@@ -330,3 +330,10 @@ textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px soli
 .fx-row .check { flex: 1; min-width: 0; }
 .fx-row.fx-off { opacity: .55; }
 .fx-pin { flex: none; background: none; border: 0; color: var(--gold); font-size: 18px; line-height: 1; padding: 2px 4px; cursor: pointer; }
+
+/* Cảnh nhiều đoạn */
+.scene-dots { display: flex; gap: 6px; margin: 2px 0 10px; }
+.scene-dots i { width: 18px; height: 3px; border-radius: 2px; background: var(--line); }
+.scene-dots i.done { background: var(--gold); opacity: .5; }
+.scene-dots i.on { background: var(--gold); }
+.scene-nav { align-items: center; }

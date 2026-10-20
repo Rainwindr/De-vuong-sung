@@ -340,7 +340,7 @@
       <div class="section-head"><h3>Gói nội dung</h3><span class="hint">Thêm gói trong thư mục packs/</span></div>
       <div class="scroll-x"><table class="mini-table"><tr><th>Gói</th><th>Phiên bản</th><th>Tác giả</th></tr>
       ${R.packs.map((p) => `<tr><td>${esc(p.name)}<br><span class="mono">${esc(p.id)}</span></td><td>${esc(p.version)}</td><td>${esc(p.author)}</td></tr>`).join("")}</table></div>
-      <p class="hint">${G.sceneTextStats().count} đoạn cảnh viết bằng JSON (${G.sceneTextStats().hooks.length} cảnh) · ${count("characters")} nhân vật · ${count("events")} sự kiện · ${count("fetishes")} sở thích · ${count("contests")} cuộc thi · ${count("gifts")} quà · ${count("buildings")} công trình · ${count("regions")} vùng</p>
+      <p class="hint">${G.sceneTextStats().count} đoạn trong ${G.sceneTextStats().scenes} cảnh viết bằng JSON (${G.sceneTextStats().hooks.length} loại cảnh) · ${count("characters")} nhân vật · ${count("events")} sự kiện · ${count("fetishes")} sở thích · ${count("contests")} cuộc thi · ${count("gifts")} quà · ${count("buildings")} công trình · ${count("regions")} vùng</p>
       <details><summary>HOOK đã đăng ký (${hooks.length})</summary><div class="scroll-x"><table class="mini-table">${hooks.map((h) => `<tr><td class="mono">${esc(h.id)}</td><td>${esc(h.pack)}</td></tr>`).join("") || "<tr><td>Chưa có</td></tr>"}</table></div></details>
       <h4 class="tier-h">Lỗi và cảnh báo khi nạp</h4>
       ${R.errors.length ? R.errors.map((e) => `<div class="err mono">${esc(e)}</div>`).join("") : '<div class="ok">Không có lỗi.</div>'}
@@ -591,14 +591,25 @@
     openSheet(`<h3>${esc(title)}</h3><p class="ev-text">${formatText(text || "")}</p>${notesHtml(notes)}<button class="btn btn-primary" id="s-ok">Tiếp</button>`, (el) => $(el, "#s-ok").addEventListener("click", closeSheet));
   }
 
-  function showScene(scene, notes) {
+  /** Cảnh nhiều đoạn: hiện từng đoạn, bấm "Tiếp" để sang đoạn sau; đoạn cuối mới hiện hệ quả và nút kết thúc. */
+  function showScene(scene, notes, page) {
+    const pages = scene.pages && scene.pages.length ? scene.pages : [scene.text || ""];
+    const i = Math.min(page || 0, pages.length - 1);
+    const last = i === pages.length - 1;
     const img = scene.image
       ? `<img class="scene-img" src="${esc(scene.image)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'scene-veil',textContent:'· · ·'}))">`
       : `<div class="scene-veil">· · ·</div>`;
-    openSheet(
-      `${img}<h3>${esc(scene.title || "")}</h3><p class="ev-text">${formatText(scene.text || "")}</p>${notesHtml(notes || scene.notes)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`,
-      (el) => $(el, "#s-ok").addEventListener("click", closeSheet)
-    );
+    const dots = pages.length > 1 ? `<div class="scene-dots" aria-label="Đoạn ${i + 1} trên ${pages.length}">${pages.map((_, k) => `<i class="${k === i ? "on" : k < i ? "done" : ""}"></i>`).join("")}</div>` : "";
+    const btns = last
+      ? `${notesHtml(notes || scene.notes)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
+      : `<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
+    openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${dots}<p class="ev-text">${formatText(pages[i])}</p>${btns}`, (el) => {
+      if (last) $(el, "#s-ok").addEventListener("click", closeSheet);
+      else {
+        $(el, "#s-next").addEventListener("click", () => showScene(scene, notes, i + 1));
+        $(el, "#s-all").addEventListener("click", () => showScene(Object.assign({}, scene, { pages: [pages.slice(i).join("\n\n")] }), notes, 0));
+      }
+    }, last ? undefined : { locked: true });
   }
 
   function eventHead(prepared) {

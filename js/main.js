@@ -77,7 +77,7 @@
       G.packBases[p.manifest.id] = base;
       if (G.loadPack(p)) {
         if (typeof p.scenes === "function") p.scenes(G);
-        if (p.sceneTexts) G.addPackSceneTexts(p.sceneTexts);
+        for (const st of [].concat(p.sceneTexts || [])) G.addPackSceneTexts(st);
         if (p.portraits) G.addPortraits(p.portraits, base);
       }
     }

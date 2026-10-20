@@ -47,10 +47,8 @@ def bundle_packs():
                 for k, v in json.loads((d / f).read_text(encoding="utf-8")).items():
                     data["names"].setdefault(k, []).extend(v)
         if "sceneTexts" in files:
-            data["sceneTexts"] = {}
-            for f in as_list(files["sceneTexts"]):
-                for hook, by_key in json.loads((d / f).read_text(encoding="utf-8")).items():
-                    data["sceneTexts"].setdefault(hook, {}).update(by_key)
+            # giữ từng file riêng: game tự gộp (nối thêm), không file nào đè file nào
+            data["sceneTexts"] = [json.loads((d / f).read_text(encoding="utf-8")) for f in as_list(files["sceneTexts"])]
         if "portraits" in files:
             data["portraits"] = {}
             for f in as_list(files["portraits"]):

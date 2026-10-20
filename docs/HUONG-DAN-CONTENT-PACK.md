@@ -360,20 +360,29 @@ Cách dễ nhất để thêm cảnh: chỉ viết chữ. Trong manifest khai b�
 ```json
 {
   "core.thi_tam": {
-    "core.uyen_nghi": { "dau": ["đoạn 1", "đoạn 2"], "quen": ["..."], "lau": ["..."] },
-    "_chung": { "quen": ["Đoạn dùng cho mọi phi, tên nàng là {name}."] }
+    "core.uyen_nghi": {
+      "dau": [ ["cảnh 1 · đoạn 1", "cảnh 1 · đoạn 2"], ["cảnh 2 · đoạn 1", "cảnh 2 · đoạn 2", "cảnh 2 · đoạn 3"] ],
+      "quen": [ ["..."] ],
+      "lau": [ ["..."] ]
+    },
+    "_chung": { "quen": [ ["Đoạn dùng cho mọi phi, tên nàng là {name}.", "Đoạn tiếp theo…"] ] }
   },
   "core.thi_tam_so_thich": {
-    "core.lua_la": { "_": ["Đêm nay theo ý bệ hạ: {fetish}..."] }
+    "core.lua_la": { "_": [ ["Đêm nay theo ý bệ hạ: {fetish}...", "…", "…"] ] }
   },
-  "core.bach_hoa": { "_chung": { "_": ["{names} cùng ở bên bệ hạ..."] } }
+  "core.bach_hoa": { "_chung": { "_": ["{names} cùng ở bên bệ hạ...", "Đoạn 2…"] } }
 }
 ```
+
+- **Mỗi phần tử trong danh sách là một cảnh**, tức một danh sách đoạn nối tiếp nhau. Game hiện từng đoạn, người chơi bấm "Tiếp" để đọc đoạn sau (hoặc "Đọc liền một mạch").
+- Mỗi lần gọi, game bốc một cảnh trong danh sách và không lặp lại cho đến khi đã xem hết.
+- Viết gọn `["đoạn 1", "đoạn 2"]` (không có ngoặc lồng) cũng được: cả danh sách được hiểu là một cảnh duy nhất, như ví dụ `core.bach_hoa` ở trên.
 
 - Khóa cấp hai: id nhân vật (cảnh `core.thi_tam`), id sở thích (cảnh `core.thi_tam_so_thich`), hoặc `_chung`.
 - Khóa cấp ba: `dau` / `quen` / `lau` cho cảnh thị tẩm, `_` cho mọi cảnh khác.
 - Biến: `{name}`, `{names}`, `{emperor}`, `{fetish}`. Dòng bắt đầu bằng `> ` là lời thoại.
 - Chưa có chữ phù hợp thì game dùng cảnh cũ (của `scenes.js`).
+- Nhiều file cùng viết cho một HOOK thì game nối thêm, không file nào đè file nào.
 - Gói `packs/canh-viet` đã có sẵn khung trống cho mọi cảnh; bộ prompt cho Grok nằm ở `docs/PROMPT-VIET-CANH.md`.
 - Có thể thêm `"_title": "..."` trong khối của một HOOK để đặt tiêu đề cảnh.
 

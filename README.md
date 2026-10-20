@@ -2,7 +2,7 @@
 
 Game mô phỏng hậu cung dạng text kèm chân dung, chạy trên trình duyệt, ưu tiên điện thoại. Người chơi là một hoàng đế 18 tuổi vừa đăng cơ: tuyển tú, sủng ái phi tần, sinh con nối dõi, và tự chọn mình sẽ trụy lạc đến đâu. 
 
-Phiên bản **0.3.6**. Gói `canh-viet` có cảnh viết sẵn, sự kiện khám phá sở thích, và chỗ cắm ảnh chân dung thật.
+Phiên bản **0.3.7**. Gói `canh-viet` có cảnh viết sẵn, sự kiện khám phá sở thích, và chỗ cắm ảnh chân dung thật.
 
 ## Chạy thử
 
