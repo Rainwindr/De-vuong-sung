@@ -26,6 +26,7 @@
       "events/tuan-du.json",
       "events/he-qua.json",
       "events/tu-nu.json",
+      "events/cung-dinh.json",
       "events/chuong-3.json"
     ],
     "scenes": "scenes.js"

@@ -137,6 +137,14 @@
   reg("core.that_tich", (ctx) => ({ title: "Đèn Thất tịch", text: `Bài thơ trên chiếc đèn bệ hạ chọn là của ${first(ctx)}. Nàng đứng đợi dưới giàn hoa, như biết trước.${V()}` }));
   reg("core.trung_thu", (ctx) => ({ title: "Đèn hoa đăng", text: `Hai chiếc đèn trôi cạnh nhau trên hồ. ${first(ctx)} không chịu nói đã ước gì.` }));
 
+  /* ---- Cung đình, lễ tết (0.3.1) ---- */
+  reg("core.nguyen_tieu", (ctx) => ({ title: "Đèn đố chữ", text: `${first(ctx)} giải được hai mươi câu đố, nhận thưởng rồi kéo bệ hạ đi xem đèn đến khuya.` }));
+  reg("core.trung_cuu", (ctx) => ({ title: "Rượu hoa cúc", text: `Trên đỉnh Cảnh Sơn, ${first(ctx)} rót rượu hoa cúc, cài một bông cúc vàng lên mũ bệ hạ.${V()}` }));
+  reg("core.dong_chi", (ctx) => ({ title: "Đêm Đông chí", text: `Ngoài trời tuyết rơi. Trong cung ${first(ctx)}, lò than đỏ rực, bát chè còn ấm.${V()}` }));
+  reg("core.hoa_si", (ctx) => ({ title: "Bức chân dung", text: `Họa sĩ vẽ ${first(ctx)} ba ngày ba đêm. Bức tranh treo ở Dưỡng Tâm điện, ai vào cũng phải ngoái nhìn.` }));
+  reg("core.hong_tieu_ho", () => ({ title: "Hoa Thanh Trì", text: "Hơi nước ôn tuyền mờ mịt. Tạ Hồng Tiêu vươn tay kéo bệ hạ xuống hồ." + V() }));
+  reg("core.td_dem_thuyen", (ctx) => ({ title: "Đêm trên sông", text: `Thuyền rồng neo giữa dòng. ${list(names(ctx))} hát khúc quê mình, tiếng hát trôi xa trên mặt nước.${V()}` }));
+
   /* ---- Cuộc thi ---- */
   const thi = (title, line) => (ctx) => ({
     title,
