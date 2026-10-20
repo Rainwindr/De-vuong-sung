@@ -1,11 +1,15 @@
 /*
- * Tửu Sắc Đế Vương — engine lõi
- * Lõi lo: chỉ số, vòng lặp tháng, điều kiện, hệ quả, gói nội dung, HOOK, God Mode.
+ * Tửu Sắc Đế Vương — engine lõi 0.2
+ *
+ * Lõi lo: chỉ số, vòng lặp tháng, điều kiện, hệ quả, sự kiện, gói nội dung, HOOK.
+ * Các hệ thống (con cái, đối thực, sở thích, cuộc thi, cửa hàng, tuần du, kế vị, thành tựu,
+ * huyết mạch, God Mode) nằm ở js/systems.js.
  * Lõi KHÔNG chứa cảnh chi tiết; cảnh do các gói đăng ký qua Game.hooks.register().
  *
- * Quy tắc lõi (gói không ghi đè được):
- *   1. Mọi nhân vật phải có tuổi >= 18. Nhân vật thiếu tuổi hoặc dưới 18 bị từ chối khi nạp gói
- *      và không thể tạo trong God Mode.
+ * Quy tắc lõi (gói và God Mode không ghi đè được):
+ *   1. Mọi nhân vật trưởng thành trong game phải >= 18 tuổi. Nhân vật thiếu tuổi hoặc dưới 18
+ *      bị từ chối khi nạp gói và không thể tạo trong God Mode. Con cái của hoàng đế không bao giờ
+ *      được đưa vào HOOK.
  *   2. Trước khi gọi HOOK, mọi người tham gia phải ở mức "willing" (Sẵn lòng) với mọi sở thích
  *      của cảnh. Nếu không, lựa chọn bị ẩn và HOOK không chạy.
  */
@@ -13,12 +17,12 @@
   "use strict";
 
   const G = (window.Game = window.Game || {});
-  G.VERSION = "0.1.0";
+  G.VERSION = "0.2.0";
   G.MIN_AGE = 18;
 
   G.RANKS = ["Đáp ứng", "Thường tại", "Quý nhân", "Tần", "Phi", "Quý phi", "Hoàng quý phi", "Hoàng hậu"];
-  // Sủng ái và số con tối thiểu để tự thăng lên phẩm tương ứng (Hoàng hậu do người chơi lập)
-  const PROMOTE = [
+  G.RANK_SHORT = ["Đáp ứng", "Thường tại", "Quý nhân", "Tần", "Phi", "Quý phi", "Hoàng quý phi", "Hoàng hậu"];
+  G.PROMOTE = [
     { favor: 0, kids: 0 },
     { favor: 25, kids: 0 },
     { favor: 40, kids: 0 },
@@ -30,7 +34,7 @@
   G.STATS = {
     truyLac: { label: "Trụy lạc", min: 0, max: 100 },
     longThe: { label: "Long thể", min: 0, max: 100 },
-    quocKho: { label: "Quốc khố", min: 0, max: 999999 },
+    quocKho: { label: "Quốc khố", min: 0, max: 9999999 },
     danTam: { label: "Dân tâm", min: 0, max: 100 },
     hoaKhi: { label: "Hòa khí", min: 0, max: 100 },
   };
@@ -43,31 +47,49 @@
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const rand = () => Math.random();
   const pick = (arr) => arr[Math.floor(rand() * arr.length)];
-  G.util = { clamp, pick };
+  const shuffle = (arr) => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+  G.util = { clamp, pick, shuffle, rand };
 
   /* ------------------------------------------------------------------ */
-  /* Registry: dữ liệu từ các gói                                        */
+  /* Registry                                                            */
   /* ------------------------------------------------------------------ */
   const R = (G.registry = {
     packs: [],
     characters: {},
     events: {},
     fetishes: {},
-    namePool: { female: [], child_m: [], child_f: [] },
+    contests: {},
+    gifts: {},
+    buildings: {},
+    regions: {},
+    namePool: { female: [], child_m: [], child_f: [], spouse_m: [], spouse_f: [] },
     errors: [],
     warnings: [],
   });
 
-  function err(pack, msg) {
-    R.errors.push(`[${pack}] ${msg}`);
-  }
-  function warn(pack, msg) {
-    R.warnings.push(`[${pack}] ${msg}`);
-  }
+  const err = (pack, msg) => R.errors.push(`[${pack}] ${msg}`);
+  const warn = (pack, msg) => R.warnings.push(`[${pack}] ${msg}`);
+
+  /** Các loại dữ liệu gói có thể cung cấp, cùng giá trị mặc định. */
+  const KINDS = {
+    fetishes: { label: "sở thích", defaults: { tier: 1, unlock: {}, default_consent: "persuade", combos: [] } },
+    contests: { label: "cuộc thi", defaults: { unlock: {}, fetish: [], count: 4, prize: { favor: 20 } } },
+    gifts: { label: "quà", defaults: { cost: 200, favor: 5, likes: [] } },
+    buildings: { label: "công trình", defaults: { cost: 2000, effects: {} } },
+    regions: { label: "vùng tuần du", defaults: { cost: 2000, recruit: 2 } },
+  };
 
   /**
    * Nạp một gói đã đọc sẵn.
-   * data = { manifest, characters?, events?, fetishes?, names? }
+   * data = { manifest, characters?, events?, fetishes?, contests?, gifts?, buildings?, regions?, names? }
+   * Mỗi trường có thể là một mảng (từ một file) — bộ nạp đã gộp nhiều file thành một mảng.
    */
   G.loadPack = function (data) {
     const m = data.manifest || {};
@@ -80,9 +102,8 @@
       err(pid, "gói bị nạp hai lần");
       return false;
     }
-    for (const dep of m.requires || []) {
-      if (!R.packs.find((p) => p.id === dep)) err(pid, `thiếu gói phụ thuộc "${dep}" (phải nạp trước)`);
-    }
+    for (const dep of m.requires || []) if (!R.packs.find((p) => p.id === dep)) err(pid, `thiếu gói phụ thuộc "${dep}" (phải nạp trước)`);
+
     const prefix = pid + ".";
     const checkId = (kind, id) => {
       if (typeof id !== "string" || !id) {
@@ -93,23 +114,22 @@
       return true;
     };
 
-    for (const f of data.fetishes || []) {
-      if (!checkId("sở thích", f.id)) continue;
-      R.fetishes[f.id] = Object.assign({ tier: 1, unlock: {}, default_consent: "persuade" }, f, { pack: pid });
+    for (const [kind, spec] of Object.entries(KINDS)) {
+      for (const item of data[kind] || []) {
+        if (!checkId(spec.label, item.id)) continue;
+        R[kind][item.id] = Object.assign({}, JSON.parse(JSON.stringify(spec.defaults)), item, { pack: pid });
+      }
     }
 
     for (const c of data.characters || []) {
       if (!checkId("nhân vật", c.id)) continue;
-      // QUY TẮC LÕI 1: tuổi tối thiểu
       if (typeof c.age !== "number" || !(c.age >= G.MIN_AGE)) {
         err(pid, `nhân vật "${c.id}" bị từ chối: thiếu tuổi hoặc dưới ${G.MIN_AGE}`);
         continue;
       }
-      for (const [fid, lvl] of Object.entries(c.consent || {})) {
-        if (!G.CONSENT.includes(lvl)) warn(pid, `nhân vật "${c.id}": mức đồng thuận "${lvl}" cho "${fid}" không hợp lệ`);
-      }
+      for (const [fid, lvl] of Object.entries(c.consent || {})) if (!G.CONSENT.includes(lvl)) warn(pid, `nhân vật "${c.id}": mức đồng thuận "${lvl}" cho "${fid}" không hợp lệ`);
       R.characters[c.id] = Object.assign(
-        { rank: 0, favor: 10, affection: 10, traits: [], likes: [], consent: {}, lines: {}, start: false, portrait: {} },
+        { rank: 0, favor: 10, affection: 10, traits: [], likes: [], consent: {}, lines: {}, start: false, portrait: {}, affinity: {} },
         c,
         { pack: pid }
       );
@@ -121,12 +141,14 @@
         err(pid, `sự kiện "${e.id}" không có lựa chọn`);
         continue;
       }
+      if (e.speaker === "child" && e.choices.some((c) => c.hook)) {
+        err(pid, `sự kiện "${e.id}": sự kiện của con cái không được gọi HOOK`);
+        continue;
+      }
       R.events[e.id] = Object.assign({ weight: 1, once: false, when: {} }, e, { pack: pid });
     }
 
-    if (data.names) {
-      for (const k of Object.keys(R.namePool)) R.namePool[k].push(...(data.names[k] || []));
-    }
+    if (data.names) for (const k of Object.keys(R.namePool)) R.namePool[k].push(...(data.names[k] || []));
 
     R.packs.push({ id: pid, name: m.name || pid, version: m.version || "0", author: m.author || "", rating: m.rating || "", manifest: m });
     return true;
@@ -145,9 +167,7 @@
     resolve(id) {
       if (hookTable[id]) return hookTable[id];
       let best = null;
-      for (const k of Object.keys(hookTable)) {
-        if (k.endsWith("*") && id.startsWith(k.slice(0, -1)) && (!best || k.length > best.length)) best = k;
-      }
+      for (const k of Object.keys(hookTable)) if (k.endsWith("*") && id.startsWith(k.slice(0, -1)) && (!best || k.length > best.length)) best = k;
       return best ? hookTable[best] : null;
     },
     list() {
@@ -156,23 +176,24 @@
   };
   G.hookLog = [];
 
-  /** Đường dẫn tới file trong thư mục của một gói: Game.asset("ten-goi", "assets/a.webp"). */
   G.packBases = {};
+  /** Đường dẫn tới file trong thư mục của một gói: Game.asset("ten-goi", "assets/a.webp"). */
   G.asset = function (packId, rel) {
     if (/^(https?:|data:|\/)/.test(rel)) return rel;
     return (G.packBases[packId] || "") + rel;
   };
 
-  /**
-   * QUY TẮC LÕI 2: kiểm tra trước khi gọi HOOK.
-   * Trả về { ok: true } hoặc { ok: false, reason }.
-   */
+  /** Mức đồng thuận của một người với một sở thích. */
+  G.consentOf = function (p, fid) {
+    return (p.consent || {})[fid] || (R.fetishes[fid] && R.fetishes[fid].default_consent) || "persuade";
+  };
+
+  /** QUY TẮC LÕI: kiểm tra trước khi gọi HOOK. */
   G.checkGuards = function (participants, fetish) {
     for (const p of participants) {
-      if (!p || !(p.age >= G.MIN_AGE)) return { ok: false, reason: "Có người tham gia chưa đủ " + G.MIN_AGE + " tuổi." };
+      if (!p || p.isChild || !(p.age >= G.MIN_AGE)) return { ok: false, reason: "Có người tham gia chưa đủ " + G.MIN_AGE + " tuổi." };
       for (const f of fetish || []) {
-        const lvl = (p.consent || {})[f] || (R.fetishes[f] && R.fetishes[f].default_consent) || "persuade";
-        if (lvl !== "willing") {
+        if (G.consentOf(p, f) !== "willing") {
           const fname = R.fetishes[f] ? R.fetishes[f].name : f;
           return { ok: false, reason: `${p.name} chưa sẵn lòng với "${fname}".` };
         }
@@ -181,7 +202,7 @@
     return { ok: true };
   };
 
-  /** Gọi HOOK. Trả về cảnh { title, text, image? } để UI hiển thị, hoặc null nếu bị chặn. */
+  /** Gọi HOOK. Trả về cảnh { title, text, image? }; cảnh bị chặn có blocked: true. */
   G.runHook = function (id, ctxIn) {
     const s = G.state;
     const participants = ctxIn.participants || [];
@@ -194,15 +215,28 @@
     const ctx = Object.freeze({
       hook: id,
       participants: participants.map((p) =>
-        Object.freeze({ id: p.id, name: p.name, age: p.age, rank: G.RANKS[p.rank], favor: p.favor, affection: p.affection, traits: [...(p.traits || [])], consent: Object.assign({}, p.consent) })
+        Object.freeze({
+          id: p.id,
+          name: p.name,
+          title: G.displayTitle(p),
+          age: p.age,
+          rank: G.RANKS[p.rank],
+          favor: p.favor,
+          affection: p.affection,
+          nights: p.nights || 0,
+          traits: [...(p.traits || [])],
+          consent: Object.assign({}, p.consent),
+        })
       ),
       fetish: [...fetish],
       fetishLevels: Object.freeze(Object.assign({}, s.fetish)),
       tier: fetish.reduce((t, f) => Math.max(t, (R.fetishes[f] && R.fetishes[f].tier) || 1), 0),
+      combo: ctxIn.combo || null,
       truyLac: s.stats.truyLac,
       emperor: Object.freeze({ name: s.emperorName, age: s.age }),
       place: ctxIn.place || null,
       extra: Object.freeze(Object.assign({}, ctxIn.extra || {})),
+      count: (s.hooksFired[id] || 0) + 1,
     });
     const h = G.hooks.resolve(id);
     let scene = null;
@@ -213,8 +247,9 @@
       R.errors.push(`[hook ${id}] ${e.message}`);
     }
     if (!scene) scene = G.defaultScene(ctx);
+    s.hooksFired[id] = (s.hooksFired[id] || 0) + 1;
     G.hookLog.unshift({ id, ok: true, pack: h ? h.pack : "mặc định" });
-    if (G.hookLog.length > 50) G.hookLog.length = 50;
+    if (G.hookLog.length > 60) G.hookLog.length = 60;
     return scene;
   };
 
@@ -233,38 +268,82 @@
     opts = opts || {};
     const s = {
       v: G.VERSION,
+      scenario: opts.scenario || "tu_do",
+      generation: opts.generation || 1,
       emperorName: opts.name || "Hạ Huyền Đế",
-      age: 18,
+      age: Math.max(18, opts.age || 18),
+      startAge: Math.max(18, opts.age || 18),
       month: 1,
       year: 1,
       turn: 0,
       stats: { truyLac: 0, longThe: 100, quocKho: 3000, danTam: 70, hoaKhi: 70 },
-      consorts: [], // phi tần trong hậu cung
-      met: [], // id nhân vật đã gặp nhưng chưa nạp phi
+      consorts: [],
+      former: [], // phi tần đã rời cung
+      met: [],
       children: [],
-      fetish: {}, // id -> độ nghiện 0..100
+      grandchildren: [],
+      fetish: {},
+      fetishLast: {},
+      fetishStreak: { key: "", count: 0 },
       flags: {},
-      seen: {}, // event id -> lượt cuối
+      seen: {},
       log: [],
+      album: [],
       godMode: !!opts.godMode,
-      godFlags: { infiniteMoney: false, lockStats: {} },
+      godFlags: { infiniteMoney: false, lockStats: {}, unlockAllFetish: false, alwaysConceive: false },
       ended: null,
       visitedThisMonth: {},
       nightsTotal: 0,
+      summonStreak: { id: null, count: 0 },
+      pairs: {},
+      attitude: 1,
+      buildings: {},
+      contest: { year: 0, scores: {}, held: {} },
+      championTitle: null,
+      successor: null,
+      retirePlace: null,
+      hooksFired: {},
+      counters: { xeDe: 0, rewinds: 0, godCreated: 0, maxGroup: 0, spent: 0 },
+      legacies: opts.legacies || [],
+      lastTravelYear: 0,
+      lastSelectionYear: 0,
+      pendingTitles: [],
+      snapshots: [],
+      runAchievements: [],
     };
     G.state = s;
-    for (const c of Object.values(R.characters)) if (c.start) addConsort(c.id, true);
     for (const f of Object.values(R.fetishes)) s.fetish[f.id] = 0;
-    log(`${s.emperorName} đăng cơ năm 18 tuổi. Hậu cung còn nhiều cung điện trống.`, "milestone");
+    if (s.legacies.includes("cuong_trang")) s.stats.longThe = 100;
+    if (s.generation === 1) for (const c of Object.values(R.characters)) if (c.start) addConsort(c.id, true);
+    if (G.applyScenario) G.applyScenario(s.scenario);
+    if (s.generation > 1) {
+      log(`${s.emperorName} kế vị năm ${s.age} tuổi, đời thứ ${s.generation} của vương triều.`, "milestone");
+      const n = s.legacies.includes("my_mao") ? 4 : 3;
+      for (let i = 0; i < n; i++) addConsort(G.makeRecruit().id, true);
+    } else log(`${s.emperorName} đăng cơ năm ${s.age} tuổi. Hậu cung còn nhiều cung điện trống.`, "milestone");
+    if (s.godMode) log("Thiên Đạo đã mở: lượt chơi này không tính thành tựu thường.", "milestone");
     return s;
   };
 
   function log(text, kind) {
     const s = G.state;
     s.log.unshift({ t: s.turn, age: s.age, month: s.month, text, kind: kind || "info" });
-    if (s.log.length > 200) s.log.length = 200;
+    if (s.log.length > 300) s.log.length = 300;
   }
   G.log = log;
+
+  G.addAlbum = function (title, line) {
+    const s = G.state;
+    s.album.push({ title, line, age: s.age, year: s.year });
+    if (s.album.length > 24) s.album.shift();
+  };
+
+  /** Tên kèm phong hiệu, ví dụ "Thục Phi". */
+  G.displayTitle = function (c) {
+    if (!c || c.rank == null) return "";
+    if (c.title && c.rank >= 4 && c.rank <= 6) return c.title + " " + G.RANKS[c.rank];
+    return G.RANKS[c.rank];
+  };
 
   function makeConsortFromDef(def) {
     return {
@@ -272,7 +351,8 @@
       name: def.name,
       age: def.age,
       origin: def.origin || "",
-      rank: clamp(def.rank || 0, 0, 6),
+      rank: clamp(def.rank || 0, 0, 7),
+      title: def.title || null,
       favor: def.favor != null ? def.favor : 10,
       affection: def.affection != null ? def.affection : 10,
       traits: [...(def.traits || [])],
@@ -280,56 +360,75 @@
       consent: Object.assign({}, def.consent || {}),
       lines: Object.assign({}, def.lines || {}),
       portrait: Object.assign({}, def.portrait || {}),
+      affinity: Object.assign({}, def.affinity || {}),
       pregnantDue: null,
       kids: 0,
       nights: 0,
+      palace: 0,
+      school: null,
+      schoolMonths: 0,
+      gifts: {},
+      at100: 0,
+      contestWins: 0,
+      joinedTurn: G.state ? G.state.turn : 0,
       pack: def.pack,
     };
   }
+  G.makeConsortFromDef = makeConsortFromDef;
 
   function addConsort(id, silent) {
     const s = G.state;
     if (s.consorts.find((c) => c.id === id)) return null;
     const def = R.characters[id];
-    if (!def) return null;
-    if (!(def.age >= G.MIN_AGE)) return null;
+    if (!def || !(def.age >= G.MIN_AGE)) return null;
     const c = makeConsortFromDef(def);
     if (c.rank === 7 && s.consorts.some((x) => x.rank === 7)) c.rank = 6;
+    c.joinedTurn = s.turn;
     s.consorts.push(c);
     s.met = s.met.filter((m) => m !== id);
+    if (c.rank >= 4 && !c.title) s.pendingTitles.push(c.id);
     if (!silent) log(`${c.name} nhập cung, phong ${G.RANKS[c.rank]}.`, "harem");
     return c;
   }
   G.addConsort = addConsort;
 
-  /** Tú nữ ngẫu nhiên khi tuyển tú. Luôn từ 18 đến 23 tuổi. */
-  G.makeRecruit = function () {
+  G.removeConsort = function (id, reason) {
+    const s = G.state;
+    const c = s.consorts.find((x) => x.id === id);
+    if (!c) return;
+    s.consorts = s.consorts.filter((x) => x.id !== id);
+    s.former.push({ id: c.id, name: c.name, reason: reason || "xuất cung" });
+  };
+
+  G.TRAIT_POOL = ["Giọng hát ngọt", "Eo thon", "Hay ngượng", "Táo bạo", "Mùi hương lạ", "Biết múa", "Khéo tay", "Phúc tướng", "Tinh nghịch", "Ôn nhu", "Thích chưng diện", "Lãng mạn", "Kiêu kỳ", "Đa sầu"];
+
+  /** Tú nữ ngẫu nhiên. Luôn từ 18 đến 23 tuổi. */
+  G.makeRecruit = function (origin) {
     const s = G.state;
     const pool = R.namePool.female.length ? R.namePool.female : ["Lâm Nhược Thủy", "Giang Ánh Tuyết", "Diệp Tri Thu"];
-    const used = new Set(s.consorts.map((c) => c.name));
+    const used = new Set(s.consorts.map((c) => c.name).concat(s.former.map((c) => c.name)));
     let name = pick(pool);
-    for (let i = 0; i < 8 && used.has(name); i++) name = pick(pool);
-    const traitsPool = ["Giọng hát ngọt", "Eo thon", "Hay ngượng", "Táo bạo", "Mùi hương lạ", "Biết múa", "Khéo tay", "Phúc tướng", "Tinh nghịch", "Ôn nhu"];
-    const traits = [];
-    while (traits.length < 3) {
-      const t = pick(traitsPool);
-      if (!traits.includes(t)) traits.push(t);
-    }
+    for (let i = 0; i < 12 && used.has(name); i++) name = pick(pool);
+    const traits = shuffle(G.TRAIT_POOL).slice(0, 3);
     const consent = {};
     for (const f of Object.values(R.fetishes)) {
       const r = rand();
-      consent[f.id] = r < 0.3 ? "willing" : r < 0.8 ? "persuade" : "refuse";
+      const bold = traits.includes("Táo bạo") ? 0.15 : traits.includes("Hay ngượng") ? -0.15 : 0;
+      const tierPenalty = (f.tier - 1) * 0.1;
+      consent[f.id] = r < 0.3 + bold - tierPenalty ? "willing" : r < 0.85 ? "persuade" : "refuse";
     }
-    const id = "gen." + Date.now().toString(36) + Math.floor(rand() * 1e4).toString(36);
+    const likes = shuffle(Object.keys(R.fetishes).filter((f) => R.fetishes[f].tier === 1)).slice(0, 1);
+    const id = "gen." + Date.now().toString(36) + Math.floor(rand() * 1e6).toString(36);
     const def = {
       id,
       name,
       age: 18 + Math.floor(rand() * 6),
-      origin: pick(["Tú nữ Giang Nam", "Tú nữ Sơn Đông", "Tú nữ Thục", "Tú nữ kinh thành", "Tú nữ Lĩnh Nam"]),
+      origin: origin || pick(["Tú nữ Giang Nam", "Tú nữ Sơn Đông", "Tú nữ Thục", "Tú nữ kinh thành", "Tú nữ Lĩnh Nam"]),
       rank: 0,
-      favor: 15 + Math.floor(rand() * 10),
+      favor: 15 + Math.floor(rand() * 10) + (s.legacies.includes("my_mao") ? 10 : 0),
       affection: 10,
       traits,
+      likes,
       consent,
       portrait: { glyph: name.split(" ").pop()[0], hue: Math.floor(rand() * 360) },
       pack: "generated",
@@ -339,72 +438,16 @@
   };
 
   /* ------------------------------------------------------------------ */
-  /* Điều kiện                                                           */
-  /* ------------------------------------------------------------------ */
-  function cmp(v, rule) {
-    if (rule == null) return true;
-    if (typeof rule === "number") return v === rule;
-    if (rule.gte != null && !(v >= rule.gte)) return false;
-    if (rule.lte != null && !(v <= rule.lte)) return false;
-    if (rule.gt != null && !(v > rule.gt)) return false;
-    if (rule.lt != null && !(v < rule.lt)) return false;
-    if (rule.in && !rule.in.includes(v)) return false;
-    return true;
-  }
-
-  function resolveSpeaker(ev) {
-    const s = G.state;
-    if (!ev.speaker) return null;
-    if (ev.speaker === "random") {
-      const list = s.consorts.filter((c) => cmp(c.favor, (ev.when || {}).favor));
-      return list.length ? pick(list) : null;
-    }
-    const inHarem = s.consorts.find((c) => c.id === ev.speaker);
-    if (inHarem) return inHarem;
-    const def = R.characters[ev.speaker];
-    return def ? makeConsortFromDef(def) : null; // người chưa nhập cung (gặp lần đầu)
-  }
-
-  G.checkWhen = function (when, speaker, ev) {
-    const s = G.state;
-    when = when || {};
-    if (!cmp(s.age, when.age)) return false;
-    if (!cmp(s.month, when.month)) return false;
-    if (when.yearEvery && (s.year - 1) % when.yearEvery !== 0) return false;
-    for (const k of Object.keys(G.STATS)) if (!cmp(s.stats[k], when[k])) return false;
-    if (!cmp(s.consorts.length, when.harem)) return false;
-    if (!cmp(s.children.length, when.children)) return false;
-    if (when.flag && !s.flags[when.flag]) return false;
-    if (when.notFlag && s.flags[when.notFlag]) return false;
-    if (when.hasConsort && !s.consorts.find((c) => c.id === when.hasConsort)) return false;
-    if (when.notConsort && s.consorts.find((c) => c.id === when.notConsort)) return false;
-    if (when.fetishLevel) for (const [f, r] of Object.entries(when.fetishLevel)) if (!cmp(s.fetish[f] || 0, r)) return false;
-    if (ev && ev.speaker) {
-      if (!speaker) return false;
-      const inHarem = !!s.consorts.find((c) => c.id === speaker.id);
-      if (when.speakerInHarem === true && !inHarem) return false;
-      if (when.speakerInHarem === false && inHarem) return false;
-      if (inHarem && !cmp(speaker.favor, when.favor)) return false;
-    }
-    return true;
-  };
-
-  /** Sở thích đã mở khóa chưa (theo điều kiện unlock của sở thích). */
-  G.fetishUnlocked = function (fid) {
-    const f = R.fetishes[fid];
-    if (!f) return false;
-    if (G.state.godFlags.unlockAllFetish) return true;
-    return G.checkWhen(f.unlock || {}, null, null);
-  };
-
-  /* ------------------------------------------------------------------ */
-  /* Hệ quả                                                              */
+  /* Chỉ số, Sủng ái, thăng phẩm                                         */
   /* ------------------------------------------------------------------ */
   function addStat(k, d) {
     const s = G.state;
-    if (!G.STATS[k]) return;
+    if (!G.STATS[k] || !d) return;
     if (s.godFlags.lockStats[k]) return;
-    if (k === "quocKho" && s.godFlags.infiniteMoney && d < 0) return;
+    if (k === "quocKho") {
+      if (s.godFlags.infiniteMoney && d < 0) return;
+      if (d < 0) s.counters.spent -= d;
+    }
     s.stats[k] = clamp(Math.round((s.stats[k] + d) * 100) / 100, G.STATS[k].min, G.STATS[k].max);
   }
   G.addStat = addStat;
@@ -420,41 +463,173 @@
     if (c.rank >= 6) return;
     let target = c.rank;
     for (let r = c.rank + 1; r <= 6; r++) {
-      const need = PROMOTE[r];
+      const need = G.PROMOTE[r];
       if (c.favor >= need.favor && c.kids >= need.kids) target = r;
       else break;
     }
-    if (target > c.rank) {
-      c.rank = target;
-      log(`${c.name} được thăng lên ${G.RANKS[c.rank]}.`, "harem");
-    }
+    if (target > c.rank) promote(c, target);
   }
+  G.checkPromotion = checkPromotion;
 
-  /** Áp dụng hệ quả của một lựa chọn. Trả về danh sách dòng mô tả để UI hiển thị. */
-  G.applyEffects = function (fx, speaker) {
+  function promote(c, target) {
+    const s = G.state;
+    const before = c.rank;
+    c.rank = clamp(target, 0, 6);
+    if (c.rank === before) return;
+    log(`${c.name} được thăng lên ${G.RANKS[c.rank]}.`, "harem");
+    if (c.rank >= 4 && !c.title && !s.pendingTitles.includes(c.id)) s.pendingTitles.push(c.id);
+  }
+  G.promote = promote;
+
+  G.findConsort = (id) => G.state.consorts.find((c) => c.id === id);
+
+  /* ------------------------------------------------------------------ */
+  /* Điều kiện                                                           */
+  /* ------------------------------------------------------------------ */
+  function cmp(v, rule) {
+    if (rule == null) return true;
+    if (typeof rule === "number" || typeof rule === "string" || typeof rule === "boolean") return v === rule;
+    if (rule.gte != null && !(v >= rule.gte)) return false;
+    if (rule.lte != null && !(v <= rule.lte)) return false;
+    if (rule.gt != null && !(v > rule.gt)) return false;
+    if (rule.lt != null && !(v < rule.lt)) return false;
+    if (rule.in && !rule.in.includes(v)) return false;
+    return true;
+  }
+  G.cmp = cmp;
+
+  /** Kiểm tra điều kiện. speaker: người nói (có thể null), ev: sự kiện (để biết loại speaker). */
+  G.checkWhen = function (when, speaker, ev) {
+    const s = G.state;
+    when = when || {};
+    if (!cmp(s.age, when.age)) return false;
+    if (!cmp(s.month, when.month)) return false;
+    if (when.yearEvery && (s.year - 1) % when.yearEvery !== 0) return false;
+    for (const k of Object.keys(G.STATS)) if (!cmp(s.stats[k], when[k])) return false;
+    if (!cmp(s.consorts.length, when.harem)) return false;
+    if (!cmp(s.children.length, when.children)) return false;
+    if (!cmp(s.grandchildren.length, when.grandchildren)) return false;
+    if (!cmp(s.attitude, when.attitude)) return false;
+    if (!cmp(s.generation, when.generation)) return false;
+    if (when.scenario && s.scenario !== when.scenario) return false;
+    if (when.godMode != null && !!s.godMode !== when.godMode) return false;
+    for (const f of [].concat(when.flag || [])) if (!s.flags[f]) return false;
+    for (const f of [].concat(when.notFlag || [])) if (s.flags[f]) return false;
+    for (const b of [].concat(when.building || [])) if (!s.buildings[b]) return false;
+    for (const b of [].concat(when.notBuilding || [])) if (s.buildings[b]) return false;
+    if (when.hasConsort && ![].concat(when.hasConsort).every((id) => s.consorts.find((c) => c.id === id))) return false;
+    if (when.notConsort && [].concat(when.notConsort).some((id) => s.consorts.find((c) => c.id === id))) return false;
+    if (when.fetishLevel) for (const [f, r] of Object.entries(when.fetishLevel)) if (!cmp(s.fetish[f] || 0, r)) return false;
+    if (when.fetishUnlocked) for (const f of [].concat(when.fetishUnlocked)) if (!G.fetishUnlocked(f)) return false;
+    if (when.pairsAt && G.countPairs && !cmp(G.countPairs(when.pairsAt.tinhY || 61), when.pairsAt.count || { gte: 1 })) return false;
+    if (when.successor != null && !!s.successor !== when.successor) return false;
+    if (when.hasEmpress != null && s.consorts.some((c) => c.rank === 7) !== when.hasEmpress) return false;
+    if (ev && ev.speaker) {
+      if (!speaker) return false;
+      if (speaker.isChild) {
+        if (!cmp(speaker.age, when.childAge)) return false;
+      } else {
+        const inHarem = !!s.consorts.find((c) => c.id === speaker.id);
+        if (when.speakerInHarem === true && !inHarem) return false;
+        if (when.speakerInHarem === false && inHarem) return false;
+        if (inHarem && !cmp(speaker.favor, when.favor)) return false;
+        if (inHarem && !cmp(speaker.affection, when.affection)) return false;
+        if (!cmp(speaker.age, when.speakerAge)) return false;
+        if (inHarem && !cmp(speaker.rank, when.speakerRank)) return false;
+        if (when.speakerTrait && !(speaker.traits || []).includes(when.speakerTrait)) return false;
+        if (when.speakerPregnant != null && (speaker.pregnantDue != null) !== when.speakerPregnant) return false;
+      }
+    }
+    return true;
+  };
+
+  /** Sở thích đã mở khóa chưa (theo điều kiện unlock của sở thích). */
+  G.fetishUnlocked = function (fid) {
+    const f = R.fetishes[fid];
+    if (!f) return false;
+    if (G.state.godFlags.unlockAllFetish) return true;
+    return G.checkWhen(f.unlock || {}, null, null);
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* Người nói                                                           */
+  /* ------------------------------------------------------------------ */
+  /**
+   * Trả về { speaker, speaker2 } cho một sự kiện, hoặc null nếu không ai phù hợp.
+   * speaker: id nhân vật | "random" | "child" | "pair"
+   */
+  G.resolveSpeaker = function (ev) {
+    const s = G.state;
+    const w = ev.when || {};
+    if (!ev.speaker) return { speaker: null };
+    if (ev.speaker === "random") {
+      const list = s.consorts.filter((c) => G.checkWhen(w, c, ev) && !(ev.perConsort && s.seen[ev.id + ":" + c.id] != null));
+      return list.length ? { speaker: pick(list) } : null;
+    }
+    if (ev.speaker === "child") {
+      const list = s.children
+        .map((ch) => G.childSpeaker(ch))
+        .filter((ch) => cmp(ch.age, w.childAge) && (!w.childSex || ch.sex === w.childSex) && (w.childMarried == null || !!ch.ref.spouse === w.childMarried) && !(ev.perChild && s.seen[ev.id + ":" + ch.id] != null));
+      return list.length ? { speaker: pick(list) } : null;
+    }
+    if (ev.speaker === "pair") {
+      const pairs = G.listPairs ? G.listPairs().filter((p) => cmp(p.tinhY, w.pairTinhY) && (!w.pairFavorBelow || (p.a.favor < w.pairFavorBelow && p.b.favor < w.pairFavorBelow))) : [];
+      if (!pairs.length) return null;
+      const p = pick(pairs);
+      return { speaker: p.a, speaker2: p.b, pair: p };
+    }
+    const inHarem = s.consorts.find((c) => c.id === ev.speaker);
+    if (inHarem) return { speaker: inHarem };
+    const def = R.characters[ev.speaker];
+    if (!def) return null;
+    if (s.former.find((f) => f.id === def.id)) return null;
+    return { speaker: makeConsortFromDef(def) };
+  };
+
+  /* ------------------------------------------------------------------ */
+  /* Hệ quả                                                              */
+  /* ------------------------------------------------------------------ */
+  /** Áp dụng hệ quả. sp = { speaker, speaker2, pair }. Trả về danh sách ghi chú cho UI. */
+  G.applyEffects = function (fx, sp) {
     const s = G.state;
     const notes = [];
     fx = fx || {};
+    sp = sp || {};
+    const speaker = sp.speaker;
+    const live = speaker && !speaker.isChild ? s.consorts.find((c) => c.id === speaker.id) : null;
+    const live2 = sp.speaker2 ? s.consorts.find((c) => c.id === sp.speaker2.id) : null;
+    const sign = (n) => (n > 0 ? "+" : "") + n;
+
     for (const k of Object.keys(G.STATS)) {
       if (fx[k]) {
         addStat(k, fx[k]);
-        notes.push(`${G.STATS[k].label} ${fx[k] > 0 ? "+" : ""}${fx[k]}`);
+        notes.push(`${G.STATS[k].label} ${sign(fx[k])}`);
       }
     }
-    if (fx.favor && speaker) {
-      const live = s.consorts.find((c) => c.id === speaker.id);
-      if (live) {
-        changeFavor(live, fx.favor);
-        notes.push(`Sủng ái ${live.name} ${fx.favor > 0 ? "+" : ""}${fx.favor}`);
-      }
+    if (fx.favor && live) {
+      changeFavor(live, fx.favor);
+      notes.push(`Sủng ái ${live.name} ${sign(fx.favor)}`);
     }
-    if (fx.affection && speaker) {
-      const live = s.consorts.find((c) => c.id === speaker.id);
-      if (live) live.affection = clamp(live.affection + fx.affection, 0, 100);
+    if (fx.favor2 && live2) {
+      changeFavor(live2, fx.favor2);
+      notes.push(`Sủng ái ${live2.name} ${sign(fx.favor2)}`);
+    }
+    if (fx.affection && live) {
+      live.affection = clamp(live.affection + fx.affection, 0, 100);
+      notes.push(`Tình cảm ${live.name} ${sign(fx.affection)}`);
     }
     if (fx.favorAll) {
-      for (const c of s.consorts) if (!speaker || c.id !== speaker.id) changeFavor(c, fx.favorAll);
-      notes.push(`Sủng ái cả hậu cung ${fx.favorAll > 0 ? "+" : ""}${fx.favorAll}`);
+      for (const c of s.consorts) if (!live || c.id !== live.id) changeFavor(c, fx.favorAll);
+      notes.push(`Sủng ái cả hậu cung ${sign(fx.favorAll)}`);
+    }
+    if (fx.favorConsort) {
+      for (const [id, d] of Object.entries(fx.favorConsort)) {
+        const c = G.findConsort(id);
+        if (c) {
+          changeFavor(c, d);
+          notes.push(`Sủng ái ${c.name} ${sign(d)}`);
+        }
+      }
     }
     if (fx.addConsort) {
       for (const id of [].concat(fx.addConsort)) {
@@ -462,52 +637,101 @@
         if (c) notes.push(`${c.name} nhập cung`);
       }
     }
-    if (fx.addConsortSpeaker && speaker) {
+    if (fx.addConsortSpeaker && speaker && !speaker.isChild) {
       const c = addConsort(speaker.id);
       if (c) notes.push(`${c.name} nhập cung`);
     }
-    if (fx.meet && speaker && !s.met.includes(speaker.id)) s.met.push(speaker.id);
+    if (fx.removeSpeaker && live) {
+      G.removeConsort(live.id, fx.removeSpeaker === true ? "xuất cung" : fx.removeSpeaker);
+      notes.push(`${live.name} rời cung`);
+    }
+    if (fx.removePair && live && live2) {
+      G.removeConsort(live.id, "cùng người thương xuất cung");
+      G.removeConsort(live2.id, "cùng người thương xuất cung");
+      notes.push(`${live.name} và ${live2.name} rời cung`);
+    }
+    if (fx.meet && speaker && !speaker.isChild && !s.met.includes(speaker.id)) s.met.push(speaker.id);
     if (fx.recruit) {
-      const n = fx.recruit;
       const names = [];
-      for (let i = 0; i < n; i++) {
-        const def = G.makeRecruit();
-        const c = addConsort(def.id, true);
+      for (let i = 0; i < fx.recruit; i++) {
+        const c = addConsort(G.makeRecruit(fx.recruitOrigin).id, true);
         if (c) names.push(c.name);
       }
       if (names.length) {
-        log(`Tuyển tú: giữ lại ${names.join(", ")}.`, "harem");
-        notes.push(`Nạp ${names.length} tú nữ`);
+        log(`Nạp thêm: ${names.join(", ")}.`, "harem");
+        notes.push(`Nạp ${names.length} mỹ nhân`);
       }
     }
+    if (fx.promote && live) {
+      promote(live, live.rank + fx.promote);
+      notes.push(`${live.name} thăng phẩm`);
+    }
+    if (fx.trait && live) for (const t of [].concat(fx.trait)) if (!live.traits.includes(t)) live.traits.push(t);
+    if (fx.removeTrait && live) live.traits = live.traits.filter((t) => ![].concat(fx.removeTrait).includes(t));
     if (fx.fetish) {
       for (const [f, d] of Object.entries(fx.fetish)) {
         s.fetish[f] = clamp((s.fetish[f] || 0) + d, 0, 100);
-        if (R.fetishes[f]) notes.push(`${R.fetishes[f].name} +${d}`);
+        s.fetishLast[f] = s.turn;
+        if (R.fetishes[f]) notes.push(`${R.fetishes[f].name} ${sign(d)}`);
       }
     }
     if (fx.flag) for (const f of [].concat(fx.flag)) s.flags[f] = true;
     if (fx.unflag) for (const f of [].concat(fx.unflag)) delete s.flags[f];
-    if (fx.consent && speaker) {
-      const live = s.consorts.find((c) => c.id === speaker.id);
-      if (live) for (const [f, lvl] of Object.entries(fx.consent)) if (live.consent[f] !== "refuse" && G.CONSENT.includes(lvl)) live.consent[f] = lvl;
+    if (fx.consent && live) {
+      for (const [f, lvl] of Object.entries(fx.consent)) {
+        // Không thể đổi một mục đang là "refuse" bằng sự kiện
+        if (G.consentOf(live, f) !== "refuse" && G.CONSENT.includes(lvl)) live.consent[f] = lvl;
+      }
     }
-    if (fx.night && speaker) {
-      const live = s.consorts.find((c) => c.id === speaker.id);
-      if (live) spendNight([live], { silentLog: true });
+    if (fx.night && live) G.spendNight([live], { silentLog: true });
+    if (fx.building) {
+      for (const b of [].concat(fx.building)) s.buildings[b] = true;
     }
-    if (fx.log) log(fx.log, "story");
+    if (fx.attitude != null) {
+      s.attitude = clamp(fx.attitude, 0, 3);
+      notes.push(`Thái độ với đối thực: ${G.ATTITUDE_LABEL[s.attitude]}`);
+    }
+    if (fx.tinhY && sp.pair && G.addTinhY) {
+      G.addTinhY(sp.pair.a.id, sp.pair.b.id, fx.tinhY);
+      notes.push(`Tình Ý ${sign(fx.tinhY)}`);
+    }
+    if (fx.closeness && speaker && speaker.isChild) {
+      speaker.ref.closeness = clamp(speaker.ref.closeness + fx.closeness, 0, 100);
+      notes.push(`Thân thiết với ${speaker.name} ${sign(fx.closeness)}`);
+    }
+    if (fx.childTrait && speaker && speaker.isChild) speaker.ref.trait2 = fx.childTrait;
+    if (fx.teacher && speaker && speaker.isChild) {
+      speaker.ref.teacher = fx.teacher;
+      notes.push(`Thầy dạy: ${G.TEACHERS[fx.teacher] ? G.TEACHERS[fx.teacher].name : fx.teacher}`);
+    }
+    if (fx.educate && speaker && speaker.isChild && G.educateChild) notes.push(G.educateChild(speaker.ref));
+    if (fx.marry && speaker && speaker.isChild && G.marryChild) notes.push(G.marryChild(speaker.ref));
+    if (fx.motherFavor && speaker && speaker.isChild) {
+      const m = G.findConsort(speaker.ref.mother);
+      if (m) {
+        changeFavor(m, fx.motherFavor);
+        notes.push(`Sủng ái ${m.name} ${sign(fx.motherFavor)}`);
+      }
+    }
+    if (fx.album) G.addAlbum(fx.album.title || "Khoảnh khắc", G.fill(fx.album.line || fx.album, sp));
+    if (fx.closeSelection) s.flags.selectionClosed = true;
+    if (fx.abdicate) {
+      s.retirePlace = fx.abdicate;
+      G.abdicate();
+    }
+    if (fx.log) log(G.fill(fx.log, sp), "story");
     return notes;
   };
 
   /* ------------------------------------------------------------------ */
   /* Thị tẩm, mang thai, sinh con                                        */
   /* ------------------------------------------------------------------ */
-  function spendNight(list, opts) {
+  G.spendNight = function (list, opts) {
     const s = G.state;
     opts = opts || {};
     s.nightsTotal++;
     s.flags.firstNight = true;
+    s.counters.maxGroup = Math.max(s.counters.maxGroup, list.length);
     for (const c of list) {
       c.nights++;
       s.visitedThisMonth[c.id] = true;
@@ -515,11 +739,10 @@
       c.affection = clamp(c.affection + 3, 0, 100);
       tryConceive(c);
     }
-    addStat("longThe", -1 * list.length);
+    addStat("longThe", -1 * Math.min(list.length, 6));
     addStat("truyLac", list.length > 1 ? 3 : 1);
     if (!opts.silentLog) log(`Thị tẩm: ${list.map((c) => c.name).join(", ")}.`, "night");
-  }
-  G.spendNight = spendNight;
+  };
 
   function tryConceive(c) {
     const s = G.state;
@@ -527,6 +750,7 @@
     let p = 0.08;
     if (c.favor >= 70) p += 0.02;
     if (c.traits.includes("Phúc tướng")) p += 0.03;
+    if (s.legacies.includes("phuc_tuong")) p += 0.03;
     if (s.stats.longThe < 40) p *= 0.5;
     if (s.godFlags.alwaysConceive) p = 1;
     if (rand() < p) {
@@ -535,133 +759,135 @@
       changeFavor(c, 5);
     }
   }
-
-  function birth(c) {
-    const s = G.state;
-    const twins = rand() < 0.15 ? (rand() < 0.13 ? 3 : 2) : 1;
-    const born = [];
-    for (let i = 0; i < twins; i++) {
-      const sex = rand() < 0.5 ? "m" : "f";
-      const pool = sex === "m" ? R.namePool.child_m : R.namePool.child_f;
-      const name = (pool.length ? pick(pool) : sex === "m" ? "Hoằng An" : "Tĩnh Nghi") + (s.children.length ? "" : "");
-      const traitsPool = ["Thông minh", "Võ dũng", "Hiếu thảo", "Nghịch ngợm", "Nghệ thuật", "Nhút nhát"];
-      const child = {
-        id: "child." + s.children.length,
-        name,
-        sex,
-        mother: c.id,
-        motherName: c.name,
-        bornTurn: s.turn,
-        trait: pick(traitsPool),
-        closeness: 30,
-        quality: c.rank >= 5 && c.favor >= 85 ? "Tuyệt" : c.rank >= 3 ? "Ưu" : "Thường",
-      };
-      s.children.push(child);
-      born.push(child);
-    }
-    c.pregnantDue = null;
-    c.kids += born.length;
-    changeFavor(c, 5);
-    checkPromotion(c);
-    const label = born.map((b) => (b.sex === "m" ? "hoàng tử " : "công chúa ") + b.name).join(" và ");
-    log(`${c.name} hạ sinh ${label}.`, "child");
-    return born;
-  }
-
-  G.childAge = function (ch) {
-    return Math.floor((G.state.turn - ch.bornTurn) / 12);
-  };
+  G.tryConceive = tryConceive;
 
   /* ------------------------------------------------------------------ */
-  /* Chọn sự kiện                                                        */
+  /* Sự kiện                                                             */
   /* ------------------------------------------------------------------ */
   G.eligibleEvents = function () {
     const s = G.state;
     const out = [];
     for (const ev of Object.values(R.events)) {
+      if (ev.manual) continue;
       if (ev.once && s.seen[ev.id] != null) continue;
       if (ev.cooldown && s.seen[ev.id] != null && s.turn - s.seen[ev.id] < ev.cooldown) continue;
-      const speaker = resolveSpeaker(ev);
-      if (!G.checkWhen(ev.when, speaker, ev)) continue;
-      out.push({ ev, speaker });
+      const sp = G.resolveSpeaker(ev);
+      if (!sp) continue;
+      if (!G.checkWhen(ev.when, sp.speaker, ev)) continue;
+      const prepared = G.prepareEvent(ev, sp);
+      if (!prepared.choices.length) continue;
+      out.push(prepared);
     }
     return out;
   };
 
-  /** Dựng sự kiện sẵn sàng cho UI: lọc lựa chọn theo điều kiện và quy tắc đồng thuận. */
-  G.prepareEvent = function (ev, speaker) {
+  /** Ai tham gia cảnh của một lựa chọn. */
+  function participantsFor(ch, sp) {
     const s = G.state;
-    speaker = speaker || resolveSpeaker(ev);
-    const choices = [];
-    ev.choices.forEach((ch, i) => {
-      if (ch.requires && !G.checkWhen(ch.requires, speaker, null)) return;
-      if (ch.cost && s.stats.quocKho < ch.cost && !s.godFlags.infiniteMoney) return;
-      const parts = participantsFor(ch, speaker);
-      const fetish = ch.fetish || [];
-      if (fetish.some((f) => !G.fetishUnlocked(f))) return;
-      if (ch.participants && ch.participants !== "speaker" && !parts.length) return; // không ai đủ điều kiện
-      if (ch.hook && !G.checkGuards(parts, fetish).ok) return; // ẩn lựa chọn vi phạm quy tắc lõi
-      choices.push({ index: i, label: ch.label, cost: ch.cost || 0 });
-    });
-    return { ev, speaker, choices, text: fill(ev.text, speaker), title: fill(ev.title, speaker) };
-  };
-
-  function participantsFor(ch, speaker) {
-    const s = G.state;
+    const speaker = sp.speaker;
     const p = ch.participants;
-    if (!p) return speaker ? [speaker] : [];
-    if (p === "speaker") return speaker ? [speaker] : [];
-    if (p.select === "top_favor") {
+    const self = speaker && !speaker.isChild ? [s.consorts.find((c) => c.id === speaker.id) || speaker] : [];
+    if (!p || p === "speaker") return self;
+    if (p === "pair") return [sp.speaker, sp.speaker2].filter(Boolean).map((x) => s.consorts.find((c) => c.id === x.id) || x);
+    if (p.select === "top_favor" || p.select === "random") {
       const need = p.require_willing || ch.fetish || [];
-      return s.consorts
-        .filter((c) => c.pregnantDue == null && G.checkGuards([c], need).ok)
-        .sort((a, b) => b.favor - a.favor)
-        .slice(0, p.count || 3);
+      let list = s.consorts.filter((c) => c.pregnantDue == null && G.checkGuards([c], need).ok);
+      if (p.includeSpeaker && self.length) list = list.filter((c) => c.id !== self[0].id);
+      list = p.select === "random" ? shuffle(list) : list.sort((a, b) => b.favor - a.favor);
+      let out = list.slice(0, (p.count || 3) - (p.includeSpeaker ? 1 : 0));
+      if (p.includeSpeaker && self.length) out = self.concat(out);
+      return out;
     }
     if (Array.isArray(p)) return p.map((id) => s.consorts.find((c) => c.id === id)).filter(Boolean);
     return [];
   }
+  G.participantsFor = participantsFor;
 
-  function fill(t, speaker) {
+  /** Dựng sự kiện sẵn sàng cho UI: lọc lựa chọn theo điều kiện và quy tắc lõi. force: bỏ qua requires/cost. */
+  G.prepareEvent = function (ev, sp, force) {
+    const s = G.state;
+    sp = sp || G.resolveSpeaker(ev) || { speaker: null };
+    const choices = [];
+    ev.choices.forEach((ch, i) => {
+      if (!force && ch.requires && !G.checkWhen(ch.requires, sp.speaker, null)) return;
+      if (!force && ch.cost && s.stats.quocKho < ch.cost && !s.godFlags.infiniteMoney) return;
+      const fetish = ch.fetish || [];
+      if (!force && fetish.some((f) => !G.fetishUnlocked(f))) return;
+      if (ch.hook || ch.participants) {
+        const parts = participantsFor(ch, sp);
+        if (ch.participants && ch.participants !== "speaker" && parts.length < (ch.minParticipants || 1)) return;
+        if (ch.hook && !G.checkGuards(parts, fetish).ok) return;
+      }
+      choices.push({ index: i, label: G.fill(ch.label, sp), cost: ch.cost || 0 });
+    });
+    return Object.assign({ ev, choices, text: G.fill(ev.text, sp), title: G.fill(ev.title, sp) }, sp);
+  };
+
+  /** Thay {name}, {name2}, {emperor}, {rank}, {mother}, {title} trong chuỗi. */
+  G.fill = function (t, sp) {
     if (!t) return "";
     const s = G.state;
-    return t.replace(/\{name\}/g, speaker ? speaker.name : "nàng").replace(/\{emperor\}/g, s.emperorName).replace(/\{rank\}/g, speaker ? G.RANKS[speaker.rank] : "");
-  }
-  G.fill = fill;
+    sp = sp && sp.speaker !== undefined ? sp : { speaker: sp };
+    const a = sp.speaker;
+    const b = sp.speaker2;
+    return String(t)
+      .replace(/\{name\}/g, a ? a.name : "nàng")
+      .replace(/\{name2\}/g, b ? b.name : "")
+      .replace(/\{emperor\}/g, s.emperorName)
+      .replace(/\{rank\}/g, a && !a.isChild ? G.RANKS[a.rank] : "")
+      .replace(/\{title\}/g, a && !a.isChild ? G.displayTitle(a) : "")
+      .replace(/\{mother\}/g, a && a.isChild ? a.ref.motherName : "")
+      .replace(/\{child\}/g, a && a.isChild ? (a.sex === "m" ? "hoàng tử" : "công chúa") : "")
+      .replace(/\{trait\}/g, a && a.isChild ? [a.ref.trait, a.ref.trait2].filter(Boolean).join(", ").toLowerCase() : a && a.traits ? a.traits.join(", ").toLowerCase() : "");
+  };
 
-  /** Người chơi chọn một lựa chọn. Trả về { notes, scene? }. */
+  /** Người chơi chọn một lựa chọn. Trả về { notes, scene?, after? }. */
   G.choose = function (prepared, choiceIndex) {
     const s = G.state;
     const ev = prepared.ev;
     const ch = ev.choices[choiceIndex];
-    const speaker = prepared.speaker;
+    const sp = { speaker: prepared.speaker, speaker2: prepared.speaker2, pair: prepared.pair };
     s.seen[ev.id] = s.turn;
+    if (ev.perChild && sp.speaker && sp.speaker.isChild) s.seen[ev.id + ":" + sp.speaker.id] = s.turn;
+    if (ev.perConsort && sp.speaker) s.seen[ev.id + ":" + sp.speaker.id] = s.turn;
     if (ch.cost) addStat("quocKho", -ch.cost);
-    const notes = G.applyEffects(ch.effects, speaker);
-    if (ch.cost) notes.unshift(`Quốc khố -${ch.cost}`);
+
+    // Tính người tham gia TRƯỚC hệ quả (để hệ quả như addConsortSpeaker không đổi danh sách)
+    let parts = ch.hook ? participantsFor(ch, sp) : [];
+    const notes = G.applyEffects(ch.effects, sp);
+    if (ch.cost) notes.unshift(`Quốc khố −${ch.cost}`);
+    if (typeof ev.onChoose === "function") ev.onChoose(ch, sp, notes);
+
     let scene = null;
     if (ch.hook) {
-      const parts = participantsFor(ch, speaker);
-      const live = parts.map((p) => s.consorts.find((c) => c.id === p.id) || p);
-      scene = G.runHook(ch.hook, { participants: live, fetish: ch.fetish || [], place: ch.place, extra: ch.extra });
+      parts = parts.map((p) => s.consorts.find((c) => c.id === p.id) || p);
+      const extra = Object.assign({}, ch.extra || {}, ch._extra || {});
+      scene = G.runHook(ch.hook, { participants: parts, fetish: ch.fetish || [], place: ch.place, extra });
       if (!scene.blocked) {
-        const inHarem = live.filter((p) => s.consorts.includes(p));
-        if (inHarem.length) spendNight(inHarem, { silentLog: true });
-        for (const f of ch.fetish || []) s.fetish[f] = clamp((s.fetish[f] || 0) + 5, 0, 100);
+        const inHarem = parts.filter((p) => s.consorts.includes(p));
+        if (inHarem.length) G.spendNight(inHarem, { silentLog: true });
+        for (const f of ch.fetish || []) {
+          s.fetish[f] = clamp((s.fetish[f] || 0) + 5, 0, 100);
+          s.fetishLast[f] = s.turn;
+        }
       }
     }
-    if (ch.result) log(fill(ch.result, speaker), "story");
-    else log(`${fill(ev.title, speaker)}: ${ch.label}.`, "story");
-    return { notes, scene, after: ch.result ? fill(ch.result, speaker) : null };
+    const after = ch.result ? G.fill(ch.result, sp) : null;
+    log((after || `${G.fill(ev.title, sp)}: ${G.fill(ch.label, sp)}.`).replace(/^> /gm, "").replace(/\n+/g, " "), "story");
+    return { notes, scene, after };
   };
 
   /* ------------------------------------------------------------------ */
   /* Qua tháng                                                           */
   /* ------------------------------------------------------------------ */
-  G.advanceMonth = function () {
+  G.monthlyHooks = []; // các hệ thống đăng ký hàm chạy mỗi tháng: fn(state, report)
+
+  G.advanceMonth = function (opts) {
+    opts = opts || {};
     const s = G.state;
-    if (s.ended) return { births: [], event: null };
-    // phai Sủng ái nếu tháng này không gặp
+    const report = { births: [], event: null, system: [] };
+    if (s.ended) return report;
+
     for (const c of s.consorts) if (!s.visitedThisMonth[c.id] && rand() < 0.5) c.favor = clamp(c.favor - 1, 0, 100);
     s.visitedThisMonth = {};
 
@@ -673,28 +899,39 @@
       s.age++;
       for (const c of s.consorts) c.age++;
       log(`Năm thứ ${s.year}. ${s.emperorName} ${s.age} tuổi.`, "milestone");
+      if (G.snapshot) G.snapshot();
     }
     addStat("quocKho", 250);
-    // Long thể hồi dần khi còn trẻ, suy dần khi về già
-    if (s.age < 40) addStat("longThe", 1.5);
-    else if (s.age < 55) addStat("longThe", 0.5);
-    else addStat("longThe", -0.5);
+    const regen = s.legacies.includes("cuong_trang") ? 0.5 : 0;
+    if (s.age < 40) addStat("longThe", 2 + regen);
+    else if (s.age < 55) addStat("longThe", 1 + regen);
+    else addStat("longThe", -0.3 + regen);
     if (s.stats.truyLac >= 80) addStat("longThe", -0.5);
+    addStat("truyLac", -0.3); // tự nguội dần nếu không tiếp tục ăn chơi
     if (s.stats.truyLac >= 60) addStat("danTam", -0.5);
+    else addStat("danTam", 0.2);
 
     // sinh nở
-    const births = [];
-    for (const c of s.consorts) if (c.pregnantDue != null && s.turn >= c.pregnantDue) births.push({ mother: c, kids: birth(c) });
+    for (const c of s.consorts) if (c.pregnantDue != null && s.turn >= c.pregnantDue) report.births.push({ mother: c, kids: G.birth(c) });
 
-    // kết thúc: Long thể cạn hoặc 65 tuổi thì thoái vị
-    if (s.stats.longThe <= 0 || s.age >= 65) {
-      s.ended = G.computeEnding();
-      log(`${s.emperorName} thoái vị, làm Thái thượng hoàng.`, "milestone");
-      return { births, event: null, ended: s.ended };
+    // các hệ thống khác (con cái lớn lên, đối thực, học phường, nghiện, ...)
+    for (const fn of G.monthlyHooks) {
+      try {
+        fn(s, report, opts);
+      } catch (e) {
+        console.error(e);
+        R.errors.push("[hệ thống] " + e.message);
+      }
     }
+    if (s.ended) return Object.assign(report, { ended: s.ended });
 
-    // bốc một sự kiện
-    let event = null;
+    if (opts.skipEvents) return report;
+
+    // sự kiện hệ thống (cuộc thi, kế vị...) được ưu tiên
+    if (report.systemEvent) {
+      report.event = report.systemEvent;
+      return report;
+    }
     const pool = G.eligibleEvents();
     if (pool.length && rand() < 0.8) {
       const total = pool.reduce((t, p) => t + (p.ev.weight || 1), 0);
@@ -702,45 +939,20 @@
       for (const p of pool) {
         r -= p.ev.weight || 1;
         if (r <= 0) {
-          event = G.prepareEvent(p.ev, p.speaker);
+          report.event = p;
           break;
         }
       }
-      if (event && !event.choices.length) event = null;
     }
-    return { births, event };
+    return report;
   };
 
   /* ------------------------------------------------------------------ */
-  /* Kết thúc (không có kết cục tệ)                                      */
-  /* ------------------------------------------------------------------ */
-  G.ENDINGS = [
-    { id: "da_phuc", title: "Thiên Tử Đa Phúc", line: "Con cháu đầy điện, phúc lớn không ai sánh.", test: (s) => s.children.length >= 30 },
-    { id: "vien_man", title: "Hậu Cung Viên Mãn", line: "Hậu cung không một tiếng thở dài.", test: (s) => s.consorts.length >= 5 && s.consorts.every((c) => c.favor >= 70) },
-    { id: "nhat_sinh", title: "Nhất Sinh Nhất Thế", line: "Ba nghìn giai lệ, chỉ một người trong tim.", test: (s) => s.consorts.some((c) => c.favor >= 100 && c.nights >= 60) },
-    { id: "phong_luu", title: "Phong Lưu Thiên Cổ", line: "Đế tửu sắc cả đời, hậu thế kể mãi không chán.", test: (s) => s.stats.truyLac >= 100 },
-    { id: "tieu_dao", title: "Thái Thượng Hoàng Tiêu Dao", line: "Buông ngai vàng sớm, rong chơi sơn thủy.", test: (s) => s.age < 45 },
-    { id: "binh_an", title: "Bình An Một Đời", line: "Một đời êm ấm, không gì phải hối tiếc.", test: () => true },
-  ];
-  G.computeEnding = function () {
-    const s = G.state;
-    const hit = G.ENDINGS.filter((e) => e.test(s));
-    return { main: hit[0], extras: hit.slice(1).filter((e) => e.id !== "binh_an"), godMode: s.godMode };
-  };
-
-  G.abdicate = function () {
-    const s = G.state;
-    s.ended = G.computeEnding();
-    log(`${s.emperorName} truyền ngôi, làm Thái thượng hoàng.`, "milestone");
-    return s.ended;
-  };
-
-  /* ------------------------------------------------------------------ */
-  /* Hành động trực tiếp của người chơi                                  */
+  /* Hành động trực tiếp                                                 */
   /* ------------------------------------------------------------------ */
   G.visit = function (id) {
     const s = G.state;
-    const c = s.consorts.find((x) => x.id === id);
+    const c = G.findConsort(id);
     if (!c) return null;
     s.visitedThisMonth[c.id] = true;
     changeFavor(c, 3);
@@ -749,137 +961,39 @@
     return line || (c.favor >= 60 ? "Bệ hạ đến rồi! Thiếp chờ mãi." : "Thần thiếp tham kiến bệ hạ.");
   };
 
-  /** Lật thẻ bài: thị tẩm một người, có thể kèm sở thích. */
-  G.summon = function (id, fetishIds) {
-    const s = G.state;
-    const c = s.consorts.find((x) => x.id === id);
-    if (!c) return null;
-    if (c.pregnantDue != null) return { title: "Không thể thị tẩm", text: `${c.name} đang mang long thai, thái y dặn tĩnh dưỡng.`, blocked: true };
-    const fx = (fetishIds || []).filter((f) => G.fetishUnlocked(f));
-    const hookId = fx.length ? "core.thi_tam_so_thich" : "core.thi_tam";
-    const scene = G.runHook(hookId, { participants: [c], fetish: fx, place: "duong_tam_dien" });
-    if (!scene.blocked) {
-      spendNight([c]);
-      for (const f of fx) {
-        s.fetish[f] = clamp((s.fetish[f] || 0) + 5, 0, 100);
-        if (c.likes.includes(f)) changeFavor(c, 8);
-      }
-    }
-    return scene;
-  };
-
   G.crownEmpress = function (id) {
     const s = G.state;
-    const c = s.consorts.find((x) => x.id === id);
+    const c = G.findConsort(id);
     if (!c || s.consorts.some((x) => x.rank === 7)) return false;
     c.rank = 7;
     changeFavor(c, 10);
     log(`Đại lễ sách phong: ${c.name} được lập làm Hoàng hậu.`, "milestone");
+    G.addAlbum("Đại lễ sách phong", `${c.name} đội mũ phượng, chính thức trở thành Hoàng hậu.`);
     return true;
   };
 
-  G.holdSelection = function () {
-    const s = G.state;
-    const cost = 1500;
-    if (s.stats.quocKho < cost && !s.godFlags.infiniteMoney) return null;
-    addStat("quocKho", -cost);
-    s.flags.lastSelectionYear = s.year;
-    return [G.makeRecruit(), G.makeRecruit(), G.makeRecruit(), G.makeRecruit()];
-  };
-
-  /* ------------------------------------------------------------------ */
-  /* God Mode (Thiên Đạo)                                                */
-  /* ------------------------------------------------------------------ */
-  G.god = {
-    enable() {
-      G.state.godMode = true;
-      log("Thiên Đạo đã mở: lượt chơi này không tính thành tựu.", "milestone");
-    },
-    setStat(k, v) {
-      if (!G.STATS[k]) return;
-      G.state.stats[k] = clamp(Number(v), G.STATS[k].min, G.STATS[k].max);
-    },
-    setFavor(id, v) {
-      const c = G.state.consorts.find((x) => x.id === id);
-      if (c) {
-        c.favor = clamp(Number(v), 0, 100);
-        checkPromotion(c);
-      }
-    },
-    setConsent(id, fid, lvl) {
-      const c = G.state.consorts.find((x) => x.id === id);
-      if (c && G.CONSENT.includes(lvl)) c.consent[fid] = lvl;
-    },
-    setRank(id, r) {
-      const c = G.state.consorts.find((x) => x.id === id);
-      if (!c) return;
-      r = clamp(Number(r), 0, 7);
-      if (r === 7) for (const x of G.state.consorts) if (x.rank === 7) x.rank = 6;
-      c.rank = r;
-    },
-    skipMonths(n) {
-      const out = [];
-      for (let i = 0; i < n && !G.state.ended; i++) {
-        const r = G.advanceMonth();
-        if (r.ended) out.push(r);
-      }
-      return out;
-    },
-    /** Tạo phi tần mới. Tuổi luôn bị ép tối thiểu 18 (quy tắc lõi). */
-    createConsort(data) {
-      const age = Math.max(G.MIN_AGE, Math.floor(Number(data.age) || G.MIN_AGE));
-      const id = "god." + Date.now().toString(36);
-      const consent = {};
-      for (const f of Object.values(R.fetishes)) consent[f.id] = (data.consent && data.consent[f.id]) || "persuade";
-      R.characters[id] = {
-        id,
-        name: (data.name || "Vô Danh").slice(0, 40),
-        age,
-        origin: data.origin || "Do Thiên Đạo tạo ra",
-        rank: clamp(Number(data.rank) || 0, 0, 6),
-        favor: clamp(Number(data.favor) || 30, 0, 100),
-        traits: data.traits || [],
-        consent,
-        portrait: { glyph: (data.name || "V").trim().split(" ").pop()[0] || "V", hue: Math.floor(rand() * 360) },
-        pack: "god",
-      };
-      return addConsort(id);
-    },
-    forceEvent(id) {
-      const ev = R.events[id];
-      if (!ev) return null;
-      return G.prepareEventForce(ev);
-    },
-    forceBirth(id) {
-      const c = G.state.consorts.find((x) => x.id === id);
-      return c ? birth(c) : null;
-    },
-  };
-
-  /** God Mode: bỏ qua điều kiện của sự kiện (vẫn giữ quy tắc lõi khi gọi HOOK). */
-  G.prepareEventForce = function (ev) {
-    const s = G.state;
-    let speaker = null;
-    if (ev.speaker === "random") speaker = s.consorts.length ? pick(s.consorts) : null;
-    else if (ev.speaker) speaker = s.consorts.find((c) => c.id === ev.speaker) || (R.characters[ev.speaker] ? makeConsortFromDef(R.characters[ev.speaker]) : null);
-    const choices = [];
-    ev.choices.forEach((ch, i) => {
-      const parts = participantsFor(ch, speaker);
-      if (ch.hook && !G.checkGuards(parts, ch.fetish || []).ok) return;
-      choices.push({ index: i, label: ch.label, cost: ch.cost || 0 });
-    });
-    return { ev, speaker, choices, text: fill(ev.text, speaker), title: fill(ev.title, speaker) };
+  G.setTitle = function (id, title) {
+    const c = G.findConsort(id);
+    if (!c) return;
+    c.title = String(title || "").trim().slice(0, 12) || null;
+    G.state.pendingTitles = G.state.pendingTitles.filter((x) => x !== id);
+    if (c.title) log(`${c.name} được ban phong hiệu ${G.displayTitle(c)}.`, "harem");
   };
 
   /* ------------------------------------------------------------------ */
   /* Lưu / tải                                                           */
   /* ------------------------------------------------------------------ */
-  const SAVE_KEY = "tsdv-save-v1";
+  const SAVE_KEY = "tsdv-save-v2";
   G.save = function () {
     try {
-      localStorage.setItem(SAVE_KEY, JSON.stringify({ state: G.state, generated: Object.values(R.characters).filter((c) => c.pack === "generated" || c.pack === "god") }));
+      const s = G.state;
+      if (!s) return;
+      const snap = s.snapshots;
+      s.snapshots = []; // không lưu ảnh chụp lịch sử để tiết kiệm bộ nhớ
+      localStorage.setItem(SAVE_KEY, JSON.stringify({ state: s, generated: Object.values(R.characters).filter((c) => c.pack === "generated" || c.pack === "god") }));
+      s.snapshots = snap;
     } catch (e) {
-      /* bộ nhớ trình duyệt không dùng được: bỏ qua */
+      /* bộ nhớ trình duyệt không dùng được */
     }
   };
   G.hasSave = function () {
@@ -894,8 +1008,10 @@
       const raw = localStorage.getItem(SAVE_KEY);
       if (!raw) return false;
       const data = JSON.parse(raw);
+      if (!data.state || data.state.v !== G.VERSION) return false;
       for (const c of data.generated || []) if (c.age >= G.MIN_AGE) R.characters[c.id] = c;
       G.state = data.state;
+      G.state.snapshots = [];
       return true;
     } catch (e) {
       return false;
@@ -905,5 +1021,20 @@
     try {
       localStorage.removeItem(SAVE_KEY);
     } catch (e) {}
+  };
+  G.storage = {
+    get(k, d) {
+      try {
+        const v = localStorage.getItem(k);
+        return v ? JSON.parse(v) : d;
+      } catch (e) {
+        return d;
+      }
+    },
+    set(k, v) {
+      try {
+        localStorage.setItem(k, JSON.stringify(v));
+      } catch (e) {}
+    },
   };
 })();

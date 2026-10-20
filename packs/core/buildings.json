@@ -1,0 +1,10 @@
+[
+  { "id": "core.phong_huong", "name": "Phòng hương", "cost": 1200, "desc": "Mở sự kiện hương liệu, Hương sắc tăng nhanh hơn", "effects": { "fetish": { "core.huong_sac": 5 } }, "done": "Phòng hương thơm ngát, Hồ thị đến xem cũng phải khen." },
+  { "id": "core.hoa_vien", "name": "Hoa viên riêng", "cost": 1500, "desc": "Mở sự kiện ngắm hoa, cả hậu cung vui", "effects": { "favorAll": 3, "hoaKhi": 5 } },
+  { "id": "core.san_khau", "name": "Sân khấu nhỏ", "cost": 2000, "desc": "Mở sự kiện biểu diễn và kịch cung đình", "effects": { "hoaKhi": 3 } },
+  { "id": "core.cung_dong_tam", "name": "Cung Đồng Tâm", "cost": 2000, "desc": "Nơi các cặp đối thực không cần giấu giếm", "requires": { "attitude": { "gte": 3 } }, "requiresText": "Cần thái độ Khuyến khích với đối thực", "effects": { "truyLac": 15 } },
+  { "id": "core.ho_sen", "name": "Hồ sen", "cost": 2500, "desc": "Mùa hè có thuyền hoa trên hồ", "effects": { "hoaKhi": 5 } },
+  { "id": "core.me_lau", "name": "Mê Lâu", "cost": 5000, "desc": "Lầu nghìn phòng, rèm lụa phủ kín", "requires": { "truyLac": { "gte": 40 } }, "requiresText": "Cần Trụy lạc từ 40", "effects": { "truyLac": 10, "danTam": -10, "flag": "me_lau" } },
+  { "id": "core.ho_duc_tri", "name": "Dục Trì Thiên Hương", "cost": 6000, "desc": "Bể tắm lát ngọc, nước suối nóng dẫn từ núi", "requires": { "truyLac": { "gte": 30 } }, "requiresText": "Cần Trụy lạc từ 30", "effects": { "fetish": { "core.duc_tri": 10 }, "truyLac": 5 } },
+  { "id": "core.lac_thu_dien", "name": "Lạc Thú điện", "cost": 8000, "desc": "Phòng gương, mở Long Sàng Lệnh toàn cung", "requires": { "truyLac": { "gte": 70 } }, "requiresText": "Cần Trụy lạc từ 70", "effects": { "truyLac": 15, "danTam": -15 } }
+]

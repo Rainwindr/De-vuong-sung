@@ -1,5 +1,7 @@
 {
-  "female": ["Lâm Nhược Thủy", "Giang Ánh Tuyết", "Diệp Tri Thu", "Bạch Linh Lung", "Ôn Như Ngọc", "Tần Vãn Đường", "Lạc Thanh Đàm", "Hạ Minh Châu", "Phó Tịnh Nhan", "Mộ Dung Yên", "Cố Thanh Hà", "Vân Khinh La", "Kỷ Uyển Như", "Tô Nguyệt Hoa", "Hàn Tố Tâm", "Chu Lan Hương"],
-  "child_m": ["Hoằng An", "Hoằng Diệp", "Hoằng Lịch", "Hoằng Trú", "Hoằng Chiêm", "Hoằng Dật", "Hoằng Cảnh", "Hoằng Thự", "Hoằng Tú", "Hoằng Diễm"],
-  "child_f": ["Tĩnh Nghi", "Hòa Kính", "Đoan Mẫn", "Ninh Khang", "Hòa Gia", "Thục Thận", "Khác Tĩnh", "Ôn Hiến", "Hòa Uyển", "Thọ An"]
+  "female": ["Lâm Nhược Thủy", "Giang Ánh Tuyết", "Diệp Tri Thu", "Bạch Linh Lung", "Ôn Như Ngọc", "Tần Vãn Đường", "Lạc Thanh Đàm", "Hạ Minh Châu", "Phó Tịnh Nhan", "Mộ Dung Yên", "Cố Thanh Hà", "Vân Khinh La", "Kỷ Uyển Như", "Tô Nguyệt Hoa", "Hàn Tố Tâm", "Chu Lan Hương", "Lý Thanh Loan", "Triệu Phi Nhạn", "Nguyễn Thu Thủy", "Đoàn Hồng Ngọc", "Phương Bích Hà", "Tôn Lệ Hoa", "Kiều Tuyết Nhi", "Lam Y Nhân", "Sở Vân Tiêu", "Mạnh Khả Hân", "Thạch Ngân Bình", "Ninh Tĩnh Xu"],
+  "child_m": ["Hoằng An", "Hoằng Diệp", "Hoằng Lịch", "Hoằng Trú", "Hoằng Chiêm", "Hoằng Dật", "Hoằng Cảnh", "Hoằng Thự", "Hoằng Tú", "Hoằng Diễm", "Hoằng Duyên", "Hoằng Thiện", "Hoằng Quân", "Hoằng Bình", "Hoằng Viễn"],
+  "child_f": ["Tĩnh Nghi", "Hòa Kính", "Đoan Mẫn", "Ninh Khang", "Hòa Gia", "Thục Thận", "Khác Tĩnh", "Ôn Hiến", "Hòa Uyển", "Thọ An", "Tĩnh Hòa", "Ôn Huệ", "Gia Nhu", "Uyển Trinh", "Đoan Dung"],
+  "spouse_f": ["tiểu thư họ Phú Sát", "tiểu thư họ Nữu Hỗ Lộc", "tiểu thư họ Ô Lạt Na Lạp", "tiểu thư họ Đổng Ngạc", "tiểu thư họ Qua Nhĩ Giai"],
+  "spouse_m": ["công tử họ Nạp Lan", "Trạng nguyên khoa này", "thế tử Mông Cổ", "con trai Đại tướng quân", "công tử họ Chương Giai"]
 }

@@ -3,13 +3,21 @@
   "name": "Tên hiển thị của gói",
   "version": "0.1.0",
   "author": "Tên studio",
-  "game_version": ">=0.1",
+  "game_version": ">=0.2",
   "rating": "25+",
-  "requires": ["core"],
+  "requires": [
+    "core"
+  ],
   "files": {
     "characters": "characters.json",
-    "events": "events.json",
     "fetishes": "fetishes.json",
+    "events": [
+      "events/su-kien.json"
+    ],
+    "contests": "contests.json",
+    "gifts": "gifts.json",
+    "buildings": "buildings.json",
+    "regions": "regions.json",
     "names": "names.json",
     "scenes": "scenes.js"
   }

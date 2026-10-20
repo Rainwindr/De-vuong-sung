@@ -1,0 +1,96 @@
+[
+  { "id": "core.banh_tu_lam", "title": "Bánh tự tay làm", "speaker": "random", "cooldown": 3, "weight": 6,
+    "when": { "favor": { "gte": 30 } },
+    "text": "{name} sai cung nữ mang đến một hộp bánh hoa quế, kèm tờ giấy nhỏ: \"Thiếp tự tay làm.\"",
+    "choices": [
+      { "label": "Ăn hết", "effects": { "favor": 5 }, "result": "{name} nghe tin, vui cả ngày." },
+      { "label": "Khen, để dành", "effects": { "favor": 2 } },
+      { "label": "Chia cho thái giám", "effects": { "favor": -3 }, "result": "{name} buồn hiu." }
+    ] },
+  { "id": "core.om_nhe", "title": "Phi tần trở bệnh", "speaker": "random", "cooldown": 4, "weight": 4,
+    "when": {},
+    "text": "Thái y báo {name} nhiễm phong hàn, nằm liệt giường hai hôm.",
+    "choices": [
+      { "label": "Đến thăm, đút thuốc", "effects": { "favor": 10, "affection": 10 }, "result": "{name} đỏ mắt, nói bệnh khỏi một nửa." },
+      { "label": "Gửi thái y giỏi nhất", "effects": { "favor": 3 } },
+      { "label": "Bận, bỏ qua", "effects": { "favor": -5 } }
+    ] },
+  { "id": "core.mua_dem", "title": "Mưa to giữa đêm", "speaker": "random", "cooldown": 6, "weight": 3,
+    "when": { "month": { "in": [5, 6, 7, 8] }, "speakerPregnant": false },
+    "text": "Mưa trút xuống, đường về Dưỡng Tâm điện ngập nước. Cung gần nhất là của {name}.",
+    "choices": [
+      { "label": "Trú mưa ở cung nàng", "effects": { "favor": 10, "truyLac": 2 }, "hook": "core.mua_dem" },
+      { "label": "Đội mưa về", "effects": { "longThe": -2 }, "result": "Bệ hạ hắt hơi ba ngày." }
+    ] },
+  { "id": "core.sinh_nhat_phi", "title": "Sinh nhật phi tần", "speaker": "random", "cooldown": 2, "weight": 4,
+    "when": {},
+    "text": "Hôm nay là sinh nhật {name}. Cung nữ trong cung nàng treo đèn từ sáng.",
+    "choices": [
+      { "label": "Tặng quà, đến chúc mừng", "cost": 300, "effects": { "favor": 10, "affection": 5 }, "result": "{name} cười suốt buổi tối." },
+      { "label": "Mở tiệc cho nàng", "cost": 800, "effects": { "favor": 20, "truyLac": 2, "favorAll": -1 }, "result": "Tiệc vui đến khuya. Vài vị khác hơi ghen." },
+      { "label": "Quên mất", "effects": { "favor": -8 }, "result": "Đèn trong cung nàng tắt sớm." }
+    ] },
+  { "id": "core.hai_phi_gian", "title": "Hai phi giận nhau", "speaker": "pair", "cooldown": 6, "weight": 4,
+    "when": { "hoaKhi": { "lte": 55 }, "pairTinhY": { "gte": 1, "lt": 40 } },
+    "text": "{name} và {name2} cãi nhau vì một cây trâm, giờ không ai nhìn mặt ai.",
+    "choices": [
+      { "label": "Hòa giải", "effects": { "hoaKhi": 10, "tinhY": 5 }, "result": "Hai người miễn cưỡng bắt tay." },
+      { "label": "Đứng về phía {name}", "effects": { "favor": 15, "favor2": -15 } },
+      { "label": "Đứng về phía {name2}", "effects": { "favor": -15, "favor2": 15 } }
+    ] },
+  { "id": "core.ngu_uyen", "title": "Dạo ngự uyển", "speaker": "random", "cooldown": 3, "weight": 4,
+    "when": { "favor": { "gte": 50 } },
+    "text": "> Hoa mẫu đơn nở rồi. Bệ hạ đi dạo với thiếp một vòng nhé?",
+    "choices": [
+      { "label": "Đi", "effects": { "favor": 8, "affection": 5 } },
+      { "label": "Hẹn hôm khác", "effects": { "favor": -2 } }
+    ] },
+  { "id": "core.ly_cong_cong", "title": "Lý công công kể chuyện", "cooldown": 4, "weight": 3,
+    "when": { "harem": { "gte": 3 } },
+    "text": "Lý công công vừa rót trà vừa kể: trong hậu cung, ai đang thương ai, ai đang ghen ai, ai lén học múa để tranh sủng.",
+    "choices": [
+      { "label": "Nghe hết", "effects": { "truyLac": 1 }, "result": "Bệ hạ biết thêm nhiều chuyện hơn mình muốn." },
+      { "label": "Bảo ông im", "effects": {} }
+    ] },
+  { "id": "core.con_chay_vao", "title": "Con nhỏ chạy vào điện", "speaker": "child", "cooldown": 6, "weight": 4,
+    "when": { "childAge": { "gte": 3, "lte": 8 } },
+    "text": "Đang phê tấu chương, {name} chạy ào vào điện, nhũ mẫu đuổi theo sau.",
+    "choices": [
+      { "label": "Bế con lên đùi", "effects": { "closeness": 10 }, "result": "Tấu chương có thêm vài vết mực của con." },
+      { "label": "Bảo nhũ mẫu đưa về", "effects": { "closeness": -3 } }
+    ] },
+  { "id": "core.thu_nha", "title": "Thư nhà", "speaker": "random", "cooldown": 6, "weight": 3,
+    "when": {},
+    "text": "{name} nhận thư nhà, đọc xong ngồi lặng rất lâu. Nghe nói quê nàng mất mùa.",
+    "choices": [
+      { "label": "Ban bạc cứu tế quê nàng", "cost": 500, "effects": { "favor": 10, "affection": 10, "danTam": 3 }, "result": "{name} quỳ tạ ơn, nước mắt ướt cả thư." },
+      { "label": "An ủi nàng", "effects": { "affection": 5 } }
+    ] },
+  { "id": "core.tai_nghe_moi", "title": "Tài nghệ mới", "speaker": "random", "cooldown": 6, "weight": 3,
+    "when": { "favor": { "gte": 40 } },
+    "text": "{name} lén học một tài nghệ mới, muốn biểu diễn cho bệ hạ xem.",
+    "choices": [
+      { "label": "Xem biểu diễn", "effects": { "favor": 5, "trait": "Đa tài" }, "result": "Không hoàn hảo, nhưng nàng rất cố gắng." },
+      { "label": "Để sau", "effects": { "favor": -2 } }
+    ] },
+  { "id": "core.thai_y_nhac", "title": "Thái y nhắc nhở", "cooldown": 12, "weight": 6,
+    "when": { "longThe": { "lte": 50 } },
+    "text": "> Bệ hạ, long thể cần tĩnh dưỡng. Thần xin bệ hạ một tháng không thị tẩm.",
+    "choices": [
+      { "label": "Nghe lời, nghỉ một tháng", "effects": { "longThe": 12, "favorAll": -2 }, "result": "Hậu cung yên ắng lạ thường." },
+      { "label": "Bỏ qua", "effects": { "truyLac": 3 } }
+    ] },
+  { "id": "core.thi_tho_nho", "title": "Ngâm thơ trong ngự uyển", "cooldown": 12, "weight": 3,
+    "when": { "harem": { "gte": 6 } },
+    "text": "Các phi tần tụ tập ngâm thơ trong ngự uyển, mời bệ hạ làm giám khảo.",
+    "choices": [
+      { "label": "Làm giám khảo", "effects": { "hoaKhi": 5, "favorAll": 1 }, "result": "Bài hay nhất được chép vào sổ thơ hậu cung." }
+    ] },
+  { "id": "core.cung_nu", "title": "Cung nữ trong vườn", "cooldown": 18, "weight": 2,
+    "when": { "truyLac": { "gte": 35 } },
+    "text": "Một cung nữ đang hái hoa trong vườn, thấy bệ hạ thì luống cuống đánh rơi giỏ hoa. Nàng đã ngoài hai mươi, sắp đến tuổi được xuất cung về quê.",
+    "choices": [
+      { "label": "Hỏi nàng có muốn ở lại làm phi không", "effects": { "recruit": 1, "recruitOrigin": "Cung nữ được bệ hạ để mắt", "truyLac": 3 }, "result": "Nàng đỏ mặt, gật đầu." },
+      { "label": "Giúp nàng nhặt hoa rồi đi", "effects": { "danTam": 1 }, "result": "Năm sau nàng xuất cung, về quê lấy chồng." }
+    ] }
+]

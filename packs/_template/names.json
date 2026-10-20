@@ -1,5 +1,18 @@
 {
-  "female": ["Tên tú nữ 1", "Tên tú nữ 2"],
-  "child_m": ["Tên hoàng tử 1"],
-  "child_f": ["Tên công chúa 1"]
+  "female": [
+    "Tên tú nữ 1",
+    "Tên tú nữ 2"
+  ],
+  "child_m": [
+    "Tên hoàng tử 1"
+  ],
+  "child_f": [
+    "Tên công chúa 1"
+  ],
+  "spouse_m": [
+    "Tên phu quân 1"
+  ],
+  "spouse_f": [
+    "Tên phu nhân 1"
+  ]
 }

@@ -19,6 +19,10 @@ def read(p):
     return (ROOT / p).read_text(encoding="utf-8")
 
 
+def as_list(v):
+    return v if isinstance(v, list) else [v]
+
+
 def safe_js(s):
     # Không để chuỗi "</script" xuất hiện trong mã nhúng
     return s.replace("</script", "<\\/script")
@@ -32,12 +36,20 @@ def bundle_packs():
         manifest = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
         files = manifest.get("files", {})
         data = {"folder": folder, "manifest": manifest}
-        for key in ("characters", "events", "fetishes", "names"):
-            if key in files and (d / files[key]).exists():
-                data[key] = json.loads((d / files[key]).read_text(encoding="utf-8"))
+        for key in ("characters", "events", "fetishes", "contests", "gifts", "buildings", "regions"):
+            if key in files:
+                data[key] = []
+                for f in as_list(files[key]):
+                    data[key].extend(json.loads((d / f).read_text(encoding="utf-8")))
+        if "names" in files:
+            data["names"] = {}
+            for f in as_list(files["names"]):
+                for k, v in json.loads((d / f).read_text(encoding="utf-8")).items():
+                    data["names"].setdefault(k, []).extend(v)
         js = "Object.assign(" + json.dumps(data, ensure_ascii=False) + ", {scenes: "
-        if "scenes" in files and (d / files["scenes"]).exists():
-            js += "function(){\n" + (d / files["scenes"]).read_text(encoding="utf-8") + "\n}"
+        scenes = [f for f in as_list(files.get("scenes", [])) if (d / f).exists()]
+        if scenes:
+            js += "function(){\n" + "\n".join((d / f).read_text(encoding="utf-8") for f in scenes) + "\n}"
         else:
             js += "null"
         js += "})"
@@ -54,7 +66,7 @@ def main():
     )
     scripts = "\n".join(
         f"<script>\n{safe_js(s)}\n</script>"
-        for s in [read("js/engine.js"), read("js/ui.js"), bundle_packs(), read("js/main.js")]
+        for s in [read("js/engine.js"), read("js/systems.js"), read("js/ui.js"), bundle_packs(), read("js/main.js")]
     )
     body = '<div id="app" class="app" aria-live="polite"></div>\n<div id="sheet" class="sheet" hidden></div>'
     head = (

@@ -1,0 +1,11 @@
+[
+  { "id": "core.tram_ngoc", "name": "Trâm ngọc", "cost": 200, "favor": 5, "desc": "Hợp với mọi người", "likes": [] },
+  { "id": "core.lua_to_chau", "name": "Lụa Tô Châu", "cost": 300, "favor": 8, "desc": "Cho người mê lụa là", "likes": ["core.lua_la", "Thích chưng diện"] },
+  { "id": "core.huong_tay_vuc", "name": "Hương liệu Tây Vực", "cost": 400, "favor": 8, "desc": "Cho người mê hương", "likes": ["core.huong_sac", "Mùi hương lạ"] },
+  { "id": "core.co_cam", "name": "Đàn cổ cầm", "cost": 600, "favor": 10, "desc": "Cho cầm nữ, người hát hay", "likes": ["Giọng hát ngọt", "core.thanh_ca", "core.tu_lan"] },
+  { "id": "core.tuan_ma", "name": "Tuấn mã thảo nguyên", "cost": 800, "favor": 12, "desc": "Cho người hoang dã", "likes": ["Hoang dã", "core.tuyet"] },
+  { "id": "core.thu_hoa", "name": "Thư họa danh gia", "cost": 700, "favor": 10, "desc": "Cho người đoan trang, tinh tế", "likes": ["Đoan trang", "Tinh tế", "core.uyen_nghi"] },
+  { "id": "core.vong_uyen_uong", "name": "Đôi vòng uyên ương", "cost": 500, "favor": 8, "desc": "Tặng một người, người thương của nàng cũng vui (Tình Ý +10)", "likes": ["Gắn bó", "Si tình"], "pair": true },
+  { "id": "core.da_minh_chau", "name": "Dạ minh châu", "cost": 2000, "favor": 20, "desc": "Báu vật, ai cũng thích", "likes": ["core.trang_suc"], "album": true },
+  { "id": "core.chan_dung", "name": "Bức họa chân dung", "cost": 1000, "favor": 15, "desc": "Họa sĩ cung đình vẽ nàng, lưu vào album", "likes": [], "album": true }
+]

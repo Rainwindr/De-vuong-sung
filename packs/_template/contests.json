@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ten-goi-cua-ban.thi_mau",
+    "name": "Tên cuộc thi",
+    "desc": "Mô tả ngắn",
+    "tier": 1,
+    "unlock": {},
+    "fetish": [],
+    "count": 4,
+    "hook": "ten-goi-cua-ban.thi_mau",
+    "traitsBonus": [
+      "Khéo tay"
+    ],
+    "prize": {
+      "favor": 15
+    }
+  }
+]

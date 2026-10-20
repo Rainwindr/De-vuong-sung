@@ -1,8 +1,22 @@
 [
-  { "id": "core.lua_la", "name": "Lụa là", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "default_consent": "persuade", "desc": "Mê y phục, lụa mỏng, dải lụa." },
-  { "id": "core.huong_sac", "name": "Hương sắc", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "default_consent": "persuade", "desc": "Nghiện mùi hương riêng của từng người." },
-  { "id": "core.duc_tri", "name": "Dục trì", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "default_consent": "persuade", "desc": "Tắm chung, suối nước nóng, hồ hoa." },
-  { "id": "core.ngam_nhin", "name": "Ngắm nhìn", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "default_consent": "persuade", "desc": "Xem mỹ nhân múa, tắm, đùa giỡn." },
-  { "id": "core.nhap_vai", "name": "Nhập vai", "tier": 2, "unlock": { "truyLac": { "gte": 50 } }, "default_consent": "persuade", "desc": "Phi tần đóng vai thích khách, thôn nữ, nữ tướng." },
-  { "id": "core.chinh_phuc", "name": "Chinh phục", "tier": 2, "unlock": { "truyLac": { "gte": 55 } }, "default_consent": "refuse", "desc": "Thích người kiêu ngạo, khó chiều." }
+  { "id": "core.lua_la", "name": "Lụa là", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "desc": "Mê y phục, lụa mỏng, dải lụa." },
+  { "id": "core.huong_sac", "name": "Hương sắc", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "desc": "Nghiện mùi hương riêng của từng người." },
+  { "id": "core.duc_tri", "name": "Dục trì", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "desc": "Tắm chung, suối nước nóng, hồ hoa.", "combos": [{ "with": "core.yen_tiec", "hook": "core.combo_ho_ruou", "name": "Đêm Hồ Rượu" }] },
+  { "id": "core.ngam_nhin", "name": "Ngắm nhìn", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "desc": "Xem mỹ nhân múa, tắm, đùa giỡn." },
+  { "id": "core.trang_suc", "name": "Trang sức", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "desc": "Thích mỹ nhân đeo đầy châu ngọc." },
+
+  { "id": "core.nhap_vai", "name": "Nhập vai", "tier": 2, "unlock": { "truyLac": { "gte": 50 } }, "desc": "Phi tần đóng vai thích khách, thôn nữ, nữ tướng.", "combos": [{ "with": "core.y_phuc", "hook": "core.combo_kich", "name": "Kịch Vương Triều" }] },
+  { "id": "core.y_phuc", "name": "Y phục đặc biệt", "tier": 2, "unlock": { "fetishLevel": { "core.lua_la": { "gte": 50 } } }, "desc": "Quan phục, giáp trụ, áo thôn nữ, áo đạo cô." },
+  { "id": "core.bit_mat", "name": "Bịt mắt và bóng tối", "tier": 2, "unlock": { "fetishLevel": { "core.ngam_nhin": { "gte": 50 } } }, "desc": "Tắt đèn, bịt mắt, chỉ còn cảm giác." },
+  { "id": "core.yen_tiec", "name": "Yến tiệc trên người", "tier": 2, "unlock": { "fetishLevel": { "core.duc_tri": { "gte": 50 } } }, "desc": "Rượu, trái cây, mật ong." },
+  { "id": "core.thi_tham", "name": "Thì thầm", "tier": 2, "unlock": { "fetishLevel": { "core.huong_sac": { "gte": 50 } } }, "desc": "Giọng nói, lời thì thầm bên tai.", "combos": [{ "with": "core.bit_mat", "hook": "core.combo_huong_toi", "name": "Hương Trong Bóng Tối" }] },
+  { "id": "core.chinh_phuc", "name": "Chinh phục", "tier": 2, "unlock": { "truyLac": { "gte": 55 } }, "default_consent": "refuse", "desc": "Thích người kiêu ngạo, khó chiều." },
+  { "id": "core.ganh_dua", "name": "Ganh đua", "tier": 2, "unlock": { "truyLac": { "gte": 45 }, "fetishLevel": { "core.ngam_nhin": { "gte": 30 } } }, "desc": "Thích nhìn các phi tranh nhau vì mình." },
+  { "id": "core.ban_thuong", "name": "Ban thưởng", "tier": 2, "unlock": { "fetishLevel": { "core.ganh_dua": { "gte": 50 } } }, "desc": "Tự tay trao giải, phạt người thua theo thỏa thuận." },
+
+  { "id": "core.chu_to", "name": "Chủ và tớ", "tier": 3, "unlock": { "fetishLevel": { "core.nhap_vai": { "gte": 70 } } }, "desc": "Đổi vai quyền lực, có thỏa thuận và ám hiệu dừng.", "combos": [{ "with": "core.troi_lua", "hook": "core.combo_lua_do", "name": "Lụa Đỏ Quyền Uy" }] },
+  { "id": "core.troi_lua", "name": "Trói bằng lụa", "tier": 3, "unlock": { "fetishLevel": { "core.lua_la": { "gte": 70 } }, "fetishUnlocked": "core.chu_to" }, "desc": "Dải lụa đỏ, có ám hiệu dừng." },
+  { "id": "core.nong_lanh", "name": "Nóng lạnh", "tier": 3, "unlock": { "fetishLevel": { "core.duc_tri": { "gte": 70 } } }, "desc": "Nước ôn tuyền, đá lạnh, ánh nến." },
+  { "id": "core.trinh_dien", "name": "Trình diễn trước hậu cung", "tier": 3, "unlock": { "fetishLevel": { "core.ngam_nhin": { "gte": 80 } } }, "desc": "Có khán giả là các phi tần tự nguyện.", "combos": [{ "with": "core.trang_suc", "hook": "core.combo_tram_mau", "name": "Hội Trăm Màu" }] },
+  { "id": "core.khan_dai", "name": "Khán đài", "tier": 3, "unlock": { "fetishLevel": { "core.trinh_dien": { "gte": 50 } } }, "desc": "Thích cả hậu cung làm khán giả." }
 ]

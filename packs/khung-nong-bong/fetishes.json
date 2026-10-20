@@ -1,0 +1,146 @@
+[
+  {
+    "id": "khung-nong-bong.phuc_dich",
+    "name": "Phục dịch thường nhật",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 40
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Phi tần tự lập lịch hầu bệ hạ từ sáng sớm đến lúc phê tấu chương."
+  },
+  {
+    "id": "khung-nong-bong.tu_do",
+    "name": "Thánh chỉ Tự Do",
+    "tier": 3,
+    "unlock": {
+      "truyLac": {
+        "gte": 70
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Phi tần tự nguyện đeo dải lụa đỏ, tháo ra bất cứ lúc nào."
+  },
+  {
+    "id": "khung-nong-bong.kiem_che",
+    "name": "Kiềm chế và cao trào",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 50
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Trò chơi ai giữ được lâu nhất giữa các phi."
+  },
+  {
+    "id": "khung-nong-bong.long_chung",
+    "name": "Long chủng",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 35
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Ma ma ghi sổ, phi tần tự giữ gìn để tăng cơ hội thụ thai."
+  },
+  {
+    "id": "khung-nong-bong.xoa_bop",
+    "name": "Chăm sóc thân thể",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 30
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Xoa bóp sau tắm với dầu thơm."
+  },
+  {
+    "id": "khung-nong-bong.nghi_thuc",
+    "name": "Nghi thức trước thị tẩm",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 30
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Ma ma chuẩn bị, phi tần tự thoát y theo nghi lễ."
+  },
+  {
+    "id": "khung-nong-bong.y_phuc_goi",
+    "name": "Y phục khêu gợi",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 40
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Yếm lụa, áo xuyên thấu, luật trang phục có quyền miễn."
+  },
+  {
+    "id": "khung-nong-bong.doi_thuc_nong",
+    "name": "Đối thực nóng bỏng",
+    "tier": 3,
+    "unlock": {
+      "truyLac": {
+        "gte": 60
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Bệ hạ làm khán giả của một cặp đối thực."
+  },
+  {
+    "id": "khung-nong-bong.gameshow",
+    "name": "Gameshow hậu cung",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 50
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Các vòng thi mới trong mùa thi hậu cung, bình phong đoán người."
+  },
+  {
+    "id": "khung-nong-bong.troi_buoc",
+    "name": "Trói buộc",
+    "tier": 3,
+    "unlock": {
+      "truyLac": {
+        "gte": 65
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Có ám hiệu dừng cố định cho mọi phi tần."
+  },
+  {
+    "id": "khung-nong-bong.khan_gia",
+    "name": "Khán giả hậu cung",
+    "tier": 3,
+    "unlock": {
+      "truyLac": {
+        "gte": 70
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Chỉ trong cấm cung, người xem là phi tần tự nguyện."
+  },
+  {
+    "id": "khung-nong-bong.tan_phi",
+    "name": "Khởi động tân phi",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 45
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Sủng phi lâu năm hướng dẫn tân phi trong đêm đầu, tân phi đồng ý."
+  }
+]
