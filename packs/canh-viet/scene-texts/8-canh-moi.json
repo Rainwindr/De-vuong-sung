@@ -20,5 +20,370 @@
         "Tinh nóng bắn vào trong nước ấm. {name} cảm nhận dòng dịch đặc tương phản với nước, siết chặt lên đỉnh thêm, tinh loang ra trong bồn. Nàng vẫn xin đụ tiếp, cơ thể mềm nhũn trong nước nóng."
       ]
     }
+  },
+  "scenes": {
+    "canh-viet.dem_mua_ngau_nhien": {
+      "_title": "Trong cơn mưa",
+      "_chung": {
+        "_": [
+          "Mưa vẫn rơi ngoài hiên. {name} đứng giữa phòng, áo ướt dính sát, lộ rõ đường cong. Bệ hạ đóng cửa rồi bước tới, tay kéo lớp áo ướt xuống. Da nàng lạnh, nhưng hơi thở thì nóng. Nàng rên khẽ khi được ôm vào lòng.\n> Bệ hạ… áo thần thiếp ướt hết rồi.\nBệ hạ đặt nàng lên long sàng, từ từ lột nốt phần còn lại. Nước mưa còn đọng trên da, trộn với hơi ấm. Khi thân thể chạm nhau, {name} run nhẹ rồi dần thả lỏng, hai chân quấn lấy eo bệ hạ. Nhịp chậm rồi mạnh, nàng rên lớn hơn, nước chảy ra hòa với nước mưa còn sót. Nàng lên đỉnh, cơ thể co giật, ôm chặt không buông.",
+          "Nàng chủ động ngồi lên, áo ướt vẫn còn vương trên vai. Cảm giác lạnh và nóng xen kẽ. {name} nhún mạnh, rên không ngừng, móng tay cào lên ngực bệ hạ. Mưa bên ngoài át đi một phần tiếng rên. Nàng lên đỉnh thêm lần nữa, biểu cảm vừa lạnh vừa sướng điên.",
+          "Bệ hạ đè nàng xuống, đâm sâu. {name} gào khẽ, chân siết chặt. Nước từ cơ thể nàng chảy nhiều, long sàng ướt. Nàng thì thầm xin tiếp, lên đỉnh liên tục cho đến khi mưa nhỏ dần.",
+          "Khi mưa tạnh, {name} vẫn nằm trong lòng, da đã ấm lại. Nàng thì thầm cảm ơn cơn mưa đã đẩy nàng vào đây, rồi kéo bệ hạ vào thêm một lần nữa trước khi trời sáng."
+        ]
+      }
+    },
+    "canh-viet.hoi_tho_gan": {
+      "_title": "Hơi thở hòa",
+      "_chung": {
+        "_": [
+          "{name} được kéo vào lòng, khoảng cách biến mất. Hơi thở hai người hòa vào nhau. Nàng thì thầm bên tai những lời nhỏ, tay đã lần xuống dưới.\n> Bệ hạ… thần thiếp muốn được gần hơn thế này.\nBệ hạ hôn nàng, từ từ cởi áo. Da thịt chạm nhau, {name} rên khẽ. Khi được đâm vào, nàng ôm chặt cổ, hơi thở gấp bên tai. Nhịp chậm và sâu, nàng lên đỉnh với tiếng rên thì thầm, cơ thể run nhẹ.",
+          "Nàng chủ động thì thầm những lời tục hơn khi đang bị đụ. Mỗi câu đều khiến nàng siết chặt hơn. Cảm giác hơi thở nóng bên tai và dương vật bên trong khiến nàng điên. Nàng lên đỉnh nhiều lần, miệng không rời tai bệ hạ.",
+          "Đổi tư thế, nàng nằm sấp, vẫn thì thầm. Bệ hạ đâm từ sau, {name} rên lớn hơn nhưng vẫn giữ giọng nhỏ. Nước chảy, nàng lên đỉnh thêm, biểu cảm mê đắm.",
+          "Cuối cùng nàng nằm trong lòng, hơi thở đã đều lại. Nàng thì thầm rằng nàng thích được thì thầm khi đang được đụ, và muốn nhiều đêm gần nhau thế này nữa."
+        ]
+      }
+    },
+    "canh-viet.trang_suc_roi": {
+      "_title": "Ngọc trên da",
+      "_chung": {
+        "_": [
+          "Bệ hạ cúi xuống nhặt chuỗi ngọc rồi tự đeo lại cho {name}. Tay chạm vào cổ nàng, nàng run nhẹ. Chuỗi ngọc lạnh trên da nóng.\n> Bệ hạ… thần thiếp cảm ơn.\nBệ hạ không dừng ở đó. Áo nàng bị kéo xuống, chuỗi ngọc vẫn còn trên cổ. Khi bị đâm vào, ngọc va nhẹ vào da mỗi nhịp. {name} rên, cảm giác lạnh và nóng xen kẽ. Nàng lên đỉnh, chuỗi ngọc rung theo cơ thể.",
+          "Nàng ngồi lên, chuỗi ngọc buông xuống giữa hai người. Mỗi lần nhún, ngọc chạm vào ngực. {name} rên lớn, lên đỉnh nhiều lần. Biểu cảm kích thích bởi trang sức trên người.",
+          "Bệ hạ bảo nàng giữ nguyên chuỗi ngọc khi bị đụ từ sau. Ngọc leng keng nhẹ. {name} gào khẽ, nước chảy. Nàng lên đỉnh liên tục, cảm giác trang sức làm mọi thứ rõ hơn.",
+          "Sau đó chuỗi ngọc vẫn nằm trên da nàng đầy mồ hôi. {name} thì thầm muốn được đeo nhiều trang sức hơn khi hầu đêm."
+        ]
+      }
+    },
+    "canh-viet.dem_khong_ngu": {
+      "_title": "Canh dài",
+      "_chung": {
+        "_": [
+          "{name} được gọi vào long sàng. Nàng chủ động cởi áo, nằm xuống và kéo bệ hạ theo.\n> Đêm nay thần thiếp không muốn ngủ.\nBệ hạ đâm vào, nàng rên ngay. Nhịp chậm và dài, đúng như đêm không ngủ. {name} lên đỉnh nhiều lần, mỗi lần đều thì thầm xin tiếp. Cơ thể nàng không mệt, chỉ càng lúc càng tham.",
+          "Nàng đổi tư thế liên tục để không nhàm. Lúc cưỡi, lúc nằm, lúc quay người. Cảm giác kéo dài cả đêm. {name} rên khàn dần, nhưng vẫn lên đỉnh. Nước và mồ hôi làm long sàng ướt.",
+          "Gần sáng nàng vẫn còn đang được đụ. Giọng đã khàn, nhưng biểu cảm vẫn thèm. Nàng lên đỉnh thêm lần nữa khi được bắn vào trong, siết chặt, thì thầm cảm ơn vì được ở lại cả đêm.",
+          "Trời sáng, {name} vẫn chưa chịu về. Nàng nằm trong lòng, tay vuốt nhẹ, nói rằng những đêm không ngủ thế này là thứ nàng thích nhất."
+        ]
+      }
+    },
+    "canh-viet.mui_huong_la": {
+      "_title": "Hương trên da",
+      "_chung": {
+        "_": [
+          "Bệ hạ lại gần, mũi chạm vào cổ {name}. Mùi hương mới nồng và ngọt. Nàng rên khẽ khi được hôn lên chỗ thơm.\n> Bệ hạ thích mùi này không?\nÁo bị cởi, hương thấm trên da. Khi bị đâm vào, mùi hương quyện với mùi cơ thể. {name} rên lớn, lên đỉnh nhanh. Nàng cảm thấy hương làm mọi thứ mê hơn.",
+          "Nàng thoa thêm hương lên ngực và giữa hai chân rồi ngồi lên. Mỗi nhịp nhún, mùi càng nồng. {name} rên, lên đỉnh nhiều lần. Biểu cảm mê hoặc. Bệ hạ hôn và ngửi khắp người nàng.",
+          "Đụ từ sau, mũi vẫn gần da thơm. {name} gào khẽ, nước chảy. Hương và dịch hòa lẫn. Nàng lên đỉnh liên tục, thì thầm muốn được dùng loại hương này nhiều hơn.",
+          "Sau đó cả phòng còn vương mùi. {name} nằm thở, da vẫn thơm, nói rằng nàng sẽ chuẩn bị thêm nhiều hương khác cho những đêm sau."
+        ]
+      }
+    },
+    "canh-viet.muon_mua": {
+      "_title": "Điệu múa riêng",
+      "_chung": {
+        "_": [
+          "{name} múa chậm trước long sàng, áo mỏng bay. Bệ hạ ngồi xem, mắt không rời. Nàng từ từ cởi từng lớp trong điệu múa, da lộ dần.\n> Bệ hạ đang nhìn thần thiếp…\nKhi múa xong, nàng bước tới ngồi lên đùi, đã ướt. Bệ hạ đâm vào ngay. {name} rên, tiếp tục uốn người như đang múa. Nàng lên đỉnh mạnh, biểu cảm mê hoặc.",
+          "Nàng múa trên người bệ hạ, nhún theo nhịp điệu riêng. Cảm giác vừa múa vừa bị đụ. {name} rên lớn, lên đỉnh nhiều lần. Ngực nảy, tóc xõa. Bệ hạ nắm eo nàng, để nàng dẫn.",
+          "Điệu múa cuối cùng là nằm xuống, chân mở. {name} kéo bệ hạ vào, rên vang. Nàng lên đỉnh liên tục, cơ thể uốn éo. Cảm giác được ngắm và được đụ cùng lúc khiến nàng điên.",
+          "Sau điệu múa, {name} nằm thở dốc, vẫn còn uốn nhẹ người. Nàng thì thầm muốn được múa riêng cho bệ hạ nhiều đêm nữa."
+        ]
+      }
+    },
+    "canh-viet.ao_mong": {
+      "_title": "Lớp áo mỏng",
+      "_chung": {
+        "_": [
+          "Áo mỏng của {name} gần như không che được gì. Bệ hạ kéo nàng lại, tay luồn vào trong. Nàng rên khẽ, đã ướt.\n> Đêm nay nóng… nên thần thiếp mặc thế này.\nÁo bị kéo lên, không cởi hẳn. Dương vật đâm vào, vải mỏng cọ da. {name} rên lớn, lên đỉnh nhanh. Cảm giác áo mỏng khiến mọi thứ kích thích hơn.",
+          "Nàng ngồi lên, áo vẫn còn trên người. Nhún mạnh, vải dính mồ hôi và nước. {name} rên, lên đỉnh nhiều lần. Biểu cảm thích sự khêu gợi. Ngực lộ rõ qua lớp mỏng.",
+          "Bị đụ từ sau, áo bị tụt xuống eo. {name} gào, nước chảy làm ướt vải. Nàng lên đỉnh liên tục. Cảm giác nửa kín nửa hở rất mạnh.",
+          "Cuối đêm áo mỏng đã ướt đẫm và nhàu. {name} vẫn mặc nó, thì thầm rằng nàng sẽ mặc áo mỏng hơn nữa những đêm sau."
+        ]
+      }
+    },
+    "canh-viet.nho_dem_truoc": {
+      "_title": "Tiếp nối",
+      "_chung": {
+        "_": [
+          "{name} được kéo xuống. Nàng chủ động nhắc lại cảm giác đêm trước, rồi tự đưa dương vật vào.\n> Đêm trước… thần thiếp vẫn còn nhớ chỗ này.\nNàng nhún mạnh ngay, như muốn tiếp nối. Cảm giác quen thuộc và sâu. {name} rên lớn, lên đỉnh nhanh. Nước chảy nhiều. Nàng thì thầm những chi tiết đêm trước trong lúc đang bị đụ.",
+          "Nàng đòi tư thế giống đêm trước. Bệ hạ đâm sâu, {name} gào. Nàng lên đỉnh nhiều lần, biểu cảm mê đắm. Cảm giác nhớ và được làm lại khiến sướng hơn.",
+          "Creampie như đêm trước. Tinh bắn sâu, {name} siết chặt, lên đỉnh thêm. Nàng thì thầm muốn được bắn đầy nhiều lần nữa. Biểu cảm thỏa mãn.",
+          "Sau đó nàng nằm trong lòng, vẫn còn siết nhẹ. Nàng nói rằng những đêm tiếp nối thế này làm nàng càng lúc càng thèm bệ hạ hơn."
+        ]
+      }
+    },
+    "canh-viet.xin_o_lai": {
+      "_title": "Thêm một canh",
+      "_chung": {
+        "_": [
+          "{name} được giữ lại. Nàng cười, chủ động nằm lên người bệ hạ và tiếp tục.\n> Thêm một canh nữa… thần thiếp muốn.\nNàng cưỡi chậm rồi nhanh. Cảm giác kéo dài. {name} rên khàn, lên đỉnh nhiều lần. Nàng không muốn dừng, miệng thì thầm xin thêm.",
+          "Đổi nhiều tư thế trong canh giờ cuối. {name} mệt nhưng vẫn tham. Nước và tinh cũ chảy ra. Nàng lên đỉnh yếu nhưng vẫn dữ dội. Biểu cảm hạnh phúc.",
+          "Gần sáng vẫn còn được đụ. {name} ôm chặt, rên nhỏ. Khi được bắn thêm, nàng siết và lên đỉnh lần cuối. Cơ thể mềm nhũn.",
+          "Trời sáng hẳn nàng mới chịu rời. {name} thì thầm cảm ơn vì được ở lại, và hẹn sẽ xin ở lại thêm nhiều đêm nữa."
+        ]
+      }
+    },
+    "canh-viet.guong_mat_do": {
+      "_title": "Lời khó nói",
+      "_chung": {
+        "_": [
+          "{name} được kéo ngồi cạnh. Nàng đỏ mặt, thì thầm điều nàng muốn. Bệ hạ hôn nàng, tay đã cởi áo.\n> Thần thiếp… muốn được gần bệ hạ hơn.\nNàng rên khẽ khi được chạm. Khi bị đâm vào, nàng ôm chặt, biểu cảm vừa ngượng vừa sướng. Nàng lên đỉnh với tiếng rên nhỏ, nước mắt nhẹ vì cảm xúc.",
+          "Nàng dần lớn tiếng hơn. Cảm giác được chấp nhận khiến nàng táo bạo. {name} chủ động nhún, rên lớn. Lên đỉnh nhiều lần. Biểu cảm từ đỏ mặt chuyển thành mê đắm.",
+          "Nàng thì thầm những lời nàng đã muốn nói từ lâu trong lúc đang bị đụ. Mỗi câu khiến nàng siết chặt. Bệ hạ đáp lại bằng nhịp mạnh. {name} lên đỉnh dữ dội, ôm không buông.",
+          "Sau đó nàng nằm trong lòng, mặt vẫn còn đỏ nhưng đã cười. Nàng thì thầm cảm ơn vì bệ hạ đã nghe, và nói rằng nàng sẽ còn nhiều lời muốn nói trong những đêm sau."
+        ]
+      }
+    }
+  },
+  "events": {
+    "canh-viet.xin_duoc_gan": {
+      "id": "canh-viet.xin_duoc_gan",
+      "title": "Xin được gần",
+      "speaker": "random",
+      "cooldown": 7,
+      "weight": 6,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 25 }
+      },
+      "text": "{name} đứng ở cửa điện, tay nắm vạt áo, không dám bước vào hẳn.\n> Bệ hạ… thần thiếp có thể vào hầu một lát được không?",
+      "choices": [
+        {
+          "label": "Gọi nàng vào long sàng",
+          "fetish": ["core.thi_tham"],
+          "effects": { "favor": 8, "affection": 5 },
+          "hook": "canh-viet.xin_duoc_gan"
+        },
+        {
+          "label": "Cho nàng ngồi hầu bên ngoài",
+          "effects": { "affection": 3 },
+          "result": "{name} ngồi xuống bậc thềm, thỉnh thoảng lại liếc vào trong."
+        }
+      ]
+    },
+    "canh-viet.toc_xo": {
+      "id": "canh-viet.toc_xo",
+      "title": "Tóc xõa",
+      "speaker": "random",
+      "cooldown": 9,
+      "weight": 4,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 35 }
+      },
+      "text": "{name} bước vào với mái tóc đã xõa, không búi như thường ngày.\n> Đêm nay thần thiếp thấy thoải mái hơn khi để tóc thế này.",
+      "choices": [
+        {
+          "label": "Nắm lấy tóc nàng",
+          "fetish": ["canh-viet.toc_dai"],
+          "effects": { "favor": 9, "truyLac": 4 },
+          "hook": "canh-viet.toc_xo"
+        },
+        {
+          "label": "Khen mái tóc rồi để nàng hầu",
+          "effects": { "affection": 4 },
+          "result": "{name} mỉm cười, tay vô thức vuốt lại tóc."
+        }
+      ]
+    },
+    "canh-viet.muon_duoc_xem": {
+      "id": "canh-viet.muon_duoc_xem",
+      "title": "Muốn được xem",
+      "speaker": "random",
+      "cooldown": 8,
+      "weight": 5,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 30 }
+      },
+      "text": "{name} đứng trước long sàng, tay đặt lên đai áo.\n> Bệ hạ có muốn xem thần thiếp cởi áo không?",
+      "choices": [
+        {
+          "label": "Gật đầu nhìn",
+          "fetish": ["core.ngam_nhin"],
+          "effects": { "favor": 7, "truyLac": 3 },
+          "hook": "canh-viet.muon_duoc_xem"
+        },
+        {
+          "label": "Bảo nàng không cần",
+          "effects": { "affection": 2 },
+          "result": "{name} hơi thất vọng, nhưng vẫn cúi đầu lui xuống."
+        }
+      ]
+    },
+    "canh-viet.sau_man_the": {
+      "id": "canh-viet.sau_man_the",
+      "title": "Sau màn the",
+      "speaker": "random",
+      "cooldown": 11,
+      "weight": 3,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 45 }
+      },
+      "text": "{name} đã nằm sẵn sau lớp màn the mỏng, chỉ thấy bóng người lay động.\n> Bệ hạ… thần thiếp đang đợi ở đây.",
+      "choices": [
+        {
+          "label": "Vén màn bước vào",
+          "fetish": ["canh-viet.sau_man"],
+          "effects": { "favor": 10, "truyLac": 5 },
+          "hook": "canh-viet.sau_man_the"
+        },
+        {
+          "label": "Đứng ngoài gọi nàng ra",
+          "effects": { "affection": 3 },
+          "result": "{name} vén màn bước ra, mặt còn hơi đỏ."
+        }
+      ]
+    },
+    "canh-viet.chan_lanh": {
+      "id": "canh-viet.chan_lanh",
+      "title": "Chân lạnh",
+      "speaker": "random",
+      "cooldown": 6,
+      "weight": 5,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 20 }
+      },
+      "text": "{name} ngồi co chân trên ghế, hai bàn chân trần áp vào nhau.\n> Đêm nay hơi lạnh… chân thần thiếp cứ lạnh mãi.",
+      "choices": [
+        {
+          "label": "Ôm chân nàng sưởi",
+          "fetish": ["canh-viet.chan_tay"],
+          "effects": { "favor": 6, "affection": 6 },
+          "hook": "canh-viet.chan_lanh"
+        },
+        {
+          "label": "Sai người lấy thêm chăn",
+          "effects": { "affection": 4 },
+          "result": "{name} cảm ơn rồi kéo chăn phủ lên chân."
+        }
+      ]
+    },
+    "canh-viet.muon_thi_tham": {
+      "id": "canh-viet.muon_thi_tham",
+      "title": "Muốn thì thầm",
+      "speaker": "random",
+      "cooldown": 7,
+      "weight": 6,
+      "when": {
+        "speakerInHarem": true,
+        "affection": { "gte": 40 }
+      },
+      "text": "{name} lại gần, giọng nhỏ đến mức chỉ nghe được khi nghiêng tai.\n> Bệ hạ… thần thiếp có lời muốn nói rất nhỏ.",
+      "choices": [
+        {
+          "label": "Nghiêng tai nghe",
+          "fetish": ["core.thi_tham"],
+          "effects": { "favor": 7, "affection": 7 },
+          "hook": "canh-viet.muon_thi_tham"
+        },
+        {
+          "label": "Bảo nàng nói to hơn",
+          "effects": { "affection": 2 },
+          "result": "{name} lắc đầu, rồi thì thầm lại lần nữa gần hơn."
+        }
+      ]
+    },
+    "canh-viet.lua_mong": {
+      "id": "canh-viet.lua_mong",
+      "title": "Lụa mỏng",
+      "speaker": "random",
+      "cooldown": 9,
+      "weight": 4,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 30 }
+      },
+      "text": "{name} khoác thêm một dải lụa mỏng bên ngoài áo khi vào điện.\n> Đêm nay thần thiếp thấy thích màu lụa này.",
+      "choices": [
+        {
+          "label": "Dùng dải lụa đó trói nhẹ",
+          "fetish": ["core.troi_lua"],
+          "effects": { "favor": 9, "truyLac": 4 },
+          "hook": "canh-viet.lua_mong"
+        },
+        {
+          "label": "Khen màu lụa rồi để nàng cởi ra",
+          "effects": { "affection": 3 },
+          "result": "{name} cười nhẹ, tự tháo dải lụa đặt sang một bên."
+        }
+      ]
+    },
+    "canh-viet.sau_tam": {
+      "id": "canh-viet.sau_tam",
+      "title": "Vừa tắm xong",
+      "speaker": "random",
+      "cooldown": 8,
+      "weight": 5,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 25 }
+      },
+      "text": "{name} bước vào với tóc còn ẩm, da thơm mùi xà phòng.\n> Thần thiếp vừa tắm xong… có vào hầu được không?",
+      "choices": [
+        {
+          "label": "Kéo nàng lại gần ngửi",
+          "fetish": ["core.huong_sac"],
+          "effects": { "favor": 8, "truyLac": 3 },
+          "hook": "canh-viet.sau_tam"
+        },
+        {
+          "label": "Bảo nàng lau tóc cho khô đã",
+          "effects": { "affection": 3 },
+          "result": "{name} gật đầu rồi lui ra sau bình phong lau tóc."
+        }
+      ]
+    },
+    "canh-viet.khong_mac_lot": {
+      "id": "canh-viet.khong_mac_lot",
+      "title": "Không mặc lót",
+      "speaker": "random",
+      "cooldown": 10,
+      "weight": 4,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 40 }
+      },
+      "text": "{name} cúi người dâng trà, cổ áo hở để lộ làn da không có lớp lót bên trong.\n> Đêm nay hơi nóng… thần thiếp không mặc thêm lớp nào.",
+      "choices": [
+        {
+          "label": "Kéo cổ áo nàng xuống",
+          "fetish": ["canh-viet.always_bottomless"],
+          "effects": { "favor": 10, "truyLac": 5 },
+          "hook": "canh-viet.khong_mac_lot"
+        },
+        {
+          "label": "Nhìn một cái rồi bảo nàng ngồi",
+          "effects": { "affection": 2 },
+          "result": "{name} đỏ mặt ngồi xuống, cố kéo lại cổ áo."
+        }
+      ]
+    },
+    "canh-viet.xin_them": {
+      "id": "canh-viet.xin_them",
+      "title": "Xin thêm một lần",
+      "speaker": "random",
+      "cooldown": 12,
+      "weight": 3,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 60 },
+        "affection": { "gte": 50 }
+      },
+      "text": "Sau khi đã xong, {name} vẫn chưa chịu rời, tay nắm lấy tay bệ hạ.\n> Bệ hạ… thần thiếp còn muốn thêm một lần nữa.",
+      "choices": [
+        {
+          "label": "Giữ nàng lại tiếp",
+          "fetish": ["canh-viet.multiple_continuous_long_orgasms"],
+          "effects": { "favor": 12, "truyLac": 6 },
+          "hook": "canh-viet.xin_them"
+        },
+        {
+          "label": "Ôm nàng cho ngủ",
+          "effects": { "affection": 8 },
+          "result": "{name} dựa vào ngực bệ hạ, thở đều dần rồi thiếp đi."
+        }
+      ]
+    }
   }
 }
