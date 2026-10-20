@@ -11,6 +11,7 @@ Câu trả lời có thể là:
   - một khối JSON  { "core.thi_tam": { "core.tuyet": { "dau": [...] } } }
   - hoặc chỉ một dòng/khối  "core.tuyet": { "dau": [...], ... }   → cần thêm  --hook core.thi_tam
   - hoặc khối sở thích mới  { "fetishes": [ {...} ], "scenes": { ... } }
+  - hoặc khối sự kiện mới    { "events": [ {...} ], "scenes": { ... }, "fetishes": [...] }
 Chữ thừa trước/sau khối JSON (lời chào, ```json ...) sẽ tự bỏ qua.
 Đoạn mới được NỐI THÊM vào đoạn cũ, không xóa gì.
 """
@@ -25,6 +26,7 @@ PACK = ROOT / "packs" / "canh-viet"
 SCENES = PACK / "scene-texts"
 NEW_FILE = SCENES / "8-canh-moi.json"
 FETISH_FILE = PACK / "fetishes.json"
+EVENT_FILE = PACK / "events" / "su-kien-moi.json"
 
 
 def extract_json(text, hook=None):
@@ -121,6 +123,35 @@ def merge_fetishes(fets):
     FETISH_FILE.write_text(json.dumps(cur, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def save_events(evs):
+    lines = ["["]
+    for i, e in enumerate(evs):
+        lines.append("  " + json.dumps(e, ensure_ascii=False) + ("," if i < len(evs) - 1 else ""))
+    lines.append("]")
+    EVENT_FILE.parent.mkdir(exist_ok=True)
+    EVENT_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def merge_events(evs):
+    cur = load(EVENT_FILE) if EVENT_FILE.exists() else []
+    ids = {e.get("id"): i for i, e in enumerate(cur)}
+    n = 0
+    for e in evs:
+        if not str(e.get("id", "")).startswith("canh-viet."):
+            print(f"  ! sự kiện phải có id bắt đầu bằng 'canh-viet.': {e.get('id')}")
+            continue
+        if e["id"] in ids:
+            cur[ids[e["id"]]] = e
+            print(f"  ✓ cập nhật sự kiện {e['id']}")
+        else:
+            ids[e["id"]] = len(cur)
+            cur.append(e)
+            print(f"  ✓ thêm sự kiện {e['id']}")
+        n += 1
+    save_events(cur)
+    return n
+
+
 def main():
     args = sys.argv[1:]
     hook = None
@@ -140,7 +171,9 @@ def main():
             print(f"  ✗ không đọc được JSON: {e}")
             print("    Mẹo: bảo Grok 'chỉ trả về JSON, không giải thích', rồi chép lại.")
             continue
-        if isinstance(data, dict) and ("fetishes" in data or "scenes" in data):
+        if isinstance(data, dict) and ("fetishes" in data or "scenes" in data or "events" in data):
+            if data.get("events"):
+                merge_events(data["events"])
             if data.get("fetishes"):
                 merge_fetishes(data["fetishes"])
             if data.get("scenes"):

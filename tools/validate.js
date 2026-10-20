@@ -217,7 +217,8 @@ function crossCheck() {
     seenHook.add(st.hook);
   }
   if (sceneTexts.length) console.log(`\n  Cảnh viết bằng JSON: ${written} đoạn.`);
-  const covered = (h) => reg.includes(h) || reg.some((r) => r.endsWith("*") && h.startsWith(r.slice(0, -1)));
+  const textHooks = new Set(sceneTexts.filter((st) => st.n > 0).map((st) => st.hook));
+  const covered = (h) => reg.includes(h) || textHooks.has(h) || reg.some((r) => r.endsWith("*") && h.startsWith(r.slice(0, -1)));
   for (const u of all.hooksUsed) if (!covered(u.hook)) warn(u.pack, `${u.where}: HOOK "${u.hook}" chưa có cảnh đăng ký (sẽ dùng cảnh mặc định)`);
   console.log(
     `\n  ${Object.keys(all.characters).length} nhân vật · ${Object.keys(all.events).length} sự kiện · ${Object.keys(F).length} sở thích · ${Object.keys(all.contests).length} cuộc thi · ${Object.keys(all.gifts).length} quà · ${Object.keys(all.buildings).length} công trình · ${Object.keys(all.regions).length} vùng · ${reg.length} HOOK`
