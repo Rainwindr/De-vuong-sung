@@ -3,6 +3,7 @@
   "packs": [
     "core",
     "khung-nong-bong",
-    "vi-du-den-long"
+    "vi-du-den-long",
+    "canh-viet"
   ]
 }

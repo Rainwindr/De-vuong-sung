@@ -2,7 +2,7 @@
 
 Game mô phỏng hậu cung dạng text kèm chân dung, chạy trên trình duyệt, ưu tiên điện thoại. Người chơi là một hoàng đế 18 tuổi vừa đăng cơ: tuyển tú, sủng ái phi tần, sinh con nối dõi, và tự chọn mình sẽ trụy lạc đến đâu. Nội dung 25+.
 
-Phiên bản **0.3.2**.
+Phiên bản **0.3.3**.
 
 ## Chạy thử
 
@@ -50,7 +50,7 @@ css/style.css                   giao diện
 js/engine.js                    lõi: chỉ số, tháng, điều kiện, hệ quả, sự kiện, HOOK, quy tắc lõi, lưu game
 js/systems.js                   hệ thống: con cái, đối thực, sở thích, cuộc thi, cửa hàng, tuần du, kế vị, thành tựu, huyết mạch, kịch bản, Thiên Đạo
 js/portrait.js                  chân dung vẽ bằng SVG
-js/scene-texts.js               trình soạn cảnh và cảnh viết tay (không cần code)
+js/scene-texts.js               nạp cảnh viết bằng JSON (scene-texts.json của các gói)
 js/ui.js                        giao diện các màn
 js/main.js                      bộ nạp gói
 packs/index.json                danh sách gói được nạp
@@ -70,22 +70,21 @@ packs/core/                     gói lõi
   events/chuong-3.json          tuổi già, truyền ngôi
   scenes.js                     cảnh mặc định (chỉ gợi rồi chuyển cảnh)
 packs/khung-nong-bong/          khung 12 nhóm sở thích cho bên thứ ba thay cảnh
+packs/canh-viet/                chữ của cảnh (JSON, 7 mức ưu tiên) và sở thích tự thêm
 packs/vi-du-den-long/           gói ví dụ nhỏ hoàn chỉnh
 packs/_template/                mẫu trống để copy khi làm gói mới
 docs/HUONG-DAN-CONTENT-PACK.md  hướng dẫn viết sự kiện và làm gói
+docs/PROMPT-VIET-CANH.md        bộ prompt cho Grok theo 7 mức ưu tiên
 tools/validate.js               kiểm tra gói: node tools/validate.js
 tools/build.py                  đóng gói một file: python3 tools/build.py
+tools/them-canh.py              đưa câu trả lời của Grok vào packs/canh-viet
 ```
 
-## Viết cảnh bằng Grok (không cần code)
+## Viết cảnh bằng Grok
 
-Mở **☰ → Trình soạn cảnh** (hoặc nút ở màn đầu):
+Toàn bộ chữ của cảnh nằm trong `packs/canh-viet/` dưới dạng JSON, chia theo 7 mức ưu tiên. Bộ prompt, cách đưa câu trả lời của Grok vào file, và cách tự thêm sở thích mới nằm trong **[docs/PROMPT-VIET-CANH.md](docs/PROMPT-VIET-CANH.md)**.
 
-1. Chọn cảnh, nhân vật (hoặc sở thích), mức thân mật.
-2. Bấm **Chép prompt**, dán vào Grok.
-3. Chép nguyên câu trả lời của Grok, dán vào ô Bước 2, bấm **Lưu**.
-
-Cảnh xếp sẵn theo thứ tự nên viết trước. Mỗi ô lưu nhiều đoạn, game chọn ngẫu nhiên. Chữ được lưu trong trình duyệt; muốn mang sang máy khác hoặc đưa vào game chính thức thì dùng **Tạo mã** rồi gửi mã đó (đặt vào `packs/<gói>/scene-texts.json` và khai báo `"sceneTexts": "scene-texts.json"` trong manifest).
+Trên máy tính có thể dùng công cụ: chép câu trả lời của Grok vào `grok.txt` rồi chạy `python3 tools/them-canh.py grok.txt`.
 
 ## Sửa sự kiện
 

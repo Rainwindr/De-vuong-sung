@@ -1,0 +1,25 @@
+{
+  "id": "canh-viet",
+  "name": "Cảnh viết (Grok)",
+  "version": "0.1.0",
+  "author": "Tiên",
+  "game_version": ">=0.3",
+  "rating": "25+",
+  "requires": [
+    "core",
+    "khung-nong-bong"
+  ],
+  "files": {
+    "fetishes": "fetishes.json",
+    "sceneTexts": [
+      "scene-texts/1-thi-tam.json",
+      "scene-texts/2-so-thich-va-combo.json",
+      "scene-texts/3-gap-go.json",
+      "scene-texts/4-tap-the-va-le-tet.json",
+      "scene-texts/5-cot-truyen-rieng.json",
+      "scene-texts/6-truy-lac-nang.json",
+      "scene-texts/7-khung-nong-bong.json",
+      "scene-texts/8-canh-moi.json"
+    ]
+  }
+}

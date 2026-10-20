@@ -185,7 +185,15 @@
 
   /** Mức đồng thuận của một người với một sở thích. */
   G.consentOf = function (p, fid) {
-    return (p.consent || {})[fid] || (R.fetishes[fid] && R.fetishes[fid].default_consent) || "persuade";
+    const f = R.fetishes[fid];
+    if ((p.consent || {})[fid]) return p.consent[fid];
+    if (f) {
+      // Sở thích có thể tự khai mức cho từng nhân vật, hoặc theo trait (cho tú nữ ngẫu nhiên)
+      if (f.consent && f.consent[p.id]) return f.consent[p.id];
+      if (f.consentByTrait) for (const t of p.traits || []) if (f.consentByTrait[t]) return f.consentByTrait[t];
+      if (f.default_consent) return f.default_consent;
+    }
+    return "persuade";
   };
 
   /** QUY TẮC LÕI: kiểm tra trước khi gọi HOOK. */
@@ -412,6 +420,11 @@
     const traits = shuffle(G.TRAIT_POOL).slice(0, 3);
     const consent = {};
     for (const f of Object.values(R.fetishes)) {
+      const byTrait = f.consentByTrait && traits.map((t) => f.consentByTrait[t]).find(Boolean);
+      if (byTrait) {
+        consent[f.id] = byTrait;
+        continue;
+      }
       const r = rand();
       const bold = traits.includes("Táo bạo") ? 0.15 : traits.includes("Hay ngượng") ? -0.15 : 0;
       const tierPenalty = (f.tier - 1) * 0.1;

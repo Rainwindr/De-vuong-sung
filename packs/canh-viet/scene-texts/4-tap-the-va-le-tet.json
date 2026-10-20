@@ -1,0 +1,50 @@
+{
+  "core.dai_dien": {
+    "_title": "Phong Nguyệt Đại Điển",
+    "_chung": {"_": []}
+  },
+  "core.xe_de": {
+    "_title": "Dê dừng trước cửa",
+    "_chung": {"_": []}
+  },
+  "core.bit_mat_o_lai": {
+    "_title": "Người bị bắt",
+    "_chung": {"_": []}
+  },
+  "core.bit_mat_hai": {
+    "_title": "Bắt được hai người",
+    "_chung": {"_": []}
+  },
+  "core.bach_hoa": {
+    "_title": "Đêm Bách Hoa",
+    "_chung": {"_": []}
+  },
+  "core.that_tich": {
+    "_title": "Đèn Thất tịch",
+    "_chung": {"_": []}
+  },
+  "core.tet": {
+    "_title": "Giao thừa",
+    "_chung": {"_": []}
+  },
+  "core.trung_thu": {
+    "_title": "Đèn hoa đăng",
+    "_chung": {"_": []}
+  },
+  "core.nhap_vai_thich_khach": {
+    "_title": "Nữ thích khách",
+    "_chung": {"_": []}
+  },
+  "core.nhap_vai_thon_nu": {
+    "_title": "Thôn nữ hái dâu",
+    "_chung": {"_": []}
+  },
+  "core.nhap_vai_nu_tuong": {
+    "_title": "Nữ tướng bại trận",
+    "_chung": {"_": []}
+  },
+  "core.nhap_vai_dao_vai": {
+    "_title": "Đảo vai",
+    "_chung": {"_": []}
+  }
+}
