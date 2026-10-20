@@ -21,7 +21,7 @@
       ]
     }
   },
-  "scenes": {
+  
     "canh-viet.dem_mua_ngau_nhien": {
       "_title": "Trong cơn mưa",
       "_chung": {
@@ -131,7 +131,6 @@
           "Sau đó nàng nằm trong lòng, mặt vẫn còn đỏ nhưng đã cười. Nàng thì thầm cảm ơn vì bệ hạ đã nghe, và nói rằng nàng sẽ còn nhiều lời muốn nói trong những đêm sau."
         ]
       }
-    }
   },
   "events": {
     "canh-viet.xin_duoc_gan": {
@@ -382,8 +381,50 @@
           "label": "Ôm nàng cho ngủ",
           "effects": { "affection": 8 },
           "result": "{name} dựa vào ngực bệ hạ, thở đều dần rồi thiếp đi."
-        }
-      ]
+        },
+        "canh-viet.xin_duoc_gan": {
+      "_title": "Được gần",
+      "_chung": { "_": ["{name} được gọi vào, nàng lập tức quỳ xuống cạnh long sàng, mặt đỏ.\n> Thần thiếp… chỉ muốn được gần bệ hạ một chút.\nBệ hạ kéo nàng lên giường. Áo bị cởi từ từ, {name} rên khẽ khi da chạm da. Khi được đâm vào, nàng ôm chặt, hơi thở gấp. Nhịp chậm và dịu, nàng lên đỉnh với tiếng rên nhỏ, nước mắt nhẹ vì xúc động. Nàng thì thầm cảm ơn được vào.", "Nàng chủ động hôn và thì thầm những lời nhỏ. Cảm giác được chấp nhận khiến nàng táo hơn. {name} nhún nhẹ, rên lớn dần. Nàng lên đỉnh thêm lần nữa, ôm không buông.", "Bệ hạ đè nàng xuống đụ sâu hơn. {name} gào khẽ, chân quấn chặt. Nước chảy, nàng lên đỉnh liên tục. Biểu cảm hạnh phúc và sướng. Nàng không muốn rời.", "Sau đó nàng nằm trong lòng, mặt vẫn đỏ. Nàng thì thầm rằng chỉ cần được gần như thế này là nàng đã mãn nguyện, nhưng nếu bệ hạ muốn thêm thì nàng cũng sẵn lòng."] }
+    },
+    "canh-viet.toc_xo": {
+      "_title": "Nắm tóc",
+      "_chung": { "_": ["Bệ hạ nắm lấy mái tóc xõa của {name}, kéo nhẹ đầu nàng ngửa ra. Nàng rên khẽ, mắt sáng.\n> Bệ hạ… nắm mạnh hơn cũng được.\nÁo bị cởi, tóc xõa trải trên long sàng. Khi bị đâm vào, bệ hạ vẫn nắm tóc. {name} cảm nhận lực kéo và sự đầy bên trong, rên lớn. Nàng lên đỉnh nhanh, cơ thể run, tóc bị kéo căng theo từng nhịp.", "Nàng quay người, tóc bị nắm từ sau. Bệ hạ đâm mạnh, kéo tóc mỗi lần đẩy tới. {name} gào, nước chảy dài. Nàng lên đỉnh nhiều lần, biểu cảm điên sướng vì bị nắm tóc.", "Tóc bị quấn quanh tay, dùng để điều khiển nhịp. {name} cảm nhận rõ từng lần bị kéo. Rên không ngừng, lên đỉnh liên tục. Biểu cảm hoàn toàn phó thác.", "Sau đó tóc nàng rối và ướt mồ hôi. {name} thì thầm thích được nắm tóc khi đang bị đụ, và muốn để tóc xõa nhiều đêm hơn."] }
+    },
+    "canh-viet.muon_duoc_xem": {
+      "_title": "Được nhìn",
+      "_chung": { "_": ["{name} từ từ cởi áo trước mắt bệ hạ. Từng lớp rơi xuống, da lộ dần. Nàng đỏ mặt nhưng không dừng.\n> Bệ hạ đang nhìn… thần thiếp thấy nóng quá.\nKhi trần truồng, nàng nằm xuống, chân dạng nhẹ. Bệ hạ nhìn một lúc rồi mới tiến vào. {name} rên lớn khi bị đâm, cảm giác bị xem khiến nàng càng ướt. Nàng lên đỉnh nhanh, biểu cảm vừa e vừa sướng.", "Nàng chủ động ngồi lên, để bệ hạ nhìn rõ chỗ giao nhau. Nhún chậm, rên. {name} lên đỉnh nhiều lần, mắt không rời mắt bệ hạ. Cảm giác được ngắm làm nàng điên.", "Bị đụ từ sau nhưng vẫn ngoái nhìn. {name} thấy biểu cảm của bệ hạ, càng kích thích. Gào, lên đỉnh. Nước chảy, nàng thì thầm xin được xem nhiều hơn.", "Sau đó nàng nằm thở, vẫn còn đỏ mặt. Nàng nói rằng nàng thích được bệ hạ nhìn khi đang cởi và khi đang bị đụ."] }
+    },
+    "canh-viet.sau_man_the": {
+      "_title": "Sau lớp màn",
+      "_chung": { "_": ["Bệ hạ vén màn the. {name} đã trần truồng nằm đợi, bóng người in trên màn.\n> Bệ hạ vào rồi… thần thiếp đợi lâu quá.\nMàn the mỏng bay nhẹ khi hai người hòa vào nhau. {name} rên, cảm giác nửa kín nửa hở. Nàng lên đỉnh nhanh, tiếng rên vọng qua màn. Bóng hai người lay động trên lớp the.", "Nàng ngồi lên sau màn. Nhún mạnh, màn the dính vào da ướt. {name} rên lớn, lên đỉnh nhiều lần. Cảm giác có lớp màn khiến kích thích hơn. Nàng thì thầm thích được đụ sau màn.", "Bị đụ từ sau, màn che một phần. {name} gào khẽ, nước chảy. Bóng rõ trên màn. Nàng lên đỉnh liên tục, biểu cảm mê. Cảm giác sau màn the rất đặc biệt.", "Sau đó màn the vẫn còn dính mồ hôi. {name} nằm thở, nói rằng nàng muốn được đợi sau màn nhiều đêm nữa."] }
+    },
+    "canh-viet.chan_lanh": {
+      "_title": "Sưởi chân",
+      "_chung": { "_": ["Bệ hạ ôm hai bàn chân lạnh của {name} vào lòng, xoa cho ấm. Nàng rên khẽ vì nhột và vì ấm.\n> Bệ hạ… chân thần thiếp đỡ lạnh rồi.\nTừ chân, tay dần lần lên. Áo bị cởi, {name} đã ướt. Khi bị đâm vào, nàng ôm chặt, chân quấn lấy eo. Cảm giác từ lạnh sang nóng. Nàng lên đỉnh, rên lớn, biểu cảm hạnh phúc.", "Nàng chủ động dùng chân cọ. Cảm giác da chân ấm dần. {name} rên, lên đỉnh thêm. Biểu cảm thích được chăm sóc. Nàng thì thầm chân nàng giờ đã nóng.", "Bị đụ trong khi chân vẫn được nắm. {name} cảm nhận sự kiểm soát nhẹ. Rên, lên đỉnh nhiều lần. Nước chảy. Biểu cảm mê đắm.", "Sau đó chân nàng đã ấm hoàn toàn. {name} thì thầm cảm ơn, và nói rằng nàng thích được sưởi từ chân lên như thế này."] }
+    },
+    "canh-viet.muon_thi_tham": {
+      "_title": "Lời thì thầm",
+      "_chung": { "_": ["Bệ hạ nghiêng tai. {name} thì thầm những lời nhỏ và dần táo bạo. Tay nàng đã cởi áo mình.\n> Bệ hạ… thần thiếp muốn được thì thầm khi đang ở trong.\nKhi bị đâm vào, nàng tiếp tục thì thầm bên tai. Mỗi câu khiến nàng siết chặt. Cảm giác hơi thở và lời nói. {name} lên đỉnh với tiếng rên thì thầm, ôm chặt.", "Nàng thì thầm tục hơn. Giọng run. {name} cưỡi và thì thầm liên tục. Lên đỉnh nhiều lần. Biểu cảm mê. Cảm giác thì thầm làm mọi thứ kích thích hơn.", "Bị đụ từ sau, nàng vẫn ngoái lại thì thầm. {name} gào khẽ giữa các câu. Lên đỉnh liên tục. Nước chảy. Biểu cảm điên vì lời nói.", "Sau đó nàng nằm cạnh, vẫn thì thầm nhỏ. Nàng nói rằng nàng thích được thì thầm mọi cảm giác khi đang bị đụ, và muốn nhiều đêm như thế."] }
+    },
+    "canh-viet.lua_mong": {
+      "_title": "Dải lụa",
+      "_chung": { "_": ["Bệ hạ dùng chính dải lụa của {name} trói nhẹ cổ tay nàng lên đầu giường. Có ám hiệu. Nàng rên khẽ, đã ướt.\n> Bệ hạ… nhẹ thôi.\nKhi bị đâm vào, lụa mát trên da. {name} không cử động tay được, cảm giác bất lực nhẹ. Nàng lên đỉnh nhanh, rên lớn. Lụa siết nhẹ theo từng nhịp co giật.", "Trói thêm mắt cá chân mở rộng. {name} cảm thấy lộ. Bị đụ sâu, nàng gào. Lên đỉnh nhiều lần. Biểu cảm sướng và an toàn. Lụa đỏ trên da trắng.", "Dùng lụa quấn qua người rồi đụ. Cảm giác lụa cọ da. {name} rên không ngừng. Lên đỉnh liên tục. Nàng thì thầm thích dải lụa này.", "Sau khi cởi, dấu lụa còn nhẹ trên da. {name} thì thầm muốn được trói bằng lụa của chính mình thêm nhiều lần."] }
+    },
+    "canh-viet.sau_tam": {
+      "_title": "Da thơm",
+      "_chung": { "_": ["Bệ hạ kéo {name} lại, mũi chạm vào cổ và vai còn ẩm. Mùi thơm sạch sẽ. Nàng rên khẽ.\n> Bệ hạ… thần thiếp vừa tắm xong.\nÁo bị cởi, da ấm và thơm. Khi bị đâm vào, {name} cảm nhận rõ. Nàng lên đỉnh nhanh, rên lớn. Hương thơm quyện mồ hôi mới. Biểu cảm sạch sẽ và sướng.", "Nàng ngồi lên, tóc ẩm xõa. Nhún mạnh, mùi thơm lan. {name} rên, lên đỉnh nhiều lần. Cảm giác da sạch khiến nhạy hơn. Nàng thì thầm thích được đụ ngay sau khi tắm.", "Bị đụ từ sau, mũi gần da thơm. {name} gào, nước chảy. Lên đỉnh liên tục. Biểu cảm mê. Mùi thơm vẫn còn.", "Sau đó da nàng đã bóng mồ hôi mới. {name} thì thầm rằng nàng sẽ tắm rồi vào hầu nhiều hơn."] }
+    },
+    "canh-viet.khong_mac_lot": {
+      "_title": "Không lớp nào",
+      "_chung": { "_": ["Bệ hạ kéo cổ áo {name} xuống, xác nhận không có gì bên trong. Nàng đỏ mặt, đã ướt.\n> Đêm nay nóng… nên thần thiếp không mặc.\nÁo bị tụt xuống eo. Dương vật đâm vào ngay. {name} rên lớn, cảm giác không có gì cản. Nàng lên đỉnh nhanh. Biểu cảm vừa e vừa sướng vì sự trống trải.", "Nàng chủ động kéo hết áo, trần truồng ngồi lên. Nhún mạnh, không có lớp nào. {name} rên, lên đỉnh nhiều lần. Cảm giác always bottomless. Nước chảy trực tiếp.", "Bị đụ từ sau, hoàn toàn không có gì. {name} gào, nước chảy dài. Lên đỉnh liên tục. Biểu cảm điên. Nàng thì thầm thích không mặc lót.", "Sau đó nàng vẫn trần. {name} thì thầm rằng những đêm nóng nàng sẽ không mặc gì bên dưới nữa."] }
+    },
+    "canh-viet.xin_them": {
+      "_title": "Thêm lần nữa",
+      "_chung": { "_": ["{name} được giữ lại. Nàng chủ động nằm lên và tiếp tục ngay.\n> Thêm một lần nữa… thần thiếp còn muốn.\nNàng cưỡi mạnh, đã sưng nhưng vẫn ướt. Cảm giác liên tục. {name} rên khàn, lên đỉnh nhiều lần liên tiếp. Nàng không muốn dừng, miệng xin thêm.", "Đổi tư thế, vẫn tiếp tục. {name} mệt nhưng tham. Nước và tinh cũ chảy. Nàng lên đỉnh yếu nhưng dài. Biểu cảm điên sướng. Cảm giác multiple orgasms.", "Gần sáng vẫn còn. {name} ôm chặt, rên nhỏ. Khi được bắn thêm, nàng siết và lên đỉnh lần cuối trong đêm. Cơ thể run.", "Nàng nằm thở dốc, vẫn chưa hoàn toàn thỏa. {name} thì thầm rằng nàng thích được xin thêm, và muốn nhiều đêm được làm liên tục như thế này."] }
+    }
+  ]
+    }
+              ]
     }
   }
 }
