@@ -12,7 +12,8 @@
   "files": {
     "fetishes": "fetishes.json",
     "events": [
-      "events/su-kien-moi.json"
+      "events/su-kien-moi.json",
+      "events/kham-pha.json"
     ],
     "sceneTexts": [
       "scene-texts/1-thi-tam.json",
@@ -23,6 +24,7 @@
       "scene-texts/6-truy-lac-nang.json",
       "scene-texts/7-khung-nong-bong.json",
       "scene-texts/8-canh-moi.json"
-    ]
+    ],
+    "portraits": "portraits.json"
   }
 }

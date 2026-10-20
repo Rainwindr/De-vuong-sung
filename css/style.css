@@ -319,3 +319,14 @@ textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px soli
 .num-row { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 13px; }
 .num-row input[type=number], .num-row select { width: 100%; min-width: 0; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--ink); color: var(--paper); font: inherit; font-variant-numeric: tabular-nums; }
 .num-row .check { font-size: 12.5px; white-space: nowrap; }
+
+/* Chọn sở thích khi lật thẻ */
+.fx-tools { display: grid; gap: 8px; margin: 10px 0 8px; }
+.fx-tools input[type=search] { width: 100%; padding: 11px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--ink); color: var(--paper); font: inherit; }
+.fx-only { font-size: 13px; }
+.fx-status { font-size: 13px; color: var(--paper); margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.fx-group { margin-bottom: 8px; }
+.fx-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.fx-row .check { flex: 1; min-width: 0; }
+.fx-row.fx-off { opacity: .55; }
+.fx-pin { flex: none; background: none; border: 0; color: var(--gold); font-size: 18px; line-height: 1; padding: 2px 4px; cursor: pointer; }

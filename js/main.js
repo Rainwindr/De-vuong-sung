@@ -56,6 +56,7 @@
         if (G.loadPack(data)) {
           for (const f of [].concat(files.scenes || [])) await loadScript(base + f);
           for (const f of [].concat(files.sceneTexts || [])) G.addPackSceneTexts(await fetchJSON(base + f));
+          for (const f of [].concat(files.portraits || [])) G.addPortraits(await fetchJSON(base + f), base);
         }
       } catch (e) {
         G.registry.errors.push(`[${folder}] ${e.message}`);
@@ -77,6 +78,7 @@
       if (G.loadPack(p)) {
         if (typeof p.scenes === "function") p.scenes(G);
         if (p.sceneTexts) G.addPackSceneTexts(p.sceneTexts);
+        if (p.portraits) G.addPortraits(p.portraits, base);
       }
     }
   }

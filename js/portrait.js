@@ -88,3 +88,35 @@ ${blush}${brows}${eyes}${mouth}${hoaDien}${bangs}${buns}
 </svg>`;
   };
 })();
+
+/*
+ * Ảnh chân dung thật do gói khai báo (files.portraits), ví dụ packs/canh-viet/portraits.json:
+ *   { "core.tuyet": "portraits/tuyet.webp", "_tu_nu": ["portraits/tu-nu-1.webp", ...] }
+ * Ảnh theo id nhân vật ưu tiên trước; tú nữ ngẫu nhiên lấy một ảnh trong "_tu_nu" theo id (cố định mỗi người).
+ * Tra lúc vẽ nên áp dụng cả cho bản lưu cũ. Con cái không bao giờ dùng ảnh.
+ */
+(function (G) {
+  "use strict";
+  const byId = {};
+  let pool = [];
+  const abs = (base, rel) => (/^(https?:|data:|\/)/.test(rel) ? rel : base + rel);
+  G.addPortraits = function (map, base) {
+    for (const [k, v] of Object.entries(map || {})) {
+      if (k === "_tu_nu") pool = pool.concat([].concat(v).filter(Boolean).map((x) => abs(base, x)));
+      else if (k.startsWith("_")) continue;
+      else if (typeof v === "string" && v) byId[k] = abs(base, v);
+    }
+  };
+  G.portraitImageFor = function (c) {
+    if (!c || c.isChild) return null;
+    if (byId[c.id]) return byId[c.id];
+    const def = G.registry.characters[c.id];
+    const pack = c.pack || (def && def.pack);
+    if ((pack === "generated" || pack === "god") && pool.length) {
+      let h = 0;
+      for (const ch of String(c.id)) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+      return pool[h % pool.length];
+    }
+    return null;
+  };
+})(window.Game);

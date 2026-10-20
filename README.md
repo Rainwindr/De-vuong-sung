@@ -2,7 +2,7 @@
 
 Game mô phỏng hậu cung dạng text kèm chân dung, chạy trên trình duyệt, ưu tiên điện thoại. Người chơi là một hoàng đế 18 tuổi vừa đăng cơ: tuyển tú, sủng ái phi tần, sinh con nối dõi, và tự chọn mình sẽ trụy lạc đến đâu. 
 
-Phiên bản **0.3.5**. Gói `canh-viet` đã có 670 đoạn cảnh viết sẵn và 68 sở thích mới.
+Phiên bản **0.3.6**. Gói `canh-viet` có cảnh viết sẵn, sự kiện khám phá sở thích, và chỗ cắm ảnh chân dung thật.
 
 ## Chạy thử
 
@@ -74,6 +74,7 @@ packs/_template/                mẫu trống để copy khi làm gói mới
 docs/HUONG-DAN-CONTENT-PACK.md  hướng dẫn viết sự kiện và làm gói
 docs/PROMPT-VIET-CANH.md        bộ prompt cho Grok theo 7 mức ưu tiên
 docs/PROMPT-VIET-SU-KIEN.md     bộ prompt cho Grok viết sự kiện có lựa chọn
+docs/ANH-CHAN-DUNG.md           cách thêm ảnh chân dung thật, kèm prompt vẽ ảnh
 tools/validate.js               kiểm tra gói: node tools/validate.js
 tools/build.py                  đóng gói: tạo dist/index.html và packs/bundle.js
 packs/bundle.js                 TỰ SINH, dữ liệu đóng gói cho khi mở thẳng index.html (đừng sửa tay)
