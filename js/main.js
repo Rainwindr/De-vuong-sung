@@ -53,7 +53,10 @@
         }
         fixAssetPaths(data, base);
         G.packBases[manifest.id] = base;
-        if (G.loadPack(data)) for (const f of [].concat(files.scenes || [])) await loadScript(base + f);
+        if (G.loadPack(data)) {
+          for (const f of [].concat(files.scenes || [])) await loadScript(base + f);
+          for (const f of [].concat(files.sceneTexts || [])) G.addPackSceneTexts(await fetchJSON(base + f));
+        }
       } catch (e) {
         G.registry.errors.push(`[${folder}] ${e.message}`);
       }
@@ -71,7 +74,10 @@
       const base = `packs/${p.folder}/`;
       fixAssetPaths(p, base);
       G.packBases[p.manifest.id] = base;
-      if (G.loadPack(p) && typeof p.scenes === "function") p.scenes(G);
+      if (G.loadPack(p)) {
+        if (typeof p.scenes === "function") p.scenes(G);
+        if (p.sceneTexts) G.addPackSceneTexts(p.sceneTexts);
+      }
     }
   }
 
@@ -82,6 +88,7 @@
     } catch (e) {
       G.registry.errors.push("Không đọc được packs/index.json: " + e.message + ". Hãy chạy qua máy chủ web, không mở file trực tiếp.");
     }
+    G.installSceneTexts();
     G.ui.renderGate();
   }
 
