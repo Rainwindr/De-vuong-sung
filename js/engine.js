@@ -554,6 +554,7 @@
         if (when.speakerTrait && !(speaker.traits || []).includes(when.speakerTrait)) return false;
         if (when.speakerGenerated != null && (speaker.pack === "generated") !== when.speakerGenerated) return false;
         if (when.speakerPregnant != null && (speaker.pregnantDue != null) !== when.speakerPregnant) return false;
+        if (when.speakerWilling && ![].concat(when.speakerWilling).every((f) => G.consentOf(speaker, f) === "willing")) return false;
       }
     }
     return true;

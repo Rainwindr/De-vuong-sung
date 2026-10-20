@@ -66,6 +66,28 @@
       .replace(/\{fetish\}/g, fet || "ý bệ hạ");
   }
 
+  /**
+   * Bốc một đoạn chưa hiện trong vòng này. Khi đã hiện hết mới bắt đầu vòng mới,
+   * và đoạn đầu vòng mới không trùng đoạn cuối vòng trước. Ghi nhớ trong bản lưu (state.textSeen).
+   */
+  function pickUnseen(slot, arr) {
+    const s = G.state;
+    if (!s || arr.length === 1) return arr[Math.floor(Math.random() * arr.length)];
+    const store = (s.textSeen = s.textSeen || {});
+    const rec = store[slot] || { seen: [], last: -1 };
+    let pool = [];
+    for (let i = 0; i < arr.length; i++) if (!rec.seen.includes(i)) pool.push(i);
+    if (!pool.length) {
+      rec.seen = [];
+      pool = arr.map((_, i) => i).filter((i) => i !== rec.last);
+    }
+    const i = pool[Math.floor(Math.random() * pool.length)];
+    rec.seen.push(i);
+    rec.last = i;
+    store[slot] = rec;
+    return arr[i];
+  }
+
   function findText(hook, ctx) {
     const byKey = texts[hook];
     if (!byKey) return null;
@@ -77,7 +99,7 @@
       if (!byLv) continue;
       for (const lv of lvs) {
         const arr = byLv[lv];
-        if (arr && arr.length) return arr[Math.floor(Math.random() * arr.length)];
+        if (arr && arr.length) return pickUnseen(`${hook}|${k}|${lv}`, arr);
       }
     }
     return null;

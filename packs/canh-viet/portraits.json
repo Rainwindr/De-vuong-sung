@@ -1,0 +1,14 @@
+{
+  "_huong_dan": "Điền đường dẫn ảnh (trong thư mục portraits/) cho từng nhân vật. Để trống thì dùng chân dung vẽ. _tu_nu: danh sách ảnh cho tú nữ ngẫu nhiên. Xem docs/ANH-CHAN-DUNG.md",
+  "core.uyen_nghi": "",
+  "core.moc_can": "",
+  "core.tuyet": "",
+  "core.nhu_yen": "",
+  "core.tu_lan": "",
+  "core.mi_nuong": "",
+  "core.thanh_ca": "",
+  "core.song_nguyet": "",
+  "core.song_nhat": "",
+  "core.hong_tieu": "",
+  "_tu_nu": []
+}

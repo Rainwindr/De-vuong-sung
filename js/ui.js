@@ -26,7 +26,8 @@
     const hue = p.hue != null ? p.hue : hashHue(c.id || c.name);
     const mood = c.favor >= 70 ? " mood-high" : "";
     // Ảnh thật của gói (nếu có) phủ lên chân dung vẽ; ảnh lỗi thì tự gỡ, lộ chân dung vẽ bên dưới
-    const img = p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" onerror="this.remove()">` : "";
+    const src = c.isChild ? null : G.portraitImageFor(c) || p.image;
+    const img = src ? `<img src="${esc(src)}" alt="" loading="lazy" onerror="this.remove()">` : "";
     return `<span class="portrait${size ? " " + size : ""}${mood}${c.isChild ? " child" : ""}" style="--h:${hue}" aria-hidden="true">${G.portraitSVG(c)}${img}</span>`;
   }
   const bar = (v, cls) => `<span class="bar${cls ? " " + cls : ""}"><i style="width:${Math.max(0, Math.min(100, v))}%"></i></span>`;
@@ -885,26 +886,122 @@
   }
 
   /** Chọn sở thích cho đêm thị tẩm. Sở thích nàng chưa sẵn lòng sẽ bị khóa. */
+  /* Ghim sở thích: lưu trên trình duyệt, mất cũng không sao. */
+  const PIN_KEY = "tsdv-pins-v1";
+  const loadPins = () => {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(PIN_KEY) || "[]"));
+    } catch (e) {
+      return new Set();
+    }
+  };
+  const savePins = (set) => {
+    try {
+      localStorage.setItem(PIN_KEY, JSON.stringify([...set]));
+    } catch (e) {
+      /* bỏ qua */
+    }
+  };
+  const fold = (t) => String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
+
   function openNight(c) {
     const fets = Object.values(R.fetishes)
       .filter((f) => G.fetishUnlocked(f.id))
-      .sort((a, b) => a.tier - b.tier);
-    const rows = fets
-      .map((f) => {
-        const lvl = G.consentOf(c, f.id);
-        const ok = lvl === "willing";
-        return `<label class="check"><input type="checkbox" value="${esc(f.id)}" ${ok ? "" : "disabled"}> <span>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""} <span class="hint">· ${esc(G.CONSENT_LABEL[lvl])}</span></span></label>`;
-      })
-      .join("");
+      .sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name, "vi"));
+    const pins = loadPins();
+    const picked = new Set();
+    let query = "";
+    let onlyWilling = true;
+    const lvlOf = (f) => G.consentOf(c, f.id);
+
+    const row = (f) => {
+      const lvl = lvlOf(f);
+      const ok = lvl === "willing";
+      const on = picked.has(f.id);
+      return `<div class="fx-row${ok ? "" : " fx-off"}">
+        <label class="check"><input type="checkbox" data-fx="${esc(f.id)}" ${on ? "checked" : ""} ${ok ? "" : "disabled"}> <span>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""} <span class="hint">· ${esc(G.CONSENT_LABEL[lvl])}</span></span></label>
+        <button class="fx-pin" data-pin="${esc(f.id)}" aria-pressed="${pins.has(f.id)}" aria-label="Ghim ${esc(f.name)}">${pins.has(f.id) ? "★" : "☆"}</button>
+      </div>`;
+    };
+
+    const renderList = (el) => {
+      const q = fold(query.trim());
+      const shown = fets.filter((f) => (!onlyWilling || lvlOf(f) === "willing" || picked.has(f.id)) && (!q || fold(f.name).includes(q) || fold(f.id).includes(q)));
+      const groups = [];
+      const pinned = shown.filter((f) => pins.has(f.id));
+      if (pinned.length) groups.push(["★ Đã ghim", pinned, true]);
+      for (const t of [1, 2, 3]) {
+        const g = shown.filter((f) => f.tier === t && !pins.has(f.id));
+        if (g.length) groups.push([`Tầng ${t}`, g, !!q || t === 1]);
+      }
+      const box = $(el, "#fx-list");
+      box.innerHTML = groups.length
+        ? groups.map(([label, list, open]) => `<details class="fx-group" ${open ? "open" : ""}><summary>${esc(label)} <span class="hint">(${list.length})</span></summary><div class="check-list">${list.map(row).join("")}</div></details>`).join("")
+        : `<p class="empty">Không có sở thích nào khớp.</p>`;
+      renderStatus(el);
+    };
+
+    const renderStatus = (el) => {
+      const ids = [...picked];
+      const combo = G.findCombo(ids);
+      const names = ids.map((id) => (R.fetishes[id] || {}).name || id);
+      $(el, "#fx-status").innerHTML = ids.length
+        ? `Đã chọn: ${names.map(esc).join(", ")}${combo ? ` · <strong>Combo: ${esc(combo.name)}</strong>` : ""} <button class="btn btn-sm btn-ghost" id="fx-clear">Bỏ chọn</button>`
+        : `<span class="hint">Chưa chọn sở thích nào (đêm thường).</span>`;
+    };
+
     openSheet(
       `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Lật thẻ bài · ${esc(G.displayTitle(c))}</span><h3>${esc(c.name)}</h3></div></div>
-       ${fets.length ? `<p class="hint">Chọn sở thích cho đêm nay (tùy chọn). Chỉ chọn được những gì nàng sẵn lòng. Chọn hai sở thích hợp nhau để mở combo.</p><div class="check-list">${rows}</div>` : ""}
+       ${
+         fets.length
+           ? `<p class="hint">Chọn sở thích cho đêm nay (tùy chọn). Chọn hai sở thích hợp nhau để mở combo. Bấm ☆ để ghim lên đầu.</p>
+              <div class="fx-tools">
+                <input type="search" id="fx-q" placeholder="Tìm sở thích…" aria-label="Tìm sở thích" autocomplete="off">
+                <label class="check fx-only"><input type="checkbox" id="fx-only" checked> Chỉ điều nàng sẵn lòng</label>
+              </div>
+              <div id="fx-status" class="fx-status"></div>
+              <div id="fx-list"></div>`
+           : ""
+       }
        <div class="choices"><button class="btn btn-primary" id="n-go">Truyền chỉ</button><button class="btn btn-ghost" id="n-back">Thôi</button></div>`,
       (el) => {
         $(el, "#n-back").addEventListener("click", closeSheet);
+        if (fets.length) {
+          renderList(el);
+          $(el, "#fx-q").addEventListener("input", (e) => {
+            query = e.target.value;
+            renderList(el);
+          });
+          $(el, "#fx-only").addEventListener("change", (e) => {
+            onlyWilling = e.target.checked;
+            renderList(el);
+          });
+          const card = $(el, ".sheet-card");
+          card.addEventListener("change", (e) => {
+            const id = e.target.dataset && e.target.dataset.fx;
+            if (!id) return;
+            if (e.target.checked) picked.add(id);
+            else picked.delete(id);
+            renderStatus(el);
+          });
+          card.addEventListener("click", (e) => {
+            const pin = e.target.closest && e.target.closest("[data-pin]");
+            if (pin) {
+              const id = pin.dataset.pin;
+              if (pins.has(id)) pins.delete(id);
+              else pins.add(id);
+              savePins(pins);
+              renderList(el);
+              return;
+            }
+            if (e.target.id === "fx-clear") {
+              picked.clear();
+              renderList(el);
+            }
+          });
+        }
         $(el, "#n-go").addEventListener("click", () => {
-          const picked = [...el.querySelectorAll("input[type=checkbox]:checked")].map((i) => i.value);
-          const scene = G.summon(c.id, picked);
+          const scene = G.summon(c.id, [...picked]);
           G.save();
           showScene(scene);
         });

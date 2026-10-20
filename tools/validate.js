@@ -32,7 +32,7 @@ function readJSON(file, pack) {
 }
 
 const sceneTexts = []; // { pack, file, hook, key, lv, n }
-const all = { characters: {}, fetishes: {}, events: {}, contests: {}, gifts: {}, buildings: {}, regions: {}, hooksUsed: [], hooksRegistered: new Set() };
+const all = { characters: {}, fetishes: {}, events: {}, contests: {}, gifts: {}, buildings: {}, regions: {}, hooksUsed: [], hooksRegistered: new Set(), portraitKeys: [] };
 
 function collectHooks(file, packId) {
   const code = fs.readFileSync(file, "utf8");
@@ -147,6 +147,28 @@ function checkPack(folder) {
       }
     }
   }
+  // Ảnh chân dung: { "id nhân vật": "đường/dẫn.webp", "_tu_nu": [...] }
+  for (const f of asList(files.portraits)) {
+    const d = readJSON(path.join(dir, f), id);
+    if (!d) continue;
+    if (typeof d !== "object" || Array.isArray(d)) {
+      err(id, `${f}: phải là một khối { "id nhân vật": "ảnh" }`);
+      continue;
+    }
+    let n = 0;
+    for (const [k, v] of Object.entries(d)) {
+      if (k.startsWith("_") && k !== "_tu_nu") continue;
+      for (const img of [].concat(v || [])) {
+        if (!img) continue;
+        if (typeof img !== "string") { err(id, `${f} / ${k}: đường dẫn ảnh phải là chuỗi`); continue; }
+        if (/^(https?:|data:)/.test(img)) { n++; continue; }
+        if (!fs.existsSync(path.join(dir, img))) warn(id, `${f} / ${k}: không thấy file ảnh ${img}`);
+        else n++;
+      }
+      if (k !== "_tu_nu") all.portraitKeys.push({ pack: id, file: f, key: k });
+    }
+    if (n) console.log(`  Ảnh chân dung: ${n} ảnh.`);
+  }
 }
 
 function crossCheck() {
@@ -174,6 +196,7 @@ function crossCheck() {
     for (const k of ["building", "notBuilding"]) for (const b of asList(w[k])) if (!all.buildings[b]) err(pack, `${where}: ${k} "${b}" không tồn tại`);
     for (const f of Object.keys(w.fetishLevel || {})) if (!F[f]) err(pack, `${where}: fetishLevel "${f}" không tồn tại`);
     for (const f of asList(w.fetishUnlocked)) if (!F[f]) err(pack, `${where}: fetishUnlocked "${f}" không tồn tại`);
+    for (const f of asList(w.speakerWilling)) if (!F[f]) err(pack, `${where}: speakerWilling "${f}" không tồn tại`);
   };
 
   for (const e of Object.values(all.events)) {
@@ -216,6 +239,7 @@ function crossCheck() {
     if (!seenHook.has(st.hook) && !isKnownHook(st.hook)) warn(st.pack, `${st.file}: HOOK "${st.hook}" không có sự kiện nào gọi (game sẽ không dùng tới)`);
     seenHook.add(st.hook);
   }
+  for (const pk of all.portraitKeys) if (!all.characters[pk.key]) warn(pk.pack, `${pk.file}: "${pk.key}" không phải nhân vật nào`);
   if (sceneTexts.length) console.log(`\n  Cảnh viết bằng JSON: ${written} đoạn.`);
   const textHooks = new Set(sceneTexts.filter((st) => st.n > 0).map((st) => st.hook));
   const covered = (h) => reg.includes(h) || textHooks.has(h) || reg.some((r) => r.endsWith("*") && h.startsWith(r.slice(0, -1)));

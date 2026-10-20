@@ -209,6 +209,7 @@ So sánh số: `{ "gte": 10 }`, `{ "lte": 50 }`, `{ "gt": … }`, `{ "lt": … }
 | `speakerInHarem` | Người nói đã nhập cung chưa |
 | `favor`, `affection` | Sủng ái, Tình cảm của người nói |
 | `speakerAge`, `speakerRank`, `speakerTrait`, `speakerPregnant` | Tuổi, phẩm, có trait, đang mang thai |
+| `speakerWilling` | Người nói đang **sẵn lòng** với (các) sở thích này, ví dụ `"speakerWilling": "core.bit_mat"`. Dùng cho sự kiện "nàng tự đề nghị". |
 | `speakerGenerated` | `true`: chỉ chọn tú nữ ngẫu nhiên (không phải nhân vật viết sẵn) |
 | `childAge`, `childSex`, `childMarried` | Với `speaker: "child"` |
 | `pairTinhY`, `pairFavorBelow` | Với `speaker: "pair"` |

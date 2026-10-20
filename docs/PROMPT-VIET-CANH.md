@@ -157,6 +157,30 @@ Trả về:
 | `core.combo_lua_do` | Lụa Đỏ Quyền Uy | Chủ và tớ + Trói bằng lụa (có ám hiệu dừng) |
 | `core.combo_tram_mau` | Hội Trăm Màu | Trình diễn + Trang sức |
 
+**Viết cả 5 combo trong một lần** (dán nguyên khối, Grok trả về một JSON dùng được ngay với `them-canh.py`):
+
+```
+Viết cảnh cho 5 combo dưới đây. Mỗi combo 4 đoạn, mỗi đoạn 80–150 chữ, có ít nhất một câu thoại bắt đầu bằng "> ". Dùng {name} cho phi tần. Mọi người đều trưởng thành, tỉnh táo, tự nguyện; combo có trói phải nhắc ám hiệu dừng.
+Đoạn 1 mở đầu và dựng không khí, đoạn 2–3 cao trào theo đúng hai sở thích của combo, đoạn 4 dư âm sau đó.
+
+1. core.combo_ho_ruou — "Đêm Hồ Rượu" (Dục trì + Yến tiệc trên người): bể tắm nước nóng lát ngọc, rượu ấm và trái cây bày trên người {name}, bệ hạ thưởng thức từ trên da nàng. Chỉ nhấp rượu cho vui, không ai say.
+2. core.combo_kich — "Kịch Vương Triều" (Nhập vai + Y phục đặc biệt): {name} tự chọn vở và trang phục (nữ hiệp, tiên nữ, tiểu thư khuê các…), bày sân khấu nhỏ trong tẩm cung; nàng là người dẫn dắt vở diễn.
+3. core.combo_huong_toi — "Hương Trong Bóng Tối" (Thì thầm + Bịt mắt): {name} bịt mắt bằng lụa đen, mọi thứ chỉ còn tiếng thì thầm sát tai và hơi thở; ám hiệu là siết tay ba lần.
+4. core.combo_lua_do — "Lụa Đỏ Quyền Uy" (Chủ và tớ + Trói bằng lụa): dải lụa đỏ, vai chủ và tớ do {name} đề nghị, hai bên nhắc ám hiệu "hoa mai" trước khi bắt đầu.
+5. core.combo_tram_mau — "Hội Trăm Màu" (Trình diễn + Trang sức): {name} đeo toàn bộ trang sức được ban, trình diễn trước các phi khác cùng tự nguyện xem; mỗi món trang sức gỡ ra là một màn mới.
+
+Chỉ trả về JSON, đúng dạng:
+{
+  "core.combo_ho_ruou": { "_chung": { "_": ["...", "...", "...", "..."] } },
+  "core.combo_kich": { "_chung": { "_": ["...", "...", "...", "..."] } },
+  "core.combo_huong_toi": { "_chung": { "_": ["...", "...", "...", "..."] } },
+  "core.combo_lua_do": { "_chung": { "_": ["...", "...", "...", "..."] } },
+  "core.combo_tram_mau": { "_chung": { "_": ["...", "...", "...", "..."] } }
+}
+```
+
+Lưu câu trả lời vào `grok.txt` rồi chạy `python tools/them-canh.py grok.txt`: 5 combo tự vào đúng ô trong `2-so-thich-va-combo.json`. Sửa tay thì dán từng mảng `[...]` vào chỗ `"_chung": {"_": []}` của combo tương ứng.
+
 ---
 
 ## D. Mức 3 đến 7 · Một prompt chung
