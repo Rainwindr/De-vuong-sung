@@ -1281,7 +1281,7 @@
       "Hay ngượng": "persuade"
     },
      {
-      "id": "canh-viet.public",
+      "id": "canh-viet.public3",
       "name": "Public",
       "tier": 3,
       "unlock": { "truyLac": { "gte": 55 } },
