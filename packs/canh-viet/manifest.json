@@ -1,7 +1,7 @@
 {
   "id": "canh-viet",
   "name": "Cảnh viết (Grok)",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Tiên",
   "game_version": ">=0.3",
   "rating": "25+",
@@ -11,6 +11,9 @@
   ],
   "files": {
     "fetishes": "fetishes.json",
+    "events": [
+      "events/su-kien-moi.json"
+    ],
     "sceneTexts": [
       "scene-texts/1-thi-tam.json",
       "scene-texts/2-so-thich-va-combo.json",
