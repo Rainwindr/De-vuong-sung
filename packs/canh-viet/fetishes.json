@@ -11,16 +11,26 @@
     "default_consent": "persuade",
     "desc": "Sở thích thêm từ cảnh viết (bộ _sothich)."
   },
-   {
-      "id": "canh-viet.overstimulation",
-      "name": "Overstimulation",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 60 } },
-      "default_consent": "persuade",
-      "desc": "Kích thích quá mức sau khi đã lên đỉnh nhiều lần, cơ thể cực nhạy, tiếp tục bị đụ.",
-      "consent": { "core.tuyet": "willing", "core.song_nhat": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Ôn nhu": "persuade" }
+  {
+    "id": "canh-viet.overstimulation",
+    "name": "Overstimulation",
+    "tier": 3,
+    "unlock": {
+      "truyLac": {
+        "gte": 60
+      }
     },
+    "default_consent": "persuade",
+    "desc": "Kích thích quá mức sau khi đã lên đỉnh nhiều lần, cơ thể cực nhạy, tiếp tục bị đụ.",
+    "consent": {
+      "core.tuyet": "willing",
+      "core.song_nhat": "willing"
+    },
+    "consentByTrait": {
+      "Táo bạo": "willing",
+      "Ôn nhu": "persuade"
+    }
+  },
   {
     "id": "canh-viet.guong",
     "name": "Gương",
@@ -918,26 +928,6 @@
     }
   },
   {
-    "id": "canh-viet.overstimulation",
-    "name": "Overstimulation",
-    "tier": 3,
-    "unlock": {
-      "truyLac": {
-        "gte": 60
-      }
-    },
-    "default_consent": "persuade",
-    "desc": "Kích thích quá mức sau khi đã lên đỉnh nhiều lần, cơ thể cực nhạy, tiếp tục bị đụ.",
-    "consent": {
-      "core.tuyet": "willing",
-      "core.song_nhat": "willing"
-    },
-    "consentByTrait": {
-      "Táo bạo": "willing",
-      "Ôn nhu": "persuade"
-    }
-  },
-  {
     "id": "canh-viet.breeding",
     "name": "Breeding",
     "tier": 3,
@@ -1279,266 +1269,26 @@
       "Táo bạo": "willing",
       "Nghịch ngợm": "willing",
       "Hay ngượng": "persuade"
-    },
-     {
-      "id": "canh-viet.public3",
-      "name": "Public",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 55 } },
-      "default_consent": "persuade",
-      "desc": "Thị tẩm ở nơi có thể bị người khác nhìn thấy hoặc nghe thấy, tăng kích thích.",
-      "consent": { "core.tuyet": "willing", "core.mi_nuong": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Hay ngượng": "refuse" }
-    },
+    }
+  },
   {
-      "id": "canh-viet.freeuse_harem",
-      "name": "Freeuse harem / Public freeuse",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 70 } },
-      "default_consent": "persuade",
-      "desc": "Mọi phi trong hậu cung đều ở trạng thái freeuse: bất cứ lúc nào, bất cứ đâu cũng có thể bị dùng ngay mà không cần hỏi, kể cả nơi công cộng trong cung.",
-      "consent": { "core.tuyet": "willing", "core.song_nhat": "willing", "core.mi_nuong": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Đoan trang": "refuse", "Hay ngượng": "persuade" }
+    "id": "canh-viet.public3",
+    "name": "Public",
+    "tier": 3,
+    "unlock": {
+      "truyLac": {
+        "gte": 55
+      }
     },
-   {
-      "id": "canh-viet.cumflation",
-      "name": "Cumflation",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 70 } },
-      "default_consent": "persuade",
-      "desc": "Bắn tinh cực nhiều vào trong đến mức bụng phi tần phồng nhẹ, cảm giác đầy căng.",
-      "consent": { "core.hong_tieu": "willing", "core.tuyet": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Đoan trang": "refuse" }
+    "default_consent": "persuade",
+    "desc": "Thị tẩm ở nơi có thể bị người khác nhìn thấy hoặc nghe thấy, tăng kích thích.",
+    "consent": {
+      "core.tuyet": "willing",
+      "core.mi_nuong": "willing"
     },
-   {
-      "id": "canh-viet.extreme_medical",
-      "name": "Extreme medical",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 50 } },
-      "default_consent": "persuade",
-      "desc": "Đóng vai khám và điều trị cực đoan, dùng dụng cụ, kiểm tra sâu, kết hợp đụ.",
-      "consent": { "core.tu_lan": "willing", "core.mi_nuong": "persuade" },
-      "consentByTrait": { "Từng trải": "willing", "Ôn nhu": "persuade" }
-    },
-   {
-      "id": "canh-viet.invisible_force_play",
-      "name": "Invisible force play",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 60 } },
-      "default_consent": "persuade",
-      "desc": "Tưởng tượng hoặc đóng vai bị lực vô hình giữ, đụ, kích thích mà không cần trói thật.",
-      "consent": { "core.nhu_yen": "willing", "core.mi_nuong": "willing" },
-      "consentByTrait": { "Mê hoặc": "willing", "Hay ngượng": "persuade" }
-    },
-   {
-      "id": "canh-viet.hypnofetish",
-      "name": "Hypnofetish",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 55 } },
-      "default_consent": "persuade",
-      "desc": "Đóng vai hoặc tưởng tượng bị thôi miên, mất kiểm soát ý chí, trở nên cực kỳ vâng lời và nhạy cảm.",
-      "consent": { "core.nhu_yen": "willing", "core.song_nguyet": "persuade" },
-      "consentByTrait": { "Mơ mộng": "willing", "Kiêu kỳ": "persuade" }
-    },
-  {
-      "id": "canh-viet.biastophilia",
-      "name": "Biastophilia",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 60 } },
-      "default_consent": "persuade",
-      "desc": "Đóng vai bị tấn công hoặc cưỡng ép (đã thỏa thuận trước, có ám hiệu dừng), tăng kích thích từ sự kháng cự giả.",
-      "consent": { "core.tuyet": "willing", "core.song_nhat": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Đoan trang": "refuse" }
-    },
-  {
-      "id": "canh-viet.clothing_malfunction",
-      "name": "Clothing malfunction",
-      "tier": 1,
-      "unlock": { "truyLac": { "gte": 25 } },
-      "default_consent": "willing",
-      "desc": "Y phục vô tình hoặc cố ý bị tụt, rách, lộ ngực hoặc lồn trong lúc gần gũi.",
-      "consent": { "core.mi_nuong": "willing", "core.nhu_yen": "willing" },
-      "consentByTrait": { "Tinh nghịch": "willing", "Hay ngượng": "persuade" }
-    },
-    {
-      "id": "canh-viet.gameshow_omorashi",
-      "name": "Gameshow Omorashi / Holding pee female",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 50 } },
-      "default_consent": "persuade",
-      "desc": "Các phi thi đấu nhịn tiểu, người nào nhịn lâu nhất hoặc phản ứng mạnh nhất khi bị đụ sẽ thắng.",
-      "consent": { "core.song_nhat": "willing", "core.tuyet": "willing" },
-      "consentByTrait": { "Nghịch ngợm": "willing", "Ôn nhu": "persuade" }
-    },
-  {
-      "id": "canh-viet.in_front_of_her_husband",
-      "name": "In front of her husband",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 60 } },
-      "default_consent": "persuade",
-      "desc": "Đóng vai bị đụ trước mặt chồng (nhân vật phụ hoặc tưởng tượng), tăng cảm giác phản bội và kích thích.",
-      "consent": { "core.tu_lan": "willing", "core.nhu_yen": "persuade" },
-      "consentByTrait": { "Từng trải": "willing", "Đoan trang": "refuse" }
-    },
-  {
-      "id": "canh-viet.embarrassed_nude_female",
-      "name": "Embarrassed Nude Female content",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 35 } },
-      "default_consent": "persuade",
-      "desc": "Tập trung vào sự xấu hổ khi trần truồng, bị nhìn, bị chỉ trích nhẹ hoặc bị bắt lộ thân thể.",
-      "consent": { "core.moc_can": "persuade", "core.uyen_nghi": "persuade" },
-      "consentByTrait": { "Hay ngượng": "willing", "Kiêu kỳ": "persuade" }
-    },
-  {
-      "id": "canh-viet.medical_pussy_exam",
-      "name": "Medical pussy exam",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 40 } },
-      "default_consent": "persuade",
-      "desc": "Khám lồn theo kiểu y tế: mở rộng, soi, kiểm tra độ ướt và phản ứng, kết hợp đụ.",
-      "consent": { "core.tu_lan": "willing", "core.mi_nuong": "persuade" },
-      "consentByTrait": { "Từng trải": "willing", "Hay ngượng": "persuade" }
-    },
-   {
-      "id": "canh-viet.forced_orgasms",
-      "name": "Forced orgasms",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 55 } },
-      "default_consent": "persuade",
-      "desc": "Bị ép lên đỉnh liên tục dù đã xin dừng hoặc quá nhạy, có ám hiệu dừng.",
-      "consent": { "core.tuyet": "willing", "core.song_nhat": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Hay ngượng": "persuade" }
-    },
-  {
-      "id": "canh-viet.bi_bat_lot_do",
-      "name": "Bị bắt lột đồ",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 35 } },
-      "default_consent": "persuade",
-      "desc": "Bị ép cởi y phục từng món trước mặt người khác hoặc bệ hạ, cảm giác bị bắt.",
-      "consent": { "core.moc_can": "persuade", "core.song_nguyet": "persuade" },
-      "consentByTrait": { "Hay ngượng": "willing", "Đoan trang": "persuade" }
-    },
-   {
-      "id": "canh-viet.groped",
-      "name": "Groped",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 30 } },
-      "default_consent": "persuade",
-      "desc": "Bị sờ nắn mạnh ngực, mông, lồn ở nơi công cộng hoặc đột ngột.",
-      "consent": { "core.mi_nuong": "willing", "core.tuyet": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Hay ngượng": "persuade" }
-    },
-  {
-      "id": "canh-viet.grab",
-      "name": "Grab",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 30 } },
-      "default_consent": "persuade",
-      "desc": "Bị nắm, kéo mạnh tóc, mông, ngực, eo trong lúc đụ.",
-      "consent": { "core.tuyet": "willing", "core.song_nhat": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Ôn nhu": "persuade" }
-    },
-   {
-      "id": "canh-viet.public_caught_then_join",
-      "name": "Public content or being caught then they join",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 55 } },
-      "default_consent": "persuade",
-      "desc": "Bị bắt gặp đang đụ ở nơi công cộng, người bắt gặp tham gia cùng.",
-      "consent": { "core.tuyet": "willing", "core.mi_nuong": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Hay ngượng": "persuade" }
-    },
-   {
-      "id": "canh-viet.holding_pee",
-      "name": "Holding pee",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 35 } },
-      "default_consent": "persuade",
-      "desc": "Nhịn tiểu trong lúc bị đụ hoặc kích thích, áp lực kép tăng khoái cảm.",
-      "consent": { "core.song_nhat": "willing", "core.tuyet": "willing" },
-      "consentByTrait": { "Nghịch ngợm": "willing", "Ôn nhu": "persuade" }
-    },
-  {
-      "id": "canh-viet.drunk",
-      "name": "Drunk",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 35 } },
-      "default_consent": "persuade",
-      "desc": "Thị tẩm khi đã say rượu, cơ thể nhạy hơn, mất kiểm soát nhẹ, rên nhiều hơn.",
-      "consent": { "core.tuyet": "willing", "core.mi_nuong": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Đoan trang": "persuade" }
-    },
-  {
-      "id": "canh-viet.drug",
-      "name": "Drug",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 60 } },
-      "default_consent": "persuade",
-      "desc": "Dùng thuốc hoặc hương liệu kích thích mạnh, cơ thể nhạy cảm cực độ, lên đỉnh dễ và lâu.",
-      "consent": { "core.mi_nuong": "willing", "core.nhu_yen": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Ôn nhu": "persuade" }
-    },
-  {
-      "id": "canh-viet.drunk_2",
-      "name": "Drunk",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 35 } },
-      "default_consent": "persuade",
-      "desc": "Say rượu nặng, cơ thể mềm, rên không kiểm soát, đụ dài và mess.",
-      "consent": { "core.tuyet": "willing", "core.hong_tieu": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Đoan trang": "persuade" }
-    },
-  {
-      "id": "canh-viet.groping_2",
-      "name": "Groping",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 30 } },
-      "default_consent": "persuade",
-      "desc": "Bị sờ nắn mạnh, đột ngột, lâu ở ngực mông lồn trước và trong khi đụ.",
-      "consent": { "core.mi_nuong": "willing", "core.tuyet": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Hay ngượng": "persuade" }
-    },
-  {
-      "id": "canh-viet.xe_toat_quan_ao",
-      "name": "Xé toạt quần áo",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 35 } },
-      "default_consent": "persuade",
-      "desc": "Y phục bị xé rách toạc đột ngột, lộ thân thể ngay lập tức rồi đụ.",
-      "consent": { "core.tuyet": "willing", "core.song_nhat": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Đoan trang": "persuade" }
-    },
-   {
-      "id": "canh-viet.public_2",
-      "name": "Public",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 50 } },
-      "default_consent": "persuade",
-      "desc": "Đụ ở nơi có nguy cơ bị thấy hoặc nghe, tăng adrenaline.",
-      "consent": { "core.tuyet": "willing", "core.mi_nuong": "willing" },
-      "consentByTrait": { "Táo bạo": "willing", "Hay ngượng": "refuse" }
-    },
-  {
-      "id": "canh-viet.mang_may_rung_noi_cong_cong",
-      "name": "Mang máy rung nơi công cộng",
-      "tier": 2,
-      "unlock": { "truyLac": { "gte": 40 } },
-      "default_consent": "persuade",
-      "desc": "Đeo máy rung bên trong hoặc trên clit khi đi lại trong cung, bị điều khiển từ xa.",
-      "consent": { "core.song_nhat": "willing", "core.mi_nuong": "willing" },
-      "consentByTrait": { "Nghịch ngợm": "willing", "Hay ngượng": "persuade" }
-    },
-  {
-      "id": "canh-viet.holding_pee_contest",
-      "name": "Holding pee contest",
-      "tier": 3,
-      "unlock": { "truyLac": { "gte": 55 } },
-      "default_consent": "persuade",
-      "desc": "Nhiều phi thi nhịn tiểu khi bị kích thích và đụ, ai nhịn lâu nhất thắng, người xả phải để mọi người xem.",
-      "consent": { "core.song_nhat": "willing", "core.tuyet": "willing" },
-      "consentByTrait": { "Nghịch ngợm": "willing", "Táo bạo": "willing", "Hay ngượng": "persuade" }
+    "consentByTrait": {
+      "Táo bạo": "willing",
+      "Hay ngượng": "refuse"
     }
   }
 ]
