@@ -350,6 +350,29 @@ Dùng `ctx.count`, `ctx.participants[i].nights`, `ctx.tier` để cảnh lần �
 
 ---
 
+### 9.3 Cảnh viết tay, không cần code (scene-texts.json)
+
+Cách dễ nhất để thêm cảnh: chỉ viết chữ. Trong manifest khai báo `"sceneTexts": "scene-texts.json"`:
+
+```json
+{
+  "core.thi_tam": {
+    "core.uyen_nghi": { "dau": ["đoạn 1", "đoạn 2"], "quen": ["..."], "lau": ["..."] },
+    "_chung": { "quen": ["Đoạn dùng cho mọi phi, tên nàng là {name}."] }
+  },
+  "core.thi_tam_so_thich": {
+    "core.lua_la": { "_": ["Đêm nay theo ý bệ hạ: {fetish}..."] }
+  },
+  "core.bach_hoa": { "_chung": { "_": ["{names} cùng ở bên bệ hạ..."] } }
+}
+```
+
+- Khóa cấp hai: id nhân vật (cảnh `core.thi_tam`), id sở thích (cảnh `core.thi_tam_so_thich`), hoặc `_chung`.
+- Khóa cấp ba: `dau` / `quen` / `lau` cho cảnh thị tẩm, `_` cho mọi cảnh khác.
+- Biến: `{name}`, `{names}`, `{emperor}`, `{fetish}`. Dòng bắt đầu bằng `> ` là lời thoại.
+- Chưa có chữ phù hợp thì game dùng cảnh cũ (của `scenes.js`).
+- Trình soạn cảnh trong game (☰ → Trình soạn cảnh) tạo đúng định dạng này: bấm **Tạo mã**, chép vào file.
+
 ## 10. Quy tắc lõi (không ghi đè được)
 
 1. **Tuổi:** mọi nhân vật trưởng thành từ 18 tuổi trở lên. Nhân vật dưới 18 hoặc thiếu tuổi bị từ chối khi nạp; Thiên Đạo không tạo được; lõi kiểm tra lại tuổi trước mỗi HOOK. Con cái của hoàng đế không bao giờ được đưa vào HOOK.

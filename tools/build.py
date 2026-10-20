@@ -46,6 +46,11 @@ def bundle_packs():
             for f in as_list(files["names"]):
                 for k, v in json.loads((d / f).read_text(encoding="utf-8")).items():
                     data["names"].setdefault(k, []).extend(v)
+        if "sceneTexts" in files:
+            data["sceneTexts"] = {}
+            for f in as_list(files["sceneTexts"]):
+                for hook, by_key in json.loads((d / f).read_text(encoding="utf-8")).items():
+                    data["sceneTexts"].setdefault(hook, {}).update(by_key)
         js = "Object.assign(" + json.dumps(data, ensure_ascii=False) + ", {scenes: "
         scenes = [f for f in as_list(files.get("scenes", [])) if (d / f).exists()]
         if scenes:
@@ -66,7 +71,7 @@ def main():
     )
     scripts = "\n".join(
         f"<script>\n{safe_js(s)}\n</script>"
-        for s in [read("js/engine.js"), read("js/systems.js"), read("js/portrait.js"), read("js/ui.js"), bundle_packs(), read("js/main.js")]
+        for s in [read("js/engine.js"), read("js/systems.js"), read("js/portrait.js"), read("js/scene-texts.js"), read("js/ui.js"), bundle_packs(), read("js/main.js")]
     )
     body = '<div id="app" class="app" aria-live="polite"></div>\n<div id="sheet" class="sheet" hidden></div>'
     head = (
