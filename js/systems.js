@@ -196,6 +196,8 @@
         if (!c.traits.includes(t)) c.traits.push(t);
         G.changeFavor(c, 5);
         log(`${c.name} học xong lớp ${G.SUBJECTS[c.school]}, được khen tinh thông.`, "harem");
+        c.school = null; // mãn khóa
+        c.schoolMonths = 0;
       }
     }
   });
@@ -237,6 +239,7 @@
     const need = 50 + f.tier * 10;
     if (c.favor >= need && c.affection >= need) {
       c.consent[fid] = "willing";
+      G.state.flags.persuadedThisYear = true;
       log(`${c.name} gật đầu với "${f.name}".`, "harem");
       return { ok: true, text: `${c.name} đỏ mặt, khẽ gật đầu. Từ nay nàng sẵn lòng với "${f.name}".` };
     }
@@ -352,7 +355,7 @@
         .filter((x) => x.c && x.c.pregnantDue == null)
         .sort((a, b) => b.sc - a.sc)
         .slice(0, 3);
-      if (scored.length >= 3 && s.stats.truyLac >= 40) {
+      if (scored.length >= 3 && s.stats.truyLac >= 40 && s.year % 3 === 0) {
         const ids = scored.map((x) => x.c.id);
         const ev = {
           id: "sys.dai_dien",
@@ -366,7 +369,7 @@
         };
         report.systemEvent = G.prepareEvent(ev, { speaker: null });
       }
-      s.contest.scores = {};
+      if (s.year % 3 === 0) s.contest.scores = {};
     }
   });
 
@@ -376,7 +379,10 @@
     const ct = R.contests[ch._contest];
     const parts = G.participantsFor(ch, sp);
     if (!parts.length) return;
-    const ranked = parts.map((c) => ({ c, v: c.favor + rand() * 40 + (c.traits.some((t) => (ct.traitsBonus || []).includes(t)) ? 15 : 0) })).sort((a, b) => b.v - a.v);
+    // Tài năng quan trọng hơn Sủng ái; người thắng nhiều lần bị giám khảo khắt khe hơn
+    const ranked = parts
+      .map((c) => ({ c, v: c.favor * 0.35 + rand() * 55 + (c.traits.some((t) => (ct.traitsBonus || []).includes(t)) ? 22 : 0) - Math.min(30, c.contestWins * 6) }))
+      .sort((a, b) => b.v - a.v);
     ranked.forEach((r, i) => (s.contest.scores[r.c.id] = (s.contest.scores[r.c.id] || 0) + (i === 0 ? 3 : 1)));
     const win = ranked[0].c;
     win.contestWins++;
@@ -564,7 +570,7 @@
     { id: "vien_man", title: "Hậu Cung Viên Mãn", line: "Hậu cung không một tiếng thở dài.", test: (s) => s.consorts.length >= 5 && s.consorts.every((c) => c.favor >= 70) },
     { id: "thanh_toan", title: "Đế Vương Thành Toàn", line: "Đế hiểu lòng người, để tình nào cũng có chỗ.", test: (s) => G.countPairs(86) >= 3 && s.attitude >= 2 },
     { id: "nhat_sinh", title: "Nhất Sinh Nhất Thế", line: "Ba nghìn giai lệ, chỉ một người trong tim.", test: (s) => s.consorts.some((c) => c.at100 >= 240) },
-    { id: "phong_luu", title: "Phong Lưu Thiên Cổ", line: "Đế tửu sắc cả đời, hậu thế kể mãi không chán.", test: (s) => s.stats.truyLac >= 100 },
+    { id: "phong_luu", title: "Phong Lưu Thiên Cổ", line: "Đế tửu sắc cả đời, hậu thế kể mãi không chán.", test: (s) => s.stats.truyLac >= 90 },
     { id: "tieu_dao", title: "Thái Thượng Hoàng Tiêu Dao", line: "Buông ngai vàng sớm, rong chơi sơn thủy.", test: (s) => s.age < 45 },
     { id: "binh_an", title: "Bình An Một Đời", line: "Một đời êm ấm, không gì phải hối tiếc.", test: () => true },
   ];
@@ -633,7 +639,7 @@
     { id: "nguyet_lao", name: "Nguyệt Lão", desc: "5 cặp đối thực Đồng tâm", hidden: true, test: (s) => G.countPairs(86) >= 5 },
     { id: "su_quan", name: "Sử Quan Cũng Sa Ngã", desc: "Mời sử quan dự yến", hidden: true, test: (s) => s.flags.su_quan_sa_nga },
     { id: "bo_mau_muc", name: "Ông Bố Mẫu Mực", desc: "Mọi người con (từ 3 con) thân thiết từ 80", hidden: true, test: (s) => s.children.length >= 3 && s.children.every((c) => c.closeness >= 80) },
-    { id: "hoi_dau", name: "Hồi Đầu Thị Ngạn", desc: "Tu ở hành cung sau khi Trụy lạc chạm 100", hidden: true, test: (s) => s.flags.detoxed && s.flags.reached100 },
+    { id: "hoi_dau", name: "Hồi Đầu Thị Ngạn", desc: "Tu ở hành cung sau khi Trụy lạc chạm 90", hidden: true, test: (s) => s.flags.detoxed && s.flags.reached100 },
     { id: "doi_doi", name: "Đời Đời Phong Lưu", desc: "Chơi đến đời thứ ba", hidden: true, test: (s) => s.generation >= 3 },
     { id: "thien_dao", name: "Thiên Đạo Vô Thường", desc: "Bật Thiên Đạo lần đầu", god: true, test: (s) => s.godMode },
     { id: "tao_hoa", name: "Tạo Hóa", desc: "Tạo 10 phi tần bằng Thiên Đạo", god: true, test: (s) => s.counters.godCreated >= 10 },
@@ -643,7 +649,7 @@
   G.checkAchievements = function () {
     const s = G.state;
     if (!s) return [];
-    if (s.stats.truyLac >= 100) s.flags.reached100 = true;
+    if (s.stats.truyLac >= 90) s.flags.reached100 = true;
     const got = G.achievementsUnlocked();
     const fresh = [];
     for (const a of G.ACHIEVEMENTS) {
@@ -758,6 +764,131 @@
     const other = p && rand() < 0.6 ? p.other : b;
     log(pick(DIARY).replace("{a}", a.name).replace("{b}", other.name), "diary");
   });
+
+  /* ================================================================== */
+  /* MỤC TIÊU NĂM                                                        */
+  /* ================================================================== */
+  /*
+   * Mỗi đầu năm chọn 3 mục tiêu còn làm được. Hoàn thành trong năm thì nhận thưởng ngay.
+   * start(s) chụp số liệu lúc đặt mục tiêu; test(s, base) kiểm tra đã xong chưa.
+   */
+  const snapCount = (s) => ({ kids: s.children.length, nights: s.nightsTotal, harem: s.consorts.length, b: Object.keys(s.buildings).length, contests: Object.values(s.contest.held).reduce((a, b) => a + b, 0), gifts: s.consorts.reduce((t, c) => t + Object.values(c.gifts).reduce((a, b) => a + b, 0), 0), album: s.album.length });
+  G.GOALS = [
+    { id: "con_moi", text: "Có thêm một hoàng tử hoặc công chúa", ok: (s) => s.consorts.length >= 2, test: (s, b) => s.children.length > b.kids, reward: { hoaKhi: 5, quocKho: 500 } },
+    { id: "hoang_hau", text: "Lập Hoàng hậu", ok: (s) => !s.consorts.some((c) => c.rank === 7) && s.consorts.some((c) => c.favor >= 50), test: (s) => s.consorts.some((c) => c.rank === 7), reward: { danTam: 10, hoaKhi: 10 } },
+    { id: "nap_phi", text: "Nạp thêm hai phi tần", ok: (s) => !s.flags.selectionClosed, test: (s, b) => s.consorts.length >= b.harem + 2, reward: { quocKho: 400 } },
+    { id: "xay", text: "Xây một công trình mới", ok: (s) => Object.keys(R.buildings).some((id) => !s.buildings[id]), test: (s, b) => Object.keys(s.buildings).length > b.b, reward: { truyLac: 3, hoaKhi: 5 } },
+    { id: "thi", text: "Tổ chức một cuộc thi hậu cung", ok: (s) => s.consorts.length >= 3, test: (s, b) => Object.values(s.contest.held).reduce((a, x) => a + x, 0) > b.contests, reward: { favorAll: 3 } },
+    { id: "qua", text: "Tặng quà ba lần", ok: (s) => s.consorts.length >= 1, test: (s, b) => s.consorts.reduce((t, c) => t + Object.values(c.gifts).reduce((a, x) => a + x, 0), 0) >= b.gifts + 3, reward: { hoaKhi: 5 } },
+    { id: "hoa_khi", text: "Giữ Hòa khí từ 70 đến cuối năm", ok: (s) => s.stats.hoaKhi >= 50, test: (s) => s.month === 12 && s.stats.hoaKhi >= 70, reward: { quocKho: 600 } },
+    { id: "dan_tam", text: "Đưa Dân tâm lên 70", ok: (s) => s.stats.danTam < 70, test: (s) => s.stats.danTam >= 70, reward: { quocKho: 800 } },
+    { id: "tiet_che", text: "Giảm Trụy lạc 10 điểm", ok: (s) => s.stats.truyLac >= 40, test: (s, b) => s.stats.truyLac <= b.truyLac - 10, reward: { longThe: 10, danTam: 5 } },
+    { id: "sung_100", text: "Có một phi đạt Sủng ái 100", ok: (s) => s.consorts.some((c) => c.favor >= 70 && c.favor < 100), test: (s) => s.consorts.some((c) => c.favor >= 100), reward: { album: true } },
+    { id: "tri_ky", text: "Có một cặp tỷ muội thành Tri kỷ", ok: (s) => s.consorts.length >= 4 && G.countPairs(31) === 0, test: () => G.countPairs(31) > 0, reward: { hoaKhi: 5 } },
+    { id: "than_thiet", text: "Có một người con thân thiết từ 80", ok: (s) => s.children.some((c) => c.closeness < 80), test: (s) => s.children.some((c) => c.closeness >= 80), reward: { hoaKhi: 5 } },
+    { id: "tuan_du", text: "Đi tuần du một chuyến", ok: () => G.canTravel(), test: (s) => s.lastTravelYear === s.year, reward: { danTam: 5 } },
+    { id: "thuyet_phuc", text: "Thuyết phục thành công một phi", ok: (s) => s.consorts.length >= 1 && G.fetishUnlocked && Object.keys(R.fetishes).some((f) => G.fetishUnlocked(f)), test: (s) => s.flags.persuadedThisYear, reward: { truyLac: 3 } },
+  ];
+  G.newGoals = function () {
+    const s = G.state;
+    const pool = shuffle(G.GOALS.filter((g) => g.ok(s)));
+    const base = Object.assign(snapCount(s), { truyLac: s.stats.truyLac });
+    s.goals = { year: s.year, base, list: pool.slice(0, 3).map((g) => ({ id: g.id, done: false })) };
+    delete s.flags.persuadedThisYear;
+  };
+  G.goalDef = (id) => G.GOALS.find((g) => g.id === id);
+  G.checkGoals = function () {
+    const s = G.state;
+    if (!s.goals) return [];
+    const fresh = [];
+    for (const g of s.goals.list) {
+      if (g.done) continue;
+      const def = G.goalDef(g.id);
+      let ok = false;
+      try {
+        ok = def && def.test(s, s.goals.base);
+      } catch (e) {}
+      if (!ok) continue;
+      g.done = true;
+      const rw = Object.assign({}, def.reward);
+      if (rw.album) {
+        delete rw.album;
+        G.addAlbum("Mục tiêu", def.text);
+      }
+      const notes = G.applyEffects(rw, {});
+      log(`Hoàn thành mục tiêu năm: ${def.text}. ${notes.join(", ")}`, "goal");
+      fresh.push(def);
+    }
+    if (s.goals.list.length && s.goals.list.every((g) => g.done) && !s.goals.bonus) {
+      s.goals.bonus = true;
+      G.addStat("quocKho", 1000);
+      log("Hoàn thành cả ba mục tiêu năm: thưởng 1000 lượng.", "goal");
+    }
+    return fresh;
+  };
+  monthly((s) => {
+    if (!s.goals || (s.month === 1 && s.goals.year !== s.year)) G.newGoals();
+    G.checkGoals();
+  });
+
+  /* ================================================================== */
+  /* HẬU QUẢ CỦA CHỈ SỐ                                                  */
+  /* ================================================================== */
+  monthly((s) => {
+    // Hòa khí thấp: hậu cung cãi vã, Sủng ái rơi ngẫu nhiên
+    if (s.stats.hoaKhi < 30 && s.consorts.length >= 2 && rand() < 0.35) {
+      const c = pick(s.consorts);
+      G.changeFavor(c, -3);
+    }
+    // Hậu cung quá đông thì khó giữ hòa khí
+    if (s.consorts.length > 30) G.addStat("hoaKhi", -0.05 * (s.consorts.length - 30));
+    // Hòa khí tự hồi chậm khi hậu cung vừa phải
+    else if (s.stats.hoaKhi < 60) G.addStat("hoaKhi", 0.3);
+  });
+
+  /** Ban ân cho một phi xuất cung, kèm hồi môn. */
+  G.RELEASE_COST = 300;
+  G.releaseConsort = function (id) {
+    const s = G.state;
+    const c = G.findConsort(id);
+    if (!c) return null;
+    if (c.rank === 7) return { ok: false, text: "Không thể cho Hoàng hậu xuất cung." };
+    if (c.pregnantDue != null) return { ok: false, text: `${c.name} đang mang long thai.` };
+    if (s.children.some((ch) => ch.mother === c.id && G.childAge(ch) < 16)) return { ok: false, text: `${c.name} còn con nhỏ, không nỡ rời cung.` };
+    G.addStat("quocKho", -G.RELEASE_COST);
+    G.removeConsort(c.id, "được ban ân xuất cung");
+    G.addStat("danTam", 2);
+    G.addStat("hoaKhi", 1);
+    log(`${c.name} được ban ân xuất cung, mang theo hồi môn.`, "harem");
+    return { ok: true, text: `${c.name} quỳ tạ ân, rời cung về quê với hồi môn ${G.RELEASE_COST} lượng.`, notes: [`Quốc khố −${G.RELEASE_COST}`, "Dân tâm +2"] };
+  };
+
+  /* ================================================================== */
+  /* THOẠI CHO TÚ NỮ NGẪU NHIÊN                                           */
+  /* ================================================================== */
+  G.TRAIT_LINES = {
+    "Táo bạo": ["Bệ hạ nhìn gì thế? Thiếp đâu có ngại.", "Đêm nay bệ hạ còn định để thiếp đợi sao?"],
+    "Hay ngượng": ["Thần… thần thiếp tham kiến bệ hạ.", "Bệ hạ đừng nhìn thiếp như vậy… thiếp ngượng."],
+    "Biết múa": ["Thiếp vừa tập xong điệu múa mới.", "Điệu này thiếp chỉ múa khi có bệ hạ."],
+    "Giọng hát ngọt": ["Thiếp hát cho bệ hạ nghe một bài nhé?", "Khúc này thiếp hát mãi mà vẫn nhớ bệ hạ."],
+    "Khéo tay": ["Thiếp thêu chiếc khăn này, mong bệ hạ đừng chê.", "Túi thơm này thiếp làm cả tuần đấy."],
+    "Mùi hương lạ": ["Bệ hạ ngửi thử xem, hương này thiếp tự chế.", "Hôm nay thiếp xức hương bệ hạ thích nhất."],
+    "Tinh nghịch": ["Bệ hạ đoán xem thiếp giấu gì sau lưng?", "Hôm nay thiếp lại trốn học múa, bệ hạ đừng mách ai."],
+    "Ôn nhu": ["Bệ hạ mệt rồi, để thiếp xoa vai cho.", "Ngồi đây với thiếp một lát thôi."],
+    "Kiêu kỳ": ["Bệ hạ cuối cùng cũng nhớ ra thiếp sao?", "Thiếp không đợi đâu. Chỉ là tình cờ chưa ngủ."],
+    "Đa sầu": ["Mưa mãi không dứt, lòng thiếp cũng thế.", "Có bệ hạ ở đây, mưa cũng thôi buồn."],
+    "Lãng mạn": ["Trăng đêm nay đẹp quá, bệ hạ có thấy không?", "Thiếp mơ thấy bệ hạ dưới hoa đào."],
+    "Thích chưng diện": ["Trâm mới của thiếp có đẹp không?", "Bộ áo này thiếp chỉ mặc cho bệ hạ xem."],
+    "Phúc tướng": ["Thầy tướng nói thiếp có phúc lắm.", "Thiếp cầu cho bệ hạ bình an mỗi ngày."],
+    "Eo thon": ["Thiếp đang tập múa lụa, bệ hạ xem không?", "Áo này hơi chật, bệ hạ thấy sao?"],
+  };
+  const baseRecruit = G.makeRecruit;
+  G.makeRecruit = function (origin) {
+    const def = baseRecruit(origin);
+    const t = def.traits.find((x) => G.TRAIT_LINES[x]);
+    if (t) def.lines = { low: G.TRAIT_LINES[t][0], high: G.TRAIT_LINES[t][1] };
+    return def;
+  };
 
   /* ================================================================== */
   /* GOD MODE (Thiên Đạo)                                                */

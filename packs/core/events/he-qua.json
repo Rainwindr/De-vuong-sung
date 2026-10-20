@@ -1,0 +1,55 @@
+[
+  { "id": "core.hq_dan_oan", "title": "Dân oán", "cooldown": 8, "weight": 25,
+    "when": { "danTam": { "lte": 30 } },
+    "text": "Ngoài cửa Ngọ Môn có người dân quỳ dâng đơn. Thuế nặng, mùa màng thất bát, trong khi cung điện sáng đèn suốt đêm.\nThu nhập mỗi tháng của quốc khố đã giảm theo lòng dân.",
+    "choices": [
+      { "label": "Giảm thuế một năm", "cost": 1500, "effects": { "danTam": 15 }, "result": "Tin giảm thuế lan về các làng. Có người thắp hương cảm tạ." },
+      { "label": "Mở kho phát gạo", "cost": 800, "effects": { "danTam": 8 }, "result": "Hàng người nhận gạo kéo dài cả dặm." },
+      { "label": "Tạm đóng cửa một công trình xa hoa", "requires": { "truyLac": { "gte": 40 } }, "effects": { "danTam": 10, "truyLac": -8 }, "result": "Bệ hạ hạ lệnh ngừng sửa sang hậu cung một mùa." },
+      { "label": "Mặc kệ", "effects": { "danTam": -3, "flag": "mac_ke_dan" }, "result": "Đơn bị trả về. Tiếng xì xào ngoài thành to hơn." }
+    ] },
+  { "id": "core.hq_khoi_nghia", "title": "Bạo động ở phủ xa", "cooldown": 18, "weight": 30,
+    "when": { "danTam": { "lte": 15 } },
+    "text": "Tin cấp báo: dân một phủ xa nổi dậy, đốt kho thuế. Triều thần chờ ý chỉ.",
+    "choices": [
+      { "label": "Sai quan thanh liêm đến vỗ về, miễn thuế phủ ấy", "cost": 2500, "effects": { "danTam": 20 }, "result": "Bạo động dẹp yên mà không đổ máu." },
+      { "label": "Thân chinh đi an dân", "effects": { "danTam": 15, "longThe": -8, "truyLac": -10, "favorAll": -3 }, "result": "Ba tháng ngoài cung. Dân chúng thấy thiên tử tận mắt." },
+      { "label": "Giao cho triều thần lo", "effects": { "danTam": 5, "quocKho": -1000 }, "result": "Triều thần lo được, nhưng tốn kém." }
+    ] },
+  { "id": "core.hq_ngan_kho", "title": "Ngân khố cạn", "cooldown": 12, "weight": 30,
+    "when": { "quocKho": { "lte": 300 } },
+    "text": "Bộ Hộ tâu: ngân khố gần cạn, tháng sau không đủ phát bổng cho cung nhân.",
+    "choices": [
+      { "label": "Bán bớt châu báu trong kho", "effects": { "quocKho": 2500, "favorAll": -2 }, "result": "Vài món trang sức của các phi cũng phải mang đi bán." },
+      { "label": "Tăng thuế", "effects": { "quocKho": 3000, "danTam": -15 }, "result": "Ngân khố đầy lại. Lòng dân thì vơi đi." },
+      { "label": "Cắt giảm chi tiêu hậu cung", "effects": { "quocKho": 1200, "truyLac": -5, "hoaKhi": -5 }, "result": "Hậu cung ăn uống đạm bạc hơn. Có tiếng phàn nàn." }
+    ] },
+  { "id": "core.hq_cai_va", "title": "Hậu cung cãi vã", "speaker": "pair", "cooldown": 4, "weight": 20,
+    "when": { "hoaKhi": { "lte": 30 }, "pairTinhY": { "lt": 31 } },
+    "text": "Giữa ngự uyển, {name} và {name2} cãi nhau to tiếng. Cung nữ hai bên cũng xô xát.",
+    "choices": [
+      { "label": "Phạt cả hai cấm túc một tháng", "effects": { "favor": -10, "favor2": -10, "hoaKhi": 8 }, "result": "Hậu cung yên được một tháng." },
+      { "label": "Mời cả hai uống trà, giảng hòa", "effects": { "hoaKhi": 5, "tinhY": 10 }, "result": "Hai người miễn cưỡng nâng chén." },
+      { "label": "Bênh {name}", "effects": { "favor": 10, "favor2": -15, "hoaKhi": -3 } }
+    ] },
+  { "id": "core.hq_xin_xuat_cung", "title": "Xin xuất cung", "speaker": "random", "cooldown": 12, "weight": 15,
+    "when": { "hoaKhi": { "lte": 20 }, "favor": { "lte": 20 }, "speakerRank": { "lte": 3 } },
+    "text": "{name} dâng tấu: hậu cung không yên, nàng xin được xuất cung về quê, không mong gì hơn.",
+    "choices": [
+      { "label": "Chuẩn tấu, ban hồi môn", "cost": 300, "effects": { "removeSpeaker": "xin xuất cung", "danTam": 2, "hoaKhi": 5 }, "result": "{name} dập đầu tạ ân rồi rời cung." },
+      { "label": "Giữ lại, hứa quan tâm hơn", "effects": { "favor": 15, "affection": 10 }, "result": "{name} ở lại, mắt đỏ hoe." }
+    ] },
+  { "id": "core.hq_hoa_khi_cao", "title": "Hậu cung an vui", "cooldown": 18, "weight": 6,
+    "when": { "hoaKhi": { "gte": 85 }, "harem": { "gte": 5 } },
+    "text": "Lý công công cười bảo: lâu lắm rồi hậu cung mới không có tiếng khóc nào. Các phi rủ nhau làm bánh dâng bệ hạ.",
+    "choices": [
+      { "label": "Mở tiệc cả hậu cung", "cost": 500, "effects": { "favorAll": 4, "album": { "title": "Hậu cung an vui", "line": "Cả hậu cung cùng làm bánh dâng bệ hạ." } } },
+      { "label": "Ban thưởng cho Lý công công", "effects": { "quocKho": -100 }, "result": "Lão thái giám cười tít mắt." }
+    ] },
+  { "id": "core.hq_dan_yeu", "title": "Dân ca ngợi", "cooldown": 24, "weight": 6,
+    "when": { "danTam": { "gte": 85 } },
+    "text": "Ở chợ kinh thành, trẻ con hát một bài đồng dao khen thiên tử nhân từ.",
+    "choices": [
+      { "label": "Vi hành nghe tận tai", "effects": { "danTam": 3, "truyLac": -3, "album": { "title": "Đồng dao", "line": "Bệ hạ vi hành, nghe trẻ con hát bài đồng dao ca ngợi mình." } } }
+    ] }
+]

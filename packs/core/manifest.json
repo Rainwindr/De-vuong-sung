@@ -1,9 +1,9 @@
 {
   "id": "core",
   "name": "Lõi: Tửu Sắc Đế Vương",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Tiên",
-  "game_version": ">=0.2",
+  "game_version": ">=0.3",
   "rating": "25+",
   "requires": [],
   "files": {
@@ -24,6 +24,8 @@
       "events/hang-ngay.json",
       "events/le-hoi.json",
       "events/tuan-du.json",
+      "events/he-qua.json",
+      "events/tu-nu.json",
       "events/chuong-3.json"
     ],
     "scenes": "scenes.js"

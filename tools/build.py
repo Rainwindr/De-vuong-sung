@@ -66,7 +66,7 @@ def main():
     )
     scripts = "\n".join(
         f"<script>\n{safe_js(s)}\n</script>"
-        for s in [read("js/engine.js"), read("js/systems.js"), read("js/ui.js"), bundle_packs(), read("js/main.js")]
+        for s in [read("js/engine.js"), read("js/systems.js"), read("js/portrait.js"), read("js/ui.js"), bundle_packs(), read("js/main.js")]
     )
     body = '<div id="app" class="app" aria-live="polite"></div>\n<div id="sheet" class="sheet" hidden></div>'
     head = (

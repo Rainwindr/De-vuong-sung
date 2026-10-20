@@ -2,7 +2,7 @@
 
 Game mô phỏng hậu cung dạng text kèm chân dung, chạy trên trình duyệt, ưu tiên điện thoại. Người chơi là một hoàng đế 18 tuổi vừa đăng cơ: tuyển tú, sủng ái phi tần, sinh con nối dõi, và tự chọn mình sẽ trụy lạc đến đâu. Nội dung 25+.
 
-Phiên bản **0.2**.
+Phiên bản **0.3**.
 
 ## Chạy thử
 
@@ -25,7 +25,10 @@ GitHub Pages: Settings → Pages → Deploy from a branch → `main` / `(root)`.
 
 | Hệ thống | Nội dung |
 | --- | --- |
-| Hậu cung | 10 phi tần có cốt truyện, tú nữ ngẫu nhiên, 8 phẩm cấp, phong hiệu, lập Hoàng hậu, ghen tuông khi sủng một người quá lâu, nhật ký hậu cung |
+| Nhịp chơi | Nút "Đến chuyện mới" tua thẳng đến sự kiện tiếp theo; 3 mục tiêu mỗi năm có thưởng |
+| Hậu cung | 10 phi tần có cốt truyện, tú nữ ngẫu nhiên có thoại và chuyện riêng theo tính cách, 8 phẩm cấp, phong hiệu, lập Hoàng hậu, ban ân xuất cung, ghen tuông, nhật ký hậu cung |
+| Chân dung | Vẽ bằng code theo từng nhân vật, nét mặt đổi theo Sủng ái; gói có ảnh thật thì ảnh thay chỗ |
+| Chỉ số | Dân tâm quyết định thu nhập; Dân tâm, Hòa khí, Quốc khố thấp sinh sự kiện hậu quả |
 | Lật thẻ | Thị tẩm kèm sở thích, combo hai sở thích, mang thai, sinh đôi, sinh ba |
 | Sở thích | 18 sở thích lõi + 12 nhóm khung, cây 3 tầng, độ nghiện, nhạt dần, thuyết phục, tu ở hành cung |
 | Đối thực | Tình Ý giữa các phi, 4 mức thái độ của bệ hạ, Cung Đồng Tâm, có thể bị "gạt ra ngoài" |
@@ -37,6 +40,7 @@ GitHub Pages: Settings → Pages → Deploy from a branch → `main` / `(root)`.
 | Truyền đời | Thành tựu lưu giữa các lượt, điểm Huyết mạch, chơi tiếp đời sau với người kế vị |
 | Kịch bản | Tự do, Xe dê, Mê Lâu, Hoa Thanh Trì |
 | Thiên Đạo | God Mode: chỉnh mọi thứ, quay ngược thời gian, gọi sự kiện, xem nhật ký HOOK |
+| Lưu game | Tự lưu, 3 ô lưu thủ công, mã lưu để chuyển sang máy khác |
 
 ## Cấu trúc
 
@@ -45,6 +49,7 @@ index.html                      trang chính
 css/style.css                   giao diện
 js/engine.js                    lõi: chỉ số, tháng, điều kiện, hệ quả, sự kiện, HOOK, quy tắc lõi, lưu game
 js/systems.js                   hệ thống: con cái, đối thực, sở thích, cuộc thi, cửa hàng, tuần du, kế vị, thành tựu, huyết mạch, kịch bản, Thiên Đạo
+js/portrait.js                  chân dung vẽ bằng SVG
 js/ui.js                        giao diện các màn
 js/main.js                      bộ nạp gói
 packs/index.json                danh sách gói được nạp
@@ -58,6 +63,8 @@ packs/core/                     gói lõi
   events/hang-ngay.json         sự kiện nhỏ hằng ngày
   events/le-hoi.json            Tết, Đoan Ngọ, Thất tịch, Trung Thu
   events/tuan-du.json           sự kiện khi tuần du
+  events/he-qua.json            hậu quả khi chỉ số thấp hoặc cao
+  events/tu-nu.json             chuyện riêng của tú nữ theo tính cách
   events/chuong-3.json          tuổi già, truyền ngôi
   scenes.js                     cảnh mặc định (chỉ gợi rồi chuyển cảnh)
 packs/khung-nong-bong/          khung 12 nhóm sở thích cho bên thứ ba thay cảnh
