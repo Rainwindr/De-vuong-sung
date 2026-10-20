@@ -83,10 +83,19 @@
 
   async function boot() {
     try {
-      if (window.__BUNDLED_PACKS__) loadBundled();
+      if (window.__BUNDLED_PACKS__) {
+        loadBundled();
+        if (location.protocol === "file:") G.bundleMode = true;
+      } else if (location.protocol === "file:") {
+        throw new Error("đang mở thẳng file và chưa có packs/bundle.js");
+      }
       else await loadFromServer();
     } catch (e) {
-      G.registry.errors.push("Không đọc được packs/index.json: " + e.message + ". Hãy chạy qua máy chủ web, không mở file trực tiếp.");
+      G.registry.errors.push(
+        location.protocol === "file:"
+          ? "Bạn đang mở thẳng file index.html nên trình duyệt chặn đọc dữ liệu game. Hãy bấm đúp CHOI-GAME.bat (Windows) hoặc choi-game.command (Mac) để chơi, hoặc chạy python3 tools/build.py một lần."
+          : "Không đọc được packs/index.json: " + e.message
+      );
     }
     G.installSceneTexts();
     G.ui.renderGate();
