@@ -18,5 +18,117 @@
   {"id": "canh-viet.lua_mong", "title": "Lụa mỏng", "speaker": "random", "cooldown": 9, "weight": 4, "when": {"speakerInHarem": true, "favor": {"gte": 30}}, "text": "{name} khoác thêm một dải lụa mỏng bên ngoài áo khi vào điện.\n> Đêm nay thần thiếp thấy thích màu lụa này.", "choices": [{"label": "Dùng dải lụa đó trói nhẹ", "fetish": ["core.troi_lua"], "effects": {"favor": 9, "truyLac": 4}, "hook": "canh-viet.lua_mong"}, {"label": "Khen màu lụa rồi để nàng cởi ra", "effects": {"affection": 3}, "result": "{name} cười nhẹ, tự tháo dải lụa đặt sang một bên."}]},
   {"id": "canh-viet.sau_tam", "title": "Vừa tắm xong", "speaker": "random", "cooldown": 8, "weight": 5, "when": {"speakerInHarem": true, "favor": {"gte": 25}}, "text": "{name} bước vào với tóc còn ẩm, da thơm mùi xà phòng.\n> Thần thiếp vừa tắm xong… có vào hầu được không?", "choices": [{"label": "Kéo nàng lại gần ngửi", "fetish": ["core.huong_sac"], "effects": {"favor": 8, "truyLac": 3}, "hook": "canh-viet.sau_tam"}, {"label": "Bảo nàng lau tóc cho khô đã", "effects": {"affection": 3}, "result": "{name} gật đầu rồi lui ra sau bình phong lau tóc."}]},
   {"id": "canh-viet.khong_mac_lot", "title": "Không mặc lót", "speaker": "random", "cooldown": 10, "weight": 4, "when": {"speakerInHarem": true, "favor": {"gte": 40}}, "text": "{name} cúi người dâng trà, cổ áo hở để lộ làn da không có lớp lót bên trong.\n> Đêm nay hơi nóng… thần thiếp không mặc thêm lớp nào.", "choices": [{"label": "Kéo cổ áo nàng xuống", "fetish": ["canh-viet.always_bottomless"], "effects": {"favor": 10, "truyLac": 5}, "hook": "canh-viet.khong_mac_lot"}, {"label": "Nhìn một cái rồi bảo nàng ngồi", "effects": {"affection": 2}, "result": "{name} đỏ mặt ngồi xuống, cố kéo lại cổ áo."}]},
+  {
+      "id": "canh-viet.chuoi_mua_1",
+      "title": "Mưa đêm đầu",
+      "speaker": "random",
+      "once": true,
+      "cooldown": 0,
+      "weight": 5,
+      "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+      "text": "Mưa lớn. {name} đứng ngoài hiên, áo ướt.\n> Bệ hạ… thần thiếp có thể vào tránh mưa không?",
+      "choices": [
+        { "label": "Kéo nàng vào", "fetish": ["core.duc_tri"], "effects": { "favor": 8, "flag": "canh-viet.chuoi_mua.1" }, "hook": "canh-viet.chuoi_mua_1" },
+        { "label": "Cho nàng về", "effects": { "affection": 3 }, "result": "{name} cúi đầu rồi chạy trong mưa." }
+      ]
+    },
+    {
+      "id": "canh-viet.chuoi_mua_2",
+      "title": "Mưa đêm tiếp",
+      "speaker": "random",
+      "once": true,
+      "cooldown": 0,
+      "weight": 4,
+      "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "canh-viet.chuoi_mua.1" },
+      "text": "Lại mưa. {name} đã vào sẵn, đứng cạnh long sàng.\n> Bệ hạ… đêm nay thần thiếp muốn ở lại lâu hơn.",
+      "choices": [
+        { "label": "Giữ nàng lại cả đêm", "fetish": ["canh-viet.tho_phung_ca_dem"], "effects": { "favor": 10, "flag": "canh-viet.chuoi_mua.2" }, "hook": "canh-viet.chuoi_mua_2" },
+        { "label": "Để nàng hầu một canh", "effects": { "affection": 5 }, "result": "{name} gật đầu, mắt vẫn lưu luyến." }
+      ]
+    },
+    {
+      "id": "canh-viet.chuoi_mua_3",
+      "title": "Mưa đêm sâu",
+      "speaker": "random",
+      "once": true,
+      "cooldown": 0,
+      "weight": 3,
+      "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "canh-viet.chuoi_mua.2" },
+      "text": "{name} chủ động nằm lên long sàng khi mưa bắt đầu.\n> Bệ hạ… thần thiếp đã quen với những đêm mưa thế này.",
+      "choices": [
+        { "label": "Đáp lại nàng", "fetish": ["canh-viet.creampie_marathon"], "effects": { "favor": 12, "flag": "canh-viet.chuoi_mua.3" }, "hook": "canh-viet.chuoi_mua_3" },
+        { "label": "Ôm nàng ngủ", "effects": { "affection": 6 }, "result": "{name} dựa vào ngực bệ hạ, nghe mưa rơi." }
+      ]
+    },
+    {
+      "id": "canh-viet.chuoi_mua_4",
+      "title": "Mưa đêm cuối",
+      "speaker": "random",
+      "once": true,
+      "cooldown": 0,
+      "weight": 2,
+      "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "canh-viet.chuoi_mua.3" },
+      "text": "Mưa lớn nhất mùa. {name} đã trần truồng nằm đợi.\n> Bệ hạ… đây là đêm mưa thần thiếp thích nhất.",
+      "choices": [
+        { "label": "Ở cùng nàng đến sáng", "fetish": ["canh-viet.multiple_continuous_long_orgasms"], "effects": { "favor": 15, "album": { "title": "Đêm mưa cuối", "line": "Mưa rơi cả đêm, nàng không rời." } }, "hook": "canh-viet.chuoi_mua_4" },
+        { "label": "Nắm tay nàng nghe mưa", "effects": { "affection": 10 }, "result": "{name} mỉm cười, dựa sát hơn." }
+      ]
+    },
+    {
+      "id": "canh-viet.chuoi_huong_1",
+      "title": "Hương mới",
+      "speaker": "random",
+      "once": true,
+      "cooldown": 0,
+      "weight": 5,
+      "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+      "text": "{name} dâng một lọ hương nhỏ.\n> Bệ hạ thử mùi này xem… thần thiếp vừa chế.",
+      "choices": [
+        { "label": "Để nàng thoa lên người", "fetish": ["core.huong_sac"], "effects": { "favor": 7, "flag": "canh-viet.chuoi_huong.1" }, "hook": "canh-viet.chuoi_huong_1" },
+        { "label": "Cất lọ hương lại", "effects": { "affection": 3 }, "result": "{name} gật đầu, cất lọ vào túi." }
+      ]
+    },
+    {
+      "id": "canh-viet.chuoi_huong_2",
+      "title": "Hương trên da",
+      "speaker": "random",
+      "once": true,
+      "cooldown": 0,
+      "weight": 4,
+      "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "canh-viet.chuoi_huong.1" },
+      "text": "{name} đã thoa hương lên cổ và ngực trước khi vào.\n> Bệ hạ ngửi thấy không?",
+      "choices": [
+        { "label": "Hôn lên chỗ thơm", "fetish": ["core.huong_sac"], "effects": { "favor": 9, "flag": "canh-viet.chuoi_huong.2" }, "hook": "canh-viet.chuoi_huong_2" },
+        { "label": "Khen một câu", "effects": { "affection": 4 }, "result": "{name} cười vui rồi ngồi xuống hầu." }
+      ]
+    },
+    {
+      "id": "canh-viet.chuoi_huong_3",
+      "title": "Hương quyện",
+      "speaker": "random",
+      "once": true,
+      "cooldown": 0,
+      "weight": 3,
+      "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "canh-viet.chuoi_huong.2" },
+      "text": "Cả người {name} thơm nức. Nàng chủ động lại gần.\n> Đêm nay thần thiếp muốn bệ hạ ngửi kỹ hơn.",
+      "choices": [
+        { "label": "Để nàng dẫn", "fetish": ["canh-viet.milking"], "effects": { "favor": 11, "flag": "canh-viet.chuoi_huong.3" }, "hook": "canh-viet.chuoi_huong_3" },
+        { "label": "Ôm nàng một lúc", "effects": { "affection": 5 }, "result": "{name} dựa vào, mùi hương lan tỏa." }
+      ]
+    },
+    {
+      "id": "canh-viet.chuoi_huong_4",
+      "title": "Hương không phai",
+      "speaker": "random",
+      "once": true,
+      "cooldown": 0,
+      "weight": 2,
+      "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "canh-viet.chuoi_huong.3" },
+      "text": "{name} nằm sẵn, hương đã thấm sâu vào da.\n> Bệ hạ… mùi này sẽ không phai đêm nay.",
+      "choices": [
+        { "label": "Ở lại đến khi hương nhạt", "fetish": ["canh-viet.tho_phung_ca_dem"], "effects": { "favor": 14, "album": { "title": "Hương không phai", "line": "Mùi hương còn trên da đến sáng." } }, "hook": "canh-viet.chuoi_huong_4" },
+        { "label": "Nằm cạnh nàng", "effects": { "affection": 9 }, "result": "{name} thì thầm, mùi hương vẫn còn." }
+      ]
+    },
   {"id": "canh-viet.xin_them", "title": "Xin thêm một lần", "speaker": "random", "cooldown": 12, "weight": 3, "when": {"speakerInHarem": true, "favor": {"gte": 60}, "affection": {"gte": 50}}, "text": "Sau khi đã xong, {name} vẫn chưa chịu rời, tay nắm lấy tay bệ hạ.\n> Bệ hạ… thần thiếp còn muốn thêm một lần nữa.", "choices": [{"label": "Giữ nàng lại tiếp", "fetish": ["canh-viet.multiple_continuous_long_orgasms"], "effects": {"favor": 12, "truyLac": 6}, "hook": "canh-viet.xin_them"}, {"label": "Ôm nàng cho ngủ", "effects": {"affection": 8}, "result": "{name} dựa vào ngực bệ hạ, thở đều dần rồi thiếp đi."}]}
 ]
