@@ -178,5 +178,254 @@
   "id": "canh-viet.xin_them",
   "_title": "Thêm lần nữa",
   "_chung": { "_": ["{name} được giữ lại. Nàng chủ động nằm lên và tiếp tục ngay.\n> Thêm một lần nữa… thần thiếp còn muốn.\nNàng cưỡi mạnh, đã sưng nhưng vẫn ướt. Cảm giác liên tục. {name} rên khàn, lên đỉnh nhiều lần liên tiếp. Nàng không muốn dừng, miệng xin thêm.", "Đổi tư thế, vẫn tiếp tục. {name} mệt nhưng tham. Nước và tinh cũ chảy. Nàng lên đỉnh yếu nhưng dài. Biểu cảm điên sướng. Cảm giác multiple orgasms.", "Gần sáng vẫn còn. {name} ôm chặt, rên nhỏ. Khi được bắn thêm, nàng siết và lên đỉnh lần cuối trong đêm. Cơ thể run.", "Nàng nằm thở dốc, vẫn chưa hoàn toàn thỏa. {name} thì thầm rằng nàng thích được xin thêm, và muốn nhiều đêm được làm liên tục như thế này."] }
-}
+},
+     "canh-viet.xin_duoc_gan": {
+      "id": "canh-viet.xin_duoc_gan",
+      "title": "Xin được gần",
+      "speaker": "random",
+      "cooldown": 7,
+      "weight": 6,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 25 }
+      },
+      "text": "{name} đứng ở cửa điện, tay nắm vạt áo, không dám bước vào hẳn.\n> Bệ hạ… thần thiếp có thể vào hầu một lát được không?",
+      "choices": [
+        {
+          "label": "Gọi nàng vào long sàng",
+          "fetish": ["core.thi_tham"],
+          "effects": { "favor": 8, "affection": 5 },
+          "hook": "canh-viet.xin_duoc_gan"
+        },
+        {
+          "label": "Cho nàng ngồi hầu bên ngoài",
+          "effects": { "affection": 3 },
+          "result": "{name} ngồi xuống bậc thềm, thỉnh thoảng lại liếc vào trong."
+        }
+      ]
+    },
+    "canh-viet.toc_xo": {
+      "id": "canh-viet.toc_xo",
+      "title": "Tóc xõa",
+      "speaker": "random",
+      "cooldown": 9,
+      "weight": 4,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 35 }
+      },
+      "text": "{name} bước vào với mái tóc đã xõa, không búi như thường ngày.\n> Đêm nay thần thiếp thấy thoải mái hơn khi để tóc thế này.",
+      "choices": [
+        {
+          "label": "Nắm lấy tóc nàng",
+          "fetish": ["canh-viet.toc_dai"],
+          "effects": { "favor": 9, "truyLac": 4 },
+          "hook": "canh-viet.toc_xo"
+        },
+        {
+          "label": "Khen mái tóc rồi để nàng hầu",
+          "effects": { "affection": 4 },
+          "result": "{name} mỉm cười, tay vô thức vuốt lại tóc."
+        }
+      ]
+    },
+    "canh-viet.muon_duoc_xem": {
+      "id": "canh-viet.muon_duoc_xem",
+      "title": "Muốn được xem",
+      "speaker": "random",
+      "cooldown": 8,
+      "weight": 5,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 30 }
+      },
+      "text": "{name} đứng trước long sàng, tay đặt lên đai áo.\n> Bệ hạ có muốn xem thần thiếp cởi áo không?",
+      "choices": [
+        {
+          "label": "Gật đầu nhìn",
+          "fetish": ["core.ngam_nhin"],
+          "effects": { "favor": 7, "truyLac": 3 },
+          "hook": "canh-viet.muon_duoc_xem"
+        },
+        {
+          "label": "Bảo nàng không cần",
+          "effects": { "affection": 2 },
+          "result": "{name} hơi thất vọng, nhưng vẫn cúi đầu lui xuống."
+        }
+      ]
+    },
+    "canh-viet.sau_man_the": {
+      "id": "canh-viet.sau_man_the",
+      "title": "Sau màn the",
+      "speaker": "random",
+      "cooldown": 11,
+      "weight": 3,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 45 }
+      },
+      "text": "{name} đã nằm sẵn sau lớp màn the mỏng, chỉ thấy bóng người lay động.\n> Bệ hạ… thần thiếp đang đợi ở đây.",
+      "choices": [
+        {
+          "label": "Vén màn bước vào",
+          "fetish": ["canh-viet.sau_man"],
+          "effects": { "favor": 10, "truyLac": 5 },
+          "hook": "canh-viet.sau_man_the"
+        },
+        {
+          "label": "Đứng ngoài gọi nàng ra",
+          "effects": { "affection": 3 },
+          "result": "{name} vén màn bước ra, mặt còn hơi đỏ."
+        }
+      ]
+    },
+    "canh-viet.chan_lanh": {
+      "id": "canh-viet.chan_lanh",
+      "title": "Chân lạnh",
+      "speaker": "random",
+      "cooldown": 6,
+      "weight": 5,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 20 }
+      },
+      "text": "{name} ngồi co chân trên ghế, hai bàn chân trần áp vào nhau.\n> Đêm nay hơi lạnh… chân thần thiếp cứ lạnh mãi.",
+      "choices": [
+        {
+          "label": "Ôm chân nàng sưởi",
+          "fetish": ["canh-viet.chan_tay"],
+          "effects": { "favor": 6, "affection": 6 },
+          "hook": "canh-viet.chan_lanh"
+        },
+        {
+          "label": "Sai người lấy thêm chăn",
+          "effects": { "affection": 4 },
+          "result": "{name} cảm ơn rồi kéo chăn phủ lên chân."
+        }
+      ]
+    },
+    "canh-viet.muon_thi_tham": {
+      "id": "canh-viet.muon_thi_tham",
+      "title": "Muốn thì thầm",
+      "speaker": "random",
+      "cooldown": 7,
+      "weight": 6,
+      "when": {
+        "speakerInHarem": true,
+        "affection": { "gte": 40 }
+      },
+      "text": "{name} lại gần, giọng nhỏ đến mức chỉ nghe được khi nghiêng tai.\n> Bệ hạ… thần thiếp có lời muốn nói rất nhỏ.",
+      "choices": [
+        {
+          "label": "Nghiêng tai nghe",
+          "fetish": ["core.thi_tham"],
+          "effects": { "favor": 7, "affection": 7 },
+          "hook": "canh-viet.muon_thi_tham"
+        },
+        {
+          "label": "Bảo nàng nói to hơn",
+          "effects": { "affection": 2 },
+          "result": "{name} lắc đầu, rồi thì thầm lại lần nữa gần hơn."
+        }
+      ]
+    },
+    "canh-viet.lua_mong": {
+      "id": "canh-viet.lua_mong",
+      "title": "Lụa mỏng",
+      "speaker": "random",
+      "cooldown": 9,
+      "weight": 4,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 30 }
+      },
+      "text": "{name} khoác thêm một dải lụa mỏng bên ngoài áo khi vào điện.\n> Đêm nay thần thiếp thấy thích màu lụa này.",
+      "choices": [
+        {
+          "label": "Dùng dải lụa đó trói nhẹ",
+          "fetish": ["core.troi_lua"],
+          "effects": { "favor": 9, "truyLac": 4 },
+          "hook": "canh-viet.lua_mong"
+        },
+        {
+          "label": "Khen màu lụa rồi để nàng cởi ra",
+          "effects": { "affection": 3 },
+          "result": "{name} cười nhẹ, tự tháo dải lụa đặt sang một bên."
+        }
+      ]
+    },
+    "canh-viet.sau_tam": {
+      "id": "canh-viet.sau_tam",
+      "title": "Vừa tắm xong",
+      "speaker": "random",
+      "cooldown": 8,
+      "weight": 5,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 25 }
+      },
+      "text": "{name} bước vào với tóc còn ẩm, da thơm mùi xà phòng.\n> Thần thiếp vừa tắm xong… có vào hầu được không?",
+      "choices": [
+        {
+          "label": "Kéo nàng lại gần ngửi",
+          "fetish": ["core.huong_sac"],
+          "effects": { "favor": 8, "truyLac": 3 },
+          "hook": "canh-viet.sau_tam"
+        },
+        {
+          "label": "Bảo nàng lau tóc cho khô đã",
+          "effects": { "affection": 3 },
+          "result": "{name} gật đầu rồi lui ra sau bình phong lau tóc."
+        }
+      ]
+    },
+    "canh-viet.khong_mac_lot": {
+      "id": "canh-viet.khong_mac_lot",
+      "title": "Không mặc lót",
+      "speaker": "random",
+      "cooldown": 10,
+      "weight": 4,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 40 }
+      },
+      "text": "{name} cúi người dâng trà, cổ áo hở để lộ làn da không có lớp lót bên trong.\n> Đêm nay hơi nóng… thần thiếp không mặc thêm lớp nào.",
+      "choices": [
+        {
+          "label": "Kéo cổ áo nàng xuống",
+          "fetish": ["canh-viet.always_bottomless"],
+          "effects": { "favor": 10, "truyLac": 5 },
+          "hook": "canh-viet.khong_mac_lot"
+        },
+        {
+          "label": "Nhìn một cái rồi bảo nàng ngồi",
+          "effects": { "affection": 2 },
+          "result": "{name} đỏ mặt ngồi xuống, cố kéo lại cổ áo."
+        }
+      ]
+    },
+    "canh-viet.xin_them": {
+      "id": "canh-viet.xin_them",
+      "title": "Xin thêm một lần",
+      "speaker": "random",
+      "cooldown": 12,
+      "weight": 3,
+      "when": {
+        "speakerInHarem": true,
+        "favor": { "gte": 60 },
+        "affection": { "gte": 50 }
+      },
+      "text": "Sau khi đã xong, {name} vẫn chưa chịu rời, tay nắm lấy tay bệ hạ.\n> Bệ hạ… thần thiếp còn muốn thêm một lần nữa.",
+      "choices": [
+        {
+          "label": "Giữ nàng lại tiếp",
+          "fetish": ["canh-viet.multiple_continuous_long_orgasms"],
+          "effects": { "favor": 12, "truyLac": 6 },
+          "hook": "canh-viet.xin_them"
+        },
+        {
+          "label": "Ôm nàng cho ngủ",
+          "effects": { "affection": 8 },
+          "result": "{name} dựa vào ngực bệ hạ, thở đều dần rồi thiếp đi."
+        }
 ]
