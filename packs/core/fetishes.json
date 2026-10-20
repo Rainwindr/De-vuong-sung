@@ -1,0 +1,8 @@
+[
+  { "id": "core.lua_la", "name": "Lụa là", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "default_consent": "persuade", "desc": "Mê y phục, lụa mỏng, dải lụa." },
+  { "id": "core.huong_sac", "name": "Hương sắc", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "default_consent": "persuade", "desc": "Nghiện mùi hương riêng của từng người." },
+  { "id": "core.duc_tri", "name": "Dục trì", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "default_consent": "persuade", "desc": "Tắm chung, suối nước nóng, hồ hoa." },
+  { "id": "core.ngam_nhin", "name": "Ngắm nhìn", "tier": 1, "unlock": { "truyLac": { "gte": 30 } }, "default_consent": "persuade", "desc": "Xem mỹ nhân múa, tắm, đùa giỡn." },
+  { "id": "core.nhap_vai", "name": "Nhập vai", "tier": 2, "unlock": { "truyLac": { "gte": 50 } }, "default_consent": "persuade", "desc": "Phi tần đóng vai thích khách, thôn nữ, nữ tướng." },
+  { "id": "core.chinh_phuc", "name": "Chinh phục", "tier": 2, "unlock": { "truyLac": { "gte": 55 } }, "default_consent": "refuse", "desc": "Thích người kiêu ngạo, khó chiều." }
+]

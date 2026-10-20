@@ -1,0 +1,74 @@
+[
+  {
+    "id": "core.uyen_nghi", "name": "Lục Uyển Nghi", "age": 20, "origin": "Thái tử phi cũ, con gái Thừa tướng",
+    "start": true, "rank": 4, "favor": 40, "affection": 30,
+    "traits": ["Đoan trang", "Hai mặt", "Phúc tướng"], "likes": ["core.chinh_phuc"],
+    "consent": { "core.lua_la": "persuade", "core.huong_sac": "willing", "core.duc_tri": "persuade", "core.ngam_nhin": "refuse", "core.nhap_vai": "persuade", "core.chinh_phuc": "persuade" },
+    "portrait": { "glyph": "婉", "hue": 350 },
+    "lines": { "low": "Thần thiếp tham kiến bệ hạ.", "high": "Bệ hạ lại thức khuya. Để thiếp ngồi đây với người." }
+  },
+  {
+    "id": "core.moc_can", "name": "Tô Mộc Cẩn", "age": 19, "origin": "Cung nữ thân cận từ thuở Đông cung",
+    "start": true, "rank": 0, "favor": 35, "affection": 60,
+    "traits": ["Si tình", "Hay ngượng", "Khéo tay"], "likes": ["core.huong_sac"],
+    "consent": { "core.lua_la": "persuade", "core.huong_sac": "willing", "core.duc_tri": "persuade", "core.ngam_nhin": "refuse", "core.nhap_vai": "persuade", "core.chinh_phuc": "refuse" },
+    "portrait": { "glyph": "槿", "hue": 20 },
+    "lines": { "low": "Nô tỳ… à không, thiếp tham kiến bệ hạ.", "high": "Người còn nhớ hồi nhỏ người hay trốn sau lưng thiếp không?" }
+  },
+  {
+    "id": "core.tuyet", "name": "Hách Liên Tuyết", "age": 21, "origin": "Công chúa phiên bang, gả sang hòa thân",
+    "start": true, "rank": 2, "favor": 25, "affection": 15,
+    "traits": ["Táo bạo", "Hoang dã", "Thẳng thắn"], "likes": ["core.duc_tri"],
+    "consent": { "core.lua_la": "willing", "core.huong_sac": "persuade", "core.duc_tri": "willing", "core.ngam_nhin": "willing", "core.nhap_vai": "willing", "core.chinh_phuc": "persuade" },
+    "portrait": { "glyph": "雪", "hue": 200 },
+    "lines": { "low": "Cung của các người ngột ngạt quá.", "high": "Đi, hôm nay ta dạy bệ hạ cưỡi ngựa không yên." }
+  },
+  {
+    "id": "core.nhu_yen", "name": "Liễu Như Yên", "age": 22, "origin": "Vũ cơ đệ nhất kinh thành",
+    "rank": 0, "favor": 30, "affection": 20,
+    "traits": ["Mê hoặc", "Tham vọng", "Biết múa"], "likes": ["core.lua_la"],
+    "consent": { "core.lua_la": "willing", "core.huong_sac": "willing", "core.duc_tri": "willing", "core.ngam_nhin": "willing", "core.nhap_vai": "willing", "core.chinh_phuc": "persuade" },
+    "portrait": { "glyph": "煙", "hue": 0 },
+    "lines": { "low": "Bệ hạ quên thiếp rồi sao?", "high": "Điệu múa này, thiếp chỉ múa cho một người." }
+  },
+  {
+    "id": "core.tu_lan", "name": "Mạc Tử Lan", "age": 24, "origin": "Đệ nhất kỹ nữ Giang Nam, được chuộc thân",
+    "rank": 2, "favor": 30, "affection": 20,
+    "traits": ["Tinh tế", "Từng trải", "Diễn giỏi"], "likes": ["core.nhap_vai"],
+    "consent": { "core.lua_la": "willing", "core.huong_sac": "willing", "core.duc_tri": "willing", "core.ngam_nhin": "persuade", "core.nhap_vai": "willing", "core.chinh_phuc": "willing" },
+    "portrait": { "glyph": "蘭", "hue": 280 },
+    "lines": { "low": "Trong cung chẳng ai biết thưởng đàn.", "high": "Hôm nay bệ hạ muốn thiếp là ai?" }
+  },
+  {
+    "id": "core.mi_nuong", "name": "Hồ Mị Nương", "age": 23, "origin": "Chủ tiệm hương phấn kinh thành",
+    "rank": 1, "favor": 30, "affection": 20,
+    "traits": ["Tinh nghịch", "Mùi hương lạ", "Khéo nói"], "likes": ["core.huong_sac"],
+    "consent": { "core.lua_la": "willing", "core.huong_sac": "willing", "core.duc_tri": "persuade", "core.ngam_nhin": "willing", "core.nhap_vai": "willing", "core.chinh_phuc": "persuade" },
+    "portrait": { "glyph": "媚", "hue": 320 },
+    "lines": { "low": "Hương của thiếp hết rồi, bệ hạ cũng hết thương.", "high": "Đoán xem hôm nay thiếp xức hương gì?" }
+  },
+  {
+    "id": "core.thanh_ca", "name": "Thẩm Thanh Ca", "age": 21, "origin": "Cầm nữ Giang Nam",
+    "rank": 2, "favor": 25, "affection": 20,
+    "traits": ["Ôn nhu", "Giọng hát ngọt", "Đa sầu"], "likes": ["core.ngam_nhin"],
+    "consent": { "core.lua_la": "persuade", "core.huong_sac": "willing", "core.duc_tri": "persuade", "core.ngam_nhin": "willing", "core.nhap_vai": "persuade", "core.chinh_phuc": "refuse" },
+    "portrait": { "glyph": "歌", "hue": 160 },
+    "lines": { "low": "Thiếp đàn cho ai nghe đây…", "high": "Khúc này thiếp viết lúc nhớ bệ hạ." }
+  },
+  {
+    "id": "core.song_nguyet", "name": "Song Nguyệt", "age": 20, "origin": "Chị trong cặp song sinh",
+    "rank": 2, "favor": 30, "affection": 20,
+    "traits": ["Gắn bó", "Tinh nghịch", "Đồng tâm"], "likes": ["core.ngam_nhin"],
+    "consent": { "core.lua_la": "willing", "core.huong_sac": "willing", "core.duc_tri": "willing", "core.ngam_nhin": "willing", "core.nhap_vai": "willing", "core.chinh_phuc": "persuade" },
+    "portrait": { "glyph": "月", "hue": 230 },
+    "lines": { "low": "Bệ hạ lại nhầm tên bọn thiếp.", "high": "Hôm nay bệ hạ đoán được ai là chị không?" }
+  },
+  {
+    "id": "core.song_nhat", "name": "Song Nhật", "age": 20, "origin": "Em trong cặp song sinh",
+    "rank": 2, "favor": 30, "affection": 20,
+    "traits": ["Gắn bó", "Táo bạo", "Đồng tâm"], "likes": ["core.ngam_nhin"],
+    "consent": { "core.lua_la": "willing", "core.huong_sac": "willing", "core.duc_tri": "willing", "core.ngam_nhin": "willing", "core.nhap_vai": "willing", "core.chinh_phuc": "persuade" },
+    "portrait": { "glyph": "日", "hue": 40 },
+    "lines": { "low": "Chị em thiếp chưa từng xa nhau một ngày.", "high": "Bệ hạ, hôm nay thiếp là chị đấy. Tin không?" }
+  }
+]

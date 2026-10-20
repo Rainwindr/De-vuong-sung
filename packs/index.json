@@ -1,0 +1,4 @@
+{
+  "_ghi_chu": "Danh sách thư mục gói được nạp, theo thứ tự. Gói phụ thuộc phải đứng sau gói nó cần. Thư mục _template không được nạp: hãy copy nó ra thư mục mới rồi thêm tên vào đây.",
+  "packs": ["core", "vi-du-den-long"]
+}

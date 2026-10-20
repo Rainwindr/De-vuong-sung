@@ -1,0 +1,16 @@
+{
+  "id": "ten-goi-cua-ban",
+  "name": "Tên hiển thị của gói",
+  "version": "0.1.0",
+  "author": "Tên studio",
+  "game_version": ">=0.1",
+  "rating": "25+",
+  "requires": ["core"],
+  "files": {
+    "characters": "characters.json",
+    "events": "events.json",
+    "fetishes": "fetishes.json",
+    "names": "names.json",
+    "scenes": "scenes.js"
+  }
+}

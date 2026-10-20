@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ten-goi-cua-ban.su_kien_gap_go",
+    "title": "Tiêu đề sự kiện",
+    "speaker": "ten-goi-cua-ban.nhan_vat_1",
+    "once": true,
+    "weight": 5,
+    "when": { "truyLac": { "gte": 10 }, "speakerInHarem": false },
+    "text": "Đoạn dẫn chuyện.\n> Dòng bắt đầu bằng dấu > là lời thoại của {name}.",
+    "choices": [
+      {
+        "label": "Nạp nàng vào cung",
+        "effects": { "addConsortSpeaker": true, "favor": 15, "truyLac": 5 },
+        "result": "Câu kết quả hiện sau khi chọn."
+      },
+      {
+        "label": "Bỏ qua",
+        "effects": {}
+      }
+    ]
+  },
+  {
+    "id": "ten-goi-cua-ban.su_kien_co_hook",
+    "title": "Sự kiện có cảnh",
+    "speaker": "ten-goi-cua-ban.nhan_vat_1",
+    "cooldown": 6,
+    "weight": 3,
+    "when": { "speakerInHarem": true, "favor": { "gte": 40 } },
+    "text": "{name} mời bệ hạ đến cung của nàng.",
+    "choices": [
+      {
+        "label": "Đến, đêm nay theo sở thích của nàng",
+        "fetish": ["ten-goi-cua-ban.so_thich_1"],
+        "effects": { "favor": 10, "truyLac": 5 },
+        "hook": "ten-goi-cua-ban.canh_1"
+      },
+      {
+        "label": "Mời thêm hai người được sủng nhất",
+        "fetish": ["ten-goi-cua-ban.so_thich_1"],
+        "participants": { "select": "top_favor", "count": 3 },
+        "effects": { "truyLac": 10 },
+        "hook": "ten-goi-cua-ban.canh_tap_the"
+      },
+      {
+        "label": "Hẹn hôm khác",
+        "effects": { "favor": -2 }
+      }
+    ]
+  }
+]

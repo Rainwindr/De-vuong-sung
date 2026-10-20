@@ -1,0 +1,27 @@
+[
+  {
+    "id": "vi-du-den-long.dao_hoa",
+    "name": "Đào Hoa Nương",
+    "age": 22,
+    "origin": "Thợ làm đèn hoa đăng bên hồ Thái Dịch",
+    "rank": 1,
+    "favor": 25,
+    "affection": 15,
+    "traits": ["Khéo tay", "Lãng mạn", "Tinh nghịch"],
+    "likes": ["vi-du-den-long.ngam_den"],
+    "consent": {
+      "vi-du-den-long.ngam_den": "willing",
+      "core.lua_la": "willing",
+      "core.duc_tri": "persuade",
+      "core.ngam_nhin": "willing",
+      "core.nhap_vai": "persuade",
+      "core.huong_sac": "willing",
+      "core.chinh_phuc": "refuse"
+    },
+    "portrait": { "glyph": "桃", "hue": 340 },
+    "lines": {
+      "low": "Đèn của thiếp có đẹp bằng đèn trong cung không?",
+      "high": "Thiếp làm một chiếc đèn, chỉ thắp khi bệ hạ đến."
+    }
+  }
+]

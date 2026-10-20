@@ -1,0 +1,10 @@
+[
+  {
+    "id": "vi-du-den-long.ngam_den",
+    "name": "Dưới ánh đèn hoa",
+    "tier": 1,
+    "unlock": { "truyLac": { "gte": 10 } },
+    "default_consent": "persuade",
+    "desc": "Thích những đêm chỉ có ánh đèn lồng."
+  }
+]

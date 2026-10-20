@@ -1,0 +1,16 @@
+{
+  "id": "core",
+  "name": "Lõi: Tửu Sắc Đế Vương",
+  "version": "0.1.0",
+  "author": "Tiên",
+  "game_version": ">=0.1",
+  "rating": "25+",
+  "requires": [],
+  "files": {
+    "characters": "characters.json",
+    "events": "events.json",
+    "fetishes": "fetishes.json",
+    "names": "names.json",
+    "scenes": "scenes.js"
+  }
+}

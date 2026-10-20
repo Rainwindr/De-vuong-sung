@@ -1,0 +1,10 @@
+[
+  {
+    "id": "ten-goi-cua-ban.so_thich_1",
+    "name": "Tên sở thích",
+    "tier": 1,
+    "unlock": { "truyLac": { "gte": 30 } },
+    "default_consent": "persuade",
+    "desc": "Mô tả ngắn một dòng, hiện trong tab Sở thích."
+  }
+]
