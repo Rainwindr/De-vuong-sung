@@ -137,12 +137,20 @@ function checkPack(folder) {
             err(id, `${f} / ${hook} / ${key} / ${lv}: phải là danh sách [...]`);
             continue;
           }
-          arr.forEach((t, i) => {
-            if (typeof t !== "string") return err(id, `${f} / ${hook} / ${key} / ${lv} #${i + 1}: phải là chuỗi chữ`);
-            const bad = (t.match(/\{[^}]*\}/g) || []).filter((x) => !["{name}", "{names}", "{emperor}", "{fetish}"].includes(x));
-            if (bad.length) warn(id, `${f} / ${hook} / ${key} #${i + 1}: biến lạ ${bad.join(", ")} (chỉ dùng {name} {names} {emperor} {fetish})`);
+          // Mỗi phần tử là một cảnh ["đoạn 1", "đoạn 2"…]; danh sách toàn chuỗi = một cảnh duy nhất
+          const nested = arr.some(Array.isArray);
+          const vers = nested ? arr.map((x) => (Array.isArray(x) ? x : [x])) : [arr];
+          let paras = 0;
+          vers.forEach((v, vi) => {
+            v.forEach((t, i) => {
+              const where = `${f} / ${hook} / ${key} / ${lv}${nested ? ` / cảnh ${vi + 1}` : ""} / đoạn ${i + 1}`;
+              if (typeof t !== "string") return err(id, `${where}: phải là chuỗi chữ`);
+              paras++;
+              const bad = (t.match(/\{[^}]*\}/g) || []).filter((x) => !["{name}", "{names}", "{emperor}", "{fetish}"].includes(x));
+              if (bad.length) warn(id, `${where}: biến lạ ${bad.join(", ")} (chỉ dùng {name} {names} {emperor} {fetish})`);
+            });
           });
-          sceneTexts.push({ pack: id, file: f, hook, key, lv, n: arr.length });
+          sceneTexts.push({ pack: id, file: f, hook, key, lv, n: paras, scenes: vers.filter((v) => v.length).length });
         }
       }
     }
@@ -240,7 +248,7 @@ function crossCheck() {
     seenHook.add(st.hook);
   }
   for (const pk of all.portraitKeys) if (!all.characters[pk.key]) warn(pk.pack, `${pk.file}: "${pk.key}" không phải nhân vật nào`);
-  if (sceneTexts.length) console.log(`\n  Cảnh viết bằng JSON: ${written} đoạn.`);
+  if (sceneTexts.length) console.log(`\n  Cảnh viết bằng JSON: ${sceneTexts.reduce((s, x) => s + x.scenes, 0)} cảnh, ${written} đoạn.`);
   const textHooks = new Set(sceneTexts.filter((st) => st.n > 0).map((st) => st.hook));
   const covered = (h) => reg.includes(h) || textHooks.has(h) || reg.some((r) => r.endsWith("*") && h.startsWith(r.slice(0, -1)));
   for (const u of all.hooksUsed) if (!covered(u.hook)) warn(u.pack, `${u.where}: HOOK "${u.hook}" chưa có cảnh đăng ký (sẽ dùng cảnh mặc định)`);

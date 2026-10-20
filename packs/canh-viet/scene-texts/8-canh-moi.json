@@ -3,30 +3,129 @@
     "_title": "Mưa to giữa đêm",
     "_chung": {
       "_": [
-        "Đêm mưa lớn, {name} bị kéo vào hiên điện, áo ướt dính sát da, núm vú cứng lộ rõ. Bệ hạ xé áo, đâm thẳng vào lồn đã ướt nhẹp vì mưa và vì sướng. Nước mưa lạnh chảy trên lưng tương phản với dương vật nóng cứng bên trong, thành lồn siết chặt, nước ấm bắn ra hòa cùng mưa.\n> Mưa lạnh mà lồn thiếp nóng điên... đụ mạnh dưới mưa đi!\n{name} rên vỡ giọng, lên đỉnh nhanh, cơ thể run, mưa xối làm da bóng, mỗi nhịp đâm đều khiến nước bắn tung tóe.",
-        "Bị đè nằm trên sàn gỗ ướt, chân dạng rộng, đâm sâu đến mức bụng phồng. Cảm giác sàn lạnh dưới lưng, dương vật nóng cọ mạnh điểm nhạy cảm, nước và mưa trộn lẫn chảy xuống.\n> Sâu quá... thiếp cảm thấy tử cung bị chọc dưới mưa này!\nNàng gào, móng cào sàn, lên đỉnh liên tục, mắt trợn, miệng há hứng mưa mà vẫn rên tục.",
-        "Bị bế lên đụ đứng, mưa xối lên người cả hai. {name} cảm nhận trọng lượng khiến vào sâu hơn, nước mưa chảy vào chỗ giao nhau làm trơn hơn. Tiếng mưa át tiếng thịt nhưng nàng vẫn nghe rõ tiếng nước mình bắn.\n> Đụ nát thiếp đi... mưa to mà thiếp còn chảy nhiều hơn!\nNàng lên đỉnh nhiều lần, chân quấn chặt, cơ thể co giật trong mưa.",
-        "Tinh nóng bắn đầy bên trong giữa cơn mưa. {name} cảm nhận dòng ấm tương phản với mưa lạnh, siết chặt lên đỉnh thêm, tinh và nước mưa chảy cùng nhau xuống đùi, nàng vẫn xin bị đụ tiếp dưới hiên cho đến khi mưa tạnh."
+        [
+          "Đêm mưa lớn, {name} bị kéo vào hiên điện, áo ướt dính sát da, núm vú cứng lộ rõ. Bệ hạ xé áo, đâm thẳng vào lồn đã ướt nhẹp vì mưa và vì sướng. Nước mưa lạnh chảy trên lưng tương phản với dương vật nóng cứng bên trong, thành lồn siết chặt, nước ấm bắn ra hòa cùng mưa.\n> Mưa lạnh mà lồn thiếp nóng điên... đụ mạnh dưới mưa đi!\n{name} rên vỡ giọng, lên đỉnh nhanh, cơ thể run, mưa xối làm da bóng, mỗi nhịp đâm đều khiến nước bắn tung tóe.",
+          "Bị đè nằm trên sàn gỗ ướt, chân dạng rộng, đâm sâu đến mức bụng phồng. Cảm giác sàn lạnh dưới lưng, dương vật nóng cọ mạnh điểm nhạy cảm, nước và mưa trộn lẫn chảy xuống.\n> Sâu quá... thiếp cảm thấy tử cung bị chọc dưới mưa này!\nNàng gào, móng cào sàn, lên đỉnh liên tục, mắt trợn, miệng há hứng mưa mà vẫn rên tục.",
+          "Bị bế lên đụ đứng, mưa xối lên người cả hai. {name} cảm nhận trọng lượng khiến vào sâu hơn, nước mưa chảy vào chỗ giao nhau làm trơn hơn. Tiếng mưa át tiếng thịt nhưng nàng vẫn nghe rõ tiếng nước mình bắn.\n> Đụ nát thiếp đi... mưa to mà thiếp còn chảy nhiều hơn!\nNàng lên đỉnh nhiều lần, chân quấn chặt, cơ thể co giật trong mưa.",
+          "Tinh nóng bắn đầy bên trong giữa cơn mưa. {name} cảm nhận dòng ấm tương phản với mưa lạnh, siết chặt lên đỉnh thêm, tinh và nước mưa chảy cùng nhau xuống đùi, nàng vẫn xin bị đụ tiếp dưới hiên cho đến khi mưa tạnh."
+        ]
       ]
     }
   },
-  "canh-viet.chuoi_mua_1": { "_title": "Tránh mưa", "_chung": { "_": ["{name} được kéo vào. Áo ướt dính da. Bệ hạ cởi áo nàng, da lạnh. Nàng rên khẽ khi được ôm. Khi bị đâm vào, hơi ấm lan tỏa. Nàng lên đỉnh nhanh, ôm chặt, nghe mưa ngoài hiên.", "Nàng chủ động hơn. Nhún nhẹ trên long sàng. Cảm giác mưa và hơi ấm. {name} rên, lên đỉnh thêm. Biểu cảm bắt đầu thân thuộc.", "Bị đụ sâu hơn. {name} gào khẽ. Nước chảy. Nàng lên đỉnh liên tục. Mưa vẫn rơi.", "Nàng nằm trong lòng đến khi mưa nhỏ. Thì thầm thích những đêm mưa."] } },
-    "canh-viet.chuoi_mua_2": { "_title": "Ở lại", "_chung": { "_": ["{name} được giữ lại. Nàng cởi áo, nằm xuống. Đụ chậm cả đêm. Nàng lên đỉnh nhiều lần, thì thầm không muốn ngủ. Mưa rơi đều.", "Nàng đổi tư thế liên tục. Cảm giác kéo dài. Rên khàn dần. Lên đỉnh yếu nhưng vẫn mạnh. Biểu cảm hạnh phúc.", "Gần sáng vẫn còn. {name} siết chặt khi được bắn vào. Lên đỉnh cuối. Cơ thể mềm.", "Trời sáng nàng vẫn chưa về. Thì thầm muốn những đêm mưa dài hơn."] } },
-    "canh-viet.chuoi_mua_3": { "_title": "Quen mưa", "_chung": { "_": ["{name} đã chủ động. Nàng cưỡi mạnh ngay khi mưa bắt đầu. Rên lớn. Lên đỉnh nhiều. Cảm giác quen thuộc với đêm mưa.", "Creampie nhiều lần. Tinh đầy. {name} siết và lên đỉnh thêm. Biểu cảm thỏa mãn. Mưa bên ngoài.", "Nàng đòi thêm tư thế. Gào khẽ. Nước và tinh chảy. Lên đỉnh liên tục.", "Sáng ra nàng cười. Nói rằng mưa đã trở thành thứ nàng mong."] } },
-    "canh-viet.chuoi_mua_4": { "_title": "Mưa cuối", "_chung": { "_": ["{name} trần truồng đợi. Bị đụ liên tục đến sáng. Multiple orgasms. Nàng rên không dứt. Mưa lớn nhất. Cơ thể run liên hồi.", "Nàng không cho dừng. Cưỡi, nằm, quỳ. Lên đỉnh hàng chục lần. Biểu cảm điên sướng và hạnh phúc.", "Tinh bắn nhiều lần. {name} giữ và lên đỉnh thêm. Thì thầm đây là đêm đẹp nhất.", "Sáng ra mưa tạnh. Nàng nằm trong lòng, thì thầm cảm ơn cơn mưa và bệ hạ."] } },
-    "canh-viet.chuoi_huong_1": { "_title": "Thử hương", "_chung": { "_": ["{name} thoa hương lên cổ. Bệ hạ hôn. Mùi nồng. Áo cởi. Đụ chậm. Nàng rên, lên đỉnh. Hương quyện.", "Nàng thoa thêm lên ngực. Nhún nhẹ. Rên. Lên đỉnh thêm. Biểu cảm thích.", "Hương trên da khi bị đụ từ sau. {name} gào khẽ. Lên đỉnh. Mùi lan.", "Nàng thì thầm sẽ chế thêm hương khác."] } },
-    "canh-viet.chuoi_huong_2": { "_title": "Ngửi kỹ", "_chung": { "_": ["Bệ hạ hôn khắp chỗ thơm. {name} rên. Đụ sâu. Hương nồng hơn. Nàng lên đỉnh nhiều. Biểu cảm mê.", "Nàng ngồi lên mặt để ngửi và liếm. Rồi cưỡi. Lên đỉnh. Hương dính.", "Đụ lâu. Mùi hương và mồ hôi. {name} lên đỉnh liên tục. Thì thầm thích.", "Nàng nằm, da vẫn thơm. Muốn thêm nhiều đêm hương."] } },
-    "canh-viet.chuoi_huong_3": { "_title": "Hương sâu", "_chung": { "_": ["{name} dẫn. Thoa hương xuống dưới. Bị liếm và đụ. Rên lớn. Lên đỉnh nhiều. Hương quyện dịch.", "Milking nhẹ kết hợp. Ngực và lồn đều thơm. {name} điên sướng. Lên đỉnh liên tục.", "Nàng cưỡi mạnh. Hương lan khắp. Gào. Lên đỉnh. Biểu cảm mê hoặc.", "Nàng thì thầm hương này chỉ dành cho bệ hạ."] } },
-    "canh-viet.chuoi_huong_4": { "_title": "Không phai", "_chung": { "_": ["Cả đêm với hương. Đụ liên tục. {name} lên đỉnh không dứt. Hương thấm sâu. Biểu cảm hạnh phúc tột độ.", "Nàng không cho rời. Mỗi lần đều thơm hơn. Tinh và hương. Lên đỉnh thêm.", "Sáng ra hương vẫn còn trên da. {name} cười. Nói sẽ không bao giờ phai.", "Nàng ôm chặt. Thì thầm đây là mùi của hai người."] } }
-  ,
+  "canh-viet.chuoi_mua_1": {
+    "_title": "Tránh mưa",
+    "_chung": {
+      "_": [
+        [
+          "{name} được kéo vào. Áo ướt dính da. Bệ hạ cởi áo nàng, da lạnh. Nàng rên khẽ khi được ôm. Khi bị đâm vào, hơi ấm lan tỏa. Nàng lên đỉnh nhanh, ôm chặt, nghe mưa ngoài hiên.",
+          "Nàng chủ động hơn. Nhún nhẹ trên long sàng. Cảm giác mưa và hơi ấm. {name} rên, lên đỉnh thêm. Biểu cảm bắt đầu thân thuộc.",
+          "Bị đụ sâu hơn. {name} gào khẽ. Nước chảy. Nàng lên đỉnh liên tục. Mưa vẫn rơi.",
+          "Nàng nằm trong lòng đến khi mưa nhỏ. Thì thầm thích những đêm mưa."
+        ]
+      ]
+    }
+  },
+  "canh-viet.chuoi_mua_2": {
+    "_title": "Ở lại",
+    "_chung": {
+      "_": [
+        [
+          "{name} được giữ lại. Nàng cởi áo, nằm xuống. Đụ chậm cả đêm. Nàng lên đỉnh nhiều lần, thì thầm không muốn ngủ. Mưa rơi đều.",
+          "Nàng đổi tư thế liên tục. Cảm giác kéo dài. Rên khàn dần. Lên đỉnh yếu nhưng vẫn mạnh. Biểu cảm hạnh phúc.",
+          "Gần sáng vẫn còn. {name} siết chặt khi được bắn vào. Lên đỉnh cuối. Cơ thể mềm.",
+          "Trời sáng nàng vẫn chưa về. Thì thầm muốn những đêm mưa dài hơn."
+        ]
+      ]
+    }
+  },
+  "canh-viet.chuoi_mua_3": {
+    "_title": "Quen mưa",
+    "_chung": {
+      "_": [
+        [
+          "{name} đã chủ động. Nàng cưỡi mạnh ngay khi mưa bắt đầu. Rên lớn. Lên đỉnh nhiều. Cảm giác quen thuộc với đêm mưa.",
+          "Creampie nhiều lần. Tinh đầy. {name} siết và lên đỉnh thêm. Biểu cảm thỏa mãn. Mưa bên ngoài.",
+          "Nàng đòi thêm tư thế. Gào khẽ. Nước và tinh chảy. Lên đỉnh liên tục.",
+          "Sáng ra nàng cười. Nói rằng mưa đã trở thành thứ nàng mong."
+        ]
+      ]
+    }
+  },
+  "canh-viet.chuoi_mua_4": {
+    "_title": "Mưa cuối",
+    "_chung": {
+      "_": [
+        [
+          "{name} trần truồng đợi. Bị đụ liên tục đến sáng. Multiple orgasms. Nàng rên không dứt. Mưa lớn nhất. Cơ thể run liên hồi.",
+          "Nàng không cho dừng. Cưỡi, nằm, quỳ. Lên đỉnh hàng chục lần. Biểu cảm điên sướng và hạnh phúc.",
+          "Tinh bắn nhiều lần. {name} giữ và lên đỉnh thêm. Thì thầm đây là đêm đẹp nhất.",
+          "Sáng ra mưa tạnh. Nàng nằm trong lòng, thì thầm cảm ơn cơn mưa và bệ hạ."
+        ]
+      ]
+    }
+  },
+  "canh-viet.chuoi_huong_1": {
+    "_title": "Thử hương",
+    "_chung": {
+      "_": [
+        [
+          "{name} thoa hương lên cổ. Bệ hạ hôn. Mùi nồng. Áo cởi. Đụ chậm. Nàng rên, lên đỉnh. Hương quyện.",
+          "Nàng thoa thêm lên ngực. Nhún nhẹ. Rên. Lên đỉnh thêm. Biểu cảm thích.",
+          "Hương trên da khi bị đụ từ sau. {name} gào khẽ. Lên đỉnh. Mùi lan.",
+          "Nàng thì thầm sẽ chế thêm hương khác."
+        ]
+      ]
+    }
+  },
+  "canh-viet.chuoi_huong_2": {
+    "_title": "Ngửi kỹ",
+    "_chung": {
+      "_": [
+        [
+          "Bệ hạ hôn khắp chỗ thơm. {name} rên. Đụ sâu. Hương nồng hơn. Nàng lên đỉnh nhiều. Biểu cảm mê.",
+          "Nàng ngồi lên mặt để ngửi và liếm. Rồi cưỡi. Lên đỉnh. Hương dính.",
+          "Đụ lâu. Mùi hương và mồ hôi. {name} lên đỉnh liên tục. Thì thầm thích.",
+          "Nàng nằm, da vẫn thơm. Muốn thêm nhiều đêm hương."
+        ]
+      ]
+    }
+  },
+  "canh-viet.chuoi_huong_3": {
+    "_title": "Hương sâu",
+    "_chung": {
+      "_": [
+        [
+          "{name} dẫn. Thoa hương xuống dưới. Bị liếm và đụ. Rên lớn. Lên đỉnh nhiều. Hương quyện dịch.",
+          "Milking nhẹ kết hợp. Ngực và lồn đều thơm. {name} điên sướng. Lên đỉnh liên tục.",
+          "Nàng cưỡi mạnh. Hương lan khắp. Gào. Lên đỉnh. Biểu cảm mê hoặc.",
+          "Nàng thì thầm hương này chỉ dành cho bệ hạ."
+        ]
+      ]
+    }
+  },
+  "canh-viet.chuoi_huong_4": {
+    "_title": "Không phai",
+    "_chung": {
+      "_": [
+        [
+          "Cả đêm với hương. Đụ liên tục. {name} lên đỉnh không dứt. Hương thấm sâu. Biểu cảm hạnh phúc tột độ.",
+          "Nàng không cho rời. Mỗi lần đều thơm hơn. Tinh và hương. Lên đỉnh thêm.",
+          "Sáng ra hương vẫn còn trên da. {name} cười. Nói sẽ không bao giờ phai.",
+          "Nàng ôm chặt. Thì thầm đây là mùi của hai người."
+        ]
+      ]
+    }
+  },
   "core.duc_tri": {
     "_title": "Dục Trì Thiên Hương",
     "_chung": {
       "_": [
-        "Trong bồn tắm lớn đầy nước nóng, {name} đã trần, ngồi lên dương vật bệ hạ ngay trong nước. Nước ấm bao quanh, nhưng bên trong còn nóng hơn khi dương vật đâm sâu. Nước bắn tung tóe mỗi nhịp nhún, thành lồn trơn và siết.\n> Nước nóng mà lồn còn nóng hơn... đụ thiếp trong bồn đi!\nNàng rên vỡ giọng, lên đỉnh nhanh, cơ thể bóng nước, ngực nổi trên mặt nước nảy theo nhịp.",
-        "Bị đè vào thành bồn, một chân gác lên, đâm mạnh. Nước nóng chảy vào chỗ giao nhau làm trơn cực độ, tiếng nước và tiếng thịt hòa lẫn. {name} cảm nhận áp lực sâu và ấm áp khắp người.\n> Trơn quá... sâu quá... thiếp bị đụ đến nước bắn đầy bồn!\nNàng gào, lên đỉnh liên tục, chân run, phải bám thành bồn.",
-        "Đổi tư thế, nàng nằm ngửa trong nước nông, chân dạng trên vai bệ hạ. Dương vật đâm xuống, nước ấm vỗ vào mông và chỗ ướt. Cảm giác đầy và nóng lan tỏa.\n> Đụ mạnh... thiếp cảm thấy nước và dương vật cùng vào!\nNàng lên đỉnh dữ dội, nước bắn cao, mắt trợn, miệng há rên.",
-        "Tinh nóng bắn vào trong nước ấm. {name} cảm nhận dòng dịch đặc tương phản với nước, siết chặt lên đỉnh thêm, tinh loang ra trong bồn. Nàng vẫn xin đụ tiếp, cơ thể mềm nhũn trong nước nóng."
+        [
+          "Trong bồn tắm lớn đầy nước nóng, {name} đã trần, ngồi lên dương vật bệ hạ ngay trong nước. Nước ấm bao quanh, nhưng bên trong còn nóng hơn khi dương vật đâm sâu. Nước bắn tung tóe mỗi nhịp nhún, thành lồn trơn và siết.\n> Nước nóng mà lồn còn nóng hơn... đụ thiếp trong bồn đi!\nNàng rên vỡ giọng, lên đỉnh nhanh, cơ thể bóng nước, ngực nổi trên mặt nước nảy theo nhịp.",
+          "Bị đè vào thành bồn, một chân gác lên, đâm mạnh. Nước nóng chảy vào chỗ giao nhau làm trơn cực độ, tiếng nước và tiếng thịt hòa lẫn. {name} cảm nhận áp lực sâu và ấm áp khắp người.\n> Trơn quá... sâu quá... thiếp bị đụ đến nước bắn đầy bồn!\nNàng gào, lên đỉnh liên tục, chân run, phải bám thành bồn.",
+          "Đổi tư thế, nàng nằm ngửa trong nước nông, chân dạng trên vai bệ hạ. Dương vật đâm xuống, nước ấm vỗ vào mông và chỗ ướt. Cảm giác đầy và nóng lan tỏa.\n> Đụ mạnh... thiếp cảm thấy nước và dương vật cùng vào!\nNàng lên đỉnh dữ dội, nước bắn cao, mắt trợn, miệng há rên.",
+          "Tinh nóng bắn vào trong nước ấm. {name} cảm nhận dòng dịch đặc tương phản với nước, siết chặt lên đỉnh thêm, tinh loang ra trong bồn. Nàng vẫn xin đụ tiếp, cơ thể mềm nhũn trong nước nóng."
+        ]
       ]
     }
   },
@@ -34,10 +133,12 @@
     "_title": "Trong cơn mưa",
     "_chung": {
       "_": [
-        "Mưa vẫn rơi ngoài hiên. {name} đứng giữa phòng, áo ướt dính sát, lộ rõ đường cong. Bệ hạ đóng cửa rồi bước tới, tay kéo lớp áo ướt xuống. Da nàng lạnh, nhưng hơi thở thì nóng. Nàng rên khẽ khi được ôm vào lòng.\n> Bệ hạ… áo thần thiếp ướt hết rồi.\nBệ hạ đặt nàng lên long sàng, từ từ lột nốt phần còn lại. Nước mưa còn đọng trên da, trộn với hơi ấm. Khi thân thể chạm nhau, {name} run nhẹ rồi dần thả lỏng, hai chân quấn lấy eo bệ hạ. Nhịp chậm rồi mạnh, nàng rên lớn hơn, nước chảy ra hòa với nước mưa còn sót. Nàng lên đỉnh, cơ thể co giật, ôm chặt không buông.",
-        "Nàng chủ động ngồi lên, áo ướt vẫn còn vương trên vai. Cảm giác lạnh và nóng xen kẽ. {name} nhún mạnh, rên không ngừng, móng tay cào lên ngực bệ hạ. Mưa bên ngoài át đi một phần tiếng rên. Nàng lên đỉnh thêm lần nữa, biểu cảm vừa lạnh vừa sướng điên.",
-        "Bệ hạ đè nàng xuống, đâm sâu. {name} gào khẽ, chân siết chặt. Nước từ cơ thể nàng chảy nhiều, long sàng ướt. Nàng thì thầm xin tiếp, lên đỉnh liên tục cho đến khi mưa nhỏ dần.",
-        "Khi mưa tạnh, {name} vẫn nằm trong lòng, da đã ấm lại. Nàng thì thầm cảm ơn cơn mưa đã đẩy nàng vào đây, rồi kéo bệ hạ vào thêm một lần nữa trước khi trời sáng."
+        [
+          "Mưa vẫn rơi ngoài hiên. {name} đứng giữa phòng, áo ướt dính sát, lộ rõ đường cong. Bệ hạ đóng cửa rồi bước tới, tay kéo lớp áo ướt xuống. Da nàng lạnh, nhưng hơi thở thì nóng. Nàng rên khẽ khi được ôm vào lòng.\n> Bệ hạ… áo thần thiếp ướt hết rồi.\nBệ hạ đặt nàng lên long sàng, từ từ lột nốt phần còn lại. Nước mưa còn đọng trên da, trộn với hơi ấm. Khi thân thể chạm nhau, {name} run nhẹ rồi dần thả lỏng, hai chân quấn lấy eo bệ hạ. Nhịp chậm rồi mạnh, nàng rên lớn hơn, nước chảy ra hòa với nước mưa còn sót. Nàng lên đỉnh, cơ thể co giật, ôm chặt không buông.",
+          "Nàng chủ động ngồi lên, áo ướt vẫn còn vương trên vai. Cảm giác lạnh và nóng xen kẽ. {name} nhún mạnh, rên không ngừng, móng tay cào lên ngực bệ hạ. Mưa bên ngoài át đi một phần tiếng rên. Nàng lên đỉnh thêm lần nữa, biểu cảm vừa lạnh vừa sướng điên.",
+          "Bệ hạ đè nàng xuống, đâm sâu. {name} gào khẽ, chân siết chặt. Nước từ cơ thể nàng chảy nhiều, long sàng ướt. Nàng thì thầm xin tiếp, lên đỉnh liên tục cho đến khi mưa nhỏ dần.",
+          "Khi mưa tạnh, {name} vẫn nằm trong lòng, da đã ấm lại. Nàng thì thầm cảm ơn cơn mưa đã đẩy nàng vào đây, rồi kéo bệ hạ vào thêm một lần nữa trước khi trời sáng."
+        ]
       ]
     }
   },
@@ -45,10 +146,12 @@
     "_title": "Hơi thở hòa",
     "_chung": {
       "_": [
-        "{name} được kéo vào lòng, khoảng cách biến mất. Hơi thở hai người hòa vào nhau. Nàng thì thầm bên tai những lời nhỏ, tay đã lần xuống dưới.\n> Bệ hạ… thần thiếp muốn được gần hơn thế này.\nBệ hạ hôn nàng, từ từ cởi áo. Da thịt chạm nhau, {name} rên khẽ. Khi được đâm vào, nàng ôm chặt cổ, hơi thở gấp bên tai. Nhịp chậm và sâu, nàng lên đỉnh với tiếng rên thì thầm, cơ thể run nhẹ.",
-        "Nàng chủ động thì thầm những lời tục hơn khi đang bị đụ. Mỗi câu đều khiến nàng siết chặt hơn. Cảm giác hơi thở nóng bên tai và dương vật bên trong khiến nàng điên. Nàng lên đỉnh nhiều lần, miệng không rời tai bệ hạ.",
-        "Đổi tư thế, nàng nằm sấp, vẫn thì thầm. Bệ hạ đâm từ sau, {name} rên lớn hơn nhưng vẫn giữ giọng nhỏ. Nước chảy, nàng lên đỉnh thêm, biểu cảm mê đắm.",
-        "Cuối cùng nàng nằm trong lòng, hơi thở đã đều lại. Nàng thì thầm rằng nàng thích được thì thầm khi đang được đụ, và muốn nhiều đêm gần nhau thế này nữa."
+        [
+          "{name} được kéo vào lòng, khoảng cách biến mất. Hơi thở hai người hòa vào nhau. Nàng thì thầm bên tai những lời nhỏ, tay đã lần xuống dưới.\n> Bệ hạ… thần thiếp muốn được gần hơn thế này.\nBệ hạ hôn nàng, từ từ cởi áo. Da thịt chạm nhau, {name} rên khẽ. Khi được đâm vào, nàng ôm chặt cổ, hơi thở gấp bên tai. Nhịp chậm và sâu, nàng lên đỉnh với tiếng rên thì thầm, cơ thể run nhẹ.",
+          "Nàng chủ động thì thầm những lời tục hơn khi đang bị đụ. Mỗi câu đều khiến nàng siết chặt hơn. Cảm giác hơi thở nóng bên tai và dương vật bên trong khiến nàng điên. Nàng lên đỉnh nhiều lần, miệng không rời tai bệ hạ.",
+          "Đổi tư thế, nàng nằm sấp, vẫn thì thầm. Bệ hạ đâm từ sau, {name} rên lớn hơn nhưng vẫn giữ giọng nhỏ. Nước chảy, nàng lên đỉnh thêm, biểu cảm mê đắm.",
+          "Cuối cùng nàng nằm trong lòng, hơi thở đã đều lại. Nàng thì thầm rằng nàng thích được thì thầm khi đang được đụ, và muốn nhiều đêm gần nhau thế này nữa."
+        ]
       ]
     }
   },
@@ -56,10 +159,12 @@
     "_title": "Ngọc trên da",
     "_chung": {
       "_": [
-        "Bệ hạ cúi xuống nhặt chuỗi ngọc rồi tự đeo lại cho {name}. Tay chạm vào cổ nàng, nàng run nhẹ. Chuỗi ngọc lạnh trên da nóng.\n> Bệ hạ… thần thiếp cảm ơn.\nBệ hạ không dừng ở đó. Áo nàng bị kéo xuống, chuỗi ngọc vẫn còn trên cổ. Khi bị đâm vào, ngọc va nhẹ vào da mỗi nhịp. {name} rên, cảm giác lạnh và nóng xen kẽ. Nàng lên đỉnh, chuỗi ngọc rung theo cơ thể.",
-        "Nàng ngồi lên, chuỗi ngọc buông xuống giữa hai người. Mỗi lần nhún, ngọc chạm vào ngực. {name} rên lớn, lên đỉnh nhiều lần. Biểu cảm kích thích bởi trang sức trên người.",
-        "Bệ hạ bảo nàng giữ nguyên chuỗi ngọc khi bị đụ từ sau. Ngọc leng keng nhẹ. {name} gào khẽ, nước chảy. Nàng lên đỉnh liên tục, cảm giác trang sức làm mọi thứ rõ hơn.",
-        "Sau đó chuỗi ngọc vẫn nằm trên da nàng đầy mồ hôi. {name} thì thầm muốn được đeo nhiều trang sức hơn khi hầu đêm."
+        [
+          "Bệ hạ cúi xuống nhặt chuỗi ngọc rồi tự đeo lại cho {name}. Tay chạm vào cổ nàng, nàng run nhẹ. Chuỗi ngọc lạnh trên da nóng.\n> Bệ hạ… thần thiếp cảm ơn.\nBệ hạ không dừng ở đó. Áo nàng bị kéo xuống, chuỗi ngọc vẫn còn trên cổ. Khi bị đâm vào, ngọc va nhẹ vào da mỗi nhịp. {name} rên, cảm giác lạnh và nóng xen kẽ. Nàng lên đỉnh, chuỗi ngọc rung theo cơ thể.",
+          "Nàng ngồi lên, chuỗi ngọc buông xuống giữa hai người. Mỗi lần nhún, ngọc chạm vào ngực. {name} rên lớn, lên đỉnh nhiều lần. Biểu cảm kích thích bởi trang sức trên người.",
+          "Bệ hạ bảo nàng giữ nguyên chuỗi ngọc khi bị đụ từ sau. Ngọc leng keng nhẹ. {name} gào khẽ, nước chảy. Nàng lên đỉnh liên tục, cảm giác trang sức làm mọi thứ rõ hơn.",
+          "Sau đó chuỗi ngọc vẫn nằm trên da nàng đầy mồ hôi. {name} thì thầm muốn được đeo nhiều trang sức hơn khi hầu đêm."
+        ]
       ]
     }
   },
@@ -67,10 +172,12 @@
     "_title": "Canh dài",
     "_chung": {
       "_": [
-        "{name} được gọi vào long sàng. Nàng chủ động cởi áo, nằm xuống và kéo bệ hạ theo.\n> Đêm nay thần thiếp không muốn ngủ.\nBệ hạ đâm vào, nàng rên ngay. Nhịp chậm và dài, đúng như đêm không ngủ. {name} lên đỉnh nhiều lần, mỗi lần đều thì thầm xin tiếp. Cơ thể nàng không mệt, chỉ càng lúc càng tham.",
-        "Nàng đổi tư thế liên tục để không nhàm. Lúc cưỡi, lúc nằm, lúc quay người. Cảm giác kéo dài cả đêm. {name} rên khàn dần, nhưng vẫn lên đỉnh. Nước và mồ hôi làm long sàng ướt.",
-        "Gần sáng nàng vẫn còn đang được đụ. Giọng đã khàn, nhưng biểu cảm vẫn thèm. Nàng lên đỉnh thêm lần nữa khi được bắn vào trong, siết chặt, thì thầm cảm ơn vì được ở lại cả đêm.",
-        "Trời sáng, {name} vẫn chưa chịu về. Nàng nằm trong lòng, tay vuốt nhẹ, nói rằng những đêm không ngủ thế này là thứ nàng thích nhất."
+        [
+          "{name} được gọi vào long sàng. Nàng chủ động cởi áo, nằm xuống và kéo bệ hạ theo.\n> Đêm nay thần thiếp không muốn ngủ.\nBệ hạ đâm vào, nàng rên ngay. Nhịp chậm và dài, đúng như đêm không ngủ. {name} lên đỉnh nhiều lần, mỗi lần đều thì thầm xin tiếp. Cơ thể nàng không mệt, chỉ càng lúc càng tham.",
+          "Nàng đổi tư thế liên tục để không nhàm. Lúc cưỡi, lúc nằm, lúc quay người. Cảm giác kéo dài cả đêm. {name} rên khàn dần, nhưng vẫn lên đỉnh. Nước và mồ hôi làm long sàng ướt.",
+          "Gần sáng nàng vẫn còn đang được đụ. Giọng đã khàn, nhưng biểu cảm vẫn thèm. Nàng lên đỉnh thêm lần nữa khi được bắn vào trong, siết chặt, thì thầm cảm ơn vì được ở lại cả đêm.",
+          "Trời sáng, {name} vẫn chưa chịu về. Nàng nằm trong lòng, tay vuốt nhẹ, nói rằng những đêm không ngủ thế này là thứ nàng thích nhất."
+        ]
       ]
     }
   },
@@ -78,10 +185,12 @@
     "_title": "Hương trên da",
     "_chung": {
       "_": [
-        "Bệ hạ lại gần, mũi chạm vào cổ {name}. Mùi hương mới nồng và ngọt. Nàng rên khẽ khi được hôn lên chỗ thơm.\n> Bệ hạ thích mùi này không?\nÁo bị cởi, hương thấm trên da. Khi bị đâm vào, mùi hương quyện với mùi cơ thể. {name} rên lớn, lên đỉnh nhanh. Nàng cảm thấy hương làm mọi thứ mê hơn.",
-        "Nàng thoa thêm hương lên ngực và giữa hai chân rồi ngồi lên. Mỗi nhịp nhún, mùi càng nồng. {name} rên, lên đỉnh nhiều lần. Biểu cảm mê hoặc. Bệ hạ hôn và ngửi khắp người nàng.",
-        "Đụ từ sau, mũi vẫn gần da thơm. {name} gào khẽ, nước chảy. Hương và dịch hòa lẫn. Nàng lên đỉnh liên tục, thì thầm muốn được dùng loại hương này nhiều hơn.",
-        "Sau đó cả phòng còn vương mùi. {name} nằm thở, da vẫn thơm, nói rằng nàng sẽ chuẩn bị thêm nhiều hương khác cho những đêm sau."
+        [
+          "Bệ hạ lại gần, mũi chạm vào cổ {name}. Mùi hương mới nồng và ngọt. Nàng rên khẽ khi được hôn lên chỗ thơm.\n> Bệ hạ thích mùi này không?\nÁo bị cởi, hương thấm trên da. Khi bị đâm vào, mùi hương quyện với mùi cơ thể. {name} rên lớn, lên đỉnh nhanh. Nàng cảm thấy hương làm mọi thứ mê hơn.",
+          "Nàng thoa thêm hương lên ngực và giữa hai chân rồi ngồi lên. Mỗi nhịp nhún, mùi càng nồng. {name} rên, lên đỉnh nhiều lần. Biểu cảm mê hoặc. Bệ hạ hôn và ngửi khắp người nàng.",
+          "Đụ từ sau, mũi vẫn gần da thơm. {name} gào khẽ, nước chảy. Hương và dịch hòa lẫn. Nàng lên đỉnh liên tục, thì thầm muốn được dùng loại hương này nhiều hơn.",
+          "Sau đó cả phòng còn vương mùi. {name} nằm thở, da vẫn thơm, nói rằng nàng sẽ chuẩn bị thêm nhiều hương khác cho những đêm sau."
+        ]
       ]
     }
   },
@@ -89,10 +198,12 @@
     "_title": "Điệu múa riêng",
     "_chung": {
       "_": [
-        "{name} múa chậm trước long sàng, áo mỏng bay. Bệ hạ ngồi xem, mắt không rời. Nàng từ từ cởi từng lớp trong điệu múa, da lộ dần.\n> Bệ hạ đang nhìn thần thiếp…\nKhi múa xong, nàng bước tới ngồi lên đùi, đã ướt. Bệ hạ đâm vào ngay. {name} rên, tiếp tục uốn người như đang múa. Nàng lên đỉnh mạnh, biểu cảm mê hoặc.",
-        "Nàng múa trên người bệ hạ, nhún theo nhịp điệu riêng. Cảm giác vừa múa vừa bị đụ. {name} rên lớn, lên đỉnh nhiều lần. Ngực nảy, tóc xõa. Bệ hạ nắm eo nàng, để nàng dẫn.",
-        "Điệu múa cuối cùng là nằm xuống, chân mở. {name} kéo bệ hạ vào, rên vang. Nàng lên đỉnh liên tục, cơ thể uốn éo. Cảm giác được ngắm và được đụ cùng lúc khiến nàng điên.",
-        "Sau điệu múa, {name} nằm thở dốc, vẫn còn uốn nhẹ người. Nàng thì thầm muốn được múa riêng cho bệ hạ nhiều đêm nữa."
+        [
+          "{name} múa chậm trước long sàng, áo mỏng bay. Bệ hạ ngồi xem, mắt không rời. Nàng từ từ cởi từng lớp trong điệu múa, da lộ dần.\n> Bệ hạ đang nhìn thần thiếp…\nKhi múa xong, nàng bước tới ngồi lên đùi, đã ướt. Bệ hạ đâm vào ngay. {name} rên, tiếp tục uốn người như đang múa. Nàng lên đỉnh mạnh, biểu cảm mê hoặc.",
+          "Nàng múa trên người bệ hạ, nhún theo nhịp điệu riêng. Cảm giác vừa múa vừa bị đụ. {name} rên lớn, lên đỉnh nhiều lần. Ngực nảy, tóc xõa. Bệ hạ nắm eo nàng, để nàng dẫn.",
+          "Điệu múa cuối cùng là nằm xuống, chân mở. {name} kéo bệ hạ vào, rên vang. Nàng lên đỉnh liên tục, cơ thể uốn éo. Cảm giác được ngắm và được đụ cùng lúc khiến nàng điên.",
+          "Sau điệu múa, {name} nằm thở dốc, vẫn còn uốn nhẹ người. Nàng thì thầm muốn được múa riêng cho bệ hạ nhiều đêm nữa."
+        ]
       ]
     }
   },
@@ -100,10 +211,12 @@
     "_title": "Lớp áo mỏng",
     "_chung": {
       "_": [
-        "Áo mỏng của {name} gần như không che được gì. Bệ hạ kéo nàng lại, tay luồn vào trong. Nàng rên khẽ, đã ướt.\n> Đêm nay nóng… nên thần thiếp mặc thế này.\nÁo bị kéo lên, không cởi hẳn. Dương vật đâm vào, vải mỏng cọ da. {name} rên lớn, lên đỉnh nhanh. Cảm giác áo mỏng khiến mọi thứ kích thích hơn.",
-        "Nàng ngồi lên, áo vẫn còn trên người. Nhún mạnh, vải dính mồ hôi và nước. {name} rên, lên đỉnh nhiều lần. Biểu cảm thích sự khêu gợi. Ngực lộ rõ qua lớp mỏng.",
-        "Bị đụ từ sau, áo bị tụt xuống eo. {name} gào, nước chảy làm ướt vải. Nàng lên đỉnh liên tục. Cảm giác nửa kín nửa hở rất mạnh.",
-        "Cuối đêm áo mỏng đã ướt đẫm và nhàu. {name} vẫn mặc nó, thì thầm rằng nàng sẽ mặc áo mỏng hơn nữa những đêm sau."
+        [
+          "Áo mỏng của {name} gần như không che được gì. Bệ hạ kéo nàng lại, tay luồn vào trong. Nàng rên khẽ, đã ướt.\n> Đêm nay nóng… nên thần thiếp mặc thế này.\nÁo bị kéo lên, không cởi hẳn. Dương vật đâm vào, vải mỏng cọ da. {name} rên lớn, lên đỉnh nhanh. Cảm giác áo mỏng khiến mọi thứ kích thích hơn.",
+          "Nàng ngồi lên, áo vẫn còn trên người. Nhún mạnh, vải dính mồ hôi và nước. {name} rên, lên đỉnh nhiều lần. Biểu cảm thích sự khêu gợi. Ngực lộ rõ qua lớp mỏng.",
+          "Bị đụ từ sau, áo bị tụt xuống eo. {name} gào, nước chảy làm ướt vải. Nàng lên đỉnh liên tục. Cảm giác nửa kín nửa hở rất mạnh.",
+          "Cuối đêm áo mỏng đã ướt đẫm và nhàu. {name} vẫn mặc nó, thì thầm rằng nàng sẽ mặc áo mỏng hơn nữa những đêm sau."
+        ]
       ]
     }
   },
@@ -111,10 +224,12 @@
     "_title": "Tiếp nối",
     "_chung": {
       "_": [
-        "{name} được kéo xuống. Nàng chủ động nhắc lại cảm giác đêm trước, rồi tự đưa dương vật vào.\n> Đêm trước… thần thiếp vẫn còn nhớ chỗ này.\nNàng nhún mạnh ngay, như muốn tiếp nối. Cảm giác quen thuộc và sâu. {name} rên lớn, lên đỉnh nhanh. Nước chảy nhiều. Nàng thì thầm những chi tiết đêm trước trong lúc đang bị đụ.",
-        "Nàng đòi tư thế giống đêm trước. Bệ hạ đâm sâu, {name} gào. Nàng lên đỉnh nhiều lần, biểu cảm mê đắm. Cảm giác nhớ và được làm lại khiến sướng hơn.",
-        "Creampie như đêm trước. Tinh bắn sâu, {name} siết chặt, lên đỉnh thêm. Nàng thì thầm muốn được bắn đầy nhiều lần nữa. Biểu cảm thỏa mãn.",
-        "Sau đó nàng nằm trong lòng, vẫn còn siết nhẹ. Nàng nói rằng những đêm tiếp nối thế này làm nàng càng lúc càng thèm bệ hạ hơn."
+        [
+          "{name} được kéo xuống. Nàng chủ động nhắc lại cảm giác đêm trước, rồi tự đưa dương vật vào.\n> Đêm trước… thần thiếp vẫn còn nhớ chỗ này.\nNàng nhún mạnh ngay, như muốn tiếp nối. Cảm giác quen thuộc và sâu. {name} rên lớn, lên đỉnh nhanh. Nước chảy nhiều. Nàng thì thầm những chi tiết đêm trước trong lúc đang bị đụ.",
+          "Nàng đòi tư thế giống đêm trước. Bệ hạ đâm sâu, {name} gào. Nàng lên đỉnh nhiều lần, biểu cảm mê đắm. Cảm giác nhớ và được làm lại khiến sướng hơn.",
+          "Creampie như đêm trước. Tinh bắn sâu, {name} siết chặt, lên đỉnh thêm. Nàng thì thầm muốn được bắn đầy nhiều lần nữa. Biểu cảm thỏa mãn.",
+          "Sau đó nàng nằm trong lòng, vẫn còn siết nhẹ. Nàng nói rằng những đêm tiếp nối thế này làm nàng càng lúc càng thèm bệ hạ hơn."
+        ]
       ]
     }
   },
@@ -122,10 +237,12 @@
     "_title": "Thêm một canh",
     "_chung": {
       "_": [
-        "{name} được giữ lại. Nàng cười, chủ động nằm lên người bệ hạ và tiếp tục.\n> Thêm một canh nữa… thần thiếp muốn.\nNàng cưỡi chậm rồi nhanh. Cảm giác kéo dài. {name} rên khàn, lên đỉnh nhiều lần. Nàng không muốn dừng, miệng thì thầm xin thêm.",
-        "Đổi nhiều tư thế trong canh giờ cuối. {name} mệt nhưng vẫn tham. Nước và tinh cũ chảy ra. Nàng lên đỉnh yếu nhưng vẫn dữ dội. Biểu cảm hạnh phúc.",
-        "Gần sáng vẫn còn được đụ. {name} ôm chặt, rên nhỏ. Khi được bắn thêm, nàng siết và lên đỉnh lần cuối. Cơ thể mềm nhũn.",
-        "Trời sáng hẳn nàng mới chịu rời. {name} thì thầm cảm ơn vì được ở lại, và hẹn sẽ xin ở lại thêm nhiều đêm nữa."
+        [
+          "{name} được giữ lại. Nàng cười, chủ động nằm lên người bệ hạ và tiếp tục.\n> Thêm một canh nữa… thần thiếp muốn.\nNàng cưỡi chậm rồi nhanh. Cảm giác kéo dài. {name} rên khàn, lên đỉnh nhiều lần. Nàng không muốn dừng, miệng thì thầm xin thêm.",
+          "Đổi nhiều tư thế trong canh giờ cuối. {name} mệt nhưng vẫn tham. Nước và tinh cũ chảy ra. Nàng lên đỉnh yếu nhưng vẫn dữ dội. Biểu cảm hạnh phúc.",
+          "Gần sáng vẫn còn được đụ. {name} ôm chặt, rên nhỏ. Khi được bắn thêm, nàng siết và lên đỉnh lần cuối. Cơ thể mềm nhũn.",
+          "Trời sáng hẳn nàng mới chịu rời. {name} thì thầm cảm ơn vì được ở lại, và hẹn sẽ xin ở lại thêm nhiều đêm nữa."
+        ]
       ]
     }
   },
@@ -133,10 +250,12 @@
     "_title": "Lời khó nói",
     "_chung": {
       "_": [
-        "{name} được kéo ngồi cạnh. Nàng đỏ mặt, thì thầm điều nàng muốn. Bệ hạ hôn nàng, tay đã cởi áo.\n> Thần thiếp… muốn được gần bệ hạ hơn.\nNàng rên khẽ khi được chạm. Khi bị đâm vào, nàng ôm chặt, biểu cảm vừa ngượng vừa sướng. Nàng lên đỉnh với tiếng rên nhỏ, nước mắt nhẹ vì cảm xúc.",
-        "Nàng dần lớn tiếng hơn. Cảm giác được chấp nhận khiến nàng táo bạo. {name} chủ động nhún, rên lớn. Lên đỉnh nhiều lần. Biểu cảm từ đỏ mặt chuyển thành mê đắm.",
-        "Nàng thì thầm những lời nàng đã muốn nói từ lâu trong lúc đang bị đụ. Mỗi câu khiến nàng siết chặt. Bệ hạ đáp lại bằng nhịp mạnh. {name} lên đỉnh dữ dội, ôm không buông.",
-        "Sau đó nàng nằm trong lòng, mặt vẫn còn đỏ nhưng đã cười. Nàng thì thầm cảm ơn vì bệ hạ đã nghe, và nói rằng nàng sẽ còn nhiều lời muốn nói trong những đêm sau."
+        [
+          "{name} được kéo ngồi cạnh. Nàng đỏ mặt, thì thầm điều nàng muốn. Bệ hạ hôn nàng, tay đã cởi áo.\n> Thần thiếp… muốn được gần bệ hạ hơn.\nNàng rên khẽ khi được chạm. Khi bị đâm vào, nàng ôm chặt, biểu cảm vừa ngượng vừa sướng. Nàng lên đỉnh với tiếng rên nhỏ, nước mắt nhẹ vì cảm xúc.",
+          "Nàng dần lớn tiếng hơn. Cảm giác được chấp nhận khiến nàng táo bạo. {name} chủ động nhún, rên lớn. Lên đỉnh nhiều lần. Biểu cảm từ đỏ mặt chuyển thành mê đắm.",
+          "Nàng thì thầm những lời nàng đã muốn nói từ lâu trong lúc đang bị đụ. Mỗi câu khiến nàng siết chặt. Bệ hạ đáp lại bằng nhịp mạnh. {name} lên đỉnh dữ dội, ôm không buông.",
+          "Sau đó nàng nằm trong lòng, mặt vẫn còn đỏ nhưng đã cười. Nàng thì thầm cảm ơn vì bệ hạ đã nghe, và nói rằng nàng sẽ còn nhiều lời muốn nói trong những đêm sau."
+        ]
       ]
     }
   },
@@ -144,10 +263,12 @@
     "_title": "Được gần",
     "_chung": {
       "_": [
-        "{name} được gọi vào, nàng lập tức quỳ xuống cạnh long sàng, mặt đỏ.\n> Thần thiếp… chỉ muốn được gần bệ hạ một chút.\nBệ hạ kéo nàng lên giường. Áo bị cởi từ từ, {name} rên khẽ khi da chạm da. Khi được đâm vào, nàng ôm chặt, hơi thở gấp. Nhịp chậm và dịu, nàng lên đỉnh với tiếng rên nhỏ, nước mắt nhẹ vì xúc động. Nàng thì thầm cảm ơn được vào.",
-        "Nàng chủ động hôn và thì thầm những lời nhỏ. Cảm giác được chấp nhận khiến nàng táo hơn. {name} nhún nhẹ, rên lớn dần. Nàng lên đỉnh thêm lần nữa, ôm không buông.",
-        "Bệ hạ đè nàng xuống đụ sâu hơn. {name} gào khẽ, chân quấn chặt. Nước chảy, nàng lên đỉnh liên tục. Biểu cảm hạnh phúc và sướng. Nàng không muốn rời.",
-        "Sau đó nàng nằm trong lòng, mặt vẫn đỏ. Nàng thì thầm rằng chỉ cần được gần như thế này là nàng đã mãn nguyện, nhưng nếu bệ hạ muốn thêm thì nàng cũng sẵn lòng."
+        [
+          "{name} được gọi vào, nàng lập tức quỳ xuống cạnh long sàng, mặt đỏ.\n> Thần thiếp… chỉ muốn được gần bệ hạ một chút.\nBệ hạ kéo nàng lên giường. Áo bị cởi từ từ, {name} rên khẽ khi da chạm da. Khi được đâm vào, nàng ôm chặt, hơi thở gấp. Nhịp chậm và dịu, nàng lên đỉnh với tiếng rên nhỏ, nước mắt nhẹ vì xúc động. Nàng thì thầm cảm ơn được vào.",
+          "Nàng chủ động hôn và thì thầm những lời nhỏ. Cảm giác được chấp nhận khiến nàng táo hơn. {name} nhún nhẹ, rên lớn dần. Nàng lên đỉnh thêm lần nữa, ôm không buông.",
+          "Bệ hạ đè nàng xuống đụ sâu hơn. {name} gào khẽ, chân quấn chặt. Nước chảy, nàng lên đỉnh liên tục. Biểu cảm hạnh phúc và sướng. Nàng không muốn rời.",
+          "Sau đó nàng nằm trong lòng, mặt vẫn đỏ. Nàng thì thầm rằng chỉ cần được gần như thế này là nàng đã mãn nguyện, nhưng nếu bệ hạ muốn thêm thì nàng cũng sẵn lòng."
+        ]
       ]
     }
   },
@@ -155,10 +276,12 @@
     "_title": "Nắm tóc",
     "_chung": {
       "_": [
-        "Bệ hạ nắm lấy mái tóc xõa của {name}, kéo nhẹ đầu nàng ngửa ra. Nàng rên khẽ, mắt sáng.\n> Bệ hạ… nắm mạnh hơn cũng được.\nÁo bị cởi, tóc xõa trải trên long sàng. Khi bị đâm vào, bệ hạ vẫn nắm tóc. {name} cảm nhận lực kéo và sự đầy bên trong, rên lớn. Nàng lên đỉnh nhanh, cơ thể run, tóc bị kéo căng theo từng nhịp.",
-        "Nàng quay người, tóc bị nắm từ sau. Bệ hạ đâm mạnh, kéo tóc mỗi lần đẩy tới. {name} gào, nước chảy dài. Nàng lên đỉnh nhiều lần, biểu cảm điên sướng vì bị nắm tóc.",
-        "Tóc bị quấn quanh tay, dùng để điều khiển nhịp. {name} cảm nhận rõ từng lần bị kéo. Rên không ngừng, lên đỉnh liên tục. Biểu cảm hoàn toàn phó thác.",
-        "Sau đó tóc nàng rối và ướt mồ hôi. {name} thì thầm thích được nắm tóc khi đang bị đụ, và muốn để tóc xõa nhiều đêm hơn."
+        [
+          "Bệ hạ nắm lấy mái tóc xõa của {name}, kéo nhẹ đầu nàng ngửa ra. Nàng rên khẽ, mắt sáng.\n> Bệ hạ… nắm mạnh hơn cũng được.\nÁo bị cởi, tóc xõa trải trên long sàng. Khi bị đâm vào, bệ hạ vẫn nắm tóc. {name} cảm nhận lực kéo và sự đầy bên trong, rên lớn. Nàng lên đỉnh nhanh, cơ thể run, tóc bị kéo căng theo từng nhịp.",
+          "Nàng quay người, tóc bị nắm từ sau. Bệ hạ đâm mạnh, kéo tóc mỗi lần đẩy tới. {name} gào, nước chảy dài. Nàng lên đỉnh nhiều lần, biểu cảm điên sướng vì bị nắm tóc.",
+          "Tóc bị quấn quanh tay, dùng để điều khiển nhịp. {name} cảm nhận rõ từng lần bị kéo. Rên không ngừng, lên đỉnh liên tục. Biểu cảm hoàn toàn phó thác.",
+          "Sau đó tóc nàng rối và ướt mồ hôi. {name} thì thầm thích được nắm tóc khi đang bị đụ, và muốn để tóc xõa nhiều đêm hơn."
+        ]
       ]
     }
   },
@@ -166,10 +289,12 @@
     "_title": "Được nhìn",
     "_chung": {
       "_": [
-        "{name} từ từ cởi áo trước mắt bệ hạ. Từng lớp rơi xuống, da lộ dần. Nàng đỏ mặt nhưng không dừng.\n> Bệ hạ đang nhìn… thần thiếp thấy nóng quá.\nKhi trần truồng, nàng nằm xuống, chân dạng nhẹ. Bệ hạ nhìn một lúc rồi mới tiến vào. {name} rên lớn khi bị đâm, cảm giác bị xem khiến nàng càng ướt. Nàng lên đỉnh nhanh, biểu cảm vừa e vừa sướng.",
-        "Nàng chủ động ngồi lên, để bệ hạ nhìn rõ chỗ giao nhau. Nhún chậm, rên. {name} lên đỉnh nhiều lần, mắt không rời mắt bệ hạ. Cảm giác được ngắm làm nàng điên.",
-        "Bị đụ từ sau nhưng vẫn ngoái nhìn. {name} thấy biểu cảm của bệ hạ, càng kích thích. Gào, lên đỉnh. Nước chảy, nàng thì thầm xin được xem nhiều hơn.",
-        "Sau đó nàng nằm thở, vẫn còn đỏ mặt. Nàng nói rằng nàng thích được bệ hạ nhìn khi đang cởi và khi đang bị đụ."
+        [
+          "{name} từ từ cởi áo trước mắt bệ hạ. Từng lớp rơi xuống, da lộ dần. Nàng đỏ mặt nhưng không dừng.\n> Bệ hạ đang nhìn… thần thiếp thấy nóng quá.\nKhi trần truồng, nàng nằm xuống, chân dạng nhẹ. Bệ hạ nhìn một lúc rồi mới tiến vào. {name} rên lớn khi bị đâm, cảm giác bị xem khiến nàng càng ướt. Nàng lên đỉnh nhanh, biểu cảm vừa e vừa sướng.",
+          "Nàng chủ động ngồi lên, để bệ hạ nhìn rõ chỗ giao nhau. Nhún chậm, rên. {name} lên đỉnh nhiều lần, mắt không rời mắt bệ hạ. Cảm giác được ngắm làm nàng điên.",
+          "Bị đụ từ sau nhưng vẫn ngoái nhìn. {name} thấy biểu cảm của bệ hạ, càng kích thích. Gào, lên đỉnh. Nước chảy, nàng thì thầm xin được xem nhiều hơn.",
+          "Sau đó nàng nằm thở, vẫn còn đỏ mặt. Nàng nói rằng nàng thích được bệ hạ nhìn khi đang cởi và khi đang bị đụ."
+        ]
       ]
     }
   },
@@ -177,10 +302,12 @@
     "_title": "Sau lớp màn",
     "_chung": {
       "_": [
-        "Bệ hạ vén màn the. {name} đã trần truồng nằm đợi, bóng người in trên màn.\n> Bệ hạ vào rồi… thần thiếp đợi lâu quá.\nMàn the mỏng bay nhẹ khi hai người hòa vào nhau. {name} rên, cảm giác nửa kín nửa hở. Nàng lên đỉnh nhanh, tiếng rên vọng qua màn. Bóng hai người lay động trên lớp the.",
-        "Nàng ngồi lên sau màn. Nhún mạnh, màn the dính vào da ướt. {name} rên lớn, lên đỉnh nhiều lần. Cảm giác có lớp màn khiến kích thích hơn. Nàng thì thầm thích được đụ sau màn.",
-        "Bị đụ từ sau, màn che một phần. {name} gào khẽ, nước chảy. Bóng rõ trên màn. Nàng lên đỉnh liên tục, biểu cảm mê. Cảm giác sau màn the rất đặc biệt.",
-        "Sau đó màn the vẫn còn dính mồ hôi. {name} nằm thở, nói rằng nàng muốn được đợi sau màn nhiều đêm nữa."
+        [
+          "Bệ hạ vén màn the. {name} đã trần truồng nằm đợi, bóng người in trên màn.\n> Bệ hạ vào rồi… thần thiếp đợi lâu quá.\nMàn the mỏng bay nhẹ khi hai người hòa vào nhau. {name} rên, cảm giác nửa kín nửa hở. Nàng lên đỉnh nhanh, tiếng rên vọng qua màn. Bóng hai người lay động trên lớp the.",
+          "Nàng ngồi lên sau màn. Nhún mạnh, màn the dính vào da ướt. {name} rên lớn, lên đỉnh nhiều lần. Cảm giác có lớp màn khiến kích thích hơn. Nàng thì thầm thích được đụ sau màn.",
+          "Bị đụ từ sau, màn che một phần. {name} gào khẽ, nước chảy. Bóng rõ trên màn. Nàng lên đỉnh liên tục, biểu cảm mê. Cảm giác sau màn the rất đặc biệt.",
+          "Sau đó màn the vẫn còn dính mồ hôi. {name} nằm thở, nói rằng nàng muốn được đợi sau màn nhiều đêm nữa."
+        ]
       ]
     }
   },
@@ -188,10 +315,12 @@
     "_title": "Sưởi chân",
     "_chung": {
       "_": [
-        "Bệ hạ ôm hai bàn chân lạnh của {name} vào lòng, xoa cho ấm. Nàng rên khẽ vì nhột và vì ấm.\n> Bệ hạ… chân thần thiếp đỡ lạnh rồi.\nTừ chân, tay dần lần lên. Áo bị cởi, {name} đã ướt. Khi bị đâm vào, nàng ôm chặt, chân quấn lấy eo. Cảm giác từ lạnh sang nóng. Nàng lên đỉnh, rên lớn, biểu cảm hạnh phúc.",
-        "Nàng chủ động dùng chân cọ. Cảm giác da chân ấm dần. {name} rên, lên đỉnh thêm. Biểu cảm thích được chăm sóc. Nàng thì thầm chân nàng giờ đã nóng.",
-        "Bị đụ trong khi chân vẫn được nắm. {name} cảm nhận sự kiểm soát nhẹ. Rên, lên đỉnh nhiều lần. Nước chảy. Biểu cảm mê đắm.",
-        "Sau đó chân nàng đã ấm hoàn toàn. {name} thì thầm cảm ơn, và nói rằng nàng thích được sưởi từ chân lên như thế này."
+        [
+          "Bệ hạ ôm hai bàn chân lạnh của {name} vào lòng, xoa cho ấm. Nàng rên khẽ vì nhột và vì ấm.\n> Bệ hạ… chân thần thiếp đỡ lạnh rồi.\nTừ chân, tay dần lần lên. Áo bị cởi, {name} đã ướt. Khi bị đâm vào, nàng ôm chặt, chân quấn lấy eo. Cảm giác từ lạnh sang nóng. Nàng lên đỉnh, rên lớn, biểu cảm hạnh phúc.",
+          "Nàng chủ động dùng chân cọ. Cảm giác da chân ấm dần. {name} rên, lên đỉnh thêm. Biểu cảm thích được chăm sóc. Nàng thì thầm chân nàng giờ đã nóng.",
+          "Bị đụ trong khi chân vẫn được nắm. {name} cảm nhận sự kiểm soát nhẹ. Rên, lên đỉnh nhiều lần. Nước chảy. Biểu cảm mê đắm.",
+          "Sau đó chân nàng đã ấm hoàn toàn. {name} thì thầm cảm ơn, và nói rằng nàng thích được sưởi từ chân lên như thế này."
+        ]
       ]
     }
   },
@@ -199,10 +328,12 @@
     "_title": "Lời thì thầm",
     "_chung": {
       "_": [
-        "Bệ hạ nghiêng tai. {name} thì thầm những lời nhỏ và dần táo bạo. Tay nàng đã cởi áo mình.\n> Bệ hạ… thần thiếp muốn được thì thầm khi đang ở trong.\nKhi bị đâm vào, nàng tiếp tục thì thầm bên tai. Mỗi câu khiến nàng siết chặt. Cảm giác hơi thở và lời nói. {name} lên đỉnh với tiếng rên thì thầm, ôm chặt.",
-        "Nàng thì thầm tục hơn. Giọng run. {name} cưỡi và thì thầm liên tục. Lên đỉnh nhiều lần. Biểu cảm mê. Cảm giác thì thầm làm mọi thứ kích thích hơn.",
-        "Bị đụ từ sau, nàng vẫn ngoái lại thì thầm. {name} gào khẽ giữa các câu. Lên đỉnh liên tục. Nước chảy. Biểu cảm điên vì lời nói.",
-        "Sau đó nàng nằm cạnh, vẫn thì thầm nhỏ. Nàng nói rằng nàng thích được thì thầm mọi cảm giác khi đang bị đụ, và muốn nhiều đêm như thế."
+        [
+          "Bệ hạ nghiêng tai. {name} thì thầm những lời nhỏ và dần táo bạo. Tay nàng đã cởi áo mình.\n> Bệ hạ… thần thiếp muốn được thì thầm khi đang ở trong.\nKhi bị đâm vào, nàng tiếp tục thì thầm bên tai. Mỗi câu khiến nàng siết chặt. Cảm giác hơi thở và lời nói. {name} lên đỉnh với tiếng rên thì thầm, ôm chặt.",
+          "Nàng thì thầm tục hơn. Giọng run. {name} cưỡi và thì thầm liên tục. Lên đỉnh nhiều lần. Biểu cảm mê. Cảm giác thì thầm làm mọi thứ kích thích hơn.",
+          "Bị đụ từ sau, nàng vẫn ngoái lại thì thầm. {name} gào khẽ giữa các câu. Lên đỉnh liên tục. Nước chảy. Biểu cảm điên vì lời nói.",
+          "Sau đó nàng nằm cạnh, vẫn thì thầm nhỏ. Nàng nói rằng nàng thích được thì thầm mọi cảm giác khi đang bị đụ, và muốn nhiều đêm như thế."
+        ]
       ]
     }
   },
@@ -210,10 +341,12 @@
     "_title": "Dải lụa",
     "_chung": {
       "_": [
-        "Bệ hạ dùng chính dải lụa của {name} trói nhẹ cổ tay nàng lên đầu giường. Có ám hiệu. Nàng rên khẽ, đã ướt.\n> Bệ hạ… nhẹ thôi.\nKhi bị đâm vào, lụa mát trên da. {name} không cử động tay được, cảm giác bất lực nhẹ. Nàng lên đỉnh nhanh, rên lớn. Lụa siết nhẹ theo từng nhịp co giật.",
-        "Trói thêm mắt cá chân mở rộng. {name} cảm thấy lộ. Bị đụ sâu, nàng gào. Lên đỉnh nhiều lần. Biểu cảm sướng và an toàn. Lụa đỏ trên da trắng.",
-        "Dùng lụa quấn qua người rồi đụ. Cảm giác lụa cọ da. {name} rên không ngừng. Lên đỉnh liên tục. Nàng thì thầm thích dải lụa này.",
-        "Sau khi cởi, dấu lụa còn nhẹ trên da. {name} thì thầm muốn được trói bằng lụa của chính mình thêm nhiều lần."
+        [
+          "Bệ hạ dùng chính dải lụa của {name} trói nhẹ cổ tay nàng lên đầu giường. Có ám hiệu. Nàng rên khẽ, đã ướt.\n> Bệ hạ… nhẹ thôi.\nKhi bị đâm vào, lụa mát trên da. {name} không cử động tay được, cảm giác bất lực nhẹ. Nàng lên đỉnh nhanh, rên lớn. Lụa siết nhẹ theo từng nhịp co giật.",
+          "Trói thêm mắt cá chân mở rộng. {name} cảm thấy lộ. Bị đụ sâu, nàng gào. Lên đỉnh nhiều lần. Biểu cảm sướng và an toàn. Lụa đỏ trên da trắng.",
+          "Dùng lụa quấn qua người rồi đụ. Cảm giác lụa cọ da. {name} rên không ngừng. Lên đỉnh liên tục. Nàng thì thầm thích dải lụa này.",
+          "Sau khi cởi, dấu lụa còn nhẹ trên da. {name} thì thầm muốn được trói bằng lụa của chính mình thêm nhiều lần."
+        ]
       ]
     }
   },
@@ -221,10 +354,12 @@
     "_title": "Da thơm",
     "_chung": {
       "_": [
-        "Bệ hạ kéo {name} lại, mũi chạm vào cổ và vai còn ẩm. Mùi thơm sạch sẽ. Nàng rên khẽ.\n> Bệ hạ… thần thiếp vừa tắm xong.\nÁo bị cởi, da ấm và thơm. Khi bị đâm vào, {name} cảm nhận rõ. Nàng lên đỉnh nhanh, rên lớn. Hương thơm quyện mồ hôi mới. Biểu cảm sạch sẽ và sướng.",
-        "Nàng ngồi lên, tóc ẩm xõa. Nhún mạnh, mùi thơm lan. {name} rên, lên đỉnh nhiều lần. Cảm giác da sạch khiến nhạy hơn. Nàng thì thầm thích được đụ ngay sau khi tắm.",
-        "Bị đụ từ sau, mũi gần da thơm. {name} gào, nước chảy. Lên đỉnh liên tục. Biểu cảm mê. Mùi thơm vẫn còn.",
-        "Sau đó da nàng đã bóng mồ hôi mới. {name} thì thầm rằng nàng sẽ tắm rồi vào hầu nhiều hơn."
+        [
+          "Bệ hạ kéo {name} lại, mũi chạm vào cổ và vai còn ẩm. Mùi thơm sạch sẽ. Nàng rên khẽ.\n> Bệ hạ… thần thiếp vừa tắm xong.\nÁo bị cởi, da ấm và thơm. Khi bị đâm vào, {name} cảm nhận rõ. Nàng lên đỉnh nhanh, rên lớn. Hương thơm quyện mồ hôi mới. Biểu cảm sạch sẽ và sướng.",
+          "Nàng ngồi lên, tóc ẩm xõa. Nhún mạnh, mùi thơm lan. {name} rên, lên đỉnh nhiều lần. Cảm giác da sạch khiến nhạy hơn. Nàng thì thầm thích được đụ ngay sau khi tắm.",
+          "Bị đụ từ sau, mũi gần da thơm. {name} gào, nước chảy. Lên đỉnh liên tục. Biểu cảm mê. Mùi thơm vẫn còn.",
+          "Sau đó da nàng đã bóng mồ hôi mới. {name} thì thầm rằng nàng sẽ tắm rồi vào hầu nhiều hơn."
+        ]
       ]
     }
   },
@@ -232,10 +367,12 @@
     "_title": "Không lớp nào",
     "_chung": {
       "_": [
-        "Bệ hạ kéo cổ áo {name} xuống, xác nhận không có gì bên trong. Nàng đỏ mặt, đã ướt.\n> Đêm nay nóng… nên thần thiếp không mặc.\nÁo bị tụt xuống eo. Dương vật đâm vào ngay. {name} rên lớn, cảm giác không có gì cản. Nàng lên đỉnh nhanh. Biểu cảm vừa e vừa sướng vì sự trống trải.",
-        "Nàng chủ động kéo hết áo, trần truồng ngồi lên. Nhún mạnh, không có lớp nào. {name} rên, lên đỉnh nhiều lần. Cảm giác always bottomless. Nước chảy trực tiếp.",
-        "Bị đụ từ sau, hoàn toàn không có gì. {name} gào, nước chảy dài. Lên đỉnh liên tục. Biểu cảm điên. Nàng thì thầm thích không mặc lót.",
-        "Sau đó nàng vẫn trần. {name} thì thầm rằng những đêm nóng nàng sẽ không mặc gì bên dưới nữa."
+        [
+          "Bệ hạ kéo cổ áo {name} xuống, xác nhận không có gì bên trong. Nàng đỏ mặt, đã ướt.\n> Đêm nay nóng… nên thần thiếp không mặc.\nÁo bị tụt xuống eo. Dương vật đâm vào ngay. {name} rên lớn, cảm giác không có gì cản. Nàng lên đỉnh nhanh. Biểu cảm vừa e vừa sướng vì sự trống trải.",
+          "Nàng chủ động kéo hết áo, trần truồng ngồi lên. Nhún mạnh, không có lớp nào. {name} rên, lên đỉnh nhiều lần. Cảm giác always bottomless. Nước chảy trực tiếp.",
+          "Bị đụ từ sau, hoàn toàn không có gì. {name} gào, nước chảy dài. Lên đỉnh liên tục. Biểu cảm điên. Nàng thì thầm thích không mặc lót.",
+          "Sau đó nàng vẫn trần. {name} thì thầm rằng những đêm nóng nàng sẽ không mặc gì bên dưới nữa."
+        ]
       ]
     }
   },
@@ -243,10 +380,12 @@
     "_title": "Thêm lần nữa",
     "_chung": {
       "_": [
-        "{name} được giữ lại. Nàng chủ động nằm lên và tiếp tục ngay.\n> Thêm một lần nữa… thần thiếp còn muốn.\nNàng cưỡi mạnh, đã sưng nhưng vẫn ướt. Cảm giác liên tục. {name} rên khàn, lên đỉnh nhiều lần liên tiếp. Nàng không muốn dừng, miệng xin thêm.",
-        "Đổi tư thế, vẫn tiếp tục. {name} mệt nhưng tham. Nước và tinh cũ chảy. Nàng lên đỉnh yếu nhưng dài. Biểu cảm điên sướng. Cảm giác multiple orgasms.",
-        "Gần sáng vẫn còn. {name} ôm chặt, rên nhỏ. Khi được bắn thêm, nàng siết và lên đỉnh lần cuối trong đêm. Cơ thể run.",
-        "Nàng nằm thở dốc, vẫn chưa hoàn toàn thỏa. {name} thì thầm rằng nàng thích được xin thêm, và muốn nhiều đêm được làm liên tục như thế này."
+        [
+          "{name} được giữ lại. Nàng chủ động nằm lên và tiếp tục ngay.\n> Thêm một lần nữa… thần thiếp còn muốn.\nNàng cưỡi mạnh, đã sưng nhưng vẫn ướt. Cảm giác liên tục. {name} rên khàn, lên đỉnh nhiều lần liên tiếp. Nàng không muốn dừng, miệng xin thêm.",
+          "Đổi tư thế, vẫn tiếp tục. {name} mệt nhưng tham. Nước và tinh cũ chảy. Nàng lên đỉnh yếu nhưng dài. Biểu cảm điên sướng. Cảm giác multiple orgasms.",
+          "Gần sáng vẫn còn. {name} ôm chặt, rên nhỏ. Khi được bắn thêm, nàng siết và lên đỉnh lần cuối trong đêm. Cơ thể run.",
+          "Nàng nằm thở dốc, vẫn chưa hoàn toàn thỏa. {name} thì thầm rằng nàng thích được xin thêm, và muốn nhiều đêm được làm liên tục như thế này."
+        ]
       ]
     }
   }

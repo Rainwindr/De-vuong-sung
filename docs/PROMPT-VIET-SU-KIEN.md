@@ -55,7 +55,7 @@ MẪU TRẢ VỀ
 
 QUY TẮC BẮT BUỘC
 1. Mọi "id" sự kiện và mọi "hook" mới đều bắt đầu bằng "canh-viet." viết thường, không dấu, nối bằng gạch dưới. Không trùng nhau.
-2. Mỗi nút có "hook" thì phải có cảnh tương ứng trong "scenes" (cùng tên hook), 3–4 đoạn. Nút không có "hook" thì có "result" (một câu).
+2. Mỗi nút có "hook" thì phải có cảnh tương ứng trong "scenes" (cùng tên hook): 3–4 đoạn NỐI TIẾP nhau thành một cảnh (mở đầu → diễn biến → dư âm), mỗi đoạn tối thiểu 150 chữ. Nút không có "hook" thì có "result" (một câu).
 3. Nút có "hook" phải có "fetish" gồm ít nhất một id trong DANH SÁCH SỞ THÍCH bên dưới. Cảnh nhiều người bắt buộc có "fetish".
 4. Mọi nhân vật đều từ 18 tuổi, tự nguyện. Không có con cái, trẻ em trong cảnh nóng. Không cưỡng ép, không say/thuốc, không người ngoài bắt gặp.
 5. Trong chữ: xuống dòng viết \n, lời thoại bắt đầu bằng "> ", không dùng dấu " bên trong đoạn (dùng “ ” thay thế).

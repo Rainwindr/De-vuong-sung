@@ -14,6 +14,7 @@ Câu trả lời có thể là:
   - hoặc khối sự kiện mới    { "events": [ {...} ], "scenes": { ... }, "fetishes": [...] }
 Chữ thừa trước/sau khối JSON (lời chào, ```json ...) sẽ tự bỏ qua.
 Đoạn mới được NỐI THÊM vào đoạn cũ, không xóa gì.
+Mỗi danh sách đoạn Grok trả về cho một ô được thêm thành MỘT CẢNH mới (các đoạn nối tiếp nhau).
 """
 import json
 import pathlib
@@ -96,11 +97,18 @@ def merge_scenes(scenes):
                     print(f"  ! {hook} / {key}: mức '{lv}' không hợp lệ (chỉ dau, quen, lau, _), bỏ qua")
                     continue
                 cur = slot.setdefault(lv, [])
-                for s in arr:
-                    s = str(s).strip()
-                    if s and s not in cur:
-                        cur.append(s)
-                        added += 1
+                # Ô cũ viết gọn (toàn chuỗi) = một cảnh: đổi sang dạng danh sách cảnh trước khi thêm
+                if cur and not any(isinstance(x, list) for x in cur):
+                    cur[:] = [list(cur)]
+                # Phần mới: toàn chuỗi = MỘT cảnh mới; có ngoặc lồng = nhiều cảnh
+                if not isinstance(arr, list):
+                    continue
+                new_scenes = [x if isinstance(x, list) else [x] for x in arr] if any(isinstance(x, list) for x in arr) else [arr]
+                for sc in new_scenes:
+                    sc = [str(s).strip() for s in sc if str(s).strip()]
+                    if sc and sc not in cur:
+                        cur.append(sc)
+                        added += len(sc)
         print(f"  ✓ {hook} → {target.name}")
     for p, d in files.items():
         save_scene_file(p, d)

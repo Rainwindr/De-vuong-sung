@@ -3,212 +3,426 @@
     "_title": "Thị tẩm",
     "core.uyen_nghi": {
       "dau": [
-        "Dưỡng Tâm điện đêm khuya, Lục Uyển Nghi quỳ gối bên long sàng, áo vàng Đức Phi chỉnh tề. Nàng ngẩng đầu, mắt sáng nhìn bệ hạ bước vào.\n> Bệ hạ... thần thiếp chờ đã lâu.\nBệ hạ đỡ nàng dậy, dẫn đến long sàng. Lần đầu thị tẩm, Uyển Nghi đỏ mặt, hai tay siết chặt vạt áo. Khi bệ hạ từ từ cởi từng lớp, da thịt nàng trắng mịn hiện ra. Nàng cắn môi, hơi thở gấp. Cảm giác lạ khiến nàng nhíu mày, nhưng vẫn để người kia dẫn dắt. Nhịp điệu chậm rãi, Uyển Nghi khẽ rên, nước mắt lăn dài. Cuối cùng nàng ôm lấy bệ hạ.\n> Thần thiếp... không sao. Tiếp tục đi.\nĐêm ấy, Đức Phi đoan trang học cách hầu hạ trong sự e ấp.",
-        "Cung Uyển Nghi thơm mùi hương. Nàng ngồi trên giường, áo mỏng. Bệ hạ bước vào, nàng đứng dậy, quỳ xuống.\n> Bệ hạ triệu thần thiếp.\nBệ hạ nâng nàng lên, hôn nhẹ. Áo bị kéo xuống vai. Lần đầu, Uyển Nghi run nhẹ khi thân thể chạm nhau. Nàng cắn môi, hai chân siết. Bệ hạ chậm rãi, để nàng quen. Uyển Nghi dần thả lỏng, ôm cổ người kia.\n> Bệ hạ... nhẹ thôi.\nĐêm ấy, nàng để bệ hạ chinh phục, dù vẫn giữ lễ.",
-        "Long sàng rộng, Uyển Nghi nằm chờ, tóc búi cao. Bệ hạ bước vào, nàng ngồi dậy.\n> Thần thiếp sẵn sàng hầu hạ.\nNàng để bệ hạ cởi áo, da thịt ửng hồng. Khi hòa làm một, nàng khẽ kêu, móng tay nắm chăn. Cảm giác đau nhẹ thoáng qua, nàng thì thầm.\n> Đau... một chút. Nhưng thần thiếp chịu được.\nBệ hạ hôn lên trán, đêm ấy dài trong sự đoan trang và e ấp."
+        [
+          "Dưỡng Tâm điện đêm khuya, Lục Uyển Nghi quỳ gối bên long sàng, áo vàng Đức Phi chỉnh tề. Nàng ngẩng đầu, mắt sáng nhìn bệ hạ bước vào.\n> Bệ hạ... thần thiếp chờ đã lâu.\nBệ hạ đỡ nàng dậy, dẫn đến long sàng. Lần đầu thị tẩm, Uyển Nghi đỏ mặt, hai tay siết chặt vạt áo. Khi bệ hạ từ từ cởi từng lớp, da thịt nàng trắng mịn hiện ra. Nàng cắn môi, hơi thở gấp. Cảm giác lạ khiến nàng nhíu mày, nhưng vẫn để người kia dẫn dắt. Nhịp điệu chậm rãi, Uyển Nghi khẽ rên, nước mắt lăn dài. Cuối cùng nàng ôm lấy bệ hạ.\n> Thần thiếp... không sao. Tiếp tục đi.\nĐêm ấy, Đức Phi đoan trang học cách hầu hạ trong sự e ấp."
+        ],
+        [
+          "Cung Uyển Nghi thơm mùi hương. Nàng ngồi trên giường, áo mỏng. Bệ hạ bước vào, nàng đứng dậy, quỳ xuống.\n> Bệ hạ triệu thần thiếp.\nBệ hạ nâng nàng lên, hôn nhẹ. Áo bị kéo xuống vai. Lần đầu, Uyển Nghi run nhẹ khi thân thể chạm nhau. Nàng cắn môi, hai chân siết. Bệ hạ chậm rãi, để nàng quen. Uyển Nghi dần thả lỏng, ôm cổ người kia.\n> Bệ hạ... nhẹ thôi.\nĐêm ấy, nàng để bệ hạ chinh phục, dù vẫn giữ lễ."
+        ],
+        [
+          "Long sàng rộng, Uyển Nghi nằm chờ, tóc búi cao. Bệ hạ bước vào, nàng ngồi dậy.\n> Thần thiếp sẵn sàng hầu hạ.\nNàng để bệ hạ cởi áo, da thịt ửng hồng. Khi hòa làm một, nàng khẽ kêu, móng tay nắm chăn. Cảm giác đau nhẹ thoáng qua, nàng thì thầm.\n> Đau... một chút. Nhưng thần thiếp chịu được.\nBệ hạ hôn lên trán, đêm ấy dài trong sự đoan trang và e ấp."
+        ]
       ],
       "quen": [
-        "Uyển Nghi đã quen. Đêm nay, nàng ngồi trên long sàng, áo mỏng hở vai. Bệ hạ bước vào, nàng mỉm cười.\n> Bệ hạ đến rồi. Đêm nay để thần thiếp hầu.\nNàng kéo bệ hạ nằm xuống, tự cởi áo. Da thịt nàng đã quen với hơi ấm. Uyển Nghi uốn người, nhịp điệu chậm rồi nhanh. Nàng rên nhỏ, ôm chặt.\n> Như vậy... tốt lắm.\nBệ hạ hôn lên cổ, đêm ấy không còn e ấp như lần đầu.",
-        "Cung Uyển Nghi ấm áp. Nàng đứng chờ, mỉm cười. Bệ hạ bước vào, nàng ôm lấy người kia.\n> Thần thiếp nhớ bệ hạ.\nNàng dẫn đến giường, chủ động. Khi hòa làm một, Uyển Nghi biết cách siết, biết cách rên. Nàng thì thầm.\n> Sâu hơn... thần thiếp muốn.\nĐêm ấy, sự gần gũi vài lần khiến Đức Phi càng mềm mại.",
-        "Long sàng, Uyển Nghi nằm nghiêng. Bệ hạ bước vào, nàng quay lại.\n> Bệ hạ, thần thiếp không còn sợ.\nNàng kéo người kia xuống, hôn. Áo bị kéo, da thịt chạm. Uyển Nghi đã quen, chủ động uốn. Nàng rên khẽ.\n> Tiếp tục đi.\nĐêm ấy, sự quen thuộc khiến mọi thứ dễ dàng."
+        [
+          "Uyển Nghi đã quen. Đêm nay, nàng ngồi trên long sàng, áo mỏng hở vai. Bệ hạ bước vào, nàng mỉm cười.\n> Bệ hạ đến rồi. Đêm nay để thần thiếp hầu.\nNàng kéo bệ hạ nằm xuống, tự cởi áo. Da thịt nàng đã quen với hơi ấm. Uyển Nghi uốn người, nhịp điệu chậm rồi nhanh. Nàng rên nhỏ, ôm chặt.\n> Như vậy... tốt lắm.\nBệ hạ hôn lên cổ, đêm ấy không còn e ấp như lần đầu."
+        ],
+        [
+          "Cung Uyển Nghi ấm áp. Nàng đứng chờ, mỉm cười. Bệ hạ bước vào, nàng ôm lấy người kia.\n> Thần thiếp nhớ bệ hạ.\nNàng dẫn đến giường, chủ động. Khi hòa làm một, Uyển Nghi biết cách siết, biết cách rên. Nàng thì thầm.\n> Sâu hơn... thần thiếp muốn.\nĐêm ấy, sự gần gũi vài lần khiến Đức Phi càng mềm mại."
+        ],
+        [
+          "Long sàng, Uyển Nghi nằm nghiêng. Bệ hạ bước vào, nàng quay lại.\n> Bệ hạ, thần thiếp không còn sợ.\nNàng kéo người kia xuống, hôn. Áo bị kéo, da thịt chạm. Uyển Nghi đã quen, chủ động uốn. Nàng rên khẽ.\n> Tiếp tục đi.\nĐêm ấy, sự quen thuộc khiến mọi thứ dễ dàng."
+        ]
       ],
       "lau": [
-        "Uyển Nghi đã gắn bó lâu. Đêm nay, nàng nằm trên long sàng, tóc xõa. Bệ hạ bước vào, nàng ngồi dậy.\n> Bệ hạ, đêm nay muốn thế nào?\nNàng hôn sâu, tự cởi áo. Da thịt nàng đã thuộc. Uyển Nghi ngồi lên, dẫn nhịp. Nàng rên nhỏ.\n> Như vậy... thần thiếp thích.\nBệ hạ ôm chặt, đêm ấy dài trong sự thân thuộc.",
-        "Cung Uyển Nghi thơm. Nàng đứng chờ. Bệ hạ bước vào, nàng kéo người kia lại.\n> Để thần thiếp hầu hạ.\nNàng chủ động, khi hòa làm một, Uyển Nghi biết từng điểm. Nàng thì thầm.\n> Ở lại với thần thiếp.\nĐêm ấy, sự gắn bó lâu ngày khiến Đức Phi hoàn toàn thư giãn.",
-        "Long sàng rộng, Uyển Nghi nằm chờ. Bệ hạ bước vào, nàng mỉm cười.\n> Bệ hạ lại đến.\nNàng kéo xuống, hôn. Áo bị kéo. Uyển Nghi đã thuộc, ôm chặt. Nàng rên khẽ.\n> Đêm nay chậm một chút.\nĐêm ấy, không còn ranh giới."
+        [
+          "Uyển Nghi đã gắn bó lâu. Đêm nay, nàng nằm trên long sàng, tóc xõa. Bệ hạ bước vào, nàng ngồi dậy.\n> Bệ hạ, đêm nay muốn thế nào?\nNàng hôn sâu, tự cởi áo. Da thịt nàng đã thuộc. Uyển Nghi ngồi lên, dẫn nhịp. Nàng rên nhỏ.\n> Như vậy... thần thiếp thích.\nBệ hạ ôm chặt, đêm ấy dài trong sự thân thuộc."
+        ],
+        [
+          "Cung Uyển Nghi thơm. Nàng đứng chờ. Bệ hạ bước vào, nàng kéo người kia lại.\n> Để thần thiếp hầu hạ.\nNàng chủ động, khi hòa làm một, Uyển Nghi biết từng điểm. Nàng thì thầm.\n> Ở lại với thần thiếp.\nĐêm ấy, sự gắn bó lâu ngày khiến Đức Phi hoàn toàn thư giãn."
+        ],
+        [
+          "Long sàng rộng, Uyển Nghi nằm chờ. Bệ hạ bước vào, nàng mỉm cười.\n> Bệ hạ lại đến.\nNàng kéo xuống, hôn. Áo bị kéo. Uyển Nghi đã thuộc, ôm chặt. Nàng rên khẽ.\n> Đêm nay chậm một chút.\nĐêm ấy, không còn ranh giới."
+        ]
       ]
     },
     "core.moc_can": {
       "dau": [
-        "Dưỡng Tâm điện, Tô Mộc Cẩn quỳ gối, tay siết chặt vạt áo. Nàng ngượng đỏ mặt khi bệ hạ bước vào.\n> Bệ hạ... thần thiếp... hầu hạ.\nBệ hạ đỡ nàng dậy. Lần đầu, Mộc Cẩn run nhẹ, hơi thơm hoa nhài. Khi áo bị cởi, nàng che mặt. Bệ hạ nhẹ nhàng, hôn lên trán. Cảm giác lạ khiến nàng cắn môi, nước mắt lăn. Nàng thì thầm.\n> Đau... một chút. Nhưng thần thiếp không sao.\nBệ hạ ôm nàng, đêm ấy e ấp và si tình.",
-        "Cung Mộc Cẩn nhỏ, nàng ngồi trên giường, ngượng. Bệ hạ bước vào, nàng đứng dậy, quỳ.\n> Bệ hạ triệu thần thiếp.\nBệ hạ nâng nàng, hôn nhẹ. Áo kéo xuống, da thịt mềm. Lần đầu, nàng khẽ kêu, siết chăn. Bệ hạ chậm, để nàng quen. Mộc Cẩn ôm cổ, hơi thở gấp.\n> Bệ hạ... nhẹ thôi.\nĐêm ấy, cung nữ si tình học cách hầu.",
-        "Long sàng, Mộc Cẩn nằm chờ, đỏ mặt. Bệ hạ bước vào, nàng ngồi dậy.\n> Thần thiếp sẵn sàng.\nNàng để cởi áo, khi hòa làm một, nàng rên nhỏ. Cảm giác đau nhẹ, nàng thì thầm.\n> Chịu được... tiếp tục.\nBệ hạ hôn, đêm ấy dài trong sự ngượng ngùng."
+        [
+          "Dưỡng Tâm điện, Tô Mộc Cẩn quỳ gối, tay siết chặt vạt áo. Nàng ngượng đỏ mặt khi bệ hạ bước vào.\n> Bệ hạ... thần thiếp... hầu hạ.\nBệ hạ đỡ nàng dậy. Lần đầu, Mộc Cẩn run nhẹ, hơi thơm hoa nhài. Khi áo bị cởi, nàng che mặt. Bệ hạ nhẹ nhàng, hôn lên trán. Cảm giác lạ khiến nàng cắn môi, nước mắt lăn. Nàng thì thầm.\n> Đau... một chút. Nhưng thần thiếp không sao.\nBệ hạ ôm nàng, đêm ấy e ấp và si tình."
+        ],
+        [
+          "Cung Mộc Cẩn nhỏ, nàng ngồi trên giường, ngượng. Bệ hạ bước vào, nàng đứng dậy, quỳ.\n> Bệ hạ triệu thần thiếp.\nBệ hạ nâng nàng, hôn nhẹ. Áo kéo xuống, da thịt mềm. Lần đầu, nàng khẽ kêu, siết chăn. Bệ hạ chậm, để nàng quen. Mộc Cẩn ôm cổ, hơi thở gấp.\n> Bệ hạ... nhẹ thôi.\nĐêm ấy, cung nữ si tình học cách hầu."
+        ],
+        [
+          "Long sàng, Mộc Cẩn nằm chờ, đỏ mặt. Bệ hạ bước vào, nàng ngồi dậy.\n> Thần thiếp sẵn sàng.\nNàng để cởi áo, khi hòa làm một, nàng rên nhỏ. Cảm giác đau nhẹ, nàng thì thầm.\n> Chịu được... tiếp tục.\nBệ hạ hôn, đêm ấy dài trong sự ngượng ngùng."
+        ]
       ],
       "quen": [
-        "Mộc Cẩn đã quen. Đêm nay, nàng ngồi trên long sàng, áo mỏng. Bệ hạ bước vào, nàng mỉm cười ngượng.\n> Bệ hạ đến rồi.\nNàng kéo xuống, tự cởi. Da thịt đã quen. Nàng uốn người, rên nhỏ. Hương hoa nhài lan tỏa.\n> Như vậy... tốt.\nBệ hạ ôm, đêm ấy không còn run.",
-        "Cung Mộc Cẩn ấm. Nàng đứng chờ. Bệ hạ bước vào, nàng ôm.\n> Thần thiếp nhớ.\nNàng chủ động, khi hòa, biết cách siết. Nàng thì thầm.\n> Sâu hơn... thần thiếp muốn.\nĐêm ấy, sự gần gũi khiến nàng bạo hơn.",
-        "Long sàng, Mộc Cẩn nằm. Bệ hạ vào, nàng quay.\n> Bệ hạ, thần thiếp không sợ nữa.\nNàng kéo, hôn. Áo kéo. Nàng đã quen, rên khẽ.\n> Tiếp tục.\nĐêm ấy, quen thuộc và thơm."
+        [
+          "Mộc Cẩn đã quen. Đêm nay, nàng ngồi trên long sàng, áo mỏng. Bệ hạ bước vào, nàng mỉm cười ngượng.\n> Bệ hạ đến rồi.\nNàng kéo xuống, tự cởi. Da thịt đã quen. Nàng uốn người, rên nhỏ. Hương hoa nhài lan tỏa.\n> Như vậy... tốt.\nBệ hạ ôm, đêm ấy không còn run."
+        ],
+        [
+          "Cung Mộc Cẩn ấm. Nàng đứng chờ. Bệ hạ bước vào, nàng ôm.\n> Thần thiếp nhớ.\nNàng chủ động, khi hòa, biết cách siết. Nàng thì thầm.\n> Sâu hơn... thần thiếp muốn.\nĐêm ấy, sự gần gũi khiến nàng bạo hơn."
+        ],
+        [
+          "Long sàng, Mộc Cẩn nằm. Bệ hạ vào, nàng quay.\n> Bệ hạ, thần thiếp không sợ nữa.\nNàng kéo, hôn. Áo kéo. Nàng đã quen, rên khẽ.\n> Tiếp tục.\nĐêm ấy, quen thuộc và thơm."
+        ]
       ],
       "lau": [
-        "Mộc Cẩn gắn bó lâu. Đêm nay, nàng nằm, tóc xõa. Bệ hạ vào, nàng ngồi.\n> Bệ hạ, đêm nay thế nào?\nNàng hôn, tự cởi. Đã thuộc. Nàng ngồi lên, dẫn. Rên nhỏ.\n> Thần thiếp thích.\nBệ hạ ôm, đêm dài thân thuộc.",
-        "Cung ấm. Nàng chờ. Bệ hạ vào, nàng kéo.\n> Để thần thiếp hầu.\nChủ động, biết điểm. Thì thầm.\n> Ở lại.\nĐêm ấy, lâu ngày thư giãn.",
-        "Long sàng, nàng nằm. Bệ hạ vào, mỉm.\n> Lại đến.\nKéo, hôn. Áo kéo. Ôm chặt. Rên.\n> Chậm một chút.\nKhông còn ranh giới."
+        [
+          "Mộc Cẩn gắn bó lâu. Đêm nay, nàng nằm, tóc xõa. Bệ hạ vào, nàng ngồi.\n> Bệ hạ, đêm nay thế nào?\nNàng hôn, tự cởi. Đã thuộc. Nàng ngồi lên, dẫn. Rên nhỏ.\n> Thần thiếp thích.\nBệ hạ ôm, đêm dài thân thuộc."
+        ],
+        [
+          "Cung ấm. Nàng chờ. Bệ hạ vào, nàng kéo.\n> Để thần thiếp hầu.\nChủ động, biết điểm. Thì thầm.\n> Ở lại.\nĐêm ấy, lâu ngày thư giãn."
+        ],
+        [
+          "Long sàng, nàng nằm. Bệ hạ vào, mỉm.\n> Lại đến.\nKéo, hôn. Áo kéo. Ôm chặt. Rên.\n> Chậm một chút.\nKhông còn ranh giới."
+        ]
       ]
     },
     "core.tuyet": {
       "dau": [
-        "Dưỡng Tâm điện đêm đầu, Hách Liên Tuyết không quỳ. Nàng đứng giữa phòng, áo thảo nguyên còn vương mùi khói lửa trại, mắt sáng nhìn bệ hạ.\n> Ta không quen quỳ. Muốn đụ thì nói thẳng.\nBệ hạ bước tới kéo nàng xuống long sàng. Tuyết cắn môi khi bị lột áo, da nâu rám nắng hiện ra. Lần đầu dương vật đâm vào, nàng khẽ rên, hai chân lập tức quấn chặt như ngựa hoang. Cảm giác kéo căng và nóng khiến nàng nhíu mày rồi chủ động đẩy hông. Nàng hôn mạnh, lưỡi quấn lấy lưỡi bệ hạ, móng tay cào lên lưng. Nhịp dần mạnh, Tuyết rên khàn, nước chảy nhiều. Nàng lên đỉnh nhanh, cơ thể run, miệng vẫn nói tục.\n> Sâu hơn... ta chịu được. Đụ tiếp đi.\nĐêm ấy công chúa thảo nguyên học cách hầu bằng sự táo bạo của chính mình, không chút e dè.",
-        "Cung của Tuyết thơm mùi cỏ. Nàng ngồi trên giường, tự cởi áo khi thấy bệ hạ vào.\n> Đêm đầu của ta và ngươi. Đừng có nhẹ tay.\nNàng kéo bệ hạ nằm, ngồi lên, tự đưa dương vật vào lồn đã ướt. Cảm giác đầy ắp khiến nàng rên lớn, nhún mạnh ngay từ đầu. Da thịt săn chắc bóng mồ hôi. Tuyết cào ngực bệ hạ, tóc xõa, mắt sáng điên. Nàng lên đỉnh lần đầu rất nhanh, siết chặt, nước bắn, rồi vẫn tiếp tục nhún không dừng. Biểu cảm hoàn toàn hoang dã.",
-        "Long sàng rộng, Tuyết nằm chờ sẵn, chân đã dạng. Bệ hạ vừa vào nàng đã kéo xuống.\n> Ta không thích chờ. Vào đi.\nKhi bị đâm sâu, nàng gào khẽ, hai chân quấn eo kéo mạnh hơn. Cảm giác nóng và căng rõ rệt. Tuyết chủ động hôn và cắn nhẹ vai, rên tục. Nàng lên đỉnh, cơ thể co giật, miệng thì thầm những lời thẳng.\n> Ta thích. Đụ ta đến sáng.\nĐêm đầu kết thúc với Tuyết vẫn còn đòi thêm, hoàn toàn không biết e là gì."
+        [
+          "Dưỡng Tâm điện đêm đầu, Hách Liên Tuyết không quỳ. Nàng đứng giữa phòng, áo thảo nguyên còn vương mùi khói lửa trại, mắt sáng nhìn bệ hạ.\n> Ta không quen quỳ. Muốn đụ thì nói thẳng.\nBệ hạ bước tới kéo nàng xuống long sàng. Tuyết cắn môi khi bị lột áo, da nâu rám nắng hiện ra. Lần đầu dương vật đâm vào, nàng khẽ rên, hai chân lập tức quấn chặt như ngựa hoang. Cảm giác kéo căng và nóng khiến nàng nhíu mày rồi chủ động đẩy hông. Nàng hôn mạnh, lưỡi quấn lấy lưỡi bệ hạ, móng tay cào lên lưng. Nhịp dần mạnh, Tuyết rên khàn, nước chảy nhiều. Nàng lên đỉnh nhanh, cơ thể run, miệng vẫn nói tục.\n> Sâu hơn... ta chịu được. Đụ tiếp đi.\nĐêm ấy công chúa thảo nguyên học cách hầu bằng sự táo bạo của chính mình, không chút e dè."
+        ],
+        [
+          "Cung của Tuyết thơm mùi cỏ. Nàng ngồi trên giường, tự cởi áo khi thấy bệ hạ vào.\n> Đêm đầu của ta và ngươi. Đừng có nhẹ tay.\nNàng kéo bệ hạ nằm, ngồi lên, tự đưa dương vật vào lồn đã ướt. Cảm giác đầy ắp khiến nàng rên lớn, nhún mạnh ngay từ đầu. Da thịt săn chắc bóng mồ hôi. Tuyết cào ngực bệ hạ, tóc xõa, mắt sáng điên. Nàng lên đỉnh lần đầu rất nhanh, siết chặt, nước bắn, rồi vẫn tiếp tục nhún không dừng. Biểu cảm hoàn toàn hoang dã."
+        ],
+        [
+          "Long sàng rộng, Tuyết nằm chờ sẵn, chân đã dạng. Bệ hạ vừa vào nàng đã kéo xuống.\n> Ta không thích chờ. Vào đi.\nKhi bị đâm sâu, nàng gào khẽ, hai chân quấn eo kéo mạnh hơn. Cảm giác nóng và căng rõ rệt. Tuyết chủ động hôn và cắn nhẹ vai, rên tục. Nàng lên đỉnh, cơ thể co giật, miệng thì thầm những lời thẳng.\n> Ta thích. Đụ ta đến sáng.\nĐêm đầu kết thúc với Tuyết vẫn còn đòi thêm, hoàn toàn không biết e là gì."
+        ]
       ],
       "quen": [
-        "Tuyết đã quen. Đêm nay nàng chủ động đẩy bệ hạ nằm, ngồi lên cưỡi ngay.\n> Lần này ta dẫn. Ngươi chỉ cần cứng.\nNàng nhún mạnh và sâu, cảm giác dương vật chọc tới đáy mỗi lần hạ xuống. Nước chảy nhiều, tiếng thịt va chạm vang. Tuyết rên khàn, móng cào, tóc xõa tung. Nàng lên đỉnh liên tục, biểu cảm điên dại và thỏa mãn. Đã không còn chút ngại ngùng nào của đêm đầu.",
-        "Trong cung, Tuyết kéo bệ hạ vào, hôn mạnh rồi quay người chống tay, mông ngẩng.\n> Đụ từ sau đi. Ta thích tư thế này.\nBệ hạ đâm mạnh, Tuyết đẩy ngược lại từng nhịp. Cảm giác sâu và mạnh khiến nàng gào. Nàng lên đỉnh nhiều lần, nước chảy dài đùi, miệng vẫn nói thẳng những lời tục. Sự quen thuộc giúp nàng càng táo bạo hơn.",
-        "Tuyết nằm nghiêng, một chân nâng cao, tự kéo bệ hạ vào.\n> Vào sâu. Ta muốn cảm nhận hết.\nNhịp quen thuộc khiến nàng rên thỏa mãn. Nàng siết chặt, lên đỉnh dễ dàng, rồi thì thầm muốn thêm tư thế khác. Đêm ấy dài và hoang dã như những đêm thảo nguyên."
+        [
+          "Tuyết đã quen. Đêm nay nàng chủ động đẩy bệ hạ nằm, ngồi lên cưỡi ngay.\n> Lần này ta dẫn. Ngươi chỉ cần cứng.\nNàng nhún mạnh và sâu, cảm giác dương vật chọc tới đáy mỗi lần hạ xuống. Nước chảy nhiều, tiếng thịt va chạm vang. Tuyết rên khàn, móng cào, tóc xõa tung. Nàng lên đỉnh liên tục, biểu cảm điên dại và thỏa mãn. Đã không còn chút ngại ngùng nào của đêm đầu."
+        ],
+        [
+          "Trong cung, Tuyết kéo bệ hạ vào, hôn mạnh rồi quay người chống tay, mông ngẩng.\n> Đụ từ sau đi. Ta thích tư thế này.\nBệ hạ đâm mạnh, Tuyết đẩy ngược lại từng nhịp. Cảm giác sâu và mạnh khiến nàng gào. Nàng lên đỉnh nhiều lần, nước chảy dài đùi, miệng vẫn nói thẳng những lời tục. Sự quen thuộc giúp nàng càng táo bạo hơn."
+        ],
+        [
+          "Tuyết nằm nghiêng, một chân nâng cao, tự kéo bệ hạ vào.\n> Vào sâu. Ta muốn cảm nhận hết.\nNhịp quen thuộc khiến nàng rên thỏa mãn. Nàng siết chặt, lên đỉnh dễ dàng, rồi thì thầm muốn thêm tư thế khác. Đêm ấy dài và hoang dã như những đêm thảo nguyên."
+        ]
       ],
       "lau": [
-        "Đã gắn bó hơn hai mươi đêm. Tuyết hoàn toàn thuộc đường cơ thể bệ hạ. Nàng ngồi lên, dẫn nhịp điên cuồng ngay từ đầu.\n> Ta biết ngươi thích sâu. Đêm nay ta cho đủ.\nNàng nhún mạnh, cảm giác chọc đáy rõ ràng. Rên lớn, lên đỉnh liên tục, nước bắn. Biểu cảm vừa hoang dã vừa thân thuộc. Nàng cào và hôn, hoàn toàn không còn khoảng cách.",
-        "Tuyết bị đụ từ sau trên thảm da, mông bị vỗ đỏ. Nàng thích cảm giác đó.\n> Mạnh hơn. Ta chịu được mà.\nMỗi nhịp sâu nàng đều đẩy ngược, gào khàn. Lên đỉnh nhiều lần, cơ thể săn chắc bóng mồ hôi. Sự lâu ngày khiến mọi thứ vừa mạnh vừa ăn ý.",
-        "Cuối đêm Tuyết vẫn chưa đủ. Nàng nằm lên người bệ hạ, tiếp tục cưỡi chậm rồi nhanh.\n> Ở lại. Ta muốn đụ đến sáng như mọi khi.\nNàng lên đỉnh thêm, siết chặt khi được bắn vào trong, biểu cảm thỏa mãn hoang dã. Đã hơn hai mươi đêm, Tuyết vẫn táo bạo và thẳng thắn như đêm đầu, chỉ có điều càng ngày càng tham và càng biết cách làm cả hai cùng sướng."
+        [
+          "Đã gắn bó hơn hai mươi đêm. Tuyết hoàn toàn thuộc đường cơ thể bệ hạ. Nàng ngồi lên, dẫn nhịp điên cuồng ngay từ đầu.\n> Ta biết ngươi thích sâu. Đêm nay ta cho đủ.\nNàng nhún mạnh, cảm giác chọc đáy rõ ràng. Rên lớn, lên đỉnh liên tục, nước bắn. Biểu cảm vừa hoang dã vừa thân thuộc. Nàng cào và hôn, hoàn toàn không còn khoảng cách."
+        ],
+        [
+          "Tuyết bị đụ từ sau trên thảm da, mông bị vỗ đỏ. Nàng thích cảm giác đó.\n> Mạnh hơn. Ta chịu được mà.\nMỗi nhịp sâu nàng đều đẩy ngược, gào khàn. Lên đỉnh nhiều lần, cơ thể săn chắc bóng mồ hôi. Sự lâu ngày khiến mọi thứ vừa mạnh vừa ăn ý."
+        ],
+        [
+          "Cuối đêm Tuyết vẫn chưa đủ. Nàng nằm lên người bệ hạ, tiếp tục cưỡi chậm rồi nhanh.\n> Ở lại. Ta muốn đụ đến sáng như mọi khi.\nNàng lên đỉnh thêm, siết chặt khi được bắn vào trong, biểu cảm thỏa mãn hoang dã. Đã hơn hai mươi đêm, Tuyết vẫn táo bạo và thẳng thắn như đêm đầu, chỉ có điều càng ngày càng tham và càng biết cách làm cả hai cùng sướng."
+        ]
       ]
     },
     "core.nhu_yen": {
       "dau": [
-        "Dưỡng Tâm điện, Liễu Như Yên múa nhẹ, lụa mỏng. Bệ hạ vào, nàng quỳ, mắt mê hoặc.\n> Bệ hạ... thần thiếp hầu.\nBệ hạ dẫn đến giường. Lần đầu, nàng đỏ mặt, nhưng chủ động hôn. Áo lụa kéo, da thịt mềm. Cảm giác lạ, nàng rên khẽ, uốn người. Nàng thì thầm.\n> Đau nhẹ... nhưng mê.\nĐêm ấy, vũ cơ học hầu bằng sự mê hoặc.",
-        "Cung Như Yên, nàng ngồi, lụa. Bệ hạ vào, nàng đứng, quỳ.\n> Triệu thần thiếp.\nNâng lên, hôn. Áo kéo. Lần đầu, khẽ kêu, siết. Chậm, quen. Ôm cổ.\n> Nhẹ thôi.\nĐêm ấy, mê hoặc và e.",
-        "Long sàng, nàng nằm, tóc xõa. Bệ hạ vào, ngồi.\n> Sẵn sàng.\nCởi áo, hòa. Rên. Đau nhẹ.\n> Chịu được.\nHôn, đêm dài mê."
+        [
+          "Dưỡng Tâm điện, Liễu Như Yên múa nhẹ, lụa mỏng. Bệ hạ vào, nàng quỳ, mắt mê hoặc.\n> Bệ hạ... thần thiếp hầu.\nBệ hạ dẫn đến giường. Lần đầu, nàng đỏ mặt, nhưng chủ động hôn. Áo lụa kéo, da thịt mềm. Cảm giác lạ, nàng rên khẽ, uốn người. Nàng thì thầm.\n> Đau nhẹ... nhưng mê.\nĐêm ấy, vũ cơ học hầu bằng sự mê hoặc."
+        ],
+        [
+          "Cung Như Yên, nàng ngồi, lụa. Bệ hạ vào, nàng đứng, quỳ.\n> Triệu thần thiếp.\nNâng lên, hôn. Áo kéo. Lần đầu, khẽ kêu, siết. Chậm, quen. Ôm cổ.\n> Nhẹ thôi.\nĐêm ấy, mê hoặc và e."
+        ],
+        [
+          "Long sàng, nàng nằm, tóc xõa. Bệ hạ vào, ngồi.\n> Sẵn sàng.\nCởi áo, hòa. Rên. Đau nhẹ.\n> Chịu được.\nHôn, đêm dài mê."
+        ]
       ],
       "quen": [
-        "Như Yên quen. Đêm, ngồi long sàng, lụa. Bệ hạ vào, mỉm.\n> Đến rồi.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.\nÔm, đêm không e.",
-        "Cung ấm. Chờ. Vào, ôm.\n> Nhớ.\nChủ động, siết. Thì thầm.\n> Sâu hơn.\nGần gũi, mê hơn.",
-        "Long sàng, nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen, rên.\n> Tiếp.\nQuen thuộc."
+        [
+          "Như Yên quen. Đêm, ngồi long sàng, lụa. Bệ hạ vào, mỉm.\n> Đến rồi.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.\nÔm, đêm không e."
+        ],
+        [
+          "Cung ấm. Chờ. Vào, ôm.\n> Nhớ.\nChủ động, siết. Thì thầm.\n> Sâu hơn.\nGần gũi, mê hơn."
+        ],
+        [
+          "Long sàng, nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen, rên.\n> Tiếp.\nQuen thuộc."
+        ]
       ],
       "lau": [
-        "Gắn bó lâu. Nằm, tóc. Vào, ngồi.\n> Thế nào?\nHôn, cởi. Thuộc. Ngồi lên. Rên.\n> Thích.\nÔm, dài.",
-        "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ động. Thì thầm.\n> Ở lại.\nLâu, thư.",
-        "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm.\nKhông ranh."
+        [
+          "Gắn bó lâu. Nằm, tóc. Vào, ngồi.\n> Thế nào?\nHôn, cởi. Thuộc. Ngồi lên. Rên.\n> Thích.\nÔm, dài."
+        ],
+        [
+          "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ động. Thì thầm.\n> Ở lại.\nLâu, thư."
+        ],
+        [
+          "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm.\nKhông ranh."
+        ]
       ]
     },
     "core.tu_lan": {
       "dau": [
-        "Dưỡng Tâm, Mạc Tử Lan quỳ, mắt tinh tế. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ dậy. Lần đầu, đỏ, cắn môi. Áo cởi, da mềm. Lạ, rên. Thì thầm.\n> Đau nhẹ... chịu.\nĐêm ấy, từng trải học hầu.",
-        "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Khẽ kêu. Chậm. Ôm.\n> Nhẹ.\nĐêm e tinh tế.",
-        "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu.\nHôn, dài."
+        [
+          "Dưỡng Tâm, Mạc Tử Lan quỳ, mắt tinh tế. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ dậy. Lần đầu, đỏ, cắn môi. Áo cởi, da mềm. Lạ, rên. Thì thầm.\n> Đau nhẹ... chịu.\nĐêm ấy, từng trải học hầu."
+        ],
+        [
+          "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Khẽ kêu. Chậm. Ôm.\n> Nhẹ.\nĐêm e tinh tế."
+        ],
+        [
+          "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu.\nHôn, dài."
+        ]
       ],
       "quen": [
-        "Quen. Ngồi, mỏng. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.\nÔm.",
-        "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu.\nGần.",
-        "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        [
+          "Quen. Ngồi, mỏng. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.\nÔm."
+        ],
+        [
+          "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu.\nGần."
+        ],
+        [
+          "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        ]
       ],
       "lau": [
-        "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích.\nÔm.",
-        "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại.",
-        "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        [
+          "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích.\nÔm."
+        ],
+        [
+          "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại."
+        ],
+        [
+          "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        ]
       ]
     },
     "core.mi_nuong": {
       "dau": [
-        "Dưỡng Tâm, Hồ Mị Nương quỳ, tinh nghịch. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ, cắn. Áo, da thơm. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, chủ tiệm học.",
-        "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ.\nĐêm e.",
-        "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu.\nHôn."
+        [
+          "Dưỡng Tâm, Hồ Mị Nương quỳ, tinh nghịch. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ, cắn. Áo, da thơm. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, chủ tiệm học."
+        ],
+        [
+          "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ.\nĐêm e."
+        ],
+        [
+          "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu.\nHôn."
+        ]
       ],
       "quen": [
-        "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.\nÔm.",
-        "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu.",
-        "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        [
+          "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.\nÔm."
+        ],
+        [
+          "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu."
+        ],
+        [
+          "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        ]
       ],
       "lau": [
-        "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích.",
-        "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại.",
-        "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        [
+          "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích."
+        ],
+        [
+          "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại."
+        ],
+        [
+          "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        ]
       ]
     },
     "core.thanh_ca": {
       "dau": [
-        "Dưỡng Tâm, Thẩm Thanh Ca quỳ, ôn nhu. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ, cắn. Áo, da. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, cầm nữ học.",
-        "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ.",
-        "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu."
+        [
+          "Dưỡng Tâm, Thẩm Thanh Ca quỳ, ôn nhu. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ, cắn. Áo, da. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, cầm nữ học."
+        ],
+        [
+          "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ."
+        ],
+        [
+          "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu."
+        ]
       ],
       "quen": [
-        "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.",
-        "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu.",
-        "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        [
+          "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt."
+        ],
+        [
+          "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu."
+        ],
+        [
+          "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        ]
       ],
       "lau": [
-        "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích.",
-        "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại.",
-        "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        [
+          "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích."
+        ],
+        [
+          "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại."
+        ],
+        [
+          "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        ]
       ]
     },
     "core.song_nguyet": {
       "dau": [
-        "Dưỡng Tâm, Song Nguyệt quỳ, trầm. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ. Áo, da. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, chị song sinh học.",
-        "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ.",
-        "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu."
+        [
+          "Dưỡng Tâm, Song Nguyệt quỳ, trầm. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ. Áo, da. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, chị song sinh học."
+        ],
+        [
+          "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ."
+        ],
+        [
+          "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu."
+        ]
       ],
       "quen": [
-        "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.",
-        "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu.",
-        "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        [
+          "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt."
+        ],
+        [
+          "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu."
+        ],
+        [
+          "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        ]
       ],
       "lau": [
-        "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích.",
-        "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại.",
-        "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        [
+          "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích."
+        ],
+        [
+          "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại."
+        ],
+        [
+          "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        ]
       ]
     },
     "core.song_nhat": {
       "dau": [
-        "Dưỡng Tâm, Song Nhật quỳ, nghịch. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ, táo. Áo, da. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, em song sinh học.",
-        "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ.",
-        "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu."
+        [
+          "Dưỡng Tâm, Song Nhật quỳ, nghịch. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ, táo. Áo, da. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, em song sinh học."
+        ],
+        [
+          "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ."
+        ],
+        [
+          "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu."
+        ]
       ],
       "quen": [
-        "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.",
-        "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu.",
-        "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        [
+          "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt."
+        ],
+        [
+          "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu."
+        ],
+        [
+          "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        ]
       ],
       "lau": [
-        "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích.",
-        "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại.",
-        "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        [
+          "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích."
+        ],
+        [
+          "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại."
+        ],
+        [
+          "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        ]
       ]
     },
     "core.hong_tieu": {
       "dau": [
-        "Dưỡng Tâm, Tạ Hồng Tiêu quỳ, sủng phi. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ. Áo, da. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, Quý Phi học.",
-        "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ.",
-        "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu."
+        [
+          "Dưỡng Tâm, Tạ Hồng Tiêu quỳ, sủng phi. Bệ hạ vào.\n> Bệ hạ... hầu.\nĐỡ. Lần đầu, đỏ. Áo, da. Lạ, rên. Thì.\n> Đau nhẹ... chịu.\nĐêm ấy, Quý Phi học."
+        ],
+        [
+          "Cung, ngồi. Vào, đứng, quỳ.\n> Triệu.\nNâng, hôn. Áo. Kêu. Chậm. Ôm.\n> Nhẹ."
+        ],
+        [
+          "Long, nằm. Vào, ngồi.\n> Sẵn.\nCởi, hòa. Rên. Đau.\n> Chịu."
+        ]
       ],
       "quen": [
-        "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt.",
-        "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu.",
-        "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        [
+          "Quen. Ngồi. Vào, mỉm.\n> Đến.\nKéo, cởi. Quen. Uốn, rên.\n> Tốt."
+        ],
+        [
+          "Cung. Chờ. Vào, ôm.\n> Nhớ.\nChủ, siết. Thì.\n> Sâu."
+        ],
+        [
+          "Long. Nằm. Vào, quay.\n> Không sợ.\nKéo, hôn. Quen. Rên.\n> Tiếp."
+        ]
       ],
       "lau": [
-        "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích.",
-        "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại.",
-        "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        [
+          "Lâu. Nằm. Vào, ngồi.\n> Thế?\nHôn, cởi. Thuộc. Ngồi. Rên.\n> Thích."
+        ],
+        [
+          "Cung. Chờ. Vào, kéo.\n> Hầu.\nChủ. Thì.\n> Ở lại."
+        ],
+        [
+          "Long. Nằm. Vào, mỉm.\n> Lại.\nKéo, hôn. Ôm. Rên.\n> Chậm."
+        ]
       ]
     },
     "_chung": {
       "dau": [
-        "Trong điện đêm thanh, {name} quỳ gối bên long sàng, hai tay siết chặt vạt áo. Bệ hạ bước tới, nhẹ nhàng nâng nàng dậy. Lần đầu thị tẩm, thân thể nàng run nhẹ khi bàn tay hoàng đế chạm vào eo.\n> Bệ hạ... thần thiếp sợ.\nBệ hạ thì thầm an ủi, từ từ cởi lớp áo ngoài. Da thịt nàng trắng mịn hiện ra dưới ánh nến, hơi thở gấp gáp. Khi bệ hạ đẩy nàng nằm xuống, {name} cắn môi, hai tay nắm chặt chăn. Cảm giác lạ lẫm khiến nàng nhíu mày, nhưng vẫn để bệ hạ dẫn dắt. Từng cử động chậm rãi, nàng dần quen với hơi ấm của người trước mặt. Cuối cùng, nàng khẽ thở dài, đôi mắt nhòe lệ nhìn bệ hạ.\n> Thần thiếp... không sao.\nBệ hạ hôn nhẹ lên trán nàng, ôm {name} vào lòng cho đến khi nàng thôi run.",
-        "Long sàng rộng lớn, {name} nằm nghiêng, lưng quay về phía bệ hạ. Đây là lần đầu tiên nàng hầu hạ, tim đập loạn nhịp. Bệ hạ ngồi xuống, bàn tay vuốt nhẹ dọc sống lưng nàng.\n> Bệ hạ muốn... bắt đầu ạ?\nNàng hỏi nhỏ, giọng run. Bệ hạ gật đầu, từ từ lật người nàng. Áo lót bị kéo xuống, để lộ bầu ngực mềm mại. {name} đỏ mặt, hai tay che lại, nhưng bệ hạ nhẹ nhàng gỡ ra. Khi thân thể hai người chạm nhau, nàng khẽ rên một tiếng. Cảm giác đau nhẹ thoáng qua, nàng cắn chặt môi dưới. Bệ hạ dừng lại, hỏi han.\n> Nếu đau, thần thiếp sẽ nói.\nNàng gật đầu, để bệ hạ tiếp tục. Dần dần, cơn đau nhường chỗ cho hơi ấm lạ. {name} ôm chặt lấy bệ hạ, hơi thở hòa vào nhau.",
-        "Đêm khuya, {name} đứng trước gương, sửa lại búi tóc. Bệ hạ bước vào, nàng vội quỳ xuống.\n> Thần thiếp chờ bệ hạ đã lâu.\nBệ hạ đỡ nàng dậy, dẫn đến long sàng. Lần đầu được sủng hạnh, {name} không biết đặt tay vào đâu. Bệ hạ dạy nàng, từ từ cởi từng lớp áo. Da thịt nàng ửng hồng dưới ánh nến. Khi bệ hạ tiến vào, nàng khẽ kêu lên, hai chân siết chặt.\n> Đau... một chút thôi.\nBệ hạ dừng lại, hôn lên môi nàng. {name} dần thả lỏng, để người khác dẫn dắt. Từng nhịp chậm rãi khiến nàng quen dần. Cuối cùng, nàng ôm lấy cổ bệ hạ, hơi thở gấp gáp. Đêm ấy, nàng học cách hầu hạ, dù vẫn còn e ấp.",
-        "Trong phòng ngủ, {name} ngồi trên long sàng, hai tay đặt trên đùi. Bệ hạ bước tới, ngồi cạnh nàng. Lần đầu thị tẩm, nàng không dám nhìn thẳng.\n> Bệ hạ... thần thiếp chưa từng.\nBệ hạ mỉm cười, nâng cằm nàng lên. Hai người hôn nhau nhẹ nhàng. Áo của {name} bị kéo xuống vai, để lộ xương quai xanh. Khi thân thể chạm nhau, nàng nhíu mày vì cảm giác lạ. Bệ hạ chậm rãi, để nàng thích nghi. {name} cắn môi, nước mắt lăn dài, nhưng không đẩy ra.\n> Tiếp tục đi, bệ hạ.\nNàng thì thầm. Dần dần, cơn đau nhạt đi, thay bằng hơi ấm. {name} ôm chặt bệ hạ, để đêm ấy trôi qua chậm rãi."
+        [
+          "Trong điện đêm thanh, {name} quỳ gối bên long sàng, hai tay siết chặt vạt áo. Bệ hạ bước tới, nhẹ nhàng nâng nàng dậy. Lần đầu thị tẩm, thân thể nàng run nhẹ khi bàn tay hoàng đế chạm vào eo.\n> Bệ hạ... thần thiếp sợ.\nBệ hạ thì thầm an ủi, từ từ cởi lớp áo ngoài. Da thịt nàng trắng mịn hiện ra dưới ánh nến, hơi thở gấp gáp. Khi bệ hạ đẩy nàng nằm xuống, {name} cắn môi, hai tay nắm chặt chăn. Cảm giác lạ lẫm khiến nàng nhíu mày, nhưng vẫn để bệ hạ dẫn dắt. Từng cử động chậm rãi, nàng dần quen với hơi ấm của người trước mặt. Cuối cùng, nàng khẽ thở dài, đôi mắt nhòe lệ nhìn bệ hạ.\n> Thần thiếp... không sao.\nBệ hạ hôn nhẹ lên trán nàng, ôm {name} vào lòng cho đến khi nàng thôi run."
+        ],
+        [
+          "Long sàng rộng lớn, {name} nằm nghiêng, lưng quay về phía bệ hạ. Đây là lần đầu tiên nàng hầu hạ, tim đập loạn nhịp. Bệ hạ ngồi xuống, bàn tay vuốt nhẹ dọc sống lưng nàng.\n> Bệ hạ muốn... bắt đầu ạ?\nNàng hỏi nhỏ, giọng run. Bệ hạ gật đầu, từ từ lật người nàng. Áo lót bị kéo xuống, để lộ bầu ngực mềm mại. {name} đỏ mặt, hai tay che lại, nhưng bệ hạ nhẹ nhàng gỡ ra. Khi thân thể hai người chạm nhau, nàng khẽ rên một tiếng. Cảm giác đau nhẹ thoáng qua, nàng cắn chặt môi dưới. Bệ hạ dừng lại, hỏi han.\n> Nếu đau, thần thiếp sẽ nói.\nNàng gật đầu, để bệ hạ tiếp tục. Dần dần, cơn đau nhường chỗ cho hơi ấm lạ. {name} ôm chặt lấy bệ hạ, hơi thở hòa vào nhau."
+        ],
+        [
+          "Đêm khuya, {name} đứng trước gương, sửa lại búi tóc. Bệ hạ bước vào, nàng vội quỳ xuống.\n> Thần thiếp chờ bệ hạ đã lâu.\nBệ hạ đỡ nàng dậy, dẫn đến long sàng. Lần đầu được sủng hạnh, {name} không biết đặt tay vào đâu. Bệ hạ dạy nàng, từ từ cởi từng lớp áo. Da thịt nàng ửng hồng dưới ánh nến. Khi bệ hạ tiến vào, nàng khẽ kêu lên, hai chân siết chặt.\n> Đau... một chút thôi.\nBệ hạ dừng lại, hôn lên môi nàng. {name} dần thả lỏng, để người khác dẫn dắt. Từng nhịp chậm rãi khiến nàng quen dần. Cuối cùng, nàng ôm lấy cổ bệ hạ, hơi thở gấp gáp. Đêm ấy, nàng học cách hầu hạ, dù vẫn còn e ấp."
+        ],
+        [
+          "Trong phòng ngủ, {name} ngồi trên long sàng, hai tay đặt trên đùi. Bệ hạ bước tới, ngồi cạnh nàng. Lần đầu thị tẩm, nàng không dám nhìn thẳng.\n> Bệ hạ... thần thiếp chưa từng.\nBệ hạ mỉm cười, nâng cằm nàng lên. Hai người hôn nhau nhẹ nhàng. Áo của {name} bị kéo xuống vai, để lộ xương quai xanh. Khi thân thể chạm nhau, nàng nhíu mày vì cảm giác lạ. Bệ hạ chậm rãi, để nàng thích nghi. {name} cắn môi, nước mắt lăn dài, nhưng không đẩy ra.\n> Tiếp tục đi, bệ hạ.\nNàng thì thầm. Dần dần, cơn đau nhạt đi, thay bằng hơi ấm. {name} ôm chặt bệ hạ, để đêm ấy trôi qua chậm rãi."
+        ]
       ],
       "quen": [
-        "{name} đã quen với việc thị tẩm. Đêm nay, nàng chủ động ngồi lên long sàng, kéo áo xuống vai. Bệ hạ bước vào, nàng mỉm cười.\n> Bệ hạ đến rồi.\nNàng kéo bệ hạ nằm xuống, tự cởi lớp áo trong. Da thịt nàng mềm mại, đã quen với sự chạm chạm của bệ hạ. Hai người hôn nhau, {name} thở gấp. Nàng biết cách đặt tay, biết cách uốn người cho vừa ý. Khi bệ hạ tiến vào, nàng khẽ rên, hai chân quấn lấy eo người kia. Nhịp điệu dần tăng, {name} ôm chặt, móng tay cào nhẹ lên lưng.\n> Như vậy... tốt lắm.\nBệ hạ thì thầm. Đêm ấy, {name} chủ động dẫn dắt, không còn e ấp như những lần đầu.",
-        "Long sàng đã trở nên quen thuộc với {name}. Nàng nằm chờ, áo mỏng để lộ đường cong. Bệ hạ bước vào, nàng ngồi dậy, kéo người kia xuống.\n> Đêm nay, để thần thiếp hầu hạ.\n{name} cởi áo bệ hạ, bàn tay vuốt dọc ngực. Nàng đã quen với hơi ấm ấy. Khi hai người hòa làm một, nàng thở dài thỏa mãn. Nhịp điệu chậm rồi nhanh, {name} biết cách siết chặt, biết cách rên nhỏ vừa đủ. Bệ hạ hôn lên cổ nàng, nàng ngẩng đầu, để lộ hầu cổ.\n> Bệ hạ... sâu hơn.\nNàng thì thầm. Đêm ấy, {name} không còn run sợ, chỉ còn sự gần gũi đã quen.",
-        "Trong điện, {name} đã thay áo mỏng. Bệ hạ bước vào, nàng đứng dậy, ôm lấy người kia.\n> Thần thiếp nhớ bệ hạ.\nNàng chủ động hôn, dẫn bệ hạ đến long sàng. Áo bị kéo xuống, da thịt chạm nhau. {name} đã quen với cảm giác ấy, không còn đau. Nàng ngồi lên, tự điều chỉnh nhịp điệu. Bệ hạ nắm eo nàng, để nàng dẫn dắt. Hơi thở hai người hòa lẫn, {name} rên nhỏ, đầu ngả ra sau.\n> Như vậy... đúng rồi.\nNàng thì thầm. Đêm ấy, sự quen thuộc khiến mọi thứ dễ dàng hơn.",
-        "Đêm thanh, {name} nằm nghiêng, chờ bệ hạ. Khi người kia đến, nàng quay lại, mỉm cười.\n> Bệ hạ lại đến.\nNàng kéo bệ hạ nằm cạnh, tự cởi áo. Da thịt nàng đã quen với sự chạm chạm. Hai người hôn nhau, {name} thở gấp. Nàng biết cách ôm, biết cách uốn người. Khi hòa làm một, nàng khẽ rên, hai chân quấn chặt. Nhịp điệu quen thuộc khiến nàng thư giãn. Cuối cùng, nàng ôm bệ hạ, thì thầm.\n> Ở lại thêm một chút.",
-        "Có ám hiệu dừng đã thỏa thuận, {name} xin bị đụ mạnh hơn bình thường. Bệ hạ đâm sâu và nhanh, mỗi nhịp đều chọc cổ tử cung, mông bị vỗ đỏ. Nàng cảm nhận đau nhẹ hòa khoái cảm cực mạnh, nước bắn ra nhiều.\n> Mạnh hơn nữa... thiếp chịu được, đụ nát đi! Ám hiệu vẫn nhớ.\nNàng gào, lên đỉnh dữ dội, cơ thể co giật, nhưng vẫn chủ động đẩy ngược.",
-        "Bị kéo tóc đụ từ sau, lực mạnh đến mức nàng phải chống tay. Cảm giác da đầu căng và lồn bị kéo theo mỗi lần rút. Nước chảy thành dòng.\n> Kéo mạnh mà đụ... sướng đến chảy nước mắt rồi!\nNàng lên đỉnh liên tục, vẫn không ra ám hiệu, miệng tục cầu xin tiếp.",
-        "Bị bế đụ đứng, thả rơi nhẹ theo nhịp để vào sâu hơn. {name} cảm nhận trọng lượng và lực đâm, chân run muốn khuỵu nhưng vẫn quấn chặt.\n> Sâu đến bụng căng... thiếp muốn bị đụ đến không đi được!\nNàng rên vỡ giọng, lên đỉnh nhiều lần, nước mắt sướng chảy.",
-        "Khi được bắn tinh nóng thật sâu, nàng cảm nhận đầy và ấm, siết chặt co giật lên đỉnh mạnh cuối. Vẫn nhớ ám hiệu, nàng thì thầm muốn tiếp tục mạnh hơn nữa nếu bệ hạ còn sức, cơ thể hoàn toàn mềm nhũn vì sướng.",
-        "Đêm trăng sáng, {name} bị kéo ra sân thượng, áo bị tụt xuống eo, lưng dựa lan can lạnh. Bệ hạ đâm từ trước, dương vật nóng cứng xuyên sâu vào lồn ướt nhẹp, nước ấm chảy xuống đùi dưới ánh trăng. Nàng cảm nhận gió đêm lạnh trên da tương phản với heat bên trong, thành lồn siết chặt từng nhịp.\n> Trăng thấy hết rồi... đụ mạnh cho trăng xem thiếp bị đụ đi!\n{name} rên lớn, lên đỉnh nhanh, ngực nảy dưới trăng, nước bắn nhẹ theo gió, mắt trợn vì sướng.",
-        "Bị lật úp lên lan can, mông cao, đâm từ sau. Ánh trăng chiếu rõ chỗ giao nhau, nước chảy dài xuống chân. Mỗi nhịp rút ra đều kéo theo dịch trong, đâm vào lại đầy ắp và nóng.\n> Sâu quá... thiếp cảm thấy nó đâm tới tận cùng dưới trăng này!\nNàng gào, móng cào lan can, lên đỉnh liên tục, cơ thể run, mồ hôi bóng dưới sáng trăng.",
-        "Tự quay lại cưỡi trên ghế đá, trăng chiếu thẳng lên người. {name} nhún mạnh, cảm nhận dương vật chọc sâu mỗi lần hạ xuống, nước bắn ra ướt ghế. Gió lạnh làm núm vú cứng hơn.\n> Thiếp tự đụ dưới trăng... sướng đến phát điên!\nNàng lên đỉnh nhiều lần, đầu ngửa, tóc xõa, miệng không ngừng rên tục.",
-        "Tinh nóng bắn đầy sâu bên trong dưới ánh trăng. {name} cảm nhận dòng ấm trào ra ngay lập tức, siết chặt co giật lên đỉnh thêm, tinh chảy xuống đùi bóng dưới trăng. Nàng vẫn ôm chặt, xin được đụ tiếp cho đến khi trăng chếch.",
-        "Trước gương lớn, {name} chống tay, nhìn thẳng phản chiếu mình bị đụ từ sau. Dương vật đâm sâu, nàng thấy rõ lồn mình bị kéo căng, nước chảy xuống đùi trong gương. Cảm giác vừa bị đụ vừa nhìn mình khiến sướng gấp bội.\n> Nhìn đi... lồn thiếp đang nuốt dương vật bệ hạ kìa!\nNàng rên lớn, lên đỉnh ngay, mặt biến dạng trong gương, nước miếng chảy.",
-        "Bị đẩy ngồi trên bàn trước gương, chân dạng rộng. Bệ hạ đâm, {name} nhìn rõ từng nhịp vào ra, dịch trắng và nước dính. Nàng cảm nhận ma sát mạnh đồng thời với hình ảnh.\n> Thiếp thấy hết... sướng đến chảy nước mắt trong gương!\nNàng gào, lên đỉnh liên tục, tay tự bóp ngực, mắt không rời phản chiếu.",
-        "Tự cưỡi đối diện gương, nhìn mình nhún, ngực nảy, chỗ giao nhau rõ mồn một. Cảm giác chủ động và bị nhìn (bởi chính mình) khiến nàng điên.\n> Thiếp đang tự đụ mà gương thấy hết... sâu quá!\nNàng lên đỉnh nhiều lần, cơ thể co giật, vẫn nhìn.",
-        "Khi tinh bắn vào, nàng nhìn trong gương thấy tinh chảy ra từ lồn mình. Cảm nhận ấm đầy bên trong kết hợp hình ảnh khiến nàng siết chặt lên đỉnh mạnh, mắt trợn trong gương, vẫn xin tiếp.",
-        "Sau lớp rem the mỏng, {name} bị đụ, bóng hai người rõ trên rem. Người ngoài chỉ thấy bóng và nghe tiếng. Nàng biết có thể bị nghe, càng rên to hơn. Dương vật đâm mạnh, nước bắn, cảm giác kích thích vì sự nửa kín.\n> Họ nghe thấy thiếp bị đụ rồi... đụ mạnh hơn đi!\nNàng gào, lên đỉnh nhanh, bóng trên rem co giật theo.",
-        "Bị đụ sấp, rem dính vào da ướt. Tiếng rên và tiếng nước vọng ra. {name} cảm nhận rem mỏng cọ da mỗi nhịp, càng thêm nhạy.\n> Rem dính vào người... mà lồn thì đang bị đụ nát!\nNàng lên đỉnh liên tục, miệng tục, không kiềm chế tiếng.",
-        "Cưỡi sau rem, bóng nảy lên xuống rõ. Nàng cảm nhận sâu và biết bóng mình đang lộ. Nước chảy làm rem ướt dính.\n> Bóng thiếp đang cưỡi... sướng quá!\nNàng lên đỉnh nhiều lần, rên vang.",
-        "Tinh bắn đầy, nàng cảm nhận ấm, siết, lên đỉnh thêm. Tiếng rên cuối cùng vọng ra ngoài rem, nàng vẫn thì thầm xin đụ tiếp dù biết có thể bị nghe thấy."
+        [
+          "{name} đã quen với việc thị tẩm. Đêm nay, nàng chủ động ngồi lên long sàng, kéo áo xuống vai. Bệ hạ bước vào, nàng mỉm cười.\n> Bệ hạ đến rồi.\nNàng kéo bệ hạ nằm xuống, tự cởi lớp áo trong. Da thịt nàng mềm mại, đã quen với sự chạm chạm của bệ hạ. Hai người hôn nhau, {name} thở gấp. Nàng biết cách đặt tay, biết cách uốn người cho vừa ý. Khi bệ hạ tiến vào, nàng khẽ rên, hai chân quấn lấy eo người kia. Nhịp điệu dần tăng, {name} ôm chặt, móng tay cào nhẹ lên lưng.\n> Như vậy... tốt lắm.\nBệ hạ thì thầm. Đêm ấy, {name} chủ động dẫn dắt, không còn e ấp như những lần đầu."
+        ],
+        [
+          "Long sàng đã trở nên quen thuộc với {name}. Nàng nằm chờ, áo mỏng để lộ đường cong. Bệ hạ bước vào, nàng ngồi dậy, kéo người kia xuống.\n> Đêm nay, để thần thiếp hầu hạ.\n{name} cởi áo bệ hạ, bàn tay vuốt dọc ngực. Nàng đã quen với hơi ấm ấy. Khi hai người hòa làm một, nàng thở dài thỏa mãn. Nhịp điệu chậm rồi nhanh, {name} biết cách siết chặt, biết cách rên nhỏ vừa đủ. Bệ hạ hôn lên cổ nàng, nàng ngẩng đầu, để lộ hầu cổ.\n> Bệ hạ... sâu hơn.\nNàng thì thầm. Đêm ấy, {name} không còn run sợ, chỉ còn sự gần gũi đã quen."
+        ],
+        [
+          "Trong điện, {name} đã thay áo mỏng. Bệ hạ bước vào, nàng đứng dậy, ôm lấy người kia.\n> Thần thiếp nhớ bệ hạ.\nNàng chủ động hôn, dẫn bệ hạ đến long sàng. Áo bị kéo xuống, da thịt chạm nhau. {name} đã quen với cảm giác ấy, không còn đau. Nàng ngồi lên, tự điều chỉnh nhịp điệu. Bệ hạ nắm eo nàng, để nàng dẫn dắt. Hơi thở hai người hòa lẫn, {name} rên nhỏ, đầu ngả ra sau.\n> Như vậy... đúng rồi.\nNàng thì thầm. Đêm ấy, sự quen thuộc khiến mọi thứ dễ dàng hơn."
+        ],
+        [
+          "Đêm thanh, {name} nằm nghiêng, chờ bệ hạ. Khi người kia đến, nàng quay lại, mỉm cười.\n> Bệ hạ lại đến.\nNàng kéo bệ hạ nằm cạnh, tự cởi áo. Da thịt nàng đã quen với sự chạm chạm. Hai người hôn nhau, {name} thở gấp. Nàng biết cách ôm, biết cách uốn người. Khi hòa làm một, nàng khẽ rên, hai chân quấn chặt. Nhịp điệu quen thuộc khiến nàng thư giãn. Cuối cùng, nàng ôm bệ hạ, thì thầm.\n> Ở lại thêm một chút."
+        ],
+        [
+          "Có ám hiệu dừng đã thỏa thuận, {name} xin bị đụ mạnh hơn bình thường. Bệ hạ đâm sâu và nhanh, mỗi nhịp đều chọc cổ tử cung, mông bị vỗ đỏ. Nàng cảm nhận đau nhẹ hòa khoái cảm cực mạnh, nước bắn ra nhiều.\n> Mạnh hơn nữa... thiếp chịu được, đụ nát đi! Ám hiệu vẫn nhớ.\nNàng gào, lên đỉnh dữ dội, cơ thể co giật, nhưng vẫn chủ động đẩy ngược.",
+          "Bị kéo tóc đụ từ sau, lực mạnh đến mức nàng phải chống tay. Cảm giác da đầu căng và lồn bị kéo theo mỗi lần rút. Nước chảy thành dòng.\n> Kéo mạnh mà đụ... sướng đến chảy nước mắt rồi!\nNàng lên đỉnh liên tục, vẫn không ra ám hiệu, miệng tục cầu xin tiếp.",
+          "Bị bế đụ đứng, thả rơi nhẹ theo nhịp để vào sâu hơn. {name} cảm nhận trọng lượng và lực đâm, chân run muốn khuỵu nhưng vẫn quấn chặt.\n> Sâu đến bụng căng... thiếp muốn bị đụ đến không đi được!\nNàng rên vỡ giọng, lên đỉnh nhiều lần, nước mắt sướng chảy.",
+          "Khi được bắn tinh nóng thật sâu, nàng cảm nhận đầy và ấm, siết chặt co giật lên đỉnh mạnh cuối. Vẫn nhớ ám hiệu, nàng thì thầm muốn tiếp tục mạnh hơn nữa nếu bệ hạ còn sức, cơ thể hoàn toàn mềm nhũn vì sướng."
+        ],
+        [
+          "Đêm trăng sáng, {name} bị kéo ra sân thượng, áo bị tụt xuống eo, lưng dựa lan can lạnh. Bệ hạ đâm từ trước, dương vật nóng cứng xuyên sâu vào lồn ướt nhẹp, nước ấm chảy xuống đùi dưới ánh trăng. Nàng cảm nhận gió đêm lạnh trên da tương phản với heat bên trong, thành lồn siết chặt từng nhịp.\n> Trăng thấy hết rồi... đụ mạnh cho trăng xem thiếp bị đụ đi!\n{name} rên lớn, lên đỉnh nhanh, ngực nảy dưới trăng, nước bắn nhẹ theo gió, mắt trợn vì sướng.",
+          "Bị lật úp lên lan can, mông cao, đâm từ sau. Ánh trăng chiếu rõ chỗ giao nhau, nước chảy dài xuống chân. Mỗi nhịp rút ra đều kéo theo dịch trong, đâm vào lại đầy ắp và nóng.\n> Sâu quá... thiếp cảm thấy nó đâm tới tận cùng dưới trăng này!\nNàng gào, móng cào lan can, lên đỉnh liên tục, cơ thể run, mồ hôi bóng dưới sáng trăng.",
+          "Tự quay lại cưỡi trên ghế đá, trăng chiếu thẳng lên người. {name} nhún mạnh, cảm nhận dương vật chọc sâu mỗi lần hạ xuống, nước bắn ra ướt ghế. Gió lạnh làm núm vú cứng hơn.\n> Thiếp tự đụ dưới trăng... sướng đến phát điên!\nNàng lên đỉnh nhiều lần, đầu ngửa, tóc xõa, miệng không ngừng rên tục.",
+          "Tinh nóng bắn đầy sâu bên trong dưới ánh trăng. {name} cảm nhận dòng ấm trào ra ngay lập tức, siết chặt co giật lên đỉnh thêm, tinh chảy xuống đùi bóng dưới trăng. Nàng vẫn ôm chặt, xin được đụ tiếp cho đến khi trăng chếch."
+        ],
+        [
+          "Trước gương lớn, {name} chống tay, nhìn thẳng phản chiếu mình bị đụ từ sau. Dương vật đâm sâu, nàng thấy rõ lồn mình bị kéo căng, nước chảy xuống đùi trong gương. Cảm giác vừa bị đụ vừa nhìn mình khiến sướng gấp bội.\n> Nhìn đi... lồn thiếp đang nuốt dương vật bệ hạ kìa!\nNàng rên lớn, lên đỉnh ngay, mặt biến dạng trong gương, nước miếng chảy.",
+          "Bị đẩy ngồi trên bàn trước gương, chân dạng rộng. Bệ hạ đâm, {name} nhìn rõ từng nhịp vào ra, dịch trắng và nước dính. Nàng cảm nhận ma sát mạnh đồng thời với hình ảnh.\n> Thiếp thấy hết... sướng đến chảy nước mắt trong gương!\nNàng gào, lên đỉnh liên tục, tay tự bóp ngực, mắt không rời phản chiếu.",
+          "Tự cưỡi đối diện gương, nhìn mình nhún, ngực nảy, chỗ giao nhau rõ mồn một. Cảm giác chủ động và bị nhìn (bởi chính mình) khiến nàng điên.\n> Thiếp đang tự đụ mà gương thấy hết... sâu quá!\nNàng lên đỉnh nhiều lần, cơ thể co giật, vẫn nhìn.",
+          "Khi tinh bắn vào, nàng nhìn trong gương thấy tinh chảy ra từ lồn mình. Cảm nhận ấm đầy bên trong kết hợp hình ảnh khiến nàng siết chặt lên đỉnh mạnh, mắt trợn trong gương, vẫn xin tiếp."
+        ],
+        [
+          "Sau lớp rem the mỏng, {name} bị đụ, bóng hai người rõ trên rem. Người ngoài chỉ thấy bóng và nghe tiếng. Nàng biết có thể bị nghe, càng rên to hơn. Dương vật đâm mạnh, nước bắn, cảm giác kích thích vì sự nửa kín.\n> Họ nghe thấy thiếp bị đụ rồi... đụ mạnh hơn đi!\nNàng gào, lên đỉnh nhanh, bóng trên rem co giật theo.",
+          "Bị đụ sấp, rem dính vào da ướt. Tiếng rên và tiếng nước vọng ra. {name} cảm nhận rem mỏng cọ da mỗi nhịp, càng thêm nhạy.\n> Rem dính vào người... mà lồn thì đang bị đụ nát!\nNàng lên đỉnh liên tục, miệng tục, không kiềm chế tiếng.",
+          "Cưỡi sau rem, bóng nảy lên xuống rõ. Nàng cảm nhận sâu và biết bóng mình đang lộ. Nước chảy làm rem ướt dính.\n> Bóng thiếp đang cưỡi... sướng quá!\nNàng lên đỉnh nhiều lần, rên vang.",
+          "Tinh bắn đầy, nàng cảm nhận ấm, siết, lên đỉnh thêm. Tiếng rên cuối cùng vọng ra ngoài rem, nàng vẫn thì thầm xin đụ tiếp dù biết có thể bị nghe thấy."
+        ]
       ],
       "lau": [
-        "{name} đã ở bên bệ hạ lâu ngày. Đêm nay, nàng nằm chờ, áo mỏng để lộ thân thể. Bệ hạ bước vào, nàng ngồi dậy, kéo người kia xuống.\n> Bệ hạ, đêm nay muốn thế nào?\nNàng hỏi, giọng quen thuộc. Hai người hôn nhau sâu, {name} chủ động cởi áo. Da thịt chạm nhau, nàng thở dài thỏa mãn. Nàng biết từng điểm nhạy cảm của bệ hạ, biết cách làm người kia hài lòng. Khi hòa làm một, nàng uốn người, rên nhỏ vừa đủ. Bệ hạ ôm chặt, nàng thì thầm.\n> Như vậy... đã lâu rồi.\nĐêm ấy, sự gần gũi lâu ngày khiến mọi thứ tự nhiên.",
-        "Long sàng rộng, {name} ngồi chờ bệ hạ. Nàng đã quen với việc hầu hạ lâu ngày. Khi bệ hạ đến, nàng kéo người kia lại, hôn lên môi.\n> Đêm nay, để thần thiếp dẫn.\nNàng cởi áo, để lộ thân thể. Hai người hòa làm một, {name} biết cách điều chỉnh nhịp điệu. Nàng rên nhỏ, móng tay cào nhẹ. Bệ hạ hôn lên cổ nàng, nàng ngẩng đầu. Sự gần gũi lâu ngày khiến nàng thư giãn hoàn toàn.\n> Bệ hạ... ở lại.\nNàng thì thầm. Đêm ấy, không còn e ấp, chỉ còn sự thân thuộc.",
-        "Trong điện, {name} đã thay áo mỏng. Bệ hạ bước vào, nàng ôm lấy người kia.\n> Bệ hạ đến rồi.\nNàng dẫn đến long sàng, chủ động cởi áo. Da thịt chạm nhau, nàng thở dài. Nàng biết cách làm bệ hạ vui, biết từng cử chỉ. Khi hòa làm một, nàng uốn người, rên nhỏ. Bệ hạ ôm chặt, nàng thì thầm.\n> Đêm nay, chậm một chút.\nSự gần gũi lâu ngày khiến mọi thứ tự nhiên và dễ chịu.",
-        "Đêm khuya, {name} nằm chờ. Bệ hạ bước vào, nàng quay lại, mỉm cười.\n> Bệ hạ, lại đến.\nNàng kéo người kia nằm cạnh, tự cởi áo. Hai người hôn nhau, {name} thở gấp. Nàng đã quen với hơi ấm ấy từ lâu. Khi hòa làm một, nàng ôm chặt, rên nhỏ. Nhịp điệu chậm rãi, nàng thì thầm.\n> Ở lại với thần thiếp.\nĐêm ấy, sự thân thuộc lâu ngày khiến {name} hoàn toàn thư giãn.",
-        "Trên long sàng, {name} đã bị đụ từ đầu canh đến gần sáng. Lồn sưng đỏ, vẫn ướt nhẹp và siết. Bệ hạ đâm tiếp, dương vật cọ vào thành trong đã nhạy đến mức mỗi nhịp đều khiến nàng giật mình rên.\n> Đụ nữa đi... thiếp cảm thấy lồn mình tê mà vẫn muốn sâu hơn!\nNước chảy không ngừng, nàng lên đỉnh yếu ớt nhưng dữ dội, cơ thể run rẩy, mồ hôi và dịch dính đầy chăn.",
-        "Bị lật đủ tư thế suốt đêm: ngửa, sấp, cưỡi, nghiêng. Mỗi lần vào lại đều cảm nhận đầy ắp và nóng. {name} đã mất tiếng, chỉ còn rên khàn, nước bắn ít hơn nhưng vẫn co giật mạnh khi lên đỉnh.\n> Không ra được nữa mà vẫn sướng... đụ tiếp đi bệ hạ!\nNàng cầu xin, mắt đỏ vì sướng và mệt, vẫn đẩy hông ngược lại.",
-        "Cưỡi lần cuối, chân đã mềm. Nàng cảm nhận dương vật cứng vẫn chọc sâu, nước và tinh cũ chảy ra làm trơn. Mỗi nhịp nhún đều khiến nàng run.\n> Thiếp tự đụ đến không ngồi nổi nữa... vẫn muốn!\nNàng lên đỉnh thêm, ngã về phía trước, vẫn siết chặt.",
-        "Khi tinh mới được bắn sâu vào lồn đã đầy từ trước, {name} cảm nhận ấm áp trào ra ngay, co giật lên đỉnh cuối cùng trong đêm. Nàng nằm thở dốc, lồn vẫn nhịp nhịp co bóp, thì thầm muốn được đụ tiếp vào sáng nếu bệ hạ còn cứng."
+        [
+          "{name} đã ở bên bệ hạ lâu ngày. Đêm nay, nàng nằm chờ, áo mỏng để lộ thân thể. Bệ hạ bước vào, nàng ngồi dậy, kéo người kia xuống.\n> Bệ hạ, đêm nay muốn thế nào?\nNàng hỏi, giọng quen thuộc. Hai người hôn nhau sâu, {name} chủ động cởi áo. Da thịt chạm nhau, nàng thở dài thỏa mãn. Nàng biết từng điểm nhạy cảm của bệ hạ, biết cách làm người kia hài lòng. Khi hòa làm một, nàng uốn người, rên nhỏ vừa đủ. Bệ hạ ôm chặt, nàng thì thầm.\n> Như vậy... đã lâu rồi.\nĐêm ấy, sự gần gũi lâu ngày khiến mọi thứ tự nhiên."
+        ],
+        [
+          "Long sàng rộng, {name} ngồi chờ bệ hạ. Nàng đã quen với việc hầu hạ lâu ngày. Khi bệ hạ đến, nàng kéo người kia lại, hôn lên môi.\n> Đêm nay, để thần thiếp dẫn.\nNàng cởi áo, để lộ thân thể. Hai người hòa làm một, {name} biết cách điều chỉnh nhịp điệu. Nàng rên nhỏ, móng tay cào nhẹ. Bệ hạ hôn lên cổ nàng, nàng ngẩng đầu. Sự gần gũi lâu ngày khiến nàng thư giãn hoàn toàn.\n> Bệ hạ... ở lại.\nNàng thì thầm. Đêm ấy, không còn e ấp, chỉ còn sự thân thuộc."
+        ],
+        [
+          "Trong điện, {name} đã thay áo mỏng. Bệ hạ bước vào, nàng ôm lấy người kia.\n> Bệ hạ đến rồi.\nNàng dẫn đến long sàng, chủ động cởi áo. Da thịt chạm nhau, nàng thở dài. Nàng biết cách làm bệ hạ vui, biết từng cử chỉ. Khi hòa làm một, nàng uốn người, rên nhỏ. Bệ hạ ôm chặt, nàng thì thầm.\n> Đêm nay, chậm một chút.\nSự gần gũi lâu ngày khiến mọi thứ tự nhiên và dễ chịu."
+        ],
+        [
+          "Đêm khuya, {name} nằm chờ. Bệ hạ bước vào, nàng quay lại, mỉm cười.\n> Bệ hạ, lại đến.\nNàng kéo người kia nằm cạnh, tự cởi áo. Hai người hôn nhau, {name} thở gấp. Nàng đã quen với hơi ấm ấy từ lâu. Khi hòa làm một, nàng ôm chặt, rên nhỏ. Nhịp điệu chậm rãi, nàng thì thầm.\n> Ở lại với thần thiếp.\nĐêm ấy, sự thân thuộc lâu ngày khiến {name} hoàn toàn thư giãn."
+        ],
+        [
+          "Trên long sàng, {name} đã bị đụ từ đầu canh đến gần sáng. Lồn sưng đỏ, vẫn ướt nhẹp và siết. Bệ hạ đâm tiếp, dương vật cọ vào thành trong đã nhạy đến mức mỗi nhịp đều khiến nàng giật mình rên.\n> Đụ nữa đi... thiếp cảm thấy lồn mình tê mà vẫn muốn sâu hơn!\nNước chảy không ngừng, nàng lên đỉnh yếu ớt nhưng dữ dội, cơ thể run rẩy, mồ hôi và dịch dính đầy chăn.",
+          "Bị lật đủ tư thế suốt đêm: ngửa, sấp, cưỡi, nghiêng. Mỗi lần vào lại đều cảm nhận đầy ắp và nóng. {name} đã mất tiếng, chỉ còn rên khàn, nước bắn ít hơn nhưng vẫn co giật mạnh khi lên đỉnh.\n> Không ra được nữa mà vẫn sướng... đụ tiếp đi bệ hạ!\nNàng cầu xin, mắt đỏ vì sướng và mệt, vẫn đẩy hông ngược lại.",
+          "Cưỡi lần cuối, chân đã mềm. Nàng cảm nhận dương vật cứng vẫn chọc sâu, nước và tinh cũ chảy ra làm trơn. Mỗi nhịp nhún đều khiến nàng run.\n> Thiếp tự đụ đến không ngồi nổi nữa... vẫn muốn!\nNàng lên đỉnh thêm, ngã về phía trước, vẫn siết chặt.",
+          "Khi tinh mới được bắn sâu vào lồn đã đầy từ trước, {name} cảm nhận ấm áp trào ra ngay, co giật lên đỉnh cuối cùng trong đêm. Nàng nằm thở dốc, lồn vẫn nhịp nhịp co bóp, thì thầm muốn được đụ tiếp vào sáng nếu bệ hạ còn cứng."
+        ]
       ]
     }
   }

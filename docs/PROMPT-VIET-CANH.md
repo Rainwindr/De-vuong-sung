@@ -58,17 +58,26 @@ NHÂN VẬT CHÍNH
 - core.hong_tieu — Tạ Hồng Tiêu, 21 tuổi, Quý Phi, sủng phi định mệnh, mê ôn tuyền và trang sức.
 
 CÁCH VIẾT
-- Tiếng Việt, văn phong cổ trang. Mỗi đoạn 120 đến 250 chữ.
+- Tiếng Việt, văn phong cổ trang. Mỗi đoạn 150 đến 250 chữ, tối thiểu 150 chữ. Không tóm tắt, không viết câu cụt; tả cảm giác, cử chỉ, lời thoại đầy đủ.
 - Lời thoại của nhân vật đặt trên một dòng riêng, bắt đầu bằng dấu > và một khoảng trắng.
 - Biến game tự thay: {name} (người chính), {names} (danh sách mọi người tham gia), {emperor} (niên hiệu), {fetish} (tên sở thích). Chỉ dùng đúng bốn biến này.
 
 CÁCH TRẢ LỜI
 - Chỉ trả về JSON đúng mẫu tôi đưa, không lời chào, không giải thích.
 - Trong chuỗi JSON: xuống dòng viết là \n, dấu nháy kép bên trong viết là \".
-- Mỗi danh sách [...] có đúng số đoạn tôi yêu cầu, mỗi đoạn là một phiên bản khác nhau.
+- Mỗi danh sách [...] là MỘT CẢNH hoàn chỉnh: các đoạn nối tiếp nhau theo thời gian (đoạn đầu mở cảnh, các đoạn giữa diễn biến, đoạn cuối là dư âm sau đó). Người chơi đọc từng đoạn theo thứ tự, nên đoạn sau phải nối được với đoạn trước.
+- Có đúng số đoạn tôi yêu cầu. Nếu phải viết nhiều ô một lần mà không đủ dài, hãy viết ít ô hơn, đừng rút ngắn.
 
 Trả lời "Đã hiểu" nếu bạn sẵn sàng.
 ```
+
+---
+
+## Mẹo để Grok viết đủ dài
+
+- Mỗi lần chỉ xin **1 ô** (một nhân vật một mức, hoặc một sở thích). Xin nhiều ô một lúc Grok sẽ tự rút ngắn.
+- Nếu đoạn trả về quá ngắn, nhắn thêm: `Viết lại, mỗi đoạn tối thiểu 150 chữ, đừng tóm tắt.`
+- Muốn có **nhiều phiên bản** cho cùng một ô (để mỗi đêm khác nhau): cứ xin thêm lần nữa và đưa vào bằng `them-canh.py`. Mỗi lần thêm được tính là một cảnh mới, game bốc lần lượt, không lặp lại cho đến khi xem hết.
 
 ---
 
@@ -81,7 +90,7 @@ Cảnh xuất hiện nhiều nhất (khoảng 42%). Mỗi phi cần 3 mức: `da
 ```
 Cảnh: thị tẩm. Bệ hạ lật thẻ bài, triệu MỘT PHI TẦN thị tẩm một mình ở Dưỡng Tâm điện hoặc ở cung của nàng.
 Nhân vật: core.TUYET (xem phần nhân vật chính).
-Viết 3 đoạn cho mỗi mức:
+Mỗi mức viết một cảnh gồm 3 đoạn nối tiếp:
 - dau: đêm đầu tiên của hai người
 - quen: đã gần gũi vài lần
 - lau: đã gắn bó rất lâu, hơn hai mươi đêm
@@ -95,7 +104,7 @@ Làm lần lượt cho 10 phi: `core.uyen_nghi`, `core.moc_can`, `core.tuyet`, `
 
 ```
 Cảnh: thị tẩm với một phi tần bất kỳ trong hậu cung (không phải nhân vật chính). Không biết tính cách nàng, hãy viết trung tính. Dùng {name} ở mọi chỗ cần tên nàng.
-Viết 4 đoạn cho mỗi mức dau, quen, lau.
+Mỗi mức dau, quen, lau viết một cảnh gồm 4 đoạn nối tiếp.
 Trả về đúng một dòng:
 "_chung": {"dau": [...], "quen": [...], "lau": [...]}
 ```
@@ -112,7 +121,7 @@ Khi lật thẻ, người chơi chọn thêm sở thích. Mỗi sở thích mộ
 Cảnh: thị tẩm theo sở thích. Bệ hạ triệu {name} thị tẩm, đêm nay theo sở thích "TÊN SỞ THÍCH" (MÔ TẢ). Nàng đã đồng ý với sở thích này.
 Đây là sở thích tầng SỐ TẦNG (1 nhẹ nhàng, 2 táo bạo hơn, 3 mạnh nhất).
 Dùng {name} cho tên nàng, có thể dùng {fetish} cho tên sở thích.
-Viết 4 đoạn.
+Viết một cảnh gồm 4 đoạn nối tiếp, mỗi đoạn tối thiểu 150 chữ.
 Trả về đúng một dòng:
 "ID SỞ THÍCH": {"_": ["...", "...", "...", "..."]}
 ```
@@ -144,7 +153,7 @@ Các sở thích của khung "Sự nóng bỏng" (`khung-nong-bong.*`) cũng có
 
 ```
 Cảnh combo "TÊN COMBO": SỞ THÍCH A + SỞ THÍCH B. Nhân vật là {name}, đã đồng ý.
-Viết 4 đoạn.
+Viết một cảnh gồm 4 đoạn nối tiếp, mỗi đoạn tối thiểu 150 chữ.
 Trả về:
 { "ID COMBO": { "_chung": { "_": ["...", "...", "...", "..."] } } }
 ```
@@ -191,7 +200,7 @@ Từ mức 3 trở đi, mỗi cảnh là một khối riêng. Dùng chung một 
 Cảnh: ID CẢNH.
 Tình huống: TÌNH HUỐNG.
 Số người tham gia: SỐ NGƯỜI. Dùng {name} cho người chính, {names} cho danh sách mọi người.
-Viết 4 đoạn.
+Viết một cảnh gồm 4 đoạn nối tiếp, mỗi đoạn tối thiểu 150 chữ.
 Trả về:
 { "ID CẢNH": { "_chung": { "_": ["...", "...", "...", "..."] } } }
 ```
@@ -286,7 +295,7 @@ Một sở thích mới gồm hai phần: **định nghĩa** (đặt trong `feti
 ```
 Tôi muốn thêm một sở thích mới vào game: "TÊN SỞ THÍCH" — MÔ TẢ NGẮN.
 Tầng: SỐ (1 nhẹ nhàng, 2 táo bạo hơn, 3 mạnh nhất).
-Viết 4 đoạn cảnh thị tẩm theo sở thích này, dùng {name} cho tên phi tần, {fetish} cho tên sở thích.
+Viết một cảnh thị tẩm theo sở thích này, gồm 4 đoạn nối tiếp, dùng {name} cho tên phi tần, {fetish} cho tên sở thích.
 Trả về đúng JSON sau, chỉ đổi phần chữ hoa và thêm 4 đoạn:
 {
   "fetishes": [
