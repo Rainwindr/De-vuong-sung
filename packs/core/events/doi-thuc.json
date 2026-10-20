@@ -1,0 +1,63 @@
+[
+  { "id": "core.dt_tram", "title": "Chiếc trâm đánh rơi", "speaker": "pair", "cooldown": 18, "weight": 5,
+    "when": { "pairTinhY": { "gte": 40, "lt": 61 } },
+    "text": "Bệ hạ nhặt được một chiếc trâm trong cung của {name}, nhưng đó lại là trâm của {name2}. Trong ống trâm giấu một mảnh lụa ghi nửa câu thơ.",
+    "choices": [
+      { "label": "Trả lại, không hỏi gì", "effects": { "attitude": 1, "tinhY": 10 }, "result": "Hôm sau, {name2} cài chiếc trâm ấy, má hơi đỏ." },
+      { "label": "Gọi cả hai đến hỏi", "effects": { "tinhY": 5 }, "result": "Hai người đỏ mặt, cúi đầu. Không ai nói dối, cũng không ai nói thật." },
+      { "label": "Tịch thu chiếc trâm", "effects": { "attitude": 0, "favor": -15, "favor2": -15, "tinhY": 20 }, "result": "Càng bị cấm, hai người càng gắn bó." }
+    ] },
+  { "id": "core.dt_hien_mua", "title": "Dưới hiên mưa", "speaker": "pair", "cooldown": 18, "weight": 5,
+    "when": { "pairTinhY": { "gte": 61 }, "month": { "in": [4, 5, 6, 7, 8, 9] } },
+    "text": "Đi ngang ngự hoa viên, bệ hạ thấy {name} và {name2} đứng chung một chiếc ô. {name2} đang lau nước mưa trên má {name}.",
+    "choices": [
+      { "label": "Lặng lẽ đứng nhìn", "effects": { "fetish": { "core.ngam_nhin": 10 }, "tinhY": 5 }, "result": "Mưa rơi rất lâu. Không ai biết bệ hạ đã đứng đó." },
+      { "label": "Bước ra, cười", "effects": { "flag": "dt_bi_bat_gap" }, "result": "Hai người hoảng hốt buông nhau ra." },
+      { "label": "Quay đi", "effects": { "attitude": 2, "tinhY": 10 }, "result": "Bệ hạ đi đường khác về cung." }
+    ] },
+  { "id": "core.dt_thu_nhan", "title": "Lời thú nhận", "speaker": "pair", "cooldown": 24, "weight": 6,
+    "when": { "pairTinhY": { "gte": 61 }, "flag": "dt_bi_bat_gap" },
+    "text": "{name} và {name2} quỳ trước Dưỡng Tâm điện.\n> Thiếp thương bệ hạ. Nhưng đêm dài, bệ hạ lại ở cung khác… Người ở bên thiếp lúc đó là nàng ấy.\n> Muốn phạt thì phạt cả hai. Đừng tách bọn thiếp ra.",
+    "choices": [
+      { "label": "Tách hai người ra hai cung xa", "effects": { "attitude": 0, "favor": -30, "favor2": -30, "unflag": "dt_bi_bat_gap" }, "result": "Đêm ấy có tiếng đàn rất buồn ở cung phía Tây." },
+      { "label": "Tha thứ, cho ở chung cung", "effects": { "attitude": 2, "favor": 20, "favor2": 20, "tinhY": 15, "unflag": "dt_bi_bat_gap" }, "result": "Hai người dập đầu tạ ơn." },
+      { "label": "Từ nay hai nàng cùng hầu trẫm", "fetish": ["core.ngam_nhin"], "effects": { "attitude": 3, "truyLac": 15, "tinhY": 10, "unflag": "dt_bi_bat_gap" }, "hook": "core.doi_thuc_tam_nguoi", "participants": "pair" }
+    ] },
+  { "id": "core.dt_cung_dong_tam", "title": "Cung Đồng Tâm", "speaker": "pair", "once": true, "weight": 8,
+    "when": { "attitude": 3, "pairsAt": { "tinhY": 61, "count": { "gte": 2 } }, "notBuilding": "core.cung_dong_tam", "pairTinhY": { "gte": 61 } },
+    "text": "> Bệ hạ đã không cấm, vậy cho chúng thiếp một nơi không cần giấu nữa được không?",
+    "choices": [
+      { "label": "Xây Cung Đồng Tâm", "cost": 2000, "effects": { "building": "core.cung_dong_tam", "truyLac": 15, "tinhY": 10 }, "result": "Cung Đồng Tâm mở cửa. Từ đó có tiếng cười ở dãy cung phía Bắc." },
+      { "label": "Chưa phải lúc", "effects": {}, "result": "Hai người gật đầu, không nài thêm." }
+    ] },
+  { "id": "core.dt_lam_khach", "title": "Làm khách ở Cung Đồng Tâm", "speaker": "pair", "cooldown": 10, "weight": 5,
+    "when": { "building": "core.cung_dong_tam", "pairTinhY": { "gte": 86 } },
+    "text": "{name} và {name2} mời bệ hạ đến Cung Đồng Tâm làm khách.\n> Đêm nay bệ hạ là khách, không phải chủ.",
+    "choices": [
+      { "label": "Nhận lời", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 10, "favor": 10, "favor2": 10 }, "hook": "core.cung_dong_tam", "participants": "pair" },
+      { "label": "Ghé uống trà rồi về", "effects": { "favor": 5, "favor2": 5, "tinhY": 5 }, "result": "Trà ngon. Hai người tiễn bệ hạ ra tận cổng." }
+    ] },
+  { "id": "core.dt_ke_dung_ngoai", "title": "Kẻ đứng ngoài", "speaker": "pair", "cooldown": 24, "weight": 8,
+    "when": { "pairTinhY": { "gte": 100 }, "pairFavorBelow": 40 },
+    "text": "Thái giám run rẩy báo: hai vị nương nương lại nói thân thể không khỏe. Đã là lần thứ năm trong tháng. Bệ hạ đến tận nơi, thấy {name} và {name2} đang đánh cờ, cười đùa, hoàn toàn quên mất bệ hạ.",
+    "choices": [
+      { "label": "Đứng nhìn một lúc rồi đi", "effects": { "flag": "keDungNgoai", "fetish": { "core.ngam_nhin": 5 } }, "result": "Hai người không hề biết bệ hạ đã đến." },
+      { "label": "Ngồi xuống xin chơi một ván", "effects": { "favor": 15, "favor2": 15, "flag": "keDungNgoai" }, "result": "Bệ hạ thua cả hai ván. Ba người cười đến khuya." },
+      { "label": "Ban cho hai người tự do xuất cung", "effects": { "removePair": true, "danTam": 10, "flag": "thanh_toan" }, "result": "Hai người dập đầu ba lần rồi dắt tay nhau ra khỏi cổng cung. Sử quan ghi: đế thành toàn cho người khác." }
+    ] },
+  { "id": "core.dt_mang_luoi", "title": "Mạng lưới tỷ muội", "cooldown": 12, "weight": 5,
+    "when": { "pairsAt": { "tinhY": 61, "count": { "gte": 3 } } },
+    "text": "Hậu cung giờ là một mạng tình ý chằng chịt. Ai cũng có người trong lòng, ai cũng ghen với ai đó. Có người ghen không phải vì bệ hạ.",
+    "choices": [
+      { "label": "Dự Đêm Tỷ Muội", "requires": { "attitude": 3 }, "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 15, "longThe": -8 }, "hook": "core.dem_ty_muoi", "participants": { "select": "top_favor", "count": 6 }, "minParticipants": 4 },
+      { "label": "Tổ chức tiệc hòa giải", "effects": { "hoaKhi": 15, "quocKho": -500 }, "result": "Rượu ngọt làm dịu mọi ghen tuông, ít nhất là một đêm." },
+      { "label": "Làm ngơ", "effects": { "hoaKhi": -5 }, "result": "Lý công công thở dài, ghi thêm vài trang vào sổ." }
+    ] },
+  { "id": "core.dt_xin_o_chung", "title": "Xin ở chung", "speaker": "pair", "cooldown": 12, "weight": 4,
+    "when": { "pairTinhY": { "gte": 55 }, "attitude": { "gte": 1 } },
+    "text": "{name} dâng tấu: xin được dọn sang ở chung cung với {name2}, để tiện chăm nhau.",
+    "choices": [
+      { "label": "Chuẩn", "effects": { "tinhY": 15, "favor": 5, "favor2": 5 }, "result": "Hai người dọn về một cung, chung một ấm trà." },
+      { "label": "Không chuẩn", "effects": { "tinhY": 5, "favor": -5 }, "result": "Tấu chương được trả về, không lời phê." }
+    ] }
+]

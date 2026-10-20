@@ -1,0 +1,12 @@
+[
+  {
+    "id": "ten-goi-cua-ban.vung_mau",
+    "name": "Tên vùng",
+    "cost": 2000,
+    "recruit": 2,
+    "origin": "Mỹ nhân vùng này",
+    "desc": "Mô tả",
+    "arrive": "Câu khi đến nơi.",
+    "album": "Dòng lưu vào album."
+  }
+]

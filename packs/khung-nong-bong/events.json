@@ -1,0 +1,411 @@
+[
+  {
+    "id": "khung-nong-bong.su_kien_phuc_dich",
+    "title": "Phục dịch thường nhật",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "{name} dâng lịch hầu hạ do chính nàng soạn, từ lúc bệ hạ thức dậy đến lúc phê xong tấu chương.",
+    "choices": [
+      {
+        "label": "Theo lịch của nàng",
+        "fetish": [
+          "khung-nong-bong.phuc_dich"
+        ],
+        "effects": {
+          "truyLac": 7,
+          "favor": 8
+        },
+        "hook": "khung-nong-bong.phuc_dich"
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_tu_do",
+    "title": "Thánh chỉ Tự Do",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "{name} tự tay cài dải lụa đỏ lên áo.\n> Thiếp tự nguyện. Lúc nào muốn tháo, thiếp sẽ tháo.",
+    "choices": [
+      {
+        "label": "Nhận dải lụa của nàng",
+        "fetish": [
+          "khung-nong-bong.tu_do"
+        ],
+        "effects": {
+          "truyLac": 9,
+          "favor": 8
+        },
+        "hook": "khung-nong-bong.tu_do"
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_kiem_che",
+    "title": "Kiềm chế và cao trào",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "{name} đề nghị một trò chơi mới: xem ai kiên nhẫn được lâu nhất.",
+    "choices": [
+      {
+        "label": "Chơi",
+        "fetish": [
+          "khung-nong-bong.kiem_che"
+        ],
+        "effects": {
+          "truyLac": 7
+        },
+        "hook": "khung-nong-bong.kiem_che",
+        "participants": {
+          "select": "top_favor",
+          "count": 3,
+          "includeSpeaker": true
+        },
+        "minParticipants": 2
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_long_chung",
+    "title": "Long chủng",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "Ma ma dâng sổ ghi ngày lành tháng tốt. {name} đỏ mặt khi thấy tên mình đứng đầu.",
+    "choices": [
+      {
+        "label": "Theo sổ của ma ma",
+        "fetish": [
+          "khung-nong-bong.long_chung"
+        ],
+        "effects": {
+          "truyLac": 7,
+          "favor": 8
+        },
+        "hook": "khung-nong-bong.long_chung"
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_xoa_bop",
+    "title": "Chăm sóc thân thể",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "Sau khi tắm, {name} mang ra một lọ dầu thơm.\n> Để thiếp xoa bóp cho bệ hạ, rồi đến lượt bệ hạ.",
+    "choices": [
+      {
+        "label": "Đồng ý",
+        "fetish": [
+          "khung-nong-bong.xoa_bop"
+        ],
+        "effects": {
+          "truyLac": 7,
+          "favor": 8
+        },
+        "hook": "khung-nong-bong.xoa_bop"
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_nghi_thuc",
+    "title": "Nghi thức trước thị tẩm",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "Ma ma lui ra. {name} chậm rãi tháo từng lớp áo theo đúng nghi lễ cung đình.",
+    "choices": [
+      {
+        "label": "Ngồi xem",
+        "fetish": [
+          "khung-nong-bong.nghi_thuc"
+        ],
+        "effects": {
+          "truyLac": 7,
+          "favor": 8
+        },
+        "hook": "khung-nong-bong.nghi_thuc"
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_y_phuc_goi",
+    "title": "Y phục khêu gợi",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "{name} xuất hiện trong bộ y phục mới may, mỏng như sương.\n> Bệ hạ thấy thế nào?",
+    "choices": [
+      {
+        "label": "Khen",
+        "fetish": [
+          "khung-nong-bong.y_phuc_goi"
+        ],
+        "effects": {
+          "truyLac": 7,
+          "favor": 8
+        },
+        "hook": "khung-nong-bong.y_phuc_goi"
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_doi_thuc_nong",
+    "title": "Đối thực nóng bỏng",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "{name} và người thương của nàng mời bệ hạ đến làm khán giả.",
+    "choices": [
+      {
+        "label": "Nhận lời",
+        "fetish": [
+          "khung-nong-bong.doi_thuc_nong"
+        ],
+        "effects": {
+          "truyLac": 9
+        },
+        "hook": "khung-nong-bong.doi_thuc_nong",
+        "participants": {
+          "select": "top_favor",
+          "count": 2,
+          "includeSpeaker": true
+        },
+        "minParticipants": 2
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_gameshow",
+    "title": "Gameshow hậu cung",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "Lý công công bày một tấm bình phong lớn giữa điện.\n> Các nương nương đứng sau. Bệ hạ đoán xem ai là ai.",
+    "choices": [
+      {
+        "label": "Chơi",
+        "fetish": [
+          "khung-nong-bong.gameshow"
+        ],
+        "effects": {
+          "truyLac": 7
+        },
+        "hook": "khung-nong-bong.gameshow",
+        "participants": {
+          "select": "top_favor",
+          "count": 3,
+          "includeSpeaker": true
+        },
+        "minParticipants": 2
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_troi_buoc",
+    "title": "Trói buộc",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "{name} đặt một cuộn dây lụa lên bàn, nói rõ ám hiệu dừng trước.",
+    "choices": [
+      {
+        "label": "Đồng ý luật chơi",
+        "fetish": [
+          "khung-nong-bong.troi_buoc"
+        ],
+        "effects": {
+          "truyLac": 9,
+          "favor": 8
+        },
+        "hook": "khung-nong-bong.troi_buoc"
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_khan_gia",
+    "title": "Khán giả hậu cung",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "Các phi tần tự nguyện ngồi kín hai bên điện. {name} bước ra giữa.",
+    "choices": [
+      {
+        "label": "Bắt đầu",
+        "fetish": [
+          "khung-nong-bong.khan_gia"
+        ],
+        "effects": {
+          "truyLac": 9
+        },
+        "hook": "khung-nong-bong.khan_gia",
+        "participants": {
+          "select": "top_favor",
+          "count": 3,
+          "includeSpeaker": true
+        },
+        "minParticipants": 2
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "khung-nong-bong.su_kien_tan_phi",
+    "title": "Khởi động tân phi",
+    "speaker": "random",
+    "cooldown": 10,
+    "weight": 3,
+    "when": {
+      "favor": {
+        "gte": 45
+      }
+    },
+    "text": "{name} dắt theo một tân phi rụt rè.\n> Để thiếp chỉ cho muội ấy những gì cần biết.",
+    "choices": [
+      {
+        "label": "Đồng ý",
+        "fetish": [
+          "khung-nong-bong.tan_phi"
+        ],
+        "effects": {
+          "truyLac": 7
+        },
+        "hook": "khung-nong-bong.tan_phi",
+        "participants": {
+          "select": "top_favor",
+          "count": 2,
+          "includeSpeaker": true
+        },
+        "minParticipants": 2
+      },
+      {
+        "label": "Để hôm khác",
+        "effects": {
+          "favor": -2
+        }
+      }
+    ]
+  }
+]

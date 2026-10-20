@@ -1,0 +1,96 @@
+[
+  { "id": "core.con_day_thang", "title": "Lễ đầy tháng", "speaker": "child", "perChild": true, "weight": 20,
+    "when": { "childAge": 0 },
+    "text": "Lễ đầy tháng của {child} {name}. Mẫu phi {mother} bế con ra mắt bệ hạ.",
+    "choices": [
+      { "label": "Bế con, ban khóa vàng", "cost": 200, "effects": { "closeness": 10, "motherFavor": 5 }, "result": "{name} nắm chặt ngón tay bệ hạ, không chịu buông." },
+      { "label": "Ban thưởng cho mẫu phi", "effects": { "motherFavor": 8 } }
+    ] },
+  { "id": "core.con_thoi_noi", "title": "Lễ thôi nôi", "speaker": "child", "perChild": true, "weight": 20,
+    "when": { "childAge": 1 },
+    "text": "Trên tấm thảm đỏ bày bút lông, kiếm gỗ, cây đàn nhỏ và một con dấu. {name} bò quanh một vòng rồi…",
+    "choices": [
+      { "label": "…chộp lấy bút lông", "effects": { "childTrait": "Thông minh", "closeness": 5 }, "result": "Bá quan khen: sau này ắt là bậc văn nhân." },
+      { "label": "…chộp lấy kiếm gỗ", "effects": { "childTrait": "Võ dũng", "closeness": 5 }, "result": "Đứa bé vung kiếm gỗ, suýt trúng mũi thái giám." },
+      { "label": "…chộp lấy cây đàn", "effects": { "childTrait": "Nghệ thuật", "closeness": 5 }, "result": "Tiếng đàn lạc điệu làm cả điện cười." },
+      { "label": "…bò vào lòng phụ hoàng", "effects": { "childTrait": "Hiếu thảo", "closeness": 15 }, "result": "Bệ hạ bế con lên, không nói được gì." }
+    ] },
+  { "id": "core.con_goi_phu_hoang", "title": "Tiếng gọi đầu tiên", "speaker": "child", "perChild": true, "weight": 15,
+    "when": { "childAge": 2 },
+    "text": "{name} lẫm chẫm chạy đến, ôm chân bệ hạ.\n> Phụ… hoàng!",
+    "choices": [
+      { "label": "Bế bổng con lên", "effects": { "closeness": 15 }, "result": "Đứa bé cười khanh khách. Bệ hạ cũng cười." },
+      { "label": "Xoa đầu con", "effects": { "closeness": 5 } }
+    ] },
+  { "id": "core.con_buc_tranh", "title": "Bức tranh đầu tiên", "speaker": "child", "perChild": true, "weight": 6,
+    "when": { "childAge": { "gte": 4, "lte": 8 } },
+    "text": "{name} vẽ phụ hoàng. Mặt méo xệch, mũ miện to hơn cả người.\n> Con vẽ phụ hoàng đẹp không?",
+    "choices": [
+      { "label": "Treo lên Dưỡng Tâm điện", "effects": { "closeness": 15, "album": { "title": "Bức tranh đầu tiên", "line": "{name} vẽ phụ hoàng, bức tranh được treo ở Dưỡng Tâm điện." } }, "result": "Bá quan vào chầu phải nín cười." },
+      { "label": "Cất vào hộp", "effects": { "closeness": 5 } }
+    ] },
+  { "id": "core.con_cau_hoi", "title": "Câu hỏi khó", "speaker": "child", "cooldown": 18, "weight": 5,
+    "when": { "childAge": { "gte": 5, "lte": 10 } },
+    "text": "> Phụ hoàng, sao mẫu phi {mother} hay ngồi nhìn cửa sổ vậy?",
+    "choices": [
+      { "label": "Đến thăm {mother} ngay tối nay", "effects": { "closeness": 10, "motherFavor": 10 }, "result": "Tối ấy cung của {mother} sáng đèn rất muộn." },
+      { "label": "Mẫu phi con thích ngắm hoa thôi", "effects": { "closeness": 2 } }
+    ] },
+  { "id": "core.con_chon_thay", "title": "Vào Thượng thư phòng", "speaker": "child", "perChild": true, "weight": 20,
+    "when": { "childAge": { "gte": 6, "lte": 7 } },
+    "text": "{name} đến tuổi vào Thượng thư phòng. Bệ hạ chọn thầy cho con. Tính con: {trait}.",
+    "choices": [
+      { "label": "Đại học sĩ (văn chương, lễ nghĩa)", "effects": { "teacher": "dai_hoc_si", "closeness": 3 } },
+      { "label": "Võ tướng (cưỡi ngựa, bắn cung)", "effects": { "teacher": "vo_tuong", "closeness": 3 } },
+      { "label": "Cầm sư (đàn, họa, thơ)", "effects": { "teacher": "cam_su", "closeness": 3 } }
+    ] },
+  { "id": "core.con_kiem_bai", "title": "Kiểm tra bài", "speaker": "child", "cooldown": 12, "weight": 4,
+    "when": { "childAge": { "gte": 7, "lte": 14 } },
+    "text": "Bệ hạ ghé Thượng thư phòng, gọi {name} lên đọc bài.",
+    "choices": [
+      { "label": "Khen dù đọc vấp", "effects": { "closeness": 10 }, "result": "{name} đỏ mặt, hứa mai sẽ thuộc." },
+      { "label": "Nghiêm khắc bắt đọc lại", "effects": { "closeness": -3, "childTrait": "Chăm chỉ" }, "result": "{name} thức khuya học thuộc." },
+      { "label": "Đánh cờ với con thay vì kiểm bài", "effects": { "closeness": 15 }, "result": "Thầy dạy lắc đầu. Hai cha con thì cười." }
+    ] },
+  { "id": "core.con_nga_ngua", "title": "Ngã ngựa", "speaker": "child", "cooldown": 24, "weight": 4,
+    "when": { "childAge": { "gte": 8, "lte": 14 } },
+    "text": "{name} ngã ngựa ở bãi tập, đầu gối trầy máu, mắt ngân ngấn nước.",
+    "choices": [
+      { "label": "Chạy đến đỡ con dậy", "effects": { "closeness": 12 } },
+      { "label": "Bảo con tự đứng dậy", "effects": { "closeness": 3, "childTrait": "Kiên cường" }, "result": "{name} cắn môi đứng dậy, leo lại lên ngựa." }
+    ] },
+  { "id": "core.con_di_san", "title": "Đi săn mùa thu", "speaker": "child", "cooldown": 12, "weight": 6,
+    "when": { "childAge": { "gte": 11, "lte": 17 }, "month": { "in": [9, 10] } },
+    "text": "Đi săn mùa thu ở bãi Mộc Lan. {name} xin được cưỡi ngựa cạnh phụ hoàng.",
+    "choices": [
+      { "label": "Cho con đi cạnh", "effects": { "closeness": 10, "longThe": 2 }, "result": "{name} bắn trúng một con hoẵng, khoe suốt mấy tháng." },
+      { "label": "Con còn nhỏ, đi sau", "effects": { "closeness": -2 } }
+    ] },
+  { "id": "core.con_tho_van", "title": "Đối đáp thơ văn", "speaker": "child", "cooldown": 18, "weight": 4,
+    "when": { "childAge": { "gte": 10, "lte": 17 } },
+    "text": "Yến Trung Thu, bệ hạ ra vế đối. {name} đứng dậy đối lại trước cả điện.",
+    "choices": [
+      { "label": "Khen, ban ngọc bội", "cost": 300, "effects": { "closeness": 12 }, "result": "Bá quan khen hoàng gia nhân tài." },
+      { "label": "Chê một chữ, khen một chữ", "effects": { "closeness": 5, "childTrait": "Cầu tiến" } }
+    ] },
+  { "id": "core.con_hoc_thanh", "title": "Học thành", "speaker": "child", "perChild": true, "weight": 20,
+    "when": { "childAge": 16 },
+    "text": "{name} mười sáu tuổi, rời Thượng thư phòng. Các thầy dâng bản nhận xét.",
+    "choices": [
+      { "label": "Đọc nhận xét", "effects": { "educate": true }, "result": "Bệ hạ đọc đi đọc lại, gật đầu." }
+    ] },
+  { "id": "core.con_thanh_than", "title": "Thành gia lập thất", "speaker": "child", "perChild": true, "weight": 10,
+    "when": { "childAge": { "gte": 18 }, "childMarried": false },
+    "text": "{name} đã trưởng thành. Lễ bộ dâng danh sách các gia đình môn đăng hộ đối.",
+    "choices": [
+      { "label": "Để con tự chọn", "effects": { "marry": true, "closeness": 10 }, "result": "{name} chọn người mình thương. Hôn lễ rất vui." },
+      { "label": "Phụ hoàng chọn giúp", "effects": { "marry": true }, "result": "Hôn lễ long trọng, cả kinh thành treo đèn." },
+      { "label": "Chưa vội", "effects": {} }
+    ] },
+  { "id": "core.con_chuc_tho", "title": "Mừng thọ phụ hoàng", "cooldown": 11, "weight": 10,
+    "when": { "month": 1, "children": { "gte": 3 } },
+    "text": "Đầu xuân, các hoàng tử, công chúa cùng tập một tiết mục mừng thọ phụ hoàng.",
+    "choices": [
+      { "label": "Xem đến hết, thưởng cho tất cả", "cost": 500, "effects": { "hoaKhi": 10, "longThe": 3, "album": { "title": "Mừng thọ", "line": "Các con cùng múa hát mừng thọ phụ hoàng." } }, "result": "Đứa nhỏ nhất quên lời, đứng khóc giữa điện. Cả nhà cười." }
+    ] }
+]

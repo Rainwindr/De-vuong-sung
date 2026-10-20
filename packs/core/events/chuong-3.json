@@ -1,0 +1,38 @@
+[
+  { "id": "core.lao_phi", "title": "Sợi tóc bạc", "speaker": "random", "perConsort": true, "weight": 6,
+    "when": { "speakerAge": { "gte": 40 }, "favor": { "gte": 40 } },
+    "text": "{name} soi gương, nhổ một sợi tóc bạc.\n> Tóc thiếp có sợi bạc rồi. Bệ hạ còn thương không?",
+    "choices": [
+      { "label": "Ở bên nàng cả đêm, kể chuyện xưa", "effects": { "favor": 20, "affection": 20, "trait": "Tri kỷ trọn đời" }, "result": "Hai người nói chuyện đến khi gà gáy." },
+      { "label": "Tổ chức tiệc mừng thọ cho nàng", "cost": 600, "effects": { "favor": 10, "hoaKhi": 10 } },
+      { "label": "Ban cho nàng một cung ngắm hoa an hưởng", "cost": 1000, "effects": { "favor": 5, "affection": 15 }, "result": "Nàng có một khu vườn riêng, bệ hạ ghé bất cứ lúc nào." }
+    ] },
+  { "id": "core.tuyen_tu_cuoi", "title": "Lần tuyển tú cuối cùng", "once": true, "weight": 30,
+    "when": { "age": { "gte": 45 }, "notFlag": "selectionClosed" },
+    "text": "> Bệ hạ, năm nay có mở tuyển tú nữa không ạ?\nLý công công tóc đã bạc, hỏi khẽ.",
+    "choices": [
+      { "label": "Mở thêm lần nữa", "effects": { "recruit": 3, "truyLac": 8 }, "result": "Ba tú nữ nhập cung. Các phi cũ nhìn nhau cười." },
+      { "label": "Ngừng tuyển tú vĩnh viễn", "effects": { "closeSelection": true, "favorAll": 10, "hoaKhi": 15 }, "result": "Hậu cung đóng lại. Từ nay chỉ còn những người đã ở bên bệ hạ." }
+    ] },
+  { "id": "core.sinh_nhat_50", "title": "Thọ năm mươi", "once": true, "weight": 40,
+    "when": { "age": { "gte": 50 } },
+    "text": "Đại lễ mừng thọ năm mươi. Con cháu, phi tần quây quần chật cả điện, họa sĩ cung đình vẽ cả nhà vào một bức tranh.",
+    "choices": [
+      { "label": "Nâng chén với cả nhà", "effects": { "hoaKhi": 15, "favorAll": 5, "album": { "title": "Thọ năm mươi", "line": "Cả đại gia đình trong một bức họa mừng thọ năm mươi." } }, "result": "Bức tranh treo ở Càn Thanh cung đến tận đời sau." }
+    ] },
+  { "id": "core.chau_dau_tien", "title": "Cháu đầu tiên", "once": true, "weight": 40,
+    "when": { "flag": "hasGrandchild" },
+    "text": "Đứa cháu đầu tiên được bế vào cung. Bệ hạ bế cháu, tay hơi run.",
+    "choices": [
+      { "label": "Ban khóa vàng, ghi tên vào ngọc điệp", "cost": 300, "effects": { "album": { "title": "Cháu đầu tiên", "line": "Bệ hạ lần đầu bế cháu." } }, "result": "Bệ hạ lên chức ông." }
+    ] },
+  { "id": "core.truyen_ngoi", "title": "Lễ truyền ngôi", "cooldown": 12, "weight": 50,
+    "when": { "flag": "successorChosen" },
+    "text": "Người kế vị đã được chọn. Lễ bộ hỏi bệ hạ định khi nào truyền ngôi, và sau đó sẽ an hưởng ở đâu.",
+    "choices": [
+      { "label": "Truyền ngôi, ở lại cấm cung", "effects": { "abdicate": "cam_cung" } },
+      { "label": "Truyền ngôi, lui về hành cung ôn tuyền", "effects": { "abdicate": "hanh_cung" } },
+      { "label": "Truyền ngôi, ngao du Giang Nam", "effects": { "abdicate": "giang_nam" } },
+      { "label": "Chưa, trẫm còn khỏe", "effects": { "longThe": -2 }, "result": "Lễ bộ lui ra. Năm sau sẽ hỏi lại." }
+    ] }
+]

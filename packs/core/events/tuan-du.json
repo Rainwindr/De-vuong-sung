@@ -1,0 +1,36 @@
+[
+  { "id": "core.td_giang_nam", "title": "Đêm Tần Hoài", "once": true, "weight": 30,
+    "when": { "flag": "travel.core.giang_nam" },
+    "text": "Đêm cuối ở Giang Nam, thuyền hoa trên sông Tần Hoài mời bệ hạ dự tiệc. Tiếng đàn tiếng hát không dứt.",
+    "choices": [
+      { "label": "Lên thuyền dự tiệc", "effects": { "truyLac": 8, "recruit": 1, "recruitOrigin": "Ca nữ Tần Hoài" }, "result": "Một ca nữ theo bệ hạ về kinh." },
+      { "label": "Ngắm từ bờ", "effects": { "danTam": 2 } }
+    ] },
+  { "id": "core.td_tay_vuc", "title": "Rượu bồ đào", "once": true, "weight": 30,
+    "when": { "flag": "travel.core.tay_vuc" },
+    "text": "Vương công Tây Vực mời rượu bồ đào trong chén dạ quang. Vũ nữ múa điệu Hồ Toàn, xoay như lốc.",
+    "choices": [
+      { "label": "Uống cạn, xem đến sáng", "effects": { "truyLac": 10, "fetish": { "core.ngam_nhin": 10 } }, "result": "Bệ hạ mang về ba trăm vò rượu bồ đào." },
+      { "label": "Mua hương liệu Tây Vực", "cost": 800, "effects": { "fetish": { "core.huong_sac": 10 }, "favorAll": 2 }, "result": "Cả hậu cung thơm mùi hương lạ suốt mùa đông." }
+    ] },
+  { "id": "core.td_thuc", "title": "Trà nữ Nga Mi", "once": true, "weight": 30,
+    "when": { "flag": "travel.core.thuc" },
+    "text": "Trên núi Nga Mi, một trà nữ pha trà mời bệ hạ, tay nhanh như múa.",
+    "choices": [
+      { "label": "Mời nàng về cung pha trà", "effects": { "recruit": 1, "recruitOrigin": "Trà nữ Nga Mi" } },
+      { "label": "Mua trà mang về", "cost": 300, "effects": { "longThe": 5 } }
+    ] },
+  { "id": "core.td_bien_dong", "title": "Ngọc trai đêm", "once": true, "weight": 30,
+    "when": { "flag": "travel.core.bien_dong" },
+    "text": "Đêm trăng, ngư nữ lặn xuống biển mò ngọc trai, nổi lên cười giữa sóng bạc.",
+    "choices": [
+      { "label": "Mua cả rổ ngọc trai cho hậu cung", "cost": 1000, "effects": { "favorAll": 4, "fetish": { "core.trang_suc": 10 } } },
+      { "label": "Xuống biển cùng ngư nữ", "effects": { "truyLac": 6, "longThe": -2, "album": { "title": "Biển đêm", "line": "Bệ hạ lặn biển mò ngọc trai cùng ngư nữ." } } }
+    ] },
+  { "id": "core.td_thao_nguyen", "title": "Về quê Tuyết", "once": true, "weight": 40,
+    "when": { "flag": "travel.core.thao_nguyen", "hasConsort": "core.tuyet" },
+    "text": "Đoàn tuần du dừng ở bộ tộc của Hách Liên Tuyết. Nàng nhảy xuống ngựa, chạy ào vào lều của mẹ.",
+    "choices": [
+      { "label": "Ở lại một tuần cho nàng sum họp", "effects": { "favorConsort": { "core.tuyet": 25 }, "flag": "tuyet_ve_que" }, "result": "Đêm cuối, cả bộ tộc đốt lửa tiễn bệ hạ." }
+    ] }
+]

@@ -3,7 +3,7 @@
   "name": "Ví dụ: Hội Hoa Đăng",
   "version": "0.1.0",
   "author": "Mẫu cho bên thứ ba",
-  "game_version": ">=0.1",
+  "game_version": ">=0.2",
   "rating": "25+",
   "requires": ["core"],
   "files": {

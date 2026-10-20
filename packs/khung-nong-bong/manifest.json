@@ -1,0 +1,16 @@
+{
+  "id": "khung-nong-bong",
+  "name": "Khung: Sự nóng bỏng",
+  "version": "0.1.0",
+  "author": "Khung mẫu cho bên thứ ba",
+  "game_version": ">=0.2",
+  "rating": "25+",
+  "requires": [
+    "core"
+  ],
+  "files": {
+    "fetishes": "fetishes.json",
+    "events": "events.json",
+    "scenes": "scenes.js"
+  }
+}

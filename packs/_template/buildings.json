@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ten-goi-cua-ban.cong_trinh_mau",
+    "name": "Tên công trình",
+    "cost": 2000,
+    "desc": "Mở sự kiện gì",
+    "requires": {
+      "truyLac": {
+        "gte": 20
+      }
+    },
+    "requiresText": "Cần Trụy lạc từ 20",
+    "effects": {
+      "hoaKhi": 5
+    }
+  }
+]

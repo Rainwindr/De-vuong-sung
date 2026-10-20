@@ -37,6 +37,12 @@
     };
   }, PACK);
 
+  // Cảnh cho cuộc thi: ctx.extra.winner, ctx.extra.ranking
+  Game.hooks.register(PACK + ".thi_mau", (ctx) => ({
+    title: "Tên cuộc thi",
+    text: `Thứ hạng: ${(ctx.extra.ranking || []).join(" › ")}.\n> ${ctx.extra.winner} thắng.`,
+  }), PACK);
+
   // Ghi đè cảnh của gói khác: đăng ký lại đúng id đó.
   // Game.hooks.register("core.thi_tam", (ctx) => ({ title: "...", text: "..." }), PACK);
 

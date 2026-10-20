@@ -1,0 +1,137 @@
+[
+  {
+    "id": "core.da_yen_dang_co", "title": "Dạ yến đăng cơ", "speaker": "core.nhu_yen", "once": true, "weight": 60,
+    "when": { "age": { "lte": 18 }, "generation": 1, "speakerInHarem": false },
+    "text": "Tiếng tỳ bà vang lên, một vũ cơ áo đỏ xoay giữa điện, tà áo mỏng như khói. Múa xong, nàng quỳ dâng chén rượu.\n> Bệ hạ, đêm nay là đêm của người. Sao không vui cho trọn?",
+    "choices": [
+      { "label": "Nhận chén rượu, giữ nàng lại", "effects": { "truyLac": 10, "addConsortSpeaker": true, "favor": 20 }, "hook": "core.da_yen_thi_tam" },
+      { "label": "Ban thưởng rồi cho lui", "effects": { "danTam": 5, "flag": "nhu_yen_doi" }, "result": "Liễu Như Yên lui ra, ánh mắt ngoái lại một lần." },
+      { "label": "Phong nàng làm Đáp ứng ngay tại chỗ", "effects": { "truyLac": 15, "danTam": -5, "addConsortSpeaker": true, "favor": 10 }, "result": "Quần thần xì xào, nhưng chẳng ai dám can." }
+    ]
+  },
+  {
+    "id": "core.nhu_yen_quay_lai", "title": "Vũ cơ trở lại", "speaker": "core.nhu_yen", "once": true, "weight": 6,
+    "when": { "flag": "nhu_yen_doi", "speakerInHarem": false, "truyLac": { "gte": 10 } },
+    "text": "Yến Trung Thu, lại là nàng áo đỏ năm nào. Lần này nàng không dâng rượu, chỉ đứng nhìn bệ hạ từ xa.\n> Thiếp đợi lâu rồi. Bệ hạ còn định để thiếp đợi nữa sao?",
+    "choices": [
+      { "label": "Nạp nàng vào cung", "effects": { "truyLac": 8, "addConsortSpeaker": true, "favor": 25 }, "result": "Liễu Như Yên nhập cung, cười như đã biết trước kết cục." },
+      { "label": "Vẫn từ chối", "effects": { "danTam": 3 }, "result": "Nàng cúi đầu, quay đi, không nói thêm lời nào." }
+    ]
+  },
+  {
+    "id": "core.tuyen_tu_dau", "title": "Tuyển tú lần đầu", "once": true, "weight": 40,
+    "when": { "month": { "in": [3, 4] }, "age": { "lte": 18 }, "generation": 1 },
+    "text": "Điện Trữ Tú xếp hàng sáu mươi tú nữ, tất cả từ 18 đến 22 tuổi. Thái hậu ngồi cạnh, nhắc khẽ.\n> Hoàng nhi cứ chọn theo lòng mình. Ai gia chỉ cần cháu.",
+    "choices": [
+      { "label": "Lưu bài tử hai người", "effects": { "recruit": 2, "truyLac": 4 }, "result": "Hai tú nữ được giữ lại, phong Đáp ứng." },
+      { "label": "Lưu bài tử năm người", "effects": { "recruit": 5, "truyLac": 10, "quocKho": -500 }, "result": "Năm tú nữ nhập cung. Thái hậu cười mãn nguyện." },
+      { "label": "Ban hoa cho tất cả về nhà", "effects": { "danTam": 3 }, "result": "Thái hậu thở dài, nhưng không nói gì." }
+    ]
+  },
+  {
+    "id": "core.huong_la", "title": "Hương lạ dưới gối", "once": true, "weight": 5,
+    "when": { "truyLac": { "gte": 15 } },
+    "text": "Một túi hương được đặt dưới gối, không ghi tên ai. Mùi ngọt và ấm khiến bệ hạ thao thức cả đêm.",
+    "choices": [
+      { "label": "Truy tìm chủ nhân", "effects": { "truyLac": 5, "flag": "tim_huong", "fetish": { "core.huong_sac": 5 } }, "result": "Lý công công đi khắp sáu cung ngửi hương. Manh mối dẫn ra ngoài cung, đến một tiệm hương phấn." },
+      { "label": "Treo thưởng cho ai chế hương hay nhất", "effects": { "quocKho": -300, "truyLac": 4, "favorAll": 3 }, "result": "Cả hậu cung đua nhau chế hương." },
+      { "label": "Vứt đi", "effects": {}, "result": "Tháng sau, túi hương lại xuất hiện." }
+    ]
+  },
+  {
+    "id": "core.tiem_huong", "title": "Tiệm hương Hồ thị", "speaker": "core.mi_nuong", "once": true, "weight": 12,
+    "when": { "flag": "tim_huong", "speakerInHarem": false },
+    "text": "Theo dấu túi hương, bệ hạ cải trang bước vào tiệm Hồ thị. Bà chủ trẻ nhìn một cái đã cười.\n> Công tử tìm được đến đây, chắc là người ngủ không yên vì túi hương của ta.",
+    "choices": [
+      { "label": "Mời nàng vào cung chế hương", "effects": { "addConsortSpeaker": true, "favor": 25, "truyLac": 5 }, "result": "Hồ Mị Nương đóng cửa tiệm, mang theo cả trăm lọ hương vào cung." },
+      { "label": "Ở lại nghe nàng giảng về hương", "effects": { "addConsortSpeaker": true, "favor": 30, "fetish": { "core.huong_sac": 10 } }, "hook": "core.tiem_huong" }
+    ]
+  },
+  {
+    "id": "core.den_long", "title": "Lễ hội đèn lồng", "speaker": "core.mi_nuong", "once": true, "weight": 8,
+    "when": { "month": 1, "truyLac": { "gte": 10 }, "speakerInHarem": false, "notFlag": "tim_huong" },
+    "text": "Rằm tháng Giêng, bệ hạ cải trang ra phố. Giữa biển đèn hoa, một cô gái đeo mặt nạ hồ ly kéo tay áo người.\n> Công tử đoán đúng câu đố này, ta tháo mặt nạ cho xem.",
+    "choices": [
+      { "label": "Giải câu đố, mời nàng vào cung", "effects": { "addConsortSpeaker": true, "favor": 20, "truyLac": 6 }, "result": "Hồ Mị Nương, chủ tiệm hương phấn, theo bệ hạ về cung." },
+      { "label": "Đi cùng nàng hết đêm hội", "effects": { "truyLac": 10, "addConsortSpeaker": true, "favor": 25 }, "hook": "core.den_long_dem" },
+      { "label": "Mỉm cười, bước tiếp", "effects": { "meet": true, "flag": "tim_huong" }, "result": "Mùi hương của nàng còn vương trên tay áo." }
+    ]
+  },
+  {
+    "id": "core.bo_trieu", "title": "Lần đầu bỏ triều", "once": true, "weight": 10,
+    "when": { "flag": "firstNight" },
+    "text": "Trời đã sáng. Thái giám gõ cửa: bá quan đang đợi. Người bên cạnh níu tay áo bệ hạ.",
+    "choices": [
+      { "label": "Dậy thượng triều", "effects": { "danTam": 5 }, "result": "Bá quan tung hô vạn tuế." },
+      { "label": "Ở lại", "effects": { "truyLac": 10, "danTam": -5 }, "result": "Lý công công ra truyền: hôm nay miễn triều." },
+      { "label": "Truyền chỉ: ba ngày một lần lâm triều", "effects": { "truyLac": 20, "danTam": -15, "flag": "it_lam_trieu" }, "result": "Từ đó cửa Kim Loan điện mở ít hơn cửa hậu cung." }
+    ]
+  },
+  {
+    "id": "core.vi_hanh_giang_nam", "title": "Vi hành Giang Nam", "speaker": "core.tu_lan", "once": true, "weight": 8,
+    "when": { "truyLac": { "gte": 30 }, "month": { "in": [2, 3, 4] }, "speakerInHarem": false },
+    "text": "Bệ hạ cải trang thư sinh, bước vào tòa lầu đẹp nhất bến Tần Hoài. Sau tấm rèm, một giọng nói cất lên.\n> Công tử lạ mặt quá. Muốn nghe đàn, hay muốn nghe chuyện?",
+    "choices": [
+      { "label": "Nghe đàn suốt đêm", "effects": { "truyLac": 6, "meet": true, "flag": "gap_tu_lan" }, "hook": "core.tu_lan_dem_dau" },
+      { "label": "Lộ thân phận, chuộc nàng về cung", "cost": 3000, "effects": { "truyLac": 10, "addConsortSpeaker": true, "favor": 20 }, "result": "Mạc Tử Lan nhập cung với phẩm Quý nhân." },
+      { "label": "Mua cả thuyền hoa", "cost": 8000, "effects": { "truyLac": 25, "recruit": 3, "recruitOrigin": "Ca kỹ thuyền hoa", "addConsortSpeaker": true }, "result": "Cả thuyền hoa theo bệ hạ về kinh." }
+    ]
+  },
+  {
+    "id": "core.tu_lan_quay_lai", "title": "Thư từ Giang Nam", "speaker": "core.tu_lan", "once": true, "weight": 6,
+    "when": { "flag": "gap_tu_lan", "speakerInHarem": false },
+    "text": "Một phong thư thơm mùi lan gửi vào cung, chỉ một dòng.\n> Công tử chưa nghe hết câu chuyện. Thiếp vẫn để dành đoạn cuối.",
+    "choices": [
+      { "label": "Sai người đi chuộc nàng", "cost": 3000, "effects": { "addConsortSpeaker": true, "favor": 25 }, "result": "Mạc Tử Lan nhập cung, mang theo cây đàn cũ." },
+      { "label": "Để lá thư lại", "effects": {}, "result": "Lá thư nằm trong ngăn kéo, lâu lâu lại được lấy ra đọc." }
+    ]
+  },
+  {
+    "id": "core.thanh_ca_dan_trang", "title": "Đàn dưới trăng", "speaker": "core.thanh_ca", "once": true, "weight": 6,
+    "when": { "truyLac": { "gte": 15 }, "speakerInHarem": false },
+    "text": "Nửa đêm, tiếng đàn buồn vọng qua tường cung. Bệ hạ đi theo, gặp một cầm nữ mới vào làm nhạc công.\n> Thiếp đàn cho trăng nghe thôi. Không ngờ trăng lại có người nghe hộ.",
+    "choices": [
+      { "label": "Nạp nàng làm phi", "effects": { "addConsortSpeaker": true, "favor": 20, "truyLac": 4 }, "result": "Thẩm Thanh Ca được phong Quý nhân." },
+      { "label": "Ngồi nghe đến sáng", "effects": { "addConsortSpeaker": true, "favor": 30, "affection": 20 }, "result": "Sáng ra, khúc nhạc có tên mới, đặt theo niên hiệu của bệ hạ." }
+    ]
+  },
+  {
+    "id": "core.hoang_hau_can_gian", "title": "Lời can gián", "speaker": "core.uyen_nghi", "once": true, "weight": 14,
+    "when": { "truyLac": { "gte": 50 }, "speakerInHarem": true },
+    "text": "Lục Uyển Nghi quỳ trước điện, tháo trâm cài, tóc xõa xuống.\n> Thiếp không dám ghen. Thiếp chỉ sợ một ngày tỉnh dậy, bệ hạ không còn là bệ hạ của thiếp nữa.",
+    "choices": [
+      { "label": "Đỡ nàng dậy, hứa tiết chế", "effects": { "truyLac": -10, "favor": 25, "affection": 20, "flag": "uyen_nghi_hoi_dau" }, "result": "Nàng khóc trong vòng tay bệ hạ." },
+      { "label": "Lạnh lùng cho lui", "effects": { "favor": -30 }, "result": "Từ đó cung của nàng đóng cửa sớm." },
+      { "label": "Kéo nàng sa ngã cùng", "effects": { "truyLac": 15, "flag": "uyen_nghi_sa_nga", "consent": { "core.lua_la": "willing", "core.nhap_vai": "willing", "core.chinh_phuc": "willing", "core.chu_to": "willing" }, "trait": "Phóng túng" }, "hook": "core.uyen_nghi_sa_nga" }
+    ]
+  },
+  {
+    "id": "core.me_lau_lac", "title": "Lạc trong Mê Lâu", "cooldown": 12, "weight": 6,
+    "when": { "building": "core.me_lau", "harem": { "gte": 3 } },
+    "text": "Mê Lâu nghìn phòng, hành lang dát vàng, rèm lụa trắng phủ kín. Mỗi phòng một mỹ nhân đợi sẵn.\n> Bệ hạ cứ lạc đường đi. Chúng thiếp sẽ tìm thấy người.",
+    "choices": [
+      { "label": "Ở lại ba ngày ba đêm", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 20, "longThe": -10, "danTam": -10 }, "hook": "core.me_lau", "participants": { "select": "top_favor", "count": 3 } },
+      { "label": "Chỉ dạo một vòng", "effects": { "truyLac": 5 }, "result": "Bệ hạ lạc đường đến tận khuya." }
+    ]
+  },
+  {
+    "id": "core.dan_duoc", "title": "Đan dược của đạo sĩ", "cooldown": 24, "weight": 4,
+    "when": { "longThe": { "lte": 60 } },
+    "text": "> Bần đạo có Cửu Chuyển Kim Đan. Một viên, bệ hạ trẻ lại mười năm.",
+    "choices": [
+      { "label": "Uống một viên", "effects": { "longThe": 15, "truyLac": 3 }, "result": "Người nóng ran, sức lực trở lại." },
+      { "label": "Uống ba viên", "effects": { "longThe": 35, "truyLac": 10, "danTam": -5 }, "result": "Bệ hạ thấy mình như mười tám tuổi. Thái y lắc đầu." },
+      { "label": "Đuổi đạo sĩ", "effects": { "danTam": 3 }, "result": "Đạo sĩ đi rồi, chỉ để lại mùi lưu huỳnh." }
+    ]
+  },
+  {
+    "id": "core.su_quan", "title": "Sử quan", "cooldown": 36, "weight": 3,
+    "when": { "truyLac": { "gte": 60 } },
+    "text": "> Thần đã ghi: năm ấy, đế không lâm triều suốt bốn mươi ngày.",
+    "choices": [
+      { "label": "Bắt sửa sử", "effects": { "danTam": -15 }, "result": "Sử quan từ chối. Chuyện này cũng bị ghi vào sử." },
+      { "label": "Cười xòa bỏ qua", "effects": {}, "result": "Sử quan cúi đầu, tiếp tục viết." },
+      { "label": "Mời sử quan dự yến", "effects": { "truyLac": 5, "flag": "su_quan_sa_nga" }, "result": "Sáng hôm sau, trang sử có thêm vài câu thơ ca tụng." }
+    ]
+  }
+]

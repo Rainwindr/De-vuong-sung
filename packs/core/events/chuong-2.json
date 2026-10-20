@@ -1,0 +1,140 @@
+[
+  {
+    "id": "core.song_phi", "title": "Song phi nhập cung", "speaker": "core.song_nguyet", "once": true, "weight": 8,
+    "when": { "truyLac": { "gte": 40 }, "speakerInHarem": false },
+    "text": "Hai chị em sinh đôi, cùng 20 tuổi, một người tóc búi cao, một người tóc xõa. Họ đồng thanh.\n> Bọn thiếp chưa từng xa nhau một ngày. Bệ hạ muốn một, thì phải nhận cả hai.",
+    "choices": [
+      { "label": "Nhận cả hai", "effects": { "truyLac": 15, "addConsort": ["core.song_nguyet", "core.song_nhat"] }, "result": "Hai chị em nhập cung, ở chung một điện." },
+      { "label": "Nhận cả hai, ban điện riêng lộng lẫy nhất", "cost": 1000, "effects": { "truyLac": 20, "addConsort": ["core.song_nguyet", "core.song_nhat"], "hoaKhi": -10 }, "result": "Cả hậu cung ghen tị với điện Song Nguyệt." },
+      { "label": "Từ chối", "effects": {}, "result": "Hai chị em dắt tay nhau rời đi." }
+    ]
+  },
+  {
+    "id": "core.song_phi_dem_dau", "title": "Hai mà một", "speaker": "core.song_nguyet", "once": true, "weight": 10,
+    "when": { "hasConsort": ["core.song_nguyet", "core.song_nhat"], "speakerInHarem": true },
+    "text": "Đêm đầu tiên, thái giám lật thẻ Song Nguyệt. Cửa mở ra, có hai người đứng đợi.\n> Bọn thiếp đã nói rồi mà.",
+    "choices": [
+      { "label": "Cười, cho cả hai ở lại", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 8, "favor": 15, "favorConsort": { "core.song_nhat": 15 } }, "hook": "core.song_phi", "participants": ["core.song_nguyet", "core.song_nhat"] },
+      { "label": "Bắt đoán ai là chị trước đã", "effects": { "favor": 10, "favorConsort": { "core.song_nhat": 10 } }, "result": "Bệ hạ đoán sai. Hai chị em cười đến chảy nước mắt." }
+    ]
+  },
+  {
+    "id": "core.xe_de", "title": "Xe dê định mệnh", "cooldown": 6, "weight": 5,
+    "when": { "harem": { "gte": 8 } },
+    "text": "Hậu cung quá đông, bệ hạ không biết chọn ai.\n> Để con dê chọn cho trẫm.\nXe dê lăn qua các cung. Có cửa cung rắc muối, có cửa cắm lá trúc.",
+    "choices": [
+      { "label": "Thả dê đi", "effects": { "truyLac": 3 }, "hook": "core.xe_de", "participants": { "select": "random", "count": 1 } },
+      { "label": "Phạt ai gian lận rắc muối", "effects": { "favorAll": -3, "hoaKhi": 5 }, "result": "Từ đó không ai dám rắc muối nữa. Con dê buồn hẳn." }
+    ]
+  },
+  {
+    "id": "core.bach_hoa", "title": "Đêm Bách Hoa", "speaker": "random", "cooldown": 12, "weight": 6,
+    "when": { "harem": { "gte": 6 }, "truyLac": { "gte": 55 }, "favor": { "gte": 60 }, "speakerTrait": "Mê hoặc" },
+    "text": "> Một đêm một người, bệ hạ không thấy chậm sao? Đêm nay, để cả vườn hoa cùng nở.",
+    "choices": [
+      { "label": "Mời ba người được sủng nhất", "effects": { "truyLac": 15, "longThe": -5, "favorAll": -2 }, "hook": "core.bach_hoa", "participants": { "select": "top_favor", "count": 3 }, "minParticipants": 3, "fetish": ["core.ngam_nhin"] },
+      { "label": "Mời sáu người", "effects": { "truyLac": 30, "longThe": -15, "favorAll": -4 }, "hook": "core.bach_hoa", "participants": { "select": "top_favor", "count": 6 }, "minParticipants": 6, "fetish": ["core.ngam_nhin"] },
+      { "label": "Đêm nay chỉ một người", "effects": { "favor": 5, "night": true }, "result": "{name} bĩu môi, rồi vẫn ở lại." }
+    ]
+  },
+  {
+    "id": "core.duc_tri_thien_huong", "title": "Dục Trì Thiên Hương", "speaker": "random", "cooldown": 8, "weight": 5,
+    "when": { "building": "core.ho_duc_tri", "favor": { "gte": 40 } },
+    "text": "Hồ tắm lát ngọc bốc hơi nghi ngút, mặt nước rải đầy cánh hoa. {name} vén rèm, cười.\n> Nước ấm rồi. Bệ hạ định đứng nhìn mãi sao?",
+    "choices": [
+      { "label": "Tắm cùng nàng", "fetish": ["core.duc_tri"], "effects": { "favor": 15, "truyLac": 4 }, "hook": "core.duc_tri" },
+      { "label": "Mở cửa hồ cho cả hậu cung", "fetish": ["core.duc_tri", "core.ngam_nhin"], "participants": { "select": "top_favor", "count": 5 }, "minParticipants": 3, "effects": { "truyLac": 15, "fetish": { "core.ngam_nhin": 10 } }, "hook": "core.duc_tri_tap_the" },
+      { "label": "Ngồi bên hồ uống trà", "effects": { "favor": 5 }, "result": "Hơi nước làm mờ cả ấm trà." }
+    ]
+  },
+  {
+    "id": "core.hi_kich", "title": "Hí kịch cung đình", "speaker": "random", "cooldown": 8, "weight": 5,
+    "when": { "fetishUnlocked": "core.nhap_vai", "favor": { "gte": 45 } },
+    "text": "> Đêm nay thiếp không phải {rank}. Thiếp là nữ thích khách lẻn vào hoàng cung… và bị bệ hạ bắt được.",
+    "choices": [
+      { "label": "Thích khách và hoàng đế", "fetish": ["core.nhap_vai"], "effects": { "favor": 10 }, "hook": "core.nhap_vai_thich_khach", "extra": { "kichBan": "thich_khach" } },
+      { "label": "Thôn nữ và quan tuần du", "fetish": ["core.nhap_vai", "core.y_phuc"], "effects": { "favor": 12 }, "hook": "core.nhap_vai_thon_nu", "extra": { "kichBan": "thon_nu" } },
+      { "label": "Nữ tướng bại trận", "requires": { "fetishLevel": { "core.nhap_vai": { "gte": 70 } } }, "fetish": ["core.nhap_vai", "core.y_phuc"], "effects": { "favor": 15, "truyLac": 5 }, "hook": "core.nhap_vai_nu_tuong", "extra": { "kichBan": "nu_tuong" } },
+      { "label": "Đảo vai: bệ hạ làm nô bộc", "requires": { "fetishLevel": { "core.nhap_vai": { "gte": 90 } } }, "fetish": ["core.nhap_vai", "core.chu_to"], "effects": { "favor": 20, "truyLac": 8 }, "hook": "core.nhap_vai_dao_vai", "extra": { "kichBan": "dao_vai" } }
+    ]
+  },
+  {
+    "id": "core.dai_lua_do", "title": "Dải lụa đỏ", "speaker": "random", "cooldown": 10, "weight": 4,
+    "when": { "fetishLevel": { "core.lua_la": { "gte": 50 } }, "favor": { "gte": 55 } },
+    "text": "{name} đặt một dải lụa đỏ vào tay bệ hạ.\n> Bệ hạ trói thiếp, hay để thiếp trói bệ hạ?",
+    "choices": [
+      { "label": "Bệ hạ trói nàng", "fetish": ["core.troi_lua"], "effects": { "favor": 10, "fetish": { "core.chinh_phuc": 5 } }, "hook": "core.lua_do_a" },
+      { "label": "Để nàng trói bệ hạ", "fetish": ["core.troi_lua", "core.chu_to"], "effects": { "favor": 15, "truyLac": 5 }, "hook": "core.lua_do_b" },
+      { "label": "Ban lụa đỏ cho toàn hậu cung làm ám hiệu", "effects": { "truyLac": 10, "flag": "lua_do_am_hieu", "favorAll": 2 }, "result": "Từ nay dải lụa đỏ trước cửa cung nghĩa là đêm nay nàng sẵn lòng." }
+    ]
+  },
+  {
+    "id": "core.ty_thi_sung", "title": "Tỷ thí giành sủng", "speaker": "core.tuyet", "once": true, "weight": 8,
+    "when": { "hasConsort": ["core.tuyet", "core.nhu_yen"], "favor": { "gte": 60 } },
+    "text": "> Múa uyển chuyển thì ai chẳng làm được. Liễu Như Yên, dám thi với ta điệu múa thảo nguyên không?\nNhư Yên nhướn mày: người thua tự xin rời Dưỡng Tâm điện một tháng.",
+    "choices": [
+      { "label": "Cho Như Yên thắng", "effects": { "favorConsort": { "core.nhu_yen": 20, "core.tuyet": -10 } }, "hook": "core.ty_thi_nhu_yen", "participants": ["core.nhu_yen"] },
+      { "label": "Cho Tuyết thắng", "effects": { "favor": 20, "favorConsort": { "core.nhu_yen": -10 } }, "hook": "core.ty_thi_tuyet" },
+      { "label": "Tuyên bố hòa, giữ cả hai đêm nay", "fetish": ["core.ganh_dua"], "effects": { "truyLac": 15, "favor": 10, "favorConsort": { "core.nhu_yen": 10 } }, "hook": "core.ty_thi_hoa", "participants": ["core.tuyet", "core.nhu_yen"] }
+    ]
+  },
+  {
+    "id": "core.bit_mat_bat_de", "title": "Bịt mắt bắt dê", "cooldown": 10, "weight": 4,
+    "when": { "harem": { "gte": 6 }, "truyLac": { "gte": 35 } },
+    "text": "Các phi tần bịt mắt bệ hạ bằng lụa đen rồi tản ra khắp điện, tiếng cười khúc khích khắp nơi.\n> Bắt được ai, bệ hạ phải đoán đúng tên. Sai thì… phạt.",
+    "choices": [
+      { "label": "Chơi", "effects": { "truyLac": 5, "favorAll": 2 }, "hook": "core.bit_mat_bat_de", "participants": { "select": "random", "count": 1 } },
+      { "label": "Chơi, ai bị bắt thì ở lại", "fetish": ["core.bit_mat"], "effects": { "truyLac": 8 }, "hook": "core.bit_mat_o_lai", "participants": { "select": "random", "count": 1 } },
+      { "label": "Bắt được hai người một lúc", "fetish": ["core.bit_mat"], "effects": { "truyLac": 12 }, "hook": "core.bit_mat_hai", "participants": { "select": "random", "count": 2 }, "minParticipants": 2 }
+    ]
+  },
+  {
+    "id": "core.thuyen_hoa", "title": "Thuyền hoa Thái Dịch", "cooldown": 12, "weight": 5,
+    "when": { "month": { "in": [6, 7, 8] }, "building": "core.ho_sen" },
+    "text": "Thuyền rồng thả trôi giữa hồ sen, rèm buông bốn phía, trên thuyền chỉ có rượu, đàn và mỹ nhân.",
+    "choices": [
+      { "label": "Mời hai người thân thiết nhất", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 6 }, "hook": "core.thuyen_hoa", "participants": { "select": "top_favor", "count": 2 } },
+      { "label": "Thả thuyền ba ngày không cập bến", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 25, "longThe": -10, "danTam": -10 }, "hook": "core.thuyen_hoa_ba_ngay", "participants": { "select": "top_favor", "count": 4 } },
+      { "label": "Ngắm sen một mình", "effects": { "longThe": 3 }, "result": "Gió hồ mát, bệ hạ ngủ một giấc ngon." }
+    ]
+  },
+  {
+    "id": "core.ty_muoi_tien_cu", "title": "Tỷ muội tiến cử", "speaker": "random", "cooldown": 18, "weight": 4,
+    "when": { "favor": { "gte": 85 } },
+    "text": "> Thiếp có một người bạn cũ, đàn hay, người đẹp, lại rất hiểu chuyện. Bệ hạ muốn gặp không?",
+    "choices": [
+      { "label": "Mời nàng ấy vào cung", "effects": { "recruit": 1, "recruitOrigin": "Bạn cũ được tiến cử", "favor": 5 }, "result": "Bạn của {name} nhập cung. Hai người ôm nhau khóc vì vui." },
+      { "label": "Từ chối", "effects": { "favor": -3 }, "result": "{name} hơi buồn, nhưng không nhắc lại." }
+    ]
+  },
+  {
+    "id": "core.hoang_hau_mo_yen", "title": "Yến của Uyển Nghi", "speaker": "core.uyen_nghi", "cooldown": 12, "weight": 5,
+    "when": { "flag": "uyen_nghi_sa_nga", "speakerInHarem": true },
+    "text": "Lần đầu tiên, chính {name} gửi thiệp mời.\n> Bệ hạ dạy thiếp vui thì phải vui cho trọn. Đêm nay đến cung thiếp, thiếp đã chuẩn bị một bất ngờ.",
+    "choices": [
+      { "label": "Đến", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 15, "favor": 10 }, "hook": "core.hoang_hau_yen", "participants": { "select": "top_favor", "count": 4, "includeSpeaker": true } },
+      { "label": "Đến muộn", "fetish": ["core.ngam_nhin"], "effects": { "favor": -10, "truyLac": 8 }, "hook": "core.hoang_hau_yen", "participants": { "select": "top_favor", "count": 3, "includeSpeaker": true } },
+      { "label": "Không đến", "effects": { "favor": -15, "unflag": "uyen_nghi_sa_nga", "flag": "uyen_nghi_hoi_dau" }, "result": "Đèn cung nàng tắt sớm. Sáng hôm sau, nàng lại là Hoàng hậu đoan trang như xưa." }
+    ]
+  },
+  {
+    "id": "core.cuu_phi", "title": "Cửu Phi Lệnh", "cooldown": 24, "weight": 3,
+    "when": { "truyLac": { "gte": 75 }, "harem": { "gte": 20 } },
+    "text": "Chín phi tần được chọn, mỗi người một màu lụa, xếp thành vòng quanh long sàng.\n> Chín màu, chín đêm. Hay bệ hạ muốn cả chín trong một đêm?",
+    "choices": [
+      { "label": "Chín đêm liên tiếp", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 20, "longThe": -15, "favorAll": 2 }, "hook": "core.cuu_phi_chin_dem", "participants": { "select": "top_favor", "count": 9 }, "minParticipants": 9 },
+      { "label": "Một đêm", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 35, "longThe": -25 }, "hook": "core.cuu_phi_mot_dem", "participants": { "select": "top_favor", "count": 9 }, "minParticipants": 9 },
+      { "label": "Thôi", "effects": {}, "result": "Chín dải lụa được cất vào rương." }
+    ]
+  },
+  {
+    "id": "core.tam_thien", "title": "Tam Thiên Giai Lệ", "cooldown": 36, "weight": 4,
+    "when": { "harem": { "gte": 40 } },
+    "text": "Hậu cung đã quá đông, bệ hạ không còn nhớ hết tên. Thái giám dâng sổ.\n> Bệ hạ, có nhiều vị chưa được thị tẩm lần nào. Có người đã đợi ba năm.",
+    "choices": [
+      { "label": "Lập lịch luân phiên", "effects": { "longThe": -10, "favorAll": 5, "hoaKhi": 10 }, "result": "Lý công công lập sổ luân phiên. Bệ hạ mệt nhưng hậu cung yên." },
+      { "label": "Tổ chức Tuyển sủng", "effects": { "truyLac": 10 }, "hook": "core.tuyen_sung", "participants": { "select": "random", "count": 1 } },
+      { "label": "Bỏ mặc", "effects": { "hoaKhi": -15, "favorAll": -5 }, "result": "Có tiếng khóc ở những cung xa nhất." }
+    ]
+  }
+]

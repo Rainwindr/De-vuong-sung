@@ -1,0 +1,253 @@
+[
+  { "id": "core.arc_uyen_1", "title": "Đêm sách phong", "speaker": "core.uyen_nghi", "once": true, "weight": 12,
+    "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+    "text": "Sau đại lễ, {name} tháo mũ phượng, mệt lả.\n> Cả ngày thiếp phải là {rank}. Trước mặt bệ hạ, cho thiếp làm Uyển Nghi được không?",
+    "choices": [
+      { "label": "Được. Ở đây chỉ có Uyển Nghi.", "effects": { "affection": 20, "favor": 5, "flag": "arc.uyen.1" }, "result": "Nàng cười, nụ cười đầu tiên không cần giữ lễ." },
+      { "label": "Nàng phải luôn là hình mẫu", "effects": { "favor": -5, "flag": "arc.uyen.1" }, "result": "Nàng cúi đầu vâng dạ." }
+    ] },
+  { "id": "core.arc_uyen_2", "title": "Quyển sổ khóa", "speaker": "core.uyen_nghi", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "arc.uyen.1" },
+    "text": "Bệ hạ tìm thấy một quyển sổ khóa trong ngăn bàn của {name}. Lộ ra mép giấy là những dòng thơ chưa gửi.",
+    "choices": [
+      { "label": "Đọc trộm", "effects": { "affection": 10, "flag": "arc.uyen.2" }, "result": "Toàn là thơ viết cho bệ hạ, chưa bao giờ dám gửi. Hôm sau nàng biết, đỏ mặt cả ngày." },
+      { "label": "Trả lại, không hỏi", "effects": { "affection": 15, "favor": 5, "flag": "arc.uyen.2" }, "result": "Một năm sau, chính nàng mang quyển sổ đến." }
+    ] },
+  { "id": "core.arc_uyen_3", "title": "Một ngày không làm phi", "speaker": "core.uyen_nghi", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "arc.uyen.2" },
+    "text": "> Bệ hạ, cho thiếp một ngày không phải là ai cả. Mình cải trang ra phố, được không?",
+    "choices": [
+      { "label": "Cải trang ra phố cùng nàng", "effects": { "affection": 20, "favor": 10, "flag": "arc.uyen.3", "album": { "title": "Một ngày tự do", "line": "Bệ hạ và Uyển Nghi cải trang, ăn kẹo hồ lô ở chợ phía Đông." } }, "hook": "core.uyen_nghi_ngay_tu_do" },
+      { "label": "Hôm khác nhé", "effects": { "favor": -5 }, "result": "Nàng gật đầu, nhưng mắt buồn." }
+    ] },
+  { "id": "core.arc_uyen_4", "title": "Lựa chọn", "speaker": "core.uyen_nghi", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "arc.uyen.3" },
+    "text": "> Bệ hạ muốn thiếp là Hoàng hậu mẫu mực, hay người đồng hành cùng bệ hạ trên mọi con đường?",
+    "choices": [
+      { "label": "Hoàng hậu mẫu mực", "effects": { "trait": "Mẫu nghi", "truyLac": -10, "hoaKhi": 15, "flag": "arc.uyen.done" }, "result": "Từ đó hậu cung yên ổn chưa từng thấy." },
+      { "label": "Người đồng hành", "effects": { "trait": "Phượng hoàng lửa", "flag": ["arc.uyen.done", "uyen_nghi_sa_nga"], "consent": { "core.lua_la": "willing", "core.nhap_vai": "willing", "core.chu_to": "willing", "core.chinh_phuc": "willing" } }, "result": "Nàng nắm tay bệ hạ, không buông nữa." }
+    ] },
+
+  { "id": "core.arc_can_1", "title": "Bát canh khuya", "speaker": "core.moc_can", "once": true, "weight": 12,
+    "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+    "text": "Đã là phi tần mà {name} vẫn tự tay nấu canh như hồi ở Đông cung.\n> Bệ hạ thức khuya, uống chút canh cho ấm bụng.",
+    "choices": [
+      { "label": "Uống hết, kéo nàng ngồi cạnh", "effects": { "affection": 10, "favor": 5, "flag": "arc.can.1" }, "result": "Vị canh không đổi suốt mười năm." },
+      { "label": "Bảo nàng để cung nữ làm", "effects": { "favor": -3, "flag": "arc.can.1" }, "result": "Nàng gật đầu, nhưng đêm sau canh vẫn đến." }
+    ] },
+  { "id": "core.arc_can_2", "title": "Cung nữ mới", "speaker": "core.moc_can", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "arc.can.1" },
+    "text": "Một cung nữ mới được cử hầu bệ hạ. {name} lặng lẽ buồn suốt mấy hôm.",
+    "choices": [
+      { "label": "Dỗ dành nàng", "effects": { "affection": 15, "flag": "arc.can.2" }, "result": "> Thiếp ngốc quá phải không?" },
+      { "label": "Để nàng tự vượt qua", "effects": { "trait": "Tự tin", "removeTrait": "Hay ngượng", "flag": "arc.can.2" }, "result": "Nàng tự đứng dậy. Từ đó bớt ngượng hẳn." }
+    ] },
+  { "id": "core.arc_can_3", "title": "Diều giấy trên tường thành", "speaker": "core.moc_can", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "arc.can.2" },
+    "text": "{name} đưa bệ hạ chiếc diều giấy cả hai làm năm tám tuổi, giấy đã ngả vàng.",
+    "choices": [
+      { "label": "Thả diều cùng nàng trên tường thành", "effects": { "affection": 20, "favor": 10, "flag": "arc.can.3", "album": { "title": "Diều giấy", "line": "Chiếc diều năm tám tuổi lại bay trên tường thành." } }, "hook": "core.moc_can_tuong_thanh" },
+      { "label": "Cất diều vào hộp kỷ vật", "effects": { "affection": 10, "flag": "arc.can.3" }, "result": "Hộp kỷ vật của nàng nặng thêm một chút." }
+    ] },
+  { "id": "core.arc_can_4", "title": "Lời hứa kiếp sau", "speaker": "core.moc_can", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "arc.can.3" },
+    "text": "> Kiếp sau, thiếp vẫn muốn hầu bệ hạ. Nhưng lần này, là ngang hàng.",
+    "choices": [
+      { "label": "Kiếp này đã ngang hàng rồi", "effects": { "trait": "Tri kỷ", "promote": 2, "flag": "arc.can.done", "album": { "title": "Tri kỷ", "line": "Tô Mộc Cẩn: người đứng sau lưng bệ hạ suốt một đời." } }, "result": "Nàng khóc, lần này là vì vui." }
+    ] },
+
+  { "id": "core.arc_tuyet_1", "title": "Thử thách cưỡi ngựa", "speaker": "core.tuyet", "once": true, "weight": 12,
+    "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+    "text": "> Ngựa này chưa ai thuần được. Bệ hạ dám cưỡi không?",
+    "choices": [
+      { "label": "Dám", "effects": { "longThe": -3, "favor": 15, "flag": "arc.tuyet.1" }, "result": "Bệ hạ ngã hai lần, lần thứ ba thì ngồi vững. Tuyết vỗ tay cười lớn." },
+      { "label": "Nàng cưỡi trước đi", "effects": { "favor": 8, "flag": "arc.tuyet.1" }, "result": "Nàng phi một vòng ngự uyển, tóc bay như cờ." }
+    ] },
+  { "id": "core.arc_tuyet_2", "title": "Nhớ thảo nguyên", "speaker": "core.tuyet", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "arc.tuyet.1" },
+    "text": "{name} ngồi trên mái cung nhìn về phương Bắc cả buổi chiều.",
+    "choices": [
+      { "label": "Dựng lều thảo nguyên trong ngự uyển", "cost": 800, "effects": { "affection": 20, "favor": 10, "flag": "arc.tuyet.2" }, "result": "Đêm đó nàng ngủ trong lều, nói nghe được tiếng gió quê nhà." },
+      { "label": "Hứa đưa nàng về thăm quê", "effects": { "affection": 10, "flag": ["arc.tuyet.2", "hua_thao_nguyen"] }, "result": "Nàng bắt bệ hạ móc ngoéo." }
+    ] },
+  { "id": "core.arc_tuyet_3", "title": "Đêm lửa trại", "speaker": "core.tuyet", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "arc.tuyet.2" },
+    "text": "Lửa trại giữa hoàng cung. {name} mặc áo thảo nguyên, kéo bệ hạ vào vòng múa.",
+    "choices": [
+      { "label": "Nhảy cùng nàng", "effects": { "affection": 15, "favor": 10, "truyLac": 5, "flag": "arc.tuyet.3", "album": { "title": "Lửa trại", "line": "Hách Liên Tuyết múa quanh lửa trại giữa hoàng cung." } }, "hook": "core.tuyet_lua_trai" }
+    ] },
+  { "id": "core.arc_tuyet_4", "title": "Tự do hay ở lại", "speaker": "core.tuyet", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "arc.tuyet.3" },
+    "text": "Thư từ thảo nguyên: phụ vương nàng cho phép nàng trở về.\n> Bệ hạ muốn ta đi hay ở?",
+    "choices": [
+      { "label": "Nàng tự chọn", "effects": { "trait": "Lang vương phi", "affection": 20, "flag": "arc.tuyet.done", "album": { "title": "Gió thảo nguyên", "line": "Hách Liên Tuyết chọn ở lại cấm cung." } }, "result": "> Ta ở lại. Không phải vì phải ở, mà vì muốn ở." },
+      { "label": "Để nàng về thăm một năm", "effects": { "affection": 25, "flag": "arc.tuyet.done" }, "result": "Một năm sau nàng trở lại, mang theo cả đàn ngựa." }
+    ] },
+
+  { "id": "core.arc_yen_1", "title": "Điệu múa riêng", "speaker": "core.nhu_yen", "once": true, "weight": 12,
+    "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+    "text": "> Thiếp vừa nghĩ ra một điệu múa. Chỉ múa cho một người xem.",
+    "choices": [
+      { "label": "Xem", "fetish": ["core.ngam_nhin"], "effects": { "favor": 10, "flag": "arc.yen.1" }, "hook": "core.nhu_yen_vu_rieng" },
+      { "label": "Xem, không cần gì thêm", "effects": { "favor": 5, "affection": 10, "flag": "arc.yen.1" }, "result": "Nàng múa xong, ngồi tựa vai bệ hạ đến khi trăng lặn." }
+    ] },
+  { "id": "core.arc_yen_2", "title": "Vũ cơ trẻ", "speaker": "core.nhu_yen", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "arc.yen.1" },
+    "text": "Một vũ cơ trẻ vào cung. {name} lo bị thay thế, mấy đêm liền không ngủ.",
+    "choices": [
+      { "label": "Giữ cả hai", "effects": { "recruit": 1, "recruitOrigin": "Vũ cơ trẻ", "favor": -5, "flag": "arc.yen.2" }, "result": "Như Yên tập múa đến tận khuya." },
+      { "label": "Để Như Yên dạy múa cho người mới", "effects": { "recruit": 1, "recruitOrigin": "Học trò của Như Yên", "trait": "Sư phụ", "favor": 5, "flag": "arc.yen.2" }, "result": "Thầy trò ngày càng thân." }
+    ] },
+  { "id": "core.arc_yen_3", "title": "Chấn thương", "speaker": "core.nhu_yen", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "arc.yen.2" },
+    "text": "{name} trẹo chân khi tập, thái y dặn ba tháng không được múa.\n> Không múa được, thiếp còn gì để bệ hạ nhìn?",
+    "choices": [
+      { "label": "Ở bên chăm sóc nàng", "effects": { "affection": 30, "flag": "arc.yen.3" }, "result": "Ba tháng ấy, lần đầu nàng để người khác thấy mình yếu đuối." },
+      { "label": "Gửi thái y giỏi nhất", "effects": { "affection": 5, "flag": "arc.yen.3" } }
+    ] },
+  { "id": "core.arc_yen_4", "title": "Nghê Thường Vũ Y", "speaker": "core.nhu_yen", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "arc.yen.3" },
+    "text": "Đại yến. {name} múa Nghê Thường Vũ Y trước toàn cung, váy áo như mây ngũ sắc.",
+    "choices": [
+      { "label": "Đứng dậy vỗ tay đầu tiên", "effects": { "trait": "Thiên hạ đệ nhất vũ", "favor": 5, "hoaKhi": 5, "flag": "arc.yen.done", "album": { "title": "Nghê Thường Vũ Y", "line": "Liễu Như Yên múa trước toàn cung, cả điện lặng đi." } }, "result": "Cả điện đứng dậy theo." }
+    ] },
+
+  { "id": "core.arc_lan_1", "title": "Màn kịch không báo trước", "speaker": "core.tu_lan", "once": true, "weight": 12,
+    "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+    "text": "Cả ngày hôm nay, {name} nói giọng Thục, đi đứng như một trà nữ. Không ai biết vì sao.",
+    "choices": [
+      { "label": "Nhận ra đó là một vai diễn", "effects": { "favor": 15, "flag": "arc.lan.1" }, "result": "> Bệ hạ tinh mắt thật. Thưởng cho bệ hạ một đêm làm khách trà lâu." },
+      { "label": "Hỏi nàng có ốm không", "effects": { "favor": 5, "flag": "arc.lan.1" }, "result": "Nàng cười suốt một tuần." }
+    ] },
+  { "id": "core.arc_lan_2", "title": "Bạn cũ Giang Nam", "speaker": "core.tu_lan", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "arc.lan.1" },
+    "text": "Thư từ lầu xanh cũ: một người bạn của {name} gặp khó.",
+    "choices": [
+      { "label": "Chuộc thân, đưa vào cung", "cost": 2000, "effects": { "recruit": 1, "recruitOrigin": "Bạn cũ của Tử Lan", "affection": 15, "flag": "arc.lan.2" }, "result": "Hai người bạn gặp lại, ôm nhau khóc." },
+      { "label": "Gửi tiền giúp", "cost": 800, "effects": { "affection": 10, "flag": "arc.lan.2" } }
+    ] },
+  { "id": "core.arc_lan_3", "title": "Gỡ mặt nạ", "speaker": "core.tu_lan", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "arc.lan.2" },
+    "text": "> Bệ hạ yêu Tử Lan, hay yêu những vai thiếp diễn?",
+    "choices": [
+      { "label": "Yêu Tử Lan", "effects": { "affection": 25, "flag": "arc.lan.3" }, "result": "Từ đó, trước mặt bệ hạ, nàng không diễn nữa." },
+      { "label": "Yêu cả hai", "effects": { "affection": 10, "favor": 10, "fetish": { "core.nhap_vai": 10 }, "flag": "arc.lan.3" }, "result": "> Vậy thiếp sẽ diễn cả đời cho bệ hạ xem." }
+    ] },
+  { "id": "core.arc_lan_4", "title": "Vở kịch đời mình", "speaker": "core.tu_lan", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "arc.lan.3" },
+    "text": "{name} dựng một vở kịch kể chuyện tình của hai người, từ thuyền hoa Tần Hoài đến cấm cung.",
+    "choices": [
+      { "label": "Xem đến hết", "effects": { "trait": "Danh linh", "building": "core.san_khau", "flag": "arc.lan.done", "album": { "title": "Vở kịch đời mình", "line": "Mạc Tử Lan dựng vở kịch về chuyện tình của mình với bệ hạ." } }, "result": "Vở kịch được diễn lại mỗi năm vào ngày hai người gặp nhau." }
+    ] },
+
+  { "id": "core.arc_mi_1", "title": "Hương cho riêng bệ hạ", "speaker": "core.mi_nuong", "once": true, "weight": 12,
+    "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+    "text": "> Thiếp chế một mùi hương, đặt theo niên hiệu của bệ hạ. Ngửi thử đi.",
+    "choices": [
+      { "label": "Ngửi", "effects": { "favor": 10, "fetish": { "core.huong_sac": 5 }, "flag": "arc.mi.1" }, "result": "Mùi trầm, mùi gỗ đàn hương, và một chút gì đó rất giống nàng." }
+    ] },
+  { "id": "core.arc_mi_2", "title": "Công thức thất truyền", "speaker": "core.mi_nuong", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "arc.mi.1" },
+    "text": "> Mẹ thiếp từng chế một loại hương gọi là Mộng Hồ. Công thức đã mất. Thiếp muốn tìm lại.",
+    "choices": [
+      { "label": "Sai người đi tìm khắp Giang Nam", "cost": 1000, "effects": { "affection": 15, "flag": "arc.mi.2" }, "result": "Ba tháng sau, một cuốn sổ cũ được mang về." },
+      { "label": "Cùng nàng thử chế lại", "effects": { "affection": 20, "favor": 5, "flag": "arc.mi.2" }, "result": "Cả hai thử hỏng hai mươi lần, cười đến đau bụng." }
+    ] },
+  { "id": "core.arc_mi_3", "title": "Hương mê lòng", "speaker": "core.mi_nuong", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "arc.mi.2" },
+    "text": "> Mộng Hồ đã chế xong. Bệ hạ có dám thử không? Thiếp không chắc nó làm gì đâu.",
+    "choices": [
+      { "label": "Thử", "fetish": ["core.huong_sac"], "effects": { "favor": 10, "truyLac": 5, "flag": "arc.mi.3" }, "hook": "core.mi_nuong_huong_moi" },
+      { "label": "Để dành", "effects": { "flag": "arc.mi.3" }, "result": "Lọ hương được cất kỹ trong tủ." }
+    ] },
+  { "id": "core.arc_mi_4", "title": "Tiệm hương hoàng gia", "speaker": "core.mi_nuong", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "arc.mi.3" },
+    "text": "> Thiếp nhớ tiệm cũ. Bệ hạ cho thiếp mở một tiệm hương ngoài cung nhé?",
+    "choices": [
+      { "label": "Mở Tiệm hương hoàng gia", "cost": 2000, "effects": { "trait": "Hương phi", "building": "core.phong_huong", "flag": ["arc.mi.done", "tiem_huong_hoang_gia"], "album": { "title": "Tiệm hương hoàng gia", "line": "Hồ Mị Nương mở tiệm hương, khách xếp hàng dài." } }, "result": "Tiệm hương mỗi năm mang về một khoản cho quốc khố." }
+    ] },
+
+  { "id": "core.arc_ca_1", "title": "Đàn dưới trăng", "speaker": "core.thanh_ca", "once": true, "weight": 12,
+    "when": { "speakerInHarem": true, "favor": { "gte": 30 } },
+    "text": "Nửa đêm, tiếng đàn buồn từ cung {name} vọng ra.",
+    "choices": [
+      { "label": "Đi theo tiếng đàn", "effects": { "affection": 15, "flag": "arc.ca.1" }, "result": "> Thiếp tưởng đêm nay chỉ có trăng nghe." }
+    ] },
+  { "id": "core.arc_ca_2", "title": "Bản nhạc chưa xong", "speaker": "core.thanh_ca", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 55 }, "flag": "arc.ca.1" },
+    "text": "> Khúc này thiếp viết mãi không xong lời. Bệ hạ đặt lời giúp thiếp nhé?",
+    "choices": [
+      { "label": "Viết lời về mùa xuân", "effects": { "affection": 10, "flag": ["arc.ca.2", "khuc_xuan"] }, "result": "Khúc nhạc được đặt tên Xuân Hiểu." },
+      { "label": "Viết lời về nàng", "effects": { "affection": 20, "favor": 5, "flag": ["arc.ca.2", "khuc_nang"] }, "result": "Khúc nhạc được đặt tên Thanh Ca." }
+    ] },
+  { "id": "core.arc_ca_3", "title": "Giữa hai người", "speaker": "core.thanh_ca", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "arc.ca.2" },
+    "text": "> Thiếp có lỗi. Lòng thiếp có bệ hạ, nhưng cũng có một người nữa trong hậu cung.",
+    "choices": [
+      { "label": "Trẫm không trách. Nàng cứ thương cả hai.", "effects": { "affection": 20, "attitude": 2, "flag": "arc.ca.3" }, "result": "Nàng quỳ xuống tạ ơn, nước mắt rơi trên dây đàn." },
+      { "label": "Nàng tự quyết", "effects": { "affection": 10, "flag": "arc.ca.3" }, "result": "Nàng im lặng rất lâu." }
+    ] },
+  { "id": "core.arc_ca_4", "title": "Khúc ca truyền đời", "speaker": "core.thanh_ca", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 95 }, "flag": "arc.ca.3" },
+    "text": "Khúc nhạc của {name} được cả kinh thành hát, từ tửu lâu đến bến đò.",
+    "choices": [
+      { "label": "Phong nàng Cầm Thánh", "effects": { "trait": "Cầm thánh", "danTam": 10, "flag": "arc.ca.done", "album": { "title": "Khúc ca truyền đời", "line": "Khúc nhạc của Thẩm Thanh Ca vang khắp kinh thành." } }, "result": "Tên nàng được khắc lên bia ở Nhạc phủ." }
+    ] },
+
+  { "id": "core.arc_song_1", "title": "Đổi chỗ", "speaker": "core.song_nguyet", "once": true, "weight": 12,
+    "when": { "hasConsort": ["core.song_nguyet", "core.song_nhat"], "favor": { "gte": 30 } },
+    "text": "Hôm nay hai chị em búi tóc giống hệt nhau, mặc áo giống hệt nhau.\n> Bệ hạ đoán xem ai là chị?",
+    "choices": [
+      { "label": "Người bên trái là chị", "effects": { "favor": 15, "favorConsort": { "core.song_nhat": 15 }, "flag": "arc.song.1" }, "result": "Đúng rồi! Hai chị em ôm chầm lấy bệ hạ." },
+      { "label": "Người bên phải là chị", "effects": { "favor": 5, "favorConsort": { "core.song_nhat": 5 }, "flag": "arc.song.1" }, "result": "Sai rồi. Hai chị em trêu bệ hạ cả tháng." }
+    ] },
+  { "id": "core.arc_song_2", "title": "Lần đầu xa nhau", "speaker": "core.song_nhat", "once": true, "weight": 10,
+    "when": { "hasConsort": ["core.song_nguyet", "core.song_nhat"], "favor": { "gte": 55 }, "flag": "arc.song.1" },
+    "text": "Song Nguyệt ốm phải dời sang cung khác dưỡng bệnh. {name} khóc suốt đêm.",
+    "choices": [
+      { "label": "Cho hai người ở cùng", "effects": { "affection": 15, "flag": "arc.song.2" }, "result": "Song Nhật tự tay sắc thuốc cho chị." },
+      { "label": "Tập cho họ quen xa nhau", "effects": { "trait": "Tự lập", "flag": "arc.song.2" }, "result": "Lần đầu tiên hai chị em có chuyện riêng để kể cho nhau." }
+    ] },
+  { "id": "core.arc_song_3", "title": "Hai tính cách", "speaker": "core.song_nhat", "once": true, "weight": 10,
+    "when": { "hasConsort": ["core.song_nguyet", "core.song_nhat"], "favor": { "gte": 75 }, "flag": "arc.song.2" },
+    "text": "Bệ hạ nhận ra: Song Nguyệt trầm và mơ mộng, còn {name} nghịch ngợm và táo bạo. Hai người khác nhau hơn ai nghĩ.",
+    "choices": [
+      { "label": "Mời riêng Song Nhật đêm nay", "effects": { "favor": 15, "flag": "arc.song.3" }, "hook": "core.song_phi_rieng" },
+      { "label": "Vẫn mời cả hai", "fetish": ["core.ngam_nhin"], "effects": { "favor": 10, "favorConsort": { "core.song_nguyet": 10 }, "flag": "arc.song.3" }, "hook": "core.song_phi", "participants": ["core.song_nguyet", "core.song_nhat"] }
+    ] },
+  { "id": "core.arc_song_4", "title": "Lời thề song sinh", "speaker": "core.song_nguyet", "once": true, "weight": 10,
+    "when": { "hasConsort": ["core.song_nguyet", "core.song_nhat"], "favor": { "gte": 95 }, "flag": "arc.song.3" },
+    "text": "> Bọn thiếp chỉ xin một điều: được phong cùng một phẩm, cùng một ngày, cùng một lễ.",
+    "choices": [
+      { "label": "Chuẩn tấu", "effects": { "promote": 1, "favorConsort": { "core.song_nhat": 30 }, "trait": "Song tinh", "flag": "arc.song.done", "album": { "title": "Đôi trăng sáng", "line": "Hai chị em Song Nguyệt, Song Nhật được phong cùng ngày." } }, "result": "Lễ sắc phong có hai mũ phượng giống hệt nhau." }
+    ] },
+
+  { "id": "core.cheo_huong_mua", "title": "Liên minh hương và múa", "speaker": "core.mi_nuong", "once": true, "weight": 6,
+    "when": { "hasConsort": ["core.mi_nuong", "core.nhu_yen"], "favor": { "gte": 50 } },
+    "text": "{name} chế một mùi hương riêng cho điệu múa của Liễu Như Yên. Hai người mời bệ hạ đến xem.",
+    "choices": [
+      { "label": "Đến xem", "fetish": ["core.huong_sac", "core.ngam_nhin"], "effects": { "truyLac": 8, "favor": 8, "favorConsort": { "core.nhu_yen": 8 } }, "hook": "core.huong_mua", "participants": ["core.mi_nuong", "core.nhu_yen"] },
+      { "label": "Chỉ xem múa", "effects": { "favorConsort": { "core.nhu_yen": 5 } }, "result": "Điệu múa đẹp, mùi hương còn đẹp hơn." }
+    ] },
+  { "id": "core.cheo_cuoi_ngua", "title": "Bài học cưỡi ngựa", "speaker": "core.tuyet", "once": true, "weight": 6,
+    "when": { "hasConsort": ["core.tuyet", "core.moc_can"] },
+    "text": "{name} tự nhận dạy Tô Mộc Cẩn cưỡi ngựa. Mộc Cẩn sợ đến tái mặt.",
+    "choices": [
+      { "label": "Đứng xem", "effects": { "favorConsort": { "core.moc_can": 5 }, "favor": 5 }, "result": "Đến chiều, Mộc Cẩn đã tự phi được một vòng. Hai người cười rất lâu." }
+    ] },
+  { "id": "core.cheo_dai_kich", "title": "Vở kịch cung đình", "speaker": "core.tu_lan", "once": true, "weight": 6,
+    "when": { "hasConsort": ["core.tu_lan", "core.thanh_ca", "core.nhu_yen"], "building": "core.san_khau" },
+    "text": "Tử Lan viết kịch, Thanh Ca soạn nhạc, Như Yên múa. Bệ hạ là khán giả duy nhất.",
+    "choices": [
+      { "label": "Xem đến hết", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 10, "hoaKhi": 10 }, "hook": "core.dai_kich_hau_cung", "participants": ["core.tu_lan", "core.thanh_ca", "core.nhu_yen"] },
+      { "label": "Vỗ tay, rồi về", "effects": { "hoaKhi": 5 } }
+    ] },
+  { "id": "core.cheo_doi_dau", "title": "Uyển Nghi và Tuyết", "speaker": "core.uyen_nghi", "once": true, "weight": 6,
+    "when": { "hasConsort": ["core.uyen_nghi", "core.tuyet"], "hoaKhi": { "lte": 60 } },
+    "text": "{name} phạt Hách Liên Tuyết vì cưỡi ngựa trong ngự uyển. Tuyết không chịu, hai người cãi nhau trước mặt cả hậu cung.",
+    "choices": [
+      { "label": "Hòa giải", "effects": { "hoaKhi": 10 }, "result": "Hai người bắt tay, mặt vẫn hầm hầm." },
+      { "label": "Bênh Uyển Nghi", "effects": { "favor": 10, "favorConsort": { "core.tuyet": -10 } } },
+      { "label": "Bênh Tuyết", "effects": { "favor": -10, "favorConsort": { "core.tuyet": 10 } } }
+    ] }
+]

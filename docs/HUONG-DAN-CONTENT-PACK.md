@@ -1,24 +1,27 @@
 # Hướng dẫn làm Content Pack
 
-Tài liệu này dành cho studio bên thứ ba muốn thêm nhân vật, sở thích, sự kiện và cảnh vào **Tửu Sắc Đế Vương** mà không cần sửa code lõi.
+Tài liệu dành cho người viết sự kiện và cho studio bên thứ ba muốn thêm nhân vật, sở thích, sự kiện, cuộc thi, quà, công trình, vùng tuần du và cảnh vào **Tửu Sắc Đế Vương** mà không sửa code lõi.
 
-Một gói là một thư mục trong `packs/`, gồm vài file JSON và một file `scenes.js`. Lõi lo chỉ số, điều kiện, lựa chọn và gọi HOOK. Gói lo nội dung.
+Một gói là một thư mục trong `packs/`, gồm vài file JSON và một hoặc nhiều file `scenes.js`. Lõi lo chỉ số, điều kiện, lựa chọn và gọi HOOK. Gói lo nội dung.
 
 ---
 
 ## 1. Bắt đầu trong 5 phút
 
-1. Copy thư mục `packs/_template` thành `packs/ten-goi-cua-ban` (chỉ chữ thường, số, dấu gạch ngang).
-2. Mở `manifest.json`, đổi `"id"` thành đúng tên thư mục, đổi `"name"` và `"author"`.
+1. Copy `packs/_template` thành `packs/ten-goi-cua-ban` (chỉ chữ thường, số, dấu gạch ngang).
+2. Trong `manifest.json`, đổi `"id"` thành đúng tên thư mục, đổi `"name"`, `"author"`.
 3. Tìm và thay mọi chữ `ten-goi-cua-ban` trong các file của gói thành id mới.
-4. Thêm tên thư mục vào `packs/index.json`:
+4. Thêm tên thư mục vào `packs/index.json`, sau các gói nó phụ thuộc:
    ```json
-   { "packs": ["core", "ten-goi-cua-ban"] }
+   { "packs": ["core", "khung-nong-bong", "vi-du-den-long", "ten-goi-cua-ban"] }
    ```
-5. Chạy game qua máy chủ web (xem `README.md`), vào tab **Gói** để xem gói đã nạp chưa và có lỗi gì không.
-6. Chạy bộ kiểm tra: `node tools/validate.js`.
+5. Chạy `node tools/validate.js` để kiểm tra.
+6. Chạy game qua máy chủ web (xem `README.md`), bật **Thiên Đạo** ở màn mở đầu, vào tab **Gói** xem lỗi, vào tab **Thiên Đạo** gọi thẳng sự kiện của gói để thử.
 
-Gói `packs/vi-du-den-long` là một gói hoàn chỉnh, chạy được, nên mở ra đọc song song với tài liệu này.
+Tham khảo song song:
+- `packs/vi-du-den-long`: gói nhỏ hoàn chỉnh (1 nhân vật, 1 sở thích, 2 sự kiện, cảnh).
+- `packs/khung-nong-bong`: khung 12 nhóm sở thích có sẵn sự kiện và HOOK, cảnh mặc định chỉ chuyển cảnh. Bên thứ ba thay cảnh bằng cách đăng ký lại HOOK.
+- `packs/core`: gói lõi, đọc để biết mọi loại sự kiện được viết thế nào.
 
 ---
 
@@ -26,16 +29,22 @@ Gói `packs/vi-du-den-long` là một gói hoàn chỉnh, chạy được, nên 
 
 ```
 packs/ten-goi-cua-ban/
-  manifest.json     bắt buộc
-  characters.json   nhân vật
-  events.json       sự kiện
-  fetishes.json     sở thích
-  names.json        tên cho tú nữ và con cái ngẫu nhiên
-  scenes.js         cảnh cho các HOOK
-  assets/           ảnh chân dung, ảnh cảnh
+  manifest.json       bắt buộc
+  characters.json     nhân vật
+  fetishes.json       sở thích
+  events/             sự kiện, chia nhiều file tùy ý
+    gap-go.json
+    hang-ngay.json
+  contests.json       cuộc thi hậu cung
+  gifts.json          quà tặng
+  buildings.json      công trình
+  regions.json        vùng tuần du
+  names.json          tên tú nữ, con cái, phu quân/phu nhân
+  scenes.js           cảnh cho các HOOK
+  assets/             ảnh
 ```
 
-Chỉ `manifest.json` là bắt buộc. File nào không dùng thì xóa khỏi `manifest.files`.
+Chỉ `manifest.json` là bắt buộc.
 
 ---
 
@@ -47,30 +56,30 @@ Chỉ `manifest.json` là bắt buộc. File nào không dùng thì xóa khỏi 
   "name": "Tên hiển thị",
   "version": "0.1.0",
   "author": "Studio X",
-  "game_version": ">=0.1",
+  "game_version": ">=0.2",
   "rating": "25+",
   "requires": ["core"],
   "files": {
     "characters": "characters.json",
-    "events": "events.json",
     "fetishes": "fetishes.json",
+    "events": ["events/gap-go.json", "events/hang-ngay.json"],
+    "contests": "contests.json",
+    "gifts": "gifts.json",
+    "buildings": "buildings.json",
+    "regions": "regions.json",
     "names": "names.json",
     "scenes": "scenes.js"
   }
 }
 ```
 
-| Trường | Ý nghĩa |
-| --- | --- |
-| `id` | Trùng tên thư mục. Là tiền tố cho mọi id trong gói. |
-| `requires` | Các gói phải nạp trước. Thứ tự trong `packs/index.json` phải khớp. |
-| `files` | Đường dẫn tương đối tới các file của gói. |
+Mỗi mục trong `files` là một file hoặc một danh sách file; các file cùng loại được gộp lại. Mỗi file JSON (trừ `names.json`) là một **mảng**.
 
 ---
 
 ## 4. Quy tắc id
 
-Mọi id trong gói bắt đầu bằng `id-gói.` để không đè lên gói khác:
+Mọi id bắt đầu bằng `id-gói.` và không trùng nhau trong gói, kể cả giữa các loại (đừng đặt sở thích và công trình cùng một id):
 
 ```
 ten-goi-cua-ban.dao_hoa          nhân vật
@@ -79,7 +88,7 @@ ten-goi-cua-ban.gap_go           sự kiện
 ten-goi-cua-ban.dem_den          HOOK
 ```
 
-Được phép tham chiếu id của gói khác (ví dụ `core.lua_la` trong `consent`, `core.uyen_nghi` trong `hasConsort`), miễn gói đó nằm trong `requires`.
+Được tham chiếu id của gói khác (ví dụ `core.lua_la`, `core.uyen_nghi`) miễn gói đó nằm trong `requires`.
 
 ---
 
@@ -93,31 +102,32 @@ ten-goi-cua-ban.dem_den          HOOK
   "origin": "Thợ làm đèn bên hồ Thái Dịch",
   "start": false,
   "rank": 1,
+  "title": null,
   "favor": 25,
   "affection": 15,
   "traits": ["Khéo tay", "Lãng mạn", "Tinh nghịch"],
   "likes": ["ten-goi-cua-ban.ngam_den"],
-  "consent": {
-    "ten-goi-cua-ban.ngam_den": "willing",
-    "core.lua_la": "persuade",
-    "core.chinh_phuc": "refuse"
-  },
+  "affinity": { "core.moc_can": 1 },
+  "consent": { "ten-goi-cua-ban.ngam_den": "willing", "core.lua_la": "persuade", "core.chinh_phuc": "refuse" },
   "portrait": { "glyph": "桃", "hue": 340, "image": "assets/dao_hoa.webp" },
   "lines": { "low": "Câu khi Sủng ái thấp.", "high": "Câu khi Sủng ái cao." }
 }
 ```
 
-| Trường | Bắt buộc | Ý nghĩa |
-| --- | --- | --- |
-| `age` | Có | **Từ 18 trở lên.** Thiếu hoặc dưới 18, nhân vật bị lõi từ chối khi nạp. |
-| `start` | | `true` thì có sẵn trong hậu cung khi bắt đầu game. Mặc định nhân vật chỉ xuất hiện qua sự kiện. |
-| `rank` | | 0 Đáp ứng → 6 Hoàng quý phi. Hoàng hậu (7) chỉ do người chơi lập. |
-| `favor`, `affection` | | Sủng ái và Tình cảm khởi đầu, 0–100. |
-| `likes` | | Sở thích hợp gu. Thị tẩm đúng gu được cộng thêm Sủng ái. |
-| `consent` | | Mức đồng thuận theo từng id sở thích: `willing` (Sẵn lòng), `persuade` (Cần thuyết phục), `refuse` (Từ chối). Sở thích không ghi thì dùng `default_consent` của sở thích đó. |
-| `portrait.glyph` | | Một ký tự hiện trong khung chân dung khi chưa có ảnh. |
-| `portrait.hue` | | Màu khung, 0–359. |
-| `portrait.image` | | Ảnh chân dung, đường dẫn tương đối với thư mục gói. Khuyên dùng webp vuông 512×512. |
+| Trường | Ý nghĩa |
+| --- | --- |
+| `age` | **Bắt buộc, từ 18 trở lên.** Thiếu hoặc dưới 18 thì lõi từ chối nhân vật. |
+| `start` | `true`: có sẵn trong hậu cung khi bắt đầu đời thứ nhất. Mặc định nhân vật chỉ xuất hiện qua sự kiện. |
+| `rank` | 0 Đáp ứng → 6 Hoàng quý phi. Hoàng hậu (7) chỉ do người chơi lập. |
+| `title` | Phong hiệu cho phẩm Phi trở lên, ví dụ `"Thục"` → "Thục Phi". Bỏ trống thì người chơi tự đặt. |
+| `favor`, `affection` | Sủng ái, Tình cảm khởi đầu (0–100). |
+| `traits` | Đặc điểm. Ảnh hưởng con cái thừa hưởng, quà hợp gu, cuộc thi, sự kiện có `speakerTrait`. |
+| `likes` | Sở thích hợp gu: thị tẩm đúng gu được thêm Sủng ái; quà có sở thích này được nhân đôi. |
+| `affinity` | Mức hợp tính với phi khác (1–3). Tình Ý của cặp tăng mỗi tháng theo mức này (hệ thống đối thực). |
+| `consent` | Mức đồng thuận theo từng sở thích: `willing` (Sẵn lòng), `persuade` (Cần thuyết phục), `refuse` (Từ chối). Không ghi thì dùng `default_consent` của sở thích. |
+| `portrait` | `glyph` (một ký tự), `hue` (0–359), `image` (đường dẫn trong gói, webp vuông 512×512). |
+
+**Thuyết phục:** người chơi có nút "Thuyết phục" với các mục `persuade`. Thành công khi Sủng ái và Tình cảm đều từ `50 + tầng × 10` trở lên; mục chuyển sang `willing`. Mục `refuse` không bao giờ đổi qua cơ chế này hay qua sự kiện.
 
 ---
 
@@ -130,37 +140,31 @@ ten-goi-cua-ban.dem_den          HOOK
   "tier": 1,
   "unlock": { "truyLac": { "gte": 10 } },
   "default_consent": "persuade",
-  "desc": "Một dòng mô tả."
+  "desc": "Một dòng mô tả.",
+  "combos": [{ "with": "core.ngam_nhin", "hook": "ten-goi-cua-ban.combo_den", "name": "Đèn Hoa Muôn Sắc" }]
 }
 ```
 
-- `tier`: 1 đến 3. Được truyền vào HOOK qua `ctx.tier` để gói chỉnh cường độ cảnh.
-- `unlock`: điều kiện mở khóa, cùng cú pháp với `when` của sự kiện (mục 7.2).
-- `default_consent`: mức đồng thuận cho nhân vật không ghi rõ sở thích này. Nên để `persuade`.
-
-Sở thích hiện trong tab **Sở thích**, trong bảng chi tiết của từng phi tần, và trong màn **Lật thẻ bài** khi đã mở khóa.
+- `tier` 1–3. Truyền vào HOOK qua `ctx.tier`.
+- `unlock`: điều kiện mở khóa, cùng cú pháp mục 7.2. Làm cây sở thích bằng `fetishLevel` hoặc `fetishUnlocked`, ví dụ `{ "fetishLevel": { "core.lua_la": { "gte": 50 } } }`.
+- `combos`: khi người chơi chọn cả hai sở thích trong một đêm Lật thẻ, lõi gọi `hook` của combo thay cho cảnh thường và `ctx.combo` là `name`.
+- Độ nghiện tăng mỗi lần dùng. Nghiện từ 80 mà một năm không dùng thì Long thể giảm. Lặp lại đúng một bộ sở thích quá 5 lần liền thì nhạt dần.
 
 ---
 
-## 7. Sự kiện (events.json)
+## 7. Sự kiện (events/*.json)
 
 ```json
 {
   "id": "ten-goi-cua-ban.dem_den",
   "title": "Chiếc đèn chỉ thắp một lần",
   "speaker": "ten-goi-cua-ban.dao_hoa",
-  "once": false,
   "cooldown": 6,
   "weight": 4,
   "when": { "speakerInHarem": true, "favor": { "gte": 40 } },
   "text": "{name} treo kín cung bằng đèn.\n> Đêm nay chỉ có ánh đèn thôi, bệ hạ chịu không?",
   "choices": [
-    {
-      "label": "Chịu",
-      "fetish": ["ten-goi-cua-ban.ngam_den"],
-      "effects": { "favor": 10, "truyLac": 5 },
-      "hook": "ten-goi-cua-ban.dem_den"
-    },
+    { "label": "Chịu", "fetish": ["ten-goi-cua-ban.ngam_den"], "effects": { "favor": 10, "truyLac": 5 }, "hook": "ten-goi-cua-ban.dem_den" },
     { "label": "Để hôm khác", "effects": { "favor": -2 }, "result": "Đèn vẫn sáng đến sáng." }
   ]
 }
@@ -170,69 +174,127 @@ Sở thích hiện trong tab **Sở thích**, trong bảng chi tiết của từ
 
 | Trường | Ý nghĩa |
 | --- | --- |
-| `speaker` | Id nhân vật nói chính. `"random"` để lõi chọn ngẫu nhiên một phi trong hậu cung. Bỏ trống nếu không có người nói. |
-| `once` | `true` thì chỉ xảy ra một lần mỗi lượt chơi. |
-| `cooldown` | Số tháng tối thiểu giữa hai lần xảy ra. |
-| `weight` | Trọng số khi bốc ngẫu nhiên. Cao thì dễ ra hơn. Mỗi tháng có 80% cơ hội bốc một sự kiện trong số đủ điều kiện. |
-| `when` | Điều kiện xuất hiện (7.2). |
-| `text` | Lời dẫn. `{name}` thay bằng tên người nói, `{emperor}` thay bằng niên hiệu, `{rank}` thay bằng phẩm. Dòng bắt đầu bằng `> ` hiện thành lời thoại. |
+| `speaker` | Người nói. Một id nhân vật; `"random"` (một phi ngẫu nhiên thỏa điều kiện); `"child"` (một hoàng tử/công chúa); `"pair"` (một cặp phi có Tình Ý); bỏ trống nếu không có người nói. |
+| `once` | Chỉ một lần mỗi đời. |
+| `perChild` / `perConsort` | Mỗi đứa con / mỗi phi chỉ gặp sự kiện này một lần (dùng với `"child"` / `"random"`). |
+| `cooldown` | Số tháng tối thiểu giữa hai lần. |
+| `weight` | Trọng số khi bốc ngẫu nhiên. Mỗi tháng có 80% cơ hội bốc một sự kiện trong số đủ điều kiện. |
+| `manual` | `true`: không bao giờ tự xảy ra, chỉ gọi được bằng Thiên Đạo. Dùng khi đang viết dở. |
+| `when` | Điều kiện (7.2). |
+| `text`, `title` | Chữ hiển thị. Dòng bắt đầu bằng `> ` là lời thoại. |
+
+**Biến trong chữ:** `{name}` người nói, `{name2}` người thứ hai của cặp, `{emperor}` niên hiệu, `{rank}` phẩm, `{title}` phẩm kèm phong hiệu, `{mother}` mẹ của đứa trẻ, `{child}` "hoàng tử"/"công chúa", `{trait}` đặc điểm.
 
 ### 7.2 Điều kiện (`when`, `requires`, `unlock`)
 
-So sánh số dùng `{ "gte": 10 }`, `{ "lte": 50 }`, `{ "gt": .. }`, `{ "lt": .. }`, `{ "in": [1, 2, 3] }` hoặc một số cụ thể.
+So sánh số: `{ "gte": 10 }`, `{ "lte": 50 }`, `{ "gt": … }`, `{ "lt": … }`, `{ "in": [1, 2, 3] }` hoặc một giá trị cụ thể.
 
 | Khóa | Kiểm tra |
 | --- | --- |
-| `age` | Tuổi hoàng đế |
-| `month` | Tháng 1–12 |
-| `yearEvery` | Chỉ những năm chia hết (ví dụ 3 = mỗi ba năm) |
+| `age`, `month`, `yearEvery` | Tuổi hoàng đế, tháng (1–12), chỉ những năm chia hết |
 | `truyLac`, `longThe`, `quocKho`, `danTam`, `hoaKhi` | Chỉ số |
-| `harem` | Số phi tần |
-| `children` | Số con |
-| `flag`, `notFlag` | Cờ đã bật hoặc chưa bật |
-| `hasConsort`, `notConsort` | Một nhân vật đã hoặc chưa ở trong hậu cung |
-| `fetishLevel` | `{ "core.lua_la": { "gte": 50 } }`: độ nghiện của hoàng đế |
-| `speakerInHarem` | `true` / `false`: người nói đã nhập cung chưa |
-| `favor` | Sủng ái của người nói (chỉ khi đã nhập cung) |
+| `harem`, `children`, `grandchildren` | Số phi tần, số con, số cháu |
+| `generation`, `scenario`, `godMode` | Đời thứ mấy, kịch bản (`tu_do`, `xe_de`, `me_lau`, `hoa_thanh`), có bật Thiên Đạo |
+| `flag`, `notFlag` | Cờ (một tên hoặc danh sách, tất cả phải thỏa) |
+| `building`, `notBuilding` | Công trình đã xây / chưa xây |
+| `hasConsort`, `notConsort` | Nhân vật (một id hoặc danh sách) đang / không ở trong hậu cung |
+| `hasEmpress` | Đã có Hoàng hậu chưa |
+| `fetishLevel`, `fetishUnlocked` | Độ nghiện của hoàng đế; sở thích đã mở |
+| `attitude` | Thái độ với đối thực: 0 Cấm, 1 Làm ngơ, 2 Dung túng, 3 Khuyến khích |
+| `pairsAt` | `{ "tinhY": 61, "count": { "gte": 2 } }`: số cặp đạt Tình Ý |
+| `successor` | Đã chọn người kế vị chưa |
+| **Theo người nói** | |
+| `speakerInHarem` | Người nói đã nhập cung chưa |
+| `favor`, `affection` | Sủng ái, Tình cảm của người nói |
+| `speakerAge`, `speakerRank`, `speakerTrait`, `speakerPregnant` | Tuổi, phẩm, có trait, đang mang thai |
+| `childAge`, `childSex`, `childMarried` | Với `speaker: "child"` |
+| `pairTinhY`, `pairFavorBelow` | Với `speaker: "pair"` |
 
 ### 7.3 Lựa chọn
 
 | Trường | Ý nghĩa |
 | --- | --- |
-| `label` | Chữ trên nút. |
+| `label` | Chữ trên nút (dùng được biến). |
 | `requires` | Điều kiện để nút hiện ra. |
-| `cost` | Ngân lượng phải trả. Không đủ thì nút ẩn. |
+| `cost` | Ngân lượng. Không đủ thì nút ẩn. |
 | `effects` | Hệ quả (7.4). |
-| `result` | Câu hiện sau khi chọn (nếu không có HOOK). |
+| `result` | Câu hiện sau khi chọn (khi không có HOOK). |
 | `hook` | Id cảnh sẽ gọi. |
-| `fetish` | Danh sách sở thích của cảnh. Người tham gia phải ở mức `willing` với tất cả, và sở thích phải đã mở khóa. |
-| `participants` | Ai tham gia cảnh. Mặc định là người nói. `{ "select": "top_favor", "count": 3 }` chọn những phi Sủng ái cao nhất đang sẵn lòng với mọi sở thích trong `fetish`. Hoặc danh sách id cụ thể. |
-| `place`, `extra` | Truyền thẳng vào `ctx.place`, `ctx.extra` của HOOK. |
+| `fetish` | Sở thích của cảnh. Mọi người tham gia phải `willing`, sở thích phải đã mở. |
+| `participants` | Mặc định là người nói. `"pair"` cho cặp đối thực. `{ "select": "top_favor" \| "random", "count": 3, "includeSpeaker": true }` chọn những phi đang sẵn lòng với mọi sở thích trong `fetish`. Hoặc danh sách id. |
+| `minParticipants` | Số người tối thiểu; không đủ thì nút ẩn. |
+| `place`, `extra` | Truyền vào `ctx.place`, `ctx.extra`. |
 
-**Lựa chọn có HOOK sẽ tự ẩn** nếu bất kỳ người tham gia nào chưa đủ tuổi hoặc chưa sẵn lòng. Đây là quy tắc lõi, gói không tắt được.
+**Cảnh nhiều người nên luôn có ít nhất một sở thích** trong `fetish` (ví dụ `core.ngam_nhin`), để mọi người tham gia đều phải sẵn lòng. Bộ kiểm tra sẽ cảnh báo nếu thiếu.
+
+**Lựa chọn có HOOK tự ẩn** khi bất kỳ người tham gia nào chưa đủ tuổi hoặc chưa sẵn lòng. Sự kiện `speaker: "child"` không được có HOOK; lõi từ chối cả sự kiện.
 
 ### 7.4 Hệ quả (`effects`)
 
 | Khóa | Tác dụng |
 | --- | --- |
 | `truyLac`, `longThe`, `quocKho`, `danTam`, `hoaKhi` | Cộng trừ chỉ số |
-| `favor`, `affection` | Cộng trừ Sủng ái, Tình cảm của người nói |
-| `favorAll` | Cộng trừ Sủng ái cả hậu cung (trừ người nói) |
-| `addConsortSpeaker` | `true`: người nói nhập cung |
-| `addConsort` | Id hoặc danh sách id nhân vật nhập cung |
-| `meet` | `true`: đánh dấu đã gặp, chưa nhập cung |
-| `recruit` | Số tú nữ ngẫu nhiên nhập cung |
+| `favor`, `affection` | Sủng ái, Tình cảm của người nói |
+| `favor2` | Sủng ái người thứ hai của cặp |
+| `favorAll` | Sủng ái cả hậu cung (trừ người nói) |
+| `favorConsort` | `{ "core.tuyet": 10 }`: Sủng ái của nhân vật cụ thể |
+| `addConsortSpeaker`, `addConsort` | Người nói / các id nhập cung |
+| `removeSpeaker`, `removePair` | Người nói / cả cặp rời cung |
+| `meet` | Đánh dấu đã gặp, chưa nhập cung |
+| `recruit`, `recruitOrigin` | Số tú nữ ngẫu nhiên nhập cung, kèm xuất thân |
+| `promote` | Thăng người nói bấy nhiêu phẩm |
+| `trait`, `removeTrait` | Thêm / bỏ trait của người nói |
 | `fetish` | `{ "id": 10 }`: tăng độ nghiện |
-| `consent` | `{ "id": "willing" }`: đổi mức đồng thuận của người nói. Không thể đổi một mục đang là `refuse`. |
+| `consent` | Đổi mức đồng thuận của người nói (không đổi được mục `refuse`) |
+| `night` | Tính một đêm thị tẩm với người nói (không gọi HOOK) |
 | `flag`, `unflag` | Bật, tắt cờ |
-| `night` | `true`: tính một đêm thị tẩm với người nói (không gọi HOOK) |
-| `log` | Ghi thêm một dòng vào nhật ký |
+| `building` | Xây công trình miễn phí |
+| `attitude` | Đặt thái độ với đối thực (0–3) |
+| `tinhY` | Cộng Tình Ý của cặp (với `"pair"`) |
+| `closeness`, `childTrait`, `teacher`, `educate`, `marry`, `motherFavor` | Con cái: độ thân thiết, trait thứ hai, thầy dạy (`dai_hoc_si`, `vo_tuong`, `cam_su`), xét học vấn, thành thân, Sủng ái của mẹ |
+| `album` | `{ "title": "...", "line": "..." }`: lưu một khoảnh khắc vào album |
+| `closeSelection` | Ngừng tuyển tú vĩnh viễn |
+| `abdicate` | Thoái vị ngay: `"cam_cung"`, `"hanh_cung"`, `"giang_nam"` |
+| `log` | Ghi thêm một dòng nhật ký |
 
-Khi một lựa chọn có `hook`, lõi tự tính đêm thị tẩm cho những người tham gia đã ở trong hậu cung (Sủng ái, Long thể, cơ hội thụ thai) và tăng độ nghiện các sở thích trong `fetish`.
+Khi một lựa chọn có `hook`, lõi tự tính đêm thị tẩm cho những người tham gia đã ở trong hậu cung và tăng độ nghiện các sở thích trong `fetish`.
 
 ---
 
-## 8. Cảnh (scenes.js)
+## 8. Cuộc thi, quà, công trình, vùng
+
+**contests.json** — mùa thi diễn ra tháng 6 mỗi năm, lõi chọn ngẫu nhiên tối đa 4 cuộc thi đã mở. Tháng 12, nếu có ba người điểm cao và Trụy lạc từ 40, có Phong Nguyệt Đại Điển.
+
+```json
+{ "id": "ten-goi.thi_den", "name": "Thi làm đèn", "desc": "Ai làm đèn đẹp nhất", "tier": 1,
+  "unlock": {}, "fetish": [], "count": 4, "hook": "ten-goi.thi_den",
+  "traitsBonus": ["Khéo tay"], "prize": { "favor": 15, "trait": "Đèn khéo" } }
+```
+HOOK của cuộc thi nhận `ctx.extra.winner`, `ctx.extra.ranking`, `ctx.extra.contestName`.
+
+**gifts.json**
+```json
+{ "id": "ten-goi.den_hoa", "name": "Đèn hoa đào", "cost": 300, "favor": 8, "desc": "...", "likes": ["Lãng mạn", "ten-goi.ngam_den", "ten-goi.dao_hoa"], "pair": false, "album": false }
+```
+`likes` khớp với sở thích, trait hoặc id nhân vật thì quà được nhân đôi. Tặng trùng nhiều lần hiệu quả giảm dần. `pair: true` cộng Tình Ý cho người thương của nàng.
+
+**buildings.json**
+```json
+{ "id": "ten-goi.lau_den", "name": "Lầu đèn", "cost": 3000, "desc": "...", "requires": { "truyLac": { "gte": 20 } }, "requiresText": "Cần Trụy lạc từ 20", "effects": { "hoaKhi": 5 }, "done": "Câu hiện khi xây xong." }
+```
+Sự kiện dùng `"when": { "building": "ten-goi.lau_den" }` để chỉ xảy ra sau khi xây.
+
+**regions.json**
+```json
+{ "id": "ten-goi.lac_duong", "name": "Lạc Dương", "cost": 2000, "recruit": 2, "origin": "Mỹ nhân Lạc Dương", "desc": "...", "arrive": "Câu khi đến nơi.", "album": "Dòng lưu vào album." }
+```
+Đi tuần du bật cờ `travel.<id vùng>`, ví dụ `travel.ten-goi.lac_duong`; viết sự kiện có `"when": { "flag": "travel.ten-goi.lac_duong" }` để có chuyện xảy ra ở vùng đó.
+
+**names.json** — `female` (tú nữ), `child_m`, `child_f` (con), `spouse_m`, `spouse_f` (người con thành thân cùng).
+
+---
+
+## 9. Cảnh (scenes.js)
 
 ```js
 (function (Game) {
@@ -250,82 +312,48 @@ Khi một lựa chọn có `hook`, lõi tự tính đêm thị tẩm cho những
 })(window.Game);
 ```
 
-Hàm cảnh nhận `ctx` (chỉ đọc) và trả về `{ title, text, image? }`. Trả về `null` thì lõi dùng cảnh mặc định.
+Hàm nhận `ctx` (chỉ đọc), trả về `{ title, text, image? }`. Trả về `null` thì lõi dùng cảnh mặc định.
 
-### 8.1 Nội dung của `ctx`
-
-| Trường | Ý nghĩa |
+| `ctx` | Ý nghĩa |
 | --- | --- |
-| `hook` | Id HOOK đang gọi |
-| `participants` | `[{ id, name, age, rank, favor, affection, traits, consent }]` |
-| `fetish` | Id sở thích của cảnh |
-| `fetishLevels` | Độ nghiện hiện tại của hoàng đế theo id |
-| `tier` | Tầng cao nhất trong các sở thích (0 nếu không có) |
-| `truyLac` | Chỉ số Trụy lạc |
-| `emperor` | `{ name, age }` |
+| `hook` | Id HOOK |
+| `participants` | `[{ id, name, title, age, rank, favor, affection, nights, traits, consent }]` |
+| `fetish`, `tier`, `combo` | Sở thích của cảnh, tầng cao nhất, tên combo nếu có |
+| `fetishLevels` | Độ nghiện hiện tại của hoàng đế |
+| `count` | Đây là lần thứ mấy HOOK này được gọi trong đời này |
+| `truyLac`, `emperor` | Trụy lạc; `{ name, age }` |
 | `place`, `extra` | Do sự kiện truyền vào |
 
-Dùng `ctx.tier`, `ctx.fetishLevels` và `ctx.participants[i].favor` để thay đổi cảnh theo tiến trình, ví dụ lần đầu và lần thứ mười khác nhau.
+Dùng `ctx.count`, `ctx.participants[i].nights`, `ctx.tier` để cảnh lần đầu khác lần thứ mười.
 
-### 8.2 Ghi đè và bắt nhóm
+### 9.1 Ghi đè và bắt nhóm
 
-- Đăng ký lại đúng một id đã có thì gói nạp sau ghi đè gói nạp trước. Ví dụ thay cảnh thị tẩm mặc định:
-  ```js
-  Game.hooks.register("core.thi_tam", (ctx) => ({ title: "...", text: "..." }), PACK);
-  ```
-- Id kết thúc bằng `*` bắt mọi HOOK có tiền tố đó, ví dụ `"core.thi_tam*"` bắt cả `core.thi_tam` và `core.thi_tam_so_thich`. Id cụ thể luôn được ưu tiên hơn id có `*`.
+- Đăng ký lại đúng id → gói nạp sau ghi đè gói nạp trước. Ví dụ thay cảnh thị tẩm mặc định: `Game.hooks.register("core.thi_tam", fn, PACK)`.
+- Id kết thúc bằng `*` bắt mọi HOOK có tiền tố đó: `"core.thi_*"` bắt mọi cuộc thi của lõi. Id cụ thể luôn thắng id có `*`; giữa hai id có `*`, id dài hơn thắng.
+- Gói lõi đã đăng ký `core.*` làm cảnh dự phòng, cùng cảnh riêng cho từng HOOK. Danh sách đầy đủ xem trong `packs/core/scenes.js` hoặc tab **Gói** trong game.
 
-### 8.3 HOOK của gói lõi
+### 9.2 Ảnh
 
-Gói khác có thể ghi đè các HOOK này:
-
-| HOOK | Gọi khi |
-| --- | --- |
-| `core.thi_tam` | Lật thẻ bài, không chọn sở thích |
-| `core.thi_tam_so_thich` | Lật thẻ bài có chọn sở thích (xem `ctx.fetish`) |
-| `core.da_yen_thi_tam` | Dạ yến đăng cơ |
-| `core.moc_can_dem_dau` | Đêm đầu của Tô Mộc Cẩn |
-| `core.den_long_dem` | Lễ hội đèn lồng |
-| `core.tu_lan_dem_dau` | Thuyền hoa Tần Hoài |
-| `core.uyen_nghi_sa_nga` | Hoàng hậu sa ngã |
-| `core.xe_de` | Xe dê dừng trước cửa |
-| `core.me_lau` | Mê Lâu |
-| `core.bach_hoa` | Đêm Bách Hoa (3 hoặc 6 người) |
-| `core.that_tich` | Đêm Thất tịch |
-| `core.mua_dem` | Trú mưa ở cung phi |
-
-### 8.4 Ảnh
-
-- Đặt ảnh trong `assets/` của gói, dùng `Game.asset(PACK, "assets/ten.webp")`.
-- Ảnh cảnh hiển thị tỉ lệ 4:3, nên xuất 1200×900 webp, dưới 300 KB mỗi ảnh để chạy mượt trên điện thoại.
-- Ảnh lỗi hoặc thiếu thì giao diện tự hiện khung thay thế, game không dừng.
+Đặt trong `assets/`, gọi bằng `Game.asset(PACK, "assets/ten.webp")`. Ảnh cảnh hiển thị tỉ lệ 4:3, nên xuất 1200×900 webp dưới 300 KB. Ảnh lỗi thì giao diện tự hiện khung thay thế.
 
 ---
 
-## 9. Quy tắc lõi (gói không ghi đè được)
+## 10. Quy tắc lõi (không ghi đè được)
 
-1. **Tuổi:** mọi nhân vật từ 18 tuổi trở lên. Nhân vật thiếu tuổi hoặc dưới 18 bị từ chối khi nạp, God Mode không tạo được nhân vật dưới 18, và lõi kiểm tra lại tuổi trước mỗi HOOK.
-2. **Đồng thuận:** trước mỗi HOOK, mọi người tham gia phải ở mức `willing` với mọi sở thích của cảnh. Lựa chọn không đạt bị ẩn; nếu bị gọi cưỡng bằng God Mode thì HOOK bị chặn và ghi vào nhật ký HOOK.
-3. **Cổng tuổi người chơi:** màn mở đầu bắt người chơi xác nhận đủ tuổi theo `rating` của gói.
-
-Mức `refuse` của một nhân vật không thể bị gói khác đổi qua `effects.consent`. Chỉ người chơi chỉnh trong God Mode.
+1. **Tuổi:** mọi nhân vật trưởng thành từ 18 tuổi trở lên. Nhân vật dưới 18 hoặc thiếu tuổi bị từ chối khi nạp; Thiên Đạo không tạo được; lõi kiểm tra lại tuổi trước mỗi HOOK. Con cái của hoàng đế không bao giờ được đưa vào HOOK.
+2. **Đồng thuận:** trước mỗi HOOK, mọi người tham gia phải `willing` với mọi sở thích của cảnh. Không đạt thì lựa chọn bị ẩn; gọi cưỡng bằng Thiên Đạo thì HOOK bị chặn và ghi vào nhật ký HOOK.
+3. **Cổng tuổi người chơi:** màn mở đầu bắt xác nhận đủ tuổi theo `rating`.
 
 ---
 
-## 10. Kiểm tra và gỡ lỗi
+## 11. Kiểm tra và gỡ lỗi
 
-- `node tools/validate.js` kiểm tra mọi gói trong `packs/index.json`: JSON hợp lệ, tuổi, tiền tố id, id tham chiếu tồn tại, sở thích trong `consent` và `fetish` tồn tại, HOOK được dùng nhưng chưa đăng ký.
-- Trong game, tab **Gói** liệt kê gói đã nạp, HOOK đã đăng ký, lỗi và cảnh báo.
-- Bật **Thiên Đạo** (God Mode) ở màn mở đầu để:
-  - kéo chỉ số tới đúng điều kiện cần thử,
-  - gọi thẳng sự kiện của gói (bỏ qua điều kiện),
-  - chỉnh mức đồng thuận từng phi trong bảng chi tiết phi tần,
-  - xem nhật ký HOOK (gọi được hay bị chặn, vì sao).
+- `node tools/validate.js`: JSON hợp lệ, tuổi, id trùng, tiền tố, id tham chiếu tồn tại, sở thích trong `consent`/`fetish`/`combos`, HOOK chưa có cảnh, cảnh nhiều người thiếu sở thích, sự kiện con cái có HOOK.
+- Tab **Gói**: gói đã nạp, số lượng nội dung, HOOK, lỗi và cảnh báo.
+- **Thiên Đạo**: kéo chỉ số, tua thời gian, quay lại một năm, tạo phi, đặt Tình Ý, đổi thái độ đối thực, chỉnh đồng thuận, cho sinh con, chỉnh tuổi con, gọi thẳng sự kiện, xem nhật ký HOOK.
 
 ---
 
-## 11. Phát hành gói
+## 12. Phát hành
 
-- Đóng gói cả thư mục thành `.zip`. Người chơi giải nén vào `packs/` rồi thêm tên vào `packs/index.json`.
-- Tăng `version` mỗi lần phát hành.
-- Ghi rõ trong mô tả gói: gói cần `core` phiên bản nào, thêm những nhân vật, sở thích, sự kiện nào.
+Nén thư mục gói thành `.zip`. Người chơi giải nén vào `packs/` và thêm tên vào `packs/index.json`. Tăng `version` mỗi lần phát hành và ghi rõ gói cần `core` phiên bản nào.

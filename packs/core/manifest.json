@@ -1,16 +1,31 @@
 {
   "id": "core",
   "name": "Lõi: Tửu Sắc Đế Vương",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Tiên",
-  "game_version": ">=0.1",
+  "game_version": ">=0.2",
   "rating": "25+",
   "requires": [],
   "files": {
     "characters": "characters.json",
-    "events": "events.json",
     "fetishes": "fetishes.json",
+    "contests": "contests.json",
+    "gifts": "gifts.json",
+    "buildings": "buildings.json",
+    "regions": "regions.json",
     "names": "names.json",
+    "events": [
+      "events/chuong-1.json",
+      "events/chuong-2.json",
+      "events/vo-dao.json",
+      "events/phi-tan.json",
+      "events/doi-thuc.json",
+      "events/con-cai.json",
+      "events/hang-ngay.json",
+      "events/le-hoi.json",
+      "events/tuan-du.json",
+      "events/chuong-3.json"
+    ],
     "scenes": "scenes.js"
   }
 }

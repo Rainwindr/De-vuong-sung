@@ -1,0 +1,12 @@
+[
+  {
+    "id": "ten-goi-cua-ban.qua_mau",
+    "name": "Tên món quà",
+    "cost": 300,
+    "favor": 8,
+    "desc": "Hợp với ai",
+    "likes": [
+      "ten-goi-cua-ban.so_thich_1"
+    ]
+  }
+]

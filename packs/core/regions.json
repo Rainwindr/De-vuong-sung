@@ -1,0 +1,7 @@
+[
+  { "id": "core.giang_nam", "name": "Giang Nam", "cost": 2000, "recruit": 2, "origin": "Mỹ nhân Giang Nam", "desc": "Sông nước, thuyền hoa, cầm nữ", "arrive": "Thuyền rồng cập bến Tần Hoài. Quan phủ dâng hai mỹ nhân Giang Nam.", "album": "Thuyền rồng xuôi Tần Hoài, đèn hoa kín sông." },
+  { "id": "core.tay_vuc", "name": "Tây Vực", "cost": 3000, "recruit": 2, "origin": "Vũ nữ Tây Vực", "desc": "Vũ nữ, hương liệu, rượu bồ đào", "arrive": "Đoàn lạc đà đón bệ hạ ở Ngọc Môn Quan. Vương công Tây Vực dâng vũ nữ.", "album": "Đêm sa mạc, vũ nữ Tây Vực múa quanh lửa trại." },
+  { "id": "core.thuc", "name": "Đất Thục", "cost": 2500, "recruit": 2, "origin": "Trà nữ đất Thục", "desc": "Núi non, trà, mỹ nhân tính tình phóng khoáng", "arrive": "Sương núi Nga Mi chưa tan. Trà nữ đất Thục dâng trà mời bệ hạ.", "album": "Uống trà trên núi Nga Mi, mây trôi dưới chân." },
+  { "id": "core.bien_dong", "name": "Biển Đông", "cost": 2500, "recruit": 2, "origin": "Ngọc nữ miền biển", "desc": "Ngọc trai, gió biển, ngư nữ", "arrive": "Thuyền đến làng chài. Ngư nữ lặn biển dâng ngọc trai, rồi xin theo bệ hạ vào cung.", "album": "Bình minh trên biển, bệ hạ nhặt ngọc trai cùng ngư nữ." },
+  { "id": "core.thao_nguyen", "name": "Thảo nguyên", "cost": 2000, "recruit": 1, "origin": "Nữ kỵ sĩ thảo nguyên", "desc": "Ngựa, lửa trại, quê của Hách Liên Tuyết", "arrive": "Thảo nguyên mênh mông. Bộ tộc dâng một nữ kỵ sĩ giỏi bắn cung.", "album": "Phi ngựa trên thảo nguyên, gió thổi bạt mũ miện." }
+]

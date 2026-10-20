@@ -1,0 +1,31 @@
+[
+  { "id": "core.tet", "title": "Tết", "cooldown": 11, "weight": 25,
+    "when": { "month": 1, "harem": { "gte": 2 } },
+    "text": "Giao thừa. Cả hậu cung tụ về Càn Thanh cung đón năm mới, đèn đỏ treo kín mái hiên.",
+    "choices": [
+      { "label": "Phát lì xì cho cả hậu cung", "cost": 600, "effects": { "favorAll": 3, "hoaKhi": 10, "album": { "title": "Đón năm mới", "line": "Cả hậu cung đón giao thừa ở Càn Thanh cung." } }, "result": "Tiếng pháo vang đến tận sáng." },
+      { "label": "Đón giao thừa với người được sủng nhất", "effects": { "truyLac": 3 }, "hook": "core.tet", "participants": { "select": "top_favor", "count": 1 } }
+    ] },
+  { "id": "core.doan_ngo", "title": "Tết Đoan Ngọ", "cooldown": 11, "weight": 15,
+    "when": { "month": 5, "harem": { "gte": 4 } },
+    "text": "Đua thuyền rồng trên hồ Thái Dịch. Các phi tần chia đội, cổ vũ ầm ĩ.",
+    "choices": [
+      { "label": "Đặt cược cho đội có người được sủng nhất", "effects": { "hoaKhi": 5, "favorAll": 1 }, "result": "Đội ấy thắng sát nút. Ai cũng nói là nhờ phúc của bệ hạ." },
+      { "label": "Tự xuống chèo thuyền", "effects": { "longThe": -2, "favorAll": 3, "album": { "title": "Đoan Ngọ", "line": "Bệ hạ tự chèo thuyền rồng, ướt sũng nhưng thắng cuộc." } } }
+    ] },
+  { "id": "core.that_tich", "title": "Đêm Thất tịch", "cooldown": 11, "weight": 30,
+    "when": { "month": 7, "harem": { "gte": 3 } },
+    "text": "Mỗi cung treo một chiếc đèn kèm một bài thơ. Bệ hạ chỉ được chọn một.",
+    "choices": [
+      { "label": "Chọn đèn của người được sủng nhất", "effects": { "truyLac": 3, "favorAll": -3 }, "hook": "core.that_tich", "participants": { "select": "top_favor", "count": 1 } },
+      { "label": "Chọn một chiếc đèn ngẫu nhiên", "effects": { "truyLac": 3 }, "hook": "core.that_tich", "participants": { "select": "random", "count": 1 } },
+      { "label": "Phá lệ, đi qua tất cả các cung", "effects": { "truyLac": 20, "longThe": -10, "favorAll": 5, "flag": "nguu_lang_tham_lam" }, "result": "Đến sáng bệ hạ mới đi hết một vòng." }
+    ] },
+  { "id": "core.trung_thu", "title": "Trung Thu", "cooldown": 11, "weight": 15,
+    "when": { "month": 8, "harem": { "gte": 2 } },
+    "text": "Trăng rằm tháng Tám. Hậu cung bày cỗ bánh nướng, bánh dẻo trên lầu ngắm trăng.",
+    "choices": [
+      { "label": "Ngắm trăng cùng cả nhà", "effects": { "hoaKhi": 8, "album": { "title": "Trung Thu", "line": "Cả nhà ngắm trăng trên lầu Vọng Nguyệt." } } },
+      { "label": "Thả đèn hoa đăng cùng một người", "effects": { "truyLac": 2 }, "hook": "core.trung_thu", "participants": { "select": "random", "count": 1 } }
+    ] }
+]
