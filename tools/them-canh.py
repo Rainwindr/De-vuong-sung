@@ -150,7 +150,9 @@ def main():
         else:
             total += merge_scenes(data)
     print(f"\nĐã thêm {total} đoạn. Đang kiểm tra...")
-    subprocess.call(["node", str(ROOT / "tools" / "validate.js")])
+    code = subprocess.call(["node", str(ROOT / "tools" / "validate.js")])
+    if code == 0:
+        subprocess.call([sys.executable, str(ROOT / "tools" / "build.py")])
 
 
 if __name__ == "__main__":

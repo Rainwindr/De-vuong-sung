@@ -2,21 +2,19 @@
 
 Game mô phỏng hậu cung dạng text kèm chân dung, chạy trên trình duyệt, ưu tiên điện thoại. Người chơi là một hoàng đế 18 tuổi vừa đăng cơ: tuyển tú, sủng ái phi tần, sinh con nối dõi, và tự chọn mình sẽ trụy lạc đến đâu. Nội dung 25+.
 
-Phiên bản **0.3.3**.
+Phiên bản **0.3.4**.
 
 ## Chạy thử
 
-Game đọc gói bằng `fetch`, nên phải chạy qua máy chủ web:
+**Cách dễ nhất:** bấm đúp **`CHOI-GAME.bat`** (Windows) hoặc **`choi-game.command`** (Mac). Trình duyệt tự mở game tại `http://localhost:8000`. Đóng cửa sổ đen để tắt. Cần cài Python.
+
+Mở thẳng `index.html` cũng chơi được, nhưng game dùng bản đóng gói `packs/bundle.js`: sửa JSON xong phải chạy `python3 tools/build.py` thì mới thấy thay đổi.
+
+Chạy tay bằng dòng lệnh:
 
 ```bash
 python3 -m http.server 8000
 # mở http://localhost:8000, hoặc http://<IP-máy>:8000 trên điện thoại cùng mạng
-```
-
-Hoặc build một file duy nhất, mở trực tiếp được:
-
-```bash
-python3 tools/build.py      # tạo dist/index.html
 ```
 
 GitHub Pages: Settings → Pages → Deploy from a branch → `main` / `(root)`. Không cần build.
@@ -76,7 +74,9 @@ packs/_template/                mẫu trống để copy khi làm gói mới
 docs/HUONG-DAN-CONTENT-PACK.md  hướng dẫn viết sự kiện và làm gói
 docs/PROMPT-VIET-CANH.md        bộ prompt cho Grok theo 7 mức ưu tiên
 tools/validate.js               kiểm tra gói: node tools/validate.js
-tools/build.py                  đóng gói một file: python3 tools/build.py
+tools/build.py                  đóng gói: tạo dist/index.html và packs/bundle.js
+packs/bundle.js                 TỰ SINH, dữ liệu đóng gói cho khi mở thẳng index.html (đừng sửa tay)
+CHOI-GAME.bat, choi-game.command  bấm đúp để chơi trên máy
 tools/them-canh.py              đưa câu trả lời của Grok vào packs/canh-viet
 ```
 

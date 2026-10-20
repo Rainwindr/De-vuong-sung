@@ -113,8 +113,9 @@
   };
 
   function packSummary() {
-    const errs = R.errors.length ? `<div class="err">${R.errors.length} lỗi khi nạp gói. Xem tab Gói sau khi vào game.</div>` : "";
-    return `<p class="hint">Đã nạp ${R.packs.length} gói: ${R.packs.map((p) => esc(p.name)).join(", ")}.</p>${errs}`;
+    const errs = R.errors.length ? `<div class="notice err"><strong>${R.errors.length} lỗi khi nạp gói:</strong><br>${R.errors.slice(0, 5).map(esc).join("<br>")}</div>` : "";
+    const bundle = G.bundleMode ? `<p class="hint">Đang chạy bản đóng gói (mở thẳng file). Sửa JSON xong thì chạy <span class="mono">python3 tools/build.py</span> hoặc dùng CHOI-GAME.bat để thấy thay đổi.</p>` : "";
+    return `<p class="hint">Đã nạp ${R.packs.length} gói: ${R.packs.map((p) => esc(p.name)).join(", ")}.</p>${bundle}${errs}`;
   }
 
   /* ================================================================== */

@@ -79,6 +79,11 @@ def main():
         '<meta name="claude:viewport-fit-sides" content="cover">\n'
         f"{fonts}\n<style>\n{css}\n</style>"
     )
+    # Bản đóng gói dữ liệu cho trường hợp mở thẳng index.html (bấm đúp vào file)
+    (PACKS / "bundle.js").write_text(
+        "/* TỰ SINH bởi tools/build.py, đừng sửa tay. Chỉ dùng khi mở index.html trực tiếp (file://). */\n" + bundle_packs() + "\n",
+        encoding="utf-8",
+    )
     DIST.mkdir(exist_ok=True)
     (DIST / "fragment.html").write_text(f"{head}\n{body}\n{scripts}\n", encoding="utf-8")
     full = (
@@ -87,7 +92,7 @@ def main():
         f"{head}\n</head>\n<body>\n{body}\n{scripts}\n</body>\n</html>\n"
     )
     (DIST / "index.html").write_text(full, encoding="utf-8")
-    print("Đã tạo dist/index.html và dist/fragment.html")
+    print("Đã tạo dist/index.html, dist/fragment.html và packs/bundle.js")
 
 
 if __name__ == "__main__":
