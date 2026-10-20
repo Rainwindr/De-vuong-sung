@@ -11,6 +11,16 @@
     "default_consent": "persuade",
     "desc": "Sở thích thêm từ cảnh viết (bộ _sothich)."
   },
+   {
+      "id": "canh-viet.overstimulation",
+      "name": "Overstimulation",
+      "tier": 3,
+      "unlock": { "truyLac": { "gte": 60 } },
+      "default_consent": "persuade",
+      "desc": "Kích thích quá mức sau khi đã lên đỉnh nhiều lần, cơ thể cực nhạy, tiếp tục bị đụ.",
+      "consent": { "core.tuyet": "willing", "core.song_nhat": "willing" },
+      "consentByTrait": { "Táo bạo": "willing", "Ôn nhu": "persuade" }
+    },
   {
     "id": "canh-viet.guong",
     "name": "Gương",
