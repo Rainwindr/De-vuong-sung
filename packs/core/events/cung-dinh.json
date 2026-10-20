@@ -1,0 +1,163 @@
+[
+  { "id": "core.thai_hau_hoi_chau", "title": "Thái hậu hỏi cháu", "cooldown": 18, "weight": 6,
+    "when": { "generation": 1, "age": { "lte": 40 }, "children": { "lte": 2 }, "harem": { "gte": 3 } },
+    "text": "Thái hậu gọi bệ hạ đến Từ Ninh cung, chậm rãi rót trà.\n> Hoàng nhi, ai gia già rồi. Chỉ mong được bế cháu trước khi nhắm mắt.",
+    "choices": [
+      { "label": "Hứa với mẫu hậu", "effects": { "truyLac": 3, "flag": "hua_thai_hau" }, "result": "Thái hậu cười, ban cho mỗi cung một bùa cầu tự." },
+      { "label": "Xin mẫu hậu tiến cử người", "effects": { "recruit": 1, "recruitOrigin": "Thái hậu tiến cử" }, "result": "Hôm sau, một cô nương con nhà gia giáo được đưa vào cung." },
+      { "label": "Con cháu tùy duyên", "effects": { "danTam": 2 }, "result": "Thái hậu thở dài, nhưng không ép." }
+    ] },
+  { "id": "core.thai_hau_mat", "title": "Thái hậu băng hà", "once": true, "weight": 30,
+    "when": { "generation": 1, "age": { "gte": 42 } },
+    "text": "Đêm đông, Thái hậu băng hà trong giấc ngủ. Trên bàn còn chiếc áo nhỏ bà đang may dở cho đứa cháu chưa ra đời.",
+    "choices": [
+      { "label": "Để tang ba tháng, hậu cung đóng cửa", "effects": { "truyLac": -10, "hoaKhi": 10, "danTam": 10, "album": { "title": "Tiễn Thái hậu", "line": "Cả hậu cung để tang Thái hậu ba tháng." } }, "result": "Ba tháng ấy cấm cung yên lặng như tờ." },
+      { "label": "Đại tang theo lễ, rồi mọi việc như cũ", "effects": { "danTam": 5 } }
+    ] },
+  { "id": "core.nguyen_tieu", "title": "Đêm Nguyên Tiêu", "cooldown": 11, "weight": 10,
+    "when": { "month": 1, "harem": { "gte": 3 } },
+    "text": "Rằm tháng Giêng. Cả hậu cung treo đèn đố chữ dọc hành lang, ai giải được nhiều nhất thì được thưởng.",
+    "choices": [
+      { "label": "Tự đi giải đố", "effects": { "favorAll": 2, "hoaKhi": 5 }, "result": "Bệ hạ giải sai câu dễ nhất. Cả hậu cung cười ngặt nghẽo." },
+      { "label": "Thưởng người giải giỏi nhất", "cost": 300, "effects": { "hoaKhi": 5 }, "hook": "core.nguyen_tieu", "participants": { "select": "random", "count": 1 } }
+    ] },
+  { "id": "core.trung_cuu", "title": "Tết Trùng Cửu", "cooldown": 11, "weight": 8,
+    "when": { "month": 9, "harem": { "gte": 3 } },
+    "text": "Mùng chín tháng chín, lên núi Cảnh Sơn ngắm cúc, uống rượu hoa cúc cầu trường thọ.",
+    "choices": [
+      { "label": "Dẫn cả hậu cung lên núi", "effects": { "longThe": 5, "hoaKhi": 5, "album": { "title": "Trùng Cửu", "line": "Cả hậu cung lên Cảnh Sơn ngắm cúc." } } },
+      { "label": "Chỉ đi với người thân nhất", "effects": { "longThe": 3 }, "hook": "core.trung_cuu", "participants": { "select": "top_favor", "count": 1 } }
+    ] },
+  { "id": "core.dong_chi", "title": "Đông chí", "cooldown": 11, "weight": 8,
+    "when": { "month": 11, "harem": { "gte": 2 } },
+    "text": "Ngày Đông chí, tuyết đầu mùa. Cung nào cũng nấu chè trôi nước, mời bệ hạ ghé.",
+    "choices": [
+      { "label": "Ghé từng cung, mỗi nơi một bát", "effects": { "favorAll": 3, "longThe": -2 }, "result": "Bệ hạ ăn mười bát chè, no đến không ngủ được." },
+      { "label": "Ở lại cung ấm nhất", "effects": { "truyLac": 2 }, "hook": "core.dong_chi", "participants": { "select": "top_favor", "count": 1 } }
+    ] },
+  { "id": "core.tuyet_dau_mua", "title": "Tuyết đầu mùa", "cooldown": 11, "weight": 6,
+    "when": { "month": 12, "harem": { "gte": 4 } },
+    "text": "Tuyết phủ trắng ngự uyển. Các phi tần ném tuyết như những cô gái nhỏ, quên cả lễ nghi.",
+    "choices": [
+      { "label": "Nhập cuộc ném tuyết", "effects": { "hoaKhi": 8, "favorAll": 2, "longThe": -1, "album": { "title": "Tuyết đầu mùa", "line": "Bệ hạ cùng hậu cung ném tuyết trong ngự uyển." } } },
+      { "label": "Ngồi trong đình xem", "effects": { "fetish": { "core.ngam_nhin": 3 } } }
+    ] },
+  { "id": "core.tho_pho", "title": "Thợ phụ hồ trong cung", "cooldown": 24, "weight": 3,
+    "when": { "truyLac": { "gte": 30 } },
+    "text": "Lý công công tâu: thợ sửa mái Dưỡng Tâm điện than rằng tiền công ba tháng chưa được trả, vì ngân khố dồn hết cho hậu cung.",
+    "choices": [
+      { "label": "Trả đủ, thưởng thêm", "cost": 600, "effects": { "danTam": 6 }, "result": "Thợ làm hăng say, mái điện lợp xong sớm." },
+      { "label": "Bảo họ đợi", "effects": { "danTam": -4 } }
+    ] },
+  { "id": "core.hoa_si", "title": "Họa sĩ cung đình", "cooldown": 24, "weight": 4,
+    "when": { "harem": { "gte": 5 } },
+    "text": "Họa sĩ cung đình xin vẽ bức Hậu Cung Xuân Đồ, cần các phi tần ngồi làm mẫu.",
+    "choices": [
+      { "label": "Cho vẽ cả hậu cung", "cost": 800, "effects": { "hoaKhi": 6, "favorAll": 2, "album": { "title": "Hậu Cung Xuân Đồ", "line": "Họa sĩ vẽ cả hậu cung trong một bức tranh mùa xuân." } } },
+      { "label": "Chỉ vẽ người được sủng nhất", "cost": 400, "effects": { "favorAll": -1 }, "hook": "core.hoa_si", "participants": { "select": "top_favor", "count": 1 } }
+    ] },
+  { "id": "core.lam_vuon", "title": "Vườn rau của phi tần", "speaker": "random", "perConsort": true, "weight": 2,
+    "when": { "favor": { "gte": 30 } },
+    "text": "{name} lén trồng một luống rau sau cung, tay lấm đất.\n> Bệ hạ đừng mách ai. Thiếp nhớ vườn nhà.",
+    "choices": [
+      { "label": "Ngồi xuống nhổ cỏ giúp nàng", "effects": { "favor": 10, "affection": 15 }, "result": "Bữa tối hôm ấy có món rau do chính tay hai người trồng." },
+      { "label": "Giữ bí mật cho nàng", "effects": { "favor": 5, "affection": 5 } }
+    ] },
+  { "id": "core.meo_cung", "title": "Con mèo của cung", "speaker": "random", "perConsort": true, "weight": 2,
+    "when": {},
+    "text": "Một con mèo trắng lạc vào Dưỡng Tâm điện, nằm ngủ trên tấu chương. {name} hớt hải chạy đến tìm.\n> Bạch Ngọc! Xin bệ hạ đừng phạt nó.",
+    "choices": [
+      { "label": "Vuốt mèo, trả lại cho nàng", "effects": { "favor": 8, "affection": 8 }, "result": "Từ đó Bạch Ngọc thường ghé Dưỡng Tâm điện, kéo theo cả chủ nó." },
+      { "label": "Giữ mèo lại làm của riêng", "effects": { "favor": -2, "flag": "meo_bach_ngoc" }, "result": "{name} cứ vài ngày lại sang thăm mèo. Bệ hạ biết thừa là thăm ai." }
+    ] },
+  { "id": "core.ac_mong", "title": "Ác mộng", "speaker": "random", "cooldown": 12, "weight": 3,
+    "when": { "speakerPregnant": true },
+    "text": "Nửa đêm, cung nữ chạy sang báo: {name} đang mang thai, gặp ác mộng, khóc không dứt.",
+    "choices": [
+      { "label": "Sang ngay, ngồi đến sáng", "effects": { "favor": 12, "affection": 15 }, "result": "Nàng ngủ thiếp đi trong tay bệ hạ." },
+      { "label": "Sai thái y sang", "effects": { "favor": 2 } }
+    ] },
+  { "id": "core.hong_tieu_1", "title": "Hoa Thanh Trì", "speaker": "core.hong_tieu", "once": true, "weight": 10,
+    "when": { "speakerInHarem": true, "favor": { "gte": 60 } },
+    "text": "{name} ngâm mình trong hồ ôn tuyền, chỉ để lộ đôi vai và nụ cười.\n> Cả thiên hạ là của bệ hạ. Còn thiếp chỉ muốn bệ hạ là của thiếp.",
+    "choices": [
+      { "label": "Hứa với nàng", "effects": { "favor": 15, "truyLac": 5, "flag": "arc.tieu.1" }, "hook": "core.hong_tieu_ho" },
+      { "label": "Trẫm còn cả hậu cung", "effects": { "favor": -5, "flag": "arc.tieu.1" }, "result": "Nàng quay mặt đi. Nước hồ bỗng lạnh." }
+    ] },
+  { "id": "core.hong_tieu_2", "title": "Vải tươi từ phương Nam", "speaker": "core.hong_tieu", "once": true, "weight": 8,
+    "when": { "speakerInHarem": true, "favor": { "gte": 75 }, "flag": "arc.tieu.1" },
+    "text": "> Thiếp thèm vải tươi phương Nam quá…\nVải chín ở Lĩnh Nam, cách kinh thành nghìn dặm. Muốn tươi thì phải dùng ngựa trạm chạy ngày đêm.",
+    "choices": [
+      { "label": "Truyền ngựa trạm chạy ngày đêm", "cost": 3000, "effects": { "favor": 20, "truyLac": 8, "danTam": -10, "flag": "arc.tieu.2" }, "result": "Một kỵ hồng trần phi tử tiếu. Dân gian bắt đầu xì xào." },
+      { "label": "Đợi mùa sau mua vải khô", "effects": { "favor": -5, "flag": "arc.tieu.2" }, "result": "Nàng giận ba hôm, rồi cũng thôi." }
+    ] },
+  { "id": "core.hong_tieu_3", "title": "Nghê Thường cho hai người", "speaker": "core.hong_tieu", "once": true, "weight": 8,
+    "when": { "speakerInHarem": true, "favor": { "gte": 90 }, "flag": "arc.tieu.2" },
+    "text": "{name} xin bệ hạ tự tay soạn nhạc, còn nàng sẽ múa. Một khúc nhạc, một điệu múa, chỉ hai người biết.",
+    "choices": [
+      { "label": "Soạn nhạc cho nàng", "effects": { "trait": "Sủng phi định mệnh", "affection": 25, "flag": "arc.tieu.done", "album": { "title": "Khúc nhạc của hai người", "line": "Bệ hạ soạn nhạc, Tạ Hồng Tiêu múa, không có ai khác." } }, "result": "Từ đó, cứ đến đêm trăng tròn là có tiếng đàn và tiếng chân múa ở Hoa Thanh Trì." }
+    ] },
+  { "id": "core.con_tranh_nhau", "title": "Anh em tranh đồ chơi", "speaker": "child", "cooldown": 18, "weight": 4,
+    "when": { "childAge": { "gte": 4, "lte": 9 }, "children": { "gte": 2 } },
+    "text": "{name} và một người em giành nhau con ngựa gỗ, khóc ầm cả Thượng thư phòng.",
+    "choices": [
+      { "label": "Làm thêm một con ngựa gỗ", "cost": 50, "effects": { "closeness": 5, "hoaKhi": 2 }, "result": "Hai đứa nín ngay, phi ngựa gỗ khắp sân." },
+      { "label": "Dạy con nhường em", "effects": { "closeness": 3, "childTrait": "Biết nhường" } }
+    ] },
+  { "id": "core.con_om", "title": "Con ốm", "speaker": "child", "cooldown": 24, "weight": 3,
+    "when": { "childAge": { "gte": 1, "lte": 10 } },
+    "text": "{name} sốt cao ba ngày. Mẫu phi {mother} thức trắng bên giường.",
+    "choices": [
+      { "label": "Bỏ cả triều chính, ngồi canh con", "effects": { "closeness": 20, "motherFavor": 10, "danTam": -2 }, "result": "Sáng ngày thứ tư, {name} hạ sốt, mở mắt gọi phụ hoàng." },
+      { "label": "Sai thái y giỏi nhất", "effects": { "closeness": 3, "motherFavor": 3 } }
+    ] },
+  { "id": "core.con_cong_chua_xuat_gia", "title": "Công chúa đi hòa thân", "speaker": "child", "perChild": true, "weight": 5,
+    "when": { "childAge": { "gte": 18 }, "childSex": "f", "childMarried": false },
+    "text": "Sứ thần phương Bắc đến cầu hôn công chúa {name} cho thế tử của họ. Nếu gả, biên cương sẽ yên ổn nhiều năm.",
+    "choices": [
+      { "label": "Hỏi ý con trước", "effects": { "closeness": 10 }, "result": "{name} xin được ở lại kinh thành. Bệ hạ khước từ sứ thần một cách khéo léo." },
+      { "label": "Gả, với của hồi môn hậu hĩnh", "cost": 2000, "effects": { "marry": true, "danTam": 10, "closeness": -5 }, "result": "Đoàn xe hồi môn dài mười dặm. Mẫu phi {mother} khóc suốt đêm." }
+    ] },
+  { "id": "core.con_lap_cong", "title": "Hoàng tử lập công", "speaker": "child", "cooldown": 36, "weight": 4,
+    "when": { "childAge": { "gte": 17 }, "childSex": "m" },
+    "text": "{name} theo đoàn quan đi cứu đói ở phủ xa, về tâu lại mọi chuyện rành mạch.",
+    "choices": [
+      { "label": "Khen trước triều", "effects": { "closeness": 10, "danTam": 5 }, "result": "Bá quan khen hoàng tử hiền đức." },
+      { "label": "Giao thêm việc", "effects": { "closeness": 5, "childTrait": "Giỏi việc" } }
+    ] },
+  { "id": "core.dt_thu_tay", "title": "Thư tình chuyền tay", "speaker": "pair", "cooldown": 18, "weight": 4,
+    "when": { "pairTinhY": { "gte": 50 } },
+    "text": "Một cung nữ đánh rơi lá thư trước mặt bệ hạ. Thư {name} viết cho {name2}, chữ nào cũng mềm như lụa.",
+    "choices": [
+      { "label": "Đọc rồi trả lại", "effects": { "tinhY": 8, "attitude": 1 }, "result": "Cung nữ run như cầy sấy, nhưng bệ hạ chỉ cười." },
+      { "label": "Viết thêm một câu vào cuối thư", "effects": { "tinhY": 12, "favor": 5, "favor2": 5, "attitude": 2 }, "result": "Câu ấy là: Trẫm không cấm." }
+    ] },
+  { "id": "core.dt_hoa_giai", "title": "Ghen chéo", "speaker": "pair", "cooldown": 24, "weight": 3,
+    "when": { "pairTinhY": { "gte": 61 }, "attitude": { "gte": 2 } },
+    "text": "{name} giận dỗi vì {name2} được bệ hạ triệu ba đêm liền. Nhưng hóa ra nàng không ghen với {name2}, mà ghen với bệ hạ.",
+    "choices": [
+      { "label": "Mời cả hai cùng dùng bữa", "effects": { "tinhY": 5, "favor": 5, "favor2": 5, "hoaKhi": 3 }, "result": "Bữa cơm ba người, không ai ghen ai nữa." },
+      { "label": "Để hai người tự giải quyết", "effects": { "tinhY": 10 } }
+    ] },
+  { "id": "core.vd_dat_ten_dien", "title": "Đổi tên điện", "once": true, "weight": 5,
+    "when": { "truyLac": { "gte": 75 } },
+    "text": "Bệ hạ muốn đổi tên Dưỡng Tâm điện thành một cái tên vui hơn.",
+    "choices": [
+      { "label": "Đổi thành Túy Hoa điện", "effects": { "truyLac": 5, "danTam": -5, "flag": "tuy_hoa_dien" }, "result": "Sử quan ghi lại, lắc đầu." },
+      { "label": "Giữ tên cũ", "effects": { "danTam": 2 } }
+    ] },
+  { "id": "core.vd_bo_trieu_lau", "title": "Ba tháng không lâm triều", "once": true, "weight": 8,
+    "when": { "truyLac": { "gte": 80 }, "flag": "it_lam_trieu" },
+    "text": "Đã ba tháng bệ hạ không ra Kim Loan điện. Tấu chương chất cao ngang vai thái giám.",
+    "choices": [
+      { "label": "Giao hết cho Nội các", "effects": { "truyLac": 5, "danTam": -8 }, "result": "Nội các lo việc nước. Bệ hạ lo việc hậu cung." },
+      { "label": "Ra triều một buổi cho phải phép", "effects": { "danTam": 6, "truyLac": -3 }, "result": "Bá quan mừng như bắt được vàng." }
+    ] },
+  { "id": "core.td_dem_thuyen", "title": "Thuyền rồng về kinh", "cooldown": 12, "weight": 6,
+    "when": { "flag": ["travel.core.giang_nam", "travel.core.tay_vuc"] },
+    "text": "Trên đường về kinh, đoàn thuyền rồng dừng lại một đêm giữa sông. Trăng sáng, gió mát, các mỹ nhân mới nạp ngồi hát.",
+    "choices": [
+      { "label": "Mở tiệc trên thuyền", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 6 }, "hook": "core.td_dem_thuyen", "participants": { "select": "random", "count": 3 }, "minParticipants": 2 },
+      { "label": "Ngồi một mình ngắm trăng", "effects": { "longThe": 3 } }
+    ] }
+]

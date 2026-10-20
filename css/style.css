@@ -316,3 +316,6 @@ textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px soli
 .log li.goal .txt::before { content: "✓ "; }
 .tabs .tab { flex: 1 0 auto; padding: 6px 8px; text-align: center; }
 .goals .section-head { flex-direction: column; align-items: flex-start; gap: 2px; }
+.num-row { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 13px; }
+.num-row input[type=number], .num-row select { width: 100%; min-width: 0; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--ink); color: var(--paper); font: inherit; font-variant-numeric: tabular-nums; }
+.num-row .check { font-size: 12.5px; white-space: nowrap; }

@@ -354,17 +354,45 @@
     const cs = s.consorts;
     return `<section class="section god">
       <fieldset><legend>Chỉ số</legend>
+        <p class="hint">Gõ số trực tiếp. Tick "Khóa" để chỉ số không đổi nữa.</p>
         ${Object.entries(G.STATS)
           .map(([k, d]) => {
-            const max = k === "quocKho" ? 100000 : 100;
-            return `<div class="slider"><label for="g-${k}">${d.label}</label><input type="range" id="g-${k}" data-stat="${k}" min="0" max="${max}" step="${k === "quocKho" ? 500 : 1}" value="${Math.round(s.stats[k])}"><output>${Math.round(s.stats[k])}</output></div>`;
+            const max = k === "quocKho" ? 9999999 : 100;
+            return `<div class="num-row"><label for="g-${k}">${d.label}</label><input type="number" inputmode="numeric" id="g-${k}" data-statnum="${k}" min="0" max="${max}" value="${Math.round(s.stats[k])}"><label class="check"><input type="checkbox" data-lock="${k}" ${s.godFlags.lockStats[k] ? "checked" : ""}> Khóa</label></div>`;
           })
           .join("")}
+        <div class="row-wrap"><button class="btn btn-sm" data-money="10000">+10k lượng</button><button class="btn btn-sm" data-money="100000">+100k lượng</button><button class="btn btn-sm" data-maxstats="1">Mọi chỉ số tối đa</button></div>
         <div class="row-wrap">
           <label class="check"><input type="checkbox" data-godflag="infiniteMoney" ${s.godFlags.infiniteMoney ? "checked" : ""}> Ngân lượng vô hạn</label>
           <label class="check"><input type="checkbox" data-godflag="unlockAllFetish" ${s.godFlags.unlockAllFetish ? "checked" : ""}> Mở mọi sở thích</label>
           <label class="check"><input type="checkbox" data-godflag="alwaysConceive" ${s.godFlags.alwaysConceive ? "checked" : ""}> Lần nào cũng thụ thai</label>
         </div>
+      </fieldset>
+      <fieldset><legend>Bệ hạ</legend>
+        <div class="num-row"><label for="g-eage">Tuổi</label><input type="number" id="g-eage" min="18" max="80" value="${s.age}"><button class="btn btn-sm" id="g-eage-set">Đặt</button></div>
+        <div class="num-row"><label for="g-dyn">Huyết mạch</label><input type="number" id="g-dyn" value="100"><button class="btn btn-sm" id="g-dyn-add">Cộng điểm</button></div>
+        <p class="hint">Đổi tuổi bệ hạ thì phi tần già hoặc trẻ đi theo, nhưng không ai dưới 18. Điểm huyết mạch hiện có: ${G.dynasty().points}.</p>
+      </fieldset>
+      <fieldset><legend>Hậu cung hàng loạt</legend>
+        <div class="num-row"><label for="g-allfav">Sủng ái</label><input type="number" id="g-allfav" min="0" max="100" value="80"><button class="btn btn-sm" data-setall="favor">Đặt cho tất cả</button></div>
+        <div class="num-row"><label for="g-allaff">Tình cảm</label><input type="number" id="g-allaff" min="0" max="100" value="80"><button class="btn btn-sm" data-setall="affection">Đặt cho tất cả</button></div>
+        <div class="num-row"><label for="g-allcon">Đồng thuận</label><select id="g-allcon">${G.CONSENT.map((c) => `<option value="${c}">${G.CONSENT_LABEL[c]}</option>`).join("")}</select><button class="btn btn-sm" id="g-allcon-set">Đặt cho tất cả</button></div>
+        <div class="row-wrap"><button class="btn btn-sm" id="g-birthnow">Mọi phi đang mang thai sinh tháng sau</button></div>
+      </fieldset>
+      <fieldset><legend>Độ nghiện sở thích</legend>
+        <details><summary>${Object.keys(R.fetishes).length} sở thích</summary>
+        ${Object.values(R.fetishes)
+          .sort((a, b) => a.tier - b.tier)
+          .map((f) => `<div class="num-row"><label for="g-f-${esc(f.id)}">${esc(f.name)}</label><input type="number" id="g-f-${esc(f.id)}" data-fet="${esc(f.id)}" min="0" max="100" value="${Math.round(s.fetish[f.id] || 0)}"><span class="hint">T${f.tier}</span></div>`)
+          .join("")}
+        </details>
+      </fieldset>
+      <fieldset><legend>Con cháu</legend>
+        <div class="num-row"><label for="g-close">Thân thiết</label><input type="number" id="g-close" min="0" max="100" value="80"><button class="btn btn-sm" id="g-close-set">Đặt cho mọi con</button></div>
+        <p class="hint">Chỉnh tuổi từng con trong tab Con cháu.</p>
+      </fieldset>
+      <fieldset><legend>Sự kiện</legend>
+        <button class="btn btn-sm" id="g-resetseen">Cho mọi sự kiện "một lần" xảy ra lại</button>
       </fieldset>
       <fieldset><legend>Thời gian</legend>
         <div class="row-wrap"><button class="btn btn-sm" data-skip="1">+1 tháng</button><button class="btn btn-sm" data-skip="12">+1 năm</button><button class="btn btn-sm" data-skip="60">+5 năm</button><button class="btn btn-sm" id="g-rewind" ${s.snapshots.length ? "" : "disabled"}>Quay lại 1 năm (${s.snapshots.length})</button><button class="btn btn-sm" id="g-abdicate">Thoái vị ngay</button></div>
@@ -431,11 +459,61 @@
       UI.render();
     });
     if (tab !== "god") return;
-    on(root, "[data-stat]", "input", (inp) => {
-      G.god.setStat(inp.dataset.stat, inp.value);
-      inp.nextElementSibling.textContent = inp.value;
+    const keepRender = () => {
+      const y = window.scrollY;
+      G.save();
+      UI.render();
+      window.scrollTo(0, y);
+    };
+    on(root, "[data-statnum]", "change", (inp) => {
+      G.god.setStat(inp.dataset.statnum, inp.value);
+      keepRender();
     });
-    on(root, "[data-stat]", "change", () => (G.save(), UI.render()));
+    on(root, "[data-lock]", "change", (inp) => {
+      G.god.lockStat(inp.dataset.lock, inp.checked);
+      G.save();
+    });
+    on(root, "[data-money]", "click", (b) => {
+      G.god.setStat("quocKho", s.stats.quocKho + Number(b.dataset.money));
+      keepRender();
+    });
+    on(root, "[data-maxstats]", "click", () => {
+      for (const k of ["longThe", "danTam", "hoaKhi"]) G.god.setStat(k, 100);
+      keepRender();
+    });
+    on(root, "#g-eage-set", "click", () => {
+      G.god.setEmperorAge($(root, "#g-eage").value);
+      keepRender();
+    });
+    on(root, "#g-dyn-add", "click", () => {
+      G.god.addDynasty($(root, "#g-dyn").value);
+      keepRender();
+    });
+    on(root, "[data-setall]", "click", (b) => {
+      const f = b.dataset.setall;
+      G.god.setAll(f, $(root, f === "favor" ? "#g-allfav" : "#g-allaff").value);
+      keepRender();
+    });
+    on(root, "#g-allcon-set", "click", () => {
+      G.god.setAllConsent($(root, "#g-allcon").value);
+      keepRender();
+    });
+    on(root, "#g-birthnow", "click", () => {
+      G.god.endPregnancies();
+      keepRender();
+    });
+    on(root, "[data-fet]", "change", (inp) => {
+      G.god.setFetish(inp.dataset.fet, inp.value);
+      G.save();
+    });
+    on(root, "#g-close-set", "click", () => {
+      G.god.setAllCloseness($(root, "#g-close").value);
+      keepRender();
+    });
+    on(root, "#g-resetseen", "click", () => {
+      G.god.resetSeen();
+      keepRender();
+    });
     on(root, "[data-godflag]", "change", (inp) => {
       s.godFlags[inp.dataset.godflag] = inp.checked;
       G.save();

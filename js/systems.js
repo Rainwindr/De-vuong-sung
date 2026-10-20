@@ -990,6 +990,44 @@
       const c = G.findConsort(id);
       return c ? G.birth(c) : null;
     },
+    setEmperorAge(age) {
+      const s = G.state;
+      const a = clamp(Math.floor(Number(age) || 18), 18, 80);
+      const d = a - s.age;
+      s.age = a;
+      for (const c of s.consorts) c.age = Math.max(G.MIN_AGE, c.age + d);
+    },
+    lockStat(k, on) {
+      G.state.godFlags.lockStats[k] = !!on;
+    },
+    setAll(field, v) {
+      for (const c of G.state.consorts) {
+        c[field] = clamp(Number(v), 0, 100);
+        if (field === "favor") G.checkPromotion(c);
+      }
+    },
+    setAllConsent(lvl) {
+      if (!G.CONSENT.includes(lvl)) return;
+      for (const c of G.state.consorts) for (const f of Object.keys(R.fetishes)) c.consent[f] = lvl;
+    },
+    setFetish(fid, v) {
+      if (R.fetishes[fid]) G.state.fetish[fid] = clamp(Number(v), 0, 100);
+    },
+    setAllCloseness(v) {
+      for (const ch of G.state.children) ch.closeness = clamp(Number(v), 0, 100);
+    },
+    addDynasty(n) {
+      const d = G.dynasty();
+      d.points = Math.max(0, d.points + Math.floor(Number(n) || 0));
+      G.storage.set("tsdv-dynasty-v1", d);
+      return d.points;
+    },
+    resetSeen() {
+      G.state.seen = {};
+    },
+    endPregnancies() {
+      for (const c of G.state.consorts) if (c.pregnantDue != null) c.pregnantDue = G.state.turn + 1;
+    },
     setChildAge(cid, age) {
       const ch = G.state.children.find((x) => x.id === cid);
       if (ch) ch.bornTurn = G.state.turn - clamp(Number(age), 0, 60) * 12;

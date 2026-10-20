@@ -2,7 +2,7 @@
 
 Game mô phỏng hậu cung dạng text kèm chân dung, chạy trên trình duyệt, ưu tiên điện thoại. Người chơi là một hoàng đế 18 tuổi vừa đăng cơ: tuyển tú, sủng ái phi tần, sinh con nối dõi, và tự chọn mình sẽ trụy lạc đến đâu. Nội dung 25+.
 
-Phiên bản **0.3**.
+Phiên bản **0.3.1**.
 
 ## Chạy thử
 
@@ -39,7 +39,7 @@ GitHub Pages: Settings → Pages → Deploy from a branch → `main` / `(root)`.
 | Kế vị | Chọn người kế vị, chọn nơi an hưởng, 8 kết thúc không có kết cục tệ, sử quan ghi chép, album |
 | Truyền đời | Thành tựu lưu giữa các lượt, điểm Huyết mạch, chơi tiếp đời sau với người kế vị |
 | Kịch bản | Tự do, Xe dê, Mê Lâu, Hoa Thanh Trì |
-| Thiên Đạo | God Mode: chỉnh mọi thứ, quay ngược thời gian, gọi sự kiện, xem nhật ký HOOK |
+| Thiên Đạo | God Mode: gõ số trực tiếp cho mọi chỉ số (ngân khố không giới hạn), khóa chỉ số, đổi tuổi bệ hạ, chỉnh hàng loạt Sủng ái/Tình cảm/đồng thuận, độ nghiện, thân thiết của con, điểm huyết mạch, quay ngược thời gian, gọi sự kiện, xem nhật ký HOOK |
 | Lưu game | Tự lưu, 3 ô lưu thủ công, mã lưu để chuyển sang máy khác |
 
 ## Cấu trúc
@@ -65,6 +65,7 @@ packs/core/                     gói lõi
   events/tuan-du.json           sự kiện khi tuần du
   events/he-qua.json            hậu quả khi chỉ số thấp hoặc cao
   events/tu-nu.json             chuyện riêng của tú nữ theo tính cách
+  events/cung-dinh.json         Thái hậu, lễ tết, đời sống cung đình, Hồng Tiêu, thêm con cái và đối thực
   events/chuong-3.json          tuổi già, truyền ngôi
   scenes.js                     cảnh mặc định (chỉ gợi rồi chuyển cảnh)
 packs/khung-nong-bong/          khung 12 nhóm sở thích cho bên thứ ba thay cảnh
