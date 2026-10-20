@@ -1,0 +1,49 @@
+[
+  {
+    "id": "vi-du-den-long.gap_go",
+    "title": "Hội hoa đăng",
+    "speaker": "vi-du-den-long.dao_hoa",
+    "once": true,
+    "weight": 20,
+    "when": { "month": { "in": [8, 9] }, "speakerInHarem": false },
+    "text": "Rằm tháng Tám, mặt hồ Thái Dịch kín đèn hoa. Một cô gái đang thả chiếc đèn hình hoa đào thì đèn lật, nàng suýt ngã xuống nước.\n> Đèn ơi đèn, hỏng mất rồi… Ơ, công tử là ai?",
+    "choices": [
+      {
+        "label": "Đỡ nàng, cùng làm lại chiếc đèn",
+        "effects": { "addConsortSpeaker": true, "favor": 20, "truyLac": 4 },
+        "result": "Đào Hoa Nương theo bệ hạ về cung, mang theo cả gánh đèn."
+      },
+      {
+        "label": "Mua hết đèn của nàng",
+        "cost": 500,
+        "effects": { "meet": true, "truyLac": 2 },
+        "result": "Cả hồ sáng rực. Nàng cười, nhưng không biết người kia là ai."
+      }
+    ]
+  },
+  {
+    "id": "vi-du-den-long.dem_den",
+    "title": "Chiếc đèn chỉ thắp một lần",
+    "speaker": "vi-du-den-long.dao_hoa",
+    "cooldown": 6,
+    "weight": 4,
+    "when": { "speakerInHarem": true, "favor": { "gte": 40 } },
+    "text": "{name} treo kín cung bằng đèn tự làm, tắt hết nến.\n> Đêm nay chỉ có ánh đèn hoa thôi, bệ hạ chịu không?",
+    "choices": [
+      {
+        "label": "Chịu",
+        "fetish": ["vi-du-den-long.ngam_den"],
+        "effects": { "favor": 10, "truyLac": 5 },
+        "hook": "vi-du-den-long.dem_den"
+      },
+      {
+        "label": "Rủ thêm hai người cùng ngắm đèn",
+        "fetish": ["vi-du-den-long.ngam_den"],
+        "participants": { "select": "top_favor", "count": 3 },
+        "effects": { "truyLac": 10 },
+        "hook": "vi-du-den-long.dem_den_tap_the"
+      },
+      { "label": "Để hôm khác", "effects": { "favor": -2 }, "result": "Đèn vẫn sáng đến sáng, chỉ một mình nàng ngắm." }
+    ]
+  }
+]

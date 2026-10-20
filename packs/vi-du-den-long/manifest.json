@@ -1,0 +1,15 @@
+{
+  "id": "vi-du-den-long",
+  "name": "Ví dụ: Hội Hoa Đăng",
+  "version": "0.1.0",
+  "author": "Mẫu cho bên thứ ba",
+  "game_version": ">=0.1",
+  "rating": "25+",
+  "requires": ["core"],
+  "files": {
+    "characters": "characters.json",
+    "events": "events.json",
+    "fetishes": "fetishes.json",
+    "scenes": "scenes.js"
+  }
+}

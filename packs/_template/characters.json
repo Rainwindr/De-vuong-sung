@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ten-goi-cua-ban.nhan_vat_1",
+    "name": "Họ Tên Nhân Vật",
+    "age": 20,
+    "origin": "Xuất thân, một dòng",
+    "start": false,
+    "rank": 0,
+    "favor": 20,
+    "affection": 10,
+    "traits": ["Trait 1", "Trait 2", "Trait 3"],
+    "likes": ["ten-goi-cua-ban.so_thich_1"],
+    "consent": {
+      "ten-goi-cua-ban.so_thich_1": "willing",
+      "core.lua_la": "persuade",
+      "core.ngam_nhin": "refuse"
+    },
+    "portrait": { "glyph": "花", "hue": 330, "image": "assets/nhan_vat_1.webp" },
+    "lines": {
+      "low": "Câu thoại khi Sủng ái thấp.",
+      "high": "Câu thoại khi Sủng ái cao."
+    }
+  }
+]
