@@ -7,6 +7,7 @@
   const $app = () => document.getElementById("app");
   const $sheet = () => document.getElementById("sheet");
   let tab = "log";
+  let logFilter = "all";
   const queue = [];
 
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -23,10 +24,10 @@
   function portrait(c, size) {
     const p = c.portrait || {};
     const hue = p.hue != null ? p.hue : hashHue(c.id || c.name);
-    const glyph = p.glyph || (c.name || "?").trim().split(" ").pop()[0];
     const mood = c.favor >= 70 ? " mood-high" : "";
+    // Ảnh thật của gói (nếu có) phủ lên chân dung vẽ; ảnh lỗi thì tự gỡ, lộ chân dung vẽ bên dưới
     const img = p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" onerror="this.remove()">` : "";
-    return `<span class="portrait${size ? " " + size : ""}${mood}${c.isChild ? " child" : ""}" style="--h:${hue}" aria-hidden="true">${esc(glyph)}${img}</span>`;
+    return `<span class="portrait${size ? " " + size : ""}${mood}${c.isChild ? " child" : ""}" style="--h:${hue}" aria-hidden="true">${G.portraitSVG(c)}${img}</span>`;
   }
   const bar = (v, cls) => `<span class="bar${cls ? " " + cls : ""}"><i style="width:${Math.max(0, Math.min(100, v))}%"></i></span>`;
   const meter = (label, v, cls) => `<div class="favor">${bar(v, cls)}<span>${esc(label)} ${Math.round(v)}</span></div>`;
@@ -65,6 +66,7 @@
           ${d.last ? `<button class="btn" id="btn-heir" disabled>Đời sau: ${esc(d.last.name)} kế vị (${d.last.age} tuổi)</button>` : ""}
           ${canContinue ? `<button class="btn" id="btn-cont" disabled>Tiếp tục lượt đang chơi</button>` : ""}
         </div>
+        ${[1, 2, 3].some((n) => G.slotInfo(n)) ? `<details><summary>Tải từ ô lưu</summary><div class="cards">${slotsHtml(false)}</div></details>` : ""}
         <details class="legacy" ${d.points ? "open" : ""}>
           <summary>Huyết mạch · ${d.points} điểm danh vọng</summary>
           <p class="hint">Điểm có được khi kết thúc một đời: mỗi con 1, mỗi cháu 2, mỗi thành tựu mới 5. Huyết mạch đã mua có hiệu lực cho mọi đời sau.</p>
@@ -97,6 +99,14 @@
         if (G.loadSave()) UI.render();
         else cont.textContent = "Bản lưu cũ không tương thích phiên bản này";
       });
+    on(root, "[data-slot-load]", "click", (b) => {
+      if (!ok.checked) return ok.focus();
+      if (G.loadSlot(Number(b.dataset.slotLoad))) {
+        G.save();
+        tab = "log";
+        UI.render();
+      }
+    });
     on(root, "[data-legacy]", "click", (b) => {
       if (G.buyLegacy(b.dataset.legacy)) UI.renderGate();
     });
@@ -115,20 +125,19 @@
     if (!s) return UI.renderGate();
     if (s.ended) return renderEnding();
     const tabs = [
-      ["log", "Nhật ký"],
-      ["harem", `Hậu cung · ${s.consorts.length}`],
-      ["kids", `Con cháu · ${s.children.length}`],
-      ["fetish", "Sở thích"],
+      ["log", "Triều"],
+      ["harem", "Hậu cung"],
+      ["kids", "Con cháu"],
+      ["me", "Bệ hạ"],
       ["palace", "Cung điện"],
-      ["ach", "Thành tựu"],
-      ["packs", "Gói"],
     ];
     if (s.godMode) tabs.push(["god", "Thiên Đạo"]);
     $app().innerHTML = `
       <header class="topbar">
         <div class="who">
           <h2>${esc(s.emperorName)}</h2>
-          <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year}, tháng ${s.month}</span>
+          <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year}, th.${s.month}</span>
+          <button class="icon-btn" id="b-menu" aria-label="Lưu game, gói nội dung và cài đặt">☰</button>
         </div>
         <div class="stats">${Object.entries(G.STATS)
           .map(([k, d]) => {
@@ -142,10 +151,11 @@
       <main id="view">${renderTab()}</main>
       <div class="dock"><div class="dock-inner">
         <button class="btn" id="b-summon">Lật thẻ</button>
-        <button class="btn" id="b-select">Tuyển tú</button>
-        <button class="btn" id="b-travel" ${G.canTravel() ? "" : "disabled"}>Tuần du</button>
-        <button class="btn btn-primary" id="b-next">Qua tháng</button>
-      </div></div>`;
+        <button class="btn" id="b-actions">Ý chỉ</button>
+        <button class="btn" id="b-next">+1 tháng</button>
+        <button class="btn btn-primary" id="b-skip">Đến chuyện mới</button>
+      </div></div>
+      <div class="toast" id="toast" hidden></div>`;
     const root = $app();
     on(root, ".tab", "click", (b) => {
       tab = b.dataset.tab;
@@ -153,26 +163,47 @@
       window.scrollTo(0, 0);
     });
     $(root, "#b-next").addEventListener("click", nextMonth);
+    $(root, "#b-skip").addEventListener("click", skipToEvent);
     $(root, "#b-summon").addEventListener("click", openSummon);
-    $(root, "#b-select").addEventListener("click", openSelection);
-    $(root, "#b-travel").addEventListener("click", openTravel);
+    $(root, "#b-actions").addEventListener("click", openActions);
+    $(root, "#b-menu").addEventListener("click", openMenu);
     bindTab(root);
     if (!$sheet().hidden) return;
     if (s.pendingTitles.length) openTitlePrompt();
   };
 
   function renderTab() {
-    return ({ harem: renderHarem, kids: renderKids, fetish: renderFetish, palace: renderPalace, ach: renderAch, packs: renderPacks, god: renderGod }[tab] || renderLog)();
+    return ({ harem: renderHarem, kids: renderKids, me: () => renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
   }
 
   /* ---------------- Nhật ký ---------------- */
+  const LOG_FILTERS = [
+    ["all", "Tất cả", null],
+    ["story", "Câu chuyện", ["story", "milestone", "goal", "ach"]],
+    ["harem", "Hậu cung", ["harem", "pair", "diary"]],
+    ["night", "Thị tẩm", ["night"]],
+    ["child", "Con cháu", ["child"]],
+  ];
+  function renderGoals() {
+    const s = G.state;
+    if (!s.goals || !s.goals.list.length) return "";
+    const done = s.goals.list.filter((g) => g.done).length;
+    return `<div class="goals"><div class="section-head"><h3>Mục tiêu năm ${s.goals.year}</h3><span class="hint">${done}/${s.goals.list.length} · đủ ba được thưởng 1000 lượng</span></div>
+      <ul>${s.goals.list
+        .map((g) => {
+          const d = G.goalDef(g.id);
+          return d ? `<li class="${g.done ? "done" : ""}"><span class="tick">${g.done ? "✓" : ""}</span>${esc(d.text)}</li>` : "";
+        })
+        .join("")}</ul></div>`;
+  }
   function renderLog() {
     const s = G.state;
-    if (!s.log.length) return `<p class="empty">Chưa có gì xảy ra.</p>`;
-    return `<section class="section"><ul class="log">${s.log
-      .slice(0, 120)
-      .map((l) => `<li class="${esc(l.kind)}"><span class="when">${l.age}t · T${l.month}</span><span class="txt">${esc(l.text)}</span></li>`)
-      .join("")}</ul></section>`;
+    const f = LOG_FILTERS.find((x) => x[0] === logFilter) || LOG_FILTERS[0];
+    const rows = s.log.filter((l) => !f[2] || f[2].includes(l.kind)).slice(0, 150);
+    return `<section class="section">${renderGoals()}
+      <div class="chips" role="group" aria-label="Lọc nhật ký">${LOG_FILTERS.map(([id, label]) => `<button class="chip" data-logf="${id}" aria-pressed="${logFilter === id}">${label}</button>`).join("")}</div>
+      ${rows.length ? `<ul class="log">${rows.map((l) => `<li class="${esc(l.kind)}"><span class="when">${l.age}t · T${l.month}</span><span class="txt">${esc(l.text)}</span></li>`).join("")}</ul>` : `<p class="empty">Chưa có gì ở mục này.</p>`}
+    </section>`;
   }
 
   /* ---------------- Hậu cung ---------------- */
@@ -370,6 +401,10 @@
   function bindTab(root) {
     const s = G.state;
     on(root, "[data-consort]", "click", (b) => openConsort(b.dataset.consort));
+    on(root, "[data-logf]", "click", (b) => {
+      logFilter = b.dataset.logf;
+      UI.render();
+    });
     on(root, "#b-reset", "click", () => {
       G.clearSave();
       G.state = null;
@@ -514,6 +549,28 @@
   UI.showEvent = showEvent;
 
   /* ---------------- Qua tháng ---------------- */
+  function toast(text) {
+    const t = document.getElementById("toast");
+    if (!t) return;
+    t.textContent = text;
+    t.hidden = false;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => (t.hidden = true), 2200);
+  }
+
+  function skipToEvent() {
+    const r = G.advanceUntilEvent(24);
+    G.save();
+    for (const b of r.births) {
+      const label = b.kids.map((k) => (k.sex === "m" ? "hoàng tử " : "công chúa ") + k.name).join(" và ");
+      queue.push(() => showMessage("Tin vui", `${b.mother.name} hạ sinh ${label}. Toàn cung chúc mừng.`, [`Sủng ái ${b.mother.name} +5`]));
+    }
+    if (r.event) queue.push(() => showEvent(r.event));
+    if (queue.length) queue.shift()();
+    else UI.render();
+    if (r.months > 1) toast(`Đã qua ${r.months} tháng`);
+  }
+
   function nextMonth() {
     const r = G.advanceMonth();
     G.save();
@@ -524,6 +581,106 @@
     if (r.event) queue.push(() => showEvent(r.event));
     if (queue.length) queue.shift()();
     else UI.render();
+  }
+
+  /* ---------------- Ý chỉ (hành động) ---------------- */
+  function openActions() {
+    const s = G.state;
+    const selWhy = G.selectionStatus();
+    openSheet(
+      `<h3>Ý chỉ</h3>
+       <div class="cards">
+         <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.SELECTION_COST} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
+         <div class="row-card"><div><b>Tuần du</b><br><span class="hint">${G.canTravel() ? "Mỗi năm một chuyến. Mỗi vùng có mỹ nhân và chuyện riêng." : "Năm nay đã tuần du rồi."}</span></div><button class="btn btn-sm" id="a-travel" ${G.canTravel() ? "" : "disabled"}>Chọn vùng</button></div>
+         <div class="row-card"><div><b>Tặng quà, xuất cung, học phường</b><br><span class="hint">Chạm vào từng phi trong tab Hậu cung.</span></div><button class="btn btn-sm" id="a-harem">Hậu cung</button></div>
+         <div class="row-card"><div><b>Xây dựng</b><br><span class="hint">Công trình và nâng cung phi tần.</span></div><button class="btn btn-sm" id="a-palace">Cung điện</button></div>
+       </div>
+       <p class="hint">Thu nhập mỗi tháng: ${G.monthlyIncome()} lượng (tăng theo Dân tâm).</p>
+       <button class="btn btn-ghost" id="a-close">Đóng</button>`,
+      (el) => {
+        $(el, "#a-close").addEventListener("click", closeSheet);
+        on(el, "#a-select", "click", openSelection);
+        on(el, "#a-travel", "click", openTravel);
+        on(el, "#a-harem", "click", () => {
+          tab = "harem";
+          closeSheet();
+        });
+        on(el, "#a-palace", "click", () => {
+          tab = "palace";
+          closeSheet();
+        });
+      }
+    );
+  }
+
+  /* ---------------- Menu: lưu, gói, về màn đầu ---------------- */
+  function slotsHtml(withSave) {
+    return [1, 2, 3]
+      .map((n) => {
+        const info = G.slotInfo(n);
+        const desc = info ? `${esc(info.name)} · ${info.age} tuổi · năm ${info.year} · ${info.harem} phi · ${info.kids} con${info.ended ? " · đã kết thúc" : ""}` : "Trống";
+        return `<div class="row-card"><div><b>Ô ${n}</b><br><span class="hint">${desc}</span></div><div class="row-wrap">
+          ${withSave ? `<button class="btn btn-sm" data-slot-save="${n}">Lưu</button>` : ""}
+          ${info ? `<button class="btn btn-sm" data-slot-load="${n}">Tải</button>` : ""}
+        </div></div>`;
+      })
+      .join("");
+  }
+  function bindSlots(el, after) {
+    on(el, "[data-slot-save]", "click", (b) => {
+      G.saveSlot(Number(b.dataset.slotSave));
+      after ? after() : openMenu();
+    });
+    on(el, "[data-slot-load]", "click", (b) => {
+      if (G.loadSlot(Number(b.dataset.slotLoad))) {
+        G.save();
+        tab = "log";
+        closeSheet();
+      } else showMessage("Không tải được", "Bản lưu này thuộc phiên bản khác hoặc đã hỏng.");
+    });
+  }
+  function openMenu() {
+    openSheet(
+      `<h3>Lưu game</h3><p class="hint">Game tự lưu sau mỗi lượt. Lưu thêm vào ô để giữ một mốc quay lại.</p>
+       <div class="cards">${slotsHtml(true)}</div>
+       <details><summary>Chuyển sang máy khác</summary>
+         <p class="hint">Chép mã lưu này, dán vào ô Nhập ở máy kia.</p>
+         <div class="field"><label for="m-code">Mã lưu</label><textarea id="m-code" rows="3" readonly></textarea></div>
+         <div class="row-wrap"><button class="btn btn-sm" id="m-export">Tạo mã</button><button class="btn btn-sm" id="m-copy">Chép</button></div>
+         <div class="field"><label for="m-import">Nhập mã lưu</label><textarea id="m-import" rows="3" placeholder="Dán mã vào đây"></textarea></div>
+         <button class="btn btn-sm" id="m-doimport">Nhập</button>
+       </details>
+       ${renderPacks()}
+       <button class="btn btn-ghost" id="m-close">Đóng</button>`,
+      (el) => {
+        bindSlots(el);
+        $(el, "#m-close").addEventListener("click", closeSheet);
+        $(el, "#m-export").addEventListener("click", () => ($(el, "#m-code").value = G.exportSave()));
+        $(el, "#m-copy").addEventListener("click", () => {
+          const t = $(el, "#m-code");
+          if (!t.value) t.value = G.exportSave();
+          const done = () => ($(el, "#m-copy").textContent = "Đã chép");
+          try {
+            navigator.clipboard.writeText(t.value).then(done, () => (t.select(), done()));
+          } catch (e) {
+            t.select();
+          }
+        });
+        $(el, "#m-doimport").addEventListener("click", () => {
+          if (G.importSave($(el, "#m-import").value)) {
+            G.save();
+            tab = "log";
+            closeSheet();
+          } else showMessage("Không nhập được", "Mã lưu không hợp lệ hoặc thuộc phiên bản khác.");
+        });
+        on(el, "#b-reset", "click", () => {
+          G.clearSave();
+          G.state = null;
+          $sheet().hidden = true;
+          UI.renderGate();
+        });
+      }
+    );
   }
 
   /* ---------------- Phong hiệu ---------------- */
@@ -604,6 +761,10 @@
              </details>`
            : ""
        }
+       <details><summary>Ban ân xuất cung</summary>
+         <p class="hint">Nàng rời cung về quê với hồi môn ${G.RELEASE_COST} lượng. Không thể hoàn tác.</p>
+         <button class="btn btn-sm" id="c-release">Xác nhận cho ${esc(c.name)} xuất cung</button>
+       </details>
        <button class="btn btn-ghost" id="c-close">Đóng</button>`,
       (el) => {
         $(el, "#c-close").addEventListener("click", closeSheet);
@@ -612,6 +773,10 @@
         on(el, "#c-crown", "click", () => {
           G.crownEmpress(c.id);
           showMessage("Đại lễ sách phong", `${c.name} đội mũ phượng, chính thức trở thành Hoàng hậu.`, ["Sủng ái +10"]);
+        });
+        on(el, "#c-release", "click", () => {
+          const r = G.releaseConsort(c.id);
+          if (r) showMessage(r.ok ? "Xuất cung" : "Chưa thể", r.text, r.notes);
         });
         on(el, "[data-gift]", "click", (b) => {
           const r = G.buyGift(c.id, b.dataset.gift);

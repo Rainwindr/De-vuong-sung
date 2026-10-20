@@ -207,6 +207,7 @@ So sánh số: `{ "gte": 10 }`, `{ "lte": 50 }`, `{ "gt": … }`, `{ "lt": … }
 | `speakerInHarem` | Người nói đã nhập cung chưa |
 | `favor`, `affection` | Sủng ái, Tình cảm của người nói |
 | `speakerAge`, `speakerRank`, `speakerTrait`, `speakerPregnant` | Tuổi, phẩm, có trait, đang mang thai |
+| `speakerGenerated` | `true`: chỉ chọn tú nữ ngẫu nhiên (không phải nhân vật viết sẵn) |
 | `childAge`, `childSex`, `childMarried` | Với `speaker: "child"` |
 | `pairTinhY`, `pairFavorBelow` | Với `speaker: "pair"` |
 
@@ -260,6 +261,17 @@ So sánh số: `{ "gte": 10 }`, `{ "lte": 50 }`, `{ "gt": … }`, `{ "lt": … }
 Khi một lựa chọn có `hook`, lõi tự tính đêm thị tẩm cho những người tham gia đã ở trong hậu cung và tăng độ nghiện các sở thích trong `fetish`.
 
 ---
+
+### 7.5 Chỉ số và hậu quả
+
+- Thu nhập mỗi tháng = 120 + Dân tâm × 2. Dân tâm thấp thì ngân khố hụt.
+- Trụy lạc tự nguội 0,3 mỗi tháng và càng cao càng khó tăng (tăng × (1 − Trụy lạc/130), tối thiểu × 0,3).
+- Hòa khí dưới 30: mỗi tháng có thể một phi mất Sủng ái. Hậu cung trên 30 người thì Hòa khí giảm dần.
+- Sự kiện hậu quả của chỉ số nằm trong `packs/core/events/he-qua.json` (dân oán, bạo động, ngân khố cạn, hậu cung cãi vã, xin xuất cung…). Viết thêm bằng điều kiện `danTam`, `hoaKhi`, `quocKho`.
+
+### 7.6 Mục tiêu năm
+
+Mỗi đầu năm lõi chọn 3 mục tiêu trong `G.GOALS` (js/systems.js) còn làm được. Mỗi mục tiêu có `text`, `ok(s)` (có nên đưa ra không), `test(s, base)` (đã xong chưa) và `reward` (cùng cú pháp `effects`). Đủ ba mục tiêu thưởng thêm 1000 lượng.
 
 ## 8. Cuộc thi, quà, công trình, vùng
 

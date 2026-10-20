@@ -1,0 +1,101 @@
+[
+  { "id": "core.tn_tao_bao", "title": "Lời mời táo bạo", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Táo bạo", "favor": { "gte": 25 } },
+    "text": "{name} chặn kiệu bệ hạ giữa đường, không chút ngại ngần.\n> Bệ hạ bận lắm sao? Thiếp đợi lâu lắm rồi.",
+    "choices": [
+      { "label": "Theo nàng về cung", "effects": { "favor": 15, "truyLac": 3 }, "hook": "core.tn_tao_bao" },
+      { "label": "Cười, hẹn hôm khác", "effects": { "favor": 5 }, "result": "{name} bĩu môi, nhưng mắt cười." }
+    ] },
+  { "id": "core.tn_hay_nguong", "title": "Lá thư không ký tên", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Hay ngượng" },
+    "text": "Một lá thư nhỏ kẹp trong tấu chương, nét chữ run run. Lý công công thì thầm: là của {name}, nàng không dám đưa tận tay.",
+    "choices": [
+      { "label": "Đến cung nàng, đọc thư trước mặt nàng", "effects": { "favor": 15, "affection": 15 }, "result": "{name} đỏ mặt đến tận mang tai, nhưng không chạy trốn." },
+      { "label": "Viết thư trả lời", "effects": { "favor": 10, "affection": 10 }, "result": "Hai người viết thư qua lại suốt mùa đông." }
+    ] },
+  { "id": "core.tn_biet_mua", "title": "Múa dưới mưa", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Biết múa", "month": { "in": [4, 5, 6, 7, 8] } },
+    "text": "Trời đổ mưa, {name} vẫn múa một mình giữa sân, áo ướt sũng.",
+    "choices": [
+      { "label": "Đứng dưới hiên xem", "effects": { "favor": 10, "fetish": { "core.ngam_nhin": 5 } }, "result": "Nàng múa xong mới thấy bệ hạ, đứng sững giữa mưa." },
+      { "label": "Mang ô ra che cho nàng", "effects": { "favor": 12, "affection": 12 } }
+    ] },
+  { "id": "core.tn_giong_hat", "title": "Tiếng hát bên hồ", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Giọng hát ngọt" },
+    "text": "Tiếng hát trong vắt vọng qua mặt hồ. Người hát là {name}, một phi tần bệ hạ mới gặp đôi lần.",
+    "choices": [
+      { "label": "Mời nàng hát trong yến tối nay", "effects": { "favor": 15, "trait": "Được nhớ mặt" }, "result": "Cả yến tiệc lặng đi khi nàng cất giọng." },
+      { "label": "Lặng nghe rồi đi", "effects": { "favor": 3 } }
+    ] },
+  { "id": "core.tn_kheo_tay", "title": "Đôi hài thêu", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Khéo tay" },
+    "text": "{name} dâng một đôi hài thêu rồng, từng đường kim nhỏ như tóc.\n> Thiếp thêu ba tháng, chỉ mong bệ hạ đi thử một lần.",
+    "choices": [
+      { "label": "Đi luôn đến cung nàng", "effects": { "favor": 15, "affection": 10 } },
+      { "label": "Cất vào tủ", "effects": { "favor": 3 } }
+    ] },
+  { "id": "core.tn_huong_la", "title": "Hương theo gió", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Mùi hương lạ" },
+    "text": "Đi qua dãy cung phía Tây, bệ hạ ngửi thấy một mùi hương chưa từng gặp. Lần theo thì đến cửa cung {name}.",
+    "choices": [
+      { "label": "Gõ cửa", "effects": { "favor": 12, "fetish": { "core.huong_sac": 5 } }, "hook": "core.tn_huong_la" },
+      { "label": "Đứng ngoài hít một hơi rồi đi", "effects": { "favor": 2 } }
+    ] },
+  { "id": "core.tn_tinh_nghich", "title": "Trò đùa", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Tinh nghịch" },
+    "text": "{name} giấu mũ miện của bệ hạ, đòi đoán đúng ba câu đố mới trả.",
+    "choices": [
+      { "label": "Giải đố", "effects": { "favor": 12 }, "result": "Bệ hạ đoán đúng câu cuối. Nàng phải trả mũ, kèm một nụ hôn." },
+      { "label": "Giả vờ giận", "effects": { "favor": 5 }, "result": "Nàng sợ thật, trả mũ, rồi phát hiện bị lừa." }
+    ] },
+  { "id": "core.tn_on_nhu", "title": "Chén trà đêm", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Ôn nhu" },
+    "text": "Đêm khuya phê tấu chương, có người lặng lẽ đặt chén trà nóng bên cạnh. Là {name}, nàng không nói gì rồi lui ra.",
+    "choices": [
+      { "label": "Gọi nàng lại ngồi cùng", "effects": { "favor": 12, "affection": 15 } },
+      { "label": "Uống trà, nhớ mặt nàng", "effects": { "favor": 6 } }
+    ] },
+  { "id": "core.tn_kieu_ky", "title": "Không thèm đợi", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Kiêu kỳ", "favor": { "lte": 40 } },
+    "text": "Bệ hạ ghé cung {name}, nàng không ra đón, chỉ ngồi chải tóc.\n> Bệ hạ đến nhầm cung rồi chăng?",
+    "choices": [
+      { "label": "Ngồi xuống chải tóc giúp nàng", "effects": { "favor": 18, "fetish": { "core.chinh_phuc": 5 } }, "result": "Lược rơi khỏi tay nàng. Nàng không kiêu được nữa." },
+      { "label": "Quay về", "effects": { "favor": -5 }, "result": "Đêm ấy cung nàng sáng đèn đến sáng." }
+    ] },
+  { "id": "core.tn_da_sau", "title": "Bài thơ buồn", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Đa sầu" },
+    "text": "Trên tường cung {name}, ai đó đề một bài thơ buồn về người đợi trăng.",
+    "choices": [
+      { "label": "Đề tiếp hai câu bên dưới", "effects": { "favor": 15, "affection": 15 }, "result": "Sáng hôm sau, bài thơ có thêm hai câu vui." },
+      { "label": "Sai người xóa đi", "effects": { "favor": -5 } }
+    ] },
+  { "id": "core.tn_lang_man", "title": "Hẹn dưới hoa đào", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Lãng mạn", "month": { "in": [2, 3, 4] } },
+    "text": "> Hoa đào ở góc vườn phía Đông nở rồi. Thiếp đợi bệ hạ ở đó, giờ Dậu.",
+    "choices": [
+      { "label": "Đến đúng giờ", "effects": { "favor": 15, "affection": 10, "album": { "title": "Hoa đào", "line": "Hẹn với {name} dưới hoa đào." } } },
+      { "label": "Đến muộn", "effects": { "favor": 5 }, "result": "Nàng vẫn đợi, cánh hoa rơi đầy vai." }
+    ] },
+  { "id": "core.tn_chung_dien", "title": "Trâm mới", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Thích chưng diện" },
+    "text": "{name} cài cây trâm mới, đi qua đi lại trước Dưỡng Tâm điện ba lần.",
+    "choices": [
+      { "label": "Khen trâm đẹp", "effects": { "favor": 10 } },
+      { "label": "Ban thêm một cây trâm ngọc", "cost": 200, "effects": { "favor": 15, "fetish": { "core.trang_suc": 5 } } }
+    ] },
+  { "id": "core.tn_phuc_tuong", "title": "Quẻ tốt", "speaker": "random", "perConsort": true, "weight": 4,
+    "when": { "speakerGenerated": true, "speakerTrait": "Phúc tướng", "speakerPregnant": false },
+    "text": "Khâm Thiên Giám tâu: tướng của {name} vượng tử tôn, nếu được sủng ắt có tin vui.",
+    "choices": [
+      { "label": "Triệu nàng thị tẩm", "effects": { "favor": 10 }, "hook": "core.thi_tam" },
+      { "label": "Cười, không tin", "effects": {} }
+    ] },
+  { "id": "core.tn_lau_khong_gap", "title": "Ba năm chưa gặp", "speaker": "random", "perConsort": true, "weight": 3,
+    "when": { "speakerGenerated": true, "favor": { "lte": 20 }, "harem": { "gte": 12 } },
+    "text": "Lý công công dâng sổ: {name} vào cung đã lâu mà chưa một lần được triệu. Nàng không than, chỉ ngày ngày ngồi thêu bên cửa sổ.",
+    "choices": [
+      { "label": "Đến thăm nàng", "effects": { "favor": 20, "affection": 15 }, "result": "{name} đánh rơi kim thêu khi thấy bệ hạ bước vào." },
+      { "label": "Ban ân cho nàng xuất cung", "cost": 300, "effects": { "removeSpeaker": "được ban ân xuất cung", "danTam": 2 }, "result": "{name} khóc, rồi cười. Nàng về quê, lấy chồng, sống yên ổn." },
+      { "label": "Để đó", "effects": { "favor": -3 } }
+    ] }
+]

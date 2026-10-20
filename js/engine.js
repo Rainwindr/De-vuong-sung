@@ -17,7 +17,7 @@
   "use strict";
 
   const G = (window.Game = window.Game || {});
-  G.VERSION = "0.2.0";
+  G.VERSION = "0.3.0";
   G.MIN_AGE = 18;
 
   G.RANKS = ["Đáp ứng", "Thường tại", "Quý nhân", "Tần", "Phi", "Quý phi", "Hoàng quý phi", "Hoàng hậu"];
@@ -448,6 +448,8 @@
       if (s.godFlags.infiniteMoney && d < 0) return;
       if (d < 0) s.counters.spent -= d;
     }
+    // Trụy lạc càng cao càng khó tăng thêm: còn chỗ để leo đến tận cuối đời
+    if (k === "truyLac" && d > 0) d *= Math.max(0.3, 1 - s.stats.truyLac / 130);
     s.stats[k] = clamp(Math.round((s.stats[k] + d) * 100) / 100, G.STATS[k].min, G.STATS[k].max);
   }
   G.addStat = addStat;
@@ -537,6 +539,7 @@
         if (!cmp(speaker.age, when.speakerAge)) return false;
         if (inHarem && !cmp(speaker.rank, when.speakerRank)) return false;
         if (when.speakerTrait && !(speaker.traits || []).includes(when.speakerTrait)) return false;
+        if (when.speakerGenerated != null && (speaker.pack === "generated") !== when.speakerGenerated) return false;
         if (when.speakerPregnant != null && (speaker.pregnantDue != null) !== when.speakerPregnant) return false;
       }
     }
@@ -882,6 +885,38 @@
   /* ------------------------------------------------------------------ */
   G.monthlyHooks = []; // các hệ thống đăng ký hàm chạy mỗi tháng: fn(state, report)
 
+  /** Thu nhập mỗi tháng phụ thuộc Dân tâm: 70 → 260 lượng, 20 → 160 lượng. */
+  G.monthlyIncome = function () {
+    return Math.round(120 + G.state.stats.danTam * 2);
+  };
+
+  /**
+   * Tua đến khi có chuyện: sự kiện, sinh nở, phong hiệu chờ ban, hoặc hết tối đa 24 tháng.
+   * Trả về { months, births, event, ended, notes }.
+   */
+  G.advanceUntilEvent = function (max) {
+    const s = G.state;
+    const out = { months: 0, births: [], event: null, ended: null };
+    const goalsBefore = (s.goals && s.goals.list.filter((g) => g.done).length) || 0;
+    for (let i = 0; i < (max || 24); i++) {
+      const r = G.advanceMonth();
+      out.months++;
+      out.births.push(...r.births);
+      if (r.ended || s.ended) {
+        out.ended = s.ended;
+        break;
+      }
+      if (r.event) {
+        out.event = r.event;
+        break;
+      }
+      if (r.births.length || s.pendingTitles.length) break;
+      const goalsNow = (s.goals && s.goals.list.filter((g) => g.done).length) || 0;
+      if (goalsNow !== goalsBefore || (s.month === 1 && out.months > 1)) break; // dừng ở đầu năm mới để xem mục tiêu
+    }
+    return out;
+  };
+
   G.advanceMonth = function (opts) {
     opts = opts || {};
     const s = G.state;
@@ -901,7 +936,7 @@
       log(`Năm thứ ${s.year}. ${s.emperorName} ${s.age} tuổi.`, "milestone");
       if (G.snapshot) G.snapshot();
     }
-    addStat("quocKho", 250);
+    addStat("quocKho", G.monthlyIncome());
     const regen = s.legacies.includes("cuong_trang") ? 0.5 : 0;
     if (s.age < 40) addStat("longThe", 2 + regen);
     else if (s.age < 55) addStat("longThe", 1 + regen);
@@ -1008,7 +1043,7 @@
       const raw = localStorage.getItem(SAVE_KEY);
       if (!raw) return false;
       const data = JSON.parse(raw);
-      if (!data.state || data.state.v !== G.VERSION) return false;
+      if (!data.state || !data.state.v || data.state.v.split(".")[1] !== G.VERSION.split(".")[1]) return false;
       for (const c of data.generated || []) if (c.age >= G.MIN_AGE) R.characters[c.id] = c;
       G.state = data.state;
       G.state.snapshots = [];
@@ -1017,6 +1052,67 @@
       return false;
     }
   };
+  /* Ô lưu thủ công (1..3) và xuất/nhập mã lưu */
+  const slotKey = (n) => "tsdv-slot-" + n;
+  function packSave() {
+    const s = G.state;
+    const snap = s.snapshots;
+    s.snapshots = [];
+    const data = JSON.stringify({ state: s, generated: Object.values(R.characters).filter((c) => c.pack === "generated" || c.pack === "god") });
+    s.snapshots = snap;
+    return data;
+  }
+  function unpackSave(raw) {
+    const data = JSON.parse(raw);
+    if (!data.state || !data.state.v || data.state.v.split(".")[1] !== G.VERSION.split(".")[1]) return false;
+    for (const c of data.generated || []) if (c.age >= G.MIN_AGE) R.characters[c.id] = c;
+    G.state = data.state;
+    G.state.snapshots = [];
+    return true;
+  }
+  G.saveSlot = function (n) {
+    try {
+      localStorage.setItem(slotKey(n), packSave());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+  G.loadSlot = function (n) {
+    try {
+      const raw = localStorage.getItem(slotKey(n));
+      return raw ? unpackSave(raw) : false;
+    } catch (e) {
+      return false;
+    }
+  };
+  G.slotInfo = function (n) {
+    try {
+      const raw = localStorage.getItem(slotKey(n));
+      if (!raw) return null;
+      const st = JSON.parse(raw).state;
+      return { name: st.emperorName, age: st.age, year: st.year, harem: st.consorts.length, kids: st.children.length, ended: !!st.ended };
+    } catch (e) {
+      return null;
+    }
+  };
+  G.deleteSlot = function (n) {
+    try {
+      localStorage.removeItem(slotKey(n));
+    } catch (e) {}
+  };
+  /** Mã lưu dạng chữ để chép sang máy khác. */
+  G.exportSave = function () {
+    return btoa(unescape(encodeURIComponent(packSave())));
+  };
+  G.importSave = function (code) {
+    try {
+      return unpackSave(decodeURIComponent(escape(atob(String(code).trim()))));
+    } catch (e) {
+      return false;
+    }
+  };
+
   G.clearSave = function () {
     try {
       localStorage.removeItem(SAVE_KEY);

@@ -1,7 +1,7 @@
 [
   {
     "id": "core.tuu_tri_hoi", "title": "Tửu Trì Hội", "cooldown": 24, "weight": 5,
-    "when": { "truyLac": { "gte": 90 }, "harem": { "gte": 8 } },
+    "when": { "truyLac": { "gte": 80 }, "harem": { "gte": 8 } },
     "text": "Bệ hạ truyền đào một hồ rượu giữa cung. Hương rượu bay ra tận ngoài thành.\n> Ba ngày, không ai được rời khỏi hồ.",
     "choices": [
       { "label": "Mở Tửu Trì Hội", "cost": 10000, "fetish": ["core.yen_tiec"], "effects": { "truyLac": 20, "longThe": -20, "danTam": -25 }, "hook": "core.tuu_tri_hoi", "participants": { "select": "top_favor", "count": 8 }, "minParticipants": 4 },
@@ -10,7 +10,7 @@
   },
   {
     "id": "core.thay_ao", "title": "Thánh chỉ trang phục", "once": true, "weight": 6,
-    "when": { "truyLac": { "gte": 90 }, "fetishLevel": { "core.lua_la": { "gte": 60 } } },
+    "when": { "truyLac": { "gte": 80 }, "fetishLevel": { "core.lua_la": { "gte": 60 } } },
     "text": "Bệ hạ định ban chỉ: trong cấm cung, phi tần chỉ mặc lụa mỏng theo màu bệ hạ chọn mỗi ngày.",
     "choices": [
       { "label": "Ban chỉ, ai ngượng thì được miễn", "effects": { "truyLac": 15, "fetish": { "core.lua_la": 30 }, "flag": "luat_trang_phuc" }, "result": "Hậu cung rực rỡ sắc lụa. Mấy vị hay ngượng vẫn mặc áo cũ, không ai trách." },
@@ -19,7 +19,7 @@
   },
   {
     "id": "core.ngu_hoa", "title": "Ngũ Phi Đồng Tẩm", "cooldown": 24, "weight": 4,
-    "when": { "truyLac": { "gte": 90 }, "harem": { "gte": 10 } },
+    "when": { "truyLac": { "gte": 80 }, "harem": { "gte": 10 } },
     "text": "Năm phi tần được sủng nhất được phong chung danh hiệu Ngũ Hoa, chỉ thị tẩm cùng nhau.",
     "choices": [
       { "label": "Phong Ngũ Hoa", "fetish": ["core.ngam_nhin"], "effects": { "truyLac": 15, "longThe": -10, "hoaKhi": -10, "flag": "ngu_hoa" }, "hook": "core.ngu_hoa", "participants": { "select": "top_favor", "count": 5 }, "minParticipants": 5 },
@@ -28,7 +28,7 @@
   },
   {
     "id": "core.dem_khong_trang", "title": "Đêm không trăng", "once": true, "weight": 30,
-    "when": { "truyLac": { "gte": 100 } },
+    "when": { "truyLac": { "gte": 92 } },
     "text": "Bệ hạ không còn phân biệt được ngày và đêm, không nhớ lần cuối mình bước ra khỏi hậu cung là khi nào.\n> Sử quan ghi: đế chìm trong tửu sắc, cung điện sáng đèn suốt đêm.",
     "choices": [
       { "label": "Tiếp tục", "effects": { "flag": "khong_hoi_dau" }, "result": "Đèn hậu cung không bao giờ tắt nữa." },
