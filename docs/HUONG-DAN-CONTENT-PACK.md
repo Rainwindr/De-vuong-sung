@@ -147,6 +147,8 @@ ten-goi-cua-ban.dem_den          HOOK
 
 - `tier` 1–3. Truyền vào HOOK qua `ctx.tier`.
 - `unlock`: điều kiện mở khóa, cùng cú pháp mục 7.2. Làm cây sở thích bằng `fetishLevel` hoặc `fetishUnlocked`, ví dụ `{ "fetishLevel": { "core.lua_la": { "gte": 50 } } }`.
+- `consent`: `{ "core.tuyet": "willing" }` khai mức riêng cho nhân vật của gói khác (dùng khi nhân vật đó không tự ghi mức cho sở thích này).
+- `consentByTrait`: `{ "Táo bạo": "willing", "Hay ngượng": "refuse" }` khai mức theo trait, áp dụng cả cho tú nữ ngẫu nhiên.
 - `combos`: khi người chơi chọn cả hai sở thích trong một đêm Lật thẻ, lõi gọi `hook` của combo thay cho cảnh thường và `ctx.combo` là `name`.
 - Độ nghiện tăng mỗi lần dùng. Nghiện từ 80 mà một năm không dùng thì Long thể giảm. Lặp lại đúng một bộ sở thích quá 5 lần liền thì nhạt dần.
 
@@ -371,7 +373,8 @@ Cách dễ nhất để thêm cảnh: chỉ viết chữ. Trong manifest khai b�
 - Khóa cấp ba: `dau` / `quen` / `lau` cho cảnh thị tẩm, `_` cho mọi cảnh khác.
 - Biến: `{name}`, `{names}`, `{emperor}`, `{fetish}`. Dòng bắt đầu bằng `> ` là lời thoại.
 - Chưa có chữ phù hợp thì game dùng cảnh cũ (của `scenes.js`).
-- Trình soạn cảnh trong game (☰ → Trình soạn cảnh) tạo đúng định dạng này: bấm **Tạo mã**, chép vào file.
+- Gói `packs/canh-viet` đã có sẵn khung trống cho mọi cảnh; bộ prompt cho Grok nằm ở `docs/PROMPT-VIET-CANH.md`.
+- Có thể thêm `"_title": "..."` trong khối của một HOOK để đặt tiêu đề cảnh.
 
 ## 10. Quy tắc lõi (không ghi đè được)
 

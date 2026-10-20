@@ -1,0 +1,56 @@
+{
+  "core.thi_tam_so_thich": {
+    "_title": "Thị tẩm",
+    "core.lua_la": {"_": []},
+    "core.huong_sac": {"_": []},
+    "core.duc_tri": {"_": []},
+    "core.ngam_nhin": {"_": []},
+    "core.trang_suc": {"_": []},
+    "core.nhap_vai": {"_": []},
+    "core.y_phuc": {"_": []},
+    "core.bit_mat": {"_": []},
+    "core.yen_tiec": {"_": []},
+    "core.thi_tham": {"_": []},
+    "core.chinh_phuc": {"_": []},
+    "core.ganh_dua": {"_": []},
+    "core.ban_thuong": {"_": []},
+    "core.chu_to": {"_": []},
+    "core.troi_lua": {"_": []},
+    "core.nong_lanh": {"_": []},
+    "core.trinh_dien": {"_": []},
+    "core.khan_dai": {"_": []},
+    "khung-nong-bong.phuc_dich": {"_": []},
+    "khung-nong-bong.tu_do": {"_": []},
+    "khung-nong-bong.kiem_che": {"_": []},
+    "khung-nong-bong.long_chung": {"_": []},
+    "khung-nong-bong.xoa_bop": {"_": []},
+    "khung-nong-bong.nghi_thuc": {"_": []},
+    "khung-nong-bong.y_phuc_goi": {"_": []},
+    "khung-nong-bong.doi_thuc_nong": {"_": []},
+    "khung-nong-bong.gameshow": {"_": []},
+    "khung-nong-bong.troi_buoc": {"_": []},
+    "khung-nong-bong.khan_gia": {"_": []},
+    "khung-nong-bong.tan_phi": {"_": []},
+    "_chung": {"_": []}
+  },
+  "core.combo_ho_ruou": {
+    "_title": "Đêm Hồ Rượu",
+    "_chung": {"_": []}
+  },
+  "core.combo_kich": {
+    "_title": "Kịch Vương Triều",
+    "_chung": {"_": []}
+  },
+  "core.combo_huong_toi": {
+    "_title": "Hương Trong Bóng Tối",
+    "_chung": {"_": []}
+  },
+  "core.combo_lua_do": {
+    "_title": "Lụa Đỏ Quyền Uy",
+    "_chung": {"_": []}
+  },
+  "core.combo_tram_mau": {
+    "_title": "Hội Trăm Màu",
+    "_chung": {"_": []}
+  }
+}

@@ -77,7 +77,6 @@
             })
             .join("")}</div>
         </details>
-        <button class="btn btn-ghost" id="btn-editor">Trình soạn cảnh</button>
         ${packSummary()}
       </section>`;
     const root = $app();
@@ -92,7 +91,6 @@
       UI.render();
     };
     $(root, "#btn-new").addEventListener("click", () => start());
-    $(root, "#btn-editor").addEventListener("click", () => openEditor());
     const heir = $(root, "#btn-heir");
     if (heir) heir.addEventListener("click", () => start({ name: d.last.name + " Đế", age: d.last.age, generation: d.last.generation, scenario: "tu_do" }));
     const cont = $(root, "#btn-cont");
@@ -340,7 +338,7 @@
       <div class="section-head"><h3>Gói nội dung</h3><span class="hint">Thêm gói trong thư mục packs/</span></div>
       <div class="scroll-x"><table class="mini-table"><tr><th>Gói</th><th>Phiên bản</th><th>Tác giả</th></tr>
       ${R.packs.map((p) => `<tr><td>${esc(p.name)}<br><span class="mono">${esc(p.id)}</span></td><td>${esc(p.version)}</td><td>${esc(p.author)}</td></tr>`).join("")}</table></div>
-      <p class="hint">${count("characters")} nhân vật · ${count("events")} sự kiện · ${count("fetishes")} sở thích · ${count("contests")} cuộc thi · ${count("gifts")} quà · ${count("buildings")} công trình · ${count("regions")} vùng</p>
+      <p class="hint">${G.sceneTextStats().count} đoạn cảnh viết bằng JSON (${G.sceneTextStats().hooks.length} cảnh) · ${count("characters")} nhân vật · ${count("events")} sự kiện · ${count("fetishes")} sở thích · ${count("contests")} cuộc thi · ${count("gifts")} quà · ${count("buildings")} công trình · ${count("regions")} vùng</p>
       <details><summary>HOOK đã đăng ký (${hooks.length})</summary><div class="scroll-x"><table class="mini-table">${hooks.map((h) => `<tr><td class="mono">${esc(h.id)}</td><td>${esc(h.pack)}</td></tr>`).join("") || "<tr><td>Chưa có</td></tr>"}</table></div></details>
       <h4 class="tier-h">Lỗi và cảnh báo khi nạp</h4>
       ${R.errors.length ? R.errors.map((e) => `<div class="err mono">${esc(e)}</div>`).join("") : '<div class="ok">Không có lỗi.</div>'}
@@ -721,8 +719,7 @@
   }
   function openMenu() {
     openSheet(
-      `<div class="row-card"><div><b>Trình soạn cảnh</b><br><span class="hint">Viết cảnh bằng Grok hoặc AI khác, dán vào là dùng. Đã có ${G.countSceneTexts()} đoạn.</span></div><button class="btn btn-sm btn-primary" id="m-editor">Mở</button></div>
-       <h3>Lưu game</h3><p class="hint">Game tự lưu sau mỗi lượt. Lưu thêm vào ô để giữ một mốc quay lại.</p>
+      `<h3>Lưu game</h3><p class="hint">Game tự lưu sau mỗi lượt. Lưu thêm vào ô để giữ một mốc quay lại.</p>
        <div class="cards">${slotsHtml(true)}</div>
        <details><summary>Chuyển sang máy khác</summary>
          <p class="hint">Chép mã lưu này, dán vào ô Nhập ở máy kia.</p>
@@ -735,7 +732,6 @@
        <button class="btn btn-ghost" id="m-close">Đóng</button>`,
       (el) => {
         bindSlots(el);
-        $(el, "#m-editor").addEventListener("click", () => openEditor());
         $(el, "#m-close").addEventListener("click", closeSheet);
         $(el, "#m-export").addEventListener("click", () => ($(el, "#m-code").value = G.exportSave()));
         $(el, "#m-copy").addEventListener("click", () => {
@@ -764,115 +760,6 @@
       }
     );
   }
-
-  /* ---------------- Trình soạn cảnh ---------------- */
-  const LEVEL_LABEL = { dau: "Đêm đầu", quen: "Đã quen", lau: "Lâu năm (hơn 20 đêm)" };
-  let edState = { hook: "core.thi_tam", key: "core.uyen_nghi", lv: "dau" };
-
-  function copyText(text, btn, area) {
-    const done = () => (btn.textContent = "Đã chép ✓");
-    try {
-      navigator.clipboard.writeText(text).then(done, () => {
-        area.select();
-        btn.textContent = "Bôi đen sẵn, bấm giữ để chép";
-      });
-    } catch (e) {
-      area.select();
-    }
-  }
-
-  function openEditor() {
-    const st = edState;
-    const item = G.sceneCatalogItem(st.hook) || G.SCENE_CATALOG[0].items[0];
-    st.hook = item.hook;
-    const keyOpts =
-      item.by === "char"
-        ? [["_chung", "Chung (mọi phi tần, nhất là tú nữ ngẫu nhiên)"]].concat(Object.values(R.characters).filter((c) => c.pack !== "generated" && c.pack !== "god").map((c) => [c.id, c.name]))
-        : item.by === "fetish"
-        ? [["_chung", "Chung (mọi sở thích)"]].concat(Object.values(R.fetishes).sort((a, b) => a.tier - b.tier).map((f) => [f.id, `T${f.tier} · ${f.name}`]))
-        : [["_chung", "Chung"]];
-    if (!keyOpts.some((k) => k[0] === st.key)) st.key = keyOpts[item.by === "none" ? 0 : Math.min(1, keyOpts.length - 1)][0];
-    const lv = item.levels ? (LEVEL_LABEL[st.lv] ? st.lv : "dau") : "_";
-    st.lv = lv;
-    const have = G.getSceneTexts(st.hook, st.key, lv);
-    const prompt = G.buildScenePrompt(st.hook, st.key, lv);
-    openSheet(
-      `<h3>Trình soạn cảnh</h3>
-       <p class="hint">Chọn cảnh → bấm Chép prompt → dán vào Grok → chép câu trả lời của Grok → dán vào ô bên dưới → Lưu. Cảnh xếp theo thứ tự nên viết trước.</p>
-       <div class="field"><label for="ed-hook">Cảnh</label><select id="ed-hook">${G.SCENE_CATALOG.map(
-         (g) => `<optgroup label="${esc(g.group)}">${g.items
-           .map((it) => {
-             const n = Object.values(G.customTexts()[it.hook] || {}).reduce((t, byLv) => t + Object.values(byLv).reduce((a, arr) => a + arr.length, 0), 0);
-             const label = it.nameFromFetish && R.fetishes[it.nameFromFetish] ? R.fetishes[it.nameFromFetish].name : it.name;
-             return `<option value="${esc(it.hook)}" ${it.hook === st.hook ? "selected" : ""}>${esc(label)}${n ? ` (${n})` : ""}</option>`;
-           })
-           .join("")}</optgroup>`
-       ).join("")}</select></div>
-       ${item.by !== "none" ? `<div class="field"><label for="ed-key">${item.by === "char" ? "Nhân vật" : "Sở thích"}</label><select id="ed-key">${keyOpts.map(([v, l]) => `<option value="${esc(v)}" ${v === st.key ? "selected" : ""}>${esc(l)}${G.getSceneTexts(st.hook, v, lv).length ? " ✓" : ""}</option>`).join("")}</select></div>` : ""}
-       ${item.levels ? `<div class="field"><label for="ed-lv">Mức thân mật</label><select id="ed-lv">${Object.entries(LEVEL_LABEL).map(([v, l]) => `<option value="${v}" ${v === lv ? "selected" : ""}>${l}${G.getSceneTexts(st.hook, st.key, v).length ? " ✓" : ""}</option>`).join("")}</select></div>` : ""}
-       <details ${have.length ? "" : "open"}><summary>Bước 1 · Prompt gửi Grok</summary>
-         <div class="field"><textarea id="ed-prompt" rows="8" readonly>${esc(prompt)}</textarea></div>
-         <button class="btn btn-sm btn-primary" id="ed-copy">Chép prompt</button>
-       </details>
-       <div class="field"><label for="ed-text">Bước 2 · Dán câu trả lời của Grok</label><textarea id="ed-text" rows="8" placeholder="Dán nguyên văn vào đây. Các đoạn cách nhau bằng dòng ---">${esc(have.join("\n---\n"))}</textarea></div>
-       <div class="row-wrap"><button class="btn btn-primary" id="ed-save">Lưu</button><button class="btn btn-sm" id="ed-preview">Xem thử</button>${have.length ? `<button class="btn btn-sm" id="ed-clear">Xóa ô này</button>` : ""}</div>
-       <p class="hint" id="ed-status">${have.length ? `Ô này đang có ${have.length} đoạn. Mỗi lần cảnh xảy ra, game chọn ngẫu nhiên một đoạn.` : "Ô này chưa có chữ, game đang dùng cảnh mặc định."} Viết thêm thì dán tiếp xuống dưới, cách bằng dòng ---.</p>
-       <div id="ed-out"></div>
-       <details><summary>Mang sang máy khác</summary>
-         <p class="hint">Chép mã này, mở game ở máy kia, dán vào ô Nhập. Hoặc gửi cho người làm repo để đưa vào game chính thức.</p>
-         <textarea id="ed-code" rows="4" readonly></textarea>
-         <div class="row-wrap"><button class="btn btn-sm" id="ed-export">Tạo mã</button></div>
-         <textarea id="ed-import" rows="3" placeholder="Dán mã cảnh vào đây"></textarea>
-         <button class="btn btn-sm" id="ed-doimport">Nhập</button>
-       </details>
-       <button class="btn btn-ghost" id="ed-close">Đóng</button>`,
-      (el) => {
-        const reopen = () => openEditor();
-        $(el, "#ed-close").addEventListener("click", closeSheet);
-        $(el, "#ed-hook").addEventListener("change", (e) => {
-          st.hook = e.target.value;
-          reopen();
-        });
-        on(el, "#ed-key", "change", (sel) => {
-          st.key = sel.value;
-          reopen();
-        });
-        on(el, "#ed-lv", "change", (sel) => {
-          st.lv = sel.value;
-          reopen();
-        });
-        $(el, "#ed-copy").addEventListener("click", (e) => copyText(prompt, e.target, $(el, "#ed-prompt")));
-        $(el, "#ed-save").addEventListener("click", () => {
-          const parts = G.splitParts($(el, "#ed-text").value);
-          G.saveSceneTexts(st.hook, st.key, lv, parts);
-          $(el, "#ed-status").textContent = parts.length ? `Đã lưu ${parts.length} đoạn.` : "Đã xóa chữ của ô này.";
-          $(el, "#ed-status").className = "hint ok";
-        });
-        on(el, "#ed-clear", "click", () => {
-          G.saveSceneTexts(st.hook, st.key, lv, []);
-          reopen();
-        });
-        $(el, "#ed-preview").addEventListener("click", () => {
-          const parts = G.splitParts($(el, "#ed-text").value);
-          if (!parts.length) return ($(el, "#ed-out").innerHTML = `<p class="hint err">Chưa có đoạn nào để xem.</p>`);
-          const sampleName = item.by === "char" && R.characters[st.key] ? R.characters[st.key].name : "Bạch Linh Lung";
-          const t = parts[Math.floor(Math.random() * parts.length)]
-            .replace(/\{name\}/g, sampleName)
-            .replace(/\{names\}/g, "Liễu Như Yên, Hách Liên Tuyết và Hồ Mị Nương")
-            .replace(/\{emperor\}/g, (G.state && G.state.emperorName) || "Hạ Huyền Đế")
-            .replace(/\{fetish\}/g, R.fetishes[st.key] ? R.fetishes[st.key].name : "lụa là");
-          $(el, "#ed-out").innerHTML = `<div class="preview"><p class="hint">Xem thử (${parts.length} đoạn, đây là một đoạn ngẫu nhiên):</p><p class="ev-text">${formatText(t)}</p></div>`;
-        });
-        $(el, "#ed-export").addEventListener("click", () => ($(el, "#ed-code").value = G.exportSceneTexts()));
-        $(el, "#ed-doimport").addEventListener("click", () => {
-          const ok = G.importSceneTexts($(el, "#ed-import").value);
-          $(el, "#ed-status").textContent = ok ? "Đã nhập mã cảnh." : "Mã không hợp lệ.";
-          if (ok) reopen();
-        });
-      }
-    );
-  }
-  UI.openEditor = openEditor;
 
   /* ---------------- Phong hiệu ---------------- */
   const TITLE_SUGGEST = ["Thục", "Hiền", "Đức", "Lệ", "Mỹ", "Ninh", "Uyển", "Dung", "Nhu", "Tĩnh", "Hoa", "Diễm"];

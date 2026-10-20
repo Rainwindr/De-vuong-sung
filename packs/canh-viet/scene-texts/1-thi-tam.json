@@ -1,0 +1,16 @@
+{
+  "core.thi_tam": {
+    "_title": "Thị tẩm",
+    "core.uyen_nghi": {"dau": [], "quen": [], "lau": []},
+    "core.moc_can": {"dau": [], "quen": [], "lau": []},
+    "core.tuyet": {"dau": [], "quen": [], "lau": []},
+    "core.nhu_yen": {"dau": [], "quen": [], "lau": []},
+    "core.tu_lan": {"dau": [], "quen": [], "lau": []},
+    "core.mi_nuong": {"dau": [], "quen": [], "lau": []},
+    "core.thanh_ca": {"dau": [], "quen": [], "lau": []},
+    "core.song_nguyet": {"dau": [], "quen": [], "lau": []},
+    "core.song_nhat": {"dau": [], "quen": [], "lau": []},
+    "core.hong_tieu": {"dau": [], "quen": [], "lau": []},
+    "_chung": {"dau": [], "quen": [], "lau": []}
+  }
+}

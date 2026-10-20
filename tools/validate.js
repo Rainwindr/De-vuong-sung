@@ -31,6 +31,7 @@ function readJSON(file, pack) {
   }
 }
 
+const sceneTexts = []; // { pack, file, hook, key, lv, n }
 const all = { characters: {}, fetishes: {}, events: {}, contests: {}, gifts: {}, buildings: {}, regions: {}, hooksUsed: [], hooksRegistered: new Set() };
 
 function collectHooks(file, packId) {
@@ -107,6 +108,45 @@ function checkPack(folder) {
     all.events[e.id] = Object.assign({ _pack: id }, e);
   }
   for (const f of asList(files.scenes)) if (fs.existsSync(path.join(dir, f))) collectHooks(path.join(dir, f), id);
+
+  // Cảnh viết bằng JSON
+  for (const f of asList(files.sceneTexts)) {
+    const p = path.join(dir, f);
+    if (!fs.existsSync(p)) continue;
+    const d = readJSON(p, id);
+    if (!d) continue;
+    if (typeof d !== "object" || Array.isArray(d)) {
+      err(id, `${f}: phải là một khối { "hook": {...} }`);
+      continue;
+    }
+    for (const [hook, byKey] of Object.entries(d)) {
+      if (hook.startsWith("_")) continue;
+      if (typeof byKey !== "object" || Array.isArray(byKey)) {
+        err(id, `${f} / ${hook}: phải là một khối {...}`);
+        continue;
+      }
+      for (const [key, byLv] of Object.entries(byKey)) {
+        if (key === "_title" || (key.startsWith("_") && key !== "_chung")) continue;
+        if (typeof byLv !== "object" || Array.isArray(byLv)) {
+          err(id, `${f} / ${hook} / ${key}: phải có dạng { "dau": [...], "quen": [...], "lau": [...] } hoặc { "_": [...] }`);
+          continue;
+        }
+        for (const [lv, arr] of Object.entries(byLv)) {
+          if (!["dau", "quen", "lau", "_"].includes(lv)) err(id, `${f} / ${hook} / ${key}: mức "${lv}" không hợp lệ (chỉ dau, quen, lau, _)`);
+          if (!Array.isArray(arr)) {
+            err(id, `${f} / ${hook} / ${key} / ${lv}: phải là danh sách [...]`);
+            continue;
+          }
+          arr.forEach((t, i) => {
+            if (typeof t !== "string") return err(id, `${f} / ${hook} / ${key} / ${lv} #${i + 1}: phải là chuỗi chữ`);
+            const bad = (t.match(/\{[^}]*\}/g) || []).filter((x) => !["{name}", "{names}", "{emperor}", "{fetish}"].includes(x));
+            if (bad.length) warn(id, `${f} / ${hook} / ${key} #${i + 1}: biến lạ ${bad.join(", ")} (chỉ dùng {name} {names} {emperor} {fetish})`);
+          });
+          sceneTexts.push({ pack: id, file: f, hook, key, lv, n: arr.length });
+        }
+      }
+    }
+  }
 }
 
 function crossCheck() {
@@ -116,6 +156,13 @@ function crossCheck() {
     for (const f of Object.keys(c.consent || {})) if (!F[f]) warn("tham chiếu", `${c.id}: consent nói tới sở thích không tồn tại "${f}"`);
     for (const f of c.likes || []) if (!F[f]) warn("tham chiếu", `${c.id}: likes nói tới sở thích không tồn tại "${f}"`);
     for (const o of Object.keys(c.affinity || {})) if (!all.characters[o]) warn("tham chiếu", `${c.id}: affinity nói tới nhân vật không tồn tại "${o}"`);
+  }
+  for (const f of Object.values(F)) {
+    for (const [cid, lvl] of Object.entries(f.consent || {})) {
+      if (!all.characters[cid]) warn("tham chiếu", `${f.id}: consent nói tới nhân vật không tồn tại "${cid}"`);
+      if (!CONSENT.includes(lvl)) err("tham chiếu", `${f.id}: consent "${cid}" = "${lvl}" không hợp lệ`);
+    }
+    for (const [t, lvl] of Object.entries(f.consentByTrait || {})) if (!CONSENT.includes(lvl)) err("tham chiếu", `${f.id}: consentByTrait "${t}" = "${lvl}" không hợp lệ`);
   }
   for (const f of Object.values(F)) for (const cb of f.combos || []) if (!F[cb.with]) err("tham chiếu", `${f.id}: combo với sở thích không tồn tại "${cb.with}"`);
   for (const f of Object.values(F)) for (const cb of f.combos || []) all.hooksUsed.push({ hook: cb.hook, where: f.id + " combo", pack: "?" });
@@ -158,6 +205,18 @@ function crossCheck() {
     });
   }
   const reg = [...all.hooksRegistered];
+  // Cảnh JSON: khóa phải là nhân vật, sở thích hoặc _chung; HOOK phải có thật
+  const knownHooks = new Set([...all.hooksUsed.map((u) => u.hook), ...reg]);
+  const isKnownHook = (h) => knownHooks.has(h) || reg.some((r) => r.endsWith("*") && h.startsWith(r.slice(0, -1)));
+  const seenHook = new Set();
+  let written = 0;
+  for (const st of sceneTexts) {
+    written += st.n;
+    if (st.key !== "_chung" && !all.characters[st.key] && !F[st.key]) warn(st.pack, `${st.file} / ${st.hook}: khóa "${st.key}" không phải nhân vật hay sở thích nào (game sẽ không dùng tới)`);
+    if (!seenHook.has(st.hook) && !isKnownHook(st.hook)) warn(st.pack, `${st.file}: HOOK "${st.hook}" không có sự kiện nào gọi (game sẽ không dùng tới)`);
+    seenHook.add(st.hook);
+  }
+  if (sceneTexts.length) console.log(`\n  Cảnh viết bằng JSON: ${written} đoạn.`);
   const covered = (h) => reg.includes(h) || reg.some((r) => r.endsWith("*") && h.startsWith(r.slice(0, -1)));
   for (const u of all.hooksUsed) if (!covered(u.hook)) warn(u.pack, `${u.where}: HOOK "${u.hook}" chưa có cảnh đăng ký (sẽ dùng cảnh mặc định)`);
   console.log(

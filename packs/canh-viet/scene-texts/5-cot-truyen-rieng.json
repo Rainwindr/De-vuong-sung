@@ -1,0 +1,38 @@
+{
+  "core.tuyet_lua_trai": {
+    "_title": "Lửa trại",
+    "_chung": {"_": []}
+  },
+  "core.nhu_yen_vu_rieng": {
+    "_title": "Điệu múa riêng",
+    "_chung": {"_": []}
+  },
+  "core.mi_nuong_huong_moi": {
+    "_title": "Mộng Hồ",
+    "_chung": {"_": []}
+  },
+  "core.hong_tieu_ho": {
+    "_title": "Hoa Thanh Trì",
+    "_chung": {"_": []}
+  },
+  "core.song_phi_rieng": {
+    "_title": "Riêng một mình",
+    "_chung": {"_": []}
+  },
+  "core.lua_do_a": {
+    "_title": "Dải lụa đỏ",
+    "_chung": {"_": []}
+  },
+  "core.lua_do_b": {
+    "_title": "Dải lụa đỏ",
+    "_chung": {"_": []}
+  },
+  "core.moc_can_tuong_thanh": {
+    "_title": "Diều giấy",
+    "_chung": {"_": []}
+  },
+  "core.uyen_nghi_ngay_tu_do": {
+    "_title": "Một ngày tự do",
+    "_chung": {"_": []}
+  }
+}

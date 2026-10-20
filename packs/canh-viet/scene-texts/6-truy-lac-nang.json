@@ -1,0 +1,38 @@
+{
+  "core.cuu_phi_mot_dem": {
+    "_title": "Cửu Phi Lệnh",
+    "_chung": {"_": []}
+  },
+  "core.cuu_phi_chin_dem": {
+    "_title": "Chín đêm, chín màu",
+    "_chung": {"_": []}
+  },
+  "core.ngu_hoa": {
+    "_title": "Ngũ Hoa",
+    "_chung": {"_": []}
+  },
+  "core.tuu_tri_hoi": {
+    "_title": "Tửu Trì Hội",
+    "_chung": {"_": []}
+  },
+  "core.duc_tri_tap_the": {
+    "_title": "Dục Trì",
+    "_chung": {"_": []}
+  },
+  "core.thuyen_hoa_ba_ngay": {
+    "_title": "Ba ngày trên hồ",
+    "_chung": {"_": []}
+  },
+  "core.dem_ty_muoi": {
+    "_title": "Đêm Tỷ Muội",
+    "_chung": {"_": []}
+  },
+  "core.doi_thuc_tam_nguoi": {
+    "_title": "Ba người",
+    "_chung": {"_": []}
+  },
+  "core.me_lau": {
+    "_title": "Lạc trong Mê Lâu",
+    "_chung": {"_": []}
+  }
+}
