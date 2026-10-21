@@ -12,6 +12,7 @@ Câu trả lời có thể là:
   - hoặc chỉ một dòng/khối  "core.tuyet": { "dau": [...], ... }   → cần thêm  --hook core.thi_tam
   - hoặc khối sở thích mới  { "fetishes": [ {...} ], "scenes": { ... } }
   - hoặc khối sự kiện mới    { "events": [ {...} ], "scenes": { ... }, "fetishes": [...] }
+  - hoặc khối cuộc thi mới   { "contests": [ {...} ], "scenes": { ... } }
 Chữ thừa trước/sau khối JSON (lời chào, ```json ...) sẽ tự bỏ qua.
 Đoạn mới được NỐI THÊM vào đoạn cũ, không xóa gì.
 Mỗi danh sách đoạn Grok trả về cho một ô được thêm thành MỘT CẢNH mới (các đoạn nối tiếp nhau).
@@ -28,6 +29,8 @@ SCENES = PACK / "scene-texts"
 NEW_FILE = SCENES / "8-canh-moi.json"
 FETISH_FILE = PACK / "fetishes.json"
 EVENT_FILE = PACK / "events" / "su-kien-moi.json"
+CONTEST_FILE = PACK / "contests.json"
+MANIFEST = PACK / "manifest.json"
 
 
 def extract_json(text, hook=None):
@@ -160,6 +163,34 @@ def merge_events(evs):
     return n
 
 
+def merge_contests(cts):
+    cur = load(CONTEST_FILE) if CONTEST_FILE.exists() else []
+    ids = {c.get("id"): i for i, c in enumerate(cur)}
+    for c in cts:
+        cid = str(c.get("id", ""))
+        if not cid.startswith("canh-viet."):
+            print(f"  ! cuộc thi phải có id bắt đầu bằng 'canh-viet.': {cid}")
+            continue
+        c.setdefault("hook", cid)
+        if cid in ids:
+            cur[ids[cid]] = c
+            print(f"  ✓ cập nhật cuộc thi {cid}")
+        else:
+            ids[cid] = len(cur)
+            cur.append(c)
+            print(f"  ✓ thêm cuộc thi {cid}")
+    lines = ["["] + ["  " + json.dumps(c, ensure_ascii=False) + ("," if i < len(cur) - 1 else "") for i, c in enumerate(cur)] + ["]"]
+    CONTEST_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    # khai báo file trong manifest nếu chưa có
+    m = load(MANIFEST)
+    files = m.setdefault("files", {})
+    have = [files["contests"]] if isinstance(files.get("contests"), str) else list(files.get("contests") or [])
+    if "contests.json" not in have:
+        files["contests"] = have + ["contests.json"] if have else "contests.json"
+        MANIFEST.write_text(json.dumps(m, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print("  ✓ đã khai báo contests.json trong manifest.json")
+
+
 def main():
     args = sys.argv[1:]
     hook = None
@@ -179,7 +210,9 @@ def main():
             print(f"  ✗ không đọc được JSON: {e}")
             print("    Mẹo: bảo Grok 'chỉ trả về JSON, không giải thích', rồi chép lại.")
             continue
-        if isinstance(data, dict) and ("fetishes" in data or "scenes" in data or "events" in data):
+        if isinstance(data, dict) and any(k in data for k in ("fetishes", "scenes", "events", "contests")):
+            if data.get("contests"):
+                merge_contests(data["contests"])
             if data.get("events"):
                 merge_events(data["events"])
             if data.get("fetishes"):

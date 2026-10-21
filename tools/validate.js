@@ -146,8 +146,8 @@ function checkPack(folder) {
               const where = `${f} / ${hook} / ${key} / ${lv}${nested ? ` / cảnh ${vi + 1}` : ""} / đoạn ${i + 1}`;
               if (typeof t !== "string") return err(id, `${where}: phải là chuỗi chữ`);
               paras++;
-              const bad = (t.match(/\{[^}]*\}/g) || []).filter((x) => !["{name}", "{names}", "{emperor}", "{fetish}"].includes(x));
-              if (bad.length) warn(id, `${where}: biến lạ ${bad.join(", ")} (chỉ dùng {name} {names} {emperor} {fetish})`);
+              const bad = (t.match(/\{[^}]*\}/g) || []).filter((x) => !["{name}", "{names}", "{emperor}", "{fetish}", "{winner}", "{contest}"].includes(x));
+              if (bad.length) warn(id, `${where}: biến lạ ${bad.join(", ")} (chỉ dùng {name} {names} {emperor} {fetish} {winner} {contest})`);
             });
           });
           sceneTexts.push({ pack: id, file: f, hook, key, lv, n: paras, scenes: vers.filter((v) => v.length).length });

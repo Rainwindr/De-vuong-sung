@@ -60,7 +60,7 @@ NHÂN VẬT CHÍNH
 CÁCH VIẾT
 - Tiếng Việt, văn phong cổ trang. Mỗi đoạn 150 đến 250 chữ, tối thiểu 150 chữ. Không tóm tắt, không viết câu cụt; tả cảm giác, cử chỉ, lời thoại đầy đủ.
 - Lời thoại của nhân vật đặt trên một dòng riêng, bắt đầu bằng dấu > và một khoảng trắng.
-- Biến game tự thay: {name} (người chính), {names} (danh sách mọi người tham gia), {emperor} (niên hiệu), {fetish} (tên sở thích). Chỉ dùng đúng bốn biến này.
+- Biến game tự thay: {name} (người chính), {names} (danh sách mọi người tham gia), {emperor} (niên hiệu), {fetish} (tên sở thích). Riêng cảnh cuộc thi có thêm {winner} (người thắng) và {contest} (tên cuộc thi). Không dùng biến nào khác.
 
 CÁCH TRẢ LỜI
 - Chỉ trả về JSON đúng mẫu tôi đưa, không lời chào, không giải thích.

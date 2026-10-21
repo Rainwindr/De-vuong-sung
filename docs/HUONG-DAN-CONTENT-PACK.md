@@ -285,7 +285,7 @@ Mỗi đầu năm lõi chọn 3 mục tiêu trong `G.GOALS` (js/systems.js) còn
   "unlock": {}, "fetish": [], "count": 4, "hook": "ten-goi.thi_den",
   "traitsBonus": ["Khéo tay"], "prize": { "favor": 15, "trait": "Đèn khéo" } }
 ```
-HOOK của cuộc thi nhận `ctx.extra.winner`, `ctx.extra.ranking`, `ctx.extra.contestName`.
+HOOK của cuộc thi nhận `ctx.extra.winner`, `ctx.extra.ranking`, `ctx.extra.contestName`. Trong cảnh viết bằng JSON dùng `{winner}` và `{contest}`.
 
 **gifts.json**
 ```json
@@ -380,7 +380,7 @@ Cách dễ nhất để thêm cảnh: chỉ viết chữ. Trong manifest khai b�
 
 - Khóa cấp hai: id nhân vật (cảnh `core.thi_tam`), id sở thích (cảnh `core.thi_tam_so_thich`), hoặc `_chung`.
 - Khóa cấp ba: `dau` / `quen` / `lau` cho cảnh thị tẩm, `_` cho mọi cảnh khác.
-- Biến: `{name}`, `{names}`, `{emperor}`, `{fetish}`. Dòng bắt đầu bằng `> ` là lời thoại.
+- Biến: `{name}`, `{names}`, `{emperor}`, `{fetish}`. Riêng cảnh cuộc thi và Đại Điển có thêm `{winner}` (người thắng) và `{contest}` (tên cuộc thi). Dòng bắt đầu bằng `> ` là lời thoại.
 - Chưa có chữ phù hợp thì game dùng cảnh cũ (của `scenes.js`).
 - Nhiều file cùng viết cho một HOOK thì game nối thêm, không file nào đè file nào.
 - Gói `packs/canh-viet` đã có sẵn khung trống cho mọi cảnh; bộ prompt cho Grok nằm ở `docs/PROMPT-VIET-CANH.md`.
