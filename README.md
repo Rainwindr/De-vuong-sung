@@ -75,6 +75,7 @@ docs/HUONG-DAN-CONTENT-PACK.md  hướng dẫn viết sự kiện và làm gói
 docs/PROMPT-VIET-CANH.md        bộ prompt cho Grok theo 7 mức ưu tiên
 docs/PROMPT-VIET-SU-KIEN.md     bộ prompt cho Grok viết sự kiện có lựa chọn
 docs/ANH-CHAN-DUNG.md           cách thêm ảnh chân dung thật, kèm prompt vẽ ảnh
+docs/PROMPT-VIET-CUOC-THI.md    bộ prompt cho Grok viết cuộc thi trong cung
 tools/validate.js               kiểm tra gói: node tools/validate.js
 tools/build.py                  đóng gói: tạo dist/index.html và packs/bundle.js
 packs/bundle.js                 TỰ SINH, dữ liệu đóng gói cho khi mở thẳng index.html (đừng sửa tay)
