@@ -33,14 +33,14 @@ File này liệt kê các cảnh **Claude viết nháp** để game có chữ hi
 | # | Cuộc thi | Hook | Tiêu đề cảnh | Số thí sinh | Đã sửa |
 |---|---|---|---|---|---|
 | 1 | Edging Tập Thể | `canh-viet.thi_edging_tap_the` | Edging tập thể | 6 | ☐ |
-| 2 | Thi Vắt Sữa | `canh-viet.milking_contest` | Thi vắt sữa | 4 | ☐ |
-| 3 | Marathon Creampie | `canh-viet.thi_creampie_marathon` | Marathon đêm dài | 5 | ☐ |
-| 4 | Squirting Mess | `canh-viet.squirting_mess` | Đêm nước tràn | 4 | ☐ |
-| 5 | CMNF Show | `canh-viet.cmnf_show` | Trình diễn không xiêm y | 5 | ☐ |
-| 6 | Women Having Orgasms | `canh-viet.women_orgasms` | Khoảnh khắc đẹp nhất | 5 | ☐ |
-| 7 | Massage Pussy | `canh-viet.thi_massage_pussy` | Đôi tay khéo léo | 4 | ☐ |
-| 8 | Row of Girls Dildo | `canh-viet.thi_row_of_girls_dildo` | Hàng đồ chơi ngọc | 6 | ☐ |
-| 9 | Shaving Pussy | `canh-viet.thi_shaving_pussy` | Lưỡi dao bạc | 4 | ☐ |
+| 2 | Thi Vắt Sữa | `canh-viet.milking_contest` | Thi vắt sữa | 4 | ☑ |
+| 3 | Marathon Creampie | `canh-viet.thi_creampie_marathon` | Marathon đêm dài | 5 | ☑ |
+| 4 | Squirting Mess | `canh-viet.squirting_mess` | Đêm nước tràn | 4 | ☑ |
+| 5 | CMNF Show | `canh-viet.cmnf_show` | Trình diễn không xiêm y | 5 | ☑ |
+| 6 | Women Having Orgasms | `canh-viet.women_orgasms` | Khoảnh khắc đẹp nhất | 5 | ☑ |
+| 7 | Massage Pussy | `canh-viet.thi_massage_pussy` | Đôi tay khéo léo | 4 | ☑ |
+| 8 | Row of Girls Dildo | `canh-viet.thi_row_of_girls_dildo` | Hàng đồ chơi ngọc | 6 | ☑ |
+| 9 | Shaving Pussy | `canh-viet.thi_shaving_pussy` | Lưỡi dao bạc | 4 | ☑ |
 | 10 | Nóng Lạnh Cuộc Thi | `canh-viet.nong_lanh_cuoc_thi` | Băng và nến | 5 | ☐ |
 | 11 | Khán Đài Trình Diễn | `canh-viet.khan_dai_trinh_dien` | Khán đài hậu cung | 5 | ☐ |
 | 12 | BDSM Nhẹ Nhàng | `canh-viet.bdsm_nhe_nhang` | Dây lụa và ám hiệu | 4 | ☐ |
