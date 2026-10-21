@@ -638,6 +638,14 @@
     );
   }
   UI.showEvent = showEvent;
+  /** Sự kiện thứ hai trong tháng: bỏ qua nếu sau sự kiện trước người nói đã rời cung hoặc game đã kết thúc. */
+  function showLaterEvent(prepared) {
+    const sp = prepared.speaker;
+    const gone = G.state.ended || (sp && !sp.isChild && prepared.ev.when && prepared.ev.when.speakerInHarem && !G.findConsort(sp.id));
+    if (!gone) return showEvent(prepared);
+    if (queue.length) queue.shift()();
+    else UI.render();
+  }
 
   /* ---------------- Qua tháng ---------------- */
   function toast(text) {
@@ -657,6 +665,7 @@
       queue.push(() => showMessage("Tin vui", `${b.mother.name} hạ sinh ${label}. Toàn cung chúc mừng.`, [`Sủng ái ${b.mother.name} +5`]));
     }
     if (r.event) queue.push(() => showEvent(r.event));
+    if (r.event2) queue.push(() => showLaterEvent(r.event2));
     if (queue.length) queue.shift()();
     else UI.render();
     if (r.months > 1) toast(`Đã qua ${r.months} tháng`);
@@ -670,6 +679,7 @@
       queue.push(() => showMessage("Tin vui", `${b.mother.name} hạ sinh ${label}. Toàn cung chúc mừng.`, [`Sủng ái ${b.mother.name} +5`]));
     }
     if (r.event) queue.push(() => showEvent(r.event));
+    if (r.event2) queue.push(() => showLaterEvent(r.event2));
     if (queue.length) queue.shift()();
     else UI.render();
   }
@@ -678,11 +688,13 @@
   function openActions() {
     const s = G.state;
     const selWhy = G.selectionStatus();
+    const ctWhy = G.contestStatus();
     openSheet(
       `<h3>Ý chỉ</h3>
        <div class="cards">
          <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.SELECTION_COST} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tuần du</b><br><span class="hint">${G.canTravel() ? "Mỗi năm một chuyến. Mỗi vùng có mỹ nhân và chuyện riêng." : "Năm nay đã tuần du rồi."}</span></div><button class="btn btn-sm" id="a-travel" ${G.canTravel() ? "" : "disabled"}>Chọn vùng</button></div>
+         <div class="row-card"><div><b>Mở cuộc thi</b><br><span class="hint">${esc(ctWhy || `${G.CONTEST_COST} lượng mỗi lần, ${G.CONTEST_COOLDOWN} tháng mới mở lại. Mùa thi tự đến vào tháng ${G.CONTEST_MONTHS.join(" và ")}.`)}</span></div><button class="btn btn-sm" id="a-contest" ${ctWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tặng quà, xuất cung, học phường</b><br><span class="hint">Chạm vào từng phi trong tab Hậu cung.</span></div><button class="btn btn-sm" id="a-harem">Hậu cung</button></div>
          <div class="row-card"><div><b>Xây dựng</b><br><span class="hint">Công trình và nâng cung phi tần.</span></div><button class="btn btn-sm" id="a-palace">Cung điện</button></div>
        </div>
@@ -692,6 +704,11 @@
         $(el, "#a-close").addEventListener("click", closeSheet);
         on(el, "#a-select", "click", openSelection);
         on(el, "#a-travel", "click", openTravel);
+        on(el, "#a-contest", "click", () => {
+          const ev = G.openContest();
+          if (ev) showEvent(ev);
+          else showMessage("Mở cuộc thi", G.contestStatus() || "Chưa mở được cuộc thi.");
+        });
         on(el, "#a-harem", "click", () => {
           tab = "harem";
           closeSheet();

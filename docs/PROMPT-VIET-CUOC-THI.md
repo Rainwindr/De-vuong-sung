@@ -1,6 +1,6 @@
 # Bộ prompt viết CUỘC THI cho Grok
 
-Cuộc thi diễn ra vào **tháng 6** mỗi năm: game bốc tối đa 4 cuộc thi đã mở khóa cho người chơi chọn, tự chọn các phi Sủng ái cao nhất (và sẵn lòng với sở thích của cuộc thi) làm thí sinh, chấm điểm, trao thưởng cho người thắng rồi hiện cảnh. Điểm thi cộng dồn; cứ 3 năm, nếu Trụy lạc từ 40, tháng 12 có Phong Nguyệt Đại Điển cho ba người điểm cao nhất.
+Cuộc thi diễn ra vào **tháng 4 và tháng 9** mỗi năm (người chơi cũng có thể tự mở trong Ý chỉ): game bốc tối đa 4 cuộc thi đã mở khóa cho người chơi chọn, tự chọn các phi Sủng ái cao nhất (và sẵn lòng với sở thích của cuộc thi) làm thí sinh, chấm điểm, trao thưởng cho người thắng rồi hiện cảnh. Điểm thi cộng dồn; cứ 3 năm, nếu Trụy lạc từ 40, tháng 12 có Phong Nguyệt Đại Điển cho ba người điểm cao nhất.
 
 Cuộc thi mới nằm ở:
 
@@ -124,4 +124,4 @@ Cuộc thi trong `core` (Thi thơ, Vũ Mị…) cũng viết thêm cảnh đư�
 
 - **Cách nhanh:** chép nguyên câu trả lời của Grok vào `grok.txt`, chạy `python tools/them-canh.py grok.txt`. Công cụ tự đặt định nghĩa vào `contests.json` (tự tạo và tự khai báo trong `manifest.json` nếu chưa có), cảnh vào `8-canh-moi.json`, sở thích mới vào `fetishes.json`, rồi kiểm tra lỗi và build.
 - **Gửi cho Claude:** gửi file JSON hoặc dán câu trả lời của Grok, Claude ghép giúp.
-- **Thử ngay:** đưa game đến **tháng 5** (tab Thiên Đạo có nút tua nhanh, nhưng tua sẽ bỏ qua sự kiện, nên chỉ tua đến tháng 5), rồi bấm **+1 tháng** ở thanh dưới: mùa thi tháng 6 hiện ra. Game bốc ngẫu nhiên tối đa 4 cuộc thi đã mở và cần ít nhất 3 phi trong hậu cung; nếu chưa thấy cuộc thi mới thì dùng mục ảnh chụp đầu năm của Thiên Đạo để quay lại thử tiếp.
+- **Thử ngay:** bấm **Ý chỉ → Mở cuộc thi** (cần 800 lượng; Thiên Đạo có thể bật vô hạn tiền), hoặc đưa game đến tháng 3/8 rồi bấm **+1 tháng** ở thanh dưới. Game bốc ngẫu nhiên tối đa 4 cuộc thi đã mở và cần ít nhất 3 phi trong hậu cung; nếu chưa thấy cuộc thi mới thì dùng mục ảnh chụp đầu năm của Thiên Đạo để quay lại thử tiếp.

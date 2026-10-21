@@ -551,6 +551,8 @@
         if (inHarem && !cmp(speaker.affection, when.affection)) return false;
         if (!cmp(speaker.age, when.speakerAge)) return false;
         if (inHarem && !cmp(speaker.rank, when.speakerRank)) return false;
+        // phẩm cao nhất hậu cung (từ Phi trở lên, không ai cao hơn); có Hoàng hậu thì chỉ Hoàng hậu
+        if (when.speakerTopRank && (!inHarem || speaker.rank < 4 || s.consorts.some((c) => c.rank > speaker.rank))) return false;
         if (when.speakerTrait && !(speaker.traits || []).includes(when.speakerTrait)) return false;
         if (when.speakerGenerated != null && (speaker.pack === "generated") !== when.speakerGenerated) return false;
         if (when.speakerPregnant != null && (speaker.pregnantDue != null) !== when.speakerPregnant) return false;
@@ -920,8 +922,9 @@
         out.ended = s.ended;
         break;
       }
-      if (r.event) {
+      if (r.event || r.event2) {
         out.event = r.event;
+        out.event2 = r.event2;
         break;
       }
       if (r.births.length || s.pendingTitles.length) break;
@@ -982,18 +985,55 @@
       return report;
     }
     const pool = G.eligibleEvents();
-    if (pool.length && rand() < 0.8) {
-      const total = pool.reduce((t, p) => t + (p.ev.weight || 1), 0);
-      let r = rand() * total;
-      for (const p of pool) {
-        r -= p.ev.weight || 1;
-        if (r <= 0) {
-          report.event = p;
-          break;
-        }
-      }
+    if (pool.length && rand() < 0.8) report.event = G.pickEvent(pool);
+    // lượt "chuyện hậu cung": thêm một sự kiện có cảnh, không phải sự kiện mốc
+    if (rand() < G.EXTRA_EVENT_CHANCE) {
+      const firstId = report.event && report.event.ev.id;
+      const firstSp = report.event && report.event.speaker && report.event.speaker.id;
+      const extra = pool.filter((p) => p.ev.id !== firstId && (p.ev.weight || 1) < G.MILESTONE_WEIGHT && hasScene(p) && !(firstSp && p.speaker && p.speaker.id === firstSp));
+      if (extra.length) report.event2 = G.pickEvent(extra);
     }
     return report;
+  };
+
+  /* ---------------- Bốc sự kiện ---------------- */
+  G.MILESTONE_WEIGHT = 20; // sự kiện mốc (đăng cơ, Tết, truyền ngôi...) giữ nguyên tỉ lệ cũ
+  G.CORE_SHARE = 0.4; // khi có sự kiện của gói khác, core chiếm 40% lượt bốc
+  G.EXTRA_EVENT_CHANCE = 0.5;
+  const hasScene = (p) => p.choices.some((c) => (p.ev.choices[c.index] || {}).hook);
+
+  function pickWeighted(list) {
+    const total = list.reduce((t, p) => t + (p.ev.weight || 1), 0);
+    let r = rand() * total;
+    for (const p of list) {
+      r -= p.ev.weight || 1;
+      if (r <= 0) return p;
+    }
+    return list[list.length - 1];
+  }
+
+  /**
+   * Bốc một sự kiện: sự kiện mốc giữ tỉ lệ như cũ; còn lại bốc gói trước rồi mới bốc sự kiện trong gói.
+   * Core chiếm 40%, các gói khác chia 60% theo số sự kiện đang đủ điều kiện của mỗi gói.
+   */
+  G.pickEvent = function (pool) {
+    if (!pool.length) return null;
+    const first = pickWeighted(pool);
+    if ((first.ev.weight || 1) >= G.MILESTONE_WEIGHT) return first;
+    const normal = pool.filter((p) => (p.ev.weight || 1) < G.MILESTONE_WEIGHT);
+    const byPack = {};
+    for (const p of normal) (byPack[p.ev.pack] = byPack[p.ev.pack] || []).push(p);
+    const others = Object.keys(byPack).filter((k) => k !== "core");
+    const otherCount = others.reduce((t, k) => t + byPack[k].length, 0);
+    const shares = [];
+    if (byPack.core) shares.push(["core", others.length ? G.CORE_SHARE : 1]);
+    for (const k of others) shares.push([k, ((byPack.core ? 1 - G.CORE_SHARE : 1) * byPack[k].length) / otherCount]);
+    let r = rand();
+    for (const [k, w] of shares) {
+      r -= w;
+      if (r <= 0) return pickWeighted(byPack[k]);
+    }
+    return pickWeighted(byPack[shares[shares.length - 1][0]]);
   };
 
   /* ------------------------------------------------------------------ */

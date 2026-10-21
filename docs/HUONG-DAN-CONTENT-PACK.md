@@ -209,6 +209,7 @@ So sánh số: `{ "gte": 10 }`, `{ "lte": 50 }`, `{ "gt": … }`, `{ "lt": … }
 | `speakerInHarem` | Người nói đã nhập cung chưa |
 | `favor`, `affection` | Sủng ái, Tình cảm của người nói |
 | `speakerAge`, `speakerRank`, `speakerTrait`, `speakerPregnant` | Tuổi, phẩm, có trait, đang mang thai |
+| `speakerTopRank` | `true`: người nói có phẩm cao nhất hậu cung (từ Phi trở lên, không ai cao hơn; có Hoàng hậu thì chỉ Hoàng hậu). Dùng `{rank}` trong chữ để gọi đúng phẩm. |
 | `speakerWilling` | Người nói đang **sẵn lòng** với (các) sở thích này, ví dụ `"speakerWilling": "core.bit_mat"`. Dùng cho sự kiện "nàng tự đề nghị". |
 | `speakerGenerated` | `true`: chỉ chọn tú nữ ngẫu nhiên (không phải nhân vật viết sẵn) |
 | `childAge`, `childSex`, `childMarried` | Với `speaker: "child"` |
@@ -278,7 +279,7 @@ Mỗi đầu năm lõi chọn 3 mục tiêu trong `G.GOALS` (js/systems.js) còn
 
 ## 8. Cuộc thi, quà, công trình, vùng
 
-**contests.json** — mùa thi diễn ra tháng 6 mỗi năm, lõi chọn ngẫu nhiên tối đa 4 cuộc thi đã mở. Tháng 12, nếu có ba người điểm cao và Trụy lạc từ 40, có Phong Nguyệt Đại Điển.
+**contests.json** — mùa thi diễn ra tháng 4 và tháng 9 mỗi năm, lõi chọn ngẫu nhiên tối đa 4 cuộc thi đã mở. Người chơi cũng có thể tự mở cuộc thi trong Ý chỉ (800 lượng, 3 tháng một lần). Tháng 12, nếu có ba người điểm cao và Trụy lạc từ 40, có Phong Nguyệt Đại Điển.
 
 ```json
 { "id": "ten-goi.thi_den", "name": "Thi làm đèn", "desc": "Ai làm đèn đẹp nhất", "tier": 1,
@@ -380,7 +381,7 @@ Cách dễ nhất để thêm cảnh: chỉ viết chữ. Trong manifest khai b�
 
 - Khóa cấp hai: id nhân vật (cảnh `core.thi_tam`), id sở thích (cảnh `core.thi_tam_so_thich`), hoặc `_chung`.
 - Khóa cấp ba: `dau` / `quen` / `lau` cho cảnh thị tẩm, `_` cho mọi cảnh khác.
-- Biến: `{name}`, `{names}`, `{emperor}`, `{fetish}`. Riêng cảnh cuộc thi và Đại Điển có thêm `{winner}` (người thắng) và `{contest}` (tên cuộc thi). Dòng bắt đầu bằng `> ` là lời thoại.
+- Biến: `{name}`, `{names}`, `{emperor}`, `{fetish}`, `{rank}` (phẩm của người chính, ví dụ Quý phi). Riêng cảnh cuộc thi và Đại Điển có thêm `{winner}` (người thắng) và `{contest}` (tên cuộc thi). Dòng bắt đầu bằng `> ` là lời thoại.
 - Chưa có chữ phù hợp thì game dùng cảnh cũ (của `scenes.js`).
 - Nhiều file cùng viết cho một HOOK thì game nối thêm, không file nào đè file nào.
 - Gói `packs/canh-viet` đã có sẵn khung trống cho mọi cảnh; bộ prompt cho Grok nằm ở `docs/PROMPT-VIET-CANH.md`.
