@@ -885,5 +885,57 @@
         ]
       ]
     }
+  },
+  "canh-viet.liem_het_doan_ai": {
+    "_title": "Đoán người bằng lưỡi",
+    "_chung": {
+      "_": [
+        [
+          "{name} quỳ xuống giữa phòng, bịt mắt, được yêu cầu liếm hết tất cả những người đang nằm trên giường. {names} lần lượt ngồi dang chân, âm hộ đưa đến trước mặt {name}. {name} bắt đầu liếm người đầu tiên, lưỡi chạm vào thịt mềm, nếm vị chua ngọt đặc trưng. {name} cố đoán đó là ai dựa trên mùi hương và hình dáng. Lưỡi liếm từ dưới lên, hút dịch đang chảy ra, rồi đâm sâu vào trong. Người bị liếm rên lên, hai tay giữ đầu {name} ấn sát hơn.\n> Ngon quá... tiếp đi... liếm mạnh hơn...\n{name} liếm hết một người, miệng đầy dịch, rồi chuyển sang người tiếp theo, mỗi người một vị khác nhau.",
+          "Người thứ hai có âm vật nhạy cảm hơn, {name} chỉ cần liếm nhẹ là đã co giật. {name} dùng lưỡi xoáy quanh, hút mạnh, khiến người kia kêu lên. Mùi hương của người này thơm mùi hoa, khiến {name} đoán có lẽ là một phi tần quen. {name} liếm sạch sẽ, lưỡi đẩy sâu, nếm vị mặn mà. Người bị liếm lên đỉnh nhanh, dịch trào ra đầy lưỡi {name}. {name} nuốt hết, rồi chuyển sang người tiếp theo, miệng vẫn còn ướt.\n> Tiếp đi... ta muốn nữa... liếm cái lỗ kia đi...\n{name} làm theo, liếm cả lỗ hậu môn, khiến người kia run rẩy.",
+          "Đến người thứ ba, {name} cảm thấy âm hộ chặt hơn, lưỡi khó đâm vào. {name} liếm bên ngoài trước, kéo hai môi ra, rồi liếm sâu. Vị của người này ngọt hơn, mùi cơ thể mạnh mẽ. {name} đoán sai nhiều lần, vì mỗi người đều có đặc điểm riêng. {name} liếm hết tất cả, miệng đầy dịch của mọi người, lưỡi mỏi nhưng vẫn tiếp tục. Mỗi lần đoán sai, {names} lại cười và yêu cầu liếm thêm.\n> Sai rồi... liếm lại đi... phải đoán đúng mới được dừng...\n{name} tiếp tục, lưỡi liếm không ngừng, nếm đủ mọi vị.",
+          "Sau khi liếm hết, {name} tháo bịt mắt, thấy {names} đều đang nằm đó, âm hộ ướt át, mỉm cười. {name} đã đoán đúng một vài người dựa trên mùi và vị. Mọi người đều thỏa mãn, dịch còn dính trên môi {name}. Cảnh kết thúc với {name} được khen ngợi, và hứa sẽ tiếp tục những lần sau. Không khí đầy mùi hương cơ thể, mọi người đều vui vẻ."
+        ]
+      ]
+    }
+  },
+  "canh-viet.phi_tang_liem": {
+    "_title": "Các phi cùng hầu",
+    "_chung": {
+      "_": [
+        [
+          "Hoàng hậu hoặc phi tần ngồi trên ghế, hai chân bị {names} giữ dang rộng ra. Các phi tần khác lần lượt quỳ xuống, liếm âm hộ của người ngồi. Người đầu tiên dùng lưỡi liếm từ dưới lên, hút dịch, khiến người ngồi rên lên. Hai người giữ chân kéo rộng hơn, để lộ hoàn toàn. Lưỡi liếm sạch sẽ, đâm sâu vào trong, rồi liếm âm vật. Người ngồi cảm thấy từng lưỡi khác nhau, mỗi người một cách liếm.\n> Liếm đi... mạnh hơn... đừng dừng...\nNgười liếm tiếp tục, tiếng chép chép vang lên.",
+          "Người thứ hai thay vào, lưỡi dài hơn, liếm cả lỗ hậu môn rồi quay lại âm đạo. Người ngồi cong người, dịch trào ra nhiều. Những người giữ chân vẫn giữ chặt, không cho khép lại. Mỗi lần liếm đều khiến người ngồi gần lên đỉnh. {names} thay phiên nhau, mỗi người liếm một lúc, nếm vị và hút dịch.\n> Ta sắp ra rồi... tiếp đi... liếm cái lỗ kia...\nLưỡi đáp ứng, liếm sâu hơn.",
+          "Sau nhiều người liếm, người ngồi đã lên đỉnh nhiều lần, dịch đầy miệng những người quỳ. Những người giữ chân cũng được thay, nhưng vẫn giữ dang rộng. Người ngồi thở hổn hển, cơ thể mềm nhũn, nhưng vẫn yêu cầu tiếp tục. Mỗi lưỡi đều khiến cảm giác khác nhau, có người liếm nhẹ, có người hút mạnh.\n> Đừng dừng... ta muốn nữa...\nMọi người tiếp tục, không ai muốn dừng lại.",
+          "Cuối cùng, sau khi thỏa mãn, người ngồi được lau sạch, các phi tần mỉm cười, môi ướt. Cảnh kết thúc với mọi người đều vui vẻ, không khí đầy mùi hương cơ thể. Người ngồi cảm thấy được yêu thương và phục vụ tận tình."
+        ]
+      ]
+    }
+  },
+  "canh-viet.nghi_le_cao_long": {
+    "_title": "Nghi lễ cạo lông",
+    "_chung": {
+      "_": [
+        [
+          "Nghi lễ cạo lông được thực hiện trong phòng tắm hơi. {name} nằm ngửa, hai chân dang ra, {names} chuẩn bị dao cạo và nước ấm. Họ xoa xà phòng lên âm hộ, rồi cạo từng sợi lông một cách cẩn thận. Cảm giác dao lạnh chạm vào da nhạy cảm khiến {name} run rẩy. Họ cạo sạch từ trên xuống dưới, để lộ làn da trắng mịn. {name} cảm thấy ngứa ngáy, dịch bắt đầu chảy ra vì kích thích.\n> Cạo nhẹ thôi... đừng làm đau...\nHọ tiếp tục, cạo sạch hoàn toàn.",
+          "Sau khi cạo xong phần trước, họ lật {name} lại, cạo cả vùng quanh lỗ hậu môn. Dao cạo nhẹ nhàng, không để lại một sợi lông nào. {name} cảm thấy da nhạy cảm hơn, mỗi cái chạm đều khiến rên lên. {names} dùng khăn ấm lau sạch, rồi xoa dầu thơm. Âm hộ giờ đây hoàn toàn nhẵn nhụi, trông mời gọi hơn.\n> Xong rồi... ta cảm thấy lạ quá...\nHọ kiểm tra kỹ, đảm bảo không còn sót.",
+          "Nghi lễ tiếp tục với việc massage nhẹ, ngón tay xoa quanh vùng vừa cạo, khiến {name} ướt át. {names} khen ngợi làn da mới, rồi liếm nhẹ để kiểm tra. {name} cảm thấy mọi thứ nhạy cảm hơn rất nhiều. Cảnh diễn ra chậm rãi, đầy sự cẩn thận.\n> Liếm đi... xem có sạch không...\nHọ liếm sạch, khiến {name} lên đỉnh nhẹ.",
+          "Sau nghi lễ, {name} được mặc quần mỏng, cảm thấy mọi thứ trơn tru. {names} đều hài lòng, hứa sẽ cạo lại định kỳ. Cảnh kết thúc với {name} cảm thấy tự tin hơn, da mịn màng."
+        ]
+      ]
+    }
+  },
+  "canh-viet.thanh_tuy_dau_thang": {
+    "_title": "Thanh tẩy đầu tháng",
+    "_chung": {
+      "_": [
+        [
+          "Sáng đầu tháng, nghi lễ thanh tẩy bắt đầu. Hoàng hậu {name} nằm trên giường lớn, hoàn toàn khỏa thân, hai chân dang rộng. {names} thay phiên nhau dùng lưỡi liếm sạch toàn bộ cơ thể nàng trước khi được phép mặc y phục. Người đầu tiên bắt đầu từ cổ, lưỡi liếm chậm xuống ngực, hút đầu ti, rồi trượt xuống bụng. {name} rên nhẹ, cảm thấy từng inch da thịt được làm sạch bằng lưỡi.\n> Liếm sạch đi... đừng bỏ sót chỗ nào...\nLưỡi tiếp tục xuống âm hộ, liếm từng nếp nhăn, hút dịch cũ còn sót lại.",
+          "Người thứ hai tập trung vào phần dưới, lưỡi đâm sâu vào âm đạo, móc ra những gì còn bên trong, rồi liếm xuống lỗ hậu môn, liếm sạch sẽ. {name} cong người, hai tay nắm tóc người đang liếm. Những người khác chờ sẵn, miệng đã ướt vì chờ đến lượt. Mỗi người liếm một phần khác nhau, có người chuyên liếm đùi trong, có người liếm mông. Cơ thể {name} dần trở nên bóng nhẫy nước bọt và dịch.\n> Sâu hơn... liếm cái lỗ sau của ta...\nLưỡi tuân lệnh, đâm vào lỗ hậu môn, liếm bên trong.",
+          "Sau khi toàn bộ cơ thể đã được liếm qua một lượt, các phi tần bắt đầu liếm lại những chỗ nhạy cảm. Âm vật bị hút liên tục, âm đạo bị lưỡi khám phá hết mọi ngóc ngách. {name} đã lên đỉnh hai lần, dịch mới chảy ra lại bị liếm sạch ngay lập tức. Nghi lễ kéo dài đến khi {name} không còn chảy thêm được nữa, cơ thể sạch sẽ hoàn toàn theo đúng nghĩa đen.\n> Đủ rồi... ta sạch rồi... cho ta mặc áo...\nCác phi tần vẫn liếm thêm vài cái cuối cùng trước khi dừng.",
+          "Khi nghi lễ kết thúc, {name} được lau khô bằng khăn lụa, rồi mới được mặc y phục mới. Cơ thể vẫn còn run vì bị liếm quá nhiều, âm hộ nhạy cảm đến mức chạm nhẹ cũng rên. {names} cúi đầu, miệng vẫn còn vị của hoàng hậu. Tháng mới bắt đầu với cơ thể hoàng hậu đã được thanh tẩy hoàn toàn bằng lưỡi của các phi tần."
+        ]
+      ]
+    }
   }
 }
