@@ -19,3 +19,4 @@ Khi nói "update all", Claude ghép tất cả vào đúng file rồi xóa các 
 | 12.txt | Thị tẩm Lục Uyển Nghi: đêm đầu ×3, quen ×3 | đạt (196–279) |
 
 Ghi chú: 09, 10, 12 có ngoặc kép cong trong câu văn; khi ghép dùng bộ chuyển ngoặc theo ngữ cảnh.
+| 13.txt | Thị tẩm Lục Uyển Nghi lâu ×3; Tô Mộc Cẩn đêm đầu ×3, quen ×3, lâu ×3 | đạt |
