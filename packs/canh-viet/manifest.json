@@ -24,7 +24,8 @@
       "scene-texts/5-cot-truyen-rieng.json",
       "scene-texts/6-truy-lac-nang.json",
       "scene-texts/7-khung-nong-bong.json",
-      "scene-texts/8-canh-moi.json"
+      "scene-texts/8-canh-moi.json",
+      "scene-texts/9-cuoc-thi-nhap.json"
     ],
     "portraits": "portraits.json",
     "contests": "contests.json"

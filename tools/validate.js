@@ -125,6 +125,7 @@ function checkPack(folder) {
         err(id, `${f} / ${hook}: phải là một khối {...}`);
         continue;
       }
+      if (typeof byKey._ghi_chu === "string" && /BẢN NHÁP/i.test(byKey._ghi_chu)) drafts.push(`${id}: ${f} / ${hook} (${byKey._title || ""})`);
       for (const [key, byLv] of Object.entries(byKey)) {
         if (key === "_title" || (key.startsWith("_") && key !== "_chung")) continue;
         if (typeof byLv !== "object" || Array.isArray(byLv)) {
@@ -257,6 +258,8 @@ function crossCheck() {
   );
 }
 
+const drafts = []; // cảnh còn ghi chú "BẢN NHÁP"
+
 function main() {
   const index = readJSON(path.join(PACKS, "index.json"), "index");
   if (!index) process.exit(1);
@@ -265,6 +268,7 @@ function main() {
   if (only && !list.includes(only)) list = list.concat(only);
   for (const folder of list) checkPack(folder);
   crossCheck();
+  if (drafts.length) console.log(`\n  Còn ${drafts.length} cảnh nháp cần sửa (xóa dòng "_ghi_chu" khi sửa xong; danh sách ở docs/CANH-NHAP.md):\n    ` + drafts.join("\n    "));
   console.log(`\n${errors} lỗi, ${warnings} cảnh báo.`);
   process.exit(errors ? 1 : 0);
 }
