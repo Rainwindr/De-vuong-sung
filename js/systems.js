@@ -410,7 +410,7 @@
     G.changeFavor(win, 15);
     s.championTitle = win.id;
     s.flags.daiDien = true;
-    ch._extra = { winner: win.name, ranking: list.map((x) => x.c.name) };
+    ch._extra = { winner: win.name, ranking: list.map((x) => x.c.name), contestName: "Phong Nguyệt Đại Điển" };
     notes.push(`${win.name}: Phong Nguyệt Đệ Nhất`);
     log(`${win.name} đoạt danh hiệu Phong Nguyệt Đệ Nhất.`, "milestone");
     G.addAlbum("Phong Nguyệt Đại Điển", `${win.name} đoạt danh hiệu Phong Nguyệt Đệ Nhất.`);

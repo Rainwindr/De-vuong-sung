@@ -18,7 +18,7 @@
  *
  * Game tìm theo thứ tự: nhân vật chính → sở thích của cảnh → "_chung";
  * trong mỗi khóa: đúng mức thân mật → "quen" → "_". Không có gì thì dùng cảnh cũ của scenes.js.
- * Biến dùng được trong chữ: {name} {names} {emperor} {fetish}. Dòng bắt đầu bằng "> " là lời thoại.
+ * Biến dùng được trong chữ: {name} {names} {emperor} {fetish}; riêng cảnh cuộc thi và Đại Điển có thêm {winner} (người thắng) và {contest} (tên cuộc thi). Dòng bắt đầu bằng "> " là lời thoại.
  */
 (function () {
   "use strict";
@@ -78,7 +78,9 @@
       .replace(/\{name\}/g, names[0] || "nàng")
       .replace(/\{names\}/g, list)
       .replace(/\{emperor\}/g, ctx.emperor.name)
-      .replace(/\{fetish\}/g, fet || "ý bệ hạ");
+      .replace(/\{fetish\}/g, fet || "ý bệ hạ")
+      .replace(/\{winner\}/g, (ctx.extra && ctx.extra.winner) || names[0] || "nàng")
+      .replace(/\{contest\}/g, (ctx.extra && ctx.extra.contestName) || "cuộc thi");
   }
 
   /**
