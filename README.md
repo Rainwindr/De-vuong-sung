@@ -2,7 +2,7 @@
 
 Game mô phỏng hậu cung dạng text kèm chân dung, chạy trên trình duyệt, ưu tiên điện thoại. Người chơi là một hoàng đế 18 tuổi vừa đăng cơ: tuyển tú, sủng ái phi tần, sinh con nối dõi, và tự chọn mình sẽ trụy lạc đến đâu. 
 
-Phiên bản **0.3.7**. Gói `canh-viet` có cảnh viết sẵn, sự kiện khám phá sở thích, và chỗ cắm ảnh chân dung thật.
+Phiên bản **0.3.8**. Gói `canh-viet` có cảnh viết sẵn, sự kiện khám phá sở thích, và chỗ cắm ảnh chân dung thật. Mỗi tháng có thêm lượt "chuyện hậu cung", sự kiện bốc theo gói, thi hai mùa mỗi năm và tự mở cuộc thi được.
 
 ## Chạy thử
 
@@ -31,7 +31,7 @@ GitHub Pages: Settings → Pages → Deploy from a branch → `main` / `(root)`.
 | Sở thích | 18 sở thích lõi + 12 nhóm khung, cây 3 tầng, độ nghiện, nhạt dần, thuyết phục, tu ở hành cung |
 | Đối thực | Tình Ý giữa các phi, 4 mức thái độ của bệ hạ, Cung Đồng Tâm, có thể bị "gạt ra ngoài" |
 | Con cháu | Tính cách, thầy dạy, học vấn, tước vị, thành thân, cháu, khoảnh khắc cha con |
-| Cuộc thi | Mùa thi tháng 6, 10 cuộc thi, Phong Nguyệt Đại Điển cuối năm |
+| Cuộc thi | Mùa thi tháng 4 và 9, tự mở trong Ý chỉ, 10 cuộc thi, Phong Nguyệt Đại Điển cuối năm |
 | Cung điện | 9 món quà, 8 công trình, nâng cung từng phi, học phường cầm kỳ thi họa |
 | Tuần du | 5 vùng, mỗi vùng có mỹ nhân và sự kiện riêng |
 | Kế vị | Chọn người kế vị, chọn nơi an hưởng, 8 kết thúc không có kết cục tệ, sử quan ghi chép, album |

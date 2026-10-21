@@ -332,22 +332,56 @@
     return G.participantsFor({ participants: { select: "top_favor", count: ct.count || 4 }, fetish: ct.fetish || [] }, { speaker: null });
   }
 
-  /** Dựng sự kiện mùa thi (tháng 6) và Đại Điển (tháng 12). */
+  G.CONTEST_MONTHS = [4, 9]; // hai mùa thi mỗi năm
+  G.CONTEST_COST = 800; // tự mở cuộc thi
+  G.CONTEST_COOLDOWN = 3; // tháng
+
+  function contestChoices() {
+    return shuffle(Object.values(R.contests).filter((ct) => contestUnlocked(ct) && contestParticipants(ct).length >= 2)).slice(0, 4);
+  }
+
+  function buildContestEvent(list, manual) {
+    const ev = {
+      id: "sys.contest",
+      title: manual ? "Mở cuộc thi" : "Mùa thi hậu cung",
+      text: manual
+        ? "Lý công công dâng danh sách những cuộc thi có thể tổ chức ngay. Phi tần chỉ ghi tên vào cuộc thi mình sẵn lòng.\n> Bệ hạ muốn xem cuộc thi nào?"
+        : "Lý công công dâng danh sách các cuộc thi mùa này. Phi tần chỉ ghi tên vào cuộc thi mình sẵn lòng.\n> Bệ hạ muốn xem cuộc thi nào?",
+      choices: list
+        .map((ct) => ({ label: `${ct.name}${ct.desc ? " · " + ct.desc : ""}`, hook: ct.hook, fetish: ct.fetish || [], participants: { select: "top_favor", count: ct.count || 4 }, minParticipants: 2, cost: manual ? G.CONTEST_COST : 0, effects: { truyLac: 3 + (ct.tier || 1) * 2 }, _contest: ct.id, _manual: !!manual }))
+        .concat([manual ? { label: "Để dịp khác" } : { label: "Mùa này không thi", effects: { danTam: 2 } }]),
+      onChoose: contestResolve,
+    };
+    return G.prepareEvent(ev, { speaker: null });
+  }
+
+  /** Lý do chưa tự mở cuộc thi được, hoặc null nếu mở được. */
+  G.contestStatus = function () {
+    const s = G.state;
+    if (s.consorts.length < 3) return "Cần ít nhất ba phi tần.";
+    const last = s.contest.manualTurn;
+    if (last != null && s.turn - last < G.CONTEST_COOLDOWN) {
+      const n = G.CONTEST_COOLDOWN - (s.turn - last);
+      return `Vừa thi xong, ${n} tháng nữa mới mở lại được.`;
+    }
+    if (s.stats.quocKho < G.CONTEST_COST && !s.godFlags.infiniteMoney) return `Quốc khố không đủ ${G.CONTEST_COST} lượng.`;
+    if (!contestChoices().length) return "Chưa có cuộc thi nào đủ người sẵn lòng tham gia.";
+    return null;
+  };
+  /** Tự mở một cuộc thi (tốn quốc khố khi thật sự tổ chức). */
+  G.openContest = function () {
+    if (G.contestStatus()) return null;
+    const ev = buildContestEvent(contestChoices(), true);
+    return ev && ev.choices.length > 1 ? ev : null;
+  };
+
+  /** Dựng sự kiện mùa thi (tháng 4 và 9) và Đại Điển (tháng 12). */
   monthly((s, report) => {
     if (s.ended || report.systemEvent) return;
-    if (s.month === 6 && s.consorts.length >= 3) {
-      const list = shuffle(Object.values(R.contests).filter((ct) => contestUnlocked(ct) && contestParticipants(ct).length >= 2)).slice(0, 4);
+    if (G.CONTEST_MONTHS.includes(s.month) && s.consorts.length >= 3) {
+      const list = contestChoices();
       if (!list.length) return;
-      const ev = {
-        id: "sys.contest",
-        title: "Mùa thi hậu cung",
-        text: "Lý công công dâng danh sách các cuộc thi năm nay. Phi tần chỉ ghi tên vào cuộc thi mình sẵn lòng.\n> Bệ hạ muốn xem cuộc thi nào?",
-        choices: list
-          .map((ct) => ({ label: `${ct.name}${ct.desc ? " · " + ct.desc : ""}`, hook: ct.hook, fetish: ct.fetish || [], participants: { select: "top_favor", count: ct.count || 4 }, minParticipants: 2, effects: { truyLac: 3 + (ct.tier || 1) * 2 }, _contest: ct.id }))
-          .concat([{ label: "Năm nay không thi", effects: { danTam: 2 } }]),
-        onChoose: contestResolve,
-      };
-      report.systemEvent = G.prepareEvent(ev, { speaker: null });
+      report.systemEvent = buildContestEvent(list, false);
     }
     if (s.month === 12) {
       const scored = Object.entries(s.contest.scores)
@@ -389,6 +423,7 @@
     G.changeFavor(win, (ct.prize && ct.prize.favor) || 20);
     if (ct.prize && ct.prize.trait && !win.traits.includes(ct.prize.trait)) win.traits.push(ct.prize.trait);
     s.contest.held[ct.id] = (s.contest.held[ct.id] || 0) + 1;
+    if (ch._manual) s.contest.manualTurn = s.turn;
     s.flags["contest." + ct.id] = true;
     ch._extra = { contest: ct.id, contestName: ct.name, winner: win.name, ranking: ranked.map((r) => r.c.name) };
     notes.push(`${win.name} thắng ${ct.name}`);
