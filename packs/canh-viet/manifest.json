@@ -25,6 +25,7 @@
       "scene-texts/7-khung-nong-bong.json",
       "scene-texts/8-canh-moi.json"
     ],
-    "portraits": "portraits.json"
+    "portraits": "portraits.json",
+    "contests": "contests.json"
   }
 }
