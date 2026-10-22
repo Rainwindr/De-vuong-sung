@@ -42,7 +42,7 @@ MẪU TRẢ VỀ
   "scenes": {
     "canh-viet.ten_cuoc_thi": {
       "_title": "Tên cuộc thi",
-      "_chung": { "_": ["Đoạn 1", "Đoạn 2", "Đoạn 3", "Đoạn 4"] }
+      "_chung": { "_": ["Đoạn 1", "Đoạn 2", "Đoạn 3", "Đoạn 4", "Đoạn 5"] }
     }
   }
 }
@@ -52,7 +52,7 @@ QUY TẮC BẮT BUỘC
 1. "id" và "hook" giống nhau, bắt đầu bằng "canh-viet.", viết thường không dấu, nối bằng gạch dưới. Không trùng với cuộc thi đã có (danh sách bên dưới).
 2. Mọi thí sinh đều trưởng thành, tỉnh táo, tự nguyện ghi tên. Khán giả chỉ là bệ hạ và các phi khác cùng tự nguyện. Không cưỡng ép, không say/thuốc, không người ngoài.
 3. Cuộc thi có yếu tố thân mật thì "fetish" phải có ít nhất một id trong DANH SÁCH SỞ THÍCH (chỉ phi sẵn lòng với sở thích đó mới được chọn dự thi). Cuộc thi tài nghệ thuần túy (thơ, đàn, múa) để "fetish": [].
-4. Cảnh: đúng 4 đoạn NỐI TIẾP nhau thành một cảnh: đoạn 1 mở màn và giới thiệu luật; đoạn 2 và 3 các thí sinh lần lượt thi, cao trào; đoạn 4 công bố người thắng, trao giải và dư âm. Mỗi đoạn tối thiểu 150 chữ, không tóm tắt, có lời thoại.
+4. Cảnh: đúng 5 đoạn NỐI TIẾP nhau thành một cảnh: đoạn 1 mở màn và giới thiệu luật; đoạn 2, 3, 4 các thí sinh lần lượt thi, cao trào; đoạn 5 công bố người thắng, trao giải và dư âm. Mỗi đoạn 50–70 chữ, tổng 260–320 chữ (tự đếm trước khi trả lời), không tóm tắt, có lời thoại; không đoạn nào chỉ gồm một câu thoại.
 5. Biến trong cảnh: {names} danh sách thí sinh, {name} một thí sinh (người đầu danh sách), {winner} người thắng, {contest} tên cuộc thi, {emperor} niên hiệu. Không dùng biến nào khác, không tự đặt tên thí sinh.
 6. Trong chữ: xuống dòng viết \n, lời thoại bắt đầu bằng "> ", không dùng dấu " bên trong đoạn (dùng “ ” thay thế).
 
@@ -114,7 +114,7 @@ Viết 1 cuộc thi tầng 3, mở khi Trụy lạc từ 65 và đã xây core.l
 **Nhiều phiên bản cảnh cho một cuộc thi đã có:**
 ```
 Viết thêm một cảnh khác cho cuộc thi canh-viet.ten_cuoc_thi (khác tình tiết với lần trước). Chỉ trả về:
-{ "scenes": { "canh-viet.ten_cuoc_thi": { "_chung": { "_": ["Đoạn 1", "Đoạn 2", "Đoạn 3", "Đoạn 4"] } } } }
+{ "scenes": { "canh-viet.ten_cuoc_thi": { "_chung": { "_": ["Đoạn 1", "Đoạn 2", "Đoạn 3", "Đoạn 4", "Đoạn 5"] } } } }
 ```
 Cuộc thi trong `core` (Thi thơ, Vũ Mị…) cũng viết thêm cảnh được theo cách này: thay id bằng hook của nó (`core.thi_tho`, `core.thi_cam`, `core.thi_tuyen_diem`, `core.thi_huong_dau`, `core.thi_vu_mi`, `core.thi_duc_tri`, `core.thi_dai_kich`, `core.thi_thi_tham`, `core.thi_ngu_yen`, `core.thi_hoang_hau_mot_dem`).
 

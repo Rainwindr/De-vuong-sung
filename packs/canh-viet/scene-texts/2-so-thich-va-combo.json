@@ -216,8 +216,7 @@
     "core.chu_to": {
       "_": [
         [
-          "Đổi vai, có ám hiệu dừng. {name} là chủ, ra lệnh bệ hạ quỳ.\n> Hôm nay ngươi phải làm ta sướng trước.\nNàng nói. Bệ hạ tuân lệnh. Khi nàng cho phép vào, {name} rên to, vẫn giữ vai chủ. Đêm ấy táo bạo, luôn nhớ ám hiệu.",
-          "Nàng ngồi lên mặt bệ hạ, ra lệnh. Sau đó cho vào. Rên lớn, lên đỉnh nhiều lần."
+          "Đổi vai, có ám hiệu dừng. {name} là chủ, ra lệnh bệ hạ quỳ.\n> Hôm nay ngươi phải làm ta sướng trước.\nNàng nói. Bệ hạ tuân lệnh. Khi nàng cho phép vào, {name} rên to, vẫn giữ vai chủ. Đêm ấy táo bạo, luôn nhớ ám hiệu.\nNàng ngồi lên mặt bệ hạ, ra lệnh. Sau đó cho vào. Rên lớn, lên đỉnh nhiều lần."
         ],
         [
           "{name} quỳ gối, cổ đeo vòng da mỏng, mắt nhìn lên. Nàng tự đề nghị từ đầu.\n> Chủ nhân… nô tì là tớ. Ám hiệu dừng là “hoa mai”. Người nhắc giúp. Đêm nay người muốn dùng cái lồn này thế nào cũng được.\nBệ hạ nhắc “hoa mai”. Nàng gật, rồi há miệng chờ lệnh. Bệ hạ dí cặc vào, nàng bú sâu, nước bọt chảy. Người ra lệnh.\n> Ngậm chặt. Liếm tinh hoàn. Rồi tự móc lồn cho chủ xem.\nNàng tuân theo tuyệt đối, vừa bú vừa móc, nước lồn nhỏ xuống sàn. Không có cưỡng ép, nàng chủ động làm mọi thứ bẩn thỉu nhất theo vai tớ.",
@@ -271,7 +270,7 @@
         ],
         [
           "Đêm nay trong đại sảnh nhỏ của hậu cung, chỉ có bệ hạ và các phi tần ngồi thành vòng tròn trên gối lụa. {name} được chọn trình diễn, mặc bộ y phục đỏ mỏng manh chưa cởi, đứng giữa với tâm trạng vừa hồi hộp vừa kích thích. Bệ hạ là người đề nghị từ chiều, thiếp đồng ý và các {names} đã ngồi sẵn để xem, không có ai ngoài hậu cung.",
-          "Thiếp bắt đầu cởi áo chậm theo nhịp trống nhỏ do một phi tần gõ, từng lớp rơi xuống để lộ da thịt dưới ánh đèn. Chi tiết riêng là việc phải xoay người và dang chân đúng theo lệnh bệ hạ hô to, để mọi ánh mắt đều thấy rõ khe lồn dần ướt. Âm thanh vải rơi và tiếng hô khẽ của các phi tần vang lên.",
+          "Thiếp bắt đầu cởi áo chậm theo nhịp trống nhỏ do một phi tần gõ, từng lớp rơi xuống để lộ da thịt dưới ánh đèn. Phải xoay người và dang chân đúng theo lệnh bệ hạ hô to, để mọi ánh mắt đều thấy rõ khe lồn dần ướt. Âm thanh vải rơi và tiếng hô khẽ của các phi tần vang lên.",
           "Khi đã trần, {name} phải tự dùng hai tay banh môi lồn ra và giữ nguyên tư thế trong khi đi một vòng chậm trước mặt từng người. Cảm giác bị nhìn chằm chằm từ nhiều hướng cùng lúc làm dịch nhờn chảy dài xuống đùi, khác với khi chỉ có một mình bệ hạ. Thiếp nghe rõ tiếng nuốt nước bọt và hơi thở nặng xung quanh.",
           "Bệ hạ ra lệnh thiếp ngồi lên dương vật giả đặt giữa sảnh và nhún cho đến khi ra, đồng thời phải kể lớn những gì mình cảm thấy để cả hậu cung nghe. Mỗi nhịp nhún tạo tiếng ướt át rõ ràng, các phi tần cúi người nhìn gần hơn. {name} rên không kìm được, lồn co thắt mạnh trước hàng mắt.",
           "Sau khi run rẩy xong, thiếp được các phi tần đỡ nằm xuống gối, bệ hạ lau nhẹ bằng khăn lụa. {name} nằm thở dốc, mắt vẫn mở nhìn vòng người xung quanh, môi khẽ mỉm.\n> Đêm nay thiếp đã trình hết những gì bệ hạ muốn mọi người thấy."
@@ -415,9 +414,6 @@
         ]
       ]
     },
-    "_chung": {
-      "_": []
-    },
     "canh-viet.toc_dai": {
       "_": [
         [
@@ -514,8 +510,7 @@
         [
           "Chỉ được hôn và liếm rất lâu. {name} đã ướt đẫm, cầu xin.\n> Cho thần thiếp được vào đi... thần thiếp chịu không nổi nữa.\nCuối cùng bệ hạ vào, nàng rên to ngay, lên đỉnh chỉ sau vài nhịp vì đã bị hành quá lâu.",
           "Không được rên, chỉ được cảm nhận chậm. {name} cắn môi đến bật máu nhẹ, nước chảy nhiều. Khi được phép, nàng rên lớn bù lại, lên đỉnh mạnh.",
-          "Bệ hạ chỉ chạm ngoài, không vào. {name} tự sờ, rên cầu xin. Cuối cùng được vào, nàng lên đỉnh liên tục.",
-          "Cực chậm, từng centimet. {name} thì thầm tục, run rẩy. Khi tăng tốc, nàng kêu lớn, nước bắn."
+          "Bệ hạ chỉ chạm ngoài, không vào. {name} tự sờ, rên cầu xin. Cuối cùng được vào, nàng lên đỉnh liên tục.\nCực chậm, từng centimet. {name} thì thầm tục, run rẩy. Khi tăng tốc, nàng kêu lớn, nước bắn."
         ],
         [
           "Bệ hạ bắt {name} nằm sấp, dùng lưỡi liếm chậm rãi từ gáy xuống sống lưng, dừng lại ở khe mông. Mỗi lần lưỡi chạm vào da, {name} rùng mình, nước dâm chảy ra. Bệ hạ liếm chậm, lưỡi lướt qua lỗ hậu môn, chỉ chạm nhẹ rồi rời đi. {name} rên rỉ, mông nhếch cao hơn, muốn được liếm mạnh. Bệ hạ dùng ngón tay chà nhẹ vào âm vật, chỉ chạm rồi dừng. {name} uốn người, cảm giác nóng ran lan tỏa. Bệ hạ tiếp tục liếm chậm, lưỡi chui vào khe mông nhưng không thọc sâu, chỉ chạm vào mép lỗ. {name} rên lớn, nước dâm chảy dài xuống đùi, cơ thể run rẩy vì bị trêu chọc.",
@@ -553,8 +548,7 @@
         [
           "{name} và một phi tần khác cùng quỳ trước bệ hạ. Hai người tranh nhau liếm cặc, một ngậm đầu, một liếm gốc và bìu. Dịch nhờn chảy ra, hai miệng luân phiên nuốt.",
           "Bệ hạ nằm ngửa, {name} ngồi lên mặt người, lồn áp vào miệng. Phi tần kia ngồi lên cặc, nhún mạnh. Hai người hầu cùng lúc, lưỡi và lồn cùng làm việc. {name} rên khi bị liếm sâu.",
-          "Hai người đổi vị trí. {name} nuốt cặc đến gốc, hông nhún. Người kia dùng lưỡi liếm chỗ giao nhau và núm vú {name}. Dịch chảy xuống, hai thân thể dính nhau.",
-          "{name} thì thầm.\n> Bệ hạ… hai thiếp hầu người cùng lúc… cặc to quá, lồn thiếp sắp ra!",
+          "Hai người đổi vị trí. {name} nuốt cặc đến gốc, hông nhún. Người kia dùng lưỡi liếm chỗ giao nhau và núm vú {name}. Dịch chảy xuống, hai thân thể dính nhau.\n{name} thì thầm.\n> Bệ hạ… hai thiếp hầu người cùng lúc… cặc to quá, lồn thiếp sắp ra!",
           "Cao trào gần như cùng lúc. Bệ hạ đổ tinh vào lồn {name}, người kia liếm sạch. {name} thở dốc.\n> Thiếp muốn hầu cùng nữa… để bệ hạ sướng gấp đôi."
         ]
       ]
@@ -570,8 +564,7 @@
         [
           "{name} ngồi trước mặt bệ hạ, tự banh lồn ra. Thiếp kể chi tiết bằng lời tục, mô tả cảm giác bên trong đang thèm. Bệ hạ nhìn và nghe, cặc cương cứng.",
           "Thiếp dùng ngón tay đút vào, khuấy chậm, vừa làm vừa kể. Dịch nhờn chảy ra, tiếng ướt át rõ ràng. {name} nhìn mắt bệ hạ, miệng không ngừng thì thầm những lời dâm dục.",
-          "Bệ hạ tiến lại, dùng đầu cặc cọ lên khe. {name} tiếp tục kể khi cặc đẩy vào. Mỗi nhịp đâm là một câu mô tả chi tiết. Lồn siết chặt, thiếp rên xen lẫn lời nói.",
-          "Thiếp ưỡn người.\n> Bệ hạ nghe đi… lồn thiếp đang nuốt cặc người… nghe tiếng ướt này không?",
+          "Bệ hạ tiến lại, dùng đầu cặc cọ lên khe. {name} tiếp tục kể khi cặc đẩy vào. Mỗi nhịp đâm là một câu mô tả chi tiết. Lồn siết chặt, thiếp rên xen lẫn lời nói.\nThiếp ưỡn người.\n> Bệ hạ nghe đi… lồn thiếp đang nuốt cặc người… nghe tiếng ướt này không?",
           "Cao trào đến, {name} kể không thành lời, chỉ rên. Bệ hạ đổ tinh vào. Sau đó thiếp thì thầm tiếp.\n> Thiếp muốn kể thêm… để bệ hạ vừa nghe vừa nhìn thiếp ra."
         ]
       ]
@@ -687,8 +680,7 @@
         [
           "{name} ngồi trên đùi bệ hạ, hai bầu vú căng tròn ép vào ngực người. Thiếp dùng tay bóp vú mình, đưa núm vào miệng bệ hạ. Người ngậm hút mạnh, lưỡi liếm quanh.",
           "Thiếp dùng hai vú kẹp cặc, vuốt lên xuống. Đầu cặc nhô ra giữa khe ngực, thiếp cúi liếm. Dịch nhờn từ lồn chảy xuống, bôi trơn. Bệ hạ nắm hai bầu, ép chặt hơn.",
-          "Người đẩy {name} nằm ngửa, dùng cặc cọ lên núm vú rồi đâm vào lồn. Mỗi nhịp, vú thiếp rung mạnh. Bệ hạ cúi xuống ngậm núm, vừa đâm vừa hút.",
-          "Thiếp ưỡn ngực.\n> Bệ hạ… vú thiếp to quá… cặc người đâm sâu làm vú rung không ngừng!",
+          "Người đẩy {name} nằm ngửa, dùng cặc cọ lên núm vú rồi đâm vào lồn. Mỗi nhịp, vú thiếp rung mạnh. Bệ hạ cúi xuống ngậm núm, vừa đâm vừa hút.\nThiếp ưỡn ngực.\n> Bệ hạ… vú thiếp to quá… cặc người đâm sâu làm vú rung không ngừng!",
           "Cao trào, lồn co bóp. Bệ hạ rút ra, đổ tinh lên ngực và núm vú. {name} dùng tay xoa đều.\n> Thiếp muốn bệ hạ chơi vú thêm… để tinh dính đầy ngực thiếp."
         ]
       ]
@@ -820,7 +812,7 @@
         [
           "Đêm nay {name} mặc bộ nội y lụa đen và quần lọt khe dây mảnh, bước vào phòng nơi bệ hạ đang ngồi. Người đề nghị thiếp giữ nguyên bộ này suốt đêm, thiếp đồng ý với tâm trạng đã ướt từ trước. Chỉ có hai người, đèn dầu thấp, thiếp đứng dang chân để người nhìn rõ dây lọt khe luồn giữa khe lồn.",
           "Bệ hạ kéo thiếp lại, dùng tay túm dây quần lọt khe kéo sang một bên rồi bóp mạnh môi lồn. Cảm giác dây nhỏ cọ vào âm vật khi bị kéo khác với khi không mặc gì. Thiếp rên, dịch nhờn đã làm ướt dây và dính vào ngón tay người.",
-          "Người đẩy thiếp nằm ngửa, giữ dây lọt khe kéo lệch và đút cặc vào lồn qua khe hở. Chi tiết riêng là việc dây vẫn còn cọ sát âm vật mỗi nhịp đâm, và thiếp phải tự giữ dây không cho nó tuột lại giữa. Âm thanh ướt át và tiếng dây căng vang lên, lồn siết chặt quanh cặc.",
+          "Người đẩy thiếp nằm ngửa, giữ dây lọt khe kéo lệch và đút cặc vào lồn qua khe hở. Dây vẫn còn cọ sát âm vật mỗi nhịp đâm, và thiếp phải tự giữ dây không cho nó tuột lại giữa. Âm thanh ướt át và tiếng dây căng vang lên, lồn siết chặt quanh cặc.",
           "Bệ hạ đâm sâu và nhanh, vừa đâm vừa kéo dây ra vào như đang chơi. {name} ưỡn hông, núm vú cương cứng dưới lớp áo lót mỏng. Dịch chảy ra nhiều, làm ướt đẫm quần lọt khe và đùi. Thiếp rên lớn, chân run.",
           "Người đổ tinh vào trong rồi kéo dây trở lại giữa khe, ép tinh và dịch dính vào dây. {name} nằm thở dốc, tay vẫn cầm dây.\n> Dây lọt khe này dính đầy tinh bệ hạ rồi."
         ]
@@ -836,7 +828,7 @@
         ],
         [
           "Đêm nay trong phòng ngủ lớn, bệ hạ ngồi trên ghế cao ở cuối giường với chén trà, còn {name} và một phi tần khác đã được gọi vào từ sớm. Cả hai mặc áo choàng mỏng, ngồi đối diện nhau trên giường với tâm trạng thỏa thuận trước. Bệ hạ đề nghị được ngồi xem, hai người đồng ý, không có ai khác trong phòng.",
-          "Hai phi tần bắt đầu hôn và lần tay vào trong áo nhau, rồi một người nằm xuống để người kia cúi liếm. Chi tiết riêng là việc bệ hạ thỉnh thoảng lên tiếng chỉ dẫn nhỏ như \"chậm lại\" hoặc \"để ta thấy rõ hơn\", khiến cả hai phải điều chỉnh tư thế cho người xem. Âm thanh lưỡi và hơi thở vang rõ trong không gian yên.",
+          "Hai phi tần bắt đầu hôn và lần tay vào trong áo nhau, rồi một người nằm xuống để người kia cúi liếm. Bệ hạ thỉnh thoảng lên tiếng chỉ dẫn nhỏ như \"chậm lại\" hoặc \"để ta thấy rõ hơn\", khiến cả hai phải điều chỉnh tư thế cho người xem. Âm thanh lưỡi và hơi thở vang rõ trong không gian yên.",
           "{name} ngồi lên mặt người kia, hai tay chống giường, trong khi người dưới dùng lưỡi đâm sâu và ngón tay hỗ trợ. Bệ hạ nhìn thẳng vào chỗ giao nhau, thỉnh thoảng hớp trà. Cảm giác bị quan sát liên tục từ một hướng cố định làm {name} siết chặt hơn, dịch chảy xuống cằm người dưới.",
           "Hai người đổi tư thế thành nằm cạnh, cùng dùng miệng và tay với nhau trong khi vẫn quay một phần thân thể về phía bệ hạ. Tiếng rên xen lẫn tiếng ướt át, bệ hạ đặt chén xuống và nghiêng người nhìn gần hơn một chút. {name} đạt cao trào trước, người run và dựa vào vai người kia.",
           "Sau đó cả hai nằm thở, bệ hạ bước lại gần và vuốt tóc {name}. Thiếp mở mắt, nhìn người rồi nhìn phi tần bên cạnh, môi còn ẩm.\n> Bệ hạ đã xem hết từ đầu đến cuối đêm nay."
@@ -854,7 +846,7 @@
         [
           "Trong phòng ngủ sáng đèn, {name} nằm ngửa trên giường, chân đã dang, mặc áo ngủ vén lên. Bệ hạ đề nghị đêm nay chỉ tập trung làm thiếp ra nhiều lần và nhìn rõ, thiếp đồng ý. Chỉ có hai người, không khí ấm, thiếp đã thở nhanh từ lúc người vừa chạm.",
           "Bệ hạ dùng lưỡi hút âm vật và hai ngón khuấy điểm nhạy bên trong liên tục. Cảm giác bị ép lên cao trào rất nhanh, thiếp ưỡn người, lồn co thắt. Dịch trong bắt đầu rỉ ra, thiếp rên lớn và nắm tóc người.",
-          "Khi thiếp vừa run lần đầu, người không dừng mà đâm cặc sâu vào và tiếp tục massage âm vật bằng ngón cái. Chi tiết riêng là việc bệ hạ nhìn thẳng vào mặt và lồn thiếp, bắt thiếp phải mở mắt và kể mình đang ra thế nào. Lồn phun dịch quanh thân cặc, thiếp khóc vì sướng.",
+          "Khi thiếp vừa run lần đầu, người không dừng mà đâm cặc sâu vào và tiếp tục massage âm vật bằng ngón cái. Bệ hạ nhìn thẳng vào mặt và lồn thiếp, bắt thiếp phải mở mắt và kể mình đang ra thế nào. Lồn phun dịch quanh thân cặc, thiếp khóc vì sướng.",
           "Bệ hạ đâm mạnh tiếp, buộc thiếp ra thêm lần nữa ngay sau đó. Cơ thể thiếp co giật liên hồi, nước mắt chảy, miệng há rên không thành tiếng. Dịch và nước nhờn bắn ra, ga trải ướt đẫm. Thiếp không kịp thở đều.",
           "Sau cùng người đổ tinh vào giữa lúc thiếp còn co bóp. Bệ hạ nằm cạnh, tay lau nước mắt cho thiếp. {name} thở dốc, người còn giật nhẹ.\n> Thiếp ra đến mức không còn nhìn rõ gì."
         ]
@@ -871,7 +863,7 @@
         [
           "Trong phòng tắm hơi riêng buổi tối, {name} nằm ngửa trên ghế đá ấm, chỉ quấn một khăn mỏng quanh ngực, chân đã được kê cao. Bệ hạ đích thân đề nghị massage sau khi thiếp than mệt, tâm trạng thiếp thư giãn và tin tưởng. Hơi nước ấm bao quanh, chỉ có hai người, chưa có gì vượt quá sự chăm sóc.",
           "Bệ hạ bắt đầu bằng dầu ấm, dùng cả lòng bàn tay ấn và vuốt dọc hai môi lớn từ từ lên xuống theo nhịp đều. Cảm giác áp lực lan tỏa khác với sự vuốt ve thông thường, dầu làm mọi thứ trơn và nóng dần. {name} thở sâu, hông hơi nhúc nhích theo tay người.",
-          "Người chuyển sang dùng hai ngón cái massage xoay tròn quanh âm vật, vừa ấn vừa kéo nhẹ da xung quanh. Chi tiết riêng là việc duy trì một nhịp điệu chậm và đều trong thời gian dài, không tăng tốc đột ngột. Âm thanh dầu và dịch nhờn hòa vào tiếng hơi nước, thiếp khẽ rên mỗi khi ngón tay lướt đúng điểm.",
+          "Người chuyển sang dùng hai ngón cái massage xoay tròn quanh âm vật, vừa ấn vừa kéo nhẹ da xung quanh. Duy trì một nhịp điệu chậm và đều trong thời gian dài, không tăng tốc đột ngột. Âm thanh dầu và dịch nhờn hòa vào tiếng hơi nước, thiếp khẽ rên mỗi khi ngón tay lướt đúng điểm.",
           "Bệ hạ đút một ngón vào trong, dùng khớp ngón massage thành trước trong khi ngón cái bên ngoài vẫn không dừng. Lồn co siết nhẹ quanh ngón, dịch chảy ra nhiều hơn dầu. {name} ưỡn nhẹ, tay nắm mép ghế, cảm nhận sự khác biệt giữa áp lực bên trong và bên ngoài cùng lúc.",
           "Khi đã xong, bệ hạ lau sạch bằng khăn ấm rồi đắp khăn mới lên. {name} nằm yên, mắt nhắm, tay đặt lên tay người vẫn còn nghỉ trên bụng dưới.\n> Tay bệ hạ vừa rồi làm thiếp nóng từ trong ra ngoài."
         ]
@@ -904,7 +896,7 @@
         [
           "Đêm nay một hàng ghế được xếp thẳng trong phòng, mỗi ghế có một dương vật giả ngọc lớn đặt sẵn. {name} và các phi tần khác quỳ hoặc ngồi trước mặt chúng, mặc áo lót mỏng. Bệ hạ đứng đầu hàng làm người điều khiển, mọi người đã đồng ý tham gia. Chỉ có hậu cung.",
           "Theo hiệu lệnh, tất cả cùng đút dương vật giả vào lồn và bắt đầu nhún theo nhịp đếm. Cảm giác lạnh và cứng của ngọc khác nhau ở mỗi người. {name} ở giữa, phải nuốt sâu đúng nhịp, dịch nhờn nhanh chóng làm ướt cán.",
-          "Bệ hạ đi dọc hàng và chỉ định ai phải tăng tốc hoặc đút thêm ngón tay vào bên cạnh dương vật giả. Chi tiết riêng là việc thiếp bị chỉ định phải vừa nhún vừa tự bóp vú và kể lớn độ sâu mình đang nuốt. Âm thanh nhiều lồn ướt át cùng lúc vang khắp phòng, các phi tần rên xen nhau.",
+          "Bệ hạ đi dọc hàng và chỉ định ai phải tăng tốc hoặc đút thêm ngón tay vào bên cạnh dương vật giả. Thiếp bị chỉ định phải vừa nhún vừa tự bóp vú và kể lớn độ sâu mình đang nuốt. Âm thanh nhiều lồn ướt át cùng lúc vang khắp phòng, các phi tần rên xen nhau.",
           "Người ra lệnh tất cả phải ra trong vòng đếm ngược. {name} nhún mạnh, lồn siết chặt quanh ngọc, phun dịch ra cán và xuống ghế. Các người khác cũng lần lượt co giật. Tiếng rên và tiếng nước hòa vào nhau hỗn loạn.",
           "Khi kết thúc, mọi người rút dương vật giả ra, chúng bóng loáng dịch. {name} ngồi thở, nhìn hàng ngọc ướt rồi quay sang bệ hạ.\n> Thiếp nuốt sâu nhất hàng và ra đúng lúc đếm xong."
         ]
@@ -921,7 +913,7 @@
         [
           "Trong phòng tắm hơi, {name} ngồi trên đùi bệ hạ, trần từ eo trở lên, chân dang. Người đề nghị massage cả vú lẫn âm vật cùng lúc, thiếp đồng ý. Hơi nước ấm, dầu đã chuẩn bị, thiếp dựa lưng vào ngực người, chưa có gì sâu hơn.",
           "Bệ hạ dùng hai tay bóp và xoa vú, kéo núm vú xoay tròn trong khi một tay khác đã xuống dưới, ngón cái ấn và vuốt âm vật theo nhịp. Cảm giác bị chơi cả hai chỗ cùng lúc làm thiếp rên ngay, lồn ướt nhanh. Dầu và dịch trộn lẫn.",
-          "Người tăng lực, vừa vắt vú vừa dùng hai ngón đút vào lồn khuấy, ngón cái vẫn không rời âm vật. Chi tiết riêng là việc bệ hạ thì thầm đếm nhịp massage sát tai thiếp và bắt thiếp phải lặp lại số. Âm thanh dầu ướt và tiếng rên của thiếp theo từng số, núm vú và âm vật đều sưng.",
+          "Người tăng lực, vừa vắt vú vừa dùng hai ngón đút vào lồn khuấy, ngón cái vẫn không rời âm vật. Bệ hạ thì thầm đếm nhịp massage sát tai thiếp và bắt thiếp phải lặp lại số. Âm thanh dầu ướt và tiếng rên của thiếp theo từng số, núm vú và âm vật đều sưng.",
           "Bệ hạ tiếp tục không dừng, đâm cặc vào từ dưới trong khi tay vẫn massage vú và âm vật. {name} ưỡn người, co giật nhẹ. Lồn siết chặt, dịch chảy ra nhiều. Thiếp gần như không nói được số nữa vì sướng.",
           "Người đổ tinh vào rồi chậm tay lại. {name} nằm dựa vào người, thở dốc, vú và lồn còn nhạy. Bệ hạ hôn lên vai thiếp.\n> Thiếp đếm không nổi nữa vì cả vú lẫn lồn đều run."
         ]
@@ -938,7 +930,7 @@
         [
           "Đêm nay trong phòng ngủ, {name} mặc áo lụa mỏng không nội y, ngồi trên đùi bệ hạ sau khi người vừa về. Bệ hạ đề nghị tập trung chơi vú thiếp suốt đêm, thiếp đồng ý với tâm trạng đã sẵn sàng. Chỉ có hai người, đèn dầu thấp, chưa có gì ngoài việc thiếp tự cởi cúc áo trên.",
           "Bệ hạ dùng hai tay bóp mạnh hai bầu vú, kéo núm vú ra rồi véo. Cảm giác bị bóp chặt và kéo núm khác với sự vuốt nhẹ, thiếp rên ngay. Người cúi xuống ngậm một bên núm, hút mạnh đến mức má hóp, lưỡi liếm quanh rồi cắn nhẹ.",
-          "Thiếp ưỡn ngực đẩy vú sâu hơn vào miệng người. Chi tiết riêng là việc bệ hạ vừa hút vừa dùng răng kéo núm ra rồi thả, lặp đi lặp lại, đồng thời tay kia bóp và vắt vú còn lại như muốn ép sữa. Âm thanh mút chùn chụt và tiếng rên của thiếp vang rõ, núm vú sưng đỏ và bóng nước bọt.",
+          "Thiếp ưỡn ngực đẩy vú sâu hơn vào miệng người. Bệ hạ vừa hút vừa dùng răng kéo núm ra rồi thả, lặp đi lặp lại, đồng thời tay kia bóp và vắt vú còn lại như muốn ép sữa. Âm thanh mút chùn chụt và tiếng rên của thiếp vang rõ, núm vú sưng đỏ và bóng nước bọt.",
           "Bệ hạ chuyển sang núm kia, hút mạnh hơn trong khi dùng cặc cọ lên khe lồn ướt của thiếp. {name} siết đùi, lồn chảy dịch nhiều vì bị chơi vú. Người không đút vào, chỉ tiếp tục bóp, kéo và mút cho đến khi thiếp run người.",
           "Sau đó bệ hạ ngẩng lên, môi còn dính nước bọt. {name} thở dốc, hai tay ôm lấy đầu người áp vào ngực mình.\n> Vú thiếp sưng và ướt hết vì miệng bệ hạ."
         ]
@@ -955,7 +947,7 @@
         [
           "Buổi tối trong phòng tắm ấm, {name} ngồi trên ghế gỗ thấp, chân dang đặt lên hai bệ nhỏ, mặc áo tắm ngắn vừa cởi một nửa. Bệ hạ đề nghị được tự tay cạo cho thiếp sau nhiều ngày, thiếp đồng ý với tâm trạng hơi ngượng nhưng tin tưởng. Nước ấm và khăn đã chuẩn bị sẵn, chỉ có hai người.",
           "Bệ hạ dùng dao cạo nhỏ và nước ấm, bắt đầu từ vùng trên rồi dần xuống hai bên. Cảm giác lưỡi dao lạnh lướt sát da khác hoàn toàn với khi thiếp tự làm, từng đường chậm và cẩn thận. {name} nhìn xuống, thấy lông dần biến mất và da lộ ra mịn.",
-          "Khi đến gần khe, người dùng tay banh nhẹ để cạo sạch từng milimet, thi thoảng dừng để lau và kiểm tra bằng đầu ngón tay. Chi tiết riêng là âm thanh nhẹ của dao lướt trên da ướt và tiếng nước nhỏ giọt, cùng việc bệ hạ thì thầm mô tả những gì mình thấy. Thiếp khẽ run khi ngón tay vô tình chạm môi.",
+          "Khi đến gần khe, người dùng tay banh nhẹ để cạo sạch từng milimet, thi thoảng dừng để lau và kiểm tra bằng đầu ngón tay. Chỉ có âm thanh nhẹ của dao lướt trên da ướt và tiếng nước nhỏ giọt, cùng tiếng bệ hạ thì thầm mô tả những gì mình thấy. Thiếp khẽ run khi ngón tay vô tình chạm môi.",
           "Cạo xong, bệ hạ rửa sạch bằng nước ấm rồi dùng khăn mềm lau khô từng chỗ, sau đó áp môi hôn nhẹ lên vùng vừa mịn. Cảm giác da nhạy hơn hẳn, hơi thở của người phả lên làm thiếp thở gấp. Lồn đã ướt không chỉ vì nước.",
           "Bệ hạ đứng dậy, lấy áo choàng khoác lên vai thiếp. {name} vẫn ngồi, tay sờ nhẹ vùng vừa cạo, nhìn người mỉm cười.\n> Da thiếp giờ mịn dưới tay bệ hạ."
         ]
@@ -972,14 +964,14 @@
         [
           "Trong phòng lớn hậu cung, bệ hạ ngồi làm người dẫn, các phi tần ngồi quanh. {name} được chọn tham gia thử thách, mặc áo mỏng đứng giữa. Người đề nghị trò chơi từ sớm, thiếp đồng ý. Chỉ có hậu cung, tâm trạng thiếp hồi hộp.",
           "Luật là thiếp phải tự móc lồn và kể lớn những gì mình cảm thấy cho mọi người nghe, ai ra trước thì thua. {name} dang chân, đút hai ngón vào khuấy, miệng kể chi tiết độ ướt và độ chặt. Các {names} nhìn và lắng nghe.",
-          "Bệ hạ tăng độ khó, bảo thiếp phải vừa móc vừa liếm ngón tay sạch sẽ trước mặt mọi người. Chi tiết riêng là việc thiếp phải mô tả vị của dịch nhờn của chính mình bằng lời tục. Âm thanh móc ướt át và giọng kể run của thiếp vang khắp phòng.",
+          "Bệ hạ tăng độ khó, bảo thiếp phải vừa móc vừa liếm ngón tay sạch sẽ trước mặt mọi người. Thiếp phải mô tả vị của dịch nhờn của chính mình bằng lời tục. Âm thanh móc ướt át và giọng kể run của thiếp vang khắp phòng.",
           "Khi gần ra, bệ hạ cho phép một phi tần khác đến dùng lưỡi hỗ trợ. {name} không chịu nổi, lồn co thắt và phun dịch ra. Thiếp rên lớn, chân run, vẫn phải kể nốt câu cuối.",
           "Sau đó thiếp được đỡ ngồi xuống. Bệ hạ tuyên bố kết quả. {name} thở dốc, nhìn mọi người.\n> Thiếp kể hết được những gì lồn mình đang làm."
         ],
         [
           "Trò chơi khác trong cùng đêm: các phi tần thi nhau xem ai nuốt cặc bệ hạ sâu và lâu hơn. {name} xếp hàng đầu, quỳ xuống. Bệ hạ ngồi trên ghế, các người khác chờ xung quanh. Thiếp đã đồng ý tham gia và nhắc ám hiệu hoa mai.",
           "{name} ngậm sâu, họng co lại quanh thân cặc, nước mắt trào vì độ sâu. Người tính giờ. Các phi tần cổ vũ và nhìn chăm. Thiếp cố giữ, lưỡi liếm bên dưới.",
-          "Đến lượt đổi, nhưng thiếp ra hiệu xin ở lại, bệ hạ gật đầu cho tiếp tục trong khi một phi tần khác liếm bìu. Chi tiết riêng là việc thiếp phải vừa nuốt vừa nghe người kia kể mình đang làm gì với bìu. Âm thanh mút và tiếng thở nặng hòa vào nhau.",
+          "Đến lượt đổi, nhưng thiếp ra hiệu xin ở lại, bệ hạ gật đầu cho tiếp tục trong khi một phi tần khác liếm bìu. Thiếp phải vừa nuốt vừa nghe người kia kể mình đang làm gì với bìu. Âm thanh mút và tiếng thở nặng hòa vào nhau.",
           "Thiếp chậm lại lấy hơi rồi tiếp tục giữ nhịp. Bệ hạ đổ tinh vào họng. {name} nuốt hết, rồi mới được nghỉ. Các người khác tiếp tục thi.",
           "Sau cùng thiếp ngồi sang bên, lau miệng. Bệ hạ nhìn thiếp. {name} khẽ nói.\n> Thiếp nuốt được đến cùng, không cần nói hoa mai."
         ]
@@ -996,7 +988,7 @@
         [
           "Trong phòng ngủ, {name} và một phi tần khác nằm trên giường, bệ hạ ngồi cạnh xem. Cả hai mặc áo choàng đã mở. Người kia đề nghị được ăn lồn thiếp trước, {name} đồng ý. Chỉ có ba người, không khí ấm.",
           "Phi tần kia đẩy {name} nằm ngửa, banh rộng hai chân rồi cúi xuống liếm. Lưỡi lướt dọc khe, hút âm vật mạnh. Cảm giác bị một người phụ nữ ăn khác với khi bệ hạ làm. Thiếp rên, tay nắm tóc người kia.",
-          "Người kia đút lưỡi sâu vào lỗ, khuấy rồi rút ra mút dịch. Chi tiết riêng là việc thiếp phải tự giữ chân dang rộng và kể lớn cho bệ hạ nghe lưỡi người kia đang làm gì bên trong. Âm thanh liếm chùn chụt rõ ràng, dịch chảy ra miệng người dưới.",
+          "Người kia đút lưỡi sâu vào lỗ, khuấy rồi rút ra mút dịch. Thiếp phải tự giữ chân dang rộng và kể lớn cho bệ hạ nghe lưỡi người kia đang làm gì bên trong. Âm thanh liếm chùn chụt rõ ràng, dịch chảy ra miệng người dưới.",
           "Hai người đổi, {name} ngồi lên mặt người kia và tự nhún, ép lồn vào lưỡi. Bệ hạ nhìn thẳng chỗ giao nhau. Thiếp đạt cao trào, phun dịch lên miệng và cằm người kia, người kia liếm sạch.",
           "Sau đó cả hai nằm thở. Bệ hạ đưa khăn. {name} lau miệng người kia rồi nhìn bệ hạ.\n> Thiếp phun lên miệng nàng ấy trước mặt bệ hạ."
         ]
@@ -1013,7 +1005,7 @@
         [
           "Đêm nay {name} mặc bộ y phục lụa hoàn toàn trong suốt, không nội y, đi vào phòng nơi bệ hạ và vài phi tần đang ngồi. Người đề nghị thiếp mặc bộ này cả đêm, thiếp đồng ý dù biết mọi thứ đều lộ. Chỉ có hậu cung, tâm trạng thiếp vừa xấu hổ vừa kích thích.",
           "Thiếp đứng trước mọi người, vú và lồn hiện rõ qua lớp vải mỏng. Bệ hạ gọi thiếp lại gần và dùng tay vuốt qua lớp vải, bóp vú và kéo núm. Cảm giác vải mỏng cọ vào da khi bị bóp khác với khi trần hoàn toàn.",
-          "Người kéo thiếp ngồi lên đùi, tay luồn dưới váy trong suốt vuốt khe lồn. Chi tiết riêng là việc các phi tần có thể nhìn rõ ngón tay bệ hạ đang khuấy bên trong qua lớp vải. Dịch nhờn làm vải dính sát vào môi lồn, lộ hết hình dạng.",
+          "Người kéo thiếp ngồi lên đùi, tay luồn dưới váy trong suốt vuốt khe lồn. Các phi tần có thể nhìn rõ ngón tay bệ hạ đang khuấy bên trong qua lớp vải. Dịch nhờn làm vải dính sát vào môi lồn, lộ hết hình dạng.",
           "Bệ hạ đẩy cặc vào qua lớp vải mỏng, xuyên nhẹ hoặc đẩy vải sang bên rồi đâm sâu. Mỗi nhịp làm vải cọ vào âm vật. {name} rên, lồn siết chặt, dịch thấm ướt hết vùng vải ở giữa. Các {names} nhìn không rời.",
           "Sau đó người đổ tinh vào trong. Tinh và dịch làm vải trong suốt dính bết. {name} vẫn ngồi trên đùi, thở dốc.\n> Lớp vải này để mọi người thấy hết cặc bệ hạ ở trong thiếp."
         ]
@@ -1030,8 +1022,7 @@
         [
           "Trong phòng có vách ngăn lỗ, chỉ các phi tần và bệ hạ. {name} quỳ một bên, thò miệng và tay qua lỗ. Bệ hạ đưa cặc qua, thiếp ngậm sâu.",
           "Thiếp hút mạnh, họng co lại. Không thấy mặt nhưng biết là bệ hạ. Dịch chảy. Người kia cũng tham gia ở lỗ khác, liếm hoặc dùng tay.",
-          "Bệ hạ chuyển, đâm vào lồn {name} qua lỗ. Thiếp đẩy hông sát vách. Cặc xuyên sâu, siết chặt. Các phi tần khác xem hoặc tham gia.",
-          "Thiếp rên qua lỗ.\n> Bệ hạ… đụ thiếp qua lỗ này… thiếp sắp ra!",
+          "Bệ hạ chuyển, đâm vào lồn {name} qua lỗ. Thiếp đẩy hông sát vách. Cặc xuyên sâu, siết chặt. Các phi tần khác xem hoặc tham gia.\nThiếp rên qua lỗ.\n> Bệ hạ… đụ thiếp qua lỗ này… thiếp sắp ra!",
           "Tinh đổ vào hoặc lên miệng. {name} liếm sạch.\n> Thiếp muốn hầu qua lỗ thêm… để chỉ cảm nhận cặc người."
         ]
       ]
@@ -1046,16 +1037,12 @@
         ],
         [
           "Các phi tần ngồi xung quanh xem. {name} ngồi lên cặc bệ hạ, nhún mạnh trước mặt mọi người. Lồn nuốt đến gốc, dịch chảy. Chỉ có hậu cung.",
-          "Người đâm từ dưới lên. {name} rên lớn, không che. Một phi tần tiến lại liếm chỗ giao nhau. Mọi người nhìn chăm chú.",
-          "Thiếp ưỡn ngực, để mọi người thấy vú rung. Cao trào gần, lồn co bóp rõ.",
-          "Thiếp rên.\n> Mọi người xem đi… cặc bệ hạ đang đụ lồn thiếp sâu thế này!",
+          "Người đâm từ dưới lên. {name} rên lớn, không che. Một phi tần tiến lại liếm chỗ giao nhau. Mọi người nhìn chăm chú.\nThiếp ưỡn ngực, để mọi người thấy vú rung. Cao trào gần, lồn co bóp rõ.\nThiếp rên.\n> Mọi người xem đi… cặc bệ hạ đang đụ lồn thiếp sâu thế này!",
           "Tinh đổ vào. Các người khác liếm sạch. {name} thở dốc.\n> Thiếp muốn bị đụ trước mặt hậu cung thêm."
         ],
         [
           "Tư thế khác: {name} nằm sấp, bị đâm từ sau trước mặt các {names}. Mông nhô, lồn bị kéo căng rõ ràng. Mọi người ngồi gần xem.",
-          "Bệ hạ đâm nhanh và sâu. Một phi tần dùng tay bóp vú {name}. Thiếp rên không ngừng, dịch bắn ra.",
-          "Người chuyển sang đâm người khác một lúc rồi quay lại. {name} chờ và xem, lồn ướt.",
-          "Thiếp thì thầm.\n> Bệ hạ đụ thiếp trước mặt mọi người đi… thiếp thèm quá!",
+          "Bệ hạ đâm nhanh và sâu. Một phi tần dùng tay bóp vú {name}. Thiếp rên không ngừng, dịch bắn ra.\nNgười chuyển sang đâm người khác một lúc rồi quay lại. {name} chờ và xem, lồn ướt.\nThiếp thì thầm.\n> Bệ hạ đụ thiếp trước mặt mọi người đi… thiếp thèm quá!",
           "Cao trào và tinh đổ. {name} nhìn các người kia.\n> Lần sau thiếp muốn tất cả cùng xem và tham gia."
         ]
       ]
@@ -1071,8 +1058,7 @@
         [
           "{name} đứng trước bệ hạ, từ từ cởi y phục. Từng lớp rơi xuống, lộ vú, rồi lồn. Thiếp nhìn người, chậm rãi kéo quần trong xuống, banh nhẹ để lộ.",
           "Cởi xong, thiếp xoay người, để bệ hạ nhìn hết. Người kéo thiếp lại, dùng tay vuốt thân thể vừa lộ. Ngón đút vào lồn ngay.",
-          "Thiếp bị đẩy nằm, chân dang. Bệ hạ đâm vào trong khi y phục còn vương quanh. Mỗi nhịp làm vải rung.",
-          "Thiếp rên.\n> Bệ hạ… thiếp cởi hết để người đụ… cặc vào sâu đi!",
+          "Thiếp bị đẩy nằm, chân dang. Bệ hạ đâm vào trong khi y phục còn vương quanh. Mỗi nhịp làm vải rung.\nThiếp rên.\n> Bệ hạ… thiếp cởi hết để người đụ… cặc vào sâu đi!",
           "Cao trào, tinh đổ. {name} nằm giữa đống y phục.\n> Thiếp muốn cởi chậm hơn lần sau… để người nhìn lâu."
         ]
       ]
@@ -1088,8 +1074,7 @@
         [
           "Bệ hạ ngồi, {name} quỳ đối diện như đang trả lời. Người hỏi những câu tục, thiếp phải trả lời chi tiết trong khi tự thủ dâm. Ngón đút vào lồn, kể cảm giác.",
           "Câu hỏi về việc thèm cặc thế nào. {name} vừa trả lời vừa nhún trên ngón. Dịch chảy. Bệ hạ nhìn và tiếp tục hỏi.",
-          "Thiếp được lệnh ngồi lên cặc để ‘trả lời’ bằng hành động. Nhún và kể. Lồn siết, miệng không ngừng.",
-          "Thiếp rên xen lời.\n> Bệ hạ hỏi đi… thiếp sẽ trả lời bằng lồn này… sắp ra rồi!",
+          "Thiếp được lệnh ngồi lên cặc để ‘trả lời’ bằng hành động. Nhún và kể. Lồn siết, miệng không ngừng.\nThiếp rên xen lời.\n> Bệ hạ hỏi đi… thiếp sẽ trả lời bằng lồn này… sắp ra rồi!",
           "Cao trào khi đang trả lời. Tinh đổ vào. {name} thở dốc.\n> Thiếp muốn được phỏng vấn thêm… vừa bị đụ vừa kể."
         ]
       ]
@@ -1099,8 +1084,7 @@
         [
           "{name} được làm lên đỉnh liên tục. Lần một gào, lần hai co giật dài, lần ba kéo dài gần một phút. Biểu cảm mỗi lần đều mạnh hơn. Cơ thể không ngừng run. Nước bắn nhiều. Cảm giác continuous orgasms khiến nàng gần ngất.",
           "Orgasm dài: bị giữ ở đỉnh bằng cách tiếp tục kích thích. {name} rên không dứt, lồn siết liên hồi. Biểu cảm điên. Kéo dài rất lâu trước khi xuống. Rồi lên tiếp ngay.",
-          "Nhiều phi cùng multiple orgasms. Tiếng rên không ngừng. {name} lên đỉnh hàng chục lần. Biểu cảm kiệt sức mà vẫn sướng.",
-          "Nàng muốn multiple continuous long orgasms mỗi đêm, cảm giác lên đỉnh không dứt là thứ nàng thèm nhất."
+          "Nhiều phi cùng multiple orgasms. Tiếng rên không ngừng. {name} lên đỉnh hàng chục lần. Biểu cảm kiệt sức mà vẫn sướng.\nNàng muốn multiple continuous long orgasms mỗi đêm, cảm giác lên đỉnh không dứt là thứ nàng thèm nhất."
         ],
         [
           "Bệ hạ dùng lưỡi và ngón tay chơi âm hộ {name} không ngừng, liếm mạnh âm vật, móc sâu âm đạo. {name} lên đỉnh lần đầu, nước dâm bắn ra, cơ thể co giật. Nhưng bệ hạ không dừng, tiếp tục liếm và móc, làm nàng lên đỉnh lần hai ngay sau đó, kéo dài hơn. {name} rên the thé, chân run rẩy, nước mắt chảy vì khoái cảm dồn dập. Bệ hạ tăng tốc, khuấy nát bên trong, khiến cơn lên đỉnh thứ ba kéo dài, nước dâm chảy thành dòng không ngừng. {name} giãy giụa, không thể kiểm soát.",
@@ -1121,7 +1105,7 @@
         [
           "Đêm nay trong phòng riêng của hậu cung, {name} mặc áo lụa mỏng ngồi trên giường chờ theo lời một phi tần khác. Bệ hạ ngồi ở ghế xa hơn để xem, còn người kia đã đề nghị trò chơi điều khiển từ sớm và thiếp đồng ý, nhắc lại ám hiệu hoa mai. Không khí ấm, chỉ có ba người, thiếp chưa cởi áo.",
           "Phi tần kia bước đến, dùng dây lụa buộc nhẹ cổ tay {name} ra sau lưng rồi đẩy thiếp nằm xuống. Cảm giác bị giữ tay và bị ra lệnh bằng giọng thấp khác với khi chỉ có bệ hạ. Người kia ngồi lên ngực thiếp, bắt thiếp phải liếm và mô tả chi tiết những gì lưỡi đang làm.",
-          "Khi {name} đã ngoan ngoãn nghe lời, người kia chuyển xuống dưới, dùng miệng và ngón tay đồng thời trong khi vẫn ra lệnh không được cử động hông. Chi tiết riêng là những cái tát nhẹ vào đùi mỗi khi thiếp vô tình nhún, kèm câu nhắc \"giữ yên\". Âm thanh da thịt và tiếng lệnh rõ ràng vang trong phòng.",
+          "Khi {name} đã ngoan ngoãn nghe lời, người kia chuyển xuống dưới, dùng miệng và ngón tay đồng thời trong khi vẫn ra lệnh không được cử động hông. Có những cái tát nhẹ vào đùi mỗi khi thiếp vô tình nhún, kèm câu nhắc \"giữ yên\". Âm thanh da thịt và tiếng lệnh rõ ràng vang trong phòng.",
           "Người kia lấy dương vật giả, đâm sâu và bắt {name} phải đếm ngược từng nhịp cho đến khi ra. Thiếp làm theo, giọng run, lồn co thắt mạnh dưới sự kiểm soát. Bệ hạ vẫn ngồi yên quan sát, không can thiệp.",
           "Sau khi thiếp run xong, người kia cởi dây và lau nhẹ cho {name}. Thiếp nằm thở, nhìn lên rồi quay sang bệ hạ.\n> Đêm nay thiếp nghe lệnh rõ hơn mọi lần."
         ]
@@ -1138,7 +1122,7 @@
         [
           "Trong phòng ngủ buổi tối, {name} mặc áo ngủ ngắn ngồi trên đùi bệ hạ sau khi người vừa về. Bệ hạ đề nghị chỉ cọ xát mà chưa vào, thiếp đồng ý với tâm trạng thoải mái. Ánh đèn dầu thấp, chỉ có hai người, chưa có gì sâu hơn sự tiếp xúc.",
           "Thiếp tự nâng hông và áp khe lồn vào thân cặc, bắt đầu trượt lên xuống rất chậm. Cảm giác môi lớn mở ra rồi khép lại theo từng đường trượt khác với khi đã đút vào. Dịch nhờn dần bôi trơn, tạo tiếng ướt át nhẹ mỗi lần đi qua đầu cặc.",
-          "Bệ hạ nắm eo thiếp nhưng không đẩy vào, để thiếp tự điều khiển lực cọ. Chi tiết riêng là việc thiếp cố tình dừng lại khi đầu cặc vừa chạm lỗ rồi lại kéo lên, lặp đi lặp lại nhiều lần. {name} rên khẽ, âm vật sưng và cọ mạnh hơn vào thân cặc.",
+          "Bệ hạ nắm eo thiếp nhưng không đẩy vào, để thiếp tự điều khiển lực cọ. Thiếp cố tình dừng lại khi đầu cặc vừa chạm lỗ rồi lại kéo lên, lặp đi lặp lại nhiều lần. {name} rên khẽ, âm vật sưng và cọ mạnh hơn vào thân cặc.",
           "Thiếp tăng tốc, cọ nhanh và mạnh cho đến khi dịch chảy thành dòng xuống đùi người. Lồn mở rộng mỗi lần trượt xuống, gần như nuốt đầu nhưng vẫn không vào hẳn. Tiếng da thịt và hơi thở của cả hai hòa vào nhau, thiếp ưỡn người.",
           "Cuối cùng thiếp chậm lại và ngồi yên, cặc vẫn áp sát nhưng chưa vào. Bệ hạ hôn lên vai thiếp. {name} dựa vào người, hơi thở còn nhanh.\n> Cọ như vậy làm thiếp ướt từ từ."
         ]
@@ -1155,7 +1139,7 @@
         [
           "Đêm nay phòng được chuẩn bị sẵn vài dải lụa và một roi nhẹ, {name} mặc áo choàng mỏng đứng giữa phòng. Bệ hạ đề nghị trò chơi trói và đánh từ sớm, thiếp đồng ý và nhắc rõ ám hiệu hoa mai trước khi bắt đầu. Chỉ có hai người, tâm trạng thiếp hồi hộp nhưng sẵn sàng.",
           "Bệ hạ buộc cổ tay thiếp lên cao bằng lụa mềm, rồi dùng roi lụa vỗ nhẹ lên mông và đùi theo nhịp đều. Cảm giác tê rát lan nhẹ khác với sự vuốt ve, mỗi cái vỗ làm thiếp khẽ giật và thở ra. Người hỏi nhỏ xem thiếp còn ổn không, thiếp gật.",
-          "Sau vài cái, bệ hạ dùng tay bóp mạnh chỗ vừa đánh rồi luồn ngón vào lồn đã ướt. Chi tiết riêng là việc xen kẽ giữa roi và ngón tay, đồng thời thì thầm đếm số cái đánh sát tai thiếp. Âm thanh roi chạm da và tiếng đếm rõ ràng, {name} rên theo từng số.",
+          "Sau vài cái, bệ hạ dùng tay bóp mạnh chỗ vừa đánh rồi luồn ngón vào lồn đã ướt. Xen kẽ giữa roi và ngón tay, đồng thời thì thầm đếm số cái đánh sát tai thiếp. Âm thanh roi chạm da và tiếng đếm rõ ràng, {name} rên theo từng số.",
           "Người cởi trói một phần để thiếp quỳ, rồi đâm vào từ phía sau trong khi vẫn thỉnh thoảng vỗ nhẹ. Lồn siết chặt vì sự kết hợp giữa đau nhẹ và đầy. Thiếp nắm ga, không kêu hoa mai, đẩy hông ra sau theo nhịp.",
           "Khi xong, bệ hạ cởi hết dây và ôm thiếp từ phía sau, tay xoa những chỗ vừa đánh. {name} dựa vào người, người còn hơi nóng.\n> Roi và dây đêm nay làm thiếp run đúng lúc."
         ]
@@ -1172,7 +1156,7 @@
         [
           "Trong phòng đã trải sẵn nhiều lớp khăn, {name} nằm ngửa trên giường, mặc áo ngủ đã được vén lên. Bệ hạ đề nghị tập trung làm thiếp phun nhiều lần, thiếp đồng ý và nhắc ám hiệu hoa mai. Chỉ có hai người, đèn dầu cháy ổn định.",
           "Bệ hạ dùng hai ngón đâm sâu và khuấy nhanh điểm nhạy bên trong, đồng thời miệng hút âm vật không dừng. Cảm giác áp lực dồn lên từ bên trong khác với sự kích thích thông thường, dịch trong bắt đầu rỉ ra. Thiếp ưỡn người, chân run nhẹ.",
-          "Khi đã ướt, người giữ nguyên ngón và tăng tốc hút, bắt thiếp không được khép chân. Chi tiết riêng là việc dùng lòng bàn tay ấn nhẹ lên bụng dưới đúng lúc ngón tay uốn, tạo lực ép từ hai phía. Âm thanh nước và tiếng rên của thiếp vang lớn hơn, dòng dịch phun ra mạnh.",
+          "Khi đã ướt, người giữ nguyên ngón và tăng tốc hút, bắt thiếp không được khép chân. Dùng lòng bàn tay ấn nhẹ lên bụng dưới đúng lúc ngón tay uốn, tạo lực ép từ hai phía. Âm thanh nước và tiếng rên của thiếp vang lớn hơn, dòng dịch phun ra mạnh.",
           "Bệ hạ không dừng sau lần phun đầu, tiếp tục đâm cặc vào và dùng ngón cái ấn xoay trên âm vật. {name} phun thêm lần nữa quanh thân cặc, nước bắn ra khăn. Thiếp nắm chặt gối, giọng đứt quãng nhưng không nói dừng.",
           "Sau cùng người chậm lại và đổ tinh vào giữa lúc thiếp còn rỉ nước. Bệ hạ kéo thiếp nằm nghiêng và lau mặt. {name} thở dốc, nhìn khăn ướt.\n> Nước chảy nhiều đến mức thiếp không kịp nghĩ."
         ]
@@ -1189,7 +1173,7 @@
         [
           "Đêm nay trong phòng có một thanh gỗ ngang được gắn chắc trên tường, {name} mặc áo lụa mỏng đứng trước nó. Bệ hạ đề nghị dùng thanh này để vịn suốt đêm, thiếp đồng ý với tâm trạng tò mò. Chỉ có hai người, chưa có gì xảy ra ngoài việc thiếp đặt tay lên thanh thử độ cao.",
           "Thiếp quay lưng, hai tay nắm chặt thanh và hơi cúi người. Bệ hạ bước đến sau, dùng tay vuốt từ sống lưng xuống mông rồi tách nhẹ. Cảm giác phải vịn và giữ thăng bằng khác với khi nằm trên giường, thiếp đã phải điều chỉnh tư thế chân.",
-          "Người dùng đầu cặc cọ lên khe rồi từ từ đâm vào. Chi tiết riêng là việc thiếp không được buông thanh trong suốt quá trình, mỗi nhịp đâm đều làm người thiếp chúi về phía trước rồi bị kéo lại. Âm thanh tay siết gỗ và tiếng da thịt vang rõ.",
+          "Người dùng đầu cặc cọ lên khe rồi từ từ đâm vào. Thiếp không được buông thanh trong suốt quá trình, mỗi nhịp đâm đều làm người thiếp chúi về phía trước rồi bị kéo lại. Âm thanh tay siết gỗ và tiếng da thịt vang rõ.",
           "Bệ hạ nắm eo và đâm sâu đều, thiếp vịn chặt đến mức khớp tay trắng. Lồn siết mạnh vì tư thế và lực giữ. {name} rên, ngực rung theo nhịp, chân dần run nhưng vẫn không buông tay khỏi thanh gỗ.",
           "Khi xong, bệ hạ đỡ thiếp đứng thẳng và giúp buông tay. {name} xoay lại, nhìn thanh gỗ rồi nhìn người, hơi thở còn nhanh.\n> Vịn thanh đó làm thiếp cảm nhận từng nhịp rõ hơn."
         ]
@@ -1206,8 +1190,7 @@
         [
           "{name} nằm, đã ra một lần. Bệ hạ tiếp tục dùng lưỡi, ngón và cặc kích thích không dừng. Tự nguyện, ám hiệu rõ.\n> Hoa mai… nhưng thiếp muốn thử.",
           "Sau cao trào đầu, người không rút, tiếp tục đâm và massage âm vật. {name} co giật mạnh, quá nhạy. Nước mắt chảy, miệng rên liên tục. Lồn vẫn ướt và siết.",
-          "Bệ hạ đổi sang hút và đâm xen kẽ. Thiếp run toàn thân, gần như không chịu nổi nhưng không nói dừng. Dịch chảy không ngừng.",
-          "Thiếp khóc vì sướng.\n> Bệ hạ… thiếp quá sướng… tiếp đi… không hoa mai!",
+          "Bệ hạ đổi sang hút và đâm xen kẽ. Thiếp run toàn thân, gần như không chịu nổi nhưng không nói dừng. Dịch chảy không ngừng.\nThiếp khóc vì sướng.\n> Bệ hạ… thiếp quá sướng… tiếp đi… không hoa mai!",
           "Thêm một cao trào mạnh, phun dịch. Bệ hạ đổ tinh rồi dừng. {name} nằm thở dốc, người còn run.\n> Thiếp muốn bị kích thích quá mức thêm."
         ]
       ]
@@ -1223,8 +1206,7 @@
         [
           "{name} nằm ngửa, chân gác vai bệ hạ. Người đâm sâu, nhằm đổ tinh vào trong. Thiếp chủ động siết chặt, muốn nhận hết. Lồn ướt, nuốt đến gốc.",
           "Bệ hạ đâm mạnh và chậm, từng nhịp chạm sâu. {name} ưỡn hông, kéo người lại. Miệng rên, cầu xin tinh. Dịch nhờn chảy ra nhiều.",
-          "Người tăng tốc, sắp ra. Thiếp quấn chân chặt, không cho rút. Lồn co bóp liên hồi như muốn hút tinh.",
-          "Thiếp thì thầm.\n> Bệ hạ… đổ hết vào trong thiếp đi… thiếp muốn nhận tinh người sâu nhất!",
+          "Người tăng tốc, sắp ra. Thiếp quấn chân chặt, không cho rút. Lồn co bóp liên hồi như muốn hút tinh.\nThiếp thì thầm.\n> Bệ hạ… đổ hết vào trong thiếp đi… thiếp muốn nhận tinh người sâu nhất!",
           "Bệ hạ đổ tinh đầy vào. {name} nằm im, giữ tinh bên trong, thở dốc.\n> Thiếp muốn được đổ vào thêm nhiều lần… để đầy lồn."
         ]
       ]
@@ -1240,8 +1222,7 @@
         [
           "{name} nằm, mắt bịt, tai bị che nhẹ bằng lụa. Không thấy không nghe rõ. Tự nguyện, ám hiệu bằng lời hoặc cử chỉ.\n> Hoa mai… thiếp nhớ.",
           "Bệ hạ dùng tay và lưỡi khám phá thân thể. Thiếp giật mình vì không đoán được. Ngón đút vào lồn bất ngờ, khuấy. Da thịt nhạy hơn nhiều.",
-          "Cặc đâm vào từ phía sau hoặc trước, sâu và chậm. Mỗi nhịp cảm nhận rõ hơn vì thiếu giác quan. {name} rên lớn, người run. Lồn siết chặt.",
-          "Thiếp rên.\n> Bệ hạ… thiếp không thấy gì… cặc người to quá, sướng hơn bình thường!",
+          "Cặc đâm vào từ phía sau hoặc trước, sâu và chậm. Mỗi nhịp cảm nhận rõ hơn vì thiếu giác quan. {name} rên lớn, người run. Lồn siết chặt.\nThiếp rên.\n> Bệ hạ… thiếp không thấy gì… cặc người to quá, sướng hơn bình thường!",
           "Cao trào mạnh vì nhạy cảm. Tinh đổ vào. Người gỡ bịt mắt và tai. {name} thở dốc, mắt đục.\n> Thiếp muốn bị bịt thêm… để chỉ cảm nhận cặc người."
         ]
       ]
@@ -1251,8 +1232,7 @@
         [
           "Đá lạnh và nước nóng xen kẽ trên da {name} trong lúc đụ. Cảm giác tương phản mạnh. Nàng rên lớn, lên đỉnh vì nóng lạnh. Biểu cảm kích thích. Nước và dầu trộn. Dương vật ấm bên trong tương phản đá.",
           "Nến nhỏ chảy lên ngực rồi đụ. Cảm giác nóng nhẹ. {name} rên, lên đỉnh. Biểu cảm vừa sợ vừa sướng. Temperature play làm nhạy hơn.",
-          "Nước đá đặt lên clit trong lúc đâm. {name} giật mình, gào, lên đỉnh mạnh. Biểu cảm điên. Cảm giác lạnh nóng cực độ.",
-          "Nàng muốn temperature play thêm, cảm giác tương phản khiến mọi orgasms mạnh hơn."
+          "Nước đá đặt lên clit trong lúc đâm. {name} giật mình, gào, lên đỉnh mạnh. Biểu cảm điên. Cảm giác lạnh nóng cực độ.\nNàng muốn temperature play thêm, cảm giác tương phản khiến mọi orgasms mạnh hơn."
         ],
         [
           "Bệ hạ dùng đá lạnh thoa lên núm vú {name}, khiến nàng rùng mình, núm vú cứng ngắc. Rồi chuyển đá xuống âm hộ, chà vào âm vật lạnh buốt. {name} rên rỉ, nước dâm chảy ra hòa với nước đá tan. Bệ hạ vừa thoa đá vừa dùng miệng nóng ngậm núm vú, tương phản nóng lạnh. {name} uốn người, cảm giác kích thích mạnh. Bệ hạ đâm ngón tay ấm vào âm đạo lạnh, khuấy. {name} rên lớn, không biết cảm giác nào mạnh hơn.",
@@ -1267,8 +1247,7 @@
         [
           "{name} được khen liên tục khi đụ: lồn đẹp, siết tốt, rên hay. Mỗi lời khen nàng càng ướt và siết mạnh. Biểu cảm hạnh phúc và sướng. Lên đỉnh nhiều lần vì được praise. Rên lớn hơn khi được khen.",
           "Praise trong lúc cưỡi. {name} nhún mạnh hơn vì lời khen. Cảm giác được công nhận. Biểu cảm tươi. Lên đỉnh, nước mắt sướng vì praise.",
-          "Được khen sau mỗi lần lên đỉnh. {name} càng muốn lên thêm. Biểu cảm si tình. Cảm giác praise kink rõ rệt.",
-          "Nàng muốn được praise mỗi lần thị tẩm, lời khen khiến nàng sướng và thuộc về bệ hạ hơn."
+          "Được khen sau mỗi lần lên đỉnh. {name} càng muốn lên thêm. Biểu cảm si tình. Cảm giác praise kink rõ rệt.\nNàng muốn được praise mỗi lần thị tẩm, lời khen khiến nàng sướng và thuộc về bệ hạ hơn."
         ],
         [
           "Bệ hạ đụ {name} chậm rãi, vừa đâm vừa thì thầm khen nàng tuyệt vời, lỗ nàng siết đẹp, nước dâm nhiều quá. {name} rên lớn hơn vì được khen, hông đẩy mạnh. Bệ hạ bảo nàng ngoan lắm, biết cách làm mình sướng. {name} đỏ mặt, cảm giác được tán dương làm nàng càng ướt, lên đỉnh nhanh. Bệ hạ tiếp tục khen trong khi đụ, nói rằng nàng là người làm tình giỏi nhất. {name} rên the thé, cơ thể run vì lời khen và dương vật.",
@@ -1282,9 +1261,7 @@
       "_": [
         [
           "{name} bị nói tục hạ nhục nhẹ khi đụ, có ám hiệu. Gọi là đồ dâm, lồn tham. Nàng càng ướt, rên lớn. Biểu cảm vừa xấu hổ vừa điên sướng. Lên đỉnh mạnh vì degradation. Cảm giác bị hạ mà kích thích.",
-          "Degradation mạnh hơn. {name} gào đồng ý, xin bị gọi tục. Lên đỉnh liên tục. Biểu cảm vỡ. Ám hiệu nhớ. Nước chảy nhiều.",
-          "Bị degradation trước mặt người khác nhẹ. {name} đỏ mặt, siết chặt. Lên đỉnh. Biểu cảm phức tạp sướng.",
-          "Nàng thích degradation có kiểm soát, cảm giác bị nói tục khiến lên đỉnh khác biệt."
+          "Degradation mạnh hơn. {name} gào đồng ý, xin bị gọi tục. Lên đỉnh liên tục. Biểu cảm vỡ. Ám hiệu nhớ. Nước chảy nhiều.\nBị degradation trước mặt người khác nhẹ. {name} đỏ mặt, siết chặt. Lên đỉnh. Biểu cảm phức tạp sướng.\nNàng thích degradation có kiểm soát, cảm giác bị nói tục khiến lên đỉnh khác biệt."
         ],
         [
           "Bệ hạ đụ {name} mạnh từ phía sau, vừa đâm vừa gọi nàng là con đĩ tham lam, lỗ nàng nuốt cặc như điếm. {name} rên lớn, nước dâm chảy nhiều hơn vì lời tục. Bệ hạ tát nhẹ mông, bảo nàng chỉ đáng được đụ như thế này. {name} đỏ mặt, nhưng cơ thể phản ứng mạnh, siết chặt dương vật. Bệ hạ tiếp tục chửi, nói nàng là đồ chơi, không có giá trị ngoài cái lỗ. {name} lên đỉnh, hét lên, cảm giác bị hạ nhục làm khoái cảm tăng.",
@@ -1299,8 +1276,7 @@
         [
           "{name} bị đụ trước gương lớn. Nàng phải nhìn mình bị đâm, mặt biến dạng. Cảm giác tự xem. Rên lớn, lên đỉnh mạnh. Biểu cảm vừa e vừa mê. Nước chảy, thấy rõ trong gương.",
           "Cưỡi đối diện gương. {name} nhìn lồn mình nuốt dương vật. Nhún mạnh, rên. Biểu cảm táo. Lên đỉnh nhiều lần khi nhìn.",
-          "Bị đụ từ sau, nhìn gương. {name} thấy mông và chỗ giao. Gào, lên đỉnh. Biểu cảm điên vì hình ảnh.",
-          "Nàng muốn mirror sex thường xuyên, cảm giác nhìn chính mình bị đụ rất kích thích."
+          "Bị đụ từ sau, nhìn gương. {name} thấy mông và chỗ giao. Gào, lên đỉnh. Biểu cảm điên vì hình ảnh.\nNàng muốn mirror sex thường xuyên, cảm giác nhìn chính mình bị đụ rất kích thích."
         ],
         [
           "Bệ hạ đặt {name} trước gương lớn, đụ từ phía sau, bắt nàng nhìn rõ dương vật ra vào lỗ mình. {name} rên lớn, thấy mặt mình méo mó, ngực nảy, nước dâm chảy. Bệ hạ bảo nàng nhìn kỹ cái lỗ bị đụ. {name} nhìn, thấy mép âm đạo căng, dương vật bóng vì nước dâm. Cảm giác vừa bị đụ vừa tự xem làm nàng càng ướt. Bệ hạ đụ mạnh, {name} thấy mình lên đỉnh trong gương, cơ thể co giật.",
@@ -1315,8 +1291,7 @@
         [
           "Đêm ngoài vườn, {name} bị đụ dưới trăng. Gió lạnh trên da, dương vật nóng bên trong. Nàng rên vang, lên đỉnh. Biểu cảm tự do. Nước chảy trên cỏ. Cảm giác outdoor night mạnh.",
           "Trên hiên hoặc thảm cỏ. {name} dạng chân, bị đâm. Ánh trăng chiếu. Rên lớn. Lên đỉnh nhiều. Biểu cảm thích không khí đêm.",
-          "Bị bế đụ đi lại ngoài trời. {name} quấn chân, gào khẽ. Lên đỉnh. Cảm giác đêm và bị mang. Biểu cảm sướng.",
-          "Nàng muốn outdoor night thêm, cảm giác đụ dưới trăng rất đặc biệt và tự do."
+          "Bị bế đụ đi lại ngoài trời. {name} quấn chân, gào khẽ. Lên đỉnh. Cảm giác đêm và bị mang. Biểu cảm sướng.\nNàng muốn outdoor night thêm, cảm giác đụ dưới trăng rất đặc biệt và tự do."
         ],
         [
           "Đêm khuya trong ngự hoa viên, bệ hạ đè {name} lên bãi cỏ, đụ dưới ánh trăng. Gió đêm mát, nhưng cơ thể nóng. {name} rên rỉ, sợ có người nghe nhưng không ngăn được. Dương vật đâm sâu, nước dâm chảy xuống cỏ. Bệ hạ vừa đụ vừa thì thầm giữ im. {name} cắn môi, cảm giác kích thích vì nơi ngoài trời, lên đỉnh nhanh, cơ thể run trên cỏ lạnh.",
@@ -1331,8 +1306,7 @@
         [
           "{name} bị đụ cả hai lỗ bằng dương vật và đồ chơi. Cảm giác đầy cực độ. Nàng gào, lên đỉnh ngay. Biểu cảm điên. Nước chảy. DP toys làm nàng co giật mạnh.",
           "Đồ chơi và thật đổi chỗ. {name} cảm nhận khác nhau. Rên vỡ giọng. Lên đỉnh liên tục. Biểu cảm mất kiểm soát. Cảm giác bị lấp đầy hoàn toàn.",
-          "DP lâu. {name} gần như không chịu nổi mà vẫn xin. Lên đỉnh nhiều. Biểu cảm sướng đến phát khóc.",
-          "Nàng muốn double penetration toys thêm, cảm giác cả hai lỗ bị chiếm hữu rất mạnh."
+          "DP lâu. {name} gần như không chịu nổi mà vẫn xin. Lên đỉnh nhiều. Biểu cảm sướng đến phát khóc.\nNàng muốn double penetration toys thêm, cảm giác cả hai lỗ bị chiếm hữu rất mạnh."
         ],
         [
           "Bệ hạ dùng hai dương vật giả, một đâm vào âm đạo {name}, một vào hậu môn, cùng lúc. {name} rên lớn, cảm giác cả hai lỗ bị lấp đầy, kéo giãn. Bệ hạ đẩy đồng thời, ra vào nhịp nhàng. {name} nước dâm chảy ra nhiều, cơ thể run. Bệ hạ tăng tốc, hai ngọc khuấy nát bên trong. {name} lên đỉnh nhanh, co giật, xin được mạnh hơn. Cảm giác double làm nàng không kiểm soát được tiếng rên.",
@@ -1347,8 +1321,7 @@
         [
           "Sau đụ mạnh, {name} được ôm, massage nhẹ, kiểm tra cơ thể. Bệ hạ khen và hôn dấu vết. Nàng rên khẽ vì nhạy, biểu cảm được yêu thương. Cảm giác aftercare làm nàng lên đỉnh nhẹ thêm. Nước mắt sướng vì được chăm.",
           "Aftercare kỹ: lau người, xoa dầu, ôm lâu. {name} thì thầm cảm ơn. Biểu cảm hạnh phúc. Cảm giác an toàn sau trụy lạc.",
-          "Kiểm tra và khen từng chỗ. {name} đỏ mặt mà sướng. Biểu cảm si tình. Aftercare intense khiến nàng càng thuộc về.",
-          "Nàng muốn aftercare intense sau mỗi lần, cảm giác được chăm sóc kỹ làm mọi thứ hoàn hảo hơn."
+          "Kiểm tra và khen từng chỗ. {name} đỏ mặt mà sướng. Biểu cảm si tình. Aftercare intense khiến nàng càng thuộc về.\nNàng muốn aftercare intense sau mỗi lần, cảm giác được chăm sóc kỹ làm mọi thứ hoàn hảo hơn."
         ],
         [
           "Sau cuộc đụ mạnh, bệ hạ bế {name} vào bồn tắm ấm, nhẹ nhàng rửa sạch tinh dịch và nước dâm khắp người. {name} thở dốc, cơ thể còn run. Bệ hạ dùng khăn mềm lau từng chỗ, hôn nhẹ lên vết đỏ. {name} rên nhẹ vì nhạy cảm, nhưng cảm thấy được chăm sóc. Bệ hạ thì thầm khen nàng chịu tốt, hỏi có đau không. {name} lắc đầu, dựa vào ngực bệ hạ trong nước ấm.",
@@ -1363,8 +1336,7 @@
         [
           "{name} bị ra lệnh rên to hơn. Nàng làm theo, tiếng vang. Cảm giác bị điều khiển giọng. Lên đỉnh khi đang rên theo lệnh. Biểu cảm phục tùng. Voice control kích thích.",
           "Bị bảo im lặng khi đụ. {name} cắn môi, rên khẽ thất bại. Cảm giác kiềm chế. Lên đỉnh im rồi bùng. Biểu cảm khó khăn sướng.",
-          "Phải kể cảm giác theo lệnh. {name} nói tục giữa rên. Lên đỉnh khi kể. Biểu cảm vỡ. Voice control mạnh.",
-          "Nàng thích voice control, muốn bị ra lệnh bằng giọng trong lúc sướng."
+          "Phải kể cảm giác theo lệnh. {name} nói tục giữa rên. Lên đỉnh khi kể. Biểu cảm vỡ. Voice control mạnh.\nNàng thích voice control, muốn bị ra lệnh bằng giọng trong lúc sướng."
         ],
         [
           "Bệ hạ đụ {name}, ra lệnh nàng chỉ được rên nhỏ, không được hét. {name} cắn môi, rên khe khẽ trong khi dương vật đâm mạnh. Bệ hạ bảo nếu rên to sẽ dừng. {name} cố gắng, nước dâm chảy, cơ thể run vì kiềm chế. Bệ hạ tăng tốc, {name} gần như thất bại, rên lớn một tiếng rồi bị dừng lại. Nàng xin được tiếp, hứa sẽ nhỏ tiếng.",
@@ -1378,9 +1350,7 @@
       "_": [
         [
           "Đụ lâu đến đổ mồ hôi đầm đìa. {name} bóng nhẫy, mồ hôi chảy. Bệ hạ liếm mồ hôi trên ngực và cổ. Nàng rên, lên đỉnh. Biểu cảm nóng và sướng. Cảm giác sweat play nồng.",
-          "Cơ thể trơn mồ hôi, đụ mạnh hơn. {name} cảm nhận da dính. Rên lớn. Lên đỉnh nhiều. Biểu cảm điên vì nóng.",
-          "Liếm mồ hôi trong lúc cưỡi. {name} đổ thêm. Biểu cảm mê. Cảm giác mặn và nóng. Lên đỉnh.",
-          "Nàng muốn sweat play, cảm giác đụ đến đổ mồ hôi và được liếm rất nồng và kích thích."
+          "Cơ thể trơn mồ hôi, đụ mạnh hơn. {name} cảm nhận da dính. Rên lớn. Lên đỉnh nhiều. Biểu cảm điên vì nóng.\nLiếm mồ hôi trong lúc cưỡi. {name} đổ thêm. Biểu cảm mê. Cảm giác mặn và nóng. Lên đỉnh.\nNàng muốn sweat play, cảm giác đụ đến đổ mồ hôi và được liếm rất nồng và kích thích."
         ],
         [
           "Bệ hạ đụ {name} lâu trong phòng ấm, cả hai đổ mồ hôi. Mồ hôi chảy từ ngực bệ hạ xuống người {name}, hòa với nước dâm. {name} rên rỉ, cảm giác da trơn vì mồ hôi. Bệ hạ liếm mồ hôi trên cổ nàng, mặn. {name} uốn người, mồ hôi làm mọi cú đâm trơn hơn. Bệ hạ bảo nàng đổ mồ hôi nhiều đi. {name} làm theo, cơ thể nóng, mồ hôi nhỏ giọt.",
@@ -1395,8 +1365,7 @@
         [
           "Trêu cực chậm: chỉ cọ, liếm, không vào lâu. {name} cầu xin, nước chảy nhiều. Biểu cảm sốt ruột. Cảm giác slow tease. Cuối cùng được đâm, lên đỉnh ngay lập tức mạnh. Rên vỡ.",
           "Tease hàng canh giờ. {name} run, xin. Biểu cảm điên vì chờ. Khi vào, lên đỉnh liên tục. Cảm giác bùng nổ sau tease.",
-          "Slow tease kết hợp praise hoặc degradation. {name} càng thèm. Lên đỉnh dữ dội khi được cho. Biểu cảm thỏa mãn.",
-          "Nàng muốn slow tease long thêm, cảm giác bị trêu lâu rồi được đụ rất mạnh."
+          "Slow tease kết hợp praise hoặc degradation. {name} càng thèm. Lên đỉnh dữ dội khi được cho. Biểu cảm thỏa mãn.\nNàng muốn slow tease long thêm, cảm giác bị trêu lâu rồi được đụ rất mạnh."
         ],
         [
           "Bệ hạ liếm âm hộ {name} cực chậm, lưỡi chỉ lướt nhẹ qua âm vật rồi dừng lâu. {name} rên rỉ, hông đẩy lên xin thêm nhưng bệ hạ giữ chặt. Mỗi lần chạm ngắn làm nàng nước dâm chảy, rồi lại chờ. Bệ hạ thì thầm rằng sẽ trêu đến khi nàng phát điên. {name} run rẩy, xin được liếm mạnh, giọng cầu xin. Bệ hạ tiếp tục chậm, chỉ chạm mép lỗ.",
@@ -1411,8 +1380,7 @@
         [
           "{name} bị mút và cắn nhẹ để lại dấu trên cổ, ngực. Cảm giác sở hữu. Nàng rên, lên đỉnh. Biểu cảm thích bị đánh dấu. Tinh bắn lên da làm marking thêm. Nước và tinh dính.",
           "Marking bằng tinh trên mặt, ngực, lồn. {name} cảm nhận ấm. Biểu cảm thuộc về. Lên đỉnh khi bị bắn đánh dấu. Rên lớn.",
-          "Dấu vết đỏ trên mông và eo. {name} nhìn và sờ. Biểu cảm sướng vì marking. Muốn giữ dấu lâu.",
-          "Nàng muốn được marking mỗi lần, cảm giác mang dấu của bệ hạ trên người rất kích thích."
+          "Dấu vết đỏ trên mông và eo. {name} nhìn và sờ. Biểu cảm sướng vì marking. Muốn giữ dấu lâu.\nNàng muốn được marking mỗi lần, cảm giác mang dấu của bệ hạ trên người rất kích thích."
         ],
         [
           "Bệ hạ bú mạnh lên cổ {name}, để lại dấu đỏ tím. {name} rên rỉ, cảm giác bị đánh dấu. Bệ hạ vừa đụ vừa cắn nhẹ vai, thêm dấu. {name} nước dâm chảy, thích bị sở hữu. Bệ hạ thì thầm rằng những dấu này là của mình. {name} gật đầu, lên đỉnh khi thấy dấu trong gương. Bệ hạ tiếp tục hút thêm vài chỗ trên ngực.",
@@ -1427,8 +1395,7 @@
         [
           "{name} và bệ hạ tự sờ trước mặt nhau lâu. Nàng nhìn dương vật, tự đâm ngón, rên. Biểu cảm táo. Cảm giác mutual. Lên đỉnh một lần bằng tay rồi mới đụ. Nước chảy.",
           "Mutual lâu, kể cho nhau nghe. {name} càng ướt vì xem. Biểu cảm mê. Lên đỉnh cùng lúc bằng tay. Rồi đụ mạnh.",
-          "Nhiều phi mutual trước khi tập thể. {name} xem và bị xem. Lên đỉnh. Biểu cảm kích thích. Cảm giác chia sẻ.",
-          "Nàng thích mutual masturbation, muốn tự sờ cùng bệ hạ trước mỗi lần đụ."
+          "Nhiều phi mutual trước khi tập thể. {name} xem và bị xem. Lên đỉnh. Biểu cảm kích thích. Cảm giác chia sẻ.\nNàng thích mutual masturbation, muốn tự sờ cùng bệ hạ trước mỗi lần đụ."
         ]
       ]
     },
@@ -1467,7 +1434,7 @@
         [
           "Đêm nay trong khu vườn nhỏ phía sau cung, chỉ có bệ hạ và các phi tần đang ngồi trên các ghế đá. {name} mặc áo choàng mỏng, được đề nghị ngồi cạnh người và để bị chạm trước mặt mọi người trong hậu cung. Thiếp đồng ý, tâm trạng vừa ngượng vừa kích thích. Không có ai ngoài hậu cung.",
           "Bệ hạ đặt tay lên đùi thiếp qua lớp áo và từ từ kéo vạt sang. Cảm giác bị các ánh mắt của các {names} nhìn theo từng cử động khác với khi chỉ có hai người. {name} khẽ siết tay, nhưng không đẩy ra.",
-          "Người luồn tay vào trong, dùng ngón vuốt dọc khe lồn ngay trước mặt các phi tần đang ngồi gần. Chi tiết riêng là việc thiếp phải giữ im lặng và không được rên lớn, trong khi dịch nhờn đã bắt đầu chảy. Âm thanh cực nhỏ của ngón tay và hơi thở bị kìm của thiếp vang trong đêm.",
+          "Người luồn tay vào trong, dùng ngón vuốt dọc khe lồn ngay trước mặt các phi tần đang ngồi gần. Thiếp phải giữ im lặng và không được rên lớn, trong khi dịch nhờn đã bắt đầu chảy. Âm thanh cực nhỏ của ngón tay và hơi thở bị kìm của thiếp vang trong đêm.",
           "Bệ hạ tiếp tục khuấy và đút ngón vào, đồng thời thì thầm bảo thiếp nhìn các phi tần. {name} làm theo, lồn co thắt quanh ngón, dịch chảy xuống ghế đá. Các {names} nhìn chăm chú, không ai lên tiếng.",
           "Sau một lúc, bệ hạ rút tay và kéo áo lại cho thiếp. {name} ngồi yên, mặt đỏ, nhìn xuống.\n> Thiếp giữ im được đến cuối dù rất khó."
         ]
@@ -1558,7 +1525,7 @@
         [
           "Đêm nay trong phòng riêng, {name} mặc áo lụa mỏng ngồi trên giường, còn một phi tần khác đóng vai \"phu quân\" ngồi đối diện theo thỏa thuận từ trước. Bệ hạ ngồi ở ghế bên cạnh để xem. Thiếp đồng ý tham gia trò này với tâm trạng vừa ngượng vừa kích thích, và đã nhắc ám hiệu hoa mai. Chỉ có ba người trong phòng.",
           "Người đóng vai phu quân bước đến, cởi áo của {name} từ từ trước mặt bệ hạ. Cảm giác bị cởi và nhìn bởi cả hai người cùng lúc khác với khi chỉ có một mình bệ hạ. {name} đỏ mặt, tay nắm ga trải nhưng không ngăn lại.",
-          "Khi đã trần, người kia bảo thiếp dang chân và tự banh môi lồn ra cho cả hai xem. Chi tiết riêng là việc bệ hạ thỉnh thoảng lên tiếng chỉ dẫn nhỏ như \"để ta thấy rõ hơn\", buộc thiếp phải điều chỉnh tư thế. Âm thanh hơi thở và tiếng dịch nhờn bắt đầu chảy vang nhẹ.",
+          "Khi đã trần, người kia bảo thiếp dang chân và tự banh môi lồn ra cho cả hai xem. Bệ hạ thỉnh thoảng lên tiếng chỉ dẫn nhỏ như \"để ta thấy rõ hơn\", buộc thiếp phải điều chỉnh tư thế. Âm thanh hơi thở và tiếng dịch nhờn bắt đầu chảy vang nhẹ.",
           "Người đóng vai đâm vào từ phía trước trong khi bệ hạ vẫn ngồi nhìn thẳng. {name} rên khẽ, mắt liếc về phía bệ hạ. Lồn siết chặt, dịch chảy xuống. Thiếp phải giữ mắt mở và không được che mặt theo yêu cầu.",
           "Sau khi xong, người kia rút ra và ngồi sang bên. {name} nằm thở, kéo chăn che một phần người rồi nhìn bệ hạ.\n> Thiếp nhìn bệ hạ suốt từ đầu đến cuối."
         ]
@@ -1569,7 +1536,7 @@
         [
           "Trong sảnh nhỏ hậu cung buổi tối, {name} vẫn mặc nguyên y phục đứng giữa vòng các phi tần và bệ hạ. Người đề nghị thiếp phải cởi sạch và đứng yên cho mọi người nhìn, thiếp đồng ý dù mặt đã đỏ từ trước. Chỉ có hậu cung, tâm trạng thiếp vừa xấu hổ vừa kích thích.",
           "Theo lệnh, thiếp từ từ cởi từng lớp, tay run nhẹ khi đến lớp trong. Cảm giác ánh mắt của các {names} và bệ hạ dồn vào từng phần da thịt lộ ra khác với khi cởi một mình. {name} cắn môi, cố không che bằng tay.",
-          "Khi đã hoàn toàn trần, bệ hạ bảo thiếp xoay chậm một vòng và dang chân đứng yên. Chi tiết riêng là việc thiếp phải giữ tay để sau lưng và không được cúi đầu quá lâu, buộc phải đối diện với những cái nhìn. Da thiếp nóng lên, lồn dần ướt dù chưa bị chạm.",
+          "Khi đã hoàn toàn trần, bệ hạ bảo thiếp xoay chậm một vòng và dang chân đứng yên. Thiếp phải giữ tay để sau lưng và không được cúi đầu quá lâu, buộc phải đối diện với những cái nhìn. Da thiếp nóng lên, lồn dần ướt dù chưa bị chạm.",
           "Các phi tần được phép đến gần hơn để nhìn rõ, trong khi bệ hạ ngồi yên quan sát. {name} đứng im, ngực phập phồng, dịch nhờn bắt đầu chảy thành sợi xuống đùi. Thiếp nghe tiếng thì thầm khe khẽ và cảm thấy mặt càng đỏ hơn.",
           "Sau một lúc, bệ hạ cho phép thiếp khoác lại áo choàng. {name} nhanh tay khoác vào, vẫn đứng giữa, mắt nhìn xuống.\n> Thiếp đứng được hết vòng dù mặt nóng ran."
         ]
@@ -1612,7 +1579,7 @@
         [
           "Buổi tối trong hành lang vắng dẫn đến phòng ngủ, {name} mặc váy lụa rộng, đang đi cạnh bệ hạ sau bữa tối. Người là người chủ động đề nghị sờ soạng dọc đường như trò đùa riêng giữa hai người. Thiếp cười nhẹ, tâm trạng thoải mái và đồng ý.",
           "Bệ hạ đột ngột đặt tay lên mông thiếp qua lớp váy, bóp mạnh rồi luồn vào trong. Cảm giác bàn tay ấm áp nắm chặt thịt mông, kéo thiếp sát vào người giữa hành lang tối. {name} khẽ rên, chân bước chậm lại.",
-          "Tay kia lần lên ngực, bóp vú qua áo rồi kéo cổ áo xuống để ngón tay véo núm. Chi tiết riêng là việc sờ soạng liên tục khi đang di chuyển, không dừng lại một chỗ. Âm thanh hơi thở nặng của cả hai vang nhẹ trong không gian hẹp.",
+          "Tay kia lần lên ngực, bóp vú qua áo rồi kéo cổ áo xuống để ngón tay véo núm. Sờ soạng liên tục khi đang di chuyển, không dừng lại một chỗ. Âm thanh hơi thở nặng của cả hai vang nhẹ trong không gian hẹp.",
           "Đến gần cửa phòng, bệ hạ ép thiếp vào tường, một tay vẫn bóp mông, tay kia đã luồn xuống khe lồn ướt, dùng ngón giữa khuấy nhẹ. Thiếp dựa lưng vào tường, hông nhún theo tay người, dịch nhờn dính đầy ngón.",
           "Hai người vào phòng, bệ hạ vẫn không buông tay khỏi thân thể thiếp. {name} quay lại, áp trán vào ngực người, hơi thở chưa đều.\n> Tay bệ hạ vừa rồi làm thiếp ướt hết từ hành lang."
         ]
@@ -1623,7 +1590,7 @@
         [
           "Đêm khuya trong phòng tắm riêng, {name} vừa tắm xong, quấn khăn lụa quanh người, tóc còn ướt. Bệ hạ bước vào và đề nghị trò nắm giữ mạnh mẽ, thiếp gật đầu đồng ý với tâm trạng mong chờ. Không khí ẩm ướt, chỉ có hai người.",
           "Bệ hạ đột ngột nắm cổ tay thiếp kéo lại, rồi một tay túm tóc nhẹ kéo ngửa đầu. Cảm giác bị nắm giữ đột ngột làm thiếp thở gấp. Người dùng tay kia bóp mạnh một bên vú, kéo thiếp sát vào ngực mình.",
-          "Thiếp bị xoay người, bệ hạ nắm eo và kéo mông ép vào cặc đang cương qua khăn. Chi tiết riêng là lực nắm mạnh và dứt khoát, giữ thiếp không cho dịch chuyển tự do. Âm thanh khăn lụa bị kéo và hơi thở dồn của thiếp vang trong phòng tắm.",
+          "Thiếp bị xoay người, bệ hạ nắm eo và kéo mông ép vào cặc đang cương qua khăn. Lực nắm mạnh và dứt khoát giữ thiếp không cho dịch chuyển tự do. Âm thanh khăn lụa bị kéo và hơi thở dồn của thiếp vang trong phòng tắm.",
           "Người nắm hai cổ tay thiếp ghì ra sau lưng, đồng thời hông đẩy tới, cặc cọ lên khe lồn qua lớp khăn mỏng. {name} ưỡn người, không cưỡng lại, lồn ướt át vì bị giữ chặt và cọ xát.",
           "Bệ hạ buông tay từ từ, ôm thiếp từ phía sau trong hơi nước còn ấm. {name} dựa lưng vào người, mắt nhắm, môi khẽ cong.\n> Lực nắm của bệ hạ vừa rồi làm tim thiếp đập mạnh."
         ]
@@ -1644,8 +1611,7 @@
         [
           "{name} nhịn tiểu lâu rồi bị đụ. Áp lực từ bàng quang và dương vật khiến nàng rên lớn, suýt không giữ được. Nước tiểu gần rỉ, nàng cắn môi. Cảm giác holding pee tăng khoái cảm. Nàng lên đỉnh và xả một phần, biểu cảm vừa xấu hổ vừa sướng điên.",
           "Bị đụ trong lúc cố nhịn. Mỗi nhịp đều ấn vào bàng quang. {name} run, nước mắt chảy. Cuối cùng phun cả hai, mess khắp. Biểu cảm hỗn loạn. Lên đỉnh mạnh.",
-          "Thi nhịn với người khác. {name} cố gắng, rên vì áp lực. Khi lên đỉnh thì xả. Cảm giác giải tỏa kép. Biểu cảm kiệt sức sướng.",
-          "Nàng muốn holding pee thêm, cảm giác nhịn rồi xả khi bị đụ khiến lên đỉnh khác thường."
+          "Thi nhịn với người khác. {name} cố gắng, rên vì áp lực. Khi lên đỉnh thì xả. Cảm giác giải tỏa kép. Biểu cảm kiệt sức sướng.\nNàng muốn holding pee thêm, cảm giác nhịn rồi xả khi bị đụ khiến lên đỉnh khác thường."
         ]
       ]
     },
@@ -1654,8 +1620,7 @@
         [
           "{name} đã say, cơ thể mềm, nhạy hơn. Bị đụ, nàng rên nhiều và lớn, không kiêng dè. Cảm giác drunk làm mất kiểm soát nhẹ. Nước chảy nhiều, nàng lên đỉnh dễ dàng, biểu cảm cười và sướng. Tinh bắn, nàng vẫn xin tiếp.",
           "Say rượu cưỡi lảo đảo. {name} nhún không đều, rên khàn. Biểu cảm men say. Cảm giác ấm và trơn. Lên đỉnh nhiều, rồi ngã vào lòng bệ hạ.",
-          "Bị đụ từ sau khi say. {name} gào, không giữ được tiếng. Biểu cảm hoàn toàn buông. Nước và rượu. Lên đỉnh dữ dội.",
-          "Nàng muốn drunk sex thêm, cảm giác say khiến rên và lên đỉnh thoải mái hơn."
+          "Bị đụ từ sau khi say. {name} gào, không giữ được tiếng. Biểu cảm hoàn toàn buông. Nước và rượu. Lên đỉnh dữ dội.\nNàng muốn drunk sex thêm, cảm giác say khiến rên và lên đỉnh thoải mái hơn."
         ]
       ]
     },
@@ -1664,8 +1629,7 @@
         [
           "{name} dùng hương liệu kích thích, cơ thể nóng và nhạy cực độ. Chỉ cần chạm đã rên. Khi bị đâm, nàng lên đỉnh ngay lập tức, nước bắn mạnh. Biểu cảm điên loạn. Cảm giác drug làm mọi thứ mạnh hơn mười lần. Lên đỉnh liên tục không ngừng.",
           "Trong trạng thái kích thích cao, {name} cưỡi điên cuồng. Cảm nhận từng đường gân rõ rệt. Rên vỡ giọng, lên đỉnh kéo dài. Biểu cảm mê man. Tinh bắn, nàng vẫn muốn tiếp.",
-          "Bị đụ lâu trong cơn nhạy cảm. {name} phun nhiều lần, cơ thể run không kiểm soát. Biểu cảm sướng đến phát khóc. Cảm giác drug khiến orgasms dài và mạnh.",
-          "Sau đó {name} vẫn còn nhạy, thì thầm muốn dùng thêm để được sướng điên như thế."
+          "Bị đụ lâu trong cơn nhạy cảm. {name} phun nhiều lần, cơ thể run không kiểm soát. Biểu cảm sướng đến phát khóc. Cảm giác drug khiến orgasms dài và mạnh.\nSau đó {name} vẫn còn nhạy, thì thầm muốn dùng thêm để được sướng điên như thế."
         ]
       ]
     },
@@ -1674,8 +1638,7 @@
         [
           "{name} say nặng, mắt mờ, cơ thể mềm. Bị đụ, nàng rên không thành tiếng, cười và sướng lẫn. Cảm giác drunk làm mất kiểm soát. Nước chảy nhiều, lên đỉnh dễ, biểu cảm men say hoàn toàn. Tinh bắn đầy, nàng vẫn ôm xin tiếp.",
           "Say cưỡi lảo đảo trên long sàng. {name} nhún không đều, rên khàn. Biểu cảm vui và tục. Cảm giác ấm áp. Lên đỉnh nhiều lần rồi ngã xuống.",
-          "Bị đụ mạnh khi say. {name} gào lớn không kiêng, nước bắn. Biểu cảm buông thả. Lên đỉnh dữ dội, rồi thiếp đi trong vòng tay.",
-          "Nàng thích drunk sex, cảm giác say khiến mọi thứ thoải mái và mạnh hơn."
+          "Bị đụ mạnh khi say. {name} gào lớn không kiêng, nước bắn. Biểu cảm buông thả. Lên đỉnh dữ dội, rồi thiếp đi trong vòng tay.\nNàng thích drunk sex, cảm giác say khiến mọi thứ thoải mái và mạnh hơn."
         ]
       ]
     },
@@ -1684,7 +1647,7 @@
         [
           "Đêm nay sau bữa tối, {name} mặc váy lụa rộng bước cạnh bệ hạ dọc hành lang vắng dẫn về phòng. Người đề nghị được sờ soạng dọc đường như một trò riêng giữa hai người, thiếp đồng ý với tâm trạng thoải mái. Chỉ có hai người, ánh đèn dầu thưa thớt, chưa có gì vượt quá sự đi cạnh nhau.",
           "Bệ hạ đột ngột đặt tay lên mông thiếp qua lớp váy, bóp mạnh rồi luồn vào trong nắm chặt. Cảm giác bàn tay ấm áp chiếm lấy thịt mông và kéo thiếp sát vào người giữa hành lang tối khác với khi ở trong phòng. {name} khẽ rên, bước chân chậm lại.",
-          "Tay kia lần lên ngực, bóp vú qua áo rồi kéo cổ áo xuống để ngón tay véo núm. Chi tiết riêng là việc sờ soạng liên tục trong khi cả hai vẫn đang di chuyển, không dừng lại một chỗ cố định. Âm thanh hơi thở nặng và tiếng vải bị kéo vang nhẹ trong không gian hẹp.",
+          "Tay kia lần lên ngực, bóp vú qua áo rồi kéo cổ áo xuống để ngón tay véo núm. Sờ soạng liên tục trong khi cả hai vẫn đang di chuyển, không dừng lại một chỗ cố định. Âm thanh hơi thở nặng và tiếng vải bị kéo vang nhẹ trong không gian hẹp.",
           "Đến gần cửa phòng, bệ hạ ép thiếp vào tường, một tay vẫn bóp mông, tay kia đã luồn xuống khe lồn ướt và dùng ngón giữa khuấy. Thiếp dựa lưng vào tường, hông nhún theo tay người, dịch nhờn dính đầy ngón tay. Tiếng ướt át khẽ vang.",
           "Hai người vào phòng, bệ hạ vẫn không buông tay khỏi thân thể thiếp. {name} quay lại, áp trán vào ngực người, hơi thở chưa đều.\n> Tay bệ hạ từ hành lang đến đây không rời thiếp."
         ]
@@ -1695,7 +1658,7 @@
         [
           "Trong phòng ngủ buổi tối, {name} mặc bộ y phục lụa mới còn nguyên vẹn, đứng giữa phòng sau khi vừa thay đồ. Bệ hạ đề nghị được xé toạt y phục của thiếp như một trò chơi đã thỏa thuận, thiếp đồng ý và nhắc ám hiệu hoa mai. Chỉ có hai người, đèn dầu cháy ổn định, chưa có gì xảy ra.",
           "Bệ hạ bước đến, nắm lấy vạt áo trước ngực và xé mạnh xuống. Tiếng vải rách toạc vang lên rõ ràng, để lộ da thịt và vú. Cảm giác bị xé đột ngột và âm thanh đó khác hoàn toàn với việc cởi bình thường. {name} thở gấp, đứng yên để người tiếp tục.",
-          "Người chuyển xuống váy, nắm hai bên và xé toạc từ eo xuống. Chi tiết riêng là việc từng mảnh vải rơi xuống sàn theo từng nhịp xé, và thiếp phải đứng im không được tự cởi giúp. Âm thanh rách liên tiếp hòa với hơi thở của cả hai, lồn dần lộ ra.",
+          "Người chuyển xuống váy, nắm hai bên và xé toạc từ eo xuống. Từng mảnh vải rơi xuống sàn theo từng nhịp xé, và thiếp phải đứng im không được tự cởi giúp. Âm thanh rách liên tiếp hòa với hơi thở của cả hai, lồn dần lộ ra.",
           "Khi y phục đã tả tơi, bệ hạ đẩy thiếp nằm xuống giường giữa đống vải rách và đâm vào. Lồn ướt át, siết chặt quanh cặc. {name} nắm ga trải, rên lớn theo từng nhịp, cảm nhận sự khác biệt của việc bị xé trước khi bị đụ.",
           "Sau đó bệ hạ nằm cạnh, tay vẫn cầm một mảnh vải rách. {name} thở dốc, nhìn đống y phục dưới sàn.\n> Tiếng xé đêm nay còn vang trong tai thiếp."
         ]
@@ -1706,7 +1669,7 @@
         [
           "Đêm nay trong khu vườn nhỏ phía sau cung, chỉ có bệ hạ và các phi tần đang ngồi trên các ghế đá. {name} mặc áo choàng mỏng, được đề nghị ngồi cạnh người và để bị chạm trước mặt mọi người trong hậu cung. Thiếp đồng ý, tâm trạng vừa ngượng vừa kích thích. Không có ai ngoài hậu cung.",
           "Bệ hạ đặt tay lên đùi thiếp qua lớp áo và từ từ kéo vạt sang. Cảm giác bị các ánh mắt của các {names} nhìn theo từng cử động khác với khi chỉ có hai người. {name} khẽ siết tay, nhưng không đẩy ra.",
-          "Người luồn tay vào trong, dùng ngón vuốt dọc khe lồn ngay trước mặt các phi tần đang ngồi gần. Chi tiết riêng là việc thiếp phải giữ im lặng và không được rên lớn, trong khi dịch nhờn đã bắt đầu chảy. Âm thanh cực nhỏ của ngón tay và hơi thở bị kìm của thiếp vang trong đêm.",
+          "Người luồn tay vào trong, dùng ngón vuốt dọc khe lồn ngay trước mặt các phi tần đang ngồi gần. Thiếp phải giữ im lặng và không được rên lớn, trong khi dịch nhờn đã bắt đầu chảy. Âm thanh cực nhỏ của ngón tay và hơi thở bị kìm của thiếp vang trong đêm.",
           "Bệ hạ tiếp tục khuấy và đút ngón vào, đồng thời thì thầm bảo thiếp nhìn các phi tần. {name} làm theo, lồn co thắt quanh ngón, dịch chảy xuống ghế đá. Các {names} nhìn chăm chú, không ai lên tiếng.",
           "Sau một lúc, bệ hạ rút tay và kéo áo lại cho thiếp. {name} ngồi yên, mặt đỏ, nhìn xuống.\n> Thiếp giữ im được đến cuối dù rất khó."
         ]
@@ -1717,7 +1680,7 @@
         [
           "Buổi tối trong sảnh nhỏ nơi các phi tần tụ họp, {name} mặc y phục chỉnh tề bên ngoài nhưng đã được đặt một máy rung nhỏ bên trong từ trước. Bệ hạ đề nghị thiếp mang nó trong lúc ngồi cùng mọi người, thiếp đồng ý và biết ám hiệu hoa mai. Chỉ có hậu cung, thiếp ngồi xuống với tâm trạng căng thẳng.",
           "Bệ hạ ngồi cách một khoảng và bất ngờ bật máy ở mức thấp. Cảm giác rung liên tục bên trong lồn khác hoàn toàn với sự kích thích bằng tay. {name} khẽ siết đùi, cố giữ vẻ mặt bình thường trước các {names}.",
-          "Người tăng mức rung đúng lúc thiếp đang nói chuyện với một phi tần khác. Chi tiết riêng là việc thiếp phải tiếp tục trả lời và mỉm cười trong khi máy rung mạnh hơn, dịch nhờn chảy ra làm ướt quần trong. Âm thanh máy rất nhỏ nhưng thiếp nghe rõ trong tai mình.",
+          "Người tăng mức rung đúng lúc thiếp đang nói chuyện với một phi tần khác. Thiếp phải tiếp tục trả lời và mỉm cười trong khi máy rung mạnh hơn, dịch nhờn chảy ra làm ướt quần trong. Âm thanh máy rất nhỏ nhưng thiếp nghe rõ trong tai mình.",
           "Bệ hạ giữ mức cao trong một lúc dài, buộc thiếp phải ngồi im và chịu đựng mà không được đứng dậy. Lồn co thắt liên tục, thiếp cắn môi để không rên. Các phi tần xung quanh không hay biết gì ngoài vẻ mặt hơi đỏ của thiếp.",
           "Cuối cùng người tắt máy. {name} ngồi thở nhẹ, chân vẫn siết. Bệ hạ nhìn thiếp từ xa. {name} khẽ cúi đầu.\n> Thiếp ngồi im được suốt dù bên trong không ngừng."
         ]

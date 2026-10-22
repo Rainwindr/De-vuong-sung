@@ -47,7 +47,7 @@ MẪU TRẢ VỀ
   "scenes": {
     "canh-viet.ten_su_kien": {
       "_title": "Tên cảnh",
-      "_chung": { "_": ["Đoạn cảnh 1...", "Đoạn cảnh 2...", "Đoạn cảnh 3..."] }
+      "_chung": { "_": ["Đoạn cảnh 1...", "Đoạn cảnh 2...", "Đoạn cảnh 3...", "Đoạn cảnh 4...", "Đoạn cảnh 5..."] }
     }
   }
 }
@@ -55,7 +55,7 @@ MẪU TRẢ VỀ
 
 QUY TẮC BẮT BUỘC
 1. Mọi "id" sự kiện và mọi "hook" mới đều bắt đầu bằng "canh-viet." viết thường, không dấu, nối bằng gạch dưới. Không trùng nhau.
-2. Mỗi nút có "hook" thì phải có cảnh tương ứng trong "scenes" (cùng tên hook): 3–4 đoạn NỐI TIẾP nhau thành một cảnh (mở đầu → diễn biến → dư âm), mỗi đoạn tối thiểu 150 chữ. Nút không có "hook" thì có "result" (một câu).
+2. Mỗi nút có "hook" thì phải có cảnh tương ứng trong "scenes" (cùng tên hook): đúng 5 đoạn NỐI TIẾP nhau thành một cảnh (mở đầu → diễn biến → dư âm), mỗi đoạn 50–70 chữ, tổng 260–320 chữ (tự đếm trước khi trả lời); không đoạn nào chỉ gồm một câu thoại. Nút không có "hook" thì có "result" (một câu).
 3. Nút có "hook" phải có "fetish" gồm ít nhất một id trong DANH SÁCH SỞ THÍCH bên dưới. Cảnh nhiều người bắt buộc có "fetish".
 4. Mọi nhân vật đều từ 18 tuổi, tự nguyện. Không có con cái, trẻ em trong cảnh nóng. Không cưỡng ép, không say/thuốc, không người ngoài bắt gặp.
 5. Trong chữ: xuống dòng viết \n, lời thoại bắt đầu bằng "> ", không dùng dấu " bên trong đoạn (dùng “ ” thay thế).
