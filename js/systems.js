@@ -375,6 +375,22 @@
     return ev && ev.choices.length > 1 ? ev : null;
   };
 
+  /** Cuộc thi nổ ra sau một đêm thị tẩm: miễn phí, mỗi 3 tháng tối đa một lần, không trùng tháng mùa thi. */
+  G.nightContest = function () {
+    const s = G.state;
+    if (s.consorts.length < 3 || G.CONTEST_MONTHS.includes(s.month)) return null;
+    const last = s.contest.nightTurn;
+    if (last != null && s.turn - last < G.CONTEST_COOLDOWN) return null;
+    const list = contestChoices();
+    if (!list.length) return null;
+    const ev = buildContestEvent(list, false);
+    if (!ev || ev.choices.length < 2) return null;
+    ev.title = "Cuộc thi bất chợt";
+    ev.text = "Sáng hôm sau, các phi rủ nhau bày một cuộc thi ngay trong hậu cung. Ai sẵn lòng thì ghi tên.\n> Bệ hạ muốn xem cuộc thi nào?";
+    s.contest.nightTurn = s.turn;
+    return ev;
+  };
+
   /** Dựng sự kiện mùa thi (tháng 4 và 9) và Đại Điển (tháng 12). */
   monthly((s, report) => {
     if (s.ended || report.systemEvent) return;

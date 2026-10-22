@@ -90,7 +90,7 @@
    */
   function pickUnseen(slot, arr) {
     const s = G.state;
-    if (!s || arr.length === 1) return arr[Math.floor(Math.random() * arr.length)];
+    if (!s) return arr[Math.floor(Math.random() * arr.length)];
     const store = (s.textSeen = s.textSeen || {});
     const rec = store[slot] || { seen: [], last: -1 };
     let pool = [];
@@ -98,6 +98,7 @@
     if (!pool.length) {
       rec.seen = [];
       pool = arr.map((_, i) => i).filter((i) => i !== rec.last);
+      if (!pool.length) pool = [0];
     }
     const i = pool[Math.floor(Math.random() * pool.length)];
     rec.seen.push(i);
@@ -106,21 +107,48 @@
     return arr[i];
   }
 
-  function findText(hook, ctx) {
+  /** Ô này đã xem hết mọi bản trong vòng hiện tại chưa. */
+  function exhausted(slot, arr) {
+    const rec = G.state && G.state.textSeen && G.state.textSeen[slot];
+    return !!rec && arr.every((_, i) => rec.seen.includes(i));
+  }
+  const shuffled = (a) => a.map((x) => [Math.random(), x]).sort((p, q) => p[0] - q[0]).map((p) => p[1]);
+
+  /** Các ô có chữ cho cảnh này: nhân vật → sở thích (thứ tự ngẫu nhiên) → "_chung"; mỗi khóa lấy mức hợp nhất. */
+  function candidates(hook, ctx) {
     const byKey = texts[hook];
-    if (!byKey) return null;
+    if (!byKey) return [];
     const p = ctx.participants[0];
-    const keys = [...ctx.participants.map((x) => x.id), ...ctx.fetish, "_chung"];
+    const keys = [...ctx.participants.map((x) => x.id), ...shuffled(ctx.fetish || []), "_chung"];
     const lvs = [levelOf(p), "quen", "_"];
+    const out = [];
     for (const k of keys) {
       const byLv = byKey[k];
       if (!byLv) continue;
       for (const lv of lvs) {
         const arr = byLv[lv];
-        if (arr && arr.length) return pickUnseen(`v2|${hook}|${k}|${lv}`, arr);
+        if (arr && arr.length) {
+          out.push({ slot: `v2|${hook}|${k}|${lv}`, arr });
+          break;
+        }
       }
     }
-    return null;
+    return out;
+  }
+
+  /**
+   * Chống lặp: ưu tiên ô còn bản chưa xem. Nếu cảnh sở thích đã xem hết thì mượn cảnh thị tẩm riêng
+   * của nàng (nếu còn bản chưa xem); hết cả thì mới bắt đầu vòng mới.
+   */
+  G.SCENE_FALLBACK = { "core.thi_tam_so_thich": "core.thi_tam" };
+  function findText(hook, ctx) {
+    const list = candidates(hook, ctx);
+    if (!list.length) return null;
+    const fresh = list.find((x) => !exhausted(x.slot, x.arr));
+    if (fresh) return pickUnseen(fresh.slot, fresh.arr);
+    const alt = G.SCENE_FALLBACK[hook] && candidates(G.SCENE_FALLBACK[hook], ctx).find((x) => !exhausted(x.slot, x.arr));
+    if (alt) return pickUnseen(alt.slot, alt.arr);
+    return pickUnseen(list[0].slot, list[0].arr);
   }
 
   /** Gọi sau khi nạp xong mọi gói: đăng ký đè các HOOK có chữ, giữ cảnh cũ làm dự phòng. */

@@ -996,6 +996,29 @@
     return report;
   };
 
+  /* ---------------- Chuyện trong đêm ---------------- */
+  G.NIGHT_EVENT_CHANCE = 0.25; // sau mỗi lần thị tẩm
+  G.NIGHT_EVENT_MAX = 2; // tối đa mỗi tháng
+  G.NIGHT_CONTEST_SHARE = 0.15; // phần trong số đó là cuộc thi (nếu mở được)
+  /**
+   * Sau một đêm thị tẩm: có khi nổ thêm một sự kiện có cảnh (nghi lễ, chuyện hậu cung) hoặc một cuộc thi.
+   * Không lấy sự kiện mốc, không lấy sự kiện do chính nàng vừa thị tẩm nói.
+   */
+  G.rollNightEvent = function (excludeId) {
+    const s = G.state;
+    if (!s || s.ended) return null;
+    const rec = s.nightEvents && s.nightEvents.turn === s.turn ? s.nightEvents : (s.nightEvents = { turn: s.turn, n: 0 });
+    if (rec.n >= G.NIGHT_EVENT_MAX || rand() >= G.NIGHT_EVENT_CHANCE) return null;
+    let ev = null;
+    if (G.nightContest && rand() < G.NIGHT_CONTEST_SHARE) ev = G.nightContest();
+    if (!ev) {
+      const pool = G.eligibleEvents().filter((p) => (p.ev.weight || 1) < G.MILESTONE_WEIGHT && hasScene(p) && !(p.speaker && p.speaker.id === excludeId));
+      if (pool.length) ev = G.pickEvent(pool);
+    }
+    if (ev) rec.n++;
+    return ev;
+  };
+
   /* ---------------- Bốc sự kiện ---------------- */
   G.MILESTONE_WEIGHT = 20; // sự kiện mốc (đăng cơ, Tết, truyền ngôi...) giữ nguyên tỉ lệ cũ
   G.CORE_SHARE = 0.4; // khi có sự kiện của gói khác, core chiếm 40% lượt bốc
