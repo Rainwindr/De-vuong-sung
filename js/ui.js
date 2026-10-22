@@ -700,7 +700,7 @@
       return `<div class="row-card"><div><b>${esc(r.name)}</b>${on ? " · <span class=\"tag\">đang bật</span>" : ""}<br><span class="hint">${esc(r.desc || "")}</span><br><span class="hint">Theo lệ: ${fol.length}/${s.consorts.length} phi${fol.length ? " (" + esc(fol.slice(0, 4).map((c) => c.name).join(", ")) + (fol.length > 4 ? "…" : "") + ")" : ""}${ref ? ` · Hòa khí −${loss}/tháng` : ""}</span></div><button class="btn btn-sm${on ? "" : " btn-primary"}" data-rule="${esc(r.id)}">${on ? "Bãi bỏ" : "Ban lệ"}</button></div>`;
     };
     openSheet(
-      `<h3>Cung quy</h3><p class="hint">Lệ hậu cung do bệ hạ ban. Chỉ phi sẵn lòng với sở thích của lệ mới theo; phi khác được miễn nhưng hậu cung chia phe, Hòa khí giảm mỗi tháng.</p>
+      `<h3>Cung quy</h3><p class="hint">Lệ hậu cung do bệ hạ ban. Chỉ phi sẵn lòng với sở thích của lệ mới theo; phi khác được miễn nhưng hậu cung chia phe, Hòa khí giảm mỗi tháng (cộng dồn mọi lệ tối đa −${G.RULE_HOAKHI_TOTAL_CAP}/tháng).</p>
        ${open.length ? `<div class="cards">${open.map(card).join("")}</div>` : `<p class="empty">Chưa mở quy định nào.</p>`}
        ${locked ? `<p class="hint">Còn ${locked} quy định chưa mở.</p>` : ""}
        <button class="btn btn-ghost" id="r-close">Đóng</button>`,

@@ -1,45 +1,63 @@
 {
   "canh-viet.quy_khong_mac_quan": {
     "_title": "Lệ không mặc quần",
-    "_ghi_chu": "BẢN NHÁP do Claude viết: mới có khung truyện, chưa có cảnh nóng chi tiết. Sửa hoặc viết lại tùy ý, xong thì xóa dòng _ghi_chu này.",
     "_chung": {
       "_": [
         [
-          "Buổi chiều trong hoa viên, bệ hạ đi dọc hành lang có rèm lụa buông. {names} đang ngồi bên bàn trà, váy dài chấm gót như mọi ngày. Chỉ những người theo lệ mới biết bên dưới lớp lụa ấy không còn gì, và chính các nàng đã cùng nhau đặt ra lệ này từ đầu xuân.",
-          "{name} là người thấy bệ hạ trước. Nàng đứng dậy hành lễ, rồi ghé tai các tỷ muội nói nhỏ một câu. Cả bàn bật cười, má ai nấy ửng hồng.\n> Bệ hạ đến đúng lúc. Lệ của bọn thiếp, người còn nhớ chứ?",
-          "Nàng bước lại gần, nắm một bên vạt váy, chậm rãi vén lên đến đầu gối, rồi cao hơn một chút, mắt không rời bệ hạ. Gió trong vườn lùa qua, nàng khẽ rùng mình. Các phi khác cũng đứng dậy, người thì che miệng cười, người thì nhìn bệ hạ đầy chờ đợi.",
-          "Bệ hạ ngồi xuống ghế đá, các nàng vây quanh. Không ai bị gọi tên, mỗi người tự quyết mình vén váy đến đâu. Có nàng chỉ để lộ bắp chân, có nàng thì ngồi hẳn lên đùi bệ hạ, tay người đặt lên làn da trần dưới lớp lụa.",
-          "Khi trà đã nguội, các nàng chỉnh lại váy, cười khúc khích chia nhau quay về cung. {name} ở lại sau cùng, vuốt lại nếp váy.\n> Lệ này thiếp thích lắm. Mai bệ hạ lại đi ngang qua đây nhé."
+          "Ngày thường trong hậu cung, {names} mặc váy lụa mỏng không quần lót. Mỗi cử động vạt váy khẽ mở, lồn trần thấp thoáng dưới lớp vải. {name} ngồi thêu, thỉnh thoảng tự vén váy cho thoáng. Các nàng đi lại tự nhiên, biết bệ hạ có thể ghé bất cứ lúc nào và sẽ được vén cho xem.",
+          "Bệ hạ bước vào phòng, {names} lập tức cúi người. {name} tự tay vén váy cao tận eo, dang hai chân để lồn hồng lộ rõ. Các tỷ muội cũng vén theo, mông và khe hướng về phía người. Bệ hạ tiến lại, ngón tay lướt dọc khe ẩm của {name} rồi sờ sang các nàng khác.",
+          "Bệ hạ ngồi xuống, kéo {name} đứng giữa hai chân người. Tay vẫn giữ váy vén cao, ngón giữa xỏ vào lồn nàng móc nhẹ. Các phi khác quỳ hai bên, tự banh lồn ra dưới váy. Nước nhờn chảy xuống đùi {name}, các nàng rên khẽ chờ đến lượt.",
+          "Bệ hạ bảo {name} ngồi lên đùi, cặc từ từ chui vào lồn trần. Váy vẫn tụ trên eo. Các nàng còn lại cúi bú những chỗ tiếp xúc và liếm đùi. Người đụ chậm rồi mạnh dần, các phi vén váy cao hơn nữa để nhìn rõ cặc ra vào.",
+          "Bệ hạ rời đi sau khi xuất tinh. {names} hạ váy xuống nhưng vẫn không mặc quần. Các nàng lau nước nhờn và tinh, tiếp tục thêu thùa và đi lại trong cung với lồn trần dưới váy, thì thầm kể lại cảm giác vừa được vén cho người xem."
+        ],
+        [
+          "Buổi trưa tại hiên hoa, {names} ngồi uống trà, váy mỏng không quần. Gió thổi vạt váy bay, lồn trần lộ từng nhịp. {name} cố ý ngồi xổm hơn, khe ướt ánh lên. Các nàng cười nói, sẵn sàng vén bất cứ khi nào bệ hạ xuất hiện.",
+          "Bệ hạ đi dạo tới. {names} không đứng mà chỉ tự vén váy ngay tại chỗ ngồi. {name} kéo vạt lên tận ngực, lồn và mông trần hoàn toàn. Các tỷ muội làm giống vậy, dang háng trên ghế đá. Người đi vòng quanh, tay sờ và móc từng khe một.",
+          "Bệ hạ ngồi xuống ghế, bảo các nàng lần lượt ngồi lên tay người. {name} được xỏ ngón sâu nhất, nước nhờn nhỏ xuống. Các phi khác tự sờ lồn dưới váy vén cao trong khi chờ. Người khen các nàng ngoan, lồn luôn sẵn sàng.",
+          "Bệ hạ địt {name} trên ghế đá, váy vén tận eo. Các nàng khác nằm ngửa trên thảm, tự banh lồn chờ đến lượt. Người thay phiên xỏ cặc vào từng lồn trần. Các phi rên to, váy không còn che được gì cả.",
+          "Sau khi xong, {names} chỉnh váy lại nhưng giữ lệ không quần. Các nàng lau người bằng khăn, tiếp tục ngồi uống trà với lồn trần bên dưới. Các nàng thì thầm về lần bị sờ và địt giữa hiên hoa rồi trở lại sinh hoạt thường ngày."
         ]
       ]
     }
   },
   "canh-viet.quy_ngoc_hanh": {
     "_title": "Lệ ngọc hành",
-    "_ghi_chu": "BẢN NHÁP do Claude viết: mới có khung truyện, chưa có cảnh nóng chi tiết. Sửa hoặc viết lại tùy ý, xong thì xóa dòng _ghi_chu này.",
     "_chung": {
       "_": [
         [
-          "Hôm nay là ngày ngọc hành. Từ sáng, {names} đã tự tay đặt viên ngọc hành nhỏ bằng bạch ngọc vào người, rồi vẫn đi thỉnh an, thêu thùa, đánh cờ như thường lệ. Ai muốn nghỉ chỉ cần tháo ra, không ai trách; nhưng chưa ai muốn nghỉ.",
-          "Suốt buổi chiều, các nàng ngồi không yên. Mỗi bước đi, mỗi lần đổi tư thế lại khiến một người khẽ cắn môi. {name} cố giữ vẻ nghiêm trang trước bàn cờ, nhưng nước đi cứ lạc dần, khiến các tỷ muội đối diện bật cười.",
-          "Trời vừa tối, bệ hạ đến điện phụ. Các nàng đã đợi sẵn, đèn chỉ thắp một nửa. {name} đứng dậy đầu tiên, giọng hơi run.\n> Bệ hạ, cả ngày nay thiếp chỉ nghĩ đến lúc này. Người lấy ra giúp thiếp đi.",
-          "Từng người một, bệ hạ đến bên các nàng. Có nàng nắm chặt tay áo người, có nàng tựa đầu vào vai, thở ra một hơi dài như vừa được giải thoát. Mỗi viên ngọc được lấy ra, lau sạch, đặt lại vào hộp gấm.",
-          "Hộp gấm đóng lại, các nàng ngồi tựa vào nhau, mặt còn đỏ.\n> Tuần sau lại đến ngày ngọc hành rồi. Lần này bệ hạ đặt vào cho thiếp được không?\n{name} nói xong thì vùi mặt vào vai người, không dám nhìn lên."
+          "Ngày lệ, {names} từ sáng đã nhét ngọc hành bạch ngọc nhỏ vào lồn. Các nàng vẫn thỉnh an, thêu thùa, đi lại bình thường dù mỗi bước ngọc hành cọ nhẹ bên trong. {name} thỉnh thoảng siết chặt cơ, cảm nhận vật lạnh dần ấm lên. Ai muốn nghỉ thì tự tháo, không ai trách.",
+          "Bệ hạ ghé cung vào buổi trưa. {names} cúi chào, {name} khẽ rên vì ngọc hành dịch chuyển. Người bảo các nàng ngồi xuống, tự tay sờ bên ngoài để cảm nhận vật bên trong. Các phi dang háng nhẹ, để người ấn nhẹ lên bụng dưới.",
+          "Bệ hạ kéo {name} lại gần, ngón tay luồn vào kiểm tra ngọc hành. Vật trơn tuột vì nước nhờn. Các nàng khác cũng được kiểm tra tương tự. Người khen các nàng chịu được cả ngày, rồi bảo giữ nguyên đến tối.",
+          "Chiều tối bệ hạ gọi {names} vào phòng. Người tự tay lần lượt rút ngọc hành ra khỏi từng lồn, ngón tay móc theo. Các nàng rên khi vật ra ngoài, lồn ướt át co lại. Bệ hạ nhìn ngọc hành bóng nước rồi đặt sang một bên.",
+          "Sau khi lấy hết, {names} nằm nghỉ, lồn vẫn còn cảm giác trống. Các nàng lau sạch, thì thầm kể cảm giác mang cả ngày rồi được người tự tay lấy ra. Các nàng trở lại sinh hoạt, hẹn tuần sau lại theo lệ."
+        ],
+        [
+          "Suốt ngày {names} mang ngọc hành trong người, vẫn thêu và đọc sách như thường. Mỗi lần cúi người vật chạm sâu hơn, các nàng khẽ siết. {name} đôi lúc phải đứng yên một chút để quen. Không ai bị ép, muốn tháo thì tháo.",
+          "Bệ hạ vào lúc chiều. Các nàng đang ngồi, người bảo đứng lên đi vài bước cho ngọc hành chuyển động. {names} làm theo, tiếng rên nhỏ thoát ra. Bệ hạ nhìn và sờ mông từng nàng, cảm nhận độ căng.",
+          "Bệ hạ ngồi, lần lượt cho các nàng ngồi lên đùi. Tay người ấn từ bên ngoài, đẩy ngọc hành sâu hơn một chút. {name} rên rõ, các tỷ muội cũng vậy. Người khen các nàng dâm mà vẫn giữ được lễ.",
+          "Tối đến bệ hạ tự tay rút ngọc hành. Người móc chậm, nhìn nước nhờn chảy theo vật ra ngoài. Các nàng nằm dang háng, rên khi được giải thoát. Bệ hạ lau ngọc hành rồi sờ lại lồn từng nàng cho chắc đã sạch.",
+          "Các nàng nghỉ ngơi sau khi vật được lấy ra. Lồn hơi tê và ướt. {names} thì thầm về một ngày dài mang ngọc hành, rồi mặc áo ngủ và trở lại giấc ngủ bình thường trong cung."
         ]
       ]
     }
   },
   "canh-viet.quy_liem_buoi_sang": {
     "_title": "Lệ hầu sáng",
-    "_ghi_chu": "BẢN NHÁP do Claude viết: mới có khung truyện, chưa có cảnh nóng chi tiết. Sửa hoặc viết lại tùy ý, xong thì xóa dòng _ghi_chu này.",
     "_chung": {
       "_": [
         [
-          "Trời vừa hửng, sương còn đọng trên mái ngói. Trong điện phụ, {names} đã thức dậy trước giờ thỉnh an. Lệ này do chính các nàng bày ra: mỗi sáng, ai muốn thì thay phiên hầu nhau một lúc, để cả ngày ai cũng tươi tỉnh.",
-          "Bệ hạ dậy sớm, nghe tiếng cười khẽ sau tấm bình phong thì bước vào. {name} đang nằm trên sập, tóc còn xõa, một tỷ muội quỳ bên cạnh. Thấy bệ hạ, nàng không ngồi dậy, chỉ đưa tay ra hiệu người ngồi xuống bên mép sập.\n> Đến lượt thiếp được hầu rồi. Bệ hạ ngồi xem nhé.",
-          "Các nàng làm việc của mình chậm rãi và quen tay, như một nghi thức đã thành nếp. Người được hầu thì nhắm mắt, nắm chặt mép chăn; người hầu thì thỉnh thoảng ngẩng lên nhìn bệ hạ, mỉm cười rồi lại cúi xuống.",
-          "Đến lượt đổi, {name} ngồi dậy, kéo tỷ muội kia nằm xuống thay mình. Nàng ngoái lại hỏi bệ hạ có muốn cùng không; ai cũng có thể dừng bất cứ lúc nào, ám hiệu vẫn là \"hoa mai\". Tiếng chim sáng bên ngoài lẫn với hơi thở trong điện.",
-          "Chuông thỉnh an vang lên. Các nàng vội chỉnh lại y phục, búi lại tóc, má còn hồng.\n> Sáng mai bệ hạ lại dậy sớm nhé.\n{name} nói rồi kéo tay người đi cùng ra cửa, như chưa có chuyện gì."
+          "Mỗi sáng trước giờ thỉnh an, {names} thay phiên dùng miệng hầu nhau theo lệ. {name} nằm ngửa, một tỷ muội cúi xuống liếm khe lồn đến ướt. Các nàng đổi chỗ, lưỡi và môi không ngừng. Các phi rên khẽ, chuẩn bị cơ thể cho cả ngày.",
+          "Bệ hạ dậy sớm ghé vào. {names} vẫn tiếp tục, không dừng. {name} đang được bú, người ngồi xuống nhìn. Các phi mời người xem gần hơn. Bệ hạ khen các nàng biết hầu nhau từ sáng, rồi đưa tay sờ những lồn đang ướt.",
+          "Bệ hạ tham gia, bảo {name} bú lồn một tỷ muội trong khi người móc ngón tay. Các nàng đổi tư thế 69, liếm nhau trước mặt người. Tiếng lưỡi và tiếng rên sớm vang phòng. Người nhìn và thỉnh thoảng bú thử một khe.",
+          "Bệ hạ để các nàng tiếp tục hầu miệng nhau thêm một lúc. Người đút cặc vào miệng {name} xen giữa. Các phi vẫn liếm lồn không ngừng. Cuối cùng người bắn tinh nhẹ, các nàng dùng miệng lau sạch cho nhau.",
+          "Sau buổi hầu sáng, {names} lau miệng và lồn, chỉnh áo để đi thỉnh an. Các nàng thì thầm về cảm giác được bú nhau từ sớm và được bệ hạ xem, rồi bước ra cung với cơ thể đã ướt át sẵn sàng."
+        ],
+        [
+          "Sáng sớm trong phòng, {names} đã bắt đầu lệ. Hai phi đang nằm bú lồn nhau, lưỡi thọc sâu. {name} chờ đến lượt, tự sờ nhẹ. Các nàng đổi phiên đều đặn, đảm bảo mỗi người đều được hầu và hầu lại trước khi mặt trời lên cao.",
+          "Bệ hạ đẩy cửa vào đúng lúc. Các nàng không ngừng liếm. Người ngồi bên giường, các phi chủ động dang háng về phía người. Bệ hạ nhìn cảnh miệng và lồn dính nhau, khen các nàng chăm chỉ mỗi sáng.",
+          "Bệ hạ bảo các nàng xếp hàng, lần lượt ngồi lên mặt nhau. {name} được liếm lâu nhất. Người dùng ngón tay hỗ trợ, móc cùng lúc với lưỡi. Các phi rên to hơn vì có người xem và tham gia.",
+          "Bệ hạ cùng các nàng hầu thêm. Người bú lồn một phi trong khi các nàng khác tiếp tục liếm nhau. Tiếng ướt át vang lớn. Các phi đổi chỗ liên tục cho đến khi tất cả đều ướt và mệt nhẹ.",
+          "Kết thúc lệ, {names} ngồi dậy lau sạch. Các nàng mặc y phục chỉnh tề để thỉnh an. Các nàng cười khẽ kể lại buổi sáng hầu nhau, rồi rời phòng với lồn vẫn còn ấm và ướt."
         ]
       ]
     }
