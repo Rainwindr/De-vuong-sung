@@ -1030,7 +1030,9 @@
         }
         $(el, "#n-go").addEventListener("click", () => {
           const scene = G.summon(c.id, [...picked]);
+          const later = scene && !scene.blocked ? G.rollNightEvent(c.id) : null;
           G.save();
+          if (later) queue.push(() => showLaterEvent(later));
           showScene(scene);
         });
       }
