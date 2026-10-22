@@ -1,0 +1,123 @@
+{
+  "rules": [
+    {
+      "id": "canh-viet.quy_bu_vu_mang_thai",
+      "name": "Lệ Bú Vú Nàng Mang Thai",
+      "desc": "Nàng nào mang thai tự nguyện để các phi khác bú vú mình mỗi ngày để chuẩn bị có sữa, các nàng sẵn lòng mới tham gia.",
+      "fetish": [
+        "canh-viet.breast",
+        "canh-viet.groping_and_sucking_titties"
+      ],
+      "unlock": {
+        "truyLac": {
+          "gte": 30
+        }
+      },
+      "monthly": {
+        "truyLac": 1,
+        "favor": 1.5
+      },
+      "chance": 0.25,
+      "count": 3,
+      "hook": "canh-viet.quy_bu_vu_mang_thai",
+      "eventText": "Nàng mang thai đang để các tỷ muội bú vú theo lệ chuẩn bị sữa.\n> Bệ hạ, thiếp đang cho các tỷ muội bú vú, xin người vào xem.",
+      "eventLabel": "Xem bú vú"
+    },
+    {
+      "id": "canh-viet.quy_cao_long_lon",
+      "name": "Lệ Cạo Sạch Lông Lồn",
+      "desc": "Lồn phải được cạo sạch lông trước khi hầu hạ. Phi để lông rậm tự nguyện bị nhét dưa chuột vào lồn suốt đêm theo lệ.",
+      "fetish": [
+        "canh-viet.shaving_pussy",
+        "canh-viet.ngoc_hanh"
+      ],
+      "unlock": {
+        "truyLac": {
+          "gte": 40
+        }
+      },
+      "monthly": {
+        "truyLac": 1,
+        "favor": 1
+      },
+      "chance": 0.3,
+      "count": 2,
+      "hook": "canh-viet.quy_cao_long_lon",
+      "eventText": "Các phi đang cạo lông lồn hoặc giữ dưa chuột trong người theo lệ.\n> Bệ hạ, thiếp vừa cạo sạch lồn, xin người kiểm tra.",
+      "eventLabel": "Xem cạo lông"
+    },
+    {
+      "id": "canh-viet.quy_ren_to_khi_dit",
+      "name": "Lệ Rên To Khi Bị Địt",
+      "desc": "Khi bị bệ hạ địt, phi tự nguyện phải kêu to và rên đúng kiểu. Ai im lặng sẽ tự nguyện bị móc lồn trước mặt các nàng khác.",
+      "fetish": [
+        "canh-viet.praise_kink",
+        "canh-viet.men_watching_lesbian"
+      ],
+      "unlock": {
+        "truyLac": {
+          "gte": 35
+        }
+      },
+      "monthly": {
+        "truyLac": 1,
+        "favor": 1.5
+      },
+      "chance": 0.35,
+      "count": 3,
+      "hook": "canh-viet.quy_ren_to_khi_dit",
+      "eventText": "Bệ hạ đang địt các phi, các nàng đang rên to theo lệ.\n> Bệ hạ, thiếp đang rên to cho người nghe, xin người địt mạnh hơn.",
+      "eventLabel": "Xem rên to"
+    }
+  ],
+  "scenes": {
+    "canh-viet.quy_bu_vu_mang_thai": [
+      [
+        "{name} đang mang thai, theo lệ để {names} bú vú mỗi ngày chuẩn bị sữa. Nàng nằm ngửa, các tỷ muội lần lượt ngậm đầu vú, mút nhẹ. Vú đã hơi căng. Các nàng bú đều, {name} rên khẽ vì cảm giác lạ.",
+        "Bệ hạ vào phòng, thấy các phi đang bú vú {name}. Người ngồi cạnh, sờ bụng bầu và ngực nàng. Các tỷ muội nhường chỗ cho người bú thử. {name} đưa vú ra, bệ hạ ngậm và mút.",
+        "Bệ hạ bú một bên, các phi bú bên kia và sờ lồn nhau. {name} rên to hơn. Người khen vú sắp có sữa. Các nàng tiếp tục mút đều đặn theo lệ hàng ngày.",
+        "Bệ hạ địt nhẹ một phi khác trong khi các nàng vẫn bú vú {name}. Người thỉnh thoảng quay lại sờ và bú thêm. Các phi đổi chỗ, miệng không rời đầu vú.",
+        "Sau buổi bú, các nàng lau miệng. {name} xoa nhẹ ngực, các tỷ muội thì thầm về cảm giác bú vú bầu. Các nàng nghỉ ngơi, hẹn ngày mai tiếp tục lệ."
+      ],
+      [
+        "Buổi chiều {name} ngồi dựa gối, vú trần. {names} quỳ bú từng bên ngực. Các nàng mút chậm, chuẩn bị sữa. {name} vuốt tóc các tỷ muội, rên nhẹ vì thích thú.",
+        "Bệ hạ đến, các phi tiếp tục bú. Người bóp vú {name} rồi bú cùng. Các nàng nhìn và học cách mút. {name} cảm thấy vú nóng hơn, nước nhờn chảy ở lồn.",
+        "Bệ hạ bảo các nàng bú mạnh hơn một chút. Các phi làm theo, miệng ngậm chặt đầu vú. Người sờ lồn {name} trong khi các nàng bú. Tiếng mút vang khẽ.",
+        "Các nàng đổi phiên bú lâu hơn. Bệ hạ nhìn và khen. {name} rên và cảm ơn các tỷ muội. Người bắn tinh lên ngực {name}, các phi liếm sạch rồi bú tiếp.",
+        "Kết thúc, các nàng giúp {name} lau vú. Các phi thì thầm hẹn ngày mai bú tiếp. {name} nằm nghỉ, ngực vẫn hơi ướt vì được bú nhiều."
+      ]
+    ],
+    "canh-viet.quy_cao_long_lon": [
+      [
+        "Buổi sáng, {names} ngồi trong phòng, tự cạo lông lồn theo lệ. {name} dùng dao cạo nhẹ, lồn dần sạch sẽ không còn một sợi lông. Các nàng kiểm tra nhau, sờ khe lồn trơn tru. Một phi để sót vài sợi, tự nguyện chuẩn bị dưa chuột.",
+        "Bệ hạ bước vào kiểm tra. Người sờ lồn {name}, khen sạch và trơn. Các nàng dang háng cho người nhìn. Phi để lông rậm tự nhét dưa chuột vào lồn, nhớ ám hiệu \"hoa mai\". Bệ hạ nhìn và sờ nhẹ.",
+        "Bệ hạ địt {name} có lồn đã cạo sạch. Các nàng khác tiếp tục cạo nốt hoặc giữ dưa chuột trong người. Người khen lồn trơn dễ địt. Các phi rên và sờ lồn nhau.",
+        "Bệ hạ kiểm tra phi đang nhét dưa chuột, dùng tay ấn nhẹ. Các nàng khác bú cặc người. Người bắn tinh vào lồn {name} đã cạo sạch, bảo giữ lại. Phi có dưa chuột vẫn giữ trong đêm.",
+        "Sau khi xong, các nàng lau sạch. Phi có dưa chuột nằm nghỉ với vật vẫn trong lồn. Các nàng thì thầm về cảm giác lồn cạo trơn rồi trở lại sinh hoạt."
+      ],
+      [
+        "Chiều tối, {names} đã cạo lông xong, lồn trần trụi. {name} ngồi dang háng cho các tỷ muội kiểm tra. Một nàng để lông, tự nhét dưa chuột vào lồn theo lệ, nhớ \"hoa mai\". Các nàng sờ và khen lồn sạch.",
+        "Bệ hạ vào phòng, sờ từng lồn. Người khen {name} cạo đẹp. Phi có dưa chuột dang háng cho người nhìn. Bệ hạ dùng ngón tay sờ quanh dưa chuột. Các nàng rên khẽ.",
+        "Bệ hạ địt các nàng có lồn sạch. Lồn trơn khiến cặc vào dễ. Các phi rên to. Người nhìn phi giữ dưa chuột và khen nàng ngoan. Các nàng bú và sờ nhau.",
+        "Bệ hạ bắn tinh vào lồn sạch của {name}. Phi có dưa chuột vẫn giữ vật trong người suốt đêm. Các nàng nằm cạnh, sờ lồn trơn của nhau.",
+        "Các nàng lau tinh, phi có dưa chuột nằm yên. Các nàng kể cảm giác lồn cạo sạch rồi nghỉ ngơi, giữ lệ đến sáng."
+      ]
+    ],
+    "canh-viet.quy_ren_to_khi_dit": [
+      [
+        "Bệ hạ đang địt {name} trên giường, nàng rên to đúng kiểu theo lệ. {names} còn lại ngồi cạnh nhìn và tự sờ lồn. {name} kêu lớn mỗi nhịp địt, không im lặng. Các nàng khen nàng rên hay.",
+        "Bệ hạ địt mạnh hơn, {name} rên to hơn nữa. Một phi im lặng, tự nguyện nằm dang háng để các nàng móc lồn trước mặt mọi người. Các phi dùng ngón tay móc khe lồn nàng ấy, bắt rên theo.",
+        "Bệ hạ nhìn các nàng móc lồn phi im lặng. Người tiếp tục địt {name}, bắt nàng rên rõ từng từ. Các phi khác cũng rên theo. Phi bị móc dần rên to hơn.",
+        "Bệ hạ bắn tinh vào lồn {name}. Các nàng tiếp tục móc và bắt phi im lặng rên. Người khen các nàng biết rên đúng kiểu. Các phi đổi chỗ, tiếp tục bị địt và rên to.",
+        "Sau khi xong, các nàng lau sạch, thì thầm về cách rên. Phi từng im lặng hứa sẽ rên to hơn lần sau. Các nàng nằm nghỉ."
+      ],
+      [
+        "Trong phòng có gương, bệ hạ địt {names} lần lượt. Các nàng rên to, nhìn phản chiếu của mình. {name} kêu lớn đúng kiểu. Một phi rên nhỏ, tự nguyện bị các tỷ muội móc lồn trước gương.",
+        "Các phi dùng ngón tay móc lồn phi im lặng, bắt nàng rên to. Bệ hạ nhìn trong gương và địt {name} mạnh. Các nàng rên vang khắp phòng. Phi bị móc dần kêu lớn hơn.",
+        "Bệ hạ bảo các nàng rên tên người. {name} làm theo, rên to. Các phi tiếp tục móc và sờ lồn nhau. Người bắn tinh, các nàng rên đồng thanh.",
+        "Các nàng đổi tư thế, tiếp tục bị địt và rên. Phi từng im lặng nay rên rõ. Bệ hạ khen các nàng dâm đãng biết hầu.",
+        "Khi nghỉ, các nàng lau người, kể lại cảm giác phải rên to. Các nàng cười khẽ rồi trở lại sinh hoạt bình thường."
+      ]
+    ]
+  }
+}
