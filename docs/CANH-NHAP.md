@@ -64,9 +64,9 @@ File này liệt kê các cảnh **Claude viết nháp** để game có chữ hi
 
 | Lệ | Hook | Đã sửa |
 |---|---|---|
-| Lệ không mặc quần | `canh-viet.quy_khong_mac_quan` | ☐ |
-| Lệ ngọc hành | `canh-viet.quy_ngoc_hanh` | ☐ |
-| Lệ hầu sáng | `canh-viet.quy_liem_buoi_sang` | ☐ |
+| Lệ không mặc quần | `canh-viet.quy_khong_mac_quan` | ☑ |
+| Lệ ngọc hành | `canh-viet.quy_ngoc_hanh` | ☑ |
+| Lệ hầu sáng | `canh-viet.quy_liem_buoi_sang` | ☑ |
 
 Prompt viết lại: `docs/PROMPT-VIET-CUNG-QUY.md` (Prompt B).
 

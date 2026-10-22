@@ -380,6 +380,7 @@
   /* ================================================================== */
   G.RULE_HOAKHI_PER_REFUSER = 0.25; // mỗi phi không theo làm Hòa khí giảm mỗi tháng
   G.RULE_HOAKHI_CAP = 1.5; // tối đa mỗi quy định mỗi tháng
+  G.RULE_HOAKHI_TOTAL_CAP = 3; // tối đa cộng dồn của mọi quy định mỗi tháng
   const rulesOn = () => (G.state.rules = G.state.rules || {});
 
   G.ruleUnlocked = function (r) {
@@ -425,6 +426,7 @@
     if (s.ended) return;
     const on = rulesOn();
     const active = [];
+    let penalty = 0;
     for (const id of Object.keys(on)) {
       const r = R.rules[id];
       if (!r) {
@@ -439,9 +441,10 @@
         if (m.favor) G.changeFavor(c, m.favor);
         if (m.affection) c.affection = Math.max(0, Math.min(100, c.affection + m.affection));
       }
-      if (refusers > 0) G.addStat("hoaKhi", -Math.min(G.RULE_HOAKHI_CAP, refusers * G.RULE_HOAKHI_PER_REFUSER));
+      if (refusers > 0) penalty += Math.min(G.RULE_HOAKHI_CAP, refusers * G.RULE_HOAKHI_PER_REFUSER);
       if (fol.length && r.hook && rand() < (r.chance == null ? 0.3 : r.chance)) active.push([r, fol]);
     }
+    if (penalty > 0) G.addStat("hoaKhi", -Math.min(G.RULE_HOAKHI_TOTAL_CAP, penalty));
     if (active.length && !report.ruleEvent) {
       const [r, fol] = active[Math.floor(rand() * active.length)];
       const ev = ruleEvent(r, fol);

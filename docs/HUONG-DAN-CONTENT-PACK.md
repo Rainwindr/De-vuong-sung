@@ -286,7 +286,7 @@ Mỗi đầu năm lõi chọn 3 mục tiêu trong `G.GOALS` (js/systems.js) còn
 | Trường | Ý nghĩa |
 |---|---|
 | `id`, `name`, `desc` | Mã, tên, mô tả hiện trên bảng Cung quy |
-| `fetish` | Danh sách sở thích. Chỉ phi **sẵn lòng** với tất cả mới theo lệ; mỗi phi không theo làm Hòa khí −0,25/tháng (tối đa −1,5 mỗi lệ) |
+| `fetish` | Danh sách sở thích. Chỉ phi **sẵn lòng** với tất cả mới theo lệ; mỗi phi không theo làm Hòa khí −0,25/tháng (tối đa −1,5 mỗi lệ, cộng dồn mọi lệ tối đa −3/tháng) |
 | `unlock` | Điều kiện mở (như `when`), ngoài ra mọi sở thích trong `fetish` phải đã mở |
 | `monthly` | Cộng mỗi tháng khi lệ còn bật: `truyLac`, `hoaKhi`, `danTam`, `longThe`, `quocKho` (cho cả triều) và `favor`, `affection` (cho từng phi theo lệ) |
 | `chance`, `count` | Xác suất mỗi tháng nổ sự kiện "lệ hôm nay" (mặc định 0.3), số phi theo lệ xuất hiện trong cảnh (mặc định 3) |

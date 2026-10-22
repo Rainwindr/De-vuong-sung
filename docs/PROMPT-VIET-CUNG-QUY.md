@@ -3,7 +3,7 @@
 **Cung quy** là lệ hậu cung do bệ hạ ban: bật trong **Ý chỉ → Cung quy**, có hiệu lực mỗi tháng cho đến khi bãi bỏ. Bật cùng lúc bao nhiêu quy định cũng được.
 
 Cách game xử lý:
-- Mỗi quy định gắn với một hoặc vài **sở thích**. Chỉ phi **sẵn lòng** với các sở thích đó mới theo lệ. Phi khác được miễn, nhưng hậu cung chia phe: mỗi phi không theo làm **Hòa khí −0,25/tháng** (tối đa −1,5 cho mỗi quy định).
+- Mỗi quy định gắn với một hoặc vài **sở thích**. Chỉ phi **sẵn lòng** với các sở thích đó mới theo lệ. Phi khác được miễn, nhưng hậu cung chia phe: mỗi phi không theo làm **Hòa khí −0,25/tháng** (tối đa −1,5 cho mỗi quy định; cộng dồn mọi quy định tối đa −3/tháng).
 - **Mỗi tháng**, quy định cộng chỉ số theo trường `monthly` (Trụy lạc, Sủng ái hoặc Tình cảm cho phi theo lệ…).
 - **Thỉnh thoảng** (theo `chance`, mặc định 30% mỗi tháng) nổ một sự kiện "lệ hôm nay". Người chơi chọn "Ghé xem" thì vào **cảnh của quy định**, với vài phi theo lệ được chọn ngẫu nhiên.
 
