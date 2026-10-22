@@ -408,13 +408,13 @@
   };
 
   /** Dựng sự kiện "lệ hôm nay": nhìn các phi theo lệ, có thể dẫn vào cảnh của quy định. */
-  function ruleEvent(r, followers) {
+  function ruleEvent(r, followers, lead) {
     const ev = {
       id: "sys.rule",
       title: r.name,
       text: r.eventText || `Theo ${r.name}, ${followers.length} phi tần trong hậu cung vẫn giữ lệ.\n> Bệ hạ có muốn ghé xem không?`,
       choices: [
-        { label: r.eventLabel || "Ghé xem", hook: r.hook, fetish: r.fetish || [], participants: { select: "random", count: r.count || 3 }, minParticipants: 1, effects: { truyLac: 2 } },
+        { label: r.eventLabel || "Ghé xem", hook: r.hook, fetish: r.fetish || [], participants: lead ? [lead.id, ...shuffle(followers.filter((c) => c.id !== lead.id)).slice(0, (r.count || 3) - 1).map((c) => c.id)] : { select: "random", count: r.count || 3 }, minParticipants: 1, effects: { truyLac: 2 } },
         { label: "Để các nàng tự nhiên", effects: {} },
       ],
     };
@@ -442,12 +442,15 @@
         if (m.affection) c.affection = Math.max(0, Math.min(100, c.affection + m.affection));
       }
       if (refusers > 0) penalty += Math.min(G.RULE_HOAKHI_CAP, refusers * G.RULE_HOAKHI_PER_REFUSER);
-      if (fol.length && r.hook && rand() < (r.chance == null ? 0.3 : r.chance)) active.push([r, fol]);
+      // "lead": "pregnant": người chính của cảnh phải là phi theo lệ đang mang thai
+      const lead = r.lead === "pregnant" ? fol.find((c) => c.pregnantDue != null) : null;
+      if (r.lead === "pregnant" && !lead) continue;
+      if (fol.length && r.hook && rand() < (r.chance == null ? 0.3 : r.chance)) active.push([r, fol, lead]);
     }
     if (penalty > 0) G.addStat("hoaKhi", -Math.min(G.RULE_HOAKHI_TOTAL_CAP, penalty));
     if (active.length && !report.ruleEvent) {
-      const [r, fol] = active[Math.floor(rand() * active.length)];
-      const ev = ruleEvent(r, fol);
+      const [r, fol, lead] = active[Math.floor(rand() * active.length)];
+      const ev = ruleEvent(r, fol, lead);
       if (ev && ev.choices.length) report.ruleEvent = ev;
     }
   });
