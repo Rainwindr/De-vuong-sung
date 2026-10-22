@@ -26,9 +26,11 @@
       "scene-texts/7-khung-nong-bong.json",
       "scene-texts/8-canh-moi.json",
       "scene-texts/9-cuoc-thi-nhap.json",
-      "scene-texts/10-su-kien-core.json"
+      "scene-texts/10-su-kien-core.json",
+      "scene-texts/11-cung-quy.json"
     ],
     "portraits": "portraits.json",
-    "contests": "contests.json"
+    "contests": "contests.json",
+    "rules": "cung-quy.json"
   }
 }

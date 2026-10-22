@@ -1793,5 +1793,6 @@
       "Táo bạo": "willing",
       "Hay ngượng": "persuade"
     }
-  }
+  },
+  {"id": "canh-viet.ngoc_hanh", "name": "Mang ngọc hành", "tier": 2, "unlock": {"truyLac": {"gte": 45}}, "default_consent": "persuade", "desc": "Phi tự nguyện mang một ngọc hành nhỏ trong người suốt một ngày, đi lại, thỉnh an như thường; đêm đến bệ hạ tự tay lấy ra.", "consent": {"core.tuyet": "willing", "core.song_nhat": "willing"}, "consentByTrait": {"Táo bạo": "willing", "Hay ngượng": "persuade"}}
 ]

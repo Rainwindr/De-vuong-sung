@@ -13,7 +13,7 @@ const ROOT = path.resolve(__dirname, "..");
 const PACKS = path.join(ROOT, "packs");
 const MIN_AGE = 18;
 const CONSENT = ["willing", "persuade", "refuse"];
-const LIST_KINDS = ["characters", "events", "fetishes", "contests", "gifts", "buildings", "regions"];
+const LIST_KINDS = ["characters", "events", "fetishes", "contests", "rules", "gifts", "buildings", "regions"];
 const SPEAKERS = ["random", "child", "pair"];
 
 let errors = 0;
@@ -32,7 +32,7 @@ function readJSON(file, pack) {
 }
 
 const sceneTexts = []; // { pack, file, hook, key, lv, n }
-const all = { characters: {}, fetishes: {}, events: {}, contests: {}, gifts: {}, buildings: {}, regions: {}, hooksUsed: [], hooksRegistered: new Set(), portraitKeys: [] };
+const all = { characters: {}, fetishes: {}, events: {}, contests: {}, rules: {}, gifts: {}, buildings: {}, regions: {}, hooksUsed: [], hooksRegistered: new Set(), portraitKeys: [] };
 
 function collectHooks(file, packId) {
   const code = fs.readFileSync(file, "utf8");
@@ -93,12 +93,14 @@ function checkPack(folder) {
     if (c.portrait && c.portrait.image && !/^(https?:|data:)/.test(c.portrait.image) && !fs.existsSync(path.join(dir, c.portrait.image))) warn(id, `nhân vật ${c.id}: không thấy ảnh ${c.portrait.image}`);
     all.characters[c.id] = c;
   }
-  for (const k of ["contests", "gifts", "buildings", "regions"]) {
+  for (const k of ["contests", "rules", "gifts", "buildings", "regions"]) {
     for (const x of load(k)) {
       if (!checkId(k, x)) continue;
       if (!x.name) err(id, `${k} ${x.id} thiếu name`);
       if (k === "contests" && !x.hook) warn(id, `cuộc thi ${x.id} không có hook`);
       if (k === "contests" && x.hook) all.hooksUsed.push({ hook: x.hook, where: x.id, pack: id });
+      if (k === "rules" && !x.hook) warn(id, `cung quy ${x.id} không có hook (sẽ không có cảnh)`);
+      if (k === "rules" && x.hook) all.hooksUsed.push({ hook: x.hook, where: x.id, pack: id });
       all[k][x.id] = Object.assign({ _pack: id }, x);
     }
   }
@@ -198,6 +200,11 @@ function crossCheck() {
   for (const f of Object.values(F)) for (const cb of f.combos || []) if (!F[cb.with]) err("tham chiếu", `${f.id}: combo với sở thích không tồn tại "${cb.with}"`);
   for (const f of Object.values(F)) for (const cb of f.combos || []) all.hooksUsed.push({ hook: cb.hook, where: f.id + " combo", pack: "?" });
   for (const ct of Object.values(all.contests)) for (const f of ct.fetish || []) if (!F[f]) err(ct._pack, `${ct.id}: sở thích "${f}" không tồn tại`);
+  for (const r of Object.values(all.rules)) {
+    if (!(r.fetish || []).length) warn(r._pack, `cung quy ${r.id}: nên có "fetish" để chỉ phi sẵn lòng mới theo`);
+    for (const f of r.fetish || []) if (!F[f]) err(r._pack, `cung quy ${r.id}: sở thích "${f}" không tồn tại`);
+    for (const k of Object.keys(r.monthly || {})) if (!["truyLac", "hoaKhi", "danTam", "longThe", "quocKho", "favor", "affection"].includes(k)) err(r._pack, `cung quy ${r.id}: monthly "${k}" không hợp lệ`);
+  }
 
   const checkWhenRefs = (w, where, pack) => {
     if (!w) return;
@@ -254,7 +261,7 @@ function crossCheck() {
   const covered = (h) => reg.includes(h) || textHooks.has(h) || reg.some((r) => r.endsWith("*") && h.startsWith(r.slice(0, -1)));
   for (const u of all.hooksUsed) if (!covered(u.hook)) warn(u.pack, `${u.where}: HOOK "${u.hook}" chưa có cảnh đăng ký (sẽ dùng cảnh mặc định)`);
   console.log(
-    `\n  ${Object.keys(all.characters).length} nhân vật · ${Object.keys(all.events).length} sự kiện · ${Object.keys(F).length} sở thích · ${Object.keys(all.contests).length} cuộc thi · ${Object.keys(all.gifts).length} quà · ${Object.keys(all.buildings).length} công trình · ${Object.keys(all.regions).length} vùng · ${reg.length} HOOK`
+    `\n  ${Object.keys(all.characters).length} nhân vật · ${Object.keys(all.events).length} sự kiện · ${Object.keys(F).length} sở thích · ${Object.keys(all.contests).length} cuộc thi · ${Object.keys(all.rules).length} cung quy · ${Object.keys(all.gifts).length} quà · ${Object.keys(all.buildings).length} công trình · ${Object.keys(all.regions).length} vùng · ${reg.length} HOOK`
   );
 }
 

@@ -66,6 +66,7 @@
     events: {},
     fetishes: {},
     contests: {},
+    rules: {},
     gifts: {},
     buildings: {},
     regions: {},
@@ -81,6 +82,7 @@
   const KINDS = {
     fetishes: { label: "sở thích", defaults: { tier: 1, unlock: {}, default_consent: "persuade", combos: [] } },
     contests: { label: "cuộc thi", defaults: { unlock: {}, fetish: [], count: 4, prize: { favor: 20 } } },
+    rules: { label: "cung quy", defaults: { unlock: {}, fetish: [], monthly: {}, chance: 0.3, count: 3 } },
     gifts: { label: "quà", defaults: { cost: 200, favor: 5, likes: [] } },
     buildings: { label: "công trình", defaults: { cost: 2000, effects: {} } },
     regions: { label: "vùng tuần du", defaults: { cost: 2000, recruit: 2 } },
@@ -293,6 +295,7 @@
       fetish: {},
       fetishLast: {},
       fetishStreak: { key: "", count: 0 },
+      rules: {}, // cung quy đang bật
       flags: {},
       seen: {},
       log: [],
@@ -922,9 +925,10 @@
         out.ended = s.ended;
         break;
       }
-      if (r.event || r.event2) {
+      if (r.event || r.event2 || r.ruleEvent) {
         out.event = r.event;
         out.event2 = r.event2;
+        out.ruleEvent = r.ruleEvent;
         break;
       }
       if (r.births.length || s.pendingTitles.length) break;

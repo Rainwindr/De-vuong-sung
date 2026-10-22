@@ -60,4 +60,14 @@ File này liệt kê các cảnh **Claude viết nháp** để game có chữ hi
 | 26 | Tickle Toàn Thân | `canh-viet.tickle_full` | Tiếng cười khắp điện | 5 | ☐ |
 | 27 | Tickle Vùng Nhạy Cảm | `canh-viet.tickle_sensitive` | Chỗ nhột nhất | 4 | ☐ |
 
+## Cung quy (3 lệ, file `scene-texts/11-cung-quy.json`)
+
+| Lệ | Hook | Đã sửa |
+|---|---|---|
+| Lệ không mặc quần | `canh-viet.quy_khong_mac_quan` | ☐ |
+| Lệ ngọc hành | `canh-viet.quy_ngoc_hanh` | ☐ |
+| Lệ hầu sáng | `canh-viet.quy_liem_buoi_sang` | ☐ |
+
+Prompt viết lại: `docs/PROMPT-VIET-CUNG-QUY.md` (Prompt B).
+
 Đánh dấu ☑ ở cột "Đã sửa" nếu muốn theo dõi ngay trong file này. Cách chắc chắn nhất vẫn là xóa `_ghi_chu` rồi chạy validate.

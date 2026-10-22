@@ -281,6 +281,19 @@ Mỗi đầu năm lõi chọn 3 mục tiêu trong `G.GOALS` (js/systems.js) còn
 
 **contests.json** — mùa thi diễn ra tháng 4 và tháng 9 mỗi năm, lõi chọn ngẫu nhiên tối đa 4 cuộc thi đã mở. Người chơi cũng có thể tự mở cuộc thi trong Ý chỉ (800 lượng, 3 tháng một lần). Tháng 12, nếu có ba người điểm cao và Trụy lạc từ 40, có Phong Nguyệt Đại Điển.
 
+**rules (cung quy)**: lệ hậu cung, bật/tắt trong Ý chỉ → Cung quy, không giới hạn số lệ bật cùng lúc. Khai báo trong manifest: `"rules": "cung-quy.json"`. Mỗi mục:
+
+| Trường | Ý nghĩa |
+|---|---|
+| `id`, `name`, `desc` | Mã, tên, mô tả hiện trên bảng Cung quy |
+| `fetish` | Danh sách sở thích. Chỉ phi **sẵn lòng** với tất cả mới theo lệ; mỗi phi không theo làm Hòa khí −0,25/tháng (tối đa −1,5 mỗi lệ) |
+| `unlock` | Điều kiện mở (như `when`), ngoài ra mọi sở thích trong `fetish` phải đã mở |
+| `monthly` | Cộng mỗi tháng khi lệ còn bật: `truyLac`, `hoaKhi`, `danTam`, `longThe`, `quocKho` (cho cả triều) và `favor`, `affection` (cho từng phi theo lệ) |
+| `chance`, `count` | Xác suất mỗi tháng nổ sự kiện "lệ hôm nay" (mặc định 0.3), số phi theo lệ xuất hiện trong cảnh (mặc định 3) |
+| `hook`, `eventText`, `eventLabel` | Hook của cảnh, lời dẫn sự kiện và chữ trên nút đi xem |
+
+Cảnh viết bằng JSON như mọi hook (`{name}`, `{names}` là các phi theo lệ có mặt). Prompt cho Grok: `docs/PROMPT-VIET-CUNG-QUY.md`.
+
 ```json
 { "id": "ten-goi.thi_den", "name": "Thi làm đèn", "desc": "Ai làm đèn đẹp nhất", "tier": 1,
   "unlock": {}, "fetish": [], "count": 4, "hook": "ten-goi.thi_den",

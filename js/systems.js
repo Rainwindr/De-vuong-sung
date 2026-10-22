@@ -375,6 +375,80 @@
     return ev && ev.choices.length > 1 ? ev : null;
   };
 
+  /* ================================================================== */
+  /* CUNG QUY: lệ hậu cung do bệ hạ đặt, chỉ phi sẵn lòng mới theo       */
+  /* ================================================================== */
+  G.RULE_HOAKHI_PER_REFUSER = 0.25; // mỗi phi không theo làm Hòa khí giảm mỗi tháng
+  G.RULE_HOAKHI_CAP = 1.5; // tối đa mỗi quy định mỗi tháng
+  const rulesOn = () => (G.state.rules = G.state.rules || {});
+
+  G.ruleUnlocked = function (r) {
+    return G.checkWhen(r.unlock || {}, null, null) && (r.fetish || []).every((f) => G.fetishUnlocked(f));
+  };
+  /** Phi theo lệ: đang ở trong cung và sẵn lòng với mọi sở thích của quy định. */
+  G.ruleFollowers = function (r) {
+    return G.state.consorts.filter((c) => (r.fetish || []).every((f) => G.consentOf(c, f) === "willing"));
+  };
+  G.ruleEnabled = (id) => Object.prototype.hasOwnProperty.call(rulesOn(), id);
+  G.toggleRule = function (id) {
+    const r = R.rules[id];
+    if (!r) return false;
+    const on = rulesOn();
+    if (G.ruleEnabled(id)) {
+      delete on[id];
+      log(`Bãi bỏ ${r.name}.`, "harem");
+    } else {
+      if (!G.ruleUnlocked(r)) return false;
+      on[id] = G.state.turn;
+      const f = G.ruleFollowers(r).length;
+      log(`Ban ${r.name}: ${f}/${G.state.consorts.length} phi tần theo lệ.`, "harem");
+    }
+    return true;
+  };
+
+  /** Dựng sự kiện "lệ hôm nay": nhìn các phi theo lệ, có thể dẫn vào cảnh của quy định. */
+  function ruleEvent(r, followers) {
+    const ev = {
+      id: "sys.rule",
+      title: r.name,
+      text: r.eventText || `Theo ${r.name}, ${followers.length} phi tần trong hậu cung vẫn giữ lệ.\n> Bệ hạ có muốn ghé xem không?`,
+      choices: [
+        { label: r.eventLabel || "Ghé xem", hook: r.hook, fetish: r.fetish || [], participants: { select: "random", count: r.count || 3 }, minParticipants: 1, effects: { truyLac: 2 } },
+        { label: "Để các nàng tự nhiên", effects: {} },
+      ],
+    };
+    if (!r.hook) ev.choices.shift();
+    return G.prepareEvent(ev, { speaker: null });
+  }
+
+  monthly((s, report) => {
+    if (s.ended) return;
+    const on = rulesOn();
+    const active = [];
+    for (const id of Object.keys(on)) {
+      const r = R.rules[id];
+      if (!r) {
+        delete on[id]; // quy định của gói đã gỡ
+        continue;
+      }
+      const fol = G.ruleFollowers(r);
+      const refusers = s.consorts.length - fol.length;
+      const m = r.monthly || {};
+      for (const k of ["truyLac", "danTam", "longThe", "quocKho", "hoaKhi"]) if (m[k]) G.addStat(k, m[k]);
+      for (const c of fol) {
+        if (m.favor) G.changeFavor(c, m.favor);
+        if (m.affection) c.affection = Math.max(0, Math.min(100, c.affection + m.affection));
+      }
+      if (refusers > 0) G.addStat("hoaKhi", -Math.min(G.RULE_HOAKHI_CAP, refusers * G.RULE_HOAKHI_PER_REFUSER));
+      if (fol.length && r.hook && rand() < (r.chance == null ? 0.3 : r.chance)) active.push([r, fol]);
+    }
+    if (active.length && !report.ruleEvent) {
+      const [r, fol] = active[Math.floor(rand() * active.length)];
+      const ev = ruleEvent(r, fol);
+      if (ev && ev.choices.length) report.ruleEvent = ev;
+    }
+  });
+
   /** Cuộc thi nổ ra sau một đêm thị tẩm: miễn phí, mỗi 3 tháng tối đa một lần, không trùng tháng mùa thi. */
   G.nightContest = function () {
     const s = G.state;
