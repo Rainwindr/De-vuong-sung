@@ -2,7 +2,7 @@
 
 Game mô phỏng hậu cung dạng text kèm chân dung, chạy trên trình duyệt, ưu tiên điện thoại. Người chơi là một hoàng đế 18 tuổi vừa đăng cơ: tuyển tú, sủng ái phi tần, sinh con nối dõi, và tự chọn mình sẽ trụy lạc đến đâu. 
 
-Phiên bản **0.3.9**. Gói `canh-viet` có cảnh viết sẵn, sự kiện khám phá sở thích, và chỗ cắm ảnh chân dung thật. Mỗi tháng có thêm lượt "chuyện hậu cung", sự kiện bốc theo gói, thi hai mùa mỗi năm và tự mở cuộc thi được. Sau mỗi đêm thị tẩm có thể nổ thêm chuyện trong đêm (sự kiện, nghi lễ, cuộc thi); cảnh sở thích đã xem hết thì mượn cảnh thị tẩm riêng của nàng thay vì lặp lại.
+Phiên bản **0.4.0**. Mới: **Cung quy**, lệ hậu cung bật/tắt trong Ý chỉ; chỉ phi sẵn lòng mới theo, phi không theo làm Hòa khí giảm. Gói `canh-viet` có cảnh viết sẵn, sự kiện khám phá sở thích, và chỗ cắm ảnh chân dung thật. Mỗi tháng có thêm lượt "chuyện hậu cung", sự kiện bốc theo gói, thi hai mùa mỗi năm và tự mở cuộc thi được. Sau mỗi đêm thị tẩm có thể nổ thêm chuyện trong đêm (sự kiện, nghi lễ, cuộc thi); cảnh sở thích đã xem hết thì mượn cảnh thị tẩm riêng của nàng thay vì lặp lại.
 
 ## Chạy thử
 

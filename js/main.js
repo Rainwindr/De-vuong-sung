@@ -9,7 +9,7 @@
 (function () {
   "use strict";
   const G = window.Game;
-  const LIST_KINDS = ["characters", "events", "fetishes", "contests", "gifts", "buildings", "regions"];
+  const LIST_KINDS = ["characters", "events", "fetishes", "contests", "rules", "gifts", "buildings", "regions"];
 
   async function fetchJSON(url) {
     const r = await fetch(url, { cache: "no-cache" });

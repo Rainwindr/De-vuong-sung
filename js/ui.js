@@ -666,6 +666,7 @@
     }
     if (r.event) queue.push(() => showEvent(r.event));
     if (r.event2) queue.push(() => showLaterEvent(r.event2));
+    if (r.ruleEvent) queue.push(() => showLaterEvent(r.ruleEvent));
     if (queue.length) queue.shift()();
     else UI.render();
     if (r.months > 1) toast(`Đã qua ${r.months} tháng`);
@@ -680,8 +681,38 @@
     }
     if (r.event) queue.push(() => showEvent(r.event));
     if (r.event2) queue.push(() => showLaterEvent(r.event2));
+    if (r.ruleEvent) queue.push(() => showLaterEvent(r.ruleEvent));
     if (queue.length) queue.shift()();
     else UI.render();
+  }
+
+  /* ---------------- Cung quy ---------------- */
+  function openRules() {
+    const s = G.state;
+    const all = Object.values(R.rules);
+    const open = all.filter((r) => G.ruleUnlocked(r) || G.ruleEnabled(r.id));
+    const locked = all.length - open.length;
+    const card = (r) => {
+      const on = G.ruleEnabled(r.id);
+      const fol = G.ruleFollowers(r);
+      const ref = s.consorts.length - fol.length;
+      const loss = Math.min(G.RULE_HOAKHI_CAP, ref * G.RULE_HOAKHI_PER_REFUSER);
+      return `<div class="row-card"><div><b>${esc(r.name)}</b>${on ? " · <span class=\"tag\">đang bật</span>" : ""}<br><span class="hint">${esc(r.desc || "")}</span><br><span class="hint">Theo lệ: ${fol.length}/${s.consorts.length} phi${fol.length ? " (" + esc(fol.slice(0, 4).map((c) => c.name).join(", ")) + (fol.length > 4 ? "…" : "") + ")" : ""}${ref ? ` · Hòa khí −${loss}/tháng` : ""}</span></div><button class="btn btn-sm${on ? "" : " btn-primary"}" data-rule="${esc(r.id)}">${on ? "Bãi bỏ" : "Ban lệ"}</button></div>`;
+    };
+    openSheet(
+      `<h3>Cung quy</h3><p class="hint">Lệ hậu cung do bệ hạ ban. Chỉ phi sẵn lòng với sở thích của lệ mới theo; phi khác được miễn nhưng hậu cung chia phe, Hòa khí giảm mỗi tháng.</p>
+       ${open.length ? `<div class="cards">${open.map(card).join("")}</div>` : `<p class="empty">Chưa mở quy định nào.</p>`}
+       ${locked ? `<p class="hint">Còn ${locked} quy định chưa mở.</p>` : ""}
+       <button class="btn btn-ghost" id="r-close">Đóng</button>`,
+      (el) => {
+        $(el, "#r-close").addEventListener("click", closeSheet);
+        on(el, "[data-rule]", "click", (b) => {
+          G.toggleRule(b.dataset.rule);
+          G.save();
+          openRules();
+        });
+      }
+    );
   }
 
   /* ---------------- Ý chỉ (hành động) ---------------- */
@@ -694,6 +725,7 @@
        <div class="cards">
          <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.SELECTION_COST} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tuần du</b><br><span class="hint">${G.canTravel() ? "Mỗi năm một chuyến. Mỗi vùng có mỹ nhân và chuyện riêng." : "Năm nay đã tuần du rồi."}</span></div><button class="btn btn-sm" id="a-travel" ${G.canTravel() ? "" : "disabled"}>Chọn vùng</button></div>
+         <div class="row-card"><div><b>Cung quy</b><br><span class="hint">${(() => { const on = Object.keys(s.rules || {}).length; const n = Object.values(R.rules).filter((r) => G.ruleUnlocked(r)).length; return n ? `Lệ hậu cung đang bật ${on}, đã mở ${n}. Chỉ phi sẵn lòng mới theo; phi không theo làm Hòa khí giảm.` : "Chưa mở quy định nào (cần Trụy lạc hoặc sở thích)."; })()}</span></div><button class="btn btn-sm" id="a-rules">Xem</button></div>
          <div class="row-card"><div><b>Mở cuộc thi</b><br><span class="hint">${esc(ctWhy || `${G.CONTEST_COST} lượng mỗi lần, ${G.CONTEST_COOLDOWN} tháng mới mở lại. Mùa thi tự đến vào tháng ${G.CONTEST_MONTHS.join(" và ")}.`)}</span></div><button class="btn btn-sm" id="a-contest" ${ctWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tặng quà, xuất cung, học phường</b><br><span class="hint">Chạm vào từng phi trong tab Hậu cung.</span></div><button class="btn btn-sm" id="a-harem">Hậu cung</button></div>
          <div class="row-card"><div><b>Xây dựng</b><br><span class="hint">Công trình và nâng cung phi tần.</span></div><button class="btn btn-sm" id="a-palace">Cung điện</button></div>
@@ -704,6 +736,7 @@
         $(el, "#a-close").addEventListener("click", closeSheet);
         on(el, "#a-select", "click", openSelection);
         on(el, "#a-travel", "click", openTravel);
+        on(el, "#a-rules", "click", openRules);
         on(el, "#a-contest", "click", () => {
           const ev = G.openContest();
           if (ev) showEvent(ev);

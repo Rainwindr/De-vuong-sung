@@ -337,3 +337,6 @@ textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px soli
 .scene-dots i.done { background: var(--gold); opacity: .5; }
 .scene-dots i.on { background: var(--gold); }
 .scene-nav { align-items: center; }
+
+/* Cung quy */
+.tag { display: inline-block; padding: 0 6px; border-radius: 8px; font-size: 0.78em; background: var(--vermilion); color: var(--paper); vertical-align: middle; }

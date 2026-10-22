@@ -36,7 +36,7 @@ def bundle_packs():
         manifest = json.loads((d / "manifest.json").read_text(encoding="utf-8"))
         files = manifest.get("files", {})
         data = {"folder": folder, "manifest": manifest}
-        for key in ("characters", "events", "fetishes", "contests", "gifts", "buildings", "regions"):
+        for key in ("characters", "events", "fetishes", "contests", "rules", "gifts", "buildings", "regions"):
             if key in files:
                 data[key] = []
                 for f in as_list(files[key]):
