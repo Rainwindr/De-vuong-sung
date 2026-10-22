@@ -203,6 +203,7 @@ function crossCheck() {
   for (const r of Object.values(all.rules)) {
     if (!(r.fetish || []).length) warn(r._pack, `cung quy ${r.id}: nên có "fetish" để chỉ phi sẵn lòng mới theo`);
     for (const f of r.fetish || []) if (!F[f]) err(r._pack, `cung quy ${r.id}: sở thích "${f}" không tồn tại`);
+    if (r.lead != null && r.lead !== "pregnant") err(r._pack, `cung quy ${r.id}: "lead" chỉ nhận "pregnant"`);
     for (const k of Object.keys(r.monthly || {})) if (!["truyLac", "hoaKhi", "danTam", "longThe", "quocKho", "favor", "affection"].includes(k)) err(r._pack, `cung quy ${r.id}: monthly "${k}" không hợp lệ`);
   }
 

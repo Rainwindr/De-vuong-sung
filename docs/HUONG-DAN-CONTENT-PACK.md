@@ -291,6 +291,7 @@ Mỗi đầu năm lõi chọn 3 mục tiêu trong `G.GOALS` (js/systems.js) còn
 | `monthly` | Cộng mỗi tháng khi lệ còn bật: `truyLac`, `hoaKhi`, `danTam`, `longThe`, `quocKho` (cho cả triều) và `favor`, `affection` (cho từng phi theo lệ) |
 | `chance`, `count` | Xác suất mỗi tháng nổ sự kiện "lệ hôm nay" (mặc định 0.3), số phi theo lệ xuất hiện trong cảnh (mặc định 3) |
 | `hook`, `eventText`, `eventLabel` | Hook của cảnh, lời dẫn sự kiện và chữ trên nút đi xem |
+| `lead` | Tùy chọn. `"pregnant"`: người chính của cảnh (`{name}`) luôn là một phi theo lệ đang mang thai; không có ai thì lệ không nổ cảnh |
 
 Cảnh viết bằng JSON như mọi hook (`{name}`, `{names}` là các phi theo lệ có mặt). Prompt cho Grok: `docs/PROMPT-VIET-CUNG-QUY.md`.
 
