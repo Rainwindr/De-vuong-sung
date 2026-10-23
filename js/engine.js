@@ -801,10 +801,30 @@
       if (!G.checkWhen(ev.when, sp.speaker, ev)) continue;
       const prepared = G.prepareEvent(ev, sp);
       if (!prepared.choices.length) continue;
+      if (sceneBlocked(ev, sp, prepared)) continue;
       out.push(prepared);
     }
     return out;
   };
+
+  /**
+   * Sự kiện có cảnh mà mọi lựa chọn dẫn vào cảnh đều bị ẩn vì thiếu người tham gia hoặc chưa ai sẵn lòng
+   * (không phải vì thiếu tiền hay điều kiện riêng của lựa chọn): không cho hiện, tránh sự kiện chỉ còn lựa chọn từ chối.
+   */
+  function sceneBlocked(ev, sp, prepared) {
+    const s = G.state;
+    const hookIdx = ev.choices.map((ch, i) => (ch.hook ? i : -1)).filter((i) => i >= 0);
+    if (!hookIdx.length) return false;
+    if (prepared.choices.some((c) => hookIdx.includes(c.index))) return false;
+    return hookIdx.every((i) => {
+      const ch = ev.choices[i];
+      if (ch.requires && !G.checkWhen(ch.requires, sp.speaker, null)) return false;
+      if (ch.cost && s.stats.quocKho < ch.cost && !s.godFlags.infiniteMoney) return false;
+      if ((ch.fetish || []).some((f) => !G.fetishUnlocked(f))) return false;
+      return true; // bị ẩn chỉ vì người tham gia / đồng thuận
+    });
+  }
+  G.sceneBlocked = sceneBlocked;
 
   /** Ai tham gia cảnh của một lựa chọn. */
   function participantsFor(ch, sp) {
