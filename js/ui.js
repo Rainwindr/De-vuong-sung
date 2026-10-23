@@ -138,7 +138,7 @@
       <header class="topbar">
         <div class="who">
           <h2>${esc(s.emperorName)}</h2>
-          <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year}, th.${s.month}</span>
+          <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year}, th.${s.month}${G.currentQue && G.currentQue() ? ` · Năm ${esc(G.currentQue().name)}` : ""}</span>
           <button class="icon-btn" id="b-menu" aria-label="Lưu game, gói nội dung và cài đặt">☰</button>
         </div>
         <div class="stats">${Object.entries(G.STATS)
@@ -215,7 +215,7 @@
       ${portrait(c)}
       <span class="body">
         <span class="name">${esc(c.name)}</span>
-        <span class="meta">${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}</span>
+        <span class="meta">${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}</span>
         <span class="favor">${bar(c.favor)}<span>Sủng ái ${c.favor}</span></span>
         ${extra || ""}
       </span>
@@ -235,8 +235,24 @@
           ? `<div class="scroll-x"><table class="mini-table"><tr><th>Cặp</th><th>Tình Ý</th><th>Trạng thái</th></tr>${pairs.map((p) => `<tr><td>${esc(p.a.name)} · ${esc(p.b.name)}</td><td>${Math.round(p.tinhY)}</td><td>${esc(p.status)}</td></tr>`).join("")}</table></div>`
           : `<p class="empty">Chưa có cặp nào thân thiết. Tình Ý tăng khi các phi học cùng lớp, cùng bị lạnh nhạt, hoặc hợp tính.</p>`
       }
+      ${renderBangVang()}
       ${s.former.length ? `<p class="hint">Đã rời cung: ${s.former.map((f) => esc(f.name) + " (" + esc(f.reason) + ")").join(", ")}.</p>` : ""}
     </section>`;
+  }
+
+  /** Bảng vàng: ba người đứng đầu mỗi bảng, chấm lại cuối mỗi tháng. */
+  function renderBangVang() {
+    const d = G.state.d1;
+    const boards = d && d.boards ? G.BOARDS.filter((b) => d.boards[b.id]) : [];
+    if (!boards.length) return `<div class="section-head"><h3>Bảng vàng</h3></div><p class="empty">Cần ít nhất ${G.BANG_MIN} phi tần. Bảng chấm lại cuối mỗi tháng.</p>`;
+    const cell = (e, b) => (e ? `${esc(e.name)} <span class="hint">${e.v}</span>` : "");
+    return `<div class="section-head"><h3>Bảng vàng</h3><span class="hint">Chấm cuối mỗi tháng · số bên cạnh là điểm</span></div>
+      <div class="scroll-x"><table class="mini-table"><tr><th>Bảng</th><th>Đệ nhất</th><th>Đệ nhị</th><th>Đệ tam</th></tr>${boards
+        .map((b) => {
+          const r = d.boards[b.id];
+          return `<tr><td>${esc(b.name)}<br><span class="hint">${esc(b.unit)}</span></td><td>${cell(r.top[0], b)}</td><td>${cell(r.top[1], b)}</td><td>${cell(r.top[2], b)}</td></tr>`;
+        })
+        .join("")}</table></div>`;
   }
 
   /* ---------------- Con cháu ---------------- */
@@ -667,6 +683,7 @@
     if (r.event) queue.push(() => showEvent(r.event));
     if (r.event2) queue.push(() => showLaterEvent(r.event2));
     if (r.ruleEvent) queue.push(() => showLaterEvent(r.ruleEvent));
+    for (const e of r.sideEvents || []) queue.push(() => showLaterEvent(e));
     if (queue.length) queue.shift()();
     else UI.render();
     if (r.months > 1) toast(`Đã qua ${r.months} tháng`);
@@ -682,6 +699,7 @@
     if (r.event) queue.push(() => showEvent(r.event));
     if (r.event2) queue.push(() => showLaterEvent(r.event2));
     if (r.ruleEvent) queue.push(() => showLaterEvent(r.ruleEvent));
+    for (const e of r.sideEvents || []) queue.push(() => showLaterEvent(e));
     if (queue.length) queue.shift()();
     else UI.render();
   }
@@ -723,7 +741,7 @@
     openSheet(
       `<h3>Ý chỉ</h3>
        <div class="cards">
-         <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.SELECTION_COST} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
+         <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.selectionCost()} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tuần du</b><br><span class="hint">${G.canTravel() ? "Mỗi năm một chuyến. Mỗi vùng có mỹ nhân và chuyện riêng." : "Năm nay đã tuần du rồi."}</span></div><button class="btn btn-sm" id="a-travel" ${G.canTravel() ? "" : "disabled"}>Chọn vùng</button></div>
          <div class="row-card"><div><b>Cung quy</b><br><span class="hint">${(() => { const on = Object.keys(s.rules || {}).length; const n = Object.values(R.rules).filter((r) => G.ruleUnlocked(r)).length; return n ? `Lệ hậu cung đang bật ${on}, đã mở ${n}. Chỉ phi sẵn lòng mới theo; phi không theo làm Hòa khí giảm.` : "Chưa mở quy định nào (cần Trụy lạc hoặc sở thích)."; })()}</span></div><button class="btn btn-sm" id="a-rules">Xem</button></div>
          <div class="row-card"><div><b>Mở cuộc thi</b><br><span class="hint">${esc(ctWhy || `${G.CONTEST_COST} lượng mỗi lần, ${G.CONTEST_COOLDOWN} tháng mới mở lại. Mùa thi tự đến vào tháng ${G.CONTEST_MONTHS.join(" và ")}.`)}</span></div><button class="btn btn-sm" id="a-contest" ${ctWhy ? "disabled" : ""}>Mở</button></div>
@@ -1117,7 +1135,7 @@
     if (why) return showMessage("Tuyển tú", why);
     const recruits = G.holdSelection();
     G.save();
-    recruitPicker("Tuyển tú", "Bốn tú nữ vào vòng cuối, tất cả từ 18 tuổi trở lên. Chọn người được lưu bài tử.", recruits, G.SELECTION_COST);
+    recruitPicker("Tuyển tú", "Bốn tú nữ vào vòng cuối, tất cả từ 18 tuổi trở lên. Chọn người được lưu bài tử.", recruits, G.selectionCost());
   }
 
   function openTravel() {
