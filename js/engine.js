@@ -19,6 +19,8 @@
   const G = (window.Game = window.Game || {});
   G.VERSION = "0.3.0";
   G.MIN_AGE = 18;
+  /** Hệ số của quẻ đầu năm (js/systems.js ghi đè); mặc định không đổi gì. */
+  G.queMult = () => 1;
 
   G.RANKS = ["Đáp ứng", "Thường tại", "Quý nhân", "Tần", "Phi", "Quý phi", "Hoàng quý phi", "Hoàng hậu"];
   G.RANK_SHORT = ["Đáp ứng", "Thường tại", "Quý nhân", "Tần", "Phi", "Quý phi", "Hoàng quý phi", "Hoàng hậu"];
@@ -465,7 +467,7 @@
       if (d < 0) s.counters.spent -= d;
     }
     // Trụy lạc càng cao càng khó tăng thêm: còn chỗ để leo đến tận cuối đời
-    if (k === "truyLac" && d > 0) d *= Math.max(0.3, 1 - s.stats.truyLac / 130);
+    if (k === "truyLac" && d > 0) d *= Math.max(0.3, 1 - s.stats.truyLac / 130) * G.queMult("truyLac");
     s.stats[k] = clamp(Math.round((s.stats[k] + d) * 100) / 100, G.STATS[k].min, G.STATS[k].max);
   }
   G.addStat = addStat;
@@ -774,6 +776,7 @@
     if (c.traits.includes("Phúc tướng")) p += 0.03;
     if (s.legacies.includes("phuc_tuong")) p += 0.03;
     if (s.stats.longThe < 40) p *= 0.5;
+    p *= G.queMult("conceive");
     if (s.godFlags.alwaysConceive) p = 1;
     if (rand() < p) {
       c.pregnantDue = s.turn + 9;
@@ -906,7 +909,7 @@
 
   /** Thu nhập mỗi tháng phụ thuộc Dân tâm: 70 → 260 lượng, 20 → 160 lượng. */
   G.monthlyIncome = function () {
-    return Math.round(120 + G.state.stats.danTam * 2);
+    return Math.round((120 + G.state.stats.danTam * 2) * G.queMult("income"));
   };
 
   /**
@@ -925,10 +928,11 @@
         out.ended = s.ended;
         break;
       }
-      if (r.event || r.event2 || r.ruleEvent) {
+      if (r.event || r.event2 || r.ruleEvent || (r.sideEvents && r.sideEvents.length)) {
         out.event = r.event;
         out.event2 = r.event2;
         out.ruleEvent = r.ruleEvent;
+        out.sideEvents = r.sideEvents || [];
         break;
       }
       if (r.births.length || s.pendingTitles.length) break;
@@ -941,7 +945,7 @@
   G.advanceMonth = function (opts) {
     opts = opts || {};
     const s = G.state;
-    const report = { births: [], event: null, system: [] };
+    const report = { births: [], event: null, system: [], sideEvents: [] };
     if (s.ended) return report;
 
     for (const c of s.consorts) if (!s.visitedThisMonth[c.id] && rand() < 0.5) c.favor = clamp(c.favor - 1, 0, 100);
@@ -1012,7 +1016,7 @@
     const s = G.state;
     if (!s || s.ended) return null;
     const rec = s.nightEvents && s.nightEvents.turn === s.turn ? s.nightEvents : (s.nightEvents = { turn: s.turn, n: 0 });
-    if (rec.n >= G.NIGHT_EVENT_MAX || rand() >= G.NIGHT_EVENT_CHANCE) return null;
+    if (rec.n >= G.NIGHT_EVENT_MAX || rand() >= G.NIGHT_EVENT_CHANCE * G.queMult("night")) return null;
     let ev = null;
     if (G.nightContest && rand() < G.NIGHT_CONTEST_SHARE) ev = G.nightContest();
     if (!ev) {
