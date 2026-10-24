@@ -1062,36 +1062,14 @@
    * {cosign} những phi cùng ký tấu, {que} tên quẻ.
    */
   G.D1_TEXT = {
-    bangTop: [
-      "Cuối tháng, Kính Sự phòng dâng Bảng vàng hậu cung. Bảng {bang} tháng này, {name} đứng {hang}.\n> Thần thiếp không dám nhận lời khen, chỉ mong bệ hạ vui lòng.",
-      "Lý công công trải tờ Bảng vàng lên án. Tên {name} viết đầu bảng {bang}, mực son còn chưa khô.\n> Bệ hạ, các phi đều đang chờ xem người ban thưởng thế nào.",
-    ],
-    bangBottom: {
-      sung_phi: "{name} đứng cuối bảng Sủng phi tháng này. Chiều tối, cung nữ của nàng mang đến một ấm trà còn nóng.\n> Nương nương nhà nô tì pha trà đợi bệ hạ. Nương nương nói, nếu bệ hạ rảnh thì ghé cung một lát.",
-      tri_ky: "Bảng Tri kỷ tháng này, tên {name} ở cuối. Sáng hôm sau trên án có một phong thư nhỏ, nét chữ của nàng.\n> Bệ hạ còn nhớ thiếp không? Thiếp vẫn nhớ đêm đầu bệ hạ đến cung thiếp.",
-      bi_lang_quen: "Đã lâu bệ hạ chưa triệu {name}. Đêm nay nàng tự đến trước cửa Dưỡng Tâm điện, tay ôm chiếc áo choàng mỏng.\n> Thiếp biết mình không nên tự đến… nhưng thiếp nhớ bệ hạ quá.",
-      tai_nghe: "{name} đứng cuối bảng Tài nghệ. Nàng ôm cây đàn cũ đến xin bệ hạ.\n> Thiếp muốn học thêm cho bằng các tỷ muội. Bệ hạ cho thiếp vào học phường được không?",
-      hoa_nha: "Bảng Hòa nhã tháng này, {name} đứng cuối. Nghe nói mấy hôm nay các tỷ muội ngồi uống trà mà không ai gọi nàng.\n> Thiếp không sao đâu. Thiếp quen ngồi một mình rồi.",
-    },
-    choiceIntro: [
-      "{name} quỳ trước long sàng, má hồng lên.\n> Bệ hạ… đêm nay cho thiếp được tự chọn một lần. Thiếp muốn \"{fetish}\".",
-      "{name} đến sớm hơn mọi khi, tay cầm một tấm thẻ nhỏ tự viết.\n> Đêm nay để thiếp chọn nhé. Thiếp đã nghĩ cả ngày rồi: \"{fetish}\".",
-      "Đèn vừa thắp, {name} đã kéo tay áo bệ hạ.\n> Bệ hạ hay chọn cho thiếp. Hôm nay thiếp xin được chọn \"{fetish}\", người chịu không?",
-    ],
-    ruleRequest: "{name} dâng một bản tấu chép tay ngay ngắn, xin bệ hạ ban {rule}.\n> Thần thiếp và các tỷ muội đã bàn kỹ, ai cũng sẵn lòng giữ lệ này. Xin bệ hạ chuẩn tấu.",
+    bangTop: ["Kính Sự phòng vừa xướng danh, {name} đứng đầu bảng {bang}, nàng khẽ cúi đầu, môi đỏ hé cười dâm đãng.\n> Thần thiếp cảm tạ bệ hạ, lồn thiếp ướt nhẹp vì được {hang} này.", "{name} nghe tên mình vang lên đệ nhất trên {bang}, tay nàng khẽ vuốt ngực căng, ánh mắt long lanh.\n> Bệ hạ… thiếp xin dâng cả thân xác này để bệ hạ đụ cho đã.", "Trước bàn Kính Sự, {name} nhận tin đứng đầu {bang}, nàng nhún người, váy lụa tuột lộ đùi trắng.\n> Lý công công, hãy tâu với bệ hạ, thần thiếp sẵn sàng để bệ hạ chơi suốt đêm.", "{name} đứng nhất bảng {bang}, nàng cười khẽ, ngón tay chạm nhẹ vào chỗ kín dưới váy.\n> Thần thiếp vui mừng quá, cái lồn này chỉ muốn bị bệ hạ đụ đến chảy nước.", "Khi bảng {bang} được dâng, {name} đứng đệ nhất, nàng quay người, mông cong đưa về phía cửa.\n> Bệ hạ mau đến đi, thiếp muốn bị đụ đến mông đỏ cả lên.", "{name} được xướng đệ nhất {bang}, nàng ngồi xuống, váy xòe lộ chỗ ướt át giữa hai chân.\n> Lý công công, tâu với bệ hạ rằng thần thiếp đã sẵn sàng cho bệ hạ chơi."],
+    bangBottom: {"sung_phi": "{name} ngồi buồn trong cung, sai cung nữ bưng khay trà đến trước cửa mời bệ hạ ghé.\n> Bệ hạ… thiếp nhớ cái cặc của bệ hạ quá, xin bệ hạ ghé đụ thiếp một chút.", "tri_ky": "{name} lặng lẽ để một phong thư nhỏ trên án thư, nét chữ run run viết những lời nhớ nhung.\n> Bệ hạ, thiếp chỉ muốn được bệ hạ đụ cho thật nhiều, như những lần trước.", "bi_lang_quen": "Đêm nay {name} tự bước đến trước cửa Dưỡng Tâm điện, áo mỏng ướt sương, mắt long lanh.\n> Bệ hạ… thiếp đã chờ lâu quá, xin bệ hạ cho thiếp vào để được đụ.", "tai_nghe": "{name} cúi đầu thấp, xin được vào học phường vì kém nhất về cầm kỳ thi họa.\n> Thần thiếp xin được học, để sau này có thể phục vụ bệ hạ bằng cả thân xác.", "hoa_nha": "{name} ngồi một mình trong góc vườn, các tỷ muội chẳng ai đến chơi cùng.\n> Thiếp chỉ muốn được bệ hạ chơi một mình thôi, dù không ai để ý đến thiếp."},
+    choiceIntro: ["{name} khẽ kéo tay áo bệ hạ, má đỏ hồng, mắt liếc nhìn rồi thì thầm.\n> Bệ hạ… đêm nay thiếp muốn được chơi theo kiểu \"{fetish}\" được không?", "{name} ngồi sát lại, váy lụa trễ nải, tay khẽ vuốt đùi mình rồi cười tinh nghịch.\n> Thiếp muốn đêm nay bệ hạ đụ thiếp theo kiểu \"{fetish}\", được chứ?", "{name} cúi đầu thấp, giọng run nhẹ, ngón tay siết chặt vạt áo.\n> Thần thiếp xin bệ hạ… cho thiếp được hầu theo \"{fetish}\" đêm nay.", "{name} bước đến gần, môi hé cười dâm, tay chỉ nhẹ vào chỗ kín dưới váy.\n> Bệ hạ chọn \"{fetish}\" đi, thiếp muốn bị đụ đúng kiểu đó.", "{name} ngồi lên đùi bệ hạ, mông cọ nhẹ, thì thầm vào tai.\n> Đêm nay thiếp muốn \"{fetish}\"… bệ hạ đụ thiếp theo đó nhé.", "{name} ngẩng mặt, mắt long lanh, giọng vừa ngượng vừa dám.\n> Thần thiếp tự chọn \"{fetish}\", xin bệ hạ chiều cho.", "{name} kéo bệ hạ lại gần giường, váy tuột lộ đùi trắng, cười khẽ.\n> Bệ hạ… thiếp muốn chơi \"{fetish}\" tối nay, được không?", "{name} quỳ xuống, tay đặt lên đùi bệ hạ, giọng nũng nịu.\n> Thiếp xin được hầu theo kiểu \"{fetish}\", bệ hạ đụ thiếp đi."],
+    ruleRequest: "{name} quỳ xuống dâng tấu, giọng khẽ nũng nịu.\n> Bệ hạ, thần thiếp xin ban lệ {rule}, các tỷ muội đều tự nguyện theo.",
     ruleCosign: "Cùng ký tấu: {cosign}.",
     queIntro: "Đầu xuân, Khâm thiên giám dâng quẻ cho năm mới: quẻ {que}.",
-    que: {
-      dao_hoa: "Hoa đào nở sớm trong cung, năm nay tình duyên vượng. Đêm dài nhiều chuyện, mỹ nhân hay tự tìm đến.",
-      tu_ton: "Sao Tử tôn sáng rõ ở phương đông. Năm nay hậu cung dễ có tin vui.",
-      song_hy: "Hai sao cùng mọc một chỗ, điềm song hỷ. Nếu có tin vui, dễ là long phượng song thai.",
-      phong_thu: "Mưa thuận gió hòa, lúa được mùa. Thuế về kho đầy hơn mọi năm.",
-      han_han: "Mây thưa, trời khô. Năm nay e có hạn, dân đói thì lòng dân dễ dao động. Bệ hạ nên tiết kiệm.",
-      tuyen_tu: "Sao Hồng loan chiếu vào cung. Năm nay tú nữ khắp nơi đổ về, tuyển tú tốn ít mà được người đẹp.",
-      van_xuong: "Sao Văn xương sáng. Năm nay người trong cung học gì cũng mau thành.",
-      phong_nguyet: "Gió trăng đầy trời. Năm nay lệ trong cung được giữ nghiêm, chuyện phong nguyệt cũng nhiều hơn.",
-      binh_an: "Quẻ bình. Không điềm lạ, không tai ương. Các nước chư hầu gửi lễ vật mừng năm mới.",
-    },
+    // quẻ tuyen_tu giữ câu nháp: bản Grok có chữ gợi tuổi non, chờ người chơi quyết
+    que: Object.assign({"dao_hoa": "Sao Đào Hoa đỏ rực, hoa đào nở đầy cung. Tình duyên vượng, các phi đêm đêm tự tìm đến, lồn ướt nhẹp chờ bệ hạ đụ.", "tu_ton": "Tử Tôn tinh sáng, đất trời thuận. Dễ có tin vui, các phi dễ mang thai, lồn đầy tinh chờ sinh.", "song_hy": "Song Hỷ song song, mây lành vần. Dễ sinh đôi, một lần đụ ra hai đứa, phúc lộc đôi phần.", "phong_thu": "Phong Thu khí vượng, ngũ cốc xanh. Được mùa, thuế nhiều, quốc khố đầy như lồn phi đầy tinh.", "han_han": "Hạn Hán nóng khô, sao hạn chiếu. Mất mùa, lòng dân dao động, nên tiết kiệm, đừng đụ lung tung.", "van_xuong": "Văn Xương tinh chiếu, thư hương lan. Học gì cũng mau thành, cầm kỳ thi họa giỏi, biết rên đúng lúc.", "phong_nguyet": "Phong Nguyệt khí thịnh, trăng tròn. Lệ cung giữ nghiêm, chuyện đụ nhau nhiều, đêm đêm rên to.", "binh_an": "Bình An khí hòa, trời trong. Không điềm lạ, chư hầu gửi lễ, bốn phương yên, đụ thoải mái."}, { tuyen_tu: "Sao Hồng loan chiếu vào cung. Năm nay tú nữ khắp nơi đổ về, tuyển tú tốn ít mà được người đẹp." }),
   };
 
   const d1 = (s) => {
