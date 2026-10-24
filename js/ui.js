@@ -235,9 +235,23 @@
           ? `<div class="scroll-x"><table class="mini-table"><tr><th>Cặp</th><th>Tình Ý</th><th>Trạng thái</th></tr>${pairs.map((p) => `<tr><td>${esc(p.a.name)} · ${esc(p.b.name)}</td><td>${Math.round(p.tinhY)}</td><td>${esc(p.status)}</td></tr>`).join("")}</table></div>`
           : `<p class="empty">Chưa có cặp nào thân thiết. Tình Ý tăng khi các phi học cùng lớp, cùng bị lạnh nhạt, hoặc hợp tính.</p>`
       }
+      ${renderPhe()}
       ${renderBangVang()}
       ${s.former.length ? `<p class="hint">Đã rời cung: ${s.former.map((f) => esc(f.name) + " (" + esc(f.reason) + ")").join(", ")}.</p>` : ""}
     </section>`;
+  }
+
+  /** Phe phái: người cầm đầu, số người theo, sức mạnh (tổng Sủng ái). */
+  function renderPhe() {
+    const list = G.factionList ? G.factionList() : [];
+    if (!list.length) return `<div class="section-head"><h3>Phe phái</h3></div><p class="empty">Chưa chia phe. Cần ít nhất hai phi từ phẩm Tần trở lên; phi khác theo người mình thân nhất (Tình Ý từ ${G.PHE_MIN_TINHY}).</p>`;
+    const max = Math.max(...list.map((f) => f.strength), 1);
+    const d = G.state.d2 || {};
+    const lop = list.length >= 2 && list[0].strength > 2 * list[list.length - 1].strength;
+    return `<div class="section-head"><h3>Phe phái</h3><span class="hint">${lop ? "Lệch phe: Hòa khí −1/tháng" : "Sức mạnh = tổng Sủng ái"}</span></div>
+      <div class="cards">${list
+        .map((f) => `<div class="row-card"><div><b>Phe ${esc(f.leader.name)}</b>${d.queenLeader === f.leader.id ? " · <span class=\"tag\">phe Hoàng hậu</span>" : ""}${d.sulkUntil >= G.state.turn && d.sulkLeader && d.sulkLeader !== f.leader.id ? " · <span class=\"tag\">đang dỗi</span>" : ""}<br><span class="hint">${f.members.length ? esc(f.members.map((c) => c.name).join(", ")) : "Chưa ai theo"}</span><span class="favor">${bar((f.strength / max) * 100)}<span>${f.strength}</span></span></div></div>`)
+        .join("")}</div>`;
   }
 
   /** Bảng vàng: ba người đứng đầu mỗi bảng, chấm lại cuối mỗi tháng. */
@@ -750,6 +764,11 @@
        <div class="cards">
          <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.selectionCost()} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tuần du</b><br><span class="hint">${G.canTravel() ? "Mỗi năm một chuyến. Mỗi vùng có mỹ nhân và chuyện riêng." : "Năm nay đã tuần du rồi."}</span></div><button class="btn btn-sm" id="a-travel" ${G.canTravel() ? "" : "disabled"}>Chọn vùng</button></div>
+         ${(() => {
+           const H = G.hanhCungNow && G.hanhCungNow();
+           const hint = H ? (H.why ? H.why : `${H.desc} ${H.cost} lượng, mang theo ${H.take} phi; phi ở lại hơi buồn.`) : "Tháng 6: Tiểu thử sơn trang · Tháng 11: Suối nước nóng.";
+           return `<div class="row-card"><div><b>Ngự giá hành cung${H ? " · " + esc(H.name) : ""}</b><br><span class="hint">${esc(hint)}</span></div><button class="btn btn-sm" id="a-hanh" ${H && !H.why ? "" : "disabled"}>Chọn phi</button></div>`;
+         })()}
          <div class="row-card"><div><b>Cung quy</b><br><span class="hint">${(() => { const on = Object.keys(s.rules || {}).length; const n = Object.values(R.rules).filter((r) => G.ruleUnlocked(r)).length; return n ? `Lệ hậu cung đang bật ${on}, đã mở ${n}. Chỉ phi sẵn lòng mới theo; phi không theo làm Hòa khí giảm.` : "Chưa mở quy định nào (cần Trụy lạc hoặc sở thích)."; })()}</span></div><button class="btn btn-sm" id="a-rules">Xem</button></div>
          <div class="row-card"><div><b>Mở cuộc thi</b><br><span class="hint">${esc(ctWhy || `${G.CONTEST_COST} lượng mỗi lần, ${G.CONTEST_COOLDOWN} tháng mới mở lại. Mùa thi tự đến vào tháng ${G.CONTEST_MONTHS.join(" và ")}.`)}</span></div><button class="btn btn-sm" id="a-contest" ${ctWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tặng quà, xuất cung, học phường</b><br><span class="hint">Chạm vào từng phi trong tab Hậu cung.</span></div><button class="btn btn-sm" id="a-harem">Hậu cung</button></div>
@@ -761,6 +780,7 @@
         $(el, "#a-close").addEventListener("click", closeSheet);
         on(el, "#a-select", "click", openSelection);
         on(el, "#a-travel", "click", openTravel);
+        on(el, "#a-hanh", "click", openHanhCung);
         on(el, "#a-rules", "click", openRules);
         on(el, "#a-contest", "click", () => {
           const ev = G.openContest();
@@ -883,7 +903,10 @@
     const c = G.findConsort(id);
     if (!c) return;
     const fets = Object.values(R.fetishes).sort((a, b) => a.tier - b.tier);
+    const crownWhy = G.crownBlock ? G.crownBlock(c) : null;
     const canCrown = !s.consorts.some((x) => x.rank === 7) && c.favor >= 70;
+    const wish = G.wishText ? G.wishText(c) : null;
+    const queued = s.d2 && s.d2.sacQueue.find((q) => q.id === c.id);
     const partner = G.partnerOf(c.id);
     const gifts = Object.values(R.gifts).sort((a, b) => a.cost - b.cost);
     openSheet(
@@ -892,10 +915,12 @@
        ${meter("Tình cảm", c.affection, "gold")}
        <div class="row-wrap">${c.traits.map((t) => pill(t)).join("")}</div>
        <p class="hint">${c.nights} đêm thị tẩm · ${c.kids} con${c.contestWins ? ` · ${c.contestWins} lần thắng thi` : ""}${partner && partner.tinhY >= 31 ? ` · ${partner.status} với ${esc(partner.other.name)} (${Math.round(partner.tinhY)})` : ""}</p>
+       ${wish ? `<p class="hint"><b>Tâm nguyện:</b> ${esc(wish.text)} · còn ${wish.left} tháng. Toại nguyện: Tình cảm +${G.WISH_AFFECTION}.</p>` : ""}
+       ${queued ? `<p class="hint"><b>Chờ lễ sắc phong</b> lên ${esc(G.RANKS[queued.rank])} (${G.SAC_PHONG_COST[queued.rank]} lượng). Lễ bộ sẽ dâng tấu.</p>` : ""}
        <div class="choices">
          <button class="btn" id="c-visit">Ghé thăm</button>
          <button class="btn" id="c-night" ${G.cannotSummon(c) ? "disabled" : ""}>Triệu thị tẩm${c.pregnantDue != null ? " (đang hoài thai)" : ""}</button>
-         ${canCrown ? `<button class="btn" id="c-crown">Lập làm Hoàng hậu</button>` : ""}
+         ${canCrown ? `<button class="btn" id="c-crown" ${crownWhy ? "disabled" : ""}>Lập làm Hoàng hậu${crownWhy ? `<span class="cost">${esc(crownWhy)}</span>` : ""}</button>` : ""}
        </div>
        <details><summary>Tặng quà</summary><div class="cards">${gifts
          .map((g) => `<div class="row-card"><div><b>${esc(g.name)}</b>${(g.likes || []).some((l) => c.likes.includes(l) || c.traits.includes(l) || l === c.id) ? " ♥" : ""}<br><span class="hint">${esc(g.desc || "")}${c.gifts[g.id] ? ` · đã tặng ${c.gifts[g.id]} lần` : ""}</span></div><button class="btn btn-sm" data-gift="${esc(g.id)}">${fmtMoney(g.cost)}</button></div>`)
@@ -971,8 +996,9 @@
         $(el, "#c-visit").addEventListener("click", () => showMessage(c.name, G.visit(c.id), ["Sủng ái +3"]));
         $(el, "#c-night").addEventListener("click", () => openNight(c));
         on(el, "#c-crown", "click", () => {
-          G.crownEmpress(c.id);
-          showMessage("Đại lễ sách phong", `${c.name} đội mũ phượng, chính thức trở thành Hoàng hậu.`, ["Sủng ái +10"]);
+          const ev = G.crownEvent ? G.crownEvent(c.id) : null;
+          if (ev) showEvent(ev);
+          else showMessage("Lập hậu", (G.crownBlock && G.crownBlock(c)) || "Chưa thể lập hậu.");
         });
         on(el, "#c-release", "click", () => {
           const r = G.releaseConsort(c.id);
@@ -1205,12 +1231,47 @@
     recruitPicker("Tuyển tú", "Bốn tú nữ vào vòng cuối, tất cả từ 18 tuổi trở lên. Chọn người được lưu bài tử.", recruits, G.selectionCost());
   }
 
+  function openHanhCung() {
+    const H = G.hanhCungNow();
+    if (!H || H.why) return showMessage("Ngự giá hành cung", (H && H.why) || "Chưa đến mùa đi hành cung.");
+    const list = G.state.consorts.filter((c) => c.pregnantDue == null).sort((a, b) => b.favor - a.favor);
+    const picked = new Set();
+    openSheet(
+      `<h3>${esc(H.name)}</h3><p class="hint">${esc(H.desc)} Chọn tối đa ${H.take} phi. ${H.cost} lượng.</p>
+       <div class="check-list">${list.map((c) => `<label class="check"><input type="checkbox" data-hc="${esc(c.id)}"> <span>${esc(c.name)} <span class="hint">· ${esc(G.displayTitle(c))} · Sủng ái ${c.favor}${G.factionOf && G.factionOf(c.id) ? " · phe " + esc((G.findConsort(G.factionOf(c.id)) || {}).name || "") : ""}</span></span></label>`).join("")}</div>
+       <p class="hint" id="hc-n">Chưa chọn ai.</p>
+       <div class="choices"><button class="btn btn-primary" id="hc-go" disabled>Ngự giá</button><button class="btn btn-ghost" id="hc-close">Thôi</button></div>`,
+      (el) => {
+        $(el, "#hc-close").addEventListener("click", closeSheet);
+        el.querySelector(".sheet-card").addEventListener("change", (e) => {
+          const id = e.target.dataset && e.target.dataset.hc;
+          if (!id) return;
+          if (e.target.checked) {
+            if (picked.size >= H.take) {
+              e.target.checked = false;
+              return;
+            }
+            picked.add(id);
+          } else picked.delete(id);
+          $(el, "#hc-n").textContent = picked.size ? `Đã chọn ${picked.size}/${H.take}.` : "Chưa chọn ai.";
+          $(el, "#hc-go").disabled = !picked.size;
+        });
+        $(el, "#hc-go").addEventListener("click", () => {
+          const scene = G.goHanhCung([...picked]);
+          G.save();
+          if (scene) showScene(scene);
+          else closeSheet();
+        });
+      }
+    );
+  }
+
   function openTravel() {
     if (!G.canTravel()) return showMessage("Tuần du", "Năm nay đã tuần du rồi.");
     const regions = Object.values(R.regions);
     openSheet(
       `<h3>Tuần du</h3><p class="hint">Mỗi năm một chuyến. Long thể −3, Trụy lạc +4. Mỗi vùng có mỹ nhân và sự kiện riêng.</p>
-       <div class="cards">${regions.map((r) => `<div class="row-card"><div><b>${esc(r.name)}</b><br><span class="hint">${esc(r.desc || "")}</span></div><button class="btn btn-sm" data-region="${esc(r.id)}">${fmtMoney(r.cost)}</button></div>`).join("")}</div>
+       <div class="cards">${regions.map((r) => `<div class="row-card"><div><b>${esc(r.name)}</b><br><span class="hint">${esc(r.desc || "")}</span></div><button class="btn btn-sm" data-region="${esc(r.id)}">${fmtMoney(G.regionCost ? G.regionCost(r) : r.cost)}</button></div>`).join("")}</div>
        <button class="btn btn-ghost" id="tr-close">Thôi</button>`,
       (el) => {
         $(el, "#tr-close").addEventListener("click", closeSheet);
@@ -1219,7 +1280,7 @@
           if (!r) return;
           if (!r.ok) return showMessage("Tuần du", r.text);
           G.save();
-          recruitPicker("Tuần du " + r.region.name, r.region.arrive || `Đoàn thuyền rồng cập bến ${r.region.name}. Địa phương dâng mỹ nhân.`, r.recruits, r.region.cost);
+          recruitPicker("Tuần du " + r.region.name, r.region.arrive || `Đoàn thuyền rồng cập bến ${r.region.name}. Địa phương dâng mỹ nhân.`, r.recruits, G.regionCost ? G.regionCost(r.region) : r.region.cost);
         });
       }
     );

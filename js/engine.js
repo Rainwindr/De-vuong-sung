@@ -494,6 +494,7 @@
   function promote(c, target) {
     const s = G.state;
     const before = c.rank;
+    if (G.promoteGate) target = G.promoteGate(c, target); // lễ sắc phong cho phẩm Phi trở lên
     c.rank = clamp(target, 0, 6);
     if (c.rank === before) return;
     log(`${c.name} được thăng lên ${G.RANKS[c.rank]}.`, "harem");
