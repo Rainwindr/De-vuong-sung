@@ -28,7 +28,8 @@
       "scene-texts/8-canh-moi.json",
       "scene-texts/9-cuoc-thi-nhap.json",
       "scene-texts/10-su-kien-core.json",
-      "scene-texts/11-cung-quy.json"
+      "scene-texts/11-cung-quy.json",
+      "scene-texts/12-dot-2.json"
     ],
     "portraits": "portraits.json",
     "contests": "contests.json",
