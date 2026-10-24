@@ -1448,7 +1448,7 @@
     rumorFalse: "{name} bị oan, nàng khóc cả đêm. {name2} lại được tiếng là người thẳng thắn.",
     rumorIgnoreTrue: "Bệ hạ bỏ qua, nhưng chuyện cứ âm ỉ trong hậu cung.",
     rumorIgnoreFalse: "Bệ hạ bỏ qua. Vài hôm sau tin đồn tự tắt.",
-    hoaThan: "Sứ thần {region} vào triều, xin hòa thân. Sứ dâng {n} cuộn tranh niêm phong bằng sáp đỏ. Mỗi cuộn là chân dung một công chúa do chính nàng vẽ hoặc đồng ý cho vẽ, tự tay gửi sang. Chỉ bệ hạ được mở.",
+    hoaThan: "Sứ thần nước {region} kính dâng {n} cuộn tranh niêm phong, mỗi cuộn là chân dung công chúa do chính nàng vẽ hoặc đồng ý cho vẽ, tự tay gửi sang. Các nàng đều tự nguyện hòa thân, chỉ bệ hạ được mở xem.\nTranh còn giữ nguyên dấu sáp, chưa ai dám phá.",
     hoaThanCond: {
       thue: "Điều kiện của sứ: giảm thuế buôn bán với {region} trong hai năm (Quốc khố −100 mỗi tháng).",
       cung: "Điều kiện của sứ: xây cho nàng một cung riêng theo kiểu quê nhà (Quốc khố −1000, cung nàng lên một bậc).",
@@ -2173,9 +2173,9 @@
     { id: "hoa_hop", name: "Hòa hợp", desc: "Tin đồn ít đi một nửa, Hòa khí +1 mỗi quý.", mult: { rumor: 0.5 } }
   );
   Object.assign(G.D1_TEXT.que, {
-    vien_khach: "Sao khách mọc ở phương tây. Năm nay có sứ thần phương xa vào triều, mang theo tin vui.",
-    ghen_tuong: "Mây che trăng, sao Thái âm mờ. Năm nay lòng người trong hậu cung dễ sinh hiềm khích, bệ hạ nên lắng nghe nhiều hơn.",
-    hoa_hop: "Hai sao Song nữ sáng cùng nhau. Năm nay hậu cung êm ấm, ít lời ra tiếng vào.",
+    vien_khach: "Sao Bắc Đẩu chiếu thẳng xuống phương Nam, sứ giả phương xa mang theo công chúa còn nguyên vẹn xin hòa thân. Năm nay sẽ có lồn ngoại quốc đến cung, để hoàng thượng phá trinh và đụ no cặc.",
+    ghen_tuong: "Mây đen che khuất trăng, gió lạnh thổi qua hậu cung khiến các phi ghen tuông điên đảo. Tin đồn về ai được đụ nhiều hơn lan truyền, lồn các nàng ngứa ngáy vì hiềm khích.",
+    hoa_hop: "Trăng rằm soi sáng, gió xuân hòa dịu thổi qua cung. Hậu cung êm ấm, các phi vui vẻ cùng hầu hạ, ít cãi vã vì đêm nào cũng được bệ hạ bú liếm và xuất tinh no nê.",
   });
   monthly((s) => {
     const q = G.currentQue();
