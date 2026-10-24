@@ -705,7 +705,7 @@
   }
 
   /* ---------------- Cung quy ---------------- */
-  function openRules() {
+  function openRules(msg) {
     const s = G.state;
     const all = Object.values(R.rules);
     const open = all.filter((r) => G.ruleUnlocked(r) || G.ruleEnabled(r.id));
@@ -715,10 +715,11 @@
       const fol = G.ruleFollowers(r);
       const ref = s.consorts.length - fol.length;
       const loss = Math.min(G.RULE_HOAKHI_CAP, ref * G.RULE_HOAKHI_PER_REFUSER);
-      return `<div class="row-card"><div><b>${esc(r.name)}</b>${on ? " · <span class=\"tag\">đang bật</span>" : ""}<br><span class="hint">${esc(r.desc || "")}</span><br><span class="hint">Theo lệ: ${fol.length}/${s.consorts.length} phi${fol.length ? " (" + esc(fol.slice(0, 4).map((c) => c.name).join(", ")) + (fol.length > 4 ? "…" : "") + ")" : ""}${ref ? ` · Hòa khí −${loss}/tháng` : ""}</span></div><button class="btn btn-sm${on ? "" : " btn-primary"}" data-rule="${esc(r.id)}">${on ? "Bãi bỏ" : "Ban lệ"}</button></div>`;
+      return `<div class="row-card"><div><b>${esc(r.name)}</b>${on ? " · <span class=\"tag\">đang bật</span>" : ""}<br><span class="hint">${esc(r.desc || "")}</span><br><span class="hint">Theo lệ: ${fol.length}/${s.consorts.length} phi${fol.length ? " (" + esc(fol.slice(0, 4).map((c) => c.name).join(", ")) + (fol.length > 4 ? "…" : "") + ")" : ""}${ref ? ` · Hòa khí −${loss}/tháng` : ""}</span></div><span class="row-btns"><button class="btn btn-sm${on ? "" : " btn-primary"}" data-rule="${esc(r.id)}">${on ? "Bãi bỏ" : "Ban lệ"}</button>${ref && (r.fetish || []).some((f) => G.fetishUnlocked(f) && s.consorts.some((c) => G.consentOf(c, f) === "persuade")) ? `<button class="btn btn-sm btn-ghost" data-rule-pers="${esc(r.id)}">Thuyết phục</button>` : ""}</span></div>`;
     };
     openSheet(
       `<h3>Cung quy</h3><p class="hint">Lệ hậu cung do bệ hạ ban. Chỉ phi sẵn lòng với sở thích của lệ mới theo; phi khác được miễn nhưng hậu cung chia phe, Hòa khí giảm mỗi tháng (cộng dồn mọi lệ tối đa −${G.RULE_HOAKHI_TOTAL_CAP}/tháng).</p>
+       ${msg ? `<p class="hint fx-msg">${esc(msg)}</p>` : ""}
        ${open.length ? `<div class="cards">${open.map(card).join("")}</div>` : `<p class="empty">Chưa mở quy định nào.</p>`}
        ${locked ? `<p class="hint">Còn ${locked} quy định chưa mở.</p>` : ""}
        <button class="btn btn-ghost" id="r-close">Đóng</button>`,
@@ -728,6 +729,12 @@
           G.toggleRule(b.dataset.rule);
           G.save();
           openRules();
+        });
+        on(el, "[data-rule-pers]", "click", (b) => {
+          const r = R.rules[b.dataset.rulePers];
+          const texts = (r.fetish || []).map((f) => G.persuadeAll(f)).filter(Boolean).map((x) => x.text);
+          G.save();
+          openRules(`Thuyết phục cho ${r.name}. ` + texts.join(" "));
         });
       }
     );
@@ -899,15 +906,10 @@
        </details>
        ${
          fets.length
-           ? `<details ${s.godMode ? "open" : ""}><summary>Sở thích và mức sẵn lòng</summary><div class="scroll-x"><table class="mini-table">${fets
-               .map((f) => {
-                 const lvl = G.consentOf(c, f.id);
-                 const cell = s.godMode
-                   ? `<select data-consent="${esc(f.id)}">${G.CONSENT.map((x) => `<option value="${x}" ${x === lvl ? "selected" : ""}>${G.CONSENT_LABEL[x]}</option>`).join("")}</select>`
-                   : `${esc(G.CONSENT_LABEL[lvl])}${lvl === "persuade" && G.fetishUnlocked(f.id) ? ` <button class="btn btn-sm" data-persuade="${esc(f.id)}">Thuyết phục</button>` : ""}`;
-                 return `<tr><td>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""}<br><span class="hint">Tầng ${f.tier}${G.fetishUnlocked(f.id) ? "" : " · chưa mở"}</span></td><td>${cell}</td></tr>`;
-               })
-               .join("")}</table></div></details>`
+           ? `<details ${s.godMode ? "open" : ""}><summary>Sở thích và mức sẵn lòng</summary>
+               ${s.godMode ? "" : `<div class="fx-tools"><input type="search" id="c-fxq" placeholder="Tìm sở thích…" aria-label="Tìm sở thích" autocomplete="off"><label class="check fx-only"><input type="checkbox" id="c-fxp"> Chỉ Cần thuyết phục</label></div>
+               <p class="hint">Thuyết phục được khi Sủng ái và Tình cảm của nàng đều đạt mức cần (tầng 1: 60, tầng 2: 70, tầng 3: 80). "Cả hậu cung" thử với mọi phi.</p><p class="hint fx-msg" id="c-fxmsg" hidden></p>`}
+               <div class="scroll-x" id="c-fxt"></div></details>`
            : ""
        }
        ${
@@ -926,6 +928,45 @@
        </details>
        <button class="btn btn-ghost" id="c-close">Đóng</button>`,
       (el) => {
+        let fxQuery = "";
+        let fxOnlyPersuade = false;
+        const renderFx = () => {
+          const box = el.querySelector("#c-fxt");
+          if (!box) return;
+          const q = fold(fxQuery.trim());
+          const shown = fets.filter((f) => (!q || fold(f.name).includes(q) || fold(f.id).includes(q)) && (!fxOnlyPersuade || (G.consentOf(c, f.id) === "persuade" && G.fetishUnlocked(f.id))));
+          box.innerHTML = shown.length
+            ? `<table class="mini-table">${shown
+                .map((f) => {
+                  const lvl = G.consentOf(c, f.id);
+                  const open = G.fetishUnlocked(f.id);
+                  let cell;
+                  if (s.godMode) cell = `<select data-consent="${esc(f.id)}">${G.CONSENT.map((x) => `<option value="${x}" ${x === lvl ? "selected" : ""}>${G.CONSENT_LABEL[x]}</option>`).join("")}</select>`;
+                  else if (lvl === "persuade" && open) {
+                    const need = G.persuadeNeed(f.id);
+                    const ready = c.favor >= need && c.affection >= need;
+                    cell = `${esc(G.CONSENT_LABEL[lvl])}<br><span class="hint">Cần ${need}/${need} · nàng <b class="${c.favor >= need ? "" : "short"}">${c.favor}</b>/<b class="${c.affection >= need ? "" : "short"}">${c.affection}</b></span><br><button class="btn btn-sm${ready ? " btn-primary" : ""}" data-persuade="${esc(f.id)}">Thuyết phục</button> <button class="btn btn-sm btn-ghost" data-persuade-all="${esc(f.id)}">Cả hậu cung</button>`;
+                  } else cell = esc(G.CONSENT_LABEL[lvl]);
+                  return `<tr><td>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""}<br><span class="hint">Tầng ${f.tier}${open ? "" : " · chưa mở"}</span></td><td>${cell}</td></tr>`;
+                })
+                .join("")}</table>`
+            : `<p class="empty">Không có sở thích nào khớp.</p>`;
+        };
+        const fxMsg = (text) => {
+          const m = el.querySelector("#c-fxmsg");
+          if (!m) return;
+          m.textContent = text;
+          m.hidden = false;
+        };
+        renderFx();
+        on(el, "#c-fxq", "input", (inp) => {
+          fxQuery = inp.value;
+          renderFx();
+        });
+        on(el, "#c-fxp", "change", (inp) => {
+          fxOnlyPersuade = inp.checked;
+          renderFx();
+        });
         $(el, "#c-close").addEventListener("click", closeSheet);
         $(el, "#c-visit").addEventListener("click", () => showMessage(c.name, G.visit(c.id), ["Sủng ái +3"]));
         $(el, "#c-night").addEventListener("click", () => openNight(c));
@@ -942,10 +983,22 @@
           if (r) showMessage(r.ok ? "Ban thưởng" : "Không thể ban thưởng", r.text, r.notes);
         });
         on(el, "#c-school", "change", (sel) => G.setSchool(c.id, sel.value));
-        on(el, "[data-persuade]", "click", (b) => {
-          const r = G.persuade(c.id, b.dataset.persuade);
-          if (r) showMessage(c.name, r.text);
-        });
+        // bảng sở thích được vẽ lại, nên bắt sự kiện bấm trên cả hộp
+        const fxBox = el.querySelector("#c-fxt");
+        if (fxBox)
+          fxBox.addEventListener("click", (e) => {
+            const one = e.target.closest("[data-persuade]");
+            const all = e.target.closest("[data-persuade-all]");
+            if (one) {
+              const r = G.persuade(c.id, one.dataset.persuade);
+              if (r) fxMsg(r.text);
+            } else if (all) {
+              const r = G.persuadeAll(all.dataset.persuadeAll);
+              if (r) fxMsg(r.text);
+            } else return;
+            G.save();
+            renderFx();
+          });
         on(el, "[data-consent]", "change", (sel) => G.god.setConsent(c.id, sel.dataset.consent, sel.value));
         on(el, "#g-fav", "input", (inp) => {
           G.god.setFavor(c.id, inp.value);
@@ -998,7 +1051,8 @@
       const ok = lvl === "willing";
       const on = picked.has(f.id);
       return `<div class="fx-row${ok ? "" : " fx-off"}">
-        <label class="check"><input type="checkbox" data-fx="${esc(f.id)}" ${on ? "checked" : ""} ${ok ? "" : "disabled"}> <span>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""} <span class="hint">· ${esc(G.CONSENT_LABEL[lvl])}</span></span></label>
+        <label class="check"><input type="checkbox" data-fx="${esc(f.id)}" ${on ? "checked" : ""} ${ok ? "" : "disabled"}> <span>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""} <span class="hint">· ${esc(G.CONSENT_LABEL[lvl])}${lvl === "persuade" ? ` (cần ${G.persuadeNeed(f.id)}, nàng ${c.favor}/${c.affection})` : ""}</span></span></label>
+        ${lvl === "persuade" ? `<button class="btn btn-sm btn-ghost" data-pers="${esc(f.id)}">Thuyết phục</button>` : ""}
         <button class="fx-pin" data-pin="${esc(f.id)}" aria-pressed="${pins.has(f.id)}" aria-label="Ghim ${esc(f.name)}">${pins.has(f.id) ? "★" : "☆"}</button>
       </div>`;
     };
@@ -1033,12 +1087,13 @@
       `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Lật thẻ bài · ${esc(G.displayTitle(c))}</span><h3>${esc(c.name)}</h3></div></div>
        ${
          fets.length
-           ? `<p class="hint">Chọn sở thích cho đêm nay (tùy chọn). Chọn hai sở thích hợp nhau để mở combo. Bấm ☆ để ghim lên đầu.</p>
+           ? `<p class="hint">Chọn sở thích cho đêm nay (tùy chọn). Chọn hai sở thích hợp nhau để mở combo. Bấm ☆ để ghim lên đầu. Bỏ chọn "Chỉ điều nàng sẵn lòng" để thấy và thuyết phục những sở thích nàng còn ngại.</p>
               <div class="fx-tools">
                 <input type="search" id="fx-q" placeholder="Tìm sở thích…" aria-label="Tìm sở thích" autocomplete="off">
                 <label class="check fx-only"><input type="checkbox" id="fx-only" checked> Chỉ điều nàng sẵn lòng</label>
               </div>
               <div id="fx-status" class="fx-status"></div>
+              <p class="hint fx-msg" id="fx-msg" hidden></p>
               <div id="fx-list"></div>`
            : ""
        }
@@ -1064,6 +1119,18 @@
             renderStatus(el);
           });
           card.addEventListener("click", (e) => {
+            const pers = e.target.closest && e.target.closest("[data-pers]");
+            if (pers) {
+              const r = G.persuade(c.id, pers.dataset.pers);
+              const m = $(el, "#fx-msg");
+              if (r && m) {
+                m.textContent = r.text;
+                m.hidden = false;
+              }
+              G.save();
+              renderList(el);
+              return;
+            }
             const pin = e.target.closest && e.target.closest("[data-pin]");
             if (pin) {
               const id = pin.dataset.pin;

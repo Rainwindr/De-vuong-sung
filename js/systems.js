@@ -246,6 +246,30 @@
     return { ok: false, text: `${c.name} cúi đầu: "Thiếp… cần thêm thời gian." Cần Sủng ái và Tình cảm từ ${need} trở lên.` };
   };
 
+  /** Mức Sủng ái và Tình cảm cần để thuyết phục được một sở thích. */
+  G.persuadeNeed = (fid) => 50 + ((R.fetishes[fid] && R.fetishes[fid].tier) || 1) * 10;
+
+  /** Thuyết phục cả hậu cung với một sở thích: thử lần lượt từng phi đang "Cần thuyết phục". */
+  G.persuadeAll = function (fid) {
+    const s = G.state;
+    const f = R.fetishes[fid];
+    if (!f || !G.fetishUnlocked(fid)) return null;
+    const out = { name: f.name, need: G.persuadeNeed(fid), ok: [], wait: [], refuse: 0, already: 0 };
+    for (const c of s.consorts) {
+      const lvl = G.consentOf(c, fid);
+      if (lvl === "refuse") out.refuse++;
+      else if (lvl === "willing") out.already++;
+      else (G.persuade(c.id, fid).ok ? out.ok : out.wait).push(c.name);
+    }
+    const parts = [];
+    parts.push(out.ok.length ? `${out.ok.length} phi gật đầu: ${out.ok.join(", ")}.` : "Chưa phi nào gật đầu thêm.");
+    if (out.wait.length) parts.push(`${out.wait.length} phi cần Sủng ái và Tình cảm từ ${out.need}: ${out.wait.join(", ")}.`);
+    if (out.already) parts.push(`${out.already} phi vốn đã sẵn lòng.`);
+    if (out.refuse) parts.push(`${out.refuse} phi từ chối, bệ hạ không ép.`);
+    out.text = `"${f.name}": ` + parts.join(" ");
+    return out;
+  };
+
   /** Tu ở hành cung một năm: mọi độ nghiện về 30, Trụy lạc −20. */
   G.detox = function () {
     const s = G.state;
