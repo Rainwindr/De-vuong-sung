@@ -4,7 +4,7 @@
     "text": "Giao thừa. Cả hậu cung tụ về Càn Thanh cung đón năm mới, đèn đỏ treo kín mái hiên.",
     "choices": [
       { "label": "Phát lì xì cho cả hậu cung", "cost": 600, "effects": { "favorAll": 3, "hoaKhi": 10, "album": { "title": "Đón năm mới", "line": "Cả hậu cung đón giao thừa ở Càn Thanh cung." } }, "result": "Tiếng pháo vang đến tận sáng." },
-      { "label": "Đón giao thừa với ba người được sủng nhất", "effects": { "truyLac": 3 }, "hook": "core.tet", "participants": { "select": "top_favor", "count": 3 }, "minParticipants": 3 }
+      { "label": "Đón giao thừa với ba người được sủng nhất", "effects": { "truyLac": 3 }, "hook": "core.tet", "fetish": ["canh-viet.hai_nguoi"], "participants": { "select": "top_favor", "count": 3 }, "minParticipants": 3 }
     ] },
   { "id": "core.doan_ngo", "title": "Tết Đoan Ngọ", "cooldown": 11, "weight": 15,
     "when": { "month": 5, "harem": { "gte": 4 } },
