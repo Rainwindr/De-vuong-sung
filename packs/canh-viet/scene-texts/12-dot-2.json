@@ -232,5 +232,62 @@
         ]
       ]
     }
+  },
+  "core.thi_tam": {
+    "canh-viet.cc_a_y_na": {
+      "dau": [
+        [
+          "Đêm đầu sau lễ hòa thân, công chúa {name} tự nguyện bước vào tẩm điện mới. Xiêm y mỏng ôm thân hình, tóc búi đơn giản, mùi trầm thoang thoảng. Nàng quỳ xuống, ánh mắt vừa e dè vừa quyết tâm.\n> Thần thiếp đến hầu bệ hạ, xin được thị tẩm đêm nay.\nBệ hạ ngồi trên long sàng, vẫy tay gọi nàng lại gần, không khí trầm mặc bao trùm.",
+          "Bệ hạ kéo {name} lên long sàng, bàn tay lần vào lớp y phục. Nàng run nhẹ nhưng chủ động cởi từng lớp, để lộ làn da trắng mịn chưa từng ai chạm. Môi chạm môi, lưỡi quấn, hơi thở nóng.\n> Bệ hạ… thần thiếp còn nguyên vẹn, xin bệ hạ nhận lấy.\nNgón tay bệ hạ lướt xuống, chạm nơi ẩm ướt, nàng rên nhẹ, hông nhích tới.",
+          "Y phục rơi hết, {name} nằm ngửa, chân mở rộng. Bệ hạ đưa dương vật cứng rắn áp vào khe hở, từ từ đẩy vào. Màng trinh căng ra rồi rách, nàng kêu lên, máu loang nhẹ.\n> A… đau nhưng thần thiếp muốn… sâu hơn nữa.\nBệ hạ dừng lại, hôn nàng, rồi tiếp tục đẩy chậm, nàng ôm chặt, chấp nhận hết.",
+          "Bệ hạ tăng nhịp, đưa sâu vào nơi nóng hổi vừa khai mở. {name} chủ động nâng hông đón, tiếng da thịt va chạm, nước tình lẫn máu. Nàng rên liên tục, co giật.\n> Bệ hạ… thần thiếp chịu không nổi… muốn cùng đến.\nBệ hạ nắm hông đẩy mạnh, tinh dịch bắn vào trong, nàng run rẩy đạt đỉnh.",
+          "Hai người nằm cạnh nhau, {name} gối đầu lên ngực bệ hạ, hơi thở còn dồn. Nàng mỉm cười, tay chạm nhẹ nơi vừa được khai phá, cảm nhận dư vị ấm và chút nhói.\n> Đêm nay thần thiếp đã là của bệ hạ, hạnh phúc lắm.\nBệ hạ ôm nàng vào lòng, hôn nhẹ lên trán, không gian yên tĩnh chỉ còn tiếng thở đều."
+        ]
+      ]
+    },
+    "canh-viet.cc_o_lan": {
+      "dau": [
+        [
+          "Trong tẩm điện yên tĩnh sau giờ ngủ trưa, {name} tự nguyện bước vào, xiêm y lụa mỏng khẽ lay. Nàng quỳ gối bên long sàng, ánh mắt kiên định, hơi thở nhẹ.\n> Thần thiếp muốn hầu hạ bệ hạ ngay lúc này.\n> Xin bệ hạ nhận lấy lần đầu của thiếp.\nBệ hạ ngồi dậy, kéo nàng lại gần, tay vuốt tóc, không gian chỉ còn hai người.",
+          "Bệ hạ đặt {name} nằm nghiêng trên long sàng, từ từ cởi y phục. Nàng chủ động giúp tay, để lộ thân thể nguyên vẹn. Môi hôn sâu, lưỡi quấn, tay bệ hạ lướt xuống hông.\n> Bệ hạ… thiếp đã sẵn sàng.\n> Xin vào từ từ, thiếp muốn cảm nhận hết.\nNgón tay chạm nơi ẩm ướt, nàng rên nhẹ, hông đẩy tới.",
+          "Bệ hạ nâng một chân {name}, áp dương vật vào khe hở còn nguyên. Từ từ đẩy, màng trinh căng rách, nàng kêu lên ôm chặt. Máu loang nhẹ nhưng nàng không dừng.\n> Đau… nhưng thiếp muốn sâu hơn nữa.\n> Đừng dừng, bệ hạ ơi.\nBệ hạ hôn nàng, đẩy tiếp chậm, nàng thả lỏng, nước tình chảy ra.",
+          "Bệ hạ để {name} ngồi lên, tự đưa vào sâu. Nàng chủ động nhấp xuống từng nhịp, ngực rung rinh, tiếng da thịt vang. Hơi thở dồn dập.\n> A… bệ hạ… thiếp sắp không chịu nổi.\n> Cùng đến với trẫm đi.\nBệ hạ nắm hông đẩy mạnh, tinh dịch bắn vào, nàng run rẩy đạt đỉnh.",
+          "Hai người nằm ôm nhau, {name} thở hổn hển, tay đặt lên bụng dưới cảm nhận dư ấm. Nàng mỉm cười dựa vào ngực bệ hạ.\n> Lần đầu của thiếp đã thuộc về bệ hạ rồi.\n> Thiếp muốn được hầu hạ như thế nữa.\nBệ hạ hôn lên trán, không gian yên tĩnh chỉ còn tiếng thở đều đặn."
+        ]
+      ]
+    },
+    "canh-viet.cc_bach_ngoc": {
+      "dau": [
+        [
+          "Trong tẩm điện ấm áp, {name} tự nguyện bước vào, cởi bỏ xiêm y để trần truồng. Nàng chủ động lấy dải lụa trói hai tay mình lên sau đầu, ánh mắt kiên quyết nhìn bệ hạ.\n> Thần thiếp muốn hầu hạ bệ hạ như thế này.\n> Xin bệ hạ nhận lấy thân thể thiếp.\nBệ hạ ngồi trên long sàng, nhìn nàng, không khí chỉ còn hai người.",
+          "Bệ hạ kéo {name} lại gần, cúi xuống bú vú say sưa, lưỡi liếm và mút núm vú. Nàng rên nhẹ, ngực ưỡn ra đón, hơi thở dồn dập.\n> Bệ hạ… thiếp thích lắm.\n> Mút mạnh hơn nữa đi.\nBệ hạ chuyển sang tay, bóp mạnh đầu ti rồi bóp cả bầu vú, nàng kêu lên, hông nhích.",
+          "Bệ hạ tiếp tục bóp vú mạnh, rồi đẩy {name} nằm xuống, tay vẫn trói sau đầu. Dương vật cứng áp vào khe hở còn nguyên, từ từ đẩy vào.\n> Đau… nhưng thiếp muốn bệ hạ vào.\n> Phá trinh thiếp đi, bệ hạ.\nMàng trinh căng rách, máu loang nhẹ, nàng ôm chặt bằng chân, không dừng.",
+          "Bệ hạ đẩy sâu từng nhịp, tay vẫn bóp vú và đầu ti. {name} chủ động nâng hông đón, tiếng da thịt vang, nước tình chảy. Nàng rên liên tục.\n> A… bệ hạ… thiếp sắp đến.\n> Sâu hơn nữa, cùng với trẫm.\nBệ hạ tăng tốc, tinh dịch bắn vào trong, nàng run rẩy đạt đỉnh.",
+          "Hai người nằm ôm nhau, {name} thở hổn hển, tay đã được cởi trói đặt lên ngực bệ hạ. Nàng mỉm cười, cảm nhận dư ấm nơi vừa được khai phá.\n> Đêm nay thiếp hạnh phúc lắm.\n> Thiếp muốn được hầu hạ như thế nữa.\nBệ hạ hôn lên trán nàng, không gian yên tĩnh chỉ còn tiếng thở đều đặn."
+        ]
+      ]
+    },
+    "canh-viet.cc_hai_lam": {
+      "dau": [
+        [
+          "Đêm đầu tiên trong tẩm điện, công chúa {name} còn nguyên vẹn tự nguyện bước vào. Xiêm y mỏng ôm thân, tóc búi đơn giản, ánh mắt e thẹn nhưng kiên quyết.\n> Thần thiếp muốn hầu hạ bệ hạ ngay đêm nay.\n> Xin bệ hạ nhận lấy lần đầu của thiếp.\nBệ hạ ngồi trên long sàng, vẫy nàng lại gần, không khí trầm mặc chỉ còn hai người.",
+          "Bệ hạ cởi y phục, {name} cảm nhận làn da mát lạnh chạm không khí. Nàng chủ động ngồi lên, khe hở khô cọ sát đầu dương vật cứng nóng, cảm giác căng cứng và hơi rát lan dần. Mỗi lần hạ xuống, ma sát khô khốc kéo theo cơn nhói nhẹ.\n> Bệ hạ… thiếp cảm thấy khô và căng quá.\n> Nhưng thiếp muốn cảm nhận hết cảm giác này.\nNàng tiếp tục đẩy, cảm giác áp lực tăng dần nơi kín.",
+          "Nàng {name} chủ động ngồi lên, khe hở khô áp vào đầu dương vật. Từ từ hạ xuống, màng trinh căng rồi rách, nàng kêu lên nhưng không dừng. Máu loang nhẹ.\n> Đau… nhưng thiếp muốn ngồi sâu hơn.\n> Đừng giúp, để thiếp tự làm.\nBệ hạ nắm hông nhẹ, nàng tiếp tục đẩy xuống, nước tình dần chảy.",
+          "Nàng nhấp từng nhịp mạnh, nơi kín dần ướt át hơn. {name} chủ động xoay hông, ngực rung rinh, tiếng da thịt vang. Hơi thở hổn hển.\n> A… bệ hạ… thiếp sắp đến.\n> Sâu nữa, cùng với trẫm.\nBệ hạ đẩy nhẹ lên, tinh dịch bắn vào trong, nàng run rẩy đạt đỉnh.",
+          "Hai người nằm ôm nhau, {name} thở dồn, tay đặt lên bụng dưới cảm nhận dư ấm. Nàng mỉm cười dựa vào ngực bệ hạ.\n> Lần đầu của thiếp đã thuộc về bệ hạ.\n> Thiếp muốn được ngồi như thế nữa.\nBệ hạ hôn lên trán nàng, không gian yên tĩnh chỉ còn tiếng thở đều đặn."
+        ]
+      ]
+    },
+    "canh-viet.cc_thuc_hy": {
+      "dau": [
+        [
+          "Trong thư phòng ấm áp, công chúa {name} giả làm lão sư ngồi giảng bài, bệ hạ đóng vai học trò ngồi phía sau. Nàng còn nguyên vẹn, áo mỏng khẽ lay.\n> Học trò phải ngồi yên nghe thiếp giảng.\n> Đêm nay thiếp sẽ dạy hết cho bệ hạ.\nBệ hạ ngồi sát sau lưng, không khí chỉ còn hai người.",
+          "Bệ hạ làm đổ trà nóng lên ngực {name}. Áo ướt dính sát, nàng chủ động không che. Bệ hạ cúi liếm vết trà trên bầu vú, lưỡi ấm áp.\n> Học trò liếm ngực lão sư thế này sao.\n> Nhưng thiếp thích cảm giác này.\nNàng để ngực trần, tiếp tục giảng với hơi thở dồn.",
+          "Ngực trần, {name} vẫn ngồi giảng. Bệ hạ từ phía sau ôm lấy, tay vuốt vú. Nàng chủ động nghiêng người, nơi kín ẩm dần.\n> Học trò đùa bỡn lão sư còn trinh rồi.\n> Thiếp biết và muốn bệ hạ tiếp tục.\nBệ hạ hôn cổ nàng, nàng rên nhẹ, hông nhích.",
+          "Bệ hạ từ phía sau đưa dương vật vào nơi còn nguyên của {name}. Nàng biết rõ, chủ động đẩy hông đón. Màng trinh căng rách, nàng kêu lên.\n> Đau… nhưng thiếp muốn học trò vào sâu.\n> Đừng dừng, bệ hạ.\nBệ hạ đẩy nhịp, nàng đón hết, nước tình chảy ra.",
+          "Hai người nằm ôm nhau sau đó, {name} thở dồn, dựa vào ngực bệ hạ. Nàng mỉm cười, tay chạm nơi vừa được khai phá.\n> Lần đầu của thiếp đã thuộc về học trò.\n> Thiếp muốn được dạy như thế nữa.\nBệ hạ hôn lên trán, không gian yên tĩnh chỉ còn tiếng thở đều."
+        ]
+      ]
+    }
   }
 }

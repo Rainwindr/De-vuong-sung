@@ -2,40 +2,64 @@
   {
     "id": "canh-viet.cc_a_y_na",
     "name": "A Y Na",
-    "age": 19,
-    "origin": "Công chúa Lâu Lan, Tây Vực",
+    "age": 20,
+    "origin": "Công chúa Lâu Lan, vũ nữ sa mạc Tây Vực",
     "princess": true,
     "princessFrom": "core.tay_vuc",
     "princessLand": "Lâu Lan",
     "rank": 2,
     "favor": 30,
     "affection": 20,
-    "traits": ["Biết múa", "Mùi hương lạ", "Táo bạo"],
-    "likes": ["core.huong_sac"],
-    "portrait": { "glyph": "娜", "hue": 30 },
-    "portraitText": "Nàng tự vẽ mình đang múa giữa sa mạc, chỉ khoác một dải lụa vàng, chuông bạc đeo ở cổ chân.",
-    "lines": { "low": "Ở Lâu Lan, con gái tự chọn người mình gả. Thiếp đã chọn bệ hạ.", "high": "Bệ hạ có muốn xem điệu múa chỉ dành cho phu quân không?" }
+    "traits": [
+      "Giỏi múa",
+      "Nồng nàn",
+      "Táo bạo"
+    ],
+    "likes": [
+      "core.huong_sac"
+    ],
+    "portrait": {
+      "glyph": "娜",
+      "hue": 30
+    },
+    "portraitText": "Tranh nàng tự vẽ dưới trăng sa mạc: thân múa trần, da đồng óng, đôi gò bồng đảo tròn đầy rung theo nhịp, eo thon, nơi kín ẩn sau lụa mỏng, ánh mắt nồng cháy như lửa.",
+    "lines": {
+      "low": "Thần thiếp A Y Na xin bái kiến bệ hạ.",
+      "high": "Bệ hạ… thiếp muốn múa riêng, để người xem hết thân thể này."
+    }
   },
   {
     "id": "canh-viet.cc_o_lan",
-    "name": "Ô Lan Châu",
-    "age": 20,
-    "origin": "Công chúa bộ Khiết Liệt, thảo nguyên phía bắc",
+    "name": "Ô Lan",
+    "age": 19,
+    "origin": "Công chúa bộ Khiết Liệt, cưỡi ngựa trên thảo nguyên",
     "princess": true,
     "princessFrom": "core.thao_nguyen",
     "princessLand": "bộ Khiết Liệt",
     "rank": 2,
     "favor": 30,
     "affection": 20,
-    "traits": ["Táo bạo", "Eo thon", "Tinh nghịch"],
-    "likes": ["core.ngam_nhin"],
-    "portrait": { "glyph": "珠", "hue": 150 },
-    "portraitText": "Tranh vẽ nàng cưỡi ngựa trần trên đồng cỏ, tóc tết dài bay trong gió, ánh mắt nhìn thẳng người xem.",
-    "lines": { "low": "Ta không quen lễ nghi trong cung. Bệ hạ dạy ta nhé.", "high": "Đêm nay để ta dẫn bệ hạ đi, như dẫn ngựa trên thảo nguyên." }
+    "traits": [
+      "Cưỡi ngựa giỏi",
+      "Phóng khoáng",
+      "Mạnh mẽ"
+    ],
+    "likes": [
+      "core.ngam_nhin"
+    ],
+    "portrait": {
+      "glyph": "珠",
+      "hue": 150
+    },
+    "portraitText": "Tranh nàng gửi: mình trần trên lưng ngựa, gió thổi tóc, ngực cao đầy, đùi chắc, nơi kín để lộ dưới ánh nắng thảo nguyên, nụ cười phóng khoáng không giấu giếm.",
+    "lines": {
+      "low": "Thiếp Ô Lan tới, xin bệ hạ chỉ dạy.",
+      "high": "Bệ hạ muốn cưỡi cùng thiếp không? Thiếp sẽ để người tự do."
+    }
   },
   {
     "id": "canh-viet.cc_bach_ngoc",
-    "name": "Đoàn Bạch Ngọc",
+    "name": "Bạch Ngọc",
     "age": 18,
     "origin": "Công chúa Nam Chiếu, giáp đất Thục",
     "princess": true,
@@ -44,43 +68,79 @@
     "rank": 2,
     "favor": 30,
     "affection": 20,
-    "traits": ["Ôn nhu", "Giọng hát ngọt", "Hay ngượng"],
-    "likes": ["core.thi_tham"],
-    "portrait": { "glyph": "玉", "hue": 200 },
-    "portraitText": "Nàng đồng ý cho họa sư nữ trong cung vẽ: ngồi bên suối trà, áo trắng trễ vai, đôi má ửng hồng.",
-    "lines": { "low": "Thần thiếp… hát cho bệ hạ nghe một khúc quê nhà được không?", "high": "Ở bên bệ hạ, thiếp không còn nhớ nhà nữa." }
+    "traits": [
+      "Dịu dàng",
+      "Hay ngượng",
+      "Hát hay"
+    ],
+    "likes": [
+      "core.thi_tham"
+    ],
+    "portrait": {
+      "glyph": "玉",
+      "hue": 200
+    },
+    "portraitText": "Tranh nàng e ấp tự vẽ: da trắng như ngọc, đôi gò bồng đảo nhỏ nhắn, eo thon, nơi kín khẽ hé dưới tà áo, má đỏ, ánh mắt dịu dàng giấu sau tay che.",
+    "lines": {
+      "low": "Thần thiếp Bạch Ngọc xin hầu bệ hạ.",
+      "high": "Bệ hạ… thiếp hát riêng cho người, xin đừng cười thiếp ngượng."
+    }
   },
   {
     "id": "canh-viet.cc_hai_lam",
     "name": "Hải Lam",
     "age": 21,
-    "origin": "Công chúa quốc đảo Lưu Cầu, Biển Đông",
+    "origin": "Công chúa Lưu Cầu, con gái biển Biển Đông",
     "princess": true,
     "princessFrom": "core.bien_dong",
     "princessLand": "Lưu Cầu",
     "rank": 2,
     "favor": 30,
     "affection": 20,
-    "traits": ["Lãng mạn", "Tinh nghịch", "Eo thon"],
-    "likes": ["core.duc_tri"],
-    "portrait": { "glyph": "藍", "hue": 190 },
-    "portraitText": "Tranh vẽ nàng vừa từ biển bước lên, tóc ướt xõa, chuỗi ngọc trai là thứ duy nhất trên người.",
-    "lines": { "low": "Thiếp mang theo một vỏ ốc. Áp vào tai sẽ nghe thấy biển quê thiếp.", "high": "Bệ hạ hứa với thiếp, mùa hè này cùng thiếp ra biển nhé." }
+    "traits": [
+      "Tinh nghịch",
+      "Yêu biển",
+      "Lanh lợi"
+    ],
+    "likes": [
+      "core.duc_tri"
+    ],
+    "portrait": {
+      "glyph": "藍",
+      "hue": 190
+    },
+    "portraitText": "Tranh nàng vẽ trên bờ biển: thân ướt át, ngực căng tròn, eo thon, nơi kín ướt đẫm sóng, nụ cười tinh nghịch, ánh mắt lấp lánh như nước biển.",
+    "lines": {
+      "low": "Thiếp Hải Lam tới, xin bệ hạ tha thứ tinh nghịch.",
+      "high": "Bệ hạ muốn xuống biển cùng thiếp không? Thiếp sẽ để người khám phá hết."
+    }
   },
   {
     "id": "canh-viet.cc_thuc_hy",
-    "name": "Vương Thục Hy",
-    "age": 20,
-    "origin": "Công chúa Cao Ly",
+    "name": "Thục Hy",
+    "age": 22,
+    "origin": "Công chúa Cao Ly, đoan trang bên ngoài",
     "princess": true,
     "princessLand": "Cao Ly",
     "rank": 2,
     "favor": 30,
     "affection": 20,
-    "traits": ["Đoan trang", "Khéo tay", "Kiêu kỳ"],
-    "likes": ["core.lua_la"],
-    "portrait": { "glyph": "熙", "hue": 330 },
-    "portraitText": "Nàng tự tay vẽ, nét bút chuẩn mực: dáng ngồi nghiêm trang, nhưng tà áo lụa mỏng mở hờ để lộ cả người.",
-    "lines": { "low": "Cao Ly gửi thiếp sang để kết tình hai nước. Thiếp sẽ không làm bệ hạ thất vọng.", "high": "Trước mặt người khác thiếp giữ lễ. Còn trước mặt bệ hạ… thiếp không cần giữ nữa." }
+    "traits": [
+      "Đoan trang",
+      "Sâu sắc",
+      "Riêng tư khác"
+    ],
+    "likes": [
+      "core.lua_la"
+    ],
+    "portrait": {
+      "glyph": "熙",
+      "hue": 330
+    },
+    "portraitText": "Tranh nàng gửi kín: áo ngoài đoan trang nhưng bên trong trần, đôi gò bồng đảo đầy đặn, eo thon, nơi kín để lộ dưới ánh đèn, ánh mắt dịu mà nồng cháy.",
+    "lines": {
+      "low": "Thần thiếp Thục Hy xin bái kiến bệ hạ.",
+      "high": "Bệ hạ… bên ngoài thiếp đoan trang, riêng với người thì khác hẳn."
+    }
   }
 ]
