@@ -11,6 +11,7 @@
   ],
   "files": {
     "fetishes": "fetishes.json",
+    "characters": "cong-chua.json",
     "events": [
       "events/su-kien-moi.json",
       "events/kham-pha.json",
