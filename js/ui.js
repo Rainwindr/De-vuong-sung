@@ -969,8 +969,10 @@
                   if (s.godMode) cell = `<select data-consent="${esc(f.id)}">${G.CONSENT.map((x) => `<option value="${x}" ${x === lvl ? "selected" : ""}>${G.CONSENT_LABEL[x]}</option>`).join("")}</select>`;
                   else if (lvl === "persuade" && open) {
                     const need = G.persuadeNeed(f.id);
-                    const ready = c.favor >= need && c.affection >= need;
-                    cell = `${esc(G.CONSENT_LABEL[lvl])}<br><span class="hint">Cần ${need}/${need} · nàng <b class="${c.favor >= need ? "" : "short"}">${c.favor}</b>/<b class="${c.affection >= need ? "" : "short"}">${c.affection}</b></span><br><button class="btn btn-sm${ready ? " btn-primary" : ""}" data-persuade="${esc(f.id)}">Thuyết phục</button> <button class="btn btn-sm btn-ghost" data-persuade-all="${esc(f.id)}">Cả hậu cung</button>`;
+                    const fv = Math.round(c.favor);
+                    const af = Math.round(c.affection);
+                    const ready = fv >= need && af >= need;
+                    cell = `${esc(G.CONSENT_LABEL[lvl])}<br><span class="hint">Cần ${need}/${need} · nàng <b class="${fv >= need ? "" : "short"}">${fv}</b>/<b class="${af >= need ? "" : "short"}">${af}</b></span><br><button class="btn btn-sm${ready ? " btn-primary" : ""}" data-persuade="${esc(f.id)}">Thuyết phục</button> <button class="btn btn-sm btn-ghost" data-persuade-all="${esc(f.id)}">Cả hậu cung</button>`;
                   } else cell = esc(G.CONSENT_LABEL[lvl]);
                   return `<tr><td>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""}<br><span class="hint">Tầng ${f.tier}${open ? "" : " · chưa mở"}</span></td><td>${cell}</td></tr>`;
                 })
@@ -1077,7 +1079,7 @@
       const ok = lvl === "willing";
       const on = picked.has(f.id);
       return `<div class="fx-row${ok ? "" : " fx-off"}">
-        <label class="check"><input type="checkbox" data-fx="${esc(f.id)}" ${on ? "checked" : ""} ${ok ? "" : "disabled"}> <span>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""} <span class="hint">· ${esc(G.CONSENT_LABEL[lvl])}${lvl === "persuade" ? ` (cần ${G.persuadeNeed(f.id)}, nàng ${c.favor}/${c.affection})` : ""}</span></span></label>
+        <label class="check"><input type="checkbox" data-fx="${esc(f.id)}" ${on ? "checked" : ""} ${ok ? "" : "disabled"}> <span>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""} <span class="hint">· ${esc(G.CONSENT_LABEL[lvl])}${lvl === "persuade" ? ` (cần ${G.persuadeNeed(f.id)}, nàng ${Math.round(c.favor)}/${Math.round(c.affection)})` : ""}</span></span></label>
         ${lvl === "persuade" ? `<button class="btn btn-sm btn-ghost" data-pers="${esc(f.id)}">Thuyết phục</button>` : ""}
         <button class="fx-pin" data-pin="${esc(f.id)}" aria-pressed="${pins.has(f.id)}" aria-label="Ghim ${esc(f.name)}">${pins.has(f.id) ? "★" : "☆"}</button>
       </div>`;

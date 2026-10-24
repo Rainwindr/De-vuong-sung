@@ -237,7 +237,7 @@
     if (lvl === "refuse") return { ok: false, text: `${c.name} đã từ chối "${f.name}". Bệ hạ không ép.` };
     if (lvl === "willing") return { ok: true, text: `${c.name} vốn đã sẵn lòng.` };
     const need = 50 + f.tier * 10;
-    if (c.favor >= need && c.affection >= need) {
+    if (Math.round(c.favor) >= need && Math.round(c.affection) >= need) {
       c.consent[fid] = "willing";
       G.state.flags.persuadedThisYear = true;
       log(`${c.name} gật đầu với "${f.name}".`, "harem");
@@ -1984,7 +1984,9 @@
       imbalanced = true;
       G.addStat("hoaKhi", -1);
     }
-    if (d.sulkUntil >= s.turn) for (const c of s.consorts) if (factionOf(c.id) && factionOf(c.id) !== d.sulkLeader) c.affection = clamp(c.affection - 0.25, 0, 100);
+    // dỗi: mỗi 4 tháng Tình cảm −1 (giữ số nguyên để khớp với số hiện trên thanh)
+    if (d.sulkUntil >= s.turn && s.turn % 4 === 0) for (const c of s.consorts) if (factionOf(c.id) && factionOf(c.id) !== d.sulkLeader) c.affection = clamp(c.affection - 1, 0, 100);
+    for (const c of s.consorts) if (c.affection !== Math.round(c.affection)) c.affection = Math.round(c.affection); // sửa bản lưu đã có số lẻ
     if (list.length < 2 || !sideRoom(report) || s.turn - d.pheTurn < 3) return;
     if (rand() >= 0.25 * (imbalanced ? 1.5 : 1) * (d.sulkUntil >= s.turn ? 1.5 : 1)) return;
     const p = pheEvent(s, imbalanced);
