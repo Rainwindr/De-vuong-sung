@@ -259,7 +259,7 @@
     "canh-viet.cc_bach_ngoc": {
       "dau": [
         [
-          "Trong tẩm điện ấm áp, {name} tự nguyện bước vào, cởi bỏ xiêm y để trần truồng. Nàng chủ động lấy dải lụa trói hai tay mình lên sau đầu, ánh mắt kiên quyết nhìn bệ hạ.\n> Thần thiếp muốn hầu hạ bệ hạ như thế này.\n> Xin bệ hạ nhận lấy thân thể thiếp.\nBệ hạ ngồi trên long sàng, nhìn nàng, không khí chỉ còn hai người.",
+          "Trong tẩm điện ấm áp, {name} tự nguyện bước vào, cởi bỏ xiêm y để trần truồng. Nàng chủ động lấy dải lụa trói hai tay mình lên sau đầu, ánh mắt kiên quyết nhìn bệ hạ. Hai người thỏa thuận ám hiệu dừng là \"lụa rơi\".\n> Thần thiếp muốn hầu hạ bệ hạ như thế này.\n> Xin bệ hạ nhận lấy thân thể thiếp.\nBệ hạ ngồi trên long sàng, nhìn nàng, không khí chỉ còn hai người.",
           "Bệ hạ kéo {name} lại gần, cúi xuống bú vú say sưa, lưỡi liếm và mút núm vú. Nàng rên nhẹ, ngực ưỡn ra đón, hơi thở dồn dập.\n> Bệ hạ… thiếp thích lắm.\n> Mút mạnh hơn nữa đi.\nBệ hạ chuyển sang tay, bóp mạnh đầu ti rồi bóp cả bầu vú, nàng kêu lên, hông nhích.",
           "Bệ hạ tiếp tục bóp vú mạnh, rồi đẩy {name} nằm xuống, tay vẫn trói sau đầu. Dương vật cứng áp vào khe hở còn nguyên, từ từ đẩy vào.\n> Đau… nhưng thiếp muốn bệ hạ vào.\n> Phá trinh thiếp đi, bệ hạ.\nMàng trinh căng rách, máu loang nhẹ, nàng ôm chặt bằng chân, không dừng.",
           "Bệ hạ đẩy sâu từng nhịp, tay vẫn bóp vú và đầu ti. {name} chủ động nâng hông đón, tiếng da thịt vang, nước tình chảy. Nàng rên liên tục.\n> A… bệ hạ… thiếp sắp đến.\n> Sâu hơn nữa, cùng với trẫm.\nBệ hạ tăng tốc, tinh dịch bắn vào trong, nàng run rẩy đạt đỉnh.",
@@ -282,10 +282,51 @@
       "dau": [
         [
           "Trong thư phòng ấm áp, công chúa {name} giả làm lão sư ngồi giảng bài, bệ hạ đóng vai học trò ngồi phía sau. Nàng còn nguyên vẹn, áo mỏng khẽ lay.\n> Học trò phải ngồi yên nghe thiếp giảng.\n> Đêm nay thiếp sẽ dạy hết cho bệ hạ.\nBệ hạ ngồi sát sau lưng, không khí chỉ còn hai người.",
-          "Bệ hạ làm đổ trà nóng lên ngực {name}. Áo ướt dính sát, nàng chủ động không che. Bệ hạ cúi liếm vết trà trên bầu vú, lưỡi ấm áp.\n> Học trò liếm ngực lão sư thế này sao.\n> Nhưng thiếp thích cảm giác này.\nNàng để ngực trần, tiếp tục giảng với hơi thở dồn.",
+          "Bệ hạ làm đổ trà ấm lên ngực {name}. Áo ướt dính sát, nàng chủ động không che. Bệ hạ cúi liếm vết trà trên bầu vú, lưỡi ấm áp.\n> Học trò liếm ngực lão sư thế này sao.\n> Nhưng thiếp thích cảm giác này.\nNàng để ngực trần, tiếp tục giảng với hơi thở dồn.",
           "Ngực trần, {name} vẫn ngồi giảng. Bệ hạ từ phía sau ôm lấy, tay vuốt vú. Nàng chủ động nghiêng người, nơi kín ẩm dần.\n> Học trò đùa bỡn lão sư còn trinh rồi.\n> Thiếp biết và muốn bệ hạ tiếp tục.\nBệ hạ hôn cổ nàng, nàng rên nhẹ, hông nhích.",
           "Bệ hạ từ phía sau đưa dương vật vào nơi còn nguyên của {name}. Nàng biết rõ, chủ động đẩy hông đón. Màng trinh căng rách, nàng kêu lên.\n> Đau… nhưng thiếp muốn học trò vào sâu.\n> Đừng dừng, bệ hạ.\nBệ hạ đẩy nhịp, nàng đón hết, nước tình chảy ra.",
           "Hai người nằm ôm nhau sau đó, {name} thở dồn, dựa vào ngực bệ hạ. Nàng mỉm cười, tay chạm nơi vừa được khai phá.\n> Lần đầu của thiếp đã thuộc về học trò.\n> Thiếp muốn được dạy như thế nữa.\nBệ hạ hôn lên trán, không gian yên tĩnh chỉ còn tiếng thở đều."
+        ]
+      ]
+    }
+  },
+  "canh-viet.sac_phong_quy_phi": {
+    "_title": "Đêm sắc phong · Quý phi",
+    "_chung": {
+      "_": [
+        [
+          "Đêm khuya sau lễ sắc phong, {name} nằm nghiêng trên long sàng, giả vờ ngủ say. Nàng muốn thử trò giả ngủ để bệ hạ tự đến đánh thức, trong tẩm điện chỉ có hai người. Áo ngực mỏng đã bị nàng cố tình kéo hở, đôi vú đầy đặn lộ ra, núm ti hồng mềm mại còn đang chùng xuống. Trong lòng nàng vừa hồi hộp vừa thèm khát, cái lồn đã khẽ co giật từ lúc nghe tiếng chân rón rén.\n> Thần thiếp giả bộ ngủ, nhưng lồn đã ướt nhẹp, thèm được bệ hạ chạm vào.",
+          "Bệ hạ rón rén cúi xuống, lưỡi ấm nóng liếm chậm rãi quanh đầu ti mềm của {name}. Núm vú từ từ cứng lên, đỏ ửng, nàng cắn chặt môi trong cổ họng, thân thể khẽ run. Tâm lý nàng rối bời: vừa muốn giữ vẻ ngủ say, vừa sướng đến mức không dám động đậy, lồn bắt đầu chảy dịch nhờn xuống đùi.\n> Ôi… thần thiếp xin được bú vú, đầu ti thiếp bị liếm cho cứng dần, lồn co giật không ngừng.",
+          "Bệ hạ dùng hai ngón tay xe đầu ti, kéo nhẹ rồi cắn khẽ vào núm vú. Đầu ti {name} cứng ngắc, bị kéo dài ra, nhói nhẹ nhưng sướng đến tê người. Nàng thở dốc trong im lặng, bụng dưới co thắt, dịch lồn chảy thành dòng ấm nóng. Trong đầu nàng chỉ còn cảm giác được bệ hạ bú vú khi mình đang giả ngủ, vừa ngượng vừa kích thích cực độ.\n> Bệ hạ cắn đầu ti thiếp sướng quá, lồn ướt át, thiếp ngượng mà vẫn ưỡn ngực lên.",
+          "{name} vẫn giả vờ ngủ say, nhưng ngực vô thức ưỡn cao hơn để bệ hạ bú sâu và cắn mạnh. Núm vú bị nước bọt phủ đầy, cứng đỏ, mỗi lần bị cắn nàng đều khẽ rên trong họng. Tâm lý nàng loạn xạ: vừa muốn giữ vẻ ngủ say, vừa muốn được cắn mạnh hơn, cái lồn đã ướt nhẹp, co giật từng đợt, tử cung ngứa ngáy thèm được đâm.\n> Thần thiếp không dám cử động, để bệ hạ bú vú và cắn đầu ti đến cứng ngắc, lồn thiếp chảy nước không ngừng.",
+          "Bệ hạ tiếp tục bú sâu, lưỡi quấn quanh đầu ti cứng, rồi cắn nhẹ lại. {name} thở gấp, toàn thân run rẩy, dịch lồn trào ra ướt đẫm lớp vải dưới. Tâm trí nàng tan nát vì khoái cảm: vừa giả vờ ngủ, vừa thèm khát đến điên người, chỉ muốn núm vú được bú và cắn mãi. Nàng cắn chặt chăn, lồn co giật dữ dội, sẵn sàng bị địt bất cứ lúc nào.\n> Thần thiếp sướng đến mức không giả vờ nổi nữa, đầu ti cứng nhạy, lồn thèm cặc bệ hạ đến mức không chịu nổi."
+        ]
+      ]
+    }
+  },
+  "canh-viet.le_hoa_trieu": {
+    "_title": "Hoa triêu",
+    "_chung": {
+      "_": [
+        [
+          "Ngày sinh nhật trăm hoa, trong ngự hoa viên, bệ hạ cài từng bông hoa lên tóc {rank} {name}. Nàng cười tươi, được đưa về điện riêng. Bệ hạ bảo muốn nhét hoa cánh mềm vào lồn và cắm một cành hoa nhỏ trơn nhẵn vào lỗ đít, đủ mười bông rồi giữ đến sáng. {name} mỉm cười, tự cởi y phục, nằm ngửa, chân mở rộng chờ đợi.",
+          "Bệ hạ chọn hoa cánh mềm, nhét từng bông vào lồn {name}. Cánh hoa mềm cọ thành lồn, nàng rên khẽ, cảm giác tê và đầy. Đến bông thứ năm, lồn căng, nước chảy. Bệ hạ tiếp tục nhét đến bông thứ mười, rồi cầm một cành hoa nhỏ trơn nhẵn, chậm rãi cắm vào lỗ đít nàng.\n> Cánh hoa cọ lồn thần thiếp sướng quá, nhét thêm đi.\n> Cắm cành hoa vào lỗ đít luôn, thần thiếp muốn đầy cả hai.",
+          "Bệ hạ đẩy cành hoa trơn vào lỗ đít {name}, chậm và nhẹ. Nàng rên to, hông nhích, cảm giác đầy ở cả lồn và lỗ đít. Bệ hạ cúi xuống, lưỡi liếm quanh mép lồn đầy hoa, ngón tay giữ cành hoa trong lỗ đít. {name} co người, nước lồn thấm ướt hoa, lòng vừa sung sướng vừa chờ sáng.\n> Lồn và lỗ đít đầy hoa, bệ hạ liếm thêm đi.\n> Đừng rút ra, để thần thiếp giữ đến sáng.",
+          "Suốt đêm hoa vẫn nằm trong lồn và lỗ đít. Sáng hôm sau, bệ hạ gọi hoàng hậu đến. Hoàng hậu quỳ giữa hai chân {name}, lưỡi liếm mép lồn rồi nhẹ nhàng dùng lưỡi kéo từng bông hoa ra, không để rơi. {name} rên to mỗi lần hoa được lấy. Hoàng hậu lấy đủ mười bông, rồi nhẹ nhàng rút cành hoa khỏi lỗ đít.\n> Hoàng hậu liếm sướng quá, lấy từng bông ra đi.\n> Rút cành hoa khỏi lỗ đít cũng được, đừng để rơi bông nào.",
+          "Sau khi lấy hết, lồn và lỗ đít {name} trống, còn cảm giác cánh hoa mềm. Nàng nằm thở dốc, tay xoa bụng dưới. Bệ hạ nằm bên cạnh, nhẹ nhàng xoa những chỗ vừa đầy hoa. {name} mỉm cười, tựa vào người bệ hạ, thì thầm ngày sinh nhật trăm hoa này được nhét hoa vào lồn và lỗ đít đúng ý nàng muốn."
+        ]
+      ]
+    }
+  },
+  "core.that_tich": {
+    "_chung": {
+      "_": [
+        [
+          "Đêm Thất tịch, trong điện riêng sau lễ hội đèn trời, bệ hạ chọn đúng chiếc đèn của {rank} {name}. Nàng được gọi đến, ngồi trên giường, mắt sáng chờ đợi phần thưởng riêng. Bệ hạ bảo muốn nhỏ từng giọt sáp ấm và cạo sạch lông lồn nàng. {name} mỉm cười, tự cởi y phục, nằm ngửa, chân mở rộng, sẵn sàng đón nhận.",
+          "Bệ hạ đốt nến, nhỏ từng giọt sáp ấm lên ngực và bụng dưới {name}. Sáp ấm chảy chậm, {name} rên khẽ, hông nhích nhẹ. Bệ hạ lấy dao cạo nhỏ, cạo từng sợi lông lồn, lưỡi dao trượt sát da. {name} nhìn xuống, miệng há ra, nước lồn đã bắt đầu chảy.\n> Sáp ấm quá, bệ hạ nhỏ tiếp xuống bụng thần thiếp đi.\n> Cạo sạch hết lông, để lồn thần thiếp trơn tru cho bệ hạ đụ.",
+          "Bệ hạ nhỏ thêm sáp lên đầu ti và bụng dưới {name}, từng giọt chậm rãi. Nàng rên to, chân run nhẹ. Bệ hạ cạo nốt những sợi lông cuối cùng quanh lồn, rồi dùng ngón tay chà xát mép lồn trơn. Cặc bệ hạ đã cứng, đầu cặc chà lên sáp còn dính trên bụng nàng.\n> Lồn thần thiếp sạch rồi, bệ hạ đụ mạnh vào đi.\n> Sáp trên đầu ti ấm mà sướng, bệ hạ tiếp tục đi.",
+          "Bệ hạ đâm mạnh, cặc to dài trượt hết vào lồn trơn của {name}. Mỗi nhịp thụt, sáp trên bụng rung nhẹ, đầu ti vẫn còn ấm. {name} co người, lồn siết chặt, rên liên tục. Bệ hạ đụ sâu đến khi bắn đầy tinh nóng vào trong. Rút cặc ra, tinh trắng vừa trào mép lồn, bệ hạ lập tức áp lòng bàn tay giữ chặt nơi kín của nàng.\n> Cặc bệ hạ đụ sâu quá, bắn xong thì giữ chặt cho thiếp.\n> Đừng để tinh chảy ra, thần thiếp muốn giữ hết trong lồn.",
+          "Bàn tay bệ hạ giữ chặt nơi kín {name}, tinh không còn chảy ra ngoài. Nàng nằm thở dốc, tay xoa nhẹ bụng dưới, cảm nhận tinh nóng còn đọng sâu bên trong. Bệ hạ nằm bên cạnh, nhẹ nhàng lau những giọt sáp thừa trên đầu ti. {name} mỉm cười, tựa đầu vào vai bệ hạ, thì thầm đêm Thất tịch này nàng được chọn đèn và được giữ trọn tinh bên trong đúng ý muốn."
         ]
       ]
     }
