@@ -3418,7 +3418,7 @@
   G.D11_TEXT.rhythmWin = ["Bệ hạ đụ đúng nhịp thở {name}, nàng lên đỉnh dữ dội co giật.", "Trẫm thúc theo hơi thở, {name} rên la đạt cực khoái mạnh.", "Đụ nhịp nhàng, {name} lên đỉnh, nước bắn ướt hết.", "Trẫm vào ra đúng nhịp, {name} sảng khoái lên đỉnh lả người."];
   G.D11_TEXT.edgeWin = ["Bệ hạ giữ {name} sát mép lâu rồi cho lên, nàng lả đi.", "Trẫm kìm sát cực điểm, {name} cuối cùng lên đỉnh tan chảy.", "Giữ mép thật lâu, {name} lên đỉnh kiệt sức rên nhỏ.", "Bệ hạ không cho lên sớm, {name} đạt đỉnh lả người."];
   G.D11_TEXT.edgeFail = ["{name} không kìm được, lên đỉnh sớm hơn trẫm muốn.", "{name} đạt đỉnh trước, rên lớn nước ướt hết đùi.", "{name} lên đỉnh sớm, co giật không kịp kìm."];
-  G.D11_TEXT.spotHot = ["Bệ hạ vừa chạm đúng chỗ nhạy nhất của {name}.\n> A… thần thiếp lên đỉnh rồi!", "Ngón tay trẫm chạm đúng hạt của {name}.\n> Ôi… thiếp chịu không nổi nữa!"];
+  G.D11_TEXT.spotHot = ["Bệ hạ vừa chạm đúng chỗ nhạy nhất của {name}.\n> A… thần thiếp lên đỉnh rồi!", "Ngón tay trẫm chạm đúng hạt của {name}.\n> Ôi… thiếp chịu không nổi nữa!", "Bệ hạ vuốt đúng điểm nhạy của {name}.\n> Bệ hạ ơi… thiếp muốn bị đụ ngay!"];
   G.D11_TEXT.giftBack = {"canh": ["{name} vui tặng bát canh bổ tự nấu để đêm nay trẫm sung sức.", "{name} dâng canh bổ, mong bệ hạ đụ thiếp mạnh hơn đêm nay."], "tui": ["{name} tặng túi thơm tự thêu cho bệ hạ.", "{name} trao túi thơm, hương của thiếp dành cho trẫm."]};
   G.D11_TEXT.contestWin = ["{name} thắng cuộc thi, được hầu trẫm đêm nay, các phi ghen tị.", "{name} thắng, được hầu bệ hạ, phi khác đỏ mắt nhìn.", "{name} thắng thi giữa các phi, đêm nay thiếp hầu trẫm."];
   const d11 = (s) => {
