@@ -201,7 +201,7 @@
   };
 
   function renderTab() {
-    return ({ harem: renderHarem, kids: renderKids, me: () => renderBedTitles() + renderAlbum() + renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
+    return ({ harem: renderHarem, kids: renderKids, me: () => renderBedTitles() + renderGameRecords() + renderAlbum() + renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
   }
 
   /* ---------------- Nhật ký ---------------- */
@@ -409,6 +409,15 @@
 
   /* ---------------- Sở thích ---------------- */
   /* ---------------- Danh hiệu phòng the + Album cảnh ---------------- */
+  function renderGameRecords() {
+    if (!G.gameTitles) return "";
+    const b = (G.state.d11 && G.state.d11.best) || {};
+    const rec = [["Ném thẻ", b.dau_ho, 5], ["Bắn cung", b.ban_cung, 5], ["Thả đèn", b.hoa_dang, null], ["Đối thơ", b.doi_tho, 3], ["Thắng cờ", b.danh_co_win, null], ["Nhịp phòng the", b.rhythm_win, null], ["Kìm cơn", b.edge_win, null]];
+    const tl = G.gameTitles();
+    return `<section class="section"><div class="section-head"><h3>Kỷ lục trò chơi</h3><span class="hint">${tl.filter((x) => x.done).length}/${tl.length} danh hiệu</span></div>
+      <div class="bt-grid">${rec.map(([n, v, m]) => `<div class="bt ${v ? "on" : ""}"><b>${n}</b><span class="hint">${v ? (m ? `${v}/${m}` : `${v}`) + (n.startsWith("Thắng") || n.startsWith("Nhịp") || n.startsWith("Kìm") ? " lần" : n === "Thả đèn" ? " đèn" : "") : "Chưa chơi"}</span></div>`).join("")}</div>
+      <div class="bt-grid">${tl.map((x) => `<div class="bt ${x.done ? "on" : ""}"><b>${esc(x.name)}</b><span class="hint">${esc(x.desc)}</span></div>`).join("")}</div></section>`;
+  }
   function renderBedTitles() {
     if (!G.bedTitles) return "";
     const list = G.bedTitles();
@@ -980,17 +989,16 @@
     const dots = pages.length > 1 ? `<div class="scene-dots" aria-label="Đoạn ${i + 1} trên ${pages.length}">${pages.map((_, k) => `<i class="${k === i ? "on" : k < i ? "done" : ""}"></i>`).join("")}</div>` : "";
     const btns = last
       ? `${notesHtml(notes || scene.notes)}${roundBtn(scene)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
-      : `<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
-    openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${dots}<p class="ev-text ink">${formatText(pages[i])}</p>${btns}`, (el) => {
-      const card = $(el, ".sheet-card");
-      card.classList.add("scene-card");
-      if (i === 0) card.classList.add("scroll-open");
+      : `${sceneGameBtns(scene, i, pages)}<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
+    openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${dots}<p class="ev-text">${formatText(pages[i])}</p>${btns}`, (el) => {
+      $(el, ".sheet-card").classList.add("scene-card");
       if (last) {
         $(el, "#s-ok").addEventListener("click", closeSheet);
         on(el, "#s-more", "click", () => openRoundPicker(G.findConsort(scene.roundOf)));
       }
       else {
         $(el, "#s-next").addEventListener("click", () => showScene(scene, notes, i + 1));
+        on(el, "[data-sg]", "click", (b) => runSceneGame(scene, notes, i, b.dataset.sg));
         $(el, "#s-all").addEventListener("click", () => showScene(Object.assign({}, scene, { pages: [pages.slice(i).join("\n\n")] }), notes, 0));
       }
     }, last ? undefined : { locked: true });
@@ -1021,7 +1029,7 @@
     openSheet(
       `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Hiệp ${st.rounds + 2} · ${esc(c.name)}</span><h3>Thêm hiệp nữa</h3></div></div>
        <p class="hint">Đêm nay đã ${st.rounds + 1} hiệp, còn ${Math.max(0, st.left)}. Long thể hiện ${Math.round(G.state.stats.longThe)} (mỗi hiệp −${G.ROUND_COST}). Long thể từ 70 được 2 hiệp thêm, dưới 70 được 1.</p>
-       ${st.left <= 0 ? (st.canBuy ? `<button class="btn btn-primary" id="r-canh">Uống canh bổ<span class="cost">${fmtMoney(st.cost)} lượng · thêm 1 hiệp</span></button>` : `<p class="empty">${esc(st.why || "Bệ hạ đã hết sức đêm nay.")}</p>`) : `
+       ${st.left <= 0 ? (st.canBuy ? `<button class="btn btn-primary" id="r-canh">Uống canh bổ<span class="cost">${G.d11 && G.d11().canhFree ? `canh được tặng (còn ${G.d11().canhFree})` : `${fmtMoney(st.cost)} lượng`} · thêm 1 hiệp</span></button>` : `<p class="empty">${esc(st.why || "Bệ hạ đã hết sức đêm nay.")}</p>`) : `
        ${st.canBuy ? `<button class="btn btn-ghost btn-sm" id="r-canh">Uống canh bổ trước (${fmtMoney(st.cost)} lượng, thêm 1 hiệp)</button>` : ""}
        <input type="search" id="r-q" placeholder="Tìm sở thích nàng sẵn lòng…" aria-label="Tìm sở thích" autocomplete="off">
        <div class="choices" id="r-list">${list()}</div>`}
@@ -1391,6 +1399,7 @@
       ${row("Gần nhất", v.last != null ? G.turnLabel(v.last) : "Chưa")}
       ${row("Nhiều hiệp nhất", v.maxRounds ? `${v.maxRounds} hiệp một đêm` : "Chưa")}
       ${row("Nơi nhạy cảm", v.spot ? esc(v.spot) : `<span class="hint">Biết sau ${v.spotLeft} đêm nữa</span>`)}
+      ${!v.spot ? `<button class="btn btn-sm" id="c-spot" ${G.canSearchSpot(c) ? "" : "disabled"}>Tìm nơi nhạy cảm${G.canSearchSpot(c) ? "" : " (tháng sau thử lại)"}</button>` : ""}
       ${row("Tư thế nàng thích", v.pose ? esc(v.pose) : `<span class="hint">Biết sau ${v.poseLeft} đêm nữa</span>`)}
       ${row("Đã thử", `${v.tried} sở thích`)}
       ${v.top.length ? `<div class="bk-sub">Hay dùng nhất</div><div class="row-wrap">${v.top.map((x) => pill(`${x.name} · ${x.n}`)).join("")}</div>` : ""}
@@ -1517,6 +1526,7 @@
           for (const p of el.querySelectorAll("[data-pane-body]")) p.hidden = p.dataset.paneBody !== k;
         };
         showPane(consortPane);
+        on(el, "#c-spot", "click", () => openSpotSearch(c));
         on(el, "#c-whisper", "click", () => {
           const box = $(el, "#c-whisper-text");
           const lv = G.levelOf(c);
@@ -1646,7 +1656,7 @@
     openSheet(
       `${head}<p class="hint">Mỗi tháng chơi với mỗi phi một ván. Thắng: Tình cảm +5. Thua hay hòa nàng vẫn vui: Tình cảm +3. Trò nàng thích (♥) được thêm +2.</p>
        <div class="choices">${Object.entries(G.MINI_GAMES).map(([k, g]) => `<button class="btn" data-game="${k}">${esc(g.name)}${g.likes.some((x) => c.traits.includes(x)) ? " ♥" : ""}<span class="cost">${esc(g.desc)}</span></button>`).join("")}</div>`,
-      (el) => on(el, "[data-game]", "click", (b) => ({ dau_ho: gameDauHo, hoa_dang: gameHoaDang, doi_tho: gameDoiTho, danh_co: gameDanhCo })[b.dataset.game](c))
+      (el) => on(el, "[data-game]", "click", (b) => ({ dau_ho: gameDauHo, hoa_dang: gameHoaDang, doi_tho: gameDoiTho, danh_co: gameDanhCo, xuc_xac: gameXucXac, ban_cung: (x) => gameDauHo(x, "ban_cung") })[b.dataset.game](c))
     );
   }
   function endGame(c, id, outcome, line) {
@@ -1657,7 +1667,9 @@
   const gameHead = (c, id, sub) => `<div class="ev-head">${portrait(c, "sm")}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>${esc(G.MINI_GAMES[id].name)}</h3></div></div><p class="hint" id="g-sub">${sub}</p>`;
 
   // Ném thẻ vào bình: kim chạy qua lại, bấm khi kim nằm trong vùng sáng
-  function gameDauHo(c) {
+  function gameDauHo(c, gid) {
+    gid = gid || "dau_ho";
+    const bow = gid === "ban_cung";
     let shot = 0, hit = 0, pos = 0, dir = 1, raf = 0, last = 0, live = true;
     const speed = 0.9 + Math.random() * 0.3; // phần thanh mỗi giây
     let zone = null;
@@ -1668,10 +1680,10 @@
     };
     newZone();
     openSheet(
-      `${gameHead(c, "dau_ho", "Bấm Ném khi kim nằm trong vùng sáng. Năm lần, trúng ba là thắng.")}
-       <div class="dh-bar" id="dh-bar"><span class="dh-zone" id="dh-zone"></span><span class="dh-needle" id="dh-needle"></span></div>
+      `${gameHead(c, gid, bow ? "Bấm Bắn khi tâm đỏ nằm trong vòng bia. Năm mũi tên, trúng ba là thắng." : "Bấm Ném khi kim nằm trong vùng sáng. Năm lần, trúng ba là thắng.")}
+       <div class="dh-bar${bow ? " bow" : ""}" id="dh-bar"><span class="dh-zone" id="dh-zone"></span><span class="dh-needle" id="dh-needle"></span></div>
        <div class="dh-score" id="dh-score">${"○".repeat(5)}</div>
-       <button class="btn btn-primary" id="dh-go">Ném</button>`,
+       <button class="btn btn-primary" id="dh-go">${bow ? "Bắn" : "Ném"}</button>`,
       (el) => {
         const needle = $(el, "#dh-needle");
         const z = $(el, "#dh-zone");
@@ -1699,11 +1711,12 @@
           const marks = [...$(el, "#dh-score").textContent];
           marks[shot - 1] = ok ? "●" : "×";
           $(el, "#dh-score").textContent = marks.join("");
-          $(el, "#g-sub").textContent = ok ? "Trúng! Thẻ rơi gọn vào miệng bình." : "Trượt rồi, thẻ chạm vành bình bật ra.";
-          if (shot >= 5 || hit >= 3 || shot - hit > 2) {
+          $(el, "#g-sub").textContent = bow ? (ok ? "Trúng hồng tâm!" : "Mũi tên lệch bia.") : ok ? "Trúng! Thẻ rơi gọn vào miệng bình." : "Trượt rồi, thẻ chạm vành bình bật ra.";
+          if (shot >= 5) {
             live = false;
             cancelAnimationFrame(raf);
-            setTimeout(() => endGame(c, "dau_ho", hit >= 3 ? "win" : "lose", `Trúng ${hit} trên ${shot} lần ném.`), 500);
+            G.recordGame(gid, hit);
+            setTimeout(() => endGame(c, gid, hit >= 3 ? "win" : "lose", `Trúng ${hit} trên ${shot} lần ${bow ? "bắn" : "ném"}.`), 500);
           } else {
             newZone();
             drawZone();
@@ -1729,6 +1742,7 @@
           live = false;
           clearInterval(clock);
           clearInterval(spawn);
+          G.recordGame("hoa_dang", got);
           setTimeout(() => endGame(c, "hoa_dang", got >= NEED ? "win" : "lose", `Thả được ${got} chiếc đèn.`), 400);
         };
         const add = () => {
@@ -1744,7 +1758,7 @@
             d.classList.add("got");
             got++;
             $(el, "#hd-got").textContent = `${got}/${NEED} đèn`;
-            if (got >= NEED) finish();
+            if (got >= 20) finish();
           });
           lake.appendChild(d);
           setTimeout(() => d.remove(), 1300);
@@ -1786,7 +1800,10 @@
             setTimeout(() => {
               i++;
               if (i < 3) round();
-              else endGame(c, "doi_tho", ok >= 2 ? "win" : "lose", `Đối đúng ${ok} trên 3 câu.`);
+              else {
+                G.recordGame("doi_tho", ok);
+                endGame(c, "doi_tho", ok >= 2 ? "win" : "lose", `Đối đúng ${ok} trên 3 câu.`);
+              }
             }, 900);
           }),
         { locked: true }
@@ -1851,6 +1868,346 @@
       );
     draw(`Bệ hạ đi trước, cầm quân vàng <span class="co-mini">${PIECE_X}</span>. Nàng cầm quân hoa hồng <span class="co-mini">${PIECE_O}</span>.`);
   }
+  // Xúc xắc thưởng phạt: ba lần gieo, rồi mời nàng thị tẩm
+  function gameXucXac(c) {
+    const faces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+    const done = [];
+    let rolling = false;
+    const draw = () =>
+      openSheet(
+        `${gameHead(c, "xuc_xac", done.length < 3 ? `Lần gieo ${done.length + 1}/3. Mỗi mặt là một việc nàng phải làm.` : "Gieo xong ba lần.")}
+         <div class="dice" id="dice">${done.length ? faces[done[done.length - 1] - 1] : "🎲"}</div>
+         <div class="dice-log">${done.map((f, i) => `<p class="ev-text"><b>${faces[f - 1]}</b> ${formatText(G.diceText(f, c))}</p>`).join("")}</div>
+         <div class="choices">${done.length < 3 ? `<button class="btn btn-primary" id="dc-roll">Gieo</button>` : `<button class="btn btn-primary" id="dc-night">Triệu nàng đêm nay</button><button class="btn btn-ghost" id="dc-end">Để sau</button>`}</div>`,
+        (el) => {
+          on(el, "#dc-roll", "click", () => {
+            if (rolling) return;
+            rolling = true;
+            const d = $(el, "#dice");
+            let k = 0;
+            const spin = setInterval(() => (d.textContent = faces[k++ % 6]), 70);
+            setTimeout(() => {
+              clearInterval(spin);
+              done.push(1 + Math.floor(Math.random() * 6));
+              rolling = false;
+              draw();
+            }, 650);
+          });
+          on(el, "#dc-night", "click", () => {
+            G.miniGameResult(c, "xuc_xac", "win");
+            G.save();
+            openNight(c);
+          });
+          on(el, "#dc-end", "click", () => endGame(c, "xuc_xac", "win"));
+        },
+        { locked: true }
+      );
+    draw();
+  }
+
+  /* ---------------- Trò trong cảnh ---------------- */
+  function sceneGameBtns(scene, i, pages) {
+    if (!scene.roundOf || scene.blocked) return "";
+    const pl = (scene._played = scene._played || {});
+    const mid = Math.min(2, pages.length - 2);
+    const out = [];
+    if (i === 0 && pages.length > 1 && !pl.undress) out.push(`<button class="btn btn-sm" data-sg="undress">Cởi từng lớp</button>`);
+    if (i === mid && i > 0 && !pl.rhythm && !pl.edge) out.push(`<button class="btn btn-sm" data-sg="rhythm">♥ Nhịp phòng the</button><button class="btn btn-sm" data-sg="edge">Kìm cơn</button>`);
+    return out.length ? `<div class="sg-row">${out.join("")}</div>` : "";
+  }
+  function runSceneGame(scene, notes, i, kind) {
+    const c = G.findConsort(scene.roundOf);
+    if (!c) return showScene(scene, notes, i);
+    const back = (ok) => {
+      const r = G.sceneGame(c.id, kind, ok);
+      scene._played[kind] = true;
+      if (kind !== "undress") scene._played.rhythm = scene._played.edge = true;
+      const pages = scene.pages.slice();
+      if (r && r.line) pages[i + 1] = r.line + "\n\n" + pages[i + 1];
+      scene.pages = pages;
+      scene.notes = (scene.notes || []).concat((r && r.notes) || []);
+      G.save();
+      showScene(scene, notes, i + 1);
+    };
+    ({ rhythm: gameRhythm, edge: gameEdge, undress: gameUndress })[kind](c, back);
+  }
+  // Nhịp phòng the: chạm khi vòng co lại khớp vòng tâm
+  function gameRhythm(c, done) {
+    const nh = G.bodyOf ? G.bodyOf(c).nhay : 1;
+    const gain = [18, 13, 10][nh];
+    const beat = 950;
+    const TIME = 14;
+    let meter = 0, t0 = performance.now(), live = true, left = TIME;
+    openSheet(
+      `<h3>Nhịp phòng the</h3><p class="hint" id="rh-sub">Chạm khi vòng ngoài co lại khớp vòng tâm. Đầy thanh trong ${TIME} giây thì nàng lên đỉnh.${nh === 0 ? " Nàng dễ lên đỉnh." : nh === 2 ? " Nàng khó lên đỉnh, cần kiên nhẫn." : ""}</p>
+       <button class="rh-pad" id="rh-pad" aria-label="Chạm theo nhịp"><span class="rh-core"></span><span class="rh-ring" id="rh-ring"></span></button>
+       <div class="rh-meter">${bar(0)}</div><div class="hd-info"><span class="pill" id="rh-time">${TIME} giây</span><button class="btn btn-ghost btn-sm" id="rh-skip">Bỏ qua</button></div>`,
+      (el) => {
+        const ring = $(el, "#rh-ring");
+        const meterEl = el.querySelector(".rh-meter .bar i");
+        const tick = () => {
+          if (!live || !el.contains(ring)) return;
+          const ph = ((performance.now() - t0) % beat) / beat;
+          ring.style.transform = `scale(${(2.2 - 1.2 * ph).toFixed(3)})`;
+          ring.style.opacity = (0.35 + ph * 0.65).toFixed(2);
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        const finish = (ok) => {
+          if (!live) return;
+          live = false;
+          clearInterval(clock);
+          if (!document.body.contains(ring)) return; // bảng đã bị thay, bỏ kết quả
+          setTimeout(() => done(ok), 350);
+        };
+        const clock = setInterval(() => {
+          left--;
+          const tm = el.querySelector("#rh-time");
+          if (tm) tm.textContent = `${left} giây`;
+          if (left <= 0) finish(meter >= 100);
+        }, 1000);
+        $(el, "#rh-pad").addEventListener("pointerdown", () => {
+          if (!live) return;
+          const ph = ((performance.now() - t0) % beat) / beat;
+          const good = ph > 0.8 || ph < 0.06;
+          meter = clamp01(meter + (good ? gain : -6));
+          meterEl.style.width = meter + "%";
+          const pad = $(el, "#rh-pad");
+          pad.classList.remove("hit", "miss");
+          void pad.offsetWidth;
+          pad.classList.add(good ? "hit" : "miss");
+          if (navigator.vibrate) try { navigator.vibrate(good ? 12 : 4); } catch (e) {}
+          if (meter >= 100) finish(true);
+        });
+        on(el, "#rh-skip", "click", () => finish(false));
+      },
+      { locked: true }
+    );
+  }
+  // Kìm cơn: thanh tự dâng, giữ nút để hãm lại, ở vùng sát đỉnh đủ lâu là thắng, tràn là thua
+  function gameEdge(c, done) {
+    const nh = G.bodyOf ? G.bodyOf(c).nhay : 1;
+    const up = [30, 22, 16][nh];
+    const NEED = 5, TIME = 20;
+    let lv = 10, inZone = 0, hold = false, live = true, last = performance.now(), el0 = 0;
+    openSheet(
+      `<h3>Kìm cơn</h3><p class="hint">Khoái cảm của nàng tự dâng lên. Giữ nút "Hãm lại" để kéo xuống. Giữ thanh trong vùng vàng đủ ${NEED} giây là thắng; để tràn quá đỉnh là nàng lên sớm.</p>
+       <div class="edge-bar"><span class="edge-zone"></span><i id="eg-fill"></i></div>
+       <div class="hd-info"><span class="pill" id="eg-zone">Trong vùng 0/${NEED} giây</span><button class="btn btn-ghost btn-sm" id="eg-skip">Bỏ qua</button></div>
+       <button class="btn btn-primary eg-hold" id="eg-hold">Giữ để hãm lại</button>`,
+      (el) => {
+        const fill = $(el, "#eg-fill");
+        const holdBtn = $(el, "#eg-hold");
+        const set = (v) => (hold = v);
+        holdBtn.addEventListener("pointerdown", (e) => (e.preventDefault(), set(true)));
+        for (const ev of ["pointerup", "pointerleave", "pointercancel"]) holdBtn.addEventListener(ev, () => set(false));
+        const finish = (ok) => {
+          if (!live) return;
+          live = false;
+          setTimeout(() => done(ok), 350);
+        };
+        const tick = (now) => {
+          if (!live || !el.contains(fill)) return;
+          const dt = Math.min(0.1, (now - last) / 1000);
+          last = now;
+          el0 += dt;
+          lv += (hold ? -38 : up) * dt;
+          if (lv < 0) lv = 0;
+          if (lv >= 80 && lv <= 95) inZone += dt;
+          fill.style.height = Math.min(100, lv) + "%";
+          fill.classList.toggle("hot", lv >= 80);
+          const z = el.querySelector("#eg-zone");
+          if (z) z.textContent = `Trong vùng ${inZone.toFixed(1)}/${NEED} giây`;
+          if (lv >= 100) return finish(false);
+          if (inZone >= NEED) return finish(true);
+          if (el0 >= TIME) return finish(false);
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        on(el, "#eg-skip", "click", () => finish(false));
+      },
+      { locked: true }
+    );
+  }
+  // Cởi từng lớp: giữ ngón tay đủ lâu để cởi một lớp, buông sớm thì nàng kéo áo lại
+  function gameUndress(c, done) {
+    const T = G.D11_TEXT;
+    const layers = ["Áo khoác ngoài", "Áo trong", "Yếm"];
+    let k = 0, prog = 0, hold = false, live = true, last = performance.now();
+    const lines = [];
+    openSheet(
+      `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>Cởi từng lớp</h3></div></div>
+       <p class="hint">Giữ ngón tay trên nút cho đến khi thanh đầy để cởi một lớp. Buông sớm thì nàng thẹn kéo áo lại.</p>
+       <div class="ud-log" id="ud-log"></div>
+       <div class="rh-meter">${bar(0)}</div>
+       <button class="btn btn-primary eg-hold" id="ud-hold">Giữ để cởi: ${layers[0]}</button>
+       <button class="btn btn-ghost btn-sm" id="ud-skip">Bỏ qua</button>`,
+      (el) => {
+        const meterEl = el.querySelector(".rh-meter .bar i");
+        const btn = $(el, "#ud-hold");
+        const log = $(el, "#ud-log");
+        btn.addEventListener("pointerdown", (e) => (e.preventDefault(), (hold = true)));
+        const release = () => {
+          if (hold && prog > 0 && prog < 100 && live) {
+            log.innerHTML += `<p class="hint">${formatText(G.fill(G.d3one(T.undressFail), { speaker: c }))}</p>`;
+            prog = 0;
+          }
+          hold = false;
+        };
+        for (const ev of ["pointerup", "pointerleave", "pointercancel"]) btn.addEventListener(ev, release);
+        const tick = (now) => {
+          if (!live || !el.contains(btn)) return;
+          const dt = Math.min(0.1, (now - last) / 1000);
+          last = now;
+          if (hold) prog += dt * 100 / 1.1;
+          if (prog >= 100) {
+            lines.push(G.fill(G.d3one(T.undress[k]), { speaker: c }));
+            log.innerHTML = lines.map((x) => `<p class="ev-text">${formatText(x)}</p>`).join("");
+            k++;
+            prog = 0;
+            hold = false;
+            if (k >= layers.length) {
+              live = false;
+              btn.disabled = true;
+              return setTimeout(() => done(true), 700);
+            }
+            btn.textContent = `Giữ để cởi: ${layers[k]}`;
+          }
+          meterEl.style.width = Math.min(100, prog) + "%";
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        on(el, "#ud-skip", "click", () => {
+          live = false;
+          done(false);
+        });
+      },
+      { locked: true }
+    );
+  }
+  const clamp01 = (v) => Math.max(0, Math.min(100, v));
+
+  /* ---------------- Tìm nơi nhạy cảm ---------------- */
+  const SPOT_XY = [[63, 18], [37, 15], [50, 46], [50, 64], [45, 98], [66, 54], [44, 150], [50, 25], [50, 36], [34, 80]];
+  function openSpotSearch(c) {
+    const target = G.spotIndex(c);
+    let tries = 5, found = false;
+    const tx = SPOT_XY[target];
+    const draw = (msg) =>
+      openSheet(
+        `<h3>Tìm nơi nhạy cảm</h3><p class="hint" id="sp-msg">${msg || `Chạm lên người ${esc(c.name)} để tìm chỗ nàng nhạy nhất. Còn ${tries} lần chạm.`}</p>
+         <svg class="spot-fig" viewBox="0 0 100 160" aria-label="Hình bóng nàng">
+           <path d="M50 6 C60 6 64 14 63 22 C62 30 57 33 50 33 C43 33 38 30 37 22 C36 14 40 6 50 6Z" fill="#3b181b" stroke="#d9ad55" stroke-width=".8"/>
+           <path d="M38 34 C30 36 26 44 27 58 L31 70 C29 92 30 128 34 156 L66 156 C70 128 71 92 69 70 L73 58 C74 44 70 36 62 34 Z" fill="#3b181b" stroke="#d9ad55" stroke-width=".8"/>
+           <path d="M44 34 L50 46 L56 34" stroke="#d9ad55" stroke-width=".8" fill="none"/>
+           ${SPOT_XY.map(([x, y], i) => `<circle class="sp-dot" data-spot="${i}" cx="${x}" cy="${y}" r="4.6"/>`).join("")}
+         </svg>
+         <button class="btn btn-ghost" id="sp-end">Thôi</button>`,
+        (el) => {
+          on(el, "#sp-end", "click", () => closeSheet());
+          on(el, "[data-spot]", "click", (dot) => {
+            if (found || tries <= 0) return;
+            const i = Number(dot.dataset.spot);
+            tries--;
+            if (i === target) {
+              found = true;
+              const r = G.spotFound(c, true);
+              G.save();
+              return showMessage("Tìm ra rồi", r.text, r.notes);
+            }
+            const [x, y] = SPOT_XY[i];
+            const d = Math.hypot(x - tx[0], y - tx[1]);
+            const hint = d < 16 ? "Nóng lắm, nàng run khẽ!" : d < 32 ? "Ấm rồi, nàng thở gấp hơn." : "Lạnh, nàng chỉ cười.";
+            dot.classList.add("tried");
+            if (tries <= 0) {
+              const r = G.spotFound(c, false);
+              G.save();
+              return showMessage("Chưa tìm ra", `${esc(c.name)} cười khúc khích, kéo áo lại.`, r.notes);
+            }
+            $(el, "#sp-msg").textContent = `${hint} Còn ${tries} lần chạm.`;
+          });
+        },
+        { locked: true }
+      );
+    draw();
+  }
+
+  /* ---------------- Các phi thi tài ---------------- */
+  function openThiTai() {
+    openSheet(
+      `<h3>Hậu cung thi tài</h3><p class="hint">Bốn phi được sủng nhất cùng thi một trò. Người thắng được Sủng ái +5 và hầu bệ hạ đêm nay. Mỗi tháng một lần.</p>
+       <div class="choices">${G.THI_GAMES.map((k) => `<button class="btn" data-thi="${k}">${esc(G.MINI_GAMES[k].name)}</button>`).join("")}</div>
+       <button class="btn btn-ghost" id="thi-back">Thôi</button>`,
+      (el) => {
+        on(el, "#thi-back", "click", () => openSummon());
+        on(el, "[data-thi]", "click", (b) => {
+          const r = G.thiTai(b.dataset.thi);
+          G.save();
+          if (r) showThiResult(r);
+        });
+      }
+    );
+  }
+  function showThiResult(r) {
+    const win = r.ranked[0].c;
+    openSheet(
+      `<h3>${esc(r.game.name)} · kết quả</h3>
+       <div class="cards thi-list">${r.ranked
+         .map((x, i) => `<div class="row-card thi-row" style="--dl:${(r.ranked.length - i) * 0.35}s">${portrait(x.c, "sm")}<span><b>${i === 0 ? "🏆 " : ""}${esc(x.c.name)}</b><br><span class="hint">${x.score}/${r.max}</span></span></div>`)
+         .join("")}</div>
+       <p class="ev-text">${formatText(r.text)}</p>${notesHtml(r.notes)}
+       <div class="choices"><button class="btn btn-primary" id="thi-night">Triệu ${esc(win.name)}</button><button class="btn btn-ghost" id="thi-end">Để sau</button></div>`,
+      (el) => {
+        on(el, "#thi-night", "click", () => openNight(win));
+        on(el, "#thi-end", "click", () => closeSheet());
+      }
+    );
+  }
+
+  /* ---------------- Vòng quay hậu cung ---------------- */
+  function openWheel() {
+    const pool = G.spinPool();
+    if (!pool.length) return openSummon();
+    const n = pool.length;
+    const seg = 360 / n;
+    const cols = ["#7a2a2e", "#5a2226", "#8a3a2a", "#4a1e22"];
+    const grad = pool.map((_, i) => `${cols[i % cols.length]} ${(i * seg).toFixed(2)}deg ${((i + 1) * seg).toFixed(2)}deg`).join(", ");
+    let spun = false;
+    openSheet(
+      `<h3>Vòng quay hậu cung</h3><p class="hint">Quay ra phi nào và sở thích nào, đêm nay là thế.</p>
+       <div class="wheel-wrap"><span class="wheel-pin">▼</span><div class="wheel" id="wheel" style="background: conic-gradient(${grad})">${pool
+         .map((c, i) => `<span class="wl" style="transform: rotate(${(i * seg + seg / 2).toFixed(2)}deg)"><span>${esc(c.name)}</span></span>`)
+         .join("")}</div></div>
+       <p class="ev-text" id="wh-res" hidden></p>
+       <div class="choices"><button class="btn btn-primary" id="wh-spin">Quay</button><button class="btn btn-ghost" id="wh-back">Thôi</button></div>`,
+      (el) => {
+        on(el, "#wh-back", "click", () => openSummon());
+        on(el, "#wh-spin", "click", (b) => {
+          if (spun) return;
+          spun = true;
+          const r = G.spinWheel();
+          const w = $(el, "#wheel");
+          const target = 360 * 5 + (360 - (r.index * seg + seg / 2));
+          w.style.transform = `rotate(${target}deg)`;
+          b.disabled = true;
+          setTimeout(() => {
+            const f = r.fetish && R.fetishes[r.fetish];
+            const res = $(el, "#wh-res");
+            res.innerHTML = `Vòng quay dừng ở <b>${esc(r.c.name)}</b>${f ? `, sở thích <b>${esc(f.name)}</b>` : ", đêm thường"}.`;
+            res.hidden = false;
+            b.textContent = "Truyền chỉ";
+            b.disabled = false;
+            b.onclick = (e) => {
+              e.stopPropagation();
+              openNight(r.c, r.fetish ? [r.fetish] : []);
+            };
+          }, 3300);
+        });
+      },
+      { locked: true }
+    );
+  }
+
   function shuffleArr(a) {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -1859,12 +2216,12 @@
     return a;
   }
 
-  function openNight(c) {
+  function openNight(c, preset) {
     const fets = Object.values(R.fetishes)
       .filter((f) => G.fetishUnlocked(f.id))
       .sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name, "vi"));
     const pins = loadPins();
-    const picked = new Set();
+    const picked = new Set((preset || []).filter((f) => G.fetishUnlocked(f)));
     let query = "";
     let onlyWilling = true;
     const lvlOf = (f) => G.consentOf(c, f.id);
@@ -2033,12 +2390,15 @@
     openSheet(
       `<h3>Lật thẻ bài</h3><p class="hint">Lý công công dâng khay thẻ tên. Bệ hạ chạm vào thẻ để lật, đêm nay chọn ai?</p>
        ${list.length >= 2 ? `<button class="btn fate-btn" id="sm-fate" ${fate ? "" : "disabled"}>Bốc thẻ úp · duyên trời <span class="hint">${fate ? `Tình cảm +${G.FATE_BONUS} nếu triệu người bốc được` : "tháng này đã bốc"}</span></button>` : ""}
+       ${list.length >= 2 ? `<div class="row-btns tray-extra"><button class="btn btn-sm" id="sm-wheel">Vòng quay hậu cung</button><button class="btn btn-sm" id="sm-thi" ${G.canThiTai && G.canThiTai() ? "" : "disabled"}>Các phi thi tài${G.canThiTai && G.canThiTai() ? "" : " (tháng này rồi)"}</button></div>` : ""}
        ${list.length ? `<div class="tray">${list.map((c) => tablet(c)).join("")}</div>` : `<p class="empty">Không có phi tần nào có thể thị tẩm.</p>`}
        <button class="btn btn-ghost" id="sm-close">Đóng</button>`,
       (el) => {
         $(el, "#sm-close").addEventListener("click", closeSheet);
         const f = el.querySelector("#sm-fate");
         if (f) f.addEventListener("click", openFate);
+        on(el, "#sm-wheel", "click", () => openWheel());
+        on(el, "#sm-thi", "click", () => openThiTai());
         on(el, "[data-tablet]", "click", (b) => {
           if (busy) return;
           busy = true;
