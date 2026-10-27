@@ -127,7 +127,7 @@
     if (!s) return UI.renderGate();
     if (s.ended) return renderEnding();
     const tabs = [
-      ["log", "Triều"],
+      ["log", (() => { const n = G.reminders ? G.reminders().length : 0; return n ? `Triều (${n})` : "Triều"; })()],
       ["harem", "Hậu cung"],
       ["kids", "Con cháu"],
       ["me", "Bệ hạ"],
@@ -198,11 +198,17 @@
         })
         .join("")}</ul></div>`;
   }
+  function renderReminders() {
+    const list = G.reminders ? G.reminders() : [];
+    if (!list.length) return "";
+    return `<div class="goals reminders"><div class="section-head"><h3>Việc cần để ý</h3><span class="hint">${list.length} việc</span></div>
+      <ul>${list.map((r) => `<li class="${r.hot ? "hot" : ""}">${r.consort ? `<button class="link-btn" data-consort="${esc(r.consort)}">${esc(r.text)}</button>` : esc(r.text)}</li>`).join("")}</ul></div>`;
+  }
   function renderLog() {
     const s = G.state;
     const f = LOG_FILTERS.find((x) => x[0] === logFilter) || LOG_FILTERS[0];
     const rows = s.log.filter((l) => !f[2] || f[2].includes(l.kind)).slice(0, 150);
-    return `<section class="section">${renderGoals()}
+    return `<section class="section">${renderReminders()}${renderGoals()}
       <div class="chips" role="group" aria-label="Lọc nhật ký">${LOG_FILTERS.map(([id, label]) => `<button class="chip" data-logf="${id}" aria-pressed="${logFilter === id}">${label}</button>`).join("")}</div>
       ${rows.length ? `<ul class="log">${rows.map((l) => `<li class="${esc(l.kind)}"><span class="when">${l.age}t · T${l.month}</span><span class="txt">${esc(l.text)}</span></li>`).join("")}</ul>` : `<p class="empty">Chưa có gì ở mục này.</p>`}
     </section>`;
@@ -215,7 +221,7 @@
       ${portrait(c)}
       <span class="body">
         <span class="name">${esc(c.name)}</span>
-        <span class="meta">${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}</span>
+        <span class="meta">${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}${G.isSulking && G.isSulking(c) ? " " + pill("Đang dỗi", "preg") : ""}${(() => { const pr = G.promiseNow && G.promiseNow(); return pr && pr.c.id === c.id && !pr.done ? " " + pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : ""; })()}</span>
         <span class="favor">${bar(c.favor)}<span>Sủng ái ${c.favor}</span></span>
         ${extra || ""}
       </span>
@@ -968,7 +974,7 @@
                   let cell;
                   if (s.godMode) cell = `<select data-consent="${esc(f.id)}">${G.CONSENT.map((x) => `<option value="${x}" ${x === lvl ? "selected" : ""}>${G.CONSENT_LABEL[x]}</option>`).join("")}</select>`;
                   else if (lvl === "persuade" && open) {
-                    const need = G.persuadeNeed(f.id);
+                    const need = G.persuadeNeedFor ? G.persuadeNeedFor(c, f.id) : G.persuadeNeed(f.id);
                     const fv = Math.round(c.favor);
                     const af = Math.round(c.affection);
                     const ready = fv >= need && af >= need;
@@ -995,7 +1001,7 @@
           renderFx();
         });
         $(el, "#c-close").addEventListener("click", closeSheet);
-        $(el, "#c-visit").addEventListener("click", () => showMessage(c.name, G.visit(c.id), ["Sủng ái +3"]));
+        $(el, "#c-visit").addEventListener("click", () => openTalk(c));
         $(el, "#c-night").addEventListener("click", () => openNight(c));
         on(el, "#c-crown", "click", () => {
           const ev = G.crownEvent ? G.crownEvent(c.id) : null;
@@ -1064,6 +1070,35 @@
   };
   const fold = (t) => String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
 
+  /** Ghé thăm: chọn cách nói chuyện, nàng phản ứng theo tính cách. */
+  function openTalk(c) {
+    const s = G.state;
+    const can = G.talkAvailable ? G.talkAvailable(c) : false;
+    const known = (s.d3 && s.d3.talkKnown && s.d3.talkKnown[c.id]) || {};
+    const mark = { good: " ♥", bad: " ✗", ok: " ·" };
+    const sulk = G.isSulking && G.isSulking(c);
+    const greet = sulk ? G.fill(G.D3_TEXT.sulkLine, { speaker: c }) : `> ${c.favor >= 60 ? c.lines.high || "Bệ hạ đến rồi! Thiếp chờ mãi." : c.lines.low || "Thần thiếp tham kiến bệ hạ."}`;
+    openSheet(
+      `<div class="ev-head">${portrait(c, "lg")}<div class="t"><span class="eyebrow">Ghé thăm · ${esc(G.displayTitle(c))}</span><h3>${esc(c.name)}</h3></div></div>
+       <p class="ev-text">${formatText(greet)}</p>
+       ${can ? `<p class="hint">Nói đúng ý nàng: Tình cảm +4, Sủng ái +2, tháng này thuyết phục dễ hơn ${G.TALK_BONUS} điểm. ♥ đúng ý · ✗ không hợp · · bình thường (đã thử).</p>` : `<p class="hint">Tháng này đã trò chuyện với nàng rồi. Ghé thăm vẫn được Sủng ái +3, Tình cảm +2.</p>`}
+       <div class="choices">${can ? Object.entries(G.D3_TEXT.talk).map(([k, v]) => `<button class="btn" data-talk="${k}">${esc(v.label)}${known[k] ? mark[known[k]] : ""}</button>`).join("") : ""}
+         <button class="btn btn-ghost" data-talk="">Chỉ ghé thăm</button></div>`,
+      (el) =>
+        on(el, "[data-talk]", "click", (b) => {
+          const opt = b.dataset.talk;
+          if (!opt) {
+            const line = G.visit(c.id);
+            G.save();
+            return showMessage(c.name, line, ["Sủng ái +3", "Tình cảm +2"]);
+          }
+          const r = G.talk(c.id, opt);
+          G.save();
+          if (r) showMessage(c.name, r.text, r.notes);
+        })
+    );
+  }
+
   function openNight(c) {
     const fets = Object.values(R.fetishes)
       .filter((f) => G.fetishUnlocked(f.id))
@@ -1079,7 +1114,7 @@
       const ok = lvl === "willing";
       const on = picked.has(f.id);
       return `<div class="fx-row${ok ? "" : " fx-off"}">
-        <label class="check"><input type="checkbox" data-fx="${esc(f.id)}" ${on ? "checked" : ""} ${ok ? "" : "disabled"}> <span>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""} <span class="hint">· ${esc(G.CONSENT_LABEL[lvl])}${lvl === "persuade" ? ` (cần ${G.persuadeNeed(f.id)}, nàng ${Math.round(c.favor)}/${Math.round(c.affection)})` : ""}</span></span></label>
+        <label class="check"><input type="checkbox" data-fx="${esc(f.id)}" ${on ? "checked" : ""} ${ok ? "" : "disabled"}> <span>${esc(f.name)}${c.likes.includes(f.id) ? " ♥" : ""} <span class="hint">· ${esc(G.CONSENT_LABEL[lvl])}${lvl === "persuade" ? ` (cần ${G.persuadeNeedFor ? G.persuadeNeedFor(c, f.id) : G.persuadeNeed(f.id)}, nàng ${Math.round(c.favor)}/${Math.round(c.affection)})` : ""}</span></span></label>
         ${lvl === "persuade" ? `<button class="btn btn-sm btn-ghost" data-pers="${esc(f.id)}">Thuyết phục</button>` : ""}
         <button class="fx-pin" data-pin="${esc(f.id)}" aria-pressed="${pins.has(f.id)}" aria-label="Ghim ${esc(f.name)}">${pins.has(f.id) ? "★" : "☆"}</button>
       </div>`;

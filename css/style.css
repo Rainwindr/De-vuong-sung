@@ -345,3 +345,9 @@ textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px soli
 .fx-msg { background: rgba(255,255,255,.05); border-left: 3px solid #c9433a; padding: 8px 10px; border-radius: 6px; }
 .mini-table b.short { color: #e0806f; }
 .row-btns { display: flex; flex-direction: column; gap: 6px; align-items: stretch; }
+
+/* nhắc việc */
+.reminders li.hot { color: #f0b37e; }
+.link-btn { background: none; border: 0; padding: 0; color: inherit; font: inherit; text-align: left; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.reminders li { display: block; line-height: 1.45; padding-left: 14px; position: relative; }
+.reminders li::before { content: "•"; position: absolute; left: 0; color: var(--muted); }
