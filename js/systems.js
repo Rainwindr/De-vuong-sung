@@ -3065,6 +3065,32 @@
     }, { speaker: c }));
   });
 
+  /* ---------------- Trùng tu cung ---------------- */
+  G.PALACE_UP_COST = [800, 1500, 2500]; // lên cấp 1, 2, 3
+  G.palaceLevel = (pid) => (G.state.d6 && G.state.d6.up && G.state.d6.up[pid]) || 0;
+  G.upgradePalace = function (pid) {
+    const s = G.state;
+    if (!s.d6) s.d6 = {};
+    if (!s.d6.up) s.d6.up = {};
+    const lv = G.palaceLevel(pid);
+    const cost = G.PALACE_UP_COST[lv];
+    const M = G.palaceMap();
+    const p = M.all.find((x) => x.id === pid);
+    if (!p || cost == null) return { ok: false, text: "Cung đã trùng tu đến mức cao nhất." };
+    if (s.stats.quocKho < cost && !s.godFlags.infiniteMoney) return { ok: false, text: "Quốc khố không đủ." };
+    G.addStat("quocKho", -cost);
+    s.d6.up[pid] = lv + 1;
+    for (const c of M.residents[pid] || []) c.affection = clamp(c.affection + 5, 0, 100);
+    log(`Trùng tu ${p.name} lên bậc ${lv + 1}.`, "milestone");
+    G.pushFx && G.pushFx({ type: "stamp", text: "Trùng tu", sub: p.name });
+    return { ok: true, text: `${p.name} được trùng tu: mái lợp ngói lưu ly, vườn trồng thêm hoa, nội thất thay mới. Người ở trong cung vui mừng khôn xiết.`, notes: [`Quốc khố −${cost}`, `Bậc ${lv + 1}/3`, "Người ở Tình cảm +5", `Mỗi tháng Tình cảm +${lv + 1}`] };
+  };
+  monthly((s) => {
+    if (!s.d6 || !s.d6.up) return;
+    const M = G.palaceMap();
+    for (const [pid, lv] of Object.entries(s.d6.up)) for (const c of M.residents[pid] || []) c.affection = clamp(c.affection + lv, 0, 100);
+  });
+
   /* ================================================================== */
   /* GOD MODE (Thiên Đạo)                                                */
   /* ================================================================== */

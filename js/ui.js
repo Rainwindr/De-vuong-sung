@@ -241,6 +241,13 @@
   }
 
   /* ---------------- Hậu cung ---------------- */
+  function lastNightText(c) {
+    const b = G.state.d7 && G.state.d7.book && G.state.d7.book[c.id];
+    if (!c.nights) return "chưa thị tẩm";
+    if (!b || b.last == null) return `${c.nights} đêm`;
+    const ago = G.state.turn - b.last;
+    return `${c.nights} đêm · ${ago <= 0 ? "gần nhất tháng này" : `gần nhất ${ago} tháng trước`}`;
+  }
   function consortCard(c, extra) {
     const p = G.partnerOf(c.id);
     return `<button class="consort" data-consort="${esc(c.id)}">
@@ -249,6 +256,7 @@
         <span class="name">${esc(c.name)}</span>
         <span class="meta">${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}${G.isSulking && G.isSulking(c) ? " " + pill("Đang dỗi", "preg") : ""}${(() => { const pr = G.promiseNow && G.promiseNow(); return pr && pr.c.id === c.id && !pr.done ? " " + pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : ""; })()}</span>
         <span class="favor">${bar(c.favor)}<span>Sủng ái ${c.favor}</span></span>
+        ${G.levelName ? `<span class="meta card-extra"><span class="lv-pill lv-${G.levelOf(c)}">${esc(G.levelName(c))}</span> ${lastNightText(c)}</span>` : ""}
         ${extra || ""}
       </span>
     </button>`;
@@ -279,9 +287,9 @@
       const st = new Set(res.flatMap(status));
       const lit = st.has("hen") ? "lit-gold" : st.has("doi") ? "lit-red" : res.length ? "" : "empty";
       const dots = [st.has("hen") ? `<i class="d-gold" title="Có hẹn"></i>` : "", st.has("doi") ? `<i class="d-red" title="Đang dỗi"></i>` : "", st.has("thai") ? `<i class="d-jade" title="Hoài thai"></i>` : ""].join("");
-      return `<button class="palace ${lit} ${p.kind || ""}" data-palace="${p.id}" ${res.length ? "" : "disabled"}>
+      return `<button class="palace ${lit} ${p.kind || ""} up-${G.palaceLevel(p.id)}" data-palace="${p.id}" ${res.length ? "" : "disabled"}>
         <span class="roof"></span>
-        <span class="p-name">${esc(p.name)}</span>
+        <span class="p-name">${esc(p.name)}${G.palaceLevel(p.id) ? ` <span class="p-up">${"★".repeat(G.palaceLevel(p.id))}</span>` : ""}</span>
         <span class="p-who">${res.length ? res.slice(0, 3).map((c) => portrait(c, "xs")).join("") + (res.length > 3 ? `<em>+${res.length - 3}</em>` : "") : `<em>Trống</em>`}</span>
         <span class="p-main">${res[0] ? esc(res[0].name) : ""}</span>
         ${dots ? `<span class="p-dots">${dots}</span>` : ""}
@@ -304,9 +312,24 @@
     const M = G.palaceMap();
     const res = M.residents[pid] || [];
     const p = M.all.find((x) => x.id === pid);
-    if (res.length === 1) return openConsort(res[0].id);
-    openSheet(`<h3>${esc(p ? p.name : "")}</h3><p class="hint">${res.length} người ở. Chủ vị là người phẩm cao nhất.</p><div class="cards">${res.map((c) => consortCard(c)).join("")}</div>`, (el) =>
-      on(el, "[data-consort]", "click", (b) => openConsort(b.dataset.consort))
+    const lv = G.palaceLevel(pid);
+    const cost = G.PALACE_UP_COST[lv];
+    openSheet(
+      `<h3>${esc(p ? p.name : "")}${lv ? ` <span class="p-up">${"★".repeat(lv)}</span>` : ""}</h3>
+       <p class="hint">${res.length} người ở. Chủ vị là người phẩm cao nhất.${lv ? ` Cung bậc ${lv}/3: người ở được Tình cảm +${lv} mỗi tháng.` : ""}</p>
+       <div class="cards">${res.map((c) => consortCard(c)).join("")}</div>
+       ${cost != null ? `<button class="btn" id="p-up">Trùng tu lên bậc ${lv + 1}/3<span class="cost"> · ${fmtMoney(cost)} lượng · người ở Tình cảm +5 ngay, +${lv + 1} mỗi tháng</span></button>` : `<p class="hint">Cung đã trùng tu bậc cao nhất.</p>`}`,
+      (el) => {
+        on(el, "[data-consort]", "click", (b) => openConsort(b.dataset.consort));
+        on(el, "#p-up", "click", () => {
+          const r = G.upgradePalace(pid);
+          G.save();
+          if (r && r.ok) {
+            queue.unshift(() => openPalace(pid));
+            showMessage("Trùng tu", r.text, r.notes);
+          } else if (r) showMessage("Chưa thể", r.text);
+        });
+      }
     );
   }
 
@@ -318,14 +341,16 @@
       <div class="section-head"><h3>Hậu cung</h3><span class="hint">Chạm để ghé thăm, tặng quà, xem chi tiết</span></div>
       <div class="seg" role="tablist"><button class="seg-btn" data-hview="list" aria-selected="${haremView !== "map"}">Danh sách</button><button class="seg-btn" data-hview="map" aria-selected="${haremView === "map"}">Bản đồ cung</button></div>
       ${!list.length ? `<p class="empty">Hậu cung trống. Mở tuyển tú để nạp phi.</p>` : haremView === "map" ? renderPalaceMap() : `<div class="cards">${list.map((c) => consortCard(c)).join("")}</div>`}
+      <details class="fold"><summary>Đối thực <span class="hint">${pairs.length} cặp</span></summary>
       <div class="section-head"><h3>Đối thực</h3><span class="hint">Thái độ của bệ hạ: ${G.ATTITUDE_LABEL[s.attitude]}</span></div>
       ${
         pairs.length
           ? `<div class="scroll-x"><table class="mini-table"><tr><th>Cặp</th><th>Tình Ý</th><th>Trạng thái</th></tr>${pairs.map((p) => `<tr><td>${esc(p.a.name)} · ${esc(p.b.name)}</td><td>${Math.round(p.tinhY)}</td><td>${esc(p.status)}</td></tr>`).join("")}</table></div>`
           : `<p class="empty">Chưa có cặp nào thân thiết. Tình Ý tăng khi các phi học cùng lớp, cùng bị lạnh nhạt, hoặc hợp tính.</p>`
       }
-      ${renderPhe()}
-      ${renderBangVang()}
+      </details>
+      <details class="fold"><summary>Phe phái <span class="hint">${G.factionList ? G.factionList().length : 0} phe</span></summary>${renderPhe()}</details>
+      <details class="fold"><summary>Bảng vàng</summary>${renderBangVang()}</details>
       ${s.former.length ? `<p class="hint">Đã rời cung: ${s.former.map((f) => esc(f.name) + " (" + esc(f.reason) + ")").join(", ")}.</p>` : ""}
     </section>`;
   }
@@ -1761,9 +1786,9 @@
       const ids = [...picked];
       const combo = G.findCombo(ids);
       const names = ids.map((id) => (R.fetishes[id] || {}).name || id);
-      $(el, "#fx-status").innerHTML = ids.length
+      $(el, "#fx-status").innerHTML = (ids.length
         ? `Đã chọn: ${names.map(esc).join(", ")}${combo ? ` · <strong>Combo: ${esc(combo.name)}</strong>` : ""} <button class="btn btn-sm btn-ghost" id="fx-clear">Bỏ chọn</button>`
-        : `<span class="hint">Chưa chọn sở thích nào (đêm thường).</span>`;
+        : `<span class="hint">Chưa chọn sở thích nào (đêm thường).</span>`) + ` <button class="btn btn-sm" id="fx-suggest">✦ Gợi ý đêm nay</button>`;
     };
 
     openSheet(
@@ -1822,6 +1847,23 @@
               if (pins.has(id)) pins.delete(id);
               else pins.add(id);
               savePins(pins);
+              renderList(el);
+              return;
+            }
+            if (e.target.id === "fx-suggest") {
+              // sở thích nàng sẵn lòng mà lâu nhất chưa dùng; ưu tiên thứ nàng thích
+              const s = G.state;
+              const pool = fets.filter((f) => lvlOf(f) === "willing" && !picked.has(f.id));
+              if (!pool.length) return;
+              const score = (f) => (s.fetishLast[f.id] == null ? -1e6 : s.fetishLast[f.id]) - (c.likes.includes(f.id) ? 6 : 0) + Math.random() * 3;
+              pool.sort((a, b) => score(a) - score(b));
+              picked.clear();
+              picked.add(pool[0].id);
+              const m = $(el, "#fx-msg");
+              if (m) {
+                m.textContent = `Gợi ý: ${pool[0].name}${c.likes.includes(pool[0].id) ? " (nàng thích)" : ""}${s.fetishLast[pool[0].id] == null ? ", bệ hạ chưa thử bao giờ" : ""}. Bấm lần nữa để đổi.`;
+                m.hidden = false;
+              }
               renderList(el);
               return;
             }
