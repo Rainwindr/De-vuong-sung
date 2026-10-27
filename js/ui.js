@@ -196,6 +196,7 @@
       tb.addEventListener("scroll", edge, { passive: true });
     }
     if (!$sheet().hidden) return;
+    playFx();
     if (s.pendingTitles.length) openTitlePrompt();
   };
 
@@ -253,13 +254,70 @@
     </button>`;
   }
 
+  let haremView = (() => {
+    try {
+      return localStorage.getItem("dvs.haremView") || "list";
+    } catch (e) {
+      return "list";
+    }
+  })();
+  /** Bản đồ hậu cung: mỗi phi ở một cung, cung có chuyện thì sáng đèn. */
+  function renderPalaceMap() {
+    const s = G.state;
+    const M = G.palaceMap();
+    const pr = G.promiseNow && G.promiseNow();
+    const status = (c) => {
+      const out = [];
+      if (pr && pr.c.id === c.id && !pr.done) out.push("hen");
+      if (G.isSulking && G.isSulking(c)) out.push("doi");
+      if (c.pregnantDue != null) out.push("thai");
+      if (G.state.summonStreak.id === c.id && G.state.summonStreak.count >= 2) out.push("sung");
+      return out;
+    };
+    const tile = (p) => {
+      const res = M.residents[p.id] || [];
+      const st = new Set(res.flatMap(status));
+      const lit = st.has("hen") ? "lit-gold" : st.has("doi") ? "lit-red" : res.length ? "" : "empty";
+      const dots = [st.has("hen") ? `<i class="d-gold" title="Có hẹn"></i>` : "", st.has("doi") ? `<i class="d-red" title="Đang dỗi"></i>` : "", st.has("thai") ? `<i class="d-jade" title="Hoài thai"></i>` : ""].join("");
+      return `<button class="palace ${lit} ${p.kind || ""}" data-palace="${p.id}" ${res.length ? "" : "disabled"}>
+        <span class="roof"></span>
+        <span class="p-name">${esc(p.name)}</span>
+        <span class="p-who">${res.length ? res.slice(0, 3).map((c) => portrait(c, "xs")).join("") + (res.length > 3 ? `<em>+${res.length - 3}</em>` : "") : `<em>Trống</em>`}</span>
+        <span class="p-main">${res[0] ? esc(res[0].name) : ""}</span>
+        ${dots ? `<span class="p-dots">${dots}</span>` : ""}
+      </button>`;
+    };
+    const built = Object.keys(s.buildings || {}).map((b) => (R.buildings[b] || {}).name).filter(Boolean);
+    return `<div class="palace-map">
+      <div class="pm-col">${M.east.map(tile).join("")}</div>
+      <div class="pm-mid">
+        <div class="palace throne"><span class="roof"></span><span class="p-name">Càn Nguyên điện</span><span class="p-main">Bệ hạ</span></div>
+        ${tile(M.queen)}
+        <div class="pm-road"></div>
+      </div>
+      <div class="pm-col">${M.west.map(tile).join("")}</div>
+      <div class="pm-garden"><span class="p-name">Ngự hoa viên</span>${built.length ? `<span class="pm-built">${built.map((n) => `<span class="pill">${esc(n)}</span>`).join("")}</span>` : `<span class="hint">Chưa xây công trình nào.</span>`}</div>
+    </div>
+    <p class="hint pm-legend"><i class="d-gold"></i> có hẹn · <i class="d-red"></i> đang dỗi · <i class="d-jade"></i> hoài thai. Chạm vào cung để xem người ở.</p>`;
+  }
+  function openPalace(pid) {
+    const M = G.palaceMap();
+    const res = M.residents[pid] || [];
+    const p = M.all.find((x) => x.id === pid);
+    if (res.length === 1) return openConsort(res[0].id);
+    openSheet(`<h3>${esc(p ? p.name : "")}</h3><p class="hint">${res.length} người ở. Chủ vị là người phẩm cao nhất.</p><div class="cards">${res.map((c) => consortCard(c)).join("")}</div>`, (el) =>
+      on(el, "[data-consort]", "click", (b) => openConsort(b.dataset.consort))
+    );
+  }
+
   function renderHarem() {
     const s = G.state;
     const list = [...s.consorts].sort((a, b) => b.rank - a.rank || b.favor - a.favor);
     const pairs = G.listPairs().filter((p) => p.tinhY >= 31);
     return `<section class="section">
       <div class="section-head"><h3>Hậu cung</h3><span class="hint">Chạm để ghé thăm, tặng quà, xem chi tiết</span></div>
-      ${list.length ? `<div class="cards">${list.map((c) => consortCard(c)).join("")}</div>` : `<p class="empty">Hậu cung trống. Mở tuyển tú để nạp phi.</p>`}
+      <div class="seg" role="tablist"><button class="seg-btn" data-hview="list" aria-selected="${haremView !== "map"}">Danh sách</button><button class="seg-btn" data-hview="map" aria-selected="${haremView === "map"}">Bản đồ cung</button></div>
+      ${!list.length ? `<p class="empty">Hậu cung trống. Mở tuyển tú để nạp phi.</p>` : haremView === "map" ? renderPalaceMap() : `<div class="cards">${list.map((c) => consortCard(c)).join("")}</div>`}
       <div class="section-head"><h3>Đối thực</h3><span class="hint">Thái độ của bệ hạ: ${G.ATTITUDE_LABEL[s.attitude]}</span></div>
       ${
         pairs.length
@@ -492,6 +550,14 @@
   function bindTab(root) {
     const s = G.state;
     on(root, "[data-consort]", "click", (b) => openConsort(b.dataset.consort));
+    on(root, "[data-palace]", "click", (b) => openPalace(b.dataset.palace));
+    on(root, "[data-hview]", "click", (b) => {
+      haremView = b.dataset.hview;
+      try {
+        localStorage.setItem("dvs.haremView", haremView);
+      } catch (e) {}
+      UI.render();
+    });
     on(root, "[data-logf]", "click", (b) => {
       logFilter = b.dataset.logf;
       UI.render();
@@ -662,6 +728,64 @@
     if (onBind) onBind(el);
     const first = el.querySelector("button:not(.sheet-x)");
     if (first) first.focus({ preventScroll: true });
+    playFx();
+  }
+
+  /* ---------------- Hoạt cảnh mốc lớn ---------------- */
+  let fxBusy = false;
+  function playFx() {
+    if (fxBusy || !G.takeFx) return;
+    const list = G.takeFx();
+    if (!list.length) return;
+    // gộp: mỗi loại một lần, ưu tiên sắc phong > thắng thi > sinh con > ấn son
+    const order = ["crown", "fireworks", "petals", "stamp"];
+    list.sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
+    const seen = new Set();
+    const run = list.filter((f) => !seen.has(f.type) && seen.add(f.type)).slice(0, 2);
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    fxBusy = true;
+    let k = 0;
+    const next = () => {
+      if (k >= run.length) return (fxBusy = false);
+      const ms = showFx(run[k++]);
+      setTimeout(next, ms + 150);
+    };
+    setTimeout(next, 180);
+  }
+  UI.playFx = playFx;
+  function showFx(f) {
+    const box = document.createElement("div");
+    box.className = `fx-layer fx-${f.type}`;
+    box.setAttribute("aria-hidden", "true");
+    let ms = 1800;
+    if (f.type === "petals") {
+      let s = "";
+      for (let i = 0; i < 26; i++) s += `<i style="left:${(i * 41) % 100}%;--d:${1.6 + ((i * 7) % 10) / 10}s;--dl:${((i * 13) % 9) / 10}s;--r:${(i * 53) % 360}deg"></i>`;
+      box.innerHTML = s + `<div class="fx-cap">${esc(f.text || "Tin vui")}</div>`;
+      ms = 2600;
+    } else if (f.type === "fireworks") {
+      let s = "";
+      const spots = [[30, 28], [70, 22], [50, 40], [22, 50], [78, 46]];
+      spots.forEach(([x, y], n) => {
+        s += `<span class="burst" style="left:${x}%;top:${y}%;--dl:${n * 0.28}s;--h:${[45, 350, 160, 30, 280][n]}">`;
+        for (let a = 0; a < 12; a++) s += `<b style="--a:${a * 30}deg"></b>`;
+        s += "</span>";
+      });
+      box.innerHTML = s + `<div class="fx-cap">${esc(f.text || "")}</div>`;
+      ms = 2400;
+    } else if (f.type === "crown") {
+      const c = G.findConsort(f.id);
+      if (!c) return 0;
+      box.innerHTML = `<div class="crown-wrap"><svg class="crown" viewBox="0 0 120 60"><path d="M8 52 L14 18 L34 36 L60 6 L86 36 L106 18 L112 52Z" fill="#e3bb62" stroke="#8a6420" stroke-width="2"/><circle cx="60" cy="8" r="5" fill="#d2442f"/><circle cx="14" cy="18" r="4" fill="#6fae8e"/><circle cx="106" cy="18" r="4" fill="#6fae8e"/><rect x="8" y="46" width="104" height="8" rx="2" fill="#c99a3e"/></svg>${portrait(c, "xl")}</div><div class="fx-cap">${esc(c.name)} · ${esc(G.RANKS[f.rank] || "")}</div>`;
+      ms = 2300;
+    } else if (f.type === "stamp") {
+      box.innerHTML = `<div class="seal-stamp"><span>${esc(f.text || "Chuẩn")}</span></div>${f.sub ? `<div class="fx-cap">${esc(f.sub)}</div>` : ""}`;
+      ms = 1400;
+    }
+    document.body.appendChild(box);
+    if (navigator.vibrate) try { navigator.vibrate(f.type === "stamp" ? 20 : [15, 40, 15]); } catch (e) {}
+    setTimeout(() => box.remove(), ms);
+    return ms;
   }
   /** Vuốt xuống khi bảng đang ở đầu trang thì đóng. */
   function swipeToClose(card) {
@@ -725,7 +849,10 @@
     const btns = last
       ? `${notesHtml(notes || scene.notes)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
       : `<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
-    openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${dots}<p class="ev-text">${formatText(pages[i])}</p>${btns}`, (el) => {
+    openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${dots}<p class="ev-text ink">${formatText(pages[i])}</p>${btns}`, (el) => {
+      const card = $(el, ".sheet-card");
+      card.classList.add("scene-card");
+      if (i === 0) card.classList.add("scroll-open");
       if (last) $(el, "#s-ok").addEventListener("click", closeSheet);
       else {
         $(el, "#s-next").addEventListener("click", () => showScene(scene, notes, i + 1));

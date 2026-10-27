@@ -498,6 +498,7 @@
     c.rank = clamp(target, 0, 6);
     if (c.rank === before) return;
     log(`${c.name} được thăng lên ${G.RANKS[c.rank]}.`, "harem");
+    if (G.pushFx && c.rank >= 2) G.pushFx({ type: "crown", id: c.id, rank: c.rank });
     if (c.rank >= 4 && !c.title && !s.pendingTitles.includes(c.id)) s.pendingTitles.push(c.id);
   }
   G.promote = promote;
@@ -1109,6 +1110,7 @@
     c.rank = 7;
     changeFavor(c, 10);
     log(`Đại lễ sách phong: ${c.name} được lập làm Hoàng hậu.`, "milestone");
+    if (G.pushFx) G.pushFx({ type: "crown", id: c.id, rank: 7 });
     G.addAlbum("Đại lễ sách phong", `${c.name} đội mũ phượng, chính thức trở thành Hoàng hậu.`);
     return true;
   };
