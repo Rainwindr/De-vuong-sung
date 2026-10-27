@@ -1794,5 +1794,6 @@
       "Hay ngượng": "persuade"
     }
   },
-  {"id": "canh-viet.ngoc_hanh", "name": "Mang ngọc hành", "tier": 2, "unlock": {"truyLac": {"gte": 45}}, "default_consent": "persuade", "desc": "Phi tự nguyện mang một ngọc hành nhỏ trong người suốt một ngày, đi lại, thỉnh an như thường; đêm đến bệ hạ tự tay lấy ra.", "consent": {"core.tuyet": "willing", "core.song_nhat": "willing"}, "consentByTrait": {"Táo bạo": "willing", "Hay ngượng": "persuade"}}
+  {"id": "canh-viet.ngoc_hanh", "name": "Mang ngọc hành", "tier": 2, "unlock": {"truyLac": {"gte": 45}}, "default_consent": "persuade", "desc": "Phi tự nguyện mang một ngọc hành nhỏ trong người suốt một ngày, đi lại, thỉnh an như thường; đêm đến bệ hạ tự tay lấy ra.", "consent": {"core.tuyet": "willing", "core.song_nhat": "willing"}, "consentByTrait": {"Táo bạo": "willing", "Hay ngượng": "persuade"}},
+  {"id": "canh-viet.chenh_lech", "name": "Chênh lệch kích cỡ", "tier": 2, "unlock": {"truyLac": {"gte": 35}}, "default_consent": "persuade", "desc": "Long căn của bệ hạ quá khổ so với nơi kín của nàng; nàng tự nguyện, từ từ làm quen với sự căng đầy.", "consentByTrait": {"Táo bạo": "willing", "Hay ngượng": "persuade"}}
 ]
