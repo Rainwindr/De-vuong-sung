@@ -2204,6 +2204,8 @@
     sulkLine: "{name} quay mặt đi, giọng nhỏ mà giận.\n> Bệ hạ còn nhớ đường đến cung thiếp sao?",
   };
 
+  const one = (x) => (Array.isArray(x) ? pick(x) : x); // câu chữ có thể là một chuỗi hoặc danh sách nhiều bản
+  G.d3one = one;
   const d3 = (s) => {
     s = s || G.state;
     if (!s.d3) s.d3 = {};
@@ -2255,7 +2257,7 @@
     const d = d3();
     G.visit(id); // Sủng ái +3, Tình cảm +2 như ghé thăm thường
     const notes = ["Sủng ái +3", "Tình cảm +2"];
-    if (!G.talkAvailable(c)) return { text: G.fill(G.D3_TEXT.talk[opt].ok, { speaker: c }), notes: notes.concat(["Tháng này đã trò chuyện rồi"]) };
+    if (!G.talkAvailable(c)) return { text: G.fill(one(G.D3_TEXT.talk[opt].ok), { speaker: c }), notes: notes.concat(["Tháng này đã trò chuyện rồi"]) };
     d.talkMonth[c.id] = s.turn;
     let r = G.talkReaction(c, opt);
     const sulking = d.sulk[c.id] != null && d.sulk[c.id] >= s.turn;
@@ -2271,7 +2273,7 @@
       c.affection = clamp(c.affection - 2, 0, 100);
       notes.push("Không hợp ý: Tình cảm −2");
     }
-    const text = sulking && r !== "good" ? G.D3_TEXT.sulkLine : G.D3_TEXT.talk[opt][r];
+    const text = one(sulking && r !== "good" ? G.D3_TEXT.sulkLine : G.D3_TEXT.talk[opt][r]);
     return { text: G.fill(text, { speaker: c }), notes, reaction: r };
   };
   // nói đúng ý thì mức cần để thuyết phục giảm trong tháng đó
@@ -2317,12 +2319,12 @@
         if ((d.seen[c.id] || -1) >= p.due) {
           c.affection = clamp(c.affection + 8, 0, 100);
           G.changeFavor(c, 4);
-          log(G.fill(G.D3_TEXT.promiseKept, { speaker: c }) + " Tình cảm +8, Sủng ái +4.", "harem");
+          log(G.fill(one(G.D3_TEXT.promiseKept), { speaker: c }) + " Tình cảm +8, Sủng ái +4.", "harem");
         } else {
           c.affection = clamp(c.affection - 6, 0, 100);
           G.changeFavor(c, -3);
           d.sulk[c.id] = s.turn + 2;
-          log(G.fill(G.D3_TEXT.promiseBroken, { speaker: c }) + " Tình cảm −6, Sủng ái −3.", "harem");
+          log(G.fill(one(G.D3_TEXT.promiseBroken), { speaker: c }) + " Tình cảm −6, Sủng ái −3.", "harem");
         }
       }
     }
@@ -2333,7 +2335,7 @@
     const ev = {
       id: "sys.loi_hen",
       title: "Lời hẹn",
-      text: G.D3_TEXT.promiseAsk,
+      text: one(G.D3_TEXT.promiseAsk),
       choices: [
         { label: "Hứa với nàng", _promise: true, effects: { affection: 2 } },
         { label: "Trẫm bận, để dịp khác", effects: { affection: -1 } },

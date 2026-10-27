@@ -1077,7 +1077,7 @@
     const known = (s.d3 && s.d3.talkKnown && s.d3.talkKnown[c.id]) || {};
     const mark = { good: " ♥", bad: " ✗", ok: " ·" };
     const sulk = G.isSulking && G.isSulking(c);
-    const greet = sulk ? G.fill(G.D3_TEXT.sulkLine, { speaker: c }) : `> ${c.favor >= 60 ? c.lines.high || "Bệ hạ đến rồi! Thiếp chờ mãi." : c.lines.low || "Thần thiếp tham kiến bệ hạ."}`;
+    const greet = sulk ? G.fill(G.d3one(G.D3_TEXT.sulkLine), { speaker: c }) : `> ${c.favor >= 60 ? c.lines.high || "Bệ hạ đến rồi! Thiếp chờ mãi." : c.lines.low || "Thần thiếp tham kiến bệ hạ."}`;
     openSheet(
       `<div class="ev-head">${portrait(c, "lg")}<div class="t"><span class="eyebrow">Ghé thăm · ${esc(G.displayTitle(c))}</span><h3>${esc(c.name)}</h3></div></div>
        <p class="ev-text">${formatText(greet)}</p>
