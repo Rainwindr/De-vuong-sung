@@ -1148,6 +1148,8 @@
 
     openSheet(
       `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Lật thẻ bài · ${esc(G.displayTitle(c))}</span><h3>${esc(c.name)}</h3></div></div>
+       ${G.fateNow && G.fateNow(c) ? `<p class="hint fate-hint">Duyên trời: triệu nàng đêm nay được Tình cảm +${G.FATE_BONUS}.</p>` : ""}
+       ${G.state.summonStreak.id === c.id && G.state.summonStreak.count >= G.JEALOUS_AT - 1 ? `<p class="hint warn-hint">Đã triệu nàng ${G.state.summonStreak.count} đêm liền. Đêm nay sẽ có phi khác ghen.</p>` : ""}
        ${
          fets.length
            ? `<p class="hint">Chọn sở thích cho đêm nay (tùy chọn). Chọn hai sở thích hợp nhau để mở combo. Bấm ☆ để ghim lên đầu. Bỏ chọn "Chỉ điều nàng sẵn lòng" để thấy và thuyết phục những sở thích nàng còn ngại.</p>
@@ -1210,9 +1212,15 @@
           });
         }
         $(el, "#n-go").addEventListener("click", () => {
+          const mood = G.nightMood ? G.nightMood(c) : null;
+          if (mood) {
+            G.save();
+            return showMood(c, mood);
+          }
           const scene = G.summon(c.id, [...picked]);
           const later = scene && !scene.blocked ? G.rollNightEvent(c.id) : null;
           G.save();
+          if (scene && scene.jealous) queue.push(() => showJealous(scene.jealous));
           if (later) queue.push(() => showLaterEvent(later));
           showScene(scene);
         });
@@ -1220,17 +1228,114 @@
     );
   }
 
+  /** Một thẻ tên: mặt trước ghi tên, mặt sau là ấn "Đêm nay". */
+  function tablet(c, faceDown) {
+    const pr = G.promiseNow && G.promiseNow();
+    const tags = [
+      G.isSulking && G.isSulking(c) ? pill("Đang dỗi", "preg") : "",
+      pr && pr.c.id === c.id && !pr.done ? pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : "",
+      G.state.summonStreak.id === c.id && G.state.summonStreak.count >= 1 ? pill(`${G.state.summonStreak.count} đêm liền`, "rank") : "",
+    ].filter(Boolean).join(" ");
+    return `<button class="tablet${faceDown ? " down" : ""}" data-tablet="${esc(c.id)}" aria-label="${faceDown ? "Thẻ úp" : esc(c.name)}">
+      <span class="tablet-in">
+        <span class="tablet-face front">${portrait(c)}<span class="t-name">${esc(c.name)}</span><span class="t-rank">${esc(G.displayTitle(c))}</span>${tags ? `<span class="t-tags">${tags}</span>` : ""}<span class="t-favor">${bar(c.favor)}<span>Sủng ái ${Math.round(c.favor)}</span></span></span>
+        <span class="tablet-face back"><span class="seal">御</span><span class="t-back">${faceDown ? "Thẻ úp" : "Đêm nay"}</span></span>
+      </span>
+    </button>`;
+  }
+  const reduceMotion = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const FLIP_MS = 620;
+
   function openSummon() {
     const s = G.state;
     const list = s.consorts.filter((c) => !G.cannotSummon(c)).sort((a, b) => b.favor - a.favor);
+    const fate = G.canDrawFate && G.canDrawFate();
+    let busy = false;
     openSheet(
-      `<h3>Lật thẻ bài</h3><p class="hint">Lý công công dâng khay thẻ tên. Đêm nay bệ hạ chọn ai?</p>
-       ${list.length ? `<div class="cards">${list.map((c) => consortCard(c)).join("")}</div>` : `<p class="empty">Không có phi tần nào có thể thị tẩm.</p>`}
+      `<h3>Lật thẻ bài</h3><p class="hint">Lý công công dâng khay thẻ tên. Bệ hạ chạm vào thẻ để lật, đêm nay chọn ai?</p>
+       ${list.length >= 2 ? `<button class="btn fate-btn" id="sm-fate" ${fate ? "" : "disabled"}>Bốc thẻ úp · duyên trời <span class="hint">${fate ? `Tình cảm +${G.FATE_BONUS} nếu triệu người bốc được` : "tháng này đã bốc"}</span></button>` : ""}
+       ${list.length ? `<div class="tray">${list.map((c) => tablet(c)).join("")}</div>` : `<p class="empty">Không có phi tần nào có thể thị tẩm.</p>`}
        <button class="btn btn-ghost" id="sm-close">Đóng</button>`,
       (el) => {
         $(el, "#sm-close").addEventListener("click", closeSheet);
-        on(el, "[data-consort]", "click", (b) => openNight(G.findConsort(b.dataset.consort)));
+        const f = el.querySelector("#sm-fate");
+        if (f) f.addEventListener("click", openFate);
+        on(el, "[data-tablet]", "click", (b) => {
+          if (busy) return;
+          busy = true;
+          const c = G.findConsort(b.dataset.tablet);
+          if (reduceMotion()) return openNight(c);
+          b.classList.add("down", "picked");
+          setTimeout(() => openNight(c), FLIP_MS);
+        });
       }
+    );
+  }
+
+  /** Bốc 3 thẻ úp: lật một thẻ, hai thẻ còn lại lật theo cho biết suýt nữa là ai. */
+  function openFate() {
+    const cards = G.drawFate();
+    G.save();
+    if (!cards.length) return openSummon();
+    let chosen = null;
+    openSheet(
+      `<h3>Duyên trời</h3><p class="hint">${esc(G.D4_TEXT.fateIntro)}</p>
+       <div class="tray tray-3">${cards.map((c) => tablet(c, true)).join("")}</div>
+       <p class="ev-text" id="fate-msg" hidden></p>
+       <div class="choices" id="fate-act" hidden><button class="btn btn-primary" id="fate-go">Triệu nàng</button><button class="btn btn-ghost" id="fate-skip">Để sau</button></div>`,
+      (el) => {
+        on(el, "[data-tablet]", "click", (b) => {
+          if (chosen) return;
+          chosen = G.findConsort(b.dataset.tablet);
+          G.chooseFate(chosen.id);
+          G.save();
+          b.classList.remove("down");
+          b.classList.add("picked");
+          const rest = [...el.querySelectorAll("[data-tablet]")].filter((x) => x !== b);
+          const done = () => {
+            for (const x of rest) x.classList.remove("down"), x.classList.add("dim");
+            const m = $(el, "#fate-msg");
+            m.innerHTML = formatText(`Thẻ lật lên: ${chosen.name}. Triệu nàng đêm nay được Tình cảm +${G.FATE_BONUS}. Ưu đãi giữ đến hết tháng.`);
+            m.hidden = false;
+            $(el, "#fate-act").hidden = false;
+          };
+          if (reduceMotion()) done();
+          else setTimeout(done, FLIP_MS + 250);
+        });
+        $(el, "#fate-go").addEventListener("click", () => openNight(chosen));
+        $(el, "#fate-skip").addEventListener("click", closeSheet);
+      },
+      { locked: true }
+    );
+  }
+
+  /** Nàng xin dời một đêm: an ủi, hoặc để nàng nghỉ. Không có lựa chọn ép nàng. */
+  function showMood(c, mood) {
+    openSheet(
+      `<div class="ev-head">${portrait(c, "lg")}<div class="t"><span class="eyebrow">${esc(mood.label)} · ${esc(G.displayTitle(c))}</span><h3>Đêm không như ý</h3></div></div>
+       <p class="ev-text">${formatText(mood.text)}</p>
+       <div class="choices">
+         <button class="btn" data-mood="comfort">Ở lại an ủi nàng<span class="cost">Tình cảm +6, không thị tẩm</span></button>
+         <button class="btn" data-mood="other">Để nàng nghỉ, triệu người khác<span class="cost">Tình cảm +2</span></button>
+         <button class="btn btn-ghost" data-mood="rest">Để nàng nghỉ</button>
+       </div>`,
+      (el) =>
+        on(el, "[data-mood]", "click", (b) => {
+          const k = b.dataset.mood;
+          const r = k === "comfort" ? G.moodComfort(c, mood.kind) : G.moodRest(c);
+          G.save();
+          if (k === "other") queue.push(openSummon);
+          showMessage(c.name, r.text, r.notes);
+        }),
+      { locked: true }
+    );
+  }
+
+  function showJealous(j) {
+    openSheet(
+      `<div class="ev-head">${portrait(j.c, "lg")}<div class="t"><span class="eyebrow">${esc(j.c.name)} · ${esc(G.displayTitle(j.c))}</span><h3>Ghen tuông</h3></div></div>
+       <p class="ev-text">${formatText(j.text)}</p>${notesHtml(j.notes)}<button class="btn btn-primary" id="s-ok">Tiếp</button>`,
+      (el) => $(el, "#s-ok").addEventListener("click", closeSheet)
     );
   }
 
