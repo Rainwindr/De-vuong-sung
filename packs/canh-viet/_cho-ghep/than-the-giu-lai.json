@@ -1,0 +1,27 @@
+{
+  "long (Grok viết về độ dài long căn, không phải lông nơi kín)": {
+    "0": [
+      "{name} nhìn thấy long căn trẫm ngắn gọn vừa phải, nàng mỉm cười đầy thỏa mãn khi chạm vào.",
+      "{name} đưa tay nắm lấy long căn trẫm không quá dài, cảm giác vừa tay khiến nàng thèm muốn.",
+      "Long căn trẫm ngắn mà cứng khiến {name} không khỏi nuốt nước bọt khi nhìn thấy."
+    ],
+    "1": [
+      "{name} sờ thấy long căn trẫm dài vừa đủ, mắt nàng sáng lên đầy khao khát.",
+      "Long căn trẫm dài trung bình hiện ra trước {name}, nàng không kìm được mà liếm môi."
+    ],
+    "2": [
+      "{name} nhìn thấy long căn trẫm rất dài dựng đứng, nàng vừa sợ vừa thèm không dứt mắt.",
+      "{name} chạm vào long căn trẫm dài bất thường, ngón tay nàng run run đầy thèm khát.",
+      "Long căn trẫm dài khủng khiến {name} nuốt ực, mắt nàng trợn tròn đầy dục vọng."
+    ]
+  },
+  "tinh.1 (Grok viết \"vừa phải\", trong khi mức này là Nhiều)": [
+    "Trẫm bắn tinh vừa phải vào nơi kín {name}, nàng cảm nhận được sự ấm nóng lan tỏa.",
+    "{name} cảm thấy tinh dịch trẫm chảy ra vừa đủ, nàng thở dài thỏa mãn.",
+    "Tinh của trẫm tràn ra từ hạ thân {name} với lượng vừa phải, nàng đỏ mặt."
+  ],
+  "changeKin (Grok viết \"khít hơn\", trong khi ý là đã quen, bớt chật)": [
+    "Nơi kín {name} có vẻ khít hơn sau những lần bị long căn trẫm lấp đầy, nàng cảm thấy căng chật hơn.",
+    "Hạ thân {name} dần siết chặt hơn sau nhiều hiệp, nàng nhận ra sự khít khao rõ rệt."
+  ]
+}
