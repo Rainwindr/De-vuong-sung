@@ -847,18 +847,78 @@
       : `<div class="scene-veil">· · ·</div>`;
     const dots = pages.length > 1 ? `<div class="scene-dots" aria-label="Đoạn ${i + 1} trên ${pages.length}">${pages.map((_, k) => `<i class="${k === i ? "on" : k < i ? "done" : ""}"></i>`).join("")}</div>` : "";
     const btns = last
-      ? `${notesHtml(notes || scene.notes)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
+      ? `${notesHtml(notes || scene.notes)}${roundBtn(scene)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
       : `<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
     openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${dots}<p class="ev-text ink">${formatText(pages[i])}</p>${btns}`, (el) => {
       const card = $(el, ".sheet-card");
       card.classList.add("scene-card");
       if (i === 0) card.classList.add("scroll-open");
-      if (last) $(el, "#s-ok").addEventListener("click", closeSheet);
+      if (last) {
+        $(el, "#s-ok").addEventListener("click", closeSheet);
+        on(el, "#s-more", "click", () => openRoundPicker(G.findConsort(scene.roundOf)));
+      }
       else {
         $(el, "#s-next").addEventListener("click", () => showScene(scene, notes, i + 1));
         $(el, "#s-all").addEventListener("click", () => showScene(Object.assign({}, scene, { pages: [pages.slice(i).join("\n\n")] }), notes, 0));
       }
     }, last ? undefined : { locked: true });
+  }
+
+  function roundBtn(scene) {
+    if (!scene || scene.blocked || !scene.roundOf || !G.roundState) return "";
+    const c = G.findConsort(scene.roundOf);
+    const st = c && G.roundState(c);
+    if (!st) return "";
+    if (st.why && !(st.left <= 0 && st.canBuy)) return `<p class="hint">${esc(st.why)}</p>`;
+    return `<button class="btn" id="s-more">Thêm hiệp nữa<span class="cost">${st.left > 0 ? `còn ${st.left} hiệp · Long thể −${G.ROUND_COST}` : `uống canh bổ để thêm hiệp`}</span></button>`;
+  }
+  /** Chọn sở thích cho hiệp tiếp theo. */
+  function openRoundPicker(c) {
+    if (!c) return closeSheet();
+    const st = G.roundState(c);
+    if (!st) return closeSheet();
+    const willing = Object.values(R.fetishes)
+      .filter((f) => G.fetishUnlocked(f.id) && G.consentOf(c, f.id) === "willing")
+      .sort((a, b) => (c.likes.includes(b.id) ? 1 : 0) - (c.likes.includes(a.id) ? 1 : 0) || a.tier - b.tier || a.name.localeCompare(b.name, "vi"));
+    let q = "";
+    const list = () => {
+      const f = fold(q.trim());
+      const shown = willing.filter((x) => !f || fold(x.name).includes(f)).slice(0, 30);
+      return `<button class="btn" data-round="">Đêm thường</button>${shown.map((x) => `<button class="btn" data-round="${esc(x.id)}">${esc(x.name)}${c.likes.includes(x.id) ? " ♥" : ""}</button>`).join("")}`;
+    };
+    openSheet(
+      `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Hiệp ${st.rounds + 2} · ${esc(c.name)}</span><h3>Thêm hiệp nữa</h3></div></div>
+       <p class="hint">Đêm nay đã ${st.rounds + 1} hiệp, còn ${Math.max(0, st.left)}. Long thể hiện ${Math.round(G.state.stats.longThe)} (mỗi hiệp −${G.ROUND_COST}). Long thể từ 70 được 2 hiệp thêm, dưới 70 được 1.</p>
+       ${st.left <= 0 ? (st.canBuy ? `<button class="btn btn-primary" id="r-canh">Uống canh bổ<span class="cost">${fmtMoney(st.cost)} lượng · thêm 1 hiệp</span></button>` : `<p class="empty">${esc(st.why || "Bệ hạ đã hết sức đêm nay.")}</p>`) : `
+       ${st.canBuy ? `<button class="btn btn-ghost btn-sm" id="r-canh">Uống canh bổ trước (${fmtMoney(st.cost)} lượng, thêm 1 hiệp)</button>` : ""}
+       <input type="search" id="r-q" placeholder="Tìm sở thích nàng sẵn lòng…" aria-label="Tìm sở thích" autocomplete="off">
+       <div class="choices" id="r-list">${list()}</div>`}
+       <button class="btn btn-ghost" id="r-end">Thôi, nghỉ thôi</button>`,
+      (el) => {
+        on(el, "#r-end", "click", () => closeSheet());
+        on(el, "#r-canh", "click", () => {
+          const r = G.drinkCanhBo();
+          G.save();
+          if (r && r.ok) {
+            queue.unshift(() => openRoundPicker(c));
+            showMessage("Canh bổ", r.text, r.notes);
+          } else if (r) showMessage("Canh bổ", r.text);
+        });
+        on(el, "#r-q", "input", (inp) => {
+          q = inp.value;
+          $(el, "#r-list").innerHTML = list();
+        });
+        const box = el.querySelector("#r-list");
+        if (box)
+          box.addEventListener("click", (e) => {
+            const b = e.target.closest("[data-round]");
+            if (!b) return;
+            const scene = G.extraRound(c.id, b.dataset.round || null);
+            G.save();
+            showScene(scene);
+          });
+      }
+    );
   }
 
   function eventHead(prepared) {
@@ -876,7 +936,11 @@
        <div class="choices">${prepared.choices.map((c) => `<button class="btn" data-choice="${c.index}">${esc(c.label)}${c.cost ? `<span class="cost">−${fmtMoney(c.cost)} lượng</span>` : ""}</button>`).join("")}</div>`,
       (el) =>
         on(el, "[data-choice]", "click", (b) => {
-          const res = G.choose(prepared, Number(b.dataset.choice));
+          const idx = Number(b.dataset.choice);
+          const ch = prepared.ev.choices[idx];
+          const p = ch && ch.hook && ch.participants;
+          if (p && typeof p === "object" && !Array.isArray(p) && (p.count || 3) > 1 && !b.dataset.picked) return openGroupPicker(prepared, idx);
+          const res = G.choose(prepared, idx);
           G.save();
           if (G.state.ended) return closeSheet();
           if (res.scene) showScene(res.scene, res.notes);
@@ -887,6 +951,71 @@
     );
   }
   UI.showEvent = showEvent;
+  /** Chọn người cho cảnh nhiều người: 2–4 phi cùng sẵn lòng, chọn người chính. */
+  function openGroupPicker(prepared, idx) {
+    const ch = prepared.ev.choices[idx];
+    const p = ch.participants;
+    const sp = { speaker: prepared.speaker, speaker2: prepared.speaker2, pair: prepared.pair };
+    const all = G.participantsFor(Object.assign({}, ch, { participants: Object.assign({}, p, { count: 99 }) }), sp);
+    const def = G.participantsFor(ch, sp);
+    const min = Math.max(2, ch.minParticipants || 2);
+    const max = Math.max(4, p.count || 3);
+    const picked = def.map((c) => c.id).slice(0, max);
+    let lead = picked[0];
+    const run = () => {
+      const old = ch.participants;
+      const order = [lead].concat(picked.filter((id) => id !== lead));
+      ch.participants = order;
+      let res;
+      try {
+        res = G.choose(prepared, idx);
+      } finally {
+        ch.participants = old;
+      }
+      G.save();
+      if (G.state.ended) return closeSheet();
+      if (res.scene) showScene(res.scene, res.notes);
+      else if (res.after || res.notes.length) showMessage(prepared.title, res.after || "Ý chỉ đã ban.", res.notes);
+      else closeSheet();
+    };
+    if (all.length <= min) return run();
+    const draw = () =>
+      openSheet(
+        `<h3>Chọn người hầu đêm nay</h3><p class="hint">${esc(ch.label ? G.fill(ch.label, sp) : prepared.title)} · chọn ${min}–${max} phi đều sẵn lòng. Chạm ★ để chọn người chính.</p>
+         <div class="cards">${all
+           .map((c) => {
+             const on = picked.includes(c.id);
+             return `<div class="row-card gp-row${on ? " on" : ""}"><label class="check">${portrait(c, "sm")}<input type="checkbox" data-gp="${esc(c.id)}" ${on ? "checked" : ""}> <span><b>${esc(c.name)}</b><br><span class="hint">${esc(G.displayTitle(c))} · Sủng ái ${Math.round(c.favor)}</span></span></label><button class="fx-pin" data-lead="${esc(c.id)}" aria-pressed="${lead === c.id}" ${on ? "" : "disabled"} aria-label="Người chính">${lead === c.id ? "★" : "☆"}</button></div>`;
+           })
+           .join("")}</div>
+         <p class="hint" id="gp-msg">Đã chọn ${picked.length}/${max}.</p>
+         <div class="choices"><button class="btn btn-primary" id="gp-go" ${picked.length < min ? "disabled" : ""}>Truyền chỉ</button><button class="btn btn-ghost" id="gp-back">Thôi</button></div>`,
+        (el) => {
+          on(el, "#gp-back", "click", () => showEvent(prepared));
+          on(el, "#gp-go", "click", run);
+          on(el, "[data-lead]", "click", (b) => {
+            lead = b.dataset.lead;
+            draw();
+          });
+          el.querySelector(".sheet-card").addEventListener("change", (e) => {
+            const id = e.target.dataset && e.target.dataset.gp;
+            if (!id) return;
+            if (e.target.checked) {
+              if (picked.length >= max) {
+                e.target.checked = false;
+                $(el, "#gp-msg").textContent = `Tối đa ${max} người.`;
+                return;
+              }
+              picked.push(id);
+            } else picked.splice(picked.indexOf(id), 1);
+            if (!picked.includes(lead)) lead = picked[0];
+            draw();
+          });
+        },
+        { locked: true }
+      );
+    draw();
+  }
   /** Sự kiện thứ hai trong tháng: bỏ qua nếu sau sự kiện trước người nói đã rời cung hoặc game đã kết thúc. */
   function showLaterEvent(prepared) {
     const sp = prepared.speaker;
@@ -1117,6 +1246,24 @@
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
   /* ---------------- Chi tiết phi tần ---------------- */
+  /** Sổ tay phòng the của nàng. */
+  function renderBook(c) {
+    const v = G.bookView(c);
+    const nx = G.levelNext(c);
+    const row = (k, val) => `<div class="bk-row"><span class="k">${k}</span><span>${val}</span></div>`;
+    return `<div class="pane book" data-pane-body="book" hidden>
+      <div class="bk-level"><b>Cấp thân mật: ${esc(G.levelName(c))}</b>${nx ? `<span class="hint">Lên ${esc(nx.name)}: còn ${nx.nights} đêm${nx.affection ? `, Tình cảm thêm ${nx.affection}` : ""}. Cấp này tự mở các sở thích cần thuyết phục đến tầng ${G.LEVEL_TIER[G.levelOf(c) + 1]}.</span>` : `<span class="hint">Cấp cao nhất. Nàng sẵn lòng với mọi sở thích không bị từ chối, và thỉnh thoảng tự xin thị tẩm.</span>`}</div>
+      ${row("Số đêm", v.nights)}
+      ${row("Đêm đầu tiên", v.first != null ? G.turnLabel(v.first) : "Chưa")}
+      ${row("Gần nhất", v.last != null ? G.turnLabel(v.last) : "Chưa")}
+      ${row("Nhiều hiệp nhất", v.maxRounds ? `${v.maxRounds} hiệp một đêm` : "Chưa")}
+      ${row("Nơi nhạy cảm", v.spot ? esc(v.spot) : `<span class="hint">Biết sau ${v.spotLeft} đêm nữa</span>`)}
+      ${row("Tư thế nàng thích", v.pose ? esc(v.pose) : `<span class="hint">Biết sau ${v.poseLeft} đêm nữa</span>`)}
+      ${row("Đã thử", `${v.tried} sở thích`)}
+      ${v.top.length ? `<div class="bk-sub">Hay dùng nhất</div><div class="row-wrap">${v.top.map((x) => pill(`${x.name} · ${x.n}`)).join("")}</div>` : ""}
+      ${v.firsts.length ? `<div class="bk-sub">Lần đầu gần đây</div>${v.firsts.map((x) => row(esc(x.name), esc(x.when))).join("")}` : ""}
+    </div>`;
+  }
   let consortPane = "info";
   function openConsort(id) {
     const s = G.state;
@@ -1130,7 +1277,8 @@
     const partner = G.partnerOf(c.id);
     const gifts = Object.values(R.gifts).sort((a, b) => a.cost - b.cost);
     openSheet(
-      `<div class="ev-head">${portrait(c, "lg")}<div class="t"><span class="eyebrow">${esc(G.displayTitle(c))} · ${c.age} tuổi</span><h3>${esc(c.name)}</h3><span class="hint">${esc(c.origin)}</span></div></div>
+      `<div class="ev-head"><button class="whisper-btn" id="c-whisper" aria-label="Nghe nàng thì thầm">${portrait(c, "lg")}</button><div class="t"><span class="eyebrow">${esc(G.displayTitle(c))} · ${c.age} tuổi</span><h3>${esc(c.name)}</h3><span class="hint">${esc(c.origin)}</span>${G.levelName ? `<span class="lv-pill lv-${G.levelOf(c)}">${esc(G.levelName(c))}</span>` : ""}</div></div>
+       <p class="whisper" id="c-whisper-text" hidden></p>
        ${meter("Sủng ái", c.favor)}
        ${meter("Tình cảm", c.affection, "gold")}
        <div class="choices">
@@ -1138,7 +1286,7 @@
          <button class="btn" id="c-night" ${G.cannotSummon(c) ? "disabled" : ""}>Triệu thị tẩm${G.cannotSummon(c) ? `<span class="cost">${esc(c.pregnantDue != null ? "Đang hoài thai" : G.isResting && G.isResting(c) ? "Tháng này nàng nghỉ" : "Chưa thể triệu")}</span>` : ""}</button>
          ${canCrown ? `<button class="btn" id="c-crown" ${crownWhy ? "disabled" : ""}>Lập làm Hoàng hậu${crownWhy ? `<span class="cost">${esc(crownWhy)}</span>` : ""}</button>` : ""}
        </div>
-       <div class="seg" role="tablist">${[["info", "Thông tin"], ["gift", "Tặng quà"], fets.length ? ["fx", "Sở thích"] : null, ["school", "Học phường"], s.godMode ? ["god", "Thiên Đạo"] : null]
+       <div class="seg" role="tablist">${[["info", "Chung"], ["gift", "Quà"], fets.length ? ["fx", "Sở thích"] : null, ["school", "Học phường"], G.bookView ? ["book", "Sổ tay"] : null, s.godMode ? ["god", "Thiên Đạo"] : null]
          .filter(Boolean)
          .map(([k, l]) => `<button class="seg-btn" role="tab" data-pane="${k}">${l}</button>`)
          .join("")}</div>
@@ -1148,6 +1296,7 @@
        ${wish ? `<p class="hint"><b>Tâm nguyện:</b> ${esc(wish.text)} · còn ${wish.left} tháng. Toại nguyện: Tình cảm +${G.WISH_AFFECTION}.</p>` : ""}
        ${queued ? `<p class="hint"><b>Chờ lễ sắc phong</b> lên ${esc(G.RANKS[queued.rank])} (${G.SAC_PHONG_COST[queued.rank]} lượng). Lễ bộ sẽ dâng tấu.</p>` : ""}
        </div>
+       ${G.bookView ? renderBook(c) : ""}
        <div class="pane" data-pane-body="gift" hidden><div class="cards">${gifts
          .map((g) => `<div class="row-card"><div><b>${esc(g.name)}</b>${(g.likes || []).some((l) => c.likes.includes(l) || c.traits.includes(l) || l === c.id) ? " ♥" : ""}<br><span class="hint">${esc(g.desc || "")}${c.gifts[g.id] ? ` · đã tặng ${c.gifts[g.id]} lần` : ""}</span></div><button class="btn btn-sm" data-gift="${esc(g.id)}">${fmtMoney(g.cost)}</button></div>`)
          .join("")}</div></div>
@@ -1232,6 +1381,15 @@
           for (const p of el.querySelectorAll("[data-pane-body]")) p.hidden = p.dataset.paneBody !== k;
         };
         showPane(consortPane);
+        on(el, "#c-whisper", "click", () => {
+          const box = $(el, "#c-whisper-text");
+          const lv = G.levelOf(c);
+          box.innerHTML = formatText(G.fill(G.d3one(G.D7_TEXT.whisper[lv]), { speaker: c }));
+          box.hidden = false;
+          box.classList.remove("pop");
+          void box.offsetWidth;
+          box.classList.add("pop");
+        });
         on(el, "[data-pane]", "click", (b) => showPane(b.dataset.pane));
         on(el, "#c-release-ask", "click", (b) => {
           b.hidden = true;

@@ -490,3 +490,18 @@ main#view { position: relative; z-index: 1; }
 .pm-built { display: flex; flex-wrap: wrap; gap: 4px; }
 .pm-legend { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 @media (prefers-reduced-motion: reduce) { .scene-card.scroll-open, .ev-text.ink { animation: none; } }
+
+/* ---------- 0.5.7 · thân mật, sổ tay, nhiều hiệp, chọn người ---------- */
+.lv-pill { justify-self: start; margin-top: 4px; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; border: 1px solid var(--line); }
+.lv-pill.lv-0 { color: #f3c6d3; } .lv-pill.lv-1 { color: #f39a8a; border-color: #d2442f88; } .lv-pill.lv-2 { color: #fff; background: #d2442f; border-color: #d2442f; }
+.whisper-btn { padding: 0; border: 0; background: none; border-radius: 50%; cursor: pointer; flex: none; }
+.whisper { margin: 0; padding: 10px 14px; border-radius: 14px 14px 14px 4px; background: #3b181b; border: 1px solid #d2442f66; font-size: 14.5px; white-space: pre-line; }
+.whisper.pop { animation: pop .3s ease-out; }
+@keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: none; opacity: 1; } }
+.book .bk-row { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 13.5px; }
+.book .bk-row .k { color: var(--muted); }
+.book .bk-level { display: grid; gap: 3px; }
+.book .bk-sub { margin-top: 6px; font: 700 13px/1.2 var(--f-display); color: var(--gold); }
+.gp-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.gp-row .check { display: flex; align-items: center; gap: 8px; flex: 1; }
+.gp-row.on { border-color: var(--gold); }
