@@ -1,0 +1,98 @@
+{
+  "dice": {
+    "1": [
+      "{name} hôn môi bệ hạ, lưỡi nàng liếm nhẹ nuốt tiếng thở của trẫm.",
+      "{name} áp môi mềm hôn sâu, tay vuốt ve cổ trẫm đầy dục.",
+      "{name} hôn trẫm nồng nàn, lưỡi quấn lấy lưỡi bệ hạ."
+    ],
+    "2": [
+      "{name} múa eo uốn lượn, váy xẻ lộ đùi trắng mịn trước mặt trẫm.",
+      "{name} xoay người khêu gợi, mắt nhìn bệ hạ đầy ham muốn.",
+      "{name} múa chậm rãi, tay vuốt từ ngực xuống bụng khiến trẫm cứng."
+    ],
+    "3": [
+      "{name} tự cởi áo ngoài, để lộ yếm mỏng che vú.",
+      "{name} từ từ trút lớp áo, da thịt nóng hiện ra trước trẫm.",
+      "{name} cởi một lớp, cười duyên nhìn bệ hạ."
+    ],
+    "4": [
+      "{name} ngồi lên đùi trẫm, cọ xát háng ướt vào chỗ cứng.",
+      "{name} áp mông lên đùi bệ hạ, ma sát khiến thiếp rên nhẹ.",
+      "{name} ngồi cọ xát, cảm nhận dương vật trẫm nung nóng."
+    ],
+    "5": [
+      "{name} ghé tai thì thầm: thiếp muốn bị đụ đến chảy nước hết.",
+      "{name} thì thầm tục: lồn thiếp đang ngứa, mong trẫm liếm.",
+      "{name} rên bên tai: cho thiếp bú cặc bệ hạ đi."
+    ],
+    "6": [
+      "{name} dẫn tay trẫm đặt lên vú mềm, núm đã cứng.",
+      "{name} kéo tay bệ hạ xuống nơi kín, ướt nhẹp dâm thủy.",
+      "{name} đặt tay trẫm lên ngực nắn nhẹ, thiếp thở gấp."
+    ]
+  },
+  "undress": {
+    "0": [
+      "Bệ hạ cởi áo khoác ngoài của {name}, lộ da vai trắng.",
+      "Trẫm trút lớp áo ngoài {name}, nàng thở gấp nhìn trẫm.",
+      "Bệ hạ cởi áo ngoài, {name} cười khêu gợi."
+    ],
+    "1": [
+      "Trẫm cởi áo trong mỏng của {name}, thấy yếm che vú.",
+      "Bệ hạ kéo áo trong, da thịt {name} nóng hổi run lên.",
+      "Trẫm cởi lớp trong, {name} đỏ mặt nhưng không che."
+    ],
+    "2": [
+      "Bệ hạ cởi chiếc yếm cuối, vú {name} lộ ra đầy đủ.",
+      "Trẫm tháo yếm, núm vú {name} cứng ngắc chờ chạm.",
+      "Bệ hạ cởi yếm, {name} trần nửa thân trên nhìn trẫm."
+    ]
+  },
+  "undressFail": [
+    "{name} thẹn thùng kéo áo che lại, cười e lệ nhìn trẫm.",
+    "{name} đỏ mặt che ngực, mắt liếc bệ hạ đầy ngượng.",
+    "{name} kéo vải che lại, cười khúc khích không dám nhìn."
+  ],
+  "undressDone": [
+    "{name} trần truồng trước mặt trẫm, lồn đã ướt chờ đụ.",
+    "{name} khỏa thân, nước dâm chảy dài, mắt cầu xin bệ hạ.",
+    "{name} trần hết, vú và háng lộ, thiếp chờ trẫm vào."
+  ],
+  "rhythmWin": [
+    "Bệ hạ đụ đúng nhịp thở {name}, nàng lên đỉnh dữ dội co giật.",
+    "Trẫm thúc theo hơi thở, {name} rên la đạt cực khoái mạnh.",
+    "Đụ nhịp nhàng, {name} lên đỉnh, nước bắn ướt hết.",
+    "Trẫm vào ra đúng nhịp, {name} sảng khoái lên đỉnh lả người."
+  ],
+  "edgeWin": [
+    "Bệ hạ giữ {name} sát mép lâu rồi cho lên, nàng lả đi.",
+    "Trẫm kìm sát cực điểm, {name} cuối cùng lên đỉnh tan chảy.",
+    "Giữ mép thật lâu, {name} lên đỉnh kiệt sức rên nhỏ.",
+    "Bệ hạ không cho lên sớm, {name} đạt đỉnh lả người."
+  ],
+  "edgeFail": [
+    "{name} không kìm được, lên đỉnh sớm hơn trẫm muốn.",
+    "{name} đạt đỉnh trước, rên lớn nước ướt hết đùi.",
+    "{name} lên đỉnh sớm, co giật không kịp kìm."
+  ],
+  "spotHot": [
+    "Bệ hạ vừa chạm đúng chỗ nhạy nhất của {name}.\n> A… thần thiếp lên đỉnh rồi!",
+    "Ngón tay trẫm chạm đúng hạt của {name}.\n> Ôi… thiếp chịu không nổi nữa!",
+    "Bệ hạ vuốt đúng điểm nhạy của {name}.\n> Trẫm ơi… thiếp muốn bị đụ ngay!"
+  ],
+  "giftBack": {
+    "canh": [
+      "{name} vui tặng bát canh bổ tự nấu để đêm nay trẫm sung sức.",
+      "{name} dâng canh bổ, mong bệ hạ đụ thiếp mạnh hơn đêm nay."
+    ],
+    "tui": [
+      "{name} tặng túi thơm tự thêu cho bệ hạ.",
+      "{name} trao túi thơm, hương của thiếp dành cho trẫm."
+    ]
+  },
+  "contestWin": [
+    "{name} thắng cuộc thi, được hầu trẫm đêm nay, các phi ghen tị.",
+    "{name} thắng, được hầu bệ hạ, phi khác đỏ mắt nhìn.",
+    "{name} thắng thi giữa các phi, đêm nay thiếp hầu trẫm."
+  ]
+}
