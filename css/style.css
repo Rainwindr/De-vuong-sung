@@ -437,3 +437,5 @@ body[data-season="dong"] { background: radial-gradient(120% 60% at 50% -10%, #1b
 .co-cell:disabled { cursor: default; }
 main#view { position: relative; z-index: 1; }
 .hd-info { display: flex; justify-content: space-between; gap: 8px; } .hd-info .pill { font-size: 13px; padding: 4px 10px; }
+.co-cell svg { width: 70%; height: 70%; display: block; margin: auto; }
+.co-mini svg { width: 18px; height: 18px; vertical-align: -4px; display: inline-block; }

@@ -1371,6 +1371,9 @@
   }
 
   // Đánh cờ ba quân (3x3). Nàng giỏi cờ thì đi chặt hơn.
+  // quân cờ: bệ hạ = đồng xu vàng có chữ thập, nàng = bông hoa hồng
+  const PIECE_X = `<svg viewBox="0 0 40 40" aria-label="Quân bệ hạ"><circle cx="20" cy="20" r="15" fill="#d9ad55"/><circle cx="20" cy="20" r="11" fill="none" stroke="#7a5418" stroke-width="2"/><path d="M20 11 L22.6 17.4 L29 20 L22.6 22.6 L20 29 L17.4 22.6 L11 20 L17.4 17.4Z" fill="#7a5418"/></svg>`;
+  const PIECE_O = `<svg viewBox="0 0 40 40" aria-label="Quân của nàng">${[0, 72, 144, 216, 288].map((a) => `<circle cx="${(20 + Math.cos(((a - 90) * Math.PI) / 180) * 8).toFixed(1)}" cy="${(20 + Math.sin(((a - 90) * Math.PI) / 180) * 8).toFixed(1)}" r="7" fill="#f3a6bd"/>`).join("")}<circle cx="20" cy="20" r="5" fill="#d9ad55"/></svg>`;
   function gameDanhCo(c) {
     const b = Array(9).fill("");
     const L = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
@@ -1401,7 +1404,7 @@
     const draw = (msg) =>
       openSheet(
         `${gameHead(c, "danh_co", msg)}
-         <div class="co-board">${b.map((v, j) => `<button class="co-cell ${v}" data-cell="${j}" ${v || over ? "disabled" : ""} aria-label="Ô ${j + 1}">${v === "x" ? "帝" : v === "o" ? "妃" : ""}</button>`).join("")}</div>`,
+         <div class="co-board">${b.map((v, j) => `<button class="co-cell ${v}" data-cell="${j}" ${v || over ? "disabled" : ""} aria-label="Ô ${j + 1}">${v === "x" ? PIECE_X : v === "o" ? PIECE_O : ""}</button>`).join("")}</div>`,
         (el) =>
           on(el, "[data-cell]", "click", (btn) => {
             const j = Number(btn.dataset.cell);
@@ -1421,7 +1424,7 @@
           }),
         { locked: true }
       );
-    draw("Bệ hạ đi trước (quân 帝), nàng cầm quân 妃.");
+    draw(`Bệ hạ đi trước, cầm quân vàng <span class="co-mini">${PIECE_X}</span>. Nàng cầm quân hoa hồng <span class="co-mini">${PIECE_O}</span>.`);
   }
   function shuffleArr(a) {
     for (let i = a.length - 1; i > 0; i--) {
