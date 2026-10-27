@@ -1747,6 +1747,62 @@
           "Kết thúc cuộc thi, tất cả nằm la liệt thở dốc, bàng quang rỗng, cơ thể còn run vì dư âm. {name} giọng khàn thì thầm muốn thi lại dù biết sẽ lại xả và khóc trước mặt mọi người. Cảm giác áp lực, xấu hổ bị nhìn và lên đỉnh cùng lúc khiến nàng trống rỗng đầu óc, chỉ thèm được nhịn và bị phá vỡ thêm lần nữa. Sàn điện còn lâu mới khô."
         ]
       ]
+    },
+    "canh-viet.bon_chua_tinh": {
+      "_": [
+        [
+          "[TẠM · Bồn chứa tinh] Đêm nay {name} hầu bệ hạ theo sở thích Bồn chứa tinh. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.pha_trinh": {
+      "_": [
+        [
+          "[TẠM · Phá trinh] Đêm nay {name} hầu bệ hạ theo sở thích Phá trinh. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.mang_thai": {
+      "_": [
+        [
+          "[TẠM · Mang thai] Đêm nay {name} hầu bệ hạ theo sở thích Mang thai. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.dem_truoc_dai_hon": {
+      "_": [
+        [
+          "[TẠM · Đêm trước đại hôn] Đêm nay {name} hầu bệ hạ theo sở thích Đêm trước đại hôn. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.trung_phat": {
+      "_": [
+        [
+          "[TẠM · Trừng phạt] Đêm nay {name} hầu bệ hạ theo sở thích Trừng phạt. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.bat_luc": {
+      "_": [
+        [
+          "[TẠM · Bất lực] Đêm nay {name} hầu bệ hạ theo sở thích Bất lực. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.cau_quan": {
+      "_": [
+        [
+          "[TẠM · Cầu quan] Đêm nay {name} hầu bệ hạ theo sở thích Cầu quan. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.yen_tiec": {
+      "_": [
+        [
+          "[TẠM · Yến tiệc] Đêm nay {name} hầu bệ hạ theo sở thích Yến tiệc. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
     }
   },
   "core.tuu_tri_hoi": {
