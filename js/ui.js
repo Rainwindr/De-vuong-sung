@@ -137,8 +137,8 @@
     $app().innerHTML = `
       <header class="topbar">
         <div class="who">
-          <h2>${esc(s.emperorName)}</h2>
-          <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year}, th.${s.month}${G.currentQue && G.currentQue() ? ` · Năm ${esc(G.currentQue().name)}` : ""}</span>
+          <h2 title="${esc(s.emperorName)}">${esc(s.emperorName)}</h2>
+          <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year} th.${s.month}${G.currentQue && G.currentQue() ? ` <span class="que-pill">${esc(G.currentQue().name)}</span>` : ""}</span>
           <button class="icon-btn" id="b-menu" aria-label="Lưu game, gói nội dung và cài đặt">☰</button>
         </div>
         <div class="stats">${Object.entries(G.STATS)
@@ -170,6 +170,17 @@
     $(root, "#b-actions").addEventListener("click", openActions);
     $(root, "#b-menu").addEventListener("click", openMenu);
     bindTab(root);
+    const tb = $(root, ".tabs");
+    if (tb) {
+      const edge = () => {
+        tb.classList.toggle("more-r", tb.scrollLeft + tb.clientWidth < tb.scrollWidth - 4);
+        tb.classList.toggle("more-l", tb.scrollLeft > 4);
+      };
+      const cur = $(tb, '[aria-selected="true"]');
+      if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: "nearest", inline: "nearest" });
+      edge();
+      tb.addEventListener("scroll", edge, { passive: true });
+    }
     if (!$sheet().hidden) return;
     if (s.pendingTitles.length) openTitlePrompt();
   };
@@ -599,25 +610,86 @@
   /* ================================================================== */
   /* Bảng trượt                                                          */
   /* ================================================================== */
+  // Nút quay lại của điện thoại: khi bảng trượt mở, giữ một mục lịch sử; bấm quay lại thì đóng bảng thay vì rời game.
+  const hist = { pending: false };
+  const sheetInHistory = () => !!(history.state && history.state.sheet);
+  function pushSheetHistory() {
+    try {
+      if (!sheetInHistory()) history.pushState({ sheet: 1 }, "");
+    } catch (e) {}
+  }
+  window.addEventListener("popstate", () => {
+    const el = $sheet();
+    if (hist.pending) {
+      hist.pending = false;
+      if (!el.hidden) pushSheetHistory(); // bảng kế tiếp đã mở trong lúc chờ
+      return;
+    }
+    if (el.hidden) return;
+    if (el.dataset.dismiss === "no") return pushSheetHistory(); // bảng bắt buộc chọn: ở lại
+    closeSheet(true);
+  });
+
   function openSheet(html, onBind, opts) {
     const el = $sheet();
-    el.innerHTML = `<div class="sheet-card" role="dialog" aria-modal="true">${html}</div>`;
+    const locked = !!(opts && opts.locked);
+    el.innerHTML = `<div class="sheet-card" role="dialog" aria-modal="true">${locked ? "" : `<button class="sheet-x" aria-label="Đóng" title="Đóng">✕</button>`}${html}</div>`;
     el.hidden = false;
-    el.dataset.dismiss = opts && opts.locked ? "no" : "";
+    el.dataset.dismiss = locked ? "no" : "";
     el.onclick = (e) => {
       if (e.target === el && el.dataset.dismiss !== "no") closeSheet();
     };
-    $(el, ".sheet-card").scrollTop = 0;
+    const card = $(el, ".sheet-card");
+    card.scrollTop = 0;
+    const x = el.querySelector(".sheet-x");
+    if (x) x.addEventListener("click", () => closeSheet());
+    if (!locked) swipeToClose(card);
+    pushSheetHistory();
     if (onBind) onBind(el);
-    const first = el.querySelector("button");
+    const first = el.querySelector("button:not(.sheet-x)");
     if (first) first.focus({ preventScroll: true });
   }
-  function closeSheet() {
+  /** Vuốt xuống khi bảng đang ở đầu trang thì đóng. */
+  function swipeToClose(card) {
+    let y0 = null;
+    let dy = 0;
+    card.addEventListener("touchstart", (e) => {
+      y0 = card.scrollTop <= 0 && e.touches.length === 1 ? e.touches[0].clientY : null;
+      dy = 0;
+    }, { passive: true });
+    card.addEventListener("touchmove", (e) => {
+      if (y0 == null) return;
+      dy = e.touches[0].clientY - y0;
+      if (dy < 0 || card.scrollTop > 0) {
+        y0 = null;
+        card.style.transform = "";
+        return;
+      }
+      card.style.transition = "none";
+      card.style.transform = `translateY(${Math.min(dy, 400) * 0.8}px)`;
+    }, { passive: true });
+    card.addEventListener("touchend", () => {
+      if (y0 == null) return;
+      y0 = null;
+      card.style.transition = "";
+      if (dy > 110) closeSheet();
+      else card.style.transform = "";
+    });
+  }
+  function closeSheet(fromBack) {
     const el = $sheet();
     el.hidden = true;
     el.innerHTML = "";
     el.dataset.dismiss = "";
     G.save();
+    if (fromBack !== true && sheetInHistory()) {
+      hist.pending = true;
+      try {
+        history.back();
+      } catch (e) {
+        hist.pending = false;
+      }
+    }
     if (queue.length) queue.shift()();
     else UI.render();
   }
@@ -904,6 +976,7 @@
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
   /* ---------------- Chi tiết phi tần ---------------- */
+  let consortPane = "info";
   function openConsort(id) {
     const s = G.state;
     const c = G.findConsort(id);
@@ -919,45 +992,54 @@
       `<div class="ev-head">${portrait(c, "lg")}<div class="t"><span class="eyebrow">${esc(G.displayTitle(c))} · ${c.age} tuổi</span><h3>${esc(c.name)}</h3><span class="hint">${esc(c.origin)}</span></div></div>
        ${meter("Sủng ái", c.favor)}
        ${meter("Tình cảm", c.affection, "gold")}
+       <div class="choices">
+         <button class="btn" id="c-visit">Ghé thăm</button>
+         <button class="btn" id="c-night" ${G.cannotSummon(c) ? "disabled" : ""}>Triệu thị tẩm${G.cannotSummon(c) ? `<span class="cost">${esc(c.pregnantDue != null ? "Đang hoài thai" : G.isResting && G.isResting(c) ? "Tháng này nàng nghỉ" : "Chưa thể triệu")}</span>` : ""}</button>
+         ${canCrown ? `<button class="btn" id="c-crown" ${crownWhy ? "disabled" : ""}>Lập làm Hoàng hậu${crownWhy ? `<span class="cost">${esc(crownWhy)}</span>` : ""}</button>` : ""}
+       </div>
+       <div class="seg" role="tablist">${[["info", "Thông tin"], ["gift", "Tặng quà"], fets.length ? ["fx", "Sở thích"] : null, ["school", "Học phường"], s.godMode ? ["god", "Thiên Đạo"] : null]
+         .filter(Boolean)
+         .map(([k, l]) => `<button class="seg-btn" role="tab" data-pane="${k}">${l}</button>`)
+         .join("")}</div>
+       <div class="pane" data-pane-body="info">
        <div class="row-wrap">${c.traits.map((t) => pill(t)).join("")}</div>
        <p class="hint">${c.nights} đêm thị tẩm · ${c.kids} con${c.contestWins ? ` · ${c.contestWins} lần thắng thi` : ""}${partner && partner.tinhY >= 31 ? ` · ${partner.status} với ${esc(partner.other.name)} (${Math.round(partner.tinhY)})` : ""}</p>
        ${wish ? `<p class="hint"><b>Tâm nguyện:</b> ${esc(wish.text)} · còn ${wish.left} tháng. Toại nguyện: Tình cảm +${G.WISH_AFFECTION}.</p>` : ""}
        ${queued ? `<p class="hint"><b>Chờ lễ sắc phong</b> lên ${esc(G.RANKS[queued.rank])} (${G.SAC_PHONG_COST[queued.rank]} lượng). Lễ bộ sẽ dâng tấu.</p>` : ""}
-       <div class="choices">
-         <button class="btn" id="c-visit">Ghé thăm</button>
-         <button class="btn" id="c-night" ${G.cannotSummon(c) ? "disabled" : ""}>Triệu thị tẩm${c.pregnantDue != null ? " (đang hoài thai)" : ""}</button>
-         ${canCrown ? `<button class="btn" id="c-crown" ${crownWhy ? "disabled" : ""}>Lập làm Hoàng hậu${crownWhy ? `<span class="cost">${esc(crownWhy)}</span>` : ""}</button>` : ""}
        </div>
-       <details><summary>Tặng quà</summary><div class="cards">${gifts
+       <div class="pane" data-pane-body="gift" hidden><div class="cards">${gifts
          .map((g) => `<div class="row-card"><div><b>${esc(g.name)}</b>${(g.likes || []).some((l) => c.likes.includes(l) || c.traits.includes(l) || l === c.id) ? " ♥" : ""}<br><span class="hint">${esc(g.desc || "")}${c.gifts[g.id] ? ` · đã tặng ${c.gifts[g.id]} lần` : ""}</span></div><button class="btn btn-sm" data-gift="${esc(g.id)}">${fmtMoney(g.cost)}</button></div>`)
-         .join("")}</div></details>
-       <details><summary>Học phường</summary>
+         .join("")}</div></div>
+       <div class="pane" data-pane-body="school" hidden>
          <div class="field"><label for="c-school">Lớp</label><select id="c-school"><option value="">Không học</option>${Object.entries(G.SUBJECTS).map(([k, v]) => `<option value="${k}" ${c.school === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>
          <p class="hint">Các phi học chung lớp thân nhau hơn. Học đủ 12 tháng được trait tinh thông.${c.school ? ` Đã học ${c.schoolMonths} tháng.` : ""}</p>
-       </details>
+       </div>
        ${
          fets.length
-           ? `<details ${s.godMode ? "open" : ""}><summary>Sở thích và mức sẵn lòng</summary>
+           ? `<div class="pane" data-pane-body="fx" hidden>
                ${s.godMode ? "" : `<div class="fx-tools"><input type="search" id="c-fxq" placeholder="Tìm sở thích…" aria-label="Tìm sở thích" autocomplete="off"><label class="check fx-only"><input type="checkbox" id="c-fxp"> Chỉ Cần thuyết phục</label></div>
                <p class="hint">Thuyết phục được khi Sủng ái và Tình cảm của nàng đều đạt mức cần (tầng 1: 60, tầng 2: 70, tầng 3: 80). "Cả hậu cung" thử với mọi phi.</p><p class="hint fx-msg" id="c-fxmsg" hidden></p>`}
-               <div class="scroll-x" id="c-fxt"></div></details>`
+               <div class="scroll-x" id="c-fxt"></div></div>`
            : ""
        }
        ${
          s.godMode
-           ? `<details open><summary>Thiên Đạo</summary>
+           ? `<div class="pane" data-pane-body="god" hidden>
                <div class="slider"><label for="g-fav">Sủng ái</label><input type="range" id="g-fav" min="0" max="100" value="${c.favor}"><output>${c.favor}</output></div>
                <div class="slider"><label for="g-aff">Tình cảm</label><input type="range" id="g-aff" min="0" max="100" value="${c.affection}"><output>${c.affection}</output></div>
                <div class="field"><label for="g-crank">Phẩm</label><select id="g-crank">${G.RANKS.map((r, i) => `<option value="${i}" ${c.rank === i ? "selected" : ""}>${r}</option>`).join("")}</select></div>
                <button class="btn btn-sm" id="g-birth">Cho sinh con ngay</button>
-             </details>`
+             </div>`
            : ""
        }
-       <details><summary>Ban ân xuất cung</summary>
-         <p class="hint">Nàng rời cung về quê với hồi môn ${G.RELEASE_COST} lượng. Không thể hoàn tác.</p>
-         <button class="btn btn-sm" id="c-release">Xác nhận cho ${esc(c.name)} xuất cung</button>
-       </details>
-       <button class="btn btn-ghost" id="c-close">Đóng</button>`,
+       <button class="btn btn-ghost" id="c-close">Đóng</button>
+       <div class="danger-zone">
+         <button class="btn btn-sm btn-danger-ghost" id="c-release-ask">Ban ân xuất cung…</button>
+         <div id="c-release-box" hidden>
+           <p class="hint">${esc(c.name)} sẽ rời cung về quê với hồi môn ${G.RELEASE_COST} lượng. <b>Không thể hoàn tác.</b></p>
+           <div class="row-btns"><button class="btn btn-sm btn-danger" id="c-release">Xác nhận cho nàng xuất cung</button><button class="btn btn-sm btn-ghost" id="c-release-no">Thôi</button></div>
+         </div>
+       </div>`,
       (el) => {
         let fxQuery = "";
         let fxOnlyPersuade = false;
@@ -1000,7 +1082,24 @@
           fxOnlyPersuade = inp.checked;
           renderFx();
         });
-        $(el, "#c-close").addEventListener("click", closeSheet);
+        $(el, "#c-close").addEventListener("click", () => closeSheet());
+        // tab trong hồ sơ: nhớ tab đã chọn lần trước
+        const showPane = (k) => {
+          if (!el.querySelector(`[data-pane-body="${k}"]`)) k = "info";
+          consortPane = k;
+          for (const b of el.querySelectorAll("[data-pane]")) b.setAttribute("aria-selected", b.dataset.pane === k);
+          for (const p of el.querySelectorAll("[data-pane-body]")) p.hidden = p.dataset.paneBody !== k;
+        };
+        showPane(consortPane);
+        on(el, "[data-pane]", "click", (b) => showPane(b.dataset.pane));
+        on(el, "#c-release-ask", "click", (b) => {
+          b.hidden = true;
+          $(el, "#c-release-box").hidden = false;
+        });
+        on(el, "#c-release-no", "click", () => {
+          $(el, "#c-release-box").hidden = true;
+          $(el, "#c-release-ask").hidden = false;
+        });
         $(el, "#c-visit").addEventListener("click", () => openTalk(c));
         $(el, "#c-night").addEventListener("click", () => openNight(c));
         on(el, "#c-crown", "click", () => {
