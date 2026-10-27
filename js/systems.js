@@ -2567,6 +2567,44 @@
   });
 
   /* ================================================================== */
+  /* Sở thích có điều kiện ("needs" trong fetishes.json)                  */
+  /*   "virgin"   : chỉ khi nàng chưa từng thị tẩm (Phá trinh)             */
+  /*   "pregnant" : chỉ khi nàng đang hoài thai (Mang thai)                */
+  /* ================================================================== */
+  G.NEEDS_LABEL = { virgin: "Chỉ ở đêm đầu của nàng", pregnant: "Chỉ khi nàng hoài thai" };
+  G.CONSENT_LABEL.na = "Chưa hợp lúc này";
+  /** Sở thích có hợp với tình trạng của nàng lúc này không. */
+  G.fetishFits = function (c, fid) {
+    const f = R.fetishes[fid];
+    if (!f || !f.needs || !c || c.isChild) return true;
+    if (f.needs === "virgin") return !c.nights;
+    if (f.needs === "pregnant") return c.pregnantDue != null;
+    return true;
+  };
+  const consentD5 = G.consentOf;
+  G.consentOf = function (p, fid) {
+    const lvl = consentD5(p, fid);
+    return lvl !== "refuse" && G.state && G.state.consorts && G.findConsort(p.id) && !G.fetishFits(p, fid) ? "na" : lvl;
+  };
+  // phi đang hoài thai: chỉ triệu được khi nàng sẵn lòng với sở thích "pregnant" đã mở
+  const pregFetishes = () => Object.values(R.fetishes).filter((f) => f.needs === "pregnant" || f.allowPregnant).map((f) => f.id);
+  const pregOk = (c) => c.pregnantDue != null && pregFetishes().some((f) => G.fetishUnlocked(f) && G.consentOf(c, f) === "willing");
+  G.pregnantSummonOk = pregOk;
+  const cannotD5 = G.cannotSummon;
+  G.cannotSummon = function (c) {
+    if (pregOk(c)) return cannotD5(Object.assign({}, c, { pregnantDue: null }));
+    return cannotD5(c);
+  };
+  const summonD5 = G.summon;
+  G.summon = function (id, fetishIds) {
+    const c = G.findConsort(id);
+    const fx = fetishIds || [];
+    if (c && c.pregnantDue != null && !fx.some((f) => R.fetishes[f] && (R.fetishes[f].needs === "pregnant" || R.fetishes[f].allowPregnant)))
+      return { title: "Không thể thị tẩm", text: `${c.name} đang mang long thai. Muốn gần gũi nàng, hãy chọn sở thích "${(R.fetishes[pregFetishes()[0]] || {}).name || "Mang thai"}".`, blocked: true };
+    return summonD5(id, fetishIds);
+  };
+
+  /* ================================================================== */
   /* GOD MODE (Thiên Đạo)                                                */
   /* ================================================================== */
   G.snapshot = function () {

@@ -1291,7 +1291,7 @@
       "Hay ngượng": "refuse"
     }
   },
-   {
+  {
     "id": "canh-viet.freeuse_harem",
     "name": "Freeuse harem / Public freeuse",
     "tier": 3,
@@ -1794,6 +1794,105 @@
       "Hay ngượng": "persuade"
     }
   },
-  {"id": "canh-viet.ngoc_hanh", "name": "Mang ngọc hành", "tier": 2, "unlock": {"truyLac": {"gte": 45}}, "default_consent": "persuade", "desc": "Phi tự nguyện mang một ngọc hành nhỏ trong người suốt một ngày, đi lại, thỉnh an như thường; đêm đến bệ hạ tự tay lấy ra.", "consent": {"core.tuyet": "willing", "core.song_nhat": "willing"}, "consentByTrait": {"Táo bạo": "willing", "Hay ngượng": "persuade"}},
-  {"id": "canh-viet.chenh_lech", "name": "Chênh lệch kích cỡ", "tier": 2, "unlock": {"truyLac": {"gte": 35}}, "default_consent": "persuade", "desc": "Long căn của bệ hạ quá khổ so với nơi kín của nàng; nàng tự nguyện, từ từ làm quen với sự căng đầy.", "consentByTrait": {"Táo bạo": "willing", "Hay ngượng": "persuade"}}
+  {
+    "id": "canh-viet.ngoc_hanh",
+    "name": "Mang ngọc hành",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 45
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Phi tự nguyện mang một ngọc hành nhỏ trong người suốt một ngày, đi lại, thỉnh an như thường; đêm đến bệ hạ tự tay lấy ra.",
+    "consent": {
+      "core.tuyet": "willing",
+      "core.song_nhat": "willing"
+    },
+    "consentByTrait": {
+      "Táo bạo": "willing",
+      "Hay ngượng": "persuade"
+    }
+  },
+  {
+    "id": "canh-viet.chenh_lech",
+    "name": "Chênh lệch kích cỡ",
+    "tier": 2,
+    "unlock": {
+      "truyLac": {
+        "gte": 35
+      }
+    },
+    "default_consent": "persuade",
+    "desc": "Long căn của bệ hạ quá khổ so với nơi kín của nàng; nàng tự nguyện, từ từ làm quen với sự căng đầy.",
+    "consentByTrait": {
+      "Táo bạo": "willing",
+      "Hay ngượng": "persuade"
+    }
+  },
+  {
+    "id": "canh-viet.bon_chua_tinh",
+    "name": "Bồn chứa tinh",
+    "tier": 3,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng tự nguyện để bệ hạ bắn vào trong nhiều lần liền trong một đêm, xem mình là nơi chứa tinh riêng của bệ hạ."
+  },
+  {
+    "id": "canh-viet.pha_trinh",
+    "name": "Phá trinh",
+    "tier": 1,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng còn trinh và tự nguyện dâng lần đầu cho bệ hạ."
+  },
+  {
+    "id": "canh-viet.mang_thai",
+    "name": "Mang thai",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng đang mang long thai vẫn muốn gần gũi bệ hạ; bệ hạ nhẹ nhàng, chiều theo nàng. Đây cũng là cách để triệu phi đang hoài thai.",
+    "allowPregnant": true
+  },
+  {
+    "id": "canh-viet.dem_truoc_dai_hon",
+    "name": "Đêm trước đại hôn",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Đêm trước lễ đại hôn của chính nàng với bệ hạ, nàng lén đến hầu trước, hồi hộp như tân nương."
+  },
+  {
+    "id": "canh-viet.trung_phat",
+    "name": "Trừng phạt",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Trò phạt do nàng tự xin: phạt quỳ, phát mông nhẹ, bắt chờ được phép. Hai bên thỏa thuận ám hiệu dừng trước, không đau thật, không thương tích."
+  },
+  {
+    "id": "canh-viet.bat_luc",
+    "name": "Bất lực",
+    "tier": 1,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Đêm bệ hạ mỏi mệt, long căn mãi không cứng; nàng kiên nhẫn dùng tay, miệng và lời ngọt đánh thức lại."
+  },
+  {
+    "id": "canh-viet.cau_quan",
+    "name": "Cầu quan",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng hầu thật chu đáo để xin bệ hạ ban chức cho cha hoặc anh trong nhà. Nàng tự nguyện, bệ hạ không hứa gì trước."
+  },
+  {
+    "id": "canh-viet.yen_tiec",
+    "name": "Yến tiệc",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Tiệc tan, khách đã về hết, nàng ở lại điện yến múa riêng rồi hầu bệ hạ ngay trên bàn tiệc. Chỉ có hai người, không ai say."
+  }
 ]
