@@ -1803,6 +1803,90 @@
           "[TẠM · Yến tiệc] Đêm nay {name} hầu bệ hạ theo sở thích Yến tiệc. Đoạn này là câu tạm, thay bằng nội dung thật."
         ]
       ]
+    },
+    "canh-viet.du_ban_tho": {
+      "_": [
+        [
+          "[TẠM · Đụ trên bàn thờ] Đêm nay {name} hầu bệ hạ theo sở thích Đụ trên bàn thờ. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.phat_tap_the": {
+      "_": [
+        [
+          "[TẠM · Phạt tập thể phòng kín] Đêm nay {name} hầu bệ hạ theo sở thích Phạt tập thể phòng kín. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.du_trong_kieu": {
+      "_": [
+        [
+          "[TẠM · Đụ trong kiệu] Đêm nay {name} hầu bệ hạ theo sở thích Đụ trong kiệu. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.du_xoa_bop": {
+      "_": [
+        [
+          "[TẠM · Đụ lúc xoa bóp] Đêm nay {name} hầu bệ hạ theo sở thích Đụ lúc xoa bóp. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.ngua_go": {
+      "_": [
+        [
+          "[TẠM · Đụ trên ngựa gỗ] Đêm nay {name} hầu bệ hạ theo sở thích Đụ trên ngựa gỗ. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.du_danh_don": {
+      "_": [
+        [
+          "[TẠM · Đụ trong lúc đánh đòn] Đêm nay {name} hầu bệ hạ theo sở thích Đụ trong lúc đánh đòn. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.veo_cau": {
+      "_": [
+        [
+          "[TẠM · Đụ vừa véo vừa cấu] Đêm nay {name} hầu bệ hạ theo sở thích Đụ vừa véo vừa cấu. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.cang_chan": {
+      "_": [
+        [
+          "[TẠM · Căng chân tối đa] Đêm nay {name} hầu bệ hạ theo sở thích Căng chân tối đa. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.giu_vat_nang": {
+      "_": [
+        [
+          "[TẠM · Giữ vật nặng khi bị đụ] Đêm nay {name} hầu bệ hạ theo sở thích Giữ vật nặng khi bị đụ. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.du_cao_long": {
+      "_": [
+        [
+          "[TẠM · Đụ lúc đang cạo lông] Đêm nay {name} hầu bệ hạ theo sở thích Đụ lúc đang cạo lông. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.keo_tay": {
+      "_": [
+        [
+          "[TẠM · Kéo tay ra sau] Đêm nay {name} hầu bệ hạ theo sở thích Kéo tay ra sau. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    },
+    "canh-viet.thu_do_sau": {
+      "_": [
+        [
+          "[TẠM · Thử độ sâu] Đêm nay {name} hầu bệ hạ theo sở thích Thử độ sâu. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
     }
   },
   "core.tuu_tri_hoi": {

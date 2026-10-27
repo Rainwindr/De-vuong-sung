@@ -1894,5 +1894,101 @@
     "unlock": {},
     "default_consent": "willing",
     "desc": "Tiệc tan, khách đã về hết, nàng ở lại điện yến múa riêng rồi hầu bệ hạ ngay trên bàn tiệc. Chỉ có hai người, không ai say."
+  },
+  {
+    "id": "canh-viet.du_ban_tho",
+    "name": "Đụ trên bàn thờ",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Đêm khuya trong điện thờ vắng, chỉ hai người, nàng tự nguyện nằm lên bàn thờ để bệ hạ đụ, vừa sợ vừa hưng phấn vì phạm điều cấm."
+  },
+  {
+    "id": "canh-viet.phat_tap_the",
+    "name": "Phạt tập thể phòng kín",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Trò phạt vui trong phòng kín: các phi tự nguyện cùng chịu phạt nhẹ trước bệ hạ (quỳ, chờ được phép, phát mông nhẹ). Không người ngoài, ai cũng biết ám hiệu dừng."
+  },
+  {
+    "id": "canh-viet.du_trong_kieu",
+    "name": "Đụ trong kiệu",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Kiệu đã đặt xuống nơi vắng, phu kiệu lui ra xa, rèm buông kín. Nàng ngồi lên đùi bệ hạ trong lòng kiệu chật."
+  },
+  {
+    "id": "canh-viet.du_xoa_bop",
+    "name": "Đụ lúc xoa bóp",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng xoa bóp dầu thơm cho bệ hạ hoặc được bệ hạ xoa bóp, tay trượt dần xuống rồi thành đụ."
+  },
+  {
+    "id": "canh-viet.ngua_go",
+    "name": "Đụ trên ngựa gỗ",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng tự cưỡi một con ngựa gỗ bập bênh trơn nhẵn, êm, vừa nhún vừa được bệ hạ đụ. Không đau, không thương tích."
+  },
+  {
+    "id": "canh-viet.du_danh_don",
+    "name": "Đụ trong lúc đánh đòn",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng tự xin: bệ hạ phát mông nàng nhẹ trong lúc đụ. Ám hiệu dừng thỏa thuận trước, không đau thật, không để lại dấu."
+  },
+  {
+    "id": "canh-viet.veo_cau",
+    "name": "Đụ vừa véo vừa cấu",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Bệ hạ véo nhẹ núm vú, đùi, mông nàng trong lúc đụ, đúng mức nàng thích. Ám hiệu dừng thỏa thuận trước, không để lại vết."
+  },
+  {
+    "id": "canh-viet.cang_chan",
+    "name": "Căng chân tối đa",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng mềm dẻo, tự dang hai chân rộng hết mức có thể để bệ hạ đụ sâu. Không quá sức, không đau."
+  },
+  {
+    "id": "canh-viet.giu_vat_nang",
+    "name": "Giữ vật nặng khi bị đụ",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng tự nguyện cầm hoặc đội một vật nhẹ vừa sức (chén trà, quạt, quyển sách) trong lúc bị đụ, cố giữ không để rơi."
+  },
+  {
+    "id": "canh-viet.du_cao_long",
+    "name": "Đụ lúc đang cạo lông",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Bệ hạ cạo lông cho nàng thật cẩn thận, cạo xong mới đụ, dao đặt xa trước khi bắt đầu. Không xước, không thương tích."
+  },
+  {
+    "id": "canh-viet.keo_tay",
+    "name": "Kéo tay ra sau",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Bệ hạ nắm hai tay nàng kéo ra sau lưng trong lúc đụ từ phía sau, vừa đủ chặt. Nàng tự nguyện, biết ám hiệu dừng."
+  },
+  {
+    "id": "canh-viet.thu_do_sau",
+    "name": "Thử độ sâu",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Bệ hạ đẩy thật chậm để thử nàng nuốt được sâu đến đâu, bằng long căn hoặc miệng. Nàng tự nguyện, ra hiệu là dừng ngay."
   }
 ]
