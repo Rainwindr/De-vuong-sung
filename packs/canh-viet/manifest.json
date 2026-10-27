@@ -33,6 +33,7 @@
     ],
     "portraits": "portraits.json",
     "contests": "contests.json",
-    "rules": "cung-quy.json"
+    "rules": "cung-quy.json",
+    "gifts": "gifts.json"
   }
 }

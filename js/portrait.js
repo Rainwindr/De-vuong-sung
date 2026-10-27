@@ -160,11 +160,27 @@
 <path d="M41 78.5 L54 102" stroke="${robeD}" stroke-width=".6" stroke-dasharray="1.2 1.6"/>
 <path d="M20 92 q6 -3 9 2 M80 92 q-6 -3 -9 2" stroke="${trim}" stroke-width=".9" fill="none" opacity=".7"/>`;
 
+    // dáng ngực dưới lớp áo theo vòng một (0–3), chỉ phi trong hậu cung có chỉ số này
+    let bust = "";
+    if (!kid && G.state && G.bodyOf && G.findConsort && G.findConsort(c.id)) {
+      const n = G.bodyOf(G.findConsort(c.id)).nguc;
+      const r = [0, 4.2, 6, 7.8][n] || 0;
+      if (r) {
+        for (const x of [37.5, 62.5]) {
+          const y = 86.5 + r * 0.15;
+          bust += `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${(r * 0.72).toFixed(2)}" fill="hsl(${hue} 50% 46%)" opacity=".55"/>`;
+          bust += `<path d="M${x - r} ${y} Q${x} ${(y + r * 0.95).toFixed(2)} ${x + r} ${y}" stroke="${robeD}" stroke-width="1.1" fill="none" opacity=".75"/>`;
+          bust += `<path d="M${x - r * 0.5} ${(y - r * 0.35).toFixed(2)} q${(r * 0.4).toFixed(2)} ${(-r * 0.25).toFixed(2)} ${(r * 0.85).toFixed(2)} 0" stroke="#ffffff33" stroke-width=".9" fill="none"/>`;
+        }
+      }
+    }
+
     // nền: trăng tròn và mây
     const bg = `<rect width="100" height="100" fill="url(#${uid}g)"/>
 <circle cx="50" cy="44" r="33" fill="hsl(${hue} 50% 70%)" opacity=".13"/><circle cx="50" cy="44" r="33" fill="none" stroke="${gold}" stroke-width=".6" opacity=".35"/>
 <path d="M6 30 q5 -5 10 0 q4 -4 8 0" stroke="${gold}" stroke-width=".7" fill="none" opacity=".3"/><path d="M76 16 q5 -5 10 0 q4 -4 8 0" stroke="${gold}" stroke-width=".7" fill="none" opacity=".3"/>`;
 
+    const bodyFull = bust ? body.replace("/>", "/>" + bust) : body; // dáng ngực nằm dưới viền áo
     const neckTop = kid ? 70 + fy : 68;
     return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs>
@@ -176,7 +192,7 @@
 ${bg}
 <g transform="translate(50 54) scale(1.12) translate(-50 -54)">
 ${back}
-${body}
+${bodyFull}
 <path d="M46 ${neckTop} L46 ${kid ? 82 : 79} Q50 ${kid ? 84.5 : 81.5} 54 ${kid ? 82 : 79} L54 ${neckTop}Z" fill="${skinD}"/>
 <path d="${face}" fill="url(#${uid}f)"/>
 ${blush}${brow(lx, false)}${brow(rx, true)}${eye(lx, false)}${eye(rx, true)}${nose}${mouth}${hoaDien}${earring}

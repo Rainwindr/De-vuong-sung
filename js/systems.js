@@ -3194,6 +3194,131 @@
     return Object.assign(scene, { pages, text: pages.join("\n\n") });
   };
 
+  /* ---------------- Thân thể (bổ sung): lông, độ nhạy, lượng tinh, thay đổi theo thời gian ---------------- */
+  G.BODY.long = ["Cạo sạch", "Tỉa gọn", "Tự nhiên"];
+  G.BODY.nhay = ["Dễ lên đỉnh", "Bình thường", "Khó lên đỉnh"];
+  G.BODY.tinh = ["Bình thường", "Nhiều", "Rất nhiều"]; // của bệ hạ
+  Object.assign(G.D8_TEXT, {
+    long: { 0: ["Nơi kín của {name} cạo sạch, trơn láng dưới ánh đèn."], 2: ["Lông nơi kín của {name} để tự nhiên, mềm và rậm."] },
+    nhay: { 0: ["{name} nhạy đến mức chỉ cần bệ hạ chạm khẽ đã run lên."], 2: ["{name} khó lên đỉnh, bệ hạ phải kiên nhẫn thật lâu nàng mới buông được."] },
+    tinh: { 1: ["Bệ hạ xuất tinh nhiều, tràn đầy trong nàng."], 2: ["Tinh của bệ hạ ra rất nhiều, {name} không giữ hết, trào cả ra ngoài."] },
+    changeNguc: ["Từ ngày hoài thai, vòng một của {name} căng đầy hẳn lên."],
+    changeKin: ["Sau nhiều đêm hầu long căn quá khổ, {name} đã quen dần, không còn chật như trước."],
+  });
+  G.ORGASM_FX = ["canh-viet.women_having_orgasms", "canh-viet.multiple_continuous_long_orgasms", "canh-viet.forced_orgasms", "canh-viet.force_squirt", "canh-viet.squirting_mess_fuck", "canh-viet.overstimulation"];
+  G.SLOW_FX = ["canh-viet.slow_tease_long", "canh-viet.cham_cham", "canh-viet.edging_tap_the", "canh-viet.one_bar", "khung-nong-bong.kiem_che"];
+  G.SEED_FX = ["canh-viet.breeding", "canh-viet.bon_chua_tinh", "canh-viet.creampie_marathon", "canh-viet.cumflation", "canh-viet.du_xong_bat_giu_tinh", "khung-nong-bong.long_chung"];
+  G.SHAVE_FX = ["canh-viet.shaving_pussy", "canh-viet.du_cao_long"];
+  G.KIN_ADAPT_NIGHTS = 10; // số đêm với long căn quá khổ để nơi kín rất khít quen dần
+  G.SHAVE_MONTHS = 3; // cạo xong giữ sạch mấy tháng
+  const bodyD9 = G.bodyOf;
+  G.bodyOf = function (c) {
+    const b = bodyD9(c);
+    if (b.long == null) {
+      let h = 5;
+      for (const ch of String(c.id)) h = (h * 37 + ch.charCodeAt(0)) >>> 0;
+      b.long = h % 3;
+      b.nhay = (h >>> 6) % 3;
+    }
+    return b;
+  };
+  G.emperorTinh = () => (G.state ? d8().tinh || 0 : 0);
+  G.setEmperorTinh = (v) => {
+    d8().tinh = clamp(Number(v) || 0, 0, 2);
+  };
+  /** Lông nơi kín đang thế nào: vừa cạo hoặc theo lệ cạo thì sạch. */
+  G.longNow = function (c) {
+    const b = G.bodyOf(c);
+    if (b.shaved != null && G.state.turn - b.shaved < G.SHAVE_MONTHS) return 0;
+    if (G.ruleEnabled && R.rules["canh-viet.quy_cao_long_lon"] && G.ruleEnabled("canh-viet.quy_cao_long_lon") && G.ruleFollowers(R.rules["canh-viet.quy_cao_long_lon"]).some((x) => x.id === c.id)) return 0;
+    return b.long;
+  };
+  const linesD9 = G.bodyLines;
+  G.bodyLines = function (c) {
+    const out = linesD9(c);
+    const T = G.D8_TEXT;
+    const pickT = (x) => (x ? G.fill(G.d3one(x), { speaker: c }) : null);
+    const b = G.bodyOf(c);
+    for (const extra of [pickT(T.nhay[b.nhay]), pickT(T.long[G.longNow(c)])]) if (extra && out.length < 3) out.push(extra);
+    return out;
+  };
+  // lượng tinh: thụ thai dễ hơn
+  const queD9 = G.queMult;
+  G.queMult = (k) => queD9(k) * (k === "conceive" ? [1, 1.3, 1.6][G.emperorTinh()] : 1);
+  // sau mỗi đêm một người: câu tinh ở đoạn cuối, độ nhạy và lượng tinh hợp sở thích, cạo lông, quen dần
+  const summonD9 = G.summon;
+  G.summon = function (id, fetishIds) {
+    const scene = summonD9(id, fetishIds);
+    const c = G.findConsort(id);
+    if (!scene || scene.blocked || !c) return scene;
+    const fx = fetishIds || [];
+    const b = G.bodyOf(c);
+    const notes = scene.notes || (scene.notes = []);
+    const like = (b.nhay === 0 && fx.some((f) => G.ORGASM_FX.includes(f))) || (b.nhay === 2 && fx.some((f) => G.SLOW_FX.includes(f)));
+    if (like) {
+      G.changeFavor(c, 3);
+      notes.push(`${G.BODY.nhay[b.nhay]}: nàng thích, Sủng ái +3`);
+    }
+    if (G.emperorTinh() >= 1 && fx.some((f) => G.SEED_FX.includes(f))) {
+      c.affection = clamp(c.affection + 2, 0, 100);
+      notes.push(`Lượng tinh ${G.BODY.tinh[G.emperorTinh()].toLowerCase()}: Tình cảm +2`);
+    }
+    if (fx.some((f) => G.SHAVE_FX.includes(f))) {
+      b.shaved = G.state.turn;
+      notes.push("Nàng được cạo sạch");
+    }
+    const t = G.emperorTinh() ? G.fill(G.d3one(G.D8_TEXT.tinh[G.emperorTinh()]), { speaker: c }) : "";
+    if (t && scene.pages && scene.pages.length) {
+      const pages = scene.pages.slice();
+      const last = pages.length - 1;
+      const parts = pages[last].split("\n");
+      parts.splice(1, 0, t);
+      pages[last] = parts.join("\n");
+      Object.assign(scene, { pages, text: pages.join("\n\n") });
+    }
+    G.checkPregBody();
+    // nơi kín rất khít quen dần với long căn quá khổ
+    if (G.emperorSize() >= 3 && b.kin === 0) {
+      b.bigNights = (b.bigNights || 0) + 1;
+      if (b.bigNights >= G.KIN_ADAPT_NIGHTS) {
+        b.kin = 1;
+        log(G.fill(G.d3one(G.D8_TEXT.changeKin), { speaker: c }) + " Nơi kín: Rất khít → Khít.", "harem");
+        notes.push("Nơi kín: Rất khít → Khít");
+      }
+    }
+    return scene;
+  };
+  // hoài thai: vòng một lên một bậc (mỗi lần mang thai một lần)
+  G.checkPregBody = function () {
+    const s = G.state;
+    for (const c of s.consorts) {
+      if (c.pregnantDue == null) continue;
+      const b = G.bodyOf(c);
+      if (b.pregBump === c.pregnantDue) continue;
+      b.pregBump = c.pregnantDue;
+      if (b.nguc < 3) {
+        b.nguc++;
+        log(G.fill(G.d3one(G.D8_TEXT.changeNguc), { speaker: c }) + ` Vòng một: ${G.BODY.nguc[b.nguc]}.`, "harem");
+      }
+    }
+  };
+  monthly(() => G.checkPregBody());
+  // quà theo thân hình: bodyLikes { nguc: [3] } trong gifts.json
+  G.giftFitsBody = (g, c) => !!(g && g.bodyLikes && Object.entries(g.bodyLikes).some(([k, vals]) => vals.includes(k === "long" ? G.longNow(c) : G.bodyOf(c)[k])));
+  const giftD9 = G.buyGift;
+  G.buyGift = function (cid, gid) {
+    const c = G.findConsort(cid);
+    const g = R.gifts[gid];
+    const r = giftD9(cid, gid);
+    if (r && r.ok && c && G.giftFitsBody(g, c)) {
+      G.changeFavor(c, 6);
+      c.affection = clamp(c.affection + 3, 0, 100);
+      r.text += " Món này vừa vặn thân hình nàng.";
+      r.notes.push("Hợp thân hình: Sủng ái +6, Tình cảm +3");
+    }
+    return r;
+  };
+
   /* ================================================================== */
   /* GOD MODE (Thiên Đạo)                                                */
   /* ================================================================== */

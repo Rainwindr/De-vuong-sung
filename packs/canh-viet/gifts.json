@@ -1,0 +1,56 @@
+[
+  {
+    "id": "canh-viet.yem_rong",
+    "name": "Yếm lụa rộng",
+    "cost": 350,
+    "favor": 8,
+    "likes": [],
+    "bodyLikes": {
+      "nguc": [
+        2,
+        3
+      ]
+    },
+    "desc": "Yếm lụa thêu mẫu đơn, cắt rộng cho người vòng một đầy đặn"
+  },
+  {
+    "id": "canh-viet.ao_the_bo",
+    "name": "Áo the bó",
+    "cost": 350,
+    "favor": 8,
+    "likes": [],
+    "bodyLikes": {
+      "nguc": [
+        0,
+        1
+      ]
+    },
+    "desc": "Áo the mỏng ôm sát, hợp người nhỏ nhắn"
+  },
+  {
+    "id": "canh-viet.dao_cao_bac",
+    "name": "Dao cạo bạc và dầu thơm",
+    "cost": 300,
+    "favor": 6,
+    "likes": [],
+    "bodyLikes": {
+      "long": [
+        0
+      ]
+    },
+    "desc": "Cho nàng ưa giữ nơi kín trơn láng"
+  },
+  {
+    "id": "canh-viet.luoc_nga",
+    "name": "Lược ngà chải tóc mây",
+    "cost": 250,
+    "favor": 6,
+    "likes": [],
+    "bodyLikes": {
+      "long": [
+        2
+      ]
+    },
+    "desc": "Cho nàng để mọi thứ tự nhiên, mềm mại"
+  }
+]
