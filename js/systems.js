@@ -3092,6 +3092,109 @@
   });
 
   /* ================================================================== */
+  /* ĐỢT 8 · Thân thể: long căn của bệ hạ, vòng một, nơi kín             */
+  /* ================================================================== */
+  G.BODY = {
+    size: ["Vừa vặn", "To", "Rất to", "Quá khổ"], // long căn của bệ hạ
+    nguc: ["Nhỏ nhắn", "Vừa", "Đầy đặn", "Rất đầy"], // vòng một của nàng
+    kin: ["Rất khít", "Khít", "Vừa"], // nơi kín của nàng
+  };
+  // Câu chèn vào đoạn mở của đêm (nháp, chờ Grok viết lại). {name} = tên nàng.
+  G.D8_TEXT = {
+    size: { 2: ["Long căn của bệ hạ to hơn hẳn thường nhân, {name} nhìn mà nuốt khan."], 3: ["Long căn quá khổ của bệ hạ khiến {name} vừa sợ vừa mong, tay khẽ run khi chạm vào."] },
+    nguc: { 0: ["Bầu ngực nhỏ nhắn của {name} nằm gọn trong lòng bàn tay bệ hạ."], 2: ["Vòng một đầy đặn của {name} căng tràn dưới lớp yếm mỏng."], 3: ["Bầu ngực rất đầy của {name} nặng trĩu, chỉ khẽ cử động đã rung lên."] },
+    kin: { 0: ["Nơi kín của {name} rất khít, nàng phải thở thật sâu mới đón được bệ hạ."] },
+    combo: { "3_0": ["Long căn quá khổ và nơi kín rất khít của {name} khiến mỗi lần bệ hạ tiến vào đều chậm và căng."] },
+    roundTight: ["{name} vẫn còn căng chật sau hiệp trước, nhưng lại kéo bệ hạ vào lần nữa."],
+  };
+  G.BREAST_FX = ["canh-viet.breast", "canh-viet.milking", "canh-viet.groping_and_sucking_titties", "canh-viet.titties_clit_massage"];
+  const d8 = (s) => {
+    s = s || G.state;
+    if (!s.d8) s.d8 = { size: 1, body: {} };
+    if (!s.d8.body) s.d8.body = {};
+    return s.d8;
+  };
+  G.emperorSize = () => (G.state ? d8().size : 1);
+  G.setEmperorSize = (v) => {
+    d8().size = clamp(Number(v) || 0, 0, G.BODY.size.length - 1);
+  };
+  /** Thân thể của nàng: lúc đầu gán ngẫu nhiên cố định theo id, bệ hạ đổi tùy ý. */
+  G.bodyOf = function (c) {
+    const b = d8().body;
+    if (!b[c.id]) {
+      let h = 11;
+      for (const ch of String(c.id)) h = (h * 33 + ch.charCodeAt(0)) >>> 0;
+      b[c.id] = { nguc: h % 4, kin: (h >>> 5) % 3 };
+    }
+    return b[c.id];
+  };
+  G.setBody = (cid, key, v) => {
+    const c = G.findConsort(cid);
+    if (!c || !G.BODY[key]) return;
+    G.bodyOf(c)[key] = clamp(Number(v) || 0, 0, G.BODY[key].length - 1);
+  };
+  /** Một hai câu tả thân thể chèn vào đêm nay. */
+  G.bodyLines = function (c) {
+    const T = G.D8_TEXT;
+    const sz = G.emperorSize();
+    const b = G.bodyOf(c);
+    const out = [];
+    const pickT = (x) => (x ? G.fill(G.d3one(x), { speaker: c }) : null);
+    const combo = pickT(T.combo[`${sz}_${b.kin}`]);
+    if (combo) out.push(combo);
+    else {
+      const a = pickT(T.size[sz]);
+      if (a) out.push(a);
+      const k = pickT(T.kin[b.kin]);
+      if (k) out.push(k);
+    }
+    const n = pickT(T.nguc[b.nguc]);
+    if (n && out.length < 2) out.push(n);
+    return out.slice(0, 2);
+  };
+  const withBody = (scene, c) => {
+    if (!scene || scene.blocked || !c) return scene;
+    const lines = G.bodyLines(c);
+    if (!lines.length) return scene;
+    const pages = scene.pages && scene.pages.length ? scene.pages.slice() : [scene.text || ""];
+    const parts = pages[0].split("\n");
+    // chèn sau câu dẫn đầu tiên của đoạn mở (trước lời thoại)
+    const at = Math.max(1, parts.findIndex((l) => l.startsWith("> ")));
+    parts.splice(at < 0 ? parts.length : at, 0, lines.join(" "));
+    pages[0] = parts.join("\n");
+    return Object.assign(scene, { pages, text: pages.join("\n\n") });
+  };
+  // long căn quá khổ: sở thích "Chênh lệch kích cỡ" mở sẵn với mọi phi
+  const unlockD8 = G.fetishUnlocked;
+  G.fetishUnlocked = (fid) => (fid === "canh-viet.chenh_lech" && G.state && G.emperorSize() >= 3 ? !!R.fetishes[fid] : unlockD8(fid));
+  const consentD8 = G.consentOf;
+  G.consentOf = function (p, fid) {
+    const lvl = consentD8(p, fid);
+    return lvl === "persuade" && fid === "canh-viet.chenh_lech" && G.state && G.emperorSize() >= 3 && G.findConsort(p.id) ? "willing" : lvl;
+  };
+  // vòng một rất đầy: thích các sở thích về vú hơn
+  const summonD8 = G.summon;
+  G.summon = function (id, fetishIds) {
+    const scene = summonD8(id, fetishIds);
+    const c = G.findConsort(id);
+    if (!scene || scene.blocked || !c) return scene;
+    if (G.bodyOf(c).nguc >= 3 && (fetishIds || []).some((f) => G.BREAST_FX.includes(f))) {
+      G.changeFavor(c, 3);
+      scene.notes = (scene.notes || []).concat(["Vòng một rất đầy: nàng thích, Sủng ái +3"]);
+    }
+    return withBody(scene, c);
+  };
+  const roundD8 = G.extraRound;
+  G.extraRound = function (cid, fid) {
+    const scene = roundD8(cid, fid);
+    const c = G.findConsort(cid);
+    if (!scene || scene.blocked || !c || G.bodyOf(c).kin !== 0) return scene;
+    const pages = scene.pages.slice();
+    pages[0] = G.fill(G.d3one(G.D8_TEXT.roundTight), { speaker: c }) + " " + pages[0];
+    return Object.assign(scene, { pages, text: pages.join("\n\n") });
+  };
+
+  /* ================================================================== */
   /* GOD MODE (Thiên Đạo)                                                */
   /* ================================================================== */
   G.snapshot = function () {

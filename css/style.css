@@ -521,3 +521,4 @@ details.fold > .section-head h3 { display: none; }
 .palace.up-2 .roof, .palace.up-3 .roof { height: 15px; top: -9px; background: linear-gradient(#ffe08a, #c99a3e); box-shadow: 0 0 10px #e3bb6288; }
 .palace.up-3 { background: linear-gradient(#6a2a2e, #4a1e22); }
 #fx-suggest { margin-left: 4px; }
+.body-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }

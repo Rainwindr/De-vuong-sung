@@ -201,7 +201,7 @@
   };
 
   function renderTab() {
-    return ({ harem: renderHarem, kids: renderKids, me: () => renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
+    return ({ harem: renderHarem, kids: renderKids, me: () => renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
   }
 
   /* ---------------- Nhật ký ---------------- */
@@ -408,6 +408,13 @@
   }
 
   /* ---------------- Sở thích ---------------- */
+  function renderBody() {
+    if (!G.BODY) return "";
+    const sz = G.emperorSize();
+    return `<section class="section"><div class="section-head"><h3>Long thể bệ hạ</h3><span class="hint">Câu tả trong cảnh đổi theo lựa chọn</span></div>
+      <div class="field"><label for="me-size">Long căn</label><select id="me-size">${G.BODY.size.map((n, i) => `<option value="${i}" ${i === sz ? "selected" : ""}>${n}</option>`).join("")}</select></div>
+      ${sz >= 3 ? `<p class="hint">Quá khổ: sở thích "Chênh lệch kích cỡ" mở sẵn, mọi phi chưa từ chối đều sẵn lòng.</p>` : ""}</section>`;
+  }
   function renderFetish() {
     const s = G.state;
     const list = Object.values(R.fetishes).sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name));
@@ -576,6 +583,11 @@
     const s = G.state;
     on(root, "[data-consort]", "click", (b) => openConsort(b.dataset.consort));
     on(root, "[data-palace]", "click", (b) => openPalace(b.dataset.palace));
+    on(root, "#me-size", "change", (sel) => {
+      G.setEmperorSize(sel.value);
+      G.save();
+      UI.render();
+    });
     on(root, "[data-hview]", "click", (b) => {
       haremView = b.dataset.hview;
       try {
@@ -1278,6 +1290,7 @@
     const row = (k, val) => `<div class="bk-row"><span class="k">${k}</span><span>${val}</span></div>`;
     return `<div class="pane book" data-pane-body="book" hidden>
       <div class="bk-level"><b>Cấp thân mật: ${esc(G.levelName(c))}</b>${nx ? `<span class="hint">Lên ${esc(nx.name)}: còn ${nx.nights} đêm${nx.affection ? `, Tình cảm thêm ${nx.affection}` : ""}. Cấp này tự mở các sở thích cần thuyết phục đến tầng ${G.LEVEL_TIER[G.levelOf(c) + 1]}.</span>` : `<span class="hint">Cấp cao nhất. Nàng sẵn lòng với mọi sở thích không bị từ chối, và thỉnh thoảng tự xin thị tẩm.</span>`}</div>
+      ${G.bodyOf ? row("Vòng một", esc(G.BODY.nguc[G.bodyOf(c).nguc])) + row("Nơi kín", esc(G.BODY.kin[G.bodyOf(c).kin])) : ""}
       ${row("Số đêm", v.nights)}
       ${row("Đêm đầu tiên", v.first != null ? G.turnLabel(v.first) : "Chưa")}
       ${row("Gần nhất", v.last != null ? G.turnLabel(v.last) : "Chưa")}
@@ -1317,6 +1330,7 @@
          .join("")}</div>
        <div class="pane" data-pane-body="info">
        <div class="row-wrap">${c.traits.map((t) => pill(t)).join("")}</div>
+       ${G.bodyOf ? `<div class="body-row"><div class="field"><label for="c-nguc">Vòng một</label><select id="c-nguc">${G.BODY.nguc.map((n, i) => `<option value="${i}" ${i === G.bodyOf(c).nguc ? "selected" : ""}>${n}</option>`).join("")}</select></div><div class="field"><label for="c-kin">Nơi kín</label><select id="c-kin">${G.BODY.kin.map((n, i) => `<option value="${i}" ${i === G.bodyOf(c).kin ? "selected" : ""}>${n}</option>`).join("")}</select></div></div>` : ""}
        <p class="hint">${c.nights} đêm thị tẩm · ${c.kids} con${c.contestWins ? ` · ${c.contestWins} lần thắng thi` : ""}${partner && partner.tinhY >= 31 ? ` · ${partner.status} với ${esc(partner.other.name)} (${Math.round(partner.tinhY)})` : ""}</p>
        ${wish ? `<p class="hint"><b>Tâm nguyện:</b> ${esc(wish.text)} · còn ${wish.left} tháng. Toại nguyện: Tình cảm +${G.WISH_AFFECTION}.</p>` : ""}
        ${queued ? `<p class="hint"><b>Chờ lễ sắc phong</b> lên ${esc(G.RANKS[queued.rank])} (${G.SAC_PHONG_COST[queued.rank]} lượng). Lễ bộ sẽ dâng tấu.</p>` : ""}
@@ -1440,6 +1454,8 @@
           if (r) showMessage(r.ok ? "Ban thưởng" : "Không thể ban thưởng", r.text, r.notes);
         });
         on(el, "#c-school", "change", (sel) => G.setSchool(c.id, sel.value));
+        on(el, "#c-nguc", "change", (sel) => (G.setBody(c.id, "nguc", sel.value), G.save()));
+        on(el, "#c-kin", "change", (sel) => (G.setBody(c.id, "kin", sel.value), G.save()));
         // bảng sở thích được vẽ lại, nên bắt sự kiện bấm trên cả hộp
         const fxBox = el.querySelector("#c-fxt");
         if (fxBox)
@@ -1855,7 +1871,8 @@
               const s = G.state;
               const pool = fets.filter((f) => lvlOf(f) === "willing" && !picked.has(f.id));
               if (!pool.length) return;
-              const score = (f) => (s.fetishLast[f.id] == null ? -1e6 : s.fetishLast[f.id]) - (c.likes.includes(f.id) ? 6 : 0) + Math.random() * 3;
+              const big = G.bodyOf && G.bodyOf(c).nguc >= 3 && G.BREAST_FX;
+              const score = (f) => (s.fetishLast[f.id] == null ? -1e6 : s.fetishLast[f.id]) - (c.likes.includes(f.id) ? 6 : 0) - (big && big.includes(f.id) ? 8 : 0) + Math.random() * 3;
               pool.sort((a, b) => score(a) - score(b));
               picked.clear();
               picked.add(pool[0].id);
