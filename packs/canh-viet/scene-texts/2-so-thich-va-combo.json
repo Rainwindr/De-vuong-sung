@@ -1887,6 +1887,13 @@
           "[TẠM · Thử độ sâu] Đêm nay {name} hầu bệ hạ theo sở thích Thử độ sâu. Đoạn này là câu tạm, thay bằng nội dung thật."
         ]
       ]
+    },
+    "canh-viet.do_choi_thai_hau": {
+      "_": [
+        [
+          "[TẠM · Đồ chơi của thái hậu] Đêm nay {name} hầu bệ hạ theo sở thích Đồ chơi của thái hậu. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
     }
   },
   "core.tuu_tri_hoi": {

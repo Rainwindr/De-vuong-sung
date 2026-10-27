@@ -1990,5 +1990,13 @@
     "unlock": {},
     "default_consent": "willing",
     "desc": "Bệ hạ đẩy thật chậm để thử nàng nuốt được sâu đến đâu, bằng long căn hoặc miệng. Nàng tự nguyện, ra hiệu là dừng ngay."
+  },
+  {
+    "id": "canh-viet.do_choi_thai_hau",
+    "name": "Đồ chơi của thái hậu",
+    "tier": 2,
+    "unlock": {},
+    "default_consent": "willing",
+    "desc": "Nàng từng là cung nữ hầu hạ bên thái hậu, nay được bệ hạ để mắt. Nàng vẫn giữ nếp lễ nghi khéo léo học được, tự nguyện hầu bệ hạ. Thái hậu không có mặt và không dính dáng đến chuyện thân mật."
   }
 ]
