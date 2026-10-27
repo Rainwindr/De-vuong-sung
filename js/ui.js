@@ -122,6 +122,18 @@
   /* ================================================================== */
   /* Màn chính                                                           */
   /* ================================================================== */
+  /** Lớp hiệu ứng mùa: cánh đào, đom đóm, lá phong, tuyết. Chỉ trang trí, không chặn bấm. */
+  function seasonLayer(se) {
+    let out = "";
+    for (let i = 0; i < 14; i++) {
+      const x = (i * 37) % 100;
+      const d = 9 + ((i * 7) % 9);
+      const delay = -((i * 13) % 17);
+      const sz = 5 + ((i * 5) % 6);
+      out += `<i style="left:${x}%;--d:${d}s;--dl:${delay}s;--sz:${sz}px"></i>`;
+    }
+    return `<div class="season-fx fx-${se}" aria-hidden="true">${out}</div>`;
+  }
   UI.render = function () {
     const s = G.state;
     if (!s) return UI.renderGate();
@@ -138,7 +150,7 @@
       <header class="topbar">
         <div class="who">
           <h2 title="${esc(s.emperorName)}">${esc(s.emperorName)}</h2>
-          <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year} th.${s.month}${G.currentQue && G.currentQue() ? ` <span class="que-pill">${esc(G.currentQue().name)}</span>` : ""}</span>
+          <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year} th.${s.month}${G.seasonOf ? ` <span class="season-pill s-${G.seasonOf(s.month)}">${G.SEASONS[G.seasonOf(s.month)]}</span>` : ""}${G.currentQue && G.currentQue() ? ` <span class="que-pill">${esc(G.currentQue().name)}</span>` : ""}</span>
           <button class="icon-btn" id="b-menu" aria-label="Lưu game, gói nội dung và cài đặt">☰</button>
         </div>
         <div class="stats">${Object.entries(G.STATS)
@@ -157,7 +169,9 @@
         <button class="btn" id="b-next">+1 tháng</button>
         <button class="btn btn-primary" id="b-skip">Đến chuyện mới</button>
       </div></div>
-      <div class="toast" id="toast" hidden></div>`;
+      <div class="toast" id="toast" hidden></div>
+      ${G.seasonOf ? seasonLayer(G.seasonOf(s.month)) : ""}`;
+    if (G.seasonOf) document.body.dataset.season = G.seasonOf(s.month);
     const root = $app();
     on(root, ".tab", "click", (b) => {
       tab = b.dataset.tab;
@@ -1182,8 +1196,10 @@
        <p class="ev-text">${formatText(greet)}</p>
        ${can ? `<p class="hint">Nói đúng ý nàng: Tình cảm +4, Sủng ái +2, tháng này thuyết phục dễ hơn ${G.TALK_BONUS} điểm. ♥ đúng ý · ✗ không hợp · · bình thường (đã thử).</p>` : `<p class="hint">Tháng này đã trò chuyện với nàng rồi. Ghé thăm vẫn được Sủng ái +3, Tình cảm +2.</p>`}
        <div class="choices">${can ? Object.entries(G.D3_TEXT.talk).map(([k, v]) => `<button class="btn" data-talk="${k}">${esc(v.label)}${known[k] ? mark[known[k]] : ""}</button>`).join("") : ""}
+         ${G.canPlayGame ? `<button class="btn" id="t-game" ${G.canPlayGame(c) ? "" : "disabled"}>Chơi một ván cùng nàng${G.canPlayGame(c) ? "" : `<span class="cost">tháng này đã chơi</span>`}</button>` : ""}
          <button class="btn btn-ghost" data-talk="">Chỉ ghé thăm</button></div>`,
-      (el) =>
+      (el) => {
+        on(el, "#t-game", "click", () => openGames(c));
         on(el, "[data-talk]", "click", (b) => {
           const opt = b.dataset.talk;
           if (!opt) {
@@ -1194,8 +1210,225 @@
           const r = G.talk(c.id, opt);
           G.save();
           if (r) showMessage(c.name, r.text, r.notes);
-        })
+        });
+      }
     );
+  }
+
+  /* ---------------- Mini game ---------------- */
+  function openGames(c) {
+    const head = `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Chơi cùng ${esc(c.name)}</span><h3>Chọn trò</h3></div></div>`;
+    openSheet(
+      `${head}<p class="hint">Mỗi tháng chơi với mỗi phi một ván. Thắng: Tình cảm +5. Thua hay hòa nàng vẫn vui: Tình cảm +3. Trò nàng thích (♥) được thêm +2.</p>
+       <div class="choices">${Object.entries(G.MINI_GAMES).map(([k, g]) => `<button class="btn" data-game="${k}">${esc(g.name)}${g.likes.some((x) => c.traits.includes(x)) ? " ♥" : ""}<span class="cost">${esc(g.desc)}</span></button>`).join("")}</div>`,
+      (el) => on(el, "[data-game]", "click", (b) => ({ dau_ho: gameDauHo, hoa_dang: gameHoaDang, doi_tho: gameDoiTho, danh_co: gameDanhCo })[b.dataset.game](c))
+    );
+  }
+  function endGame(c, id, outcome, line) {
+    const r = G.miniGameResult(c, id, outcome);
+    G.save();
+    if (r) showMessage(`${G.MINI_GAMES[id].name} · ${outcome === "win" ? "Bệ hạ thắng" : outcome === "draw" ? "Hòa" : "Nàng thắng"}`, (line ? line + "\n\n" : "") + r.text, r.notes);
+  }
+  const gameHead = (c, id, sub) => `<div class="ev-head">${portrait(c, "sm")}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>${esc(G.MINI_GAMES[id].name)}</h3></div></div><p class="hint" id="g-sub">${sub}</p>`;
+
+  // Ném thẻ vào bình: kim chạy qua lại, bấm khi kim nằm trong vùng sáng
+  function gameDauHo(c) {
+    let shot = 0, hit = 0, pos = 0, dir = 1, raf = 0, last = 0, live = true;
+    const speed = 0.9 + Math.random() * 0.3; // phần thanh mỗi giây
+    let zone = null;
+    const newZone = () => {
+      const w = 0.16 + Math.random() * 0.06;
+      const x = 0.12 + Math.random() * (0.76 - w);
+      zone = [x, x + w];
+    };
+    newZone();
+    openSheet(
+      `${gameHead(c, "dau_ho", "Bấm Ném khi kim nằm trong vùng sáng. Năm lần, trúng ba là thắng.")}
+       <div class="dh-bar" id="dh-bar"><span class="dh-zone" id="dh-zone"></span><span class="dh-needle" id="dh-needle"></span></div>
+       <div class="dh-score" id="dh-score">${"○".repeat(5)}</div>
+       <button class="btn btn-primary" id="dh-go">Ném</button>`,
+      (el) => {
+        const needle = $(el, "#dh-needle");
+        const z = $(el, "#dh-zone");
+        const drawZone = () => {
+          z.style.left = zone[0] * 100 + "%";
+          z.style.width = (zone[1] - zone[0]) * 100 + "%";
+        };
+        drawZone();
+        const tick = (ts) => {
+          if (!live || !el.contains(needle)) return;
+          const dt = last ? (ts - last) / 1000 : 0;
+          last = ts;
+          pos += dir * speed * (1 + shot * 0.12) * dt;
+          if (pos > 1) (pos = 1), (dir = -1);
+          if (pos < 0) (pos = 0), (dir = 1);
+          needle.style.left = pos * 100 + "%";
+          raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        $(el, "#dh-go").addEventListener("click", () => {
+          if (!live) return;
+          const ok = pos >= zone[0] && pos <= zone[1];
+          shot++;
+          if (ok) hit++;
+          const marks = [...$(el, "#dh-score").textContent];
+          marks[shot - 1] = ok ? "●" : "×";
+          $(el, "#dh-score").textContent = marks.join("");
+          $(el, "#g-sub").textContent = ok ? "Trúng! Thẻ rơi gọn vào miệng bình." : "Trượt rồi, thẻ chạm vành bình bật ra.";
+          if (shot >= 5 || hit >= 3 || shot - hit > 2) {
+            live = false;
+            cancelAnimationFrame(raf);
+            setTimeout(() => endGame(c, "dau_ho", hit >= 3 ? "win" : "lose", `Trúng ${hit} trên ${shot} lần ném.`), 500);
+          } else {
+            newZone();
+            drawZone();
+          }
+        });
+      },
+      { locked: true }
+    );
+  }
+
+  // Thả đèn hoa đăng: đèn hiện chỗ ngẫu nhiên trên mặt hồ, chạm trước khi đèn trôi mất
+  function gameHoaDang(c) {
+    const NEED = 7, TIME = 14;
+    let got = 0, left = TIME, live = true;
+    openSheet(
+      `${gameHead(c, "hoa_dang", `Chạm vào đèn trước khi đèn trôi đi. Đủ ${NEED} chiếc trong ${TIME} giây là thắng.`)}
+       <div class="hd-lake" id="hd-lake"></div>
+       <div class="hd-info"><span class="pill" id="hd-got">0/${NEED} đèn</span><span class="pill" id="hd-time">${TIME} giây</span></div>`,
+      (el) => {
+        const lake = $(el, "#hd-lake");
+        const finish = () => {
+          if (!live) return;
+          live = false;
+          clearInterval(clock);
+          clearInterval(spawn);
+          setTimeout(() => endGame(c, "hoa_dang", got >= NEED ? "win" : "lose", `Thả được ${got} chiếc đèn.`), 400);
+        };
+        const add = () => {
+          if (!live || !el.contains(lake)) return;
+          const d = document.createElement("button");
+          d.className = "hd-lamp";
+          d.setAttribute("aria-label", "Đèn hoa đăng");
+          d.style.left = 6 + Math.random() * 78 + "%";
+          d.style.top = 8 + Math.random() * 70 + "%";
+          d.addEventListener("pointerdown", () => {
+            if (!live || d.dataset.done) return;
+            d.dataset.done = "1";
+            d.classList.add("got");
+            got++;
+            $(el, "#hd-got").textContent = `${got}/${NEED} đèn`;
+            if (got >= NEED) finish();
+          });
+          lake.appendChild(d);
+          setTimeout(() => d.remove(), 1300);
+        };
+        const spawn = setInterval(add, 620);
+        add();
+        const clock = setInterval(() => {
+          left--;
+          const tm = el.querySelector("#hd-time");
+          if (tm) tm.textContent = `${left} giây`;
+          if (left <= 0) finish();
+        }, 1000);
+      },
+      { locked: true }
+    );
+  }
+
+  // Đối thơ: ba câu, chọn vế dưới đúng
+  function gameDoiTho(c) {
+    const qs = shuffleArr(G.COUPLETS.slice()).slice(0, 3);
+    let i = 0, ok = 0;
+    const round = () => {
+      const [a, b] = qs[i];
+      const wrong = shuffleArr(G.COUPLETS.filter((x) => x[1] !== b).map((x) => x[1])).slice(0, 2);
+      const opts = shuffleArr([b].concat(wrong));
+      openSheet(
+        `${gameHead(c, "doi_tho", `Câu ${i + 1}/3 · đã đối đúng ${ok}`)}
+         <p class="ev-text"><span class="q">${esc(a)}</span></p>
+         <div class="choices">${opts.map((o) => `<button class="btn" data-op="${esc(o)}">${esc(o)}</button>`).join("")}</div>`,
+        (el) =>
+          on(el, "[data-op]", "click", (btn) => {
+            const right = btn.dataset.op === b;
+            if (right) ok++;
+            for (const x of el.querySelectorAll("[data-op]")) {
+              x.disabled = true;
+              if (x.dataset.op === b) x.classList.add("btn-primary");
+            }
+            $(el, "#g-sub").textContent = right ? "Đối chuẩn! Nàng gật gù tán thưởng." : "Chưa chỉnh lắm, nàng mỉm cười chỉ vế đúng.";
+            setTimeout(() => {
+              i++;
+              if (i < 3) round();
+              else endGame(c, "doi_tho", ok >= 2 ? "win" : "lose", `Đối đúng ${ok} trên 3 câu.`);
+            }, 900);
+          }),
+        { locked: true }
+      );
+    };
+    round();
+  }
+
+  // Đánh cờ ba quân (3x3). Nàng giỏi cờ thì đi chặt hơn.
+  function gameDanhCo(c) {
+    const b = Array(9).fill("");
+    const L = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+    const smart = ["Sâu sắc", "Lanh lợi", "Thông minh", "Hai mặt", "Kiêu kỳ"].some((x) => c.traits.includes(x)) ? 0.9 : 0.6;
+    const winner = () => {
+      for (const [x, y, z] of L) if (b[x] && b[x] === b[y] && b[x] === b[z]) return b[x];
+      return b.every(Boolean) ? "draw" : null;
+    };
+    const finder = (m) => {
+      for (const l of L) {
+        const v = l.map((k) => b[k]);
+        if (v.filter((q) => q === m).length === 2 && v.includes("")) return l[v.indexOf("")];
+      }
+      return -1;
+    };
+    const herMove = () => {
+      let k = -1;
+      if (Math.random() < smart) k = finder("o");
+      if (k < 0 && Math.random() < smart) k = finder("x");
+      if (k < 0 && !b[4] && Math.random() < smart) k = 4;
+      if (k < 0) {
+        const free = b.map((v, j) => (v ? -1 : j)).filter((j) => j >= 0);
+        k = free[Math.floor(Math.random() * free.length)];
+      }
+      if (k >= 0) b[k] = "o";
+    };
+    let over = false;
+    const draw = (msg) =>
+      openSheet(
+        `${gameHead(c, "danh_co", msg)}
+         <div class="co-board">${b.map((v, j) => `<button class="co-cell ${v}" data-cell="${j}" ${v || over ? "disabled" : ""} aria-label="Ô ${j + 1}">${v === "x" ? "帝" : v === "o" ? "妃" : ""}</button>`).join("")}</div>`,
+        (el) =>
+          on(el, "[data-cell]", "click", (btn) => {
+            const j = Number(btn.dataset.cell);
+            if (over || b[j]) return;
+            b[j] = "x";
+            let w = winner();
+            if (!w) {
+              herMove();
+              w = winner();
+            }
+            if (w) {
+              over = true;
+              const outcome = w === "x" ? "win" : w === "o" ? "lose" : "draw";
+              draw(outcome === "win" ? "Ba quân của bệ hạ thẳng hàng!" : outcome === "lose" ? "Nàng xếp được ba quân trước." : "Kín bàn, hòa.");
+              setTimeout(() => endGame(c, "danh_co", outcome), 900);
+            } else draw("Đến lượt bệ hạ.");
+          }),
+        { locked: true }
+      );
+    draw("Bệ hạ đi trước (quân 帝), nàng cầm quân 妃.");
+  }
+  function shuffleArr(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   }
 
   function openNight(c) {

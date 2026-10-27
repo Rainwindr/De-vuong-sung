@@ -404,3 +404,36 @@ textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px soli
 .btn-danger-ghost { justify-self: start; background: none; border-color: #e0705e66; color: var(--danger); }
 .btn-danger { background: var(--danger); border-color: var(--danger); color: #1a0a08; font-weight: 600; }
 .pane > p { margin: 0; }
+
+/* ---------- 0.5.5 · mùa ---------- */
+.season-pill { display: inline-block; padding: 1px 7px; margin-left: 2px; border-radius: 999px; font-size: 11.5px; border: 1px solid var(--line); }
+.season-pill.s-xuan { color: #f3a6bd; } .season-pill.s-ha { color: #9fe0b5; } .season-pill.s-thu { color: #f0a25e; } .season-pill.s-dong { color: #cfe6ff; }
+.season-fx { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; opacity: .55; }
+.season-fx i { position: absolute; top: -20px; width: var(--sz); height: var(--sz); animation: fall var(--d) linear var(--dl) infinite; }
+.fx-xuan i { background: #f6b3c6; border-radius: 70% 0 70% 0; }
+.fx-thu i { background: #d9763a; border-radius: 0 80% 0 80%; }
+.fx-dong i { background: #f4f8ff; border-radius: 50%; opacity: .8; }
+.fx-ha i { top: auto; bottom: -10px; width: 4px; height: 4px; background: #e9ff9b; border-radius: 50%; box-shadow: 0 0 8px 2px #d8ff7a99; animation: float var(--d) ease-in-out var(--dl) infinite; }
+@keyframes fall { from { transform: translate(0, 0) rotate(0); } to { transform: translate(60px, 110vh) rotate(540deg); } }
+@keyframes float { 0% { transform: translate(0, 0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translate(-30px, -80vh); opacity: 0; } }
+body[data-season="xuan"] { background: radial-gradient(120% 60% at 50% -10%, #3a1a24 0, var(--ink) 60%) fixed; }
+body[data-season="ha"] { background: radial-gradient(120% 60% at 50% -10%, #17261b 0, var(--ink) 60%) fixed; }
+body[data-season="thu"] { background: radial-gradient(120% 60% at 50% -10%, #33200f 0, var(--ink) 60%) fixed; }
+body[data-season="dong"] { background: radial-gradient(120% 60% at 50% -10%, #1b2230 0, var(--ink) 60%) fixed; }
+@media (prefers-reduced-motion: reduce) { .season-fx { display: none; } }
+/* ---------- mini game ---------- */
+.dh-bar { position: relative; height: 34px; border-radius: 17px; background: #ffffff12; border: 1px solid var(--line); overflow: hidden; }
+.dh-zone { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, #d9ad5533, #d9ad5599, #d9ad5533); border-left: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+.dh-needle { position: absolute; top: 3px; bottom: 3px; width: 4px; margin-left: -2px; border-radius: 2px; background: var(--vermilion); box-shadow: 0 0 8px #d2442f; }
+.dh-score { text-align: center; font-size: 22px; letter-spacing: .3em; color: var(--gold); }
+.hd-lake { position: relative; height: 260px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: radial-gradient(80% 60% at 50% 30%, #1d2b44, #0c111d); touch-action: manipulation; }
+.hd-lamp { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border: 0; border-radius: 50% 50% 46% 46%; background: radial-gradient(circle at 50% 40%, #fff3c4 0, #f7a33b 45%, #c4442c 80%); box-shadow: 0 0 18px 4px #f7a33b88; animation: lampIn 1.3s ease-out forwards; cursor: pointer; }
+.hd-lamp.got { animation: lampGot .35s ease-out forwards; }
+@keyframes lampIn { 0% { transform: scale(.3); opacity: 0; } 15% { transform: scale(1); opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(-26px) scale(.8); opacity: 0; } }
+@keyframes lampGot { to { transform: scale(1.6); opacity: 0; } }
+.co-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: min(100%, 270px); justify-self: center; }
+.co-cell { aspect-ratio: 1; border-radius: 10px; border: 1px solid var(--line); background: var(--lacquer-2); color: var(--paper); font: 700 30px/1 var(--f-display); cursor: pointer; }
+.co-cell.x { color: var(--gold); } .co-cell.o { color: #f3a6bd; }
+.co-cell:disabled { cursor: default; }
+main#view { position: relative; z-index: 1; }
+.hd-info { display: flex; justify-content: space-between; gap: 8px; } .hd-info .pill { font-size: 13px; padding: 4px 10px; }

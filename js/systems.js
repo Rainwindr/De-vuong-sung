@@ -2605,6 +2605,207 @@
   };
 
   /* ================================================================== */
+  /* ĐỢT 5 · Hậu cung tự sống · Mini game · Mùa và thời tiết            */
+  /* ================================================================== */
+  // Câu chữ: chuỗi hoặc danh sách nhiều bản. {name} = phi chính, {name2} = phi thứ hai.
+  G.D5_TEXT = {
+    life: {
+      dang_canh: ["{name} sai cung nữ mang đến ngự thư phòng một bát canh sen hầm, kèm mảnh giấy nhỏ: \"Bệ hạ phê tấu chương khuya, xin giữ long thể.\""],
+      ket_be: ["{name} và {name2} cùng ngồi thêu dưới giàn tử đằng cả buổi chiều, cười nói không dứt."],
+      tap_nghe: ["Cả buổi chiều, từ cung {name} vọng ra tiếng đàn tập đi tập lại một khúc mới."],
+      gianh_nhau: ["Nội vụ phủ chỉ còn một xấp gấm Thục, {name} và {name2} cùng muốn, hai bên không ai chịu nhường."],
+    },
+    hanhLang: ["Tan triều, bệ hạ đi qua hành lang dài thì thấy {name} đã đứng chờ từ lúc nào, tay cầm chiếc đèn lồng nhỏ.\n> Thiếp chỉ muốn được gặp bệ hạ một lát thôi."],
+    tienCu: ["{name} quỳ dâng tấu, giọng khẽ mà tha thiết.\n> Thiếp có một biểu muội ở quê, dung mạo đoan trang, cầm kỳ thi họa đều biết. Xin bệ hạ cho nàng ấy vào cung hầu hạ."],
+    tranhSung: ["{name} và {name2} cùng lúc sai người mang điểm tâm đến ngự thư phòng. Hai hộp bánh đặt cạnh nhau, Lý công công khó xử chờ bệ hạ chọn."],
+    game: {
+      win: ["{name} vỗ tay cười, má ửng hồng.\n> Bệ hạ giỏi quá! Lần sau thiếp nhất định gỡ lại."],
+      draw: ["{name} bật cười, nghiêng đầu nhìn bệ hạ.\n> Hòa rồi… vậy ván sau định thắng thua thật nhé."],
+      lose: ["{name} che miệng cười, mắt sáng lên vì vui.\n> Thiếp thắng rồi! Bệ hạ nhường thiếp phải không?"],
+    },
+    weather: {
+      mua_xuan: { title: "Mưa xuân", text: ["Mưa xuân lất phất cả ngày, mái ngói ướt bóng. {name} sai người đến thưa: nàng vừa pha ấm trà mới, muốn mời bệ hạ nghe mưa."], label: "Đến cung {name} nghe mưa" },
+      hoa_dao: { title: "Hoa đào nở", text: ["Vườn ngự uyển hoa đào nở rộ, cánh hoa bay đầy lối đi. {name} cài một nhành đào lên tóc, đứng dưới gốc cây chờ bệ hạ."], label: "Dạo vườn đào cùng {name}" },
+      dom_dom: { title: "Đêm hè đom đóm", text: ["Đêm hè oi ả, bên hồ sen đom đóm bay lập lòe. {name} cầm túi lụa, rủ bệ hạ cùng bắt đom đóm."], label: "Ra hồ sen cùng {name}" },
+      la_phong: { title: "Lá phong đỏ", text: ["Rừng phong sau núi giả đã đỏ rực. {name} nhặt một chiếc lá đẹp nhất, viết lên đó một câu thơ rồi gửi đến bệ hạ."], label: "Ngắm lá phong cùng {name}" },
+      tuyet: { title: "Tuyết đầu mùa", text: ["Sáng nay tuyết đầu mùa rơi trắng mái điện. {name} khoác áo lông, đứng ngoài hiên đưa tay hứng từng bông tuyết."], label: "Ngắm tuyết cùng {name}" },
+    },
+  };
+  const d5 = (s) => {
+    s = s || G.state;
+    if (!s.d5) s.d5 = {};
+    const d = s.d5;
+    for (const [k, v] of Object.entries({ lastAct: {}, gameTurn: {}, weatherYear: {} })) if (d[k] === undefined) d[k] = JSON.parse(JSON.stringify(v));
+    return d;
+  };
+  G.d5 = d5;
+  const one5 = (x) => G.d3one(x);
+
+  /* ---------------- 6 · Hậu cung tự sống ---------------- */
+  G.LIFE_CHANCE = 0.6; // khả năng mỗi tháng có chuyện tự diễn ra
+  G.LIFE_EVENT_CHANCE = 0.35; // khả năng chuyện đó cần bệ hạ quyết
+  G.LIFE_COOLDOWN = 3; // tháng, mỗi phi
+  G.TIEN_CU_COST = 300;
+  const free5 = (s, c) => s.turn - (d5(s).lastAct[c.id] ?? -99) >= G.LIFE_COOLDOWN;
+  const mark5 = (s, ...cs) => cs.forEach((c) => (d5(s).lastAct[c.id] = s.turn));
+  monthly((s, report) => {
+    if (s.ended || s.consorts.length < 2 || rand() >= G.LIFE_CHANCE) return;
+    const pool = s.consorts.filter((c) => free5(s, c) && c.pregnantDue == null);
+    if (!pool.length) return;
+    const two = () => {
+      const a = pick(pool);
+      const rest = pool.filter((c) => c.id !== a.id);
+      return rest.length ? [a, pick(rest)] : null;
+    };
+    const canAsk = report.sideEvents.length < G.SIDE_MAX && rand() < G.LIFE_EVENT_CHANCE;
+    if (canAsk) {
+      const kind = pick(["hanhLang", "hanhLang", "tranhSung", "tienCu"]);
+      if (kind === "hanhLang") {
+        const c = pick(pool.filter((x) => x.affection >= 25).concat(pool).slice(0, 6));
+        mark5(s, c);
+        report.sideEvents.push(G.prepareEvent({
+          id: "sys.hanh_lang", title: "Chờ ở hành lang", text: one5(G.D5_TEXT.hanhLang),
+          choices: [
+            { label: "Dừng lại trò chuyện với nàng", effects: { affection: 4, favor: 2 } },
+            { label: "Đêm nay triệu nàng thị tẩm", hook: "core.thi_tam", participants: "speaker", effects: { night: true, affection: 2 } },
+            { label: "Gật đầu rồi đi tiếp", effects: { affection: -1 } },
+          ],
+        }, { speaker: c }));
+        return;
+      }
+      if (kind === "tranhSung") {
+        const p = two();
+        if (!p) return;
+        mark5(s, ...p);
+        const [a, b] = p;
+        report.sideEvents.push(G.prepareEvent({
+          id: "sys.tranh_sung", title: "Tranh sủng", text: one5(G.D5_TEXT.tranhSung),
+          choices: [
+            { label: "Ăn bánh của {name}", _win: a.id, _lose: b.id },
+            { label: "Ăn bánh của {name2}", _win: b.id, _lose: a.id },
+            { label: "Ăn cả hai, khen cả hai", effects: { favor: 1, favor2: 1, hoaKhi: 1 } },
+          ],
+          onChoose: (ch, sp, notes) => {
+            if (!ch._win) return;
+            const w = G.findConsort(ch._win);
+            const l = G.findConsort(ch._lose);
+            if (w) G.changeFavor(w, 3), notes.push(`Sủng ái ${w.name} +3`);
+            if (l) (l.affection = clamp(l.affection - 2, 0, 100)), notes.push(`Tình cảm ${l.name} −2`);
+          },
+        }, { speaker: a, speaker2: b }));
+        return;
+      }
+      if (kind === "tienCu" && s.consorts.length < 40) {
+        const c = pick(pool);
+        mark5(s, c);
+        report.sideEvents.push(G.prepareEvent({
+          id: "sys.tien_cu", title: "Xin tiến cử", text: one5(G.D5_TEXT.tienCu),
+          choices: [
+            { label: "Chuẩn tấu, cho nàng ấy nhập cung", cost: G.TIEN_CU_COST, effects: { recruit: 1, recruitOrigin: `Biểu muội của ${c.name}`, favor: 3, affection: 3 } },
+            { label: "Hậu cung đã đủ người", effects: { affection: -1 } },
+          ],
+        }, { speaker: c }));
+        return;
+      }
+    }
+    // chuyện nhỏ tự diễn ra, chỉ ghi vào nhật ký
+    const kind = pick(["dang_canh", "dang_canh", "ket_be", "tap_nghe", "gianh_nhau"]);
+    if (kind === "ket_be" || kind === "gianh_nhau") {
+      const p = two();
+      if (!p) return;
+      mark5(s, ...p);
+      const text = G.fill(one5(G.D5_TEXT.life[kind]), { speaker: p[0], speaker2: p[1] });
+      if (kind === "ket_be") G.addTinhY(p[0].id, p[1].id, 6);
+      else {
+        G.addStat("hoaKhi", -1);
+        for (const c of p) c.affection = clamp(c.affection - 1, 0, 100);
+      }
+      log(text + (kind === "ket_be" ? " Tình ý hai người +6." : " Hòa khí −1."), "harem");
+      return;
+    }
+    const c = pick(pool);
+    mark5(s, c);
+    if (kind === "dang_canh") {
+      G.addStat("longThe", 1);
+      G.changeFavor(c, 1);
+    } else G.changeFavor(c, 1);
+    log(G.fill(one5(G.D5_TEXT.life[kind]), { speaker: c }) + (kind === "dang_canh" ? " Long thể +1." : ""), "harem");
+  });
+
+  /* ---------------- 10 · Mini game ---------------- */
+  G.MINI_GAMES = {
+    dau_ho: { name: "Ném thẻ vào bình", desc: "Năm lần ném, trúng ba lần là thắng.", likes: ["Tinh nghịch", "Lanh lợi", "Hoang dã", "Phóng khoáng", "Mạnh mẽ", "Cưỡi ngựa giỏi"] },
+    hoa_dang: { name: "Thả đèn hoa đăng", desc: "Chạm thật nhanh vào đèn nổi lên mặt hồ, đủ bảy chiếc là thắng.", likes: ["Lãng mạn", "Đa sầu", "Si tình", "Dịu dàng", "Ôn nhu", "Yêu biển"] },
+    doi_tho: { name: "Đối thơ", desc: "Nàng ra vế trên, bệ hạ chọn vế dưới. Đối đúng hai trên ba câu là thắng.", likes: ["Đoan trang", "Sâu sắc", "Tinh tế", "Khéo nói", "Hát hay", "Giọng hát ngọt"] },
+    danh_co: { name: "Đánh cờ", desc: "Cờ ba quân trên bàn chín ô. Xếp được ba quân thẳng hàng là thắng.", likes: ["Kiêu kỳ", "Hai mặt", "Lanh lợi", "Sâu sắc", "Thông minh"] },
+  };
+  // vế trên / vế dưới (thơ tự đặt cho game)
+  G.COUPLETS = [
+    ["Gió xuân lay liễu biếc", "Mưa hạ thấm sen hồng"],
+    ["Trăng soi thềm ngọc lạnh", "Gió lướt rèm châu thơm"],
+    ["Hoa nở bên song cửa", "Chim hót dưới mái hiên"],
+    ["Đèn hồng soi bóng nguyệt", "Sáo trúc gọi hồn mây"],
+    ["Non xanh in bóng nước", "Sóng biếc vỗ chân mây"],
+    ["Lụa đỏ thêu đôi phượng", "Gấm vàng dệt cặp rồng"],
+    ["Tuyết rơi phủ mái ngói", "Nắng chiếu ửng tường son"],
+    ["Ngón tay lướt phím đàn", "Gót sen in thềm đá"],
+    ["Hương lan bay khắp viện", "Bóng trúc ngả đầy sân"],
+    ["Sớm mai sương đọng lá", "Chiều tà khói vờn mây"],
+    ["Thiếp ngồi thêu túi gấm", "Chàng đứng ngắm trăng thanh"],
+    ["Một chén trà xuân ấm", "Nửa vầng nguyệt thu trong"],
+  ];
+  G.canPlayGame = (c) => d5().gameTurn[c.id] !== G.state.turn;
+  /** Kết quả ván chơi: outcome = "win" | "draw" | "lose" (bệ hạ thắng / hòa / nàng thắng). */
+  G.miniGameResult = function (c, gameId, outcome) {
+    const g = G.MINI_GAMES[gameId];
+    if (!c || !g) return null;
+    d5().gameTurn[c.id] = G.state.turn;
+    const liked = g.likes.some((t) => c.traits.includes(t));
+    const aff = { win: 5, draw: 3, lose: 3 }[outcome] + (liked ? 2 : 0);
+    const fav = outcome === "win" ? 2 : 1;
+    c.affection = clamp(c.affection + aff, 0, 100);
+    G.changeFavor(c, fav);
+    G.state.visitedThisMonth[c.id] = true;
+    if (G.d3) G.d3().seen[c.id] = G.state.turn;
+    log(`Bệ hạ chơi ${g.name} cùng ${c.name}.`, "harem");
+    const notes = [`Tình cảm +${aff}`, `Sủng ái +${fav}`];
+    if (liked) notes.push("Trò nàng thích");
+    return { text: G.fill(one5(G.D5_TEXT.game[outcome]), { speaker: c }), notes };
+  };
+
+  /* ---------------- 12 · Mùa và thời tiết ---------------- */
+  G.SEASONS = { xuan: "Xuân", ha: "Hạ", thu: "Thu", dong: "Đông" };
+  G.seasonOf = (month) => (month <= 3 ? "xuan" : month <= 6 ? "ha" : month <= 9 ? "thu" : "dong");
+  G.WEATHER = [
+    { id: "mua_xuan", months: [2, 3], hook: "canh-viet.mua_xuan_mua" },
+    { id: "hoa_dao", months: [3, 4], hook: "canh-viet.mua_hoa_dao" },
+    { id: "dom_dom", months: [6, 7], hook: "canh-viet.mua_dom_dom" },
+    { id: "la_phong", months: [9, 10], hook: "canh-viet.mua_la_phong" },
+    { id: "tuyet", months: [11, 12], hook: "canh-viet.mua_tuyet" },
+  ];
+  G.WEATHER_CHANCE = 0.5;
+  G.WEATHER_GIFT_COST = 500;
+  monthly((s, report) => {
+    if (s.ended || !s.consorts.length || report.sideEvents.length >= G.SIDE_MAX) return;
+    const d = d5(s);
+    const w = G.WEATHER.find((x) => x.months.includes(s.month) && d.weatherYear[x.id] !== s.year);
+    if (!w || rand() >= G.WEATHER_CHANCE) return;
+    const top = s.consorts.filter((c) => c.pregnantDue == null).sort((a, b) => b.favor - a.favor).slice(0, 4);
+    if (!top.length) return;
+    const c = pick(top);
+    const T = G.D5_TEXT.weather[w.id];
+    d.weatherYear[w.id] = s.year;
+    report.sideEvents.push(G.prepareEvent({
+      id: "sys.thoi_tiet", title: T.title, text: one5(T.text),
+      choices: [
+        { label: T.label, hook: w.hook, participants: "speaker", effects: { night: true, affection: 3 } },
+        { label: "Ban thưởng cả hậu cung cùng thưởng cảnh", cost: G.WEATHER_GIFT_COST, effects: { hoaKhi: 4, favorAll: 1 } },
+        { label: "Để các phi tự thưởng cảnh", effects: { danTam: 1 } },
+      ],
+    }, { speaker: c }));
+  });
+
+  /* ================================================================== */
   /* GOD MODE (Thiên Đạo)                                                */
   /* ================================================================== */
   G.snapshot = function () {

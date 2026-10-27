@@ -378,5 +378,55 @@
         ]
       ]
     }
+  },
+  "canh-viet.mua_xuan_mua": {
+    "_title": "Mưa xuân",
+    "_chung": {
+      "_": [
+        [
+          "[TẠM · Mưa xuân] Đêm nay {name} cùng bệ hạ thưởng cảnh mưa xuân. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    }
+  },
+  "canh-viet.mua_hoa_dao": {
+    "_title": "Hoa đào nở",
+    "_chung": {
+      "_": [
+        [
+          "[TẠM · Hoa đào nở] Đêm nay {name} cùng bệ hạ thưởng cảnh hoa đào nở. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    }
+  },
+  "canh-viet.mua_dom_dom": {
+    "_title": "Đêm hè đom đóm",
+    "_chung": {
+      "_": [
+        [
+          "[TẠM · Đêm hè đom đóm] Đêm nay {name} cùng bệ hạ thưởng cảnh đêm hè đom đóm. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    }
+  },
+  "canh-viet.mua_la_phong": {
+    "_title": "Lá phong đỏ",
+    "_chung": {
+      "_": [
+        [
+          "[TẠM · Lá phong đỏ] Đêm nay {name} cùng bệ hạ thưởng cảnh lá phong đỏ. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    }
+  },
+  "canh-viet.mua_tuyet": {
+    "_title": "Tuyết đầu mùa",
+    "_chung": {
+      "_": [
+        [
+          "[TẠM · Tuyết đầu mùa] Đêm nay {name} cùng bệ hạ thưởng cảnh tuyết đầu mùa. Đoạn này là câu tạm, thay bằng nội dung thật."
+        ]
+      ]
+    }
   }
 }
