@@ -201,7 +201,7 @@
   };
 
   function renderTab() {
-    return ({ harem: renderHarem, kids: renderKids, me: () => renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
+    return ({ harem: renderHarem, kids: renderKids, me: () => renderBedTitles() + renderAlbum() + renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
   }
 
   /* ---------------- Nhật ký ---------------- */
@@ -408,6 +408,89 @@
   }
 
   /* ---------------- Sở thích ---------------- */
+  /* ---------------- Danh hiệu phòng the + Album cảnh ---------------- */
+  function renderBedTitles() {
+    if (!G.bedTitles) return "";
+    const list = G.bedTitles();
+    const n = list.filter((x) => x.done).length;
+    return `<section class="section"><div class="section-head"><h3>Danh hiệu phòng the</h3><span class="hint">${n}/${list.length}</span></div>
+      <div class="bt-grid">${list
+        .map((x) => `<div class="bt ${x.done ? "on" : ""}"><b>${esc(x.name)}</b><span class="hint">${esc(x.desc)}</span>${x.done ? `<span class="bt-when">${esc(G.turnLabel(x.when))}</span>` : `${bar((x.v / x.goal) * 100)}<span class="hint">${x.v}/${x.goal}</span>`}</div>`)
+        .join("")}</div></section>`;
+  }
+  const HOOK_LABEL = { "core.thi_tam": "Thị tẩm", "core.thi_tam_so_thich": "Sở thích" };
+  function albumGroups() {
+    const al = G.state.sceneAlbum || {};
+    const groups = {};
+    for (const sl of G.sceneSlots ? G.sceneSlots() : []) {
+      const gk = sl.hook + "|" + sl.key;
+      const g = (groups[gk] = groups[gk] || { key: gk, hook: sl.hook, k: sl.key, slots: [], total: 0, got: 0, last: null, title: sl.title });
+      g.slots.push(sl);
+      g.total += sl.n;
+      for (let i = 0; i < sl.n; i++) {
+        const r = al[sl.slot + "#" + i];
+        if (r) {
+          g.got++;
+          if (!g.last || r.t >= g.last.t) g.last = r;
+        }
+      }
+    }
+    const nameOf = (g) => {
+      const f = R.fetishes[g.k];
+      const ch = R.characters[g.k];
+      const base = HOOK_LABEL[g.hook] || (g.title ? g.title.replace(/\{[^}]+\}/g, "").trim() : (R.events[g.hook] || {}).title || g.hook.split(".").pop());
+      if (f) return `${f.name}`;
+      if (ch) return `${base} · ${ch.name}`;
+      return base;
+    };
+    return Object.values(groups).map((g) => Object.assign(g, { name: nameOf(g) }));
+  }
+  let albumAll = false;
+  function renderAlbum() {
+    if (!G.sceneSlots) return "";
+    const gs = albumGroups();
+    const total = gs.reduce((a, g) => a + g.total, 0);
+    const got = gs.reduce((a, g) => a + g.got, 0);
+    const shown = gs.filter((g) => albumAll || g.got).sort((a, b) => b.got / b.total - a.got / a.total || a.name.localeCompare(b.name, "vi"));
+    return `<section class="section"><div class="section-head"><h3>Album phòng the</h3><span class="hint">Đã mở ${got}/${total} cảnh</span></div>
+      ${bar((got / Math.max(1, total)) * 100)}
+      <div class="chips"><button class="chip" data-album="0" aria-pressed="${!albumAll}">Đã mở</button><button class="chip" data-album="1" aria-pressed="${albumAll}">Tất cả (${gs.length})</button></div>
+      ${shown.length ? `<div class="al-list">${shown
+        .slice(0, albumAll ? 400 : 120)
+        .map((g) => {
+          const c = g.last && g.last.id && G.findConsort(g.last.id);
+          return `<button class="al-row" data-algroup="${esc(g.key)}">${c ? portrait(c, "sm") : `<span class="al-lock">${g.got ? "✦" : "?"}</span>`}<span class="al-name">${esc(g.got ? g.name : g.name)}</span><span class="al-n ${g.got === g.total ? "full" : ""}">${g.got}/${g.total}</span></button>`;
+        })
+        .join("")}</div>` : `<p class="empty">Chưa mở cảnh nào. Mỗi đêm thị tẩm sẽ mở thêm cảnh mới vào album.</p>`}
+    </section>`;
+  }
+  function openAlbumGroup(gk) {
+    const g = albumGroups().find((x) => x.key === gk);
+    if (!g) return;
+    const al = G.state.sceneAlbum || {};
+    const LV = { dau: "Đêm đầu", quen: "Đã quen", lau: "Gắn bó lâu", _: "" };
+    const items = [];
+    for (const sl of g.slots) for (let i = 0; i < sl.n; i++) items.push({ sl, i, r: al[sl.slot + "#" + i] });
+    openSheet(
+      `<h3>${esc(g.name)}</h3><p class="hint">Đã mở ${g.got}/${g.total} bản. Cảnh chưa mở sẽ mở dần khi bệ hạ thị tẩm.</p>
+       <div class="al-items">${items
+         .map(({ sl, i, r }) => {
+           const c = r && r.id && G.findConsort(r.id);
+           const lv = LV[sl.lv] != null ? LV[sl.lv] : sl.lv;
+           return r
+             ? `<button class="al-item on" data-replay="${esc(sl.slot)}" data-i="${i}">${c ? portrait(c, "sm") : `<span class="al-lock">✦</span>`}<span><b>Bản ${i + 1}${lv ? " · " + esc(lv) : ""}</b><br><span class="hint">${esc((r.who || []).join(", ") || "")} · ${esc(G.turnLabel(r.t))}</span></span><span class="al-go">Xem lại ▸</span></button>`
+             : `<div class="al-item"><span class="al-lock">?</span><span><b>Bản ${i + 1}${lv ? " · " + esc(lv) : ""}</b><br><span class="hint">Chưa mở</span></span></div>`;
+         })
+         .join("")}</div>`,
+      (el) =>
+        on(el, "[data-replay]", "click", (b) => {
+          const pages = G.sceneReplay(b.dataset.replay, Number(b.dataset.i));
+          if (!pages) return;
+          queue.unshift(() => openAlbumGroup(gk));
+          showScene({ title: `${g.name} · Bản ${Number(b.dataset.i) + 1}`, pages, text: pages.join("\n\n") });
+        })
+    );
+  }
   function renderBody() {
     if (!G.BODY) return "";
     const sz = G.emperorSize();
@@ -585,6 +668,11 @@
     const s = G.state;
     on(root, "[data-consort]", "click", (b) => openConsort(b.dataset.consort));
     on(root, "[data-palace]", "click", (b) => openPalace(b.dataset.palace));
+    on(root, "[data-album]", "click", (b) => {
+      albumAll = b.dataset.album === "1";
+      UI.render();
+    });
+    on(root, "[data-algroup]", "click", (b) => openAlbumGroup(b.dataset.algroup));
     on(root, "#me-tinh", "change", (sel) => {
       G.setEmperorTinh(sel.value);
       G.save();

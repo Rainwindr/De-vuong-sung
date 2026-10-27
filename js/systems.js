@@ -3328,6 +3328,53 @@
     return r;
   };
 
+  /* ---------------- Danh hiệu phòng the của bệ hạ ---------------- */
+  const bookAll = () => Object.values((G.state.d7 && G.state.d7.book) || {});
+  G.BED_TITLES = [
+    { id: "dem_dau", name: "Lần đầu long sàng", desc: "Thị tẩm đêm đầu tiên", goal: 1, val: (s) => s.nightsTotal },
+    { id: "tram_dem", name: "Trăm đêm xuân", desc: "Tổng 100 đêm thị tẩm", goal: 100, val: (s) => s.nightsTotal },
+    { id: "nghin_dem", name: "Nghìn đêm hoan lạc", desc: "Tổng 1000 đêm thị tẩm", goal: 1000, val: (s) => s.nightsTotal },
+    { id: "bat_bai", name: "Long thể bất bại", desc: "4 hiệp trong một đêm", goal: 4, val: () => Math.max(0, ...bookAll().map((b) => b.maxRounds || 0)) },
+    { id: "van_hoa", name: "Vạn hoa trong tay", desc: "Thị tẩm 20 phi khác nhau", goal: 20, val: () => bookAll().filter((b) => b.first != null).length },
+    { id: "long_chung", name: "Long chủng khắp hậu cung", desc: "5 phi sinh con cho bệ hạ", goal: 5, val: (s) => s.consorts.filter((c) => c.kids > 0).length },
+    { id: "phong_luu", name: "Bậc thầy phong lưu", desc: "Thử 30 sở thích khác nhau", goal: 30, val: (s) => Object.keys(s.fetishLast || {}).length },
+    { id: "chinh_phuc", name: "Kẻ chinh phục", desc: "5 phi ở cấp Buông thả", goal: 5, val: (s) => s.consorts.filter((c) => G.levelOf(c) >= 2).length },
+    { id: "mot_long", name: "Một lòng một dạ", desc: "Một phi được thị tẩm 30 đêm", goal: 30, val: (s) => Math.max(0, ...s.consorts.map((c) => c.nights || 0)) },
+    { id: "suu_tap", name: "Sưu tập gia", desc: "Mở 100 cảnh trong album", goal: 100, val: (s) => Object.keys(s.sceneAlbum || {}).length },
+  ];
+  G.bedTitles = function () {
+    const s = G.state;
+    const got = (s.bedTitles = s.bedTitles || {});
+    return G.BED_TITLES.map((t) => {
+      const v = t.val(s);
+      return Object.assign({}, t, { v: Math.min(v, t.goal), done: got[t.id] != null, when: got[t.id] });
+    });
+  };
+  /** Trao danh hiệu mới đạt (gọi sau mỗi đêm và mỗi tháng). */
+  G.checkBedTitles = function () {
+    const s = G.state;
+    if (!s) return;
+    const got = (s.bedTitles = s.bedTitles || {});
+    for (const t of G.BED_TITLES) {
+      if (got[t.id] != null || t.val(s) < t.goal) continue;
+      got[t.id] = s.turn;
+      log(`Danh hiệu phòng the: ${t.name} (${t.desc}).`, "milestone");
+      G.pushFx && G.pushFx({ type: "stamp", text: t.name, sub: "Danh hiệu phòng the" });
+    }
+  };
+  monthly(() => G.checkBedTitles());
+  const spendD10 = G.spendNight;
+  G.spendNight = function (list, opts) {
+    spendD10(list, opts);
+    G.checkBedTitles();
+  };
+  const roundD10 = G.extraRound;
+  G.extraRound = function (cid, fid) {
+    const r = roundD10(cid, fid);
+    G.checkBedTitles();
+    return r;
+  };
+
   /* ================================================================== */
   /* GOD MODE (Thiên Đạo)                                                */
   /* ================================================================== */

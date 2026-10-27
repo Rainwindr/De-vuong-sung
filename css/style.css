@@ -523,3 +523,23 @@ details.fold > .section-head h3 { display: none; }
 #fx-suggest { margin-left: 4px; }
 .body-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
 .body-row label { font-size: 11px; }
+
+/* ---------- album, danh hiệu phòng the ---------- */
+.bt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.bt { display: grid; gap: 3px; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--line); background: #ffffff05; font-size: 13px; }
+.bt b { font: 700 13.5px/1.25 var(--f-display); color: var(--muted); }
+.bt.on { border-color: var(--gold); background: linear-gradient(#d9ad5514, transparent); }
+.bt.on b { color: var(--gold); }
+.bt .hint { font-size: 11.5px; }
+.bt-when { font-size: 11px; color: var(--jade); }
+.al-list, .al-items { display: grid; gap: 6px; }
+.al-row, .al-item { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--lacquer-2); color: var(--paper); font: inherit; text-align: left; }
+.al-row { cursor: pointer; }
+.al-row .al-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+.al-n { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.al-n.full { color: var(--gold); }
+.al-lock { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; background: #ffffff0c; color: var(--muted); font-size: 16px; border: 1px dashed var(--line); }
+.al-item { opacity: .55; }
+.al-item.on { opacity: 1; cursor: pointer; }
+.al-item > span:nth-child(2) { flex: 1; min-width: 0; }
+.al-go { font-size: 12px; color: var(--gold); white-space: nowrap; }

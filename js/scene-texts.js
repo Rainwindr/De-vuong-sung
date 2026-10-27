@@ -104,6 +104,10 @@
     rec.seen.push(i);
     rec.last = i;
     store[slot] = rec;
+    // album: ghi lại vĩnh viễn bản đã mở, ai tham gia, lúc nào
+    const al = (s.sceneAlbum = s.sceneAlbum || {});
+    const k = slot + "#" + i;
+    if (!al[k]) al[k] = { t: s.turn, who: lastCtx ? lastCtx.participants.map((p) => p.name) : [], id: lastCtx && lastCtx.participants[0] ? lastCtx.participants[0].id : null };
     return arr[i];
   }
 
@@ -141,7 +145,9 @@
    * của nàng (nếu còn bản chưa xem); hết cả thì mới bắt đầu vòng mới.
    */
   G.SCENE_FALLBACK = { "core.thi_tam_so_thich": "core.thi_tam" };
+  let lastCtx = null;
   function findText(hook, ctx) {
+    lastCtx = ctx;
     const list = candidates(hook, ctx);
     if (!list.length) return null;
     const fresh = list.find((x) => !exhausted(x.slot, x.arr));
@@ -150,6 +156,27 @@
     if (alt) return pickUnseen(alt.slot, alt.arr);
     return pickUnseen(list[0].slot, list[0].arr);
   }
+
+  /** Danh sách mọi ô cảnh cho album: [{ slot, hook, key, lv, n, title }] */
+  G.sceneSlots = function () {
+    const out = [];
+    for (const [hook, byKey] of Object.entries(texts))
+      for (const [key, byLv] of Object.entries(byKey)) {
+        if (key === "_title") continue;
+        for (const [lv, arr] of Object.entries(byLv || {})) if (Array.isArray(arr) && arr.length) out.push({ slot: `v2|${hook}|${key}|${lv}`, hook, key, lv, n: arr.length, title: byKey._title || null });
+      }
+    return out;
+  };
+  /** Lấy lại chữ một bản đã mở để xem lại, điền tên người tham gia đã lưu. */
+  G.sceneReplay = function (slot, i) {
+    const [, hook, key, lv] = slot.split("|");
+    const arr = texts[hook] && texts[hook][key] && texts[hook][key][lv];
+    if (!arr || !arr[i]) return null;
+    const rec = (G.state.sceneAlbum || {})[slot + "#" + i] || {};
+    const names = rec.who && rec.who.length ? rec.who : ["nàng"];
+    const ctx = { hook, participants: names.map((n) => ({ name: n, title: "", rank: "" })), fetish: [], emperor: { name: G.state.emperorName } };
+    return arr[i].map((x) => fillText(x, ctx));
+  };
 
   /** Gọi sau khi nạp xong mọi gói: đăng ký đè các HOOK có chữ, giữ cảnh cũ làm dự phòng. */
   G.installSceneTexts = function () {
