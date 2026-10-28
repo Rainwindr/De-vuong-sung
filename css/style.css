@@ -620,3 +620,29 @@ details.fold > .section-head h3 { display: none; }
 #cover .cv-foot { color: #999; font-size: 13px; margin-top: 14px; }
 body.covered { overflow: hidden; }
 .menu-opt { margin: 10px 0; }
+
+/* Trò chơi mới */
+.tg-status { min-height: 1.4em; }
+.tg-pad { height: 220px; border-radius: var(--r); border: 1px dashed var(--gold); display: grid; place-items: center; color: var(--muted); touch-action: none; user-select: none; background: radial-gradient(ellipse at 50% 60%, #f07aa022, transparent 70%); margin: 8px 0; }
+.tg-pad.flash { animation: tgFlash .35s ease; }
+@keyframes tgFlash { 0% { background-color: #f07aa044; } 100% { background-color: transparent; } }
+.tg-meter { height: 14px; border-radius: 7px; background: var(--ink); border: 1px solid var(--line); overflow: hidden; margin: 10px 0; }
+.tg-meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #c2416b, var(--gold)); }
+.tg-hold { width: 100%; min-height: 88px; font-size: 18px; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.tg-beat { height: 150px; display: grid; place-items: center; margin: 8px 0; }
+.tg-beat i { width: 120px; height: 120px; border-radius: 50%; border: 6px solid var(--gold); box-shadow: 0 0 24px #f3d27a88; }
+.tg-beat i.hit { border-color: #f07aa0; }
+.tg-beat i.miss { border-color: #777; }
+.zone-grid .zone.lit { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 14px #f3d27a88; }
+.tg-track { position: relative; height: 300px; width: 64px; margin: 10px auto; border-radius: 32px; background: linear-gradient(#3b181b, #5a1a1e); border: 1px solid var(--line); touch-action: none; }
+.tg-track.h { height: 64px; width: 100%; }
+.tg-track .tg-thumb { position: absolute; left: 10px; top: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: #1a0f08; display: grid; place-items: center; font-style: normal; font-size: 18px; touch-action: none; cursor: grab; }
+.tg-track.h .tg-thumb { top: 10px; left: 0; }
+.tg-track.shake { animation: tgShake .4s; }
+@keyframes tgShake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.tg-puzzle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; width: min(100%, 330px); aspect-ratio: 1; margin: 10px auto; }
+.tg-tile { border: 0; padding: 0; background-size: 300% 300%; border-radius: 4px; cursor: pointer; }
+.tg-tile.on { outline: 3px solid var(--gold); }
+.night-extra .chips { flex-wrap: wrap; overflow: visible; white-space: normal; }
+.night-extra .chip { white-space: normal; text-align: left; }
+.night-extra select { max-width: 100%; }

@@ -1305,11 +1305,27 @@
        <div class="cards">${Object.entries(G.BED_ITEMS)
          .map(([id, it]) => `<div class="row-card"><div><b>${esc(it.name)}</b> <span class="hint">· còn ${G.bedStock(id)}</span><br><span class="hint">${esc(it.desc)}</span></div><div class="row-btns"><button class="btn btn-sm" data-buy="${id}" data-n="1">${fmtMoney(it.cost)}</button><button class="btn btn-sm btn-ghost" data-buy="${id}" data-n="5">×5</button></div></div>`)
          .join("")}</div>
+       ${G.FURNISH ? `<h3>Bày biện tẩm cung</h3><p class="hint">Mua một lần. Khi lật thẻ, chọn một món ở mục Bày biện để đổi không khí đêm đó.</p><div class="cards">${Object.entries(G.FURNISH)
+         .map(([id, f]) => `<div class="row-card"><div><b>${esc(f.name)}</b><br><span class="hint">${[f.fx.favor ? `Sủng ái +${f.fx.favor}` : "", f.fx.affection ? `Tình cảm +${f.fx.affection}` : "", f.fx.longThe ? `Long thể +${f.fx.longThe}` : ""].filter(Boolean).join(", ")} mỗi đêm dùng</span></div>${G.ownsFurn(id) ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-furn="${id}">${fmtMoney(f.cost)}</button>`}</div>`)
+         .join("")}
+         <div class="row-card"><div><b>Tố Nữ Kinh chép tay</b><br><span class="hint">Mở lớp Phòng the ở Học phường. Học đủ 12 tháng thì nàng tinh thông phòng the.</span></div>${G.hasKinh() ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" id="bs-kinh">${fmtMoney(G.KINH_COST)}</button>`}</div></div>` : ""}
        <button class="btn btn-ghost" id="bs-close">Đóng</button>`,
       (el) => {
         on(el, "#bs-close", "click", () => closeSheet());
         on(el, "[data-buy]", "click", (b) => {
           const r = G.buyBedItem(b.dataset.buy, Number(b.dataset.n));
+          G.save();
+          openBedShop(r.text);
+          UI.render();
+        });
+        on(el, "[data-furn]", "click", (b) => {
+          const r = G.buyFurn(b.dataset.furn);
+          G.save();
+          openBedShop(r.text);
+          UI.render();
+        });
+        on(el, "#bs-kinh", "click", () => {
+          const r = G.buyKinh();
           G.save();
           openBedShop(r.text);
           UI.render();
@@ -1324,7 +1340,7 @@
     openSheet(
       `<h3>Ý chỉ</h3>
        <div class="cards">
-         ${G.BED_ITEMS ? `<div class="row-card"><div><b>Kho phòng the</b><br><span class="hint">Dầu thơm, chuông bạc, dải lụa, hương trầm. Chọn dùng khi lật thẻ thị tẩm.</span></div><button class="btn btn-sm" id="a-bed">Mở kho</button></div>` : ""}
+         ${G.BED_ITEMS ? `<div class="row-card"><div><b>Kho phòng the</b><br><span class="hint">Đồ dùng một lần, bày biện tẩm cung, Tố Nữ Kinh. Chọn dùng khi lật thẻ thị tẩm.</span></div><button class="btn btn-sm" id="a-bed">Mở kho</button></div>` : ""}
          <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.selectionCost()} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tuần du</b><br><span class="hint">${G.canTravel() ? "Mỗi năm một chuyến. Mỗi vùng có mỹ nhân và chuyện riêng." : "Năm nay đã tuần du rồi."}</span></div><button class="btn btn-sm" id="a-travel" ${G.canTravel() ? "" : "disabled"}>Chọn vùng</button></div>
          ${(() => {
@@ -1523,7 +1539,7 @@
          ${dacAn && !queued ? `<button class="btn" id="c-dacan">Đặc ân phong ${esc(G.RANKS[dacAn.next])}<span class="cost">${dacAn.ceremony ? `kèm lễ sắc phong · ${fmtMoney(dacAn.total)} lượng` : dacAn.fee ? `${fmtMoney(dacAn.fee)} lượng` : "miễn phí"}${dacAn.eligible ? "" : ` · ${[dacAn.favorGap ? `thiếu ${dacAn.favorGap} Sủng ái` : "", dacAn.kidGap ? `thiếu ${dacAn.kidGap} con` : ""].filter(Boolean).join(", ")}`}</span></button>` : ""}
          ${G.setTopFav ? `<button class="btn top-fav-btn" id="c-top" aria-pressed="${G.isTopFav(c)}">${G.isTopFav(c) ? "★ Đệ nhất sủng phi · bỏ ghim" : "☆ Chọn làm đệ nhất sủng phi"}<span class="cost">Mỗi tháng Sủng ái +${G.TOP_FAV_MONTHLY.favor}, luôn đứng đầu khay thẻ</span></button>` : ""}
        </div>
-       <div class="seg" role="tablist">${[["info", "Chung"], ["gift", "Quà"], G.OUTFITS ? ["outfit", "Y phục"] : null, fets.length ? ["fx", "Sở thích"] : null, ["school", "Học phường"], G.bookView ? ["book", "Sổ tay"] : null, s.godMode ? ["god", "Thiên Đạo"] : null]
+       <div class="seg" role="tablist">${[["info", "Chung"], ["gift", "Quà"], G.OUTFITS ? ["outfit", "Y phục"] : null, G.KEEPSAKES ? ["keep", "Đồ riêng"] : null, fets.length ? ["fx", "Sở thích"] : null, ["school", "Học phường"], G.bookView ? ["book", "Sổ tay"] : null, s.godMode ? ["god", "Thiên Đạo"] : null]
          .filter(Boolean)
          .map(([k, l]) => `<button class="seg-btn" role="tab" data-pane="${k}">${l}</button>`)
          .join("")}</div>
@@ -1547,8 +1563,18 @@
            return `<div class="row-card"><div><b>${esc(o.name)}</b>${G.likedOutfit(c) === k ? " ♥" : ""}<br><span class="hint">${own ? `Đã có · mặc ${G.wornCount(c, k)} lần` : "Lần đầu mặc: Sủng ái +" + G.OUTFIT_FIRST_FAVOR}</span></div>${own ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-outfit="${k}">${fmtMoney(o.cost)}</button>`}</div>`;
          })
          .join("")}</div><p class="hint">Chọn y phục khi lật thẻ thị tẩm nàng. "Không mặc gì" lúc nào cũng có. Bộ ♥ là bộ nàng thích nhất.</p></div>` : ""}
+       ${G.KEEPSAKES ? `<div class="pane" data-pane-body="keep" hidden><p class="hint">Đồ riêng nàng giữ lại, chọn dùng mỗi khi lật thẻ thị tẩm (tối đa ${G.KEEP_MAX} món một đêm). ♥ là món nàng thích.</p><div class="cards">${["keep", "jewel"]
+         .map((kind) => `<p class="hint"><b>${kind === "keep" ? "Đồ chơi và quà giữ lại" : "Trang sức"}</b></p>` + Object.entries(G.KEEPSAKES)
+           .filter(([, k]) => k.kind === kind)
+           .map(([id, k]) => {
+             const own = G.ownsKeep(c, id);
+             const fx = [k.fx.favor ? `Sủng ái +${k.fx.favor}` : "", k.fx.affection ? `Tình cảm +${k.fx.affection}` : "", k.fx.longThe ? `Long thể +${k.fx.longThe}` : "", k.fx.truyLac ? `Trụy lạc +${k.fx.truyLac}` : ""].filter(Boolean).join(", ");
+             return `<div class="row-card"><div><b>${esc(k.name)}</b>${G.likesThing(c, id, k.like) ? " ♥" : ""}<br><span class="hint">${k.desc ? esc(k.desc) + " · " : ""}mỗi đêm dùng: ${fx}${own ? " · đã có" : ""}</span></div>${own ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-keepbuy="${id}">${fmtMoney(k.cost)}</button>`}</div>`;
+           })
+           .join(""))
+         .join("")}</div></div>` : ""}
        <div class="pane" data-pane-body="school" hidden>
-         <div class="field"><label for="c-school">Lớp</label><select id="c-school"><option value="">Không học</option>${Object.entries(G.SUBJECTS).map(([k, v]) => `<option value="${k}" ${c.school === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+         <div class="field"><label for="c-school">Lớp</label><select id="c-school"><option value="">Không học</option>${Object.entries(G.SUBJECTS).map(([k, v]) => `<option value="${k}" ${c.school === k ? "selected" : ""} ${k === "phong_the" && G.hasKinh && !G.hasKinh() ? "disabled" : ""}>${v}${k === "phong_the" && G.hasKinh && !G.hasKinh() ? " (cần Tố Nữ Kinh)" : ""}</option>`).join("")}</select></div>
          <p class="hint">Các phi học chung lớp thân nhau hơn. Học đủ 12 tháng được trait tinh thông.${c.school ? ` Đã học ${c.schoolMonths} tháng.` : ""}</p>
        </div>
        ${
@@ -1672,6 +1698,12 @@
           const r = G.releaseConsort(c.id);
           if (r) showMessage(r.ok ? "Xuất cung" : "Chưa thể", r.text, r.notes);
         });
+        on(el, "[data-keepbuy]", "click", (b) => {
+          const r = G.buyKeep(c.id, b.dataset.keepbuy);
+          G.save();
+          if (r.ok) queue.unshift(() => openConsort(c.id));
+          showMessage(r.ok ? "Ban đồ riêng" : "Chưa thể ban", r.text, r.notes);
+        });
         on(el, "[data-outfit]", "click", (b) => {
           const r = G.buyOutfit(c.id, b.dataset.outfit);
           G.save();
@@ -1777,8 +1809,19 @@
     const head = `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Chơi cùng ${esc(c.name)}</span><h3>Chọn trò</h3></div></div>`;
     openSheet(
       `${head}<p class="hint">Mỗi tháng chơi với mỗi phi một ván. Thắng: Tình cảm +5. Thua hay hòa nàng vẫn vui: Tình cảm +3. Trò nàng thích (♥) được thêm +2.</p>
-       <div class="choices">${Object.entries(G.MINI_GAMES).map(([k, g]) => `<button class="btn" data-game="${k}">${esc(g.name)}${g.likes.some((x) => c.traits.includes(x)) ? " ♥" : ""}<span class="cost">${esc(g.desc)}</span></button>`).join("")}</div>`,
-      (el) => on(el, "[data-game]", "click", (b) => ({ dau_ho: gameDauHo, hoa_dang: gameHoaDang, doi_tho: gameDoiTho, danh_co: gameDanhCo, xuc_xac: gameXucXac, ban_cung: (x) => gameDauHo(x, "ban_cung"), xoa_bop: gameXoaBop, co_coi_ao: gameCoCoiAo })[b.dataset.game](c))
+       <div class="choices">${Object.entries(G.MINI_GAMES)
+         .filter(([, g]) => !g.slot || g.slot === "day")
+         .map(([k, g]) => {
+           const why = G.gameNeedWhy ? G.gameNeedWhy(k, c) : null;
+           return `<button class="btn" data-game="${k}" ${why ? "disabled" : ""}>${esc(g.name)}${g.likes.some((x) => c.traits.includes(x)) ? " ♥" : ""}<span class="cost">${esc(why || g.desc)}</span></button>`;
+         })
+         .join("")}</div>`,
+      (el) =>
+        on(el, "[data-game]", "click", (b) => {
+          const k = b.dataset.game;
+          if (G.NEW_GAMES && G.NEW_GAMES[k]) return playNewDay(c, k);
+          ({ dau_ho: gameDauHo, hoa_dang: gameHoaDang, doi_tho: gameDoiTho, danh_co: gameDanhCo, xuc_xac: gameXucXac, ban_cung: (x) => gameDauHo(x, "ban_cung"), xoa_bop: gameXoaBop, co_coi_ao: gameCoCoiAo })[k](c);
+        })
     );
   }
   function endGame(c, id, outcome, line) {
@@ -1789,14 +1832,14 @@
   const gameHead = (c, id, sub) => `<div class="ev-head">${portrait(c, "sm")}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>${esc(G.MINI_GAMES[id].name)}</h3></div></div><p class="hint" id="g-sub">${sub}</p>`;
 
   // Kết quả trò có mời thị tẩm
-  function gameNightOffer(c, title, text, notes) {
+  function gameNightOffer(c, title, text, notes, outfit) {
     const can = !G.cannotSummon(c);
     openSheet(
       `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>${esc(title)}</h3></div></div>
        <p class="ev-text">${formatText(text)}</p>${notesHtml(notes)}
        <div class="choices">${can ? `<button class="btn btn-primary" id="go-night">Triệu nàng thị tẩm đêm nay</button>` : ""}<button class="btn btn-ghost" id="go-close">Để sau</button></div>`,
       (el) => {
-        on(el, "#go-night", "click", () => openNight(c));
+        on(el, "#go-night", "click", () => openNight(c, [], { outfit }));
         on(el, "#go-close", "click", () => closeSheet());
       }
     );
@@ -1865,6 +1908,301 @@
       );
     };
     draw();
+  }
+
+  /* ---------------- Trò chơi mới: bộ máy chung ---------------- */
+  const OUT_LABEL = { win: "Bệ hạ thắng", draw: "Hòa", lose: "Nàng thắng" };
+  function playNewDay(c, id) {
+    const g = G.NEW_GAMES[id];
+    runTapGame(c, id, (outcome) => {
+      const r = G.miniGameResult(c, id, outcome);
+      G.save();
+      gameNightOffer(c, `${g.name} · ${OUT_LABEL[outcome]}`, G.gameLead(id, c) + "\n\n" + r.text, r.notes, outcome === "win" && g.outfit && G.ownsOutfit(c, g.outfit) ? g.outfit : null);
+    });
+  }
+  function openNightGames(scene, notes, i, c) {
+    const list = Object.entries(G.NEW_GAMES).filter(([, g]) => g.slot === "night");
+    openSheet(
+      `<div class="ev-head">${portrait(c, "sm")}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>Trò trong đêm</h3></div></div>
+       <p class="hint">Mỗi đêm chơi một trò. Thắng: Sủng ái +4, Tình cảm +3.</p>
+       <div class="choices">${list
+         .map(([k, g]) => {
+           const why = G.gameNeedWhy(k, c);
+           return `<button class="btn" data-ng="${k}" ${why ? "disabled" : ""}>${esc(g.name)}<span class="cost">${esc(why || g.rule)}</span></button>`;
+         })
+         .join("")}</div>
+       <button class="btn btn-ghost" id="ng-back">Thôi, đọc tiếp</button>`,
+      (el) => {
+        on(el, "#ng-back", "click", () => showScene(scene, notes, i));
+        on(el, "[data-ng]", "click", (b) => {
+          const id = b.dataset.ng;
+          runTapGame(c, id, (outcome) => {
+            const n = G.nightGameResult(c, id, outcome);
+            scene._played = scene._played || {};
+            scene._played.newgame = true;
+            G.save();
+            queue.unshift(() => showScene(scene, notes, i));
+            showMessage(`${G.NEW_GAMES[id].name} · ${OUT_LABEL[outcome]}`, G.gameLead(id, c), n);
+          });
+        });
+      },
+      { locked: true }
+    );
+  }
+  const PUZZLE_ART = "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><defs><radialGradient id="g" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#e9b77a"/><stop offset=".6" stop-color="#9c3324"/><stop offset="1" stop-color="#3a0f0a"/></radialGradient></defs><rect width="300" height="300" fill="url(#g)"/><circle cx="222" cy="70" r="34" fill="#fbe7c2"/><path d="M0 250 C60 220 120 260 180 236 S270 230 300 246 V300 H0Z" fill="#2a0b08"/><g fill="#2a0b08"><path d="M118 238 C112 196 118 158 134 134 C142 122 156 118 166 126 C180 138 182 170 176 238Z"/><circle cx="150" cy="112" r="16"/><path d="M150 96 c-6 -10 6 -18 12 -10"/><path d="M168 238 C172 200 186 170 206 160 C218 154 230 160 230 172 C230 196 214 220 210 238Z"/><circle cx="210" cy="142" r="14"/></g><path d="M150 96 L184 80" stroke="#d9ad55" stroke-width="3"/><g fill="#f07aa0" opacity=".8"><circle cx="60" cy="60" r="6"/><circle cx="74" cy="72" r="5"/><circle cx="48" cy="80" r="4"/><circle cx="260" cy="180" r="5"/><circle cx="40" cy="190" r="5"/></g><rect x="4" y="4" width="292" height="292" fill="none" stroke="#d9ad55" stroke-width="4"/></svg>`);
+  function runTapGame(c, id, done) {
+    const g = G.NEW_GAMES[id];
+    let ended = false;
+    const timers = [];
+    let raf = 0;
+    const finish = (outcome) => {
+      if (ended) return;
+      ended = true;
+      timers.forEach((t) => clearTimeout(t));
+      timers.forEach((t) => clearInterval(t));
+      cancelAnimationFrame(raf);
+      setTimeout(() => done(outcome), 350);
+    };
+    const shuffleArr = (a) => {
+      a = a.slice();
+      for (let k = a.length - 1; k > 0; k--) {
+        const j = Math.floor(Math.random() * (k + 1));
+        [a[k], a[j]] = [a[j], a[k]];
+      }
+      return a;
+    };
+    const head = gameHead(c, id, esc(g.rule));
+    const giveUp = `<button class="btn btn-ghost btn-sm" id="tg-quit">Thôi</button>`;
+    const sheet = (body, bind) =>
+      openSheet(`${head}<p class="hint tg-status" id="tg-st"></p>${body}${giveUp}`, (el) => {
+        on(el, "#tg-quit", "click", () => finish("lose"));
+        bind(el);
+      }, { locked: true });
+    const st = (el, t) => ($(el, "#tg-st").textContent = t);
+    const alive = (el) => !ended && document.body.contains(el);
+
+    if (g.mech === "stroke") {
+      sheet(`<div class="tg-pad" id="tg-pad"><span>Vuốt dài ở đây</span></div>`, (el) => {
+        const pad = $(el, "#tg-pad");
+        let n = 0, breaks = 0, lastEnd = 0, start = null, broke = false;
+        const show = () => st(el, `Đã vuốt ${n}/${g.n} đường · đứt ${breaks} lần`);
+        show();
+        pad.addEventListener("pointerdown", (e) => {
+          start = { x: e.clientX, y: e.clientY };
+          pad.setPointerCapture && pad.setPointerCapture(e.pointerId);
+        });
+        pad.addEventListener("pointerup", (e) => {
+          if (!start || ended) return;
+          const d = Math.hypot(e.clientX - start.x, e.clientY - start.y);
+          start = null;
+          if (d < 40) return;
+          n++;
+          lastEnd = Date.now();
+          broke = false;
+          pad.classList.remove("flash");
+          void pad.offsetWidth;
+          pad.classList.add("flash");
+          show();
+          if (n >= g.n) finish(breaks === 0 ? "win" : breaks === 1 ? "draw" : "lose");
+        });
+        timers.push(setInterval(() => {
+          if (!alive(pad)) return;
+          if (lastEnd && !start && !broke && Date.now() - lastEnd > g.gap * 1000) {
+            broke = true;
+            breaks++;
+            show();
+          }
+        }, 150));
+        timers.push(setTimeout(() => finish(n >= g.n - 1 ? "draw" : "lose"), 45000));
+      });
+    } else if (g.mech === "hold") {
+      sheet(`<div class="tg-meter"><i id="tg-fill"></i></div><button class="btn btn-primary tg-hold" id="tg-hold">Giữ ở đây</button>`, (el) => {
+        const btn = $(el, "#tg-hold");
+        const fill = $(el, "#tg-fill");
+        let p = 0, t0 = 0, holding = false;
+        st(el, `Giữ đủ ${g.sec} giây.`);
+        const tick = () => {
+          if (!holding || !alive(btn)) return;
+          p = Math.min(1, (Date.now() - t0) / (g.sec * 1000));
+          fill.style.width = p * 100 + "%";
+          st(el, `${Math.floor(p * g.sec)}/${g.sec} giây`);
+          if (p >= 1) return finish("win");
+          raf = requestAnimationFrame(tick);
+        };
+        btn.addEventListener("pointerdown", (e) => {
+          if (ended || holding) return;
+          e.preventDefault();
+          holding = true;
+          t0 = Date.now();
+          btn.setPointerCapture && btn.setPointerCapture(e.pointerId);
+          raf = requestAnimationFrame(tick);
+        });
+        const release = () => {
+          if (!holding || ended) return;
+          holding = false;
+          finish(p >= 0.6 ? "draw" : "lose");
+        };
+        btn.addEventListener("pointerup", release);
+        btn.addEventListener("pointercancel", release);
+        btn.addEventListener("contextmenu", (e) => e.preventDefault());
+      });
+    } else if (g.mech === "rhythm") {
+      sheet(`<div class="tg-beat"><i id="tg-ring"></i></div><button class="btn btn-primary tg-hold" id="tg-tap">Chạm khi vòng sáng nhất</button>`, (el) => {
+        const ring = $(el, "#tg-ring");
+        const per = g.period * 1000;
+        const t0 = Date.now();
+        let taps = 0, hits = 0;
+        st(el, `Đúng nhịp ${hits}/${g.n}`);
+        const anim = () => {
+          if (!alive(ring)) return;
+          const ph = ((Date.now() - t0) % per) / per;
+          const k = Math.cos(ph * Math.PI * 2) * 0.5 + 0.5; // 1 ở đúng nhịp
+          ring.style.transform = `scale(${0.55 + 0.45 * k})`;
+          ring.style.opacity = 0.35 + 0.65 * k;
+          raf = requestAnimationFrame(anim);
+        };
+        raf = requestAnimationFrame(anim);
+        $(el, "#tg-tap").addEventListener("click", () => {
+          if (ended) return;
+          const ph = ((Date.now() - t0) % per) / per;
+          const err = Math.min(ph, 1 - ph);
+          taps++;
+          if (err < 0.16) hits++;
+          ring.classList.remove("hit", "miss");
+          void ring.offsetWidth;
+          ring.classList.add(err < 0.16 ? "hit" : "miss");
+          st(el, `${err < 0.16 ? "Đúng nhịp!" : "Lệch rồi."} Đúng ${hits}/${g.n} · đã chạm ${taps}/${g.n}`);
+          if (taps >= g.n) finish(hits >= g.n - 1 ? "win" : hits >= Math.ceil(g.n / 2) ? "draw" : "lose");
+        });
+      });
+    } else if (g.mech === "seq" || g.mech === "spots") {
+      const zones = g.zones;
+      const seq = g.mech === "seq" ? (g.hidden ? G.kissOrder(c, zones, g.n) : Array.from({ length: g.n }, () => zones[Math.floor(Math.random() * zones.length)])) : null;
+      let step = 0, miss = 0, hits = 0, lit = -1;
+      const grid = (order) => `<div class="zone-grid" id="tg-grid">${order.map((z) => `<button class="btn zone" data-z="${esc(z)}">${esc(z)}</button>`).join("")}</div>`;
+      sheet(grid(g.mech === "seq" && !g.hidden ? shuffleArr(zones) : zones), (el) => {
+        const box = $(el, "#tg-grid");
+        const prompt = () => {
+          if (g.mech === "spots") return st(el, `Chạm đúng chỗ đang sáng · trúng ${hits}/${g.n}`);
+          st(el, g.hidden ? `Chỗ thứ ${step + 1}/${g.n} nàng thích · sai ${miss}` : `Nàng thì thầm: “${seq[step]}” · ${step}/${g.n} · sai ${miss}`);
+        };
+        prompt();
+        if (g.mech === "spots") {
+          let round = 0, tapped = false;
+          const next = () => {
+            if (!alive(box)) return;
+            for (const b of box.children) b.classList.remove("lit", "hit", "tried");
+            if (round >= g.n) return finish(hits >= g.n ? "win" : hits >= g.n - 2 ? "draw" : "lose");
+            round++;
+            tapped = false;
+            lit = Math.floor(Math.random() * zones.length);
+            box.children[lit].classList.add("lit");
+            timers.push(setTimeout(() => {
+              if (!tapped) next();
+            }, 1400));
+          };
+          box.addEventListener("click", (e) => {
+            const b = e.target.closest("[data-z]");
+            if (!b || tapped || ended) return;
+            tapped = true;
+            const ok = [...box.children].indexOf(b) === lit;
+            if (ok) hits++;
+            b.classList.add(ok ? "hit" : "tried");
+            prompt();
+            timers.push(setTimeout(next, 350));
+          });
+          timers.push(setTimeout(next, 600));
+          return;
+        }
+        box.addEventListener("click", (e) => {
+          const b = e.target.closest("[data-z]");
+          if (!b || ended) return;
+          const ok = b.dataset.z === seq[step];
+          if (ok) {
+            step++;
+            b.classList.add("hit");
+          } else {
+            miss++;
+            b.classList.add("tried");
+            if (g.hidden) {
+              const right = [...box.children].find((x) => x.dataset.z === seq[step]);
+              if (right) right.classList.add("lit");
+            }
+          }
+          if (step >= g.n) return finish(miss === 0 ? "win" : miss === 1 ? "draw" : "lose");
+          if (!g.hidden) {
+            box.innerHTML = shuffleArr(zones).map((z) => `<button class="btn zone" data-z="${esc(z)}">${esc(z)}</button>`).join("");
+          } else if (ok) for (const x of box.children) x.classList.remove("lit", "tried");
+          prompt();
+        });
+      });
+    } else if (g.mech === "drag" || g.mech === "still") {
+      const still = g.mech === "still";
+      sheet(`<div class="tg-track${still ? " h" : ""}" id="tg-track"><i class="tg-thumb" id="tg-thumb">${still ? "●" : "▼"}</i></div>`, (el) => {
+        const track = $(el, "#tg-track");
+        const thumb = $(el, "#tg-thumb");
+        let pos = 0, last = null, bad = 0, freeze = 0;
+        const len = () => (still ? track.clientWidth - 44 : track.clientHeight - 44);
+        const place = () => (thumb.style[still ? "left" : "top"] = pos * len() + "px");
+        const show = () => st(el, still ? `Chuông reo ${bad} lần (tối đa 3)` : `Nàng che lại ${bad} lần · kéo được ${Math.round(pos * 100)}%`);
+        place();
+        show();
+        thumb.addEventListener("pointerdown", (e) => {
+          last = { v: still ? e.clientX : e.clientY, t: Date.now() };
+          thumb.setPointerCapture && thumb.setPointerCapture(e.pointerId);
+          e.preventDefault();
+        });
+        thumb.addEventListener("pointermove", (e) => {
+          if (!last || ended || Date.now() < freeze) return;
+          const v = still ? e.clientX : e.clientY;
+          const dt = Math.max(1, Date.now() - last.t);
+          const dv = v - last.v;
+          const speed = Math.abs(dv) / dt; // px mỗi ms
+          last = { v, t: Date.now() };
+          pos = Math.max(0, Math.min(1, pos + dv / len()));
+          if (speed > (still ? 0.45 : 0.8) && dv > 0) {
+            bad++;
+            freeze = Date.now() + (still ? 450 : 700);
+            if (!still) pos = Math.max(0, pos - 0.25);
+            track.classList.remove("shake");
+            void track.offsetWidth;
+            track.classList.add("shake");
+          }
+          place();
+          show();
+          if (pos >= 0.98) finish(still ? (bad <= 3 ? "win" : bad <= 5 ? "draw" : "lose") : bad === 0 ? "win" : bad === 1 ? "draw" : "lose");
+        });
+        thumb.addEventListener("pointerup", () => (last = null));
+        timers.push(setTimeout(() => finish("lose"), 45000));
+      });
+    } else if (g.mech === "puzzle") {
+      let order = shuffleArr([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+      while (order.every((v, k) => v === k)) order = shuffleArr(order);
+      let pick = -1;
+      const tiles = () => order.map((v, k) => `<button class="tg-tile${pick === k ? " on" : ""}" data-t="${k}" style="background-image:url('${PUZZLE_ART}');background-position:${(v % 3) * 50}% ${Math.floor(v / 3) * 50}%"></button>`).join("");
+      sheet(`<div class="tg-puzzle" id="tg-pz">${tiles()}</div>`, (el) => {
+        const box = $(el, "#tg-pz");
+        const t0 = Date.now();
+        const correct = () => order.filter((v, k) => v === k).length;
+        const show = () => st(el, `Đúng chỗ ${correct()}/9 · còn ${Math.max(0, g.sec - Math.floor((Date.now() - t0) / 1000))} giây`);
+        show();
+        timers.push(setInterval(() => alive(box) && show(), 500));
+        timers.push(setTimeout(() => finish(correct() >= 6 ? "draw" : "lose"), g.sec * 1000));
+        box.addEventListener("click", (e) => {
+          const b = e.target.closest("[data-t]");
+          if (!b || ended) return;
+          const k = Number(b.dataset.t);
+          if (pick < 0) pick = k;
+          else {
+            [order[pick], order[k]] = [order[k], order[pick]];
+            pick = -1;
+          }
+          box.innerHTML = tiles();
+          show();
+          if (correct() === 9) finish("win");
+        });
+      });
+    }
   }
 
   // Ném thẻ vào bình: kim chạy qua lại, bấm khi kim nằm trong vùng sáng
@@ -2114,11 +2452,14 @@
     const out = [];
     if (i === 0 && pages.length > 1 && !pl.undress) out.push(`<button class="btn btn-sm" data-sg="undress">Cởi từng lớp</button>`);
     if (i === mid && i > 0 && !pl.rhythm && !pl.edge) out.push(`<button class="btn btn-sm" data-sg="rhythm">♥ Nhịp phòng the</button><button class="btn btn-sm" data-sg="edge">Kìm cơn</button>`);
+    const cc = G.findConsort(scene.roundOf);
+    if (i === Math.max(1, mid) && i < pages.length - 1 && !pl.newgame && cc && G.NEW_GAMES && !G.nightGameUsed(cc)) out.push(`<button class="btn btn-sm" data-sg="pick">Trò trong đêm ▸</button>`);
     return out.length ? `<div class="sg-row">${out.join("")}</div>` : "";
   }
   function runSceneGame(scene, notes, i, kind) {
     const c = G.findConsort(scene.roundOf);
     if (!c) return showScene(scene, notes, i);
+    if (kind === "pick") return openNightGames(scene, notes, i, c);
     const back = (ok) => {
       const r = G.sceneGame(c.id, kind, ok);
       scene._played[kind] = true;
@@ -2337,29 +2678,33 @@
   function openThiTai() {
     openSheet(
       `<h3>Hậu cung thi tài</h3><p class="hint">Bốn phi được sủng nhất cùng thi một trò. Người thắng được Sủng ái +5 và hầu bệ hạ đêm nay. Mỗi tháng một lần.</p>
-       <div class="choices">${G.THI_GAMES.map((k) => `<button class="btn" data-thi="${k}">${esc(G.MINI_GAMES[k].name)}</button>`).join("")}</div>
+       <div class="choices">${G.THI_GAMES.map((k) => {
+         const why = G.gameNeedWhy ? G.gameNeedWhy(k) : null;
+         return `<button class="btn" data-thi="${k}" ${why ? "disabled" : ""}>${esc(G.MINI_GAMES[k].name)}${G.NEW_GAMES && G.NEW_GAMES[k] ? `<span class="cost">${esc(why || G.NEW_GAMES[k].rule)}</span>` : ""}</button>`;
+       }).join("")}</div>
        <button class="btn btn-ghost" id="thi-back">Thôi</button>`,
       (el) => {
         on(el, "#thi-back", "click", () => openSummon());
         on(el, "[data-thi]", "click", (b) => {
           const r = G.thiTai(b.dataset.thi);
           G.save();
-          if (r) showThiResult(r);
+          if (r) showThiResult(r, b.dataset.thi);
         });
       }
     );
   }
-  function showThiResult(r) {
+  function showThiResult(r, gid) {
     const win = r.ranked[0].c;
+    const newG = gid && G.NEW_GAMES && G.NEW_GAMES[gid];
     openSheet(
       `<h3>${esc(r.game.name)} · kết quả</h3>
        <div class="cards thi-list">${r.ranked
          .map((x, i) => `<div class="row-card thi-row" style="--dl:${(r.ranked.length - i) * 0.35}s">${portrait(x.c, "sm")}<span><b>${i === 0 ? "🏆 " : ""}${esc(x.c.name)}</b><br><span class="hint">${x.score}/${r.max}</span></span></div>`)
          .join("")}</div>
-       <p class="ev-text">${formatText(r.text)}</p>${notesHtml(r.notes)}
+       <p class="ev-text">${formatText(r.text)}${newG ? "\n" + formatText(G.gameLead(gid, win)) : ""}</p>${notesHtml((r.notes || []).concat(r.loserBonus ? [`Các phi còn lại: Tình cảm +${r.loserBonus}`] : []))}
        <div class="choices"><button class="btn btn-primary" id="thi-night">Triệu ${esc(win.name)}</button><button class="btn btn-ghost" id="thi-end">Để sau</button></div>`,
       (el) => {
-        on(el, "#thi-night", "click", () => openNight(win));
+        on(el, "#thi-night", "click", () => openNight(win, [], { outfit: newG && newG.outfit && G.ownsOutfit(win, newG.outfit) ? newG.outfit : null }));
         on(el, "#thi-end", "click", () => closeSheet());
       }
     );
@@ -2417,20 +2762,25 @@
     return a;
   }
 
-  function nightExtrasHtml(c) {
+  function nightExtrasHtml(c, presetOutfit) {
     if (!G.OUTFITS) return "";
+    const keeps = G.keepsOf ? G.keepsOf(c) : [];
+    const furn = G.FURNISH ? Object.keys(G.FURNISH).filter((f) => G.ownsFurn(f)) : [];
     const outfits = G.outfitsOf(c);
     const items = Object.entries(G.BED_ITEMS).filter(([id]) => G.bedStock(id) > 0);
     return `<details class="fx-group night-extra" open><summary>Y phục và đồ dùng đêm nay</summary>
       <div class="field"><label for="n-outfit">Y phục</label><select id="n-outfit"><option value="">Thường phục</option>${outfits
-        .map((o) => `<option value="${o}">${esc(G.OUTFITS[o].name)}${G.likedOutfit(c) === o ? " ♥" : ""}${G.wornCount(c, o) ? "" : " · chưa mặc"}</option>`)
+        .map((o) => `<option value="${o}" ${presetOutfit === o ? "selected" : ""}>${esc(G.OUTFITS[o].name)}${G.likedOutfit(c) === o ? " ♥" : ""}${G.wornCount(c, o) ? "" : " · chưa mặc"}</option>`)
         .join("")}</select></div>
       ${items.length
         ? `<p class="hint">Đồ dùng (tối đa ${G.BED_ITEM_MAX}):</p><div class="chips">${items.map(([id, it]) => `<button class="chip" data-item="${id}" aria-pressed="false">${esc(it.name)} ×${G.bedStock(id)}${G.likedItem(c) === id ? " ♥" : ""}</button>`).join("")}</div>`
         : `<p class="hint">Kho đồ dùng trống. Mua ở Ý chỉ › Kho phòng the.</p>`}
-      <p class="hint">Mua thêm y phục cho nàng ở hồ sơ, tab Y phục.</p></details>`;
+      ${keeps.length ? `<p class="hint">Đồ riêng của nàng (tối đa ${G.KEEP_MAX}):</p><div class="chips">${keeps.map((k) => `<button class="chip" data-keep="${k}" aria-pressed="false">${esc(G.KEEPSAKES[k].name)}${G.likesThing(c, k, G.KEEPSAKES[k].like) ? " ♥" : ""}</button>`).join("")}</div>` : ""}
+      ${furn.length ? `<div class="field"><label for="n-furn">Bày biện</label><select id="n-furn"><option value="">Không dùng</option>${furn.map((f) => `<option value="${f}">${esc(G.FURNISH[f].name)}</option>`).join("")}</select></div>` : ""}
+      <p class="hint">Mua y phục và đồ riêng cho nàng ở hồ sơ (tab Y phục, Đồ riêng). Bày biện tẩm cung mua ở Ý chỉ › Kho phòng the.</p></details>`;
   }
-  function openNight(c, preset) {
+  function openNight(c, preset, opts) {
+    opts = opts || {};
     const fets = Object.values(R.fetishes)
       .filter((f) => G.fetishUnlocked(f.id))
       .sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name, "vi"));
@@ -2493,11 +2843,18 @@
               <div id="fx-list"></div>`
            : ""
        }
-       ${nightExtrasHtml(c)}
+       ${nightExtrasHtml(c, opts.outfit)}
        <div class="choices"><button class="btn btn-primary" id="n-go">Truyền chỉ</button><button class="btn btn-ghost" id="n-back">Thôi</button></div>`,
       (el) => {
         $(el, "#n-back").addEventListener("click", closeSheet);
         const items = new Set();
+        const keeps = new Set();
+        on(el, "[data-keep]", "click", (b) => {
+          const id = b.dataset.keep;
+          if (keeps.has(id)) keeps.delete(id);
+          else if (keeps.size < G.KEEP_MAX) keeps.add(id);
+          for (const x of el.querySelectorAll("[data-keep]")) x.setAttribute("aria-pressed", keeps.has(x.dataset.keep));
+        });
         on(el, "[data-item]", "click", (b) => {
           const id = b.dataset.item;
           if (items.has(id)) items.delete(id);
@@ -2575,7 +2932,7 @@
             G.save();
             return showMood(c, mood);
           }
-          if (G.setNightExtras) G.setNightExtras(c.id, [...items], (el.querySelector("#n-outfit") || {}).value);
+          if (G.setNightExtras) G.setNightExtras(c.id, [...items], (el.querySelector("#n-outfit") || {}).value, [...keeps], (el.querySelector("#n-furn") || {}).value);
           const scene = G.summon(c.id, [...picked]);
           const later = scene && !scene.blocked ? G.rollNightEvent(c.id) : null;
           G.save();
