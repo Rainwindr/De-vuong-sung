@@ -1017,6 +1017,11 @@
 
   /** Cảnh nhiều đoạn: hiện từng đoạn, bấm "Tiếp" để sang đoạn sau; đoạn cuối mới hiện hệ quả và nút kết thúc. */
   function showScene(scene, notes, page) {
+    // cảnh nào chưa có ảnh (sự kiện, cảnh nhiều người, thi tài…) cũng bốc một ảnh trong kho, giữ nguyên suốt cảnh
+    if (scene && !scene.blocked && !scene.image && G.sceneArtFor) {
+      const art = G.sceneArtFor([]);
+      if (art) Object.assign(scene, { image: art.src, imageAlt: art.alt });
+    }
     const pages = scene.pages && scene.pages.length ? scene.pages : [scene.text || ""];
     const i = Math.min(page || 0, pages.length - 1);
     const last = i === pages.length - 1;
