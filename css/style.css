@@ -588,3 +588,34 @@ details.fold > .section-head h3 { display: none; }
 .tablet.top-fav .tablet-face.front { border-color: var(--gold); box-shadow: 0 0 0 1px #d9ad5588, 0 0 18px -4px #f3d27a88; }
 .top-fav-btn[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
 .t-star { color: var(--gold); }
+
+/* Khát khao */
+.bar.khat i { background: linear-gradient(90deg, #c2416b, #f07aa0); }
+.pill.khat { border-color: #f07aa088; color: #f07aa0; }
+
+/* Đồ dùng, y phục, trò mới */
+.night-extra .chips { margin: 4px 0 6px; }
+.chip[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
+.zone-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 10px 0; }
+.zone-grid .zone.hit { border-color: #f07aa0; color: #f07aa0; }
+.zone-grid .zone.tried { opacity: .5; }
+.co-score { display: flex; justify-content: space-between; gap: 12px; margin: 8px 0; font-size: 14px; }
+.co-score .layers { display: inline-flex; gap: 3px; vertical-align: middle; margin-left: 4px; }
+.co-score .layers i { width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--line); }
+.co-score .layers i.on { background: var(--gold); border-color: var(--gold); }
+.co-log { font-size: 14px; }
+.co-moves { grid-template-columns: repeat(3, 1fr); }
+
+/* Che màn hình nhanh */
+#cover-spot { position: fixed; top: 0; left: 0; width: 52px; height: 52px; z-index: 9998; touch-action: manipulation; }
+#cover { position: fixed; inset: 0; z-index: 9999; background: #fbfaf7; color: #222; font: 16px/1.5 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; padding: 18px 16px; overflow: auto; touch-action: manipulation; }
+#cover[hidden] { display: none; }
+#cover .cv-head { display: flex; justify-content: space-between; align-items: center; color: #b07a1f; font-size: 15px; margin-bottom: 14px; }
+#cover .cv-head b { font-size: 17px; }
+#cover h2 { font: 700 24px/1.3 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; margin: 0 0 10px; color: #111; }
+#cover ul { list-style: none; margin: 0; padding: 0; }
+#cover li { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid #ebe8e1; }
+#cover li.done { color: #999; text-decoration: line-through; }
+#cover .cv-box { width: 20px; height: 20px; border: 1.5px solid #c9c4b8; border-radius: 50%; display: inline-grid; place-items: center; font-size: 12px; color: #b07a1f; flex: none; }
+#cover .cv-foot { color: #999; font-size: 13px; margin-top: 14px; }
+body.covered { overflow: hidden; }

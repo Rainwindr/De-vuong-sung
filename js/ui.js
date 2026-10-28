@@ -291,7 +291,7 @@
       ${portrait(c)}
       <span class="body">
         <span class="name">${esc(c.name)}</span>
-        <span class="meta">${G.isTopFav && G.isTopFav(c) ? pill("★ Sủng nhất", "top") + " " : ""}${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}${G.isSulking && G.isSulking(c) ? " " + pill("Đang dỗi", "preg") : ""}${(() => { const pr = G.promiseNow && G.promiseNow(); return pr && pr.c.id === c.id && !pr.done ? " " + pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : ""; })()}</span>
+        <span class="meta">${G.isTopFav && G.isTopFav(c) ? pill("★ Sủng nhất", "top") + " " : ""}${G.khatOf && G.khatOf(c) >= G.KHAT_ASK_AT ? pill("Khát khao", "khat") + " " : ""}${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}${G.isSulking && G.isSulking(c) ? " " + pill("Đang dỗi", "preg") : ""}${(() => { const pr = G.promiseNow && G.promiseNow(); return pr && pr.c.id === c.id && !pr.done ? " " + pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : ""; })()}</span>
         <span class="favor">${bar(c.favor)}<span>Sủng ái ${c.favor}</span></span>
         ${G.levelName ? `<span class="meta card-extra"><span class="lv-pill lv-${G.levelOf(c)}">${esc(G.levelName(c))}</span> ${lastNightText(c)}</span>` : ""}
         ${extra || ""}
@@ -1296,6 +1296,25 @@
   }
 
   /* ---------------- Ý chỉ (hành động) ---------------- */
+  function openBedShop(msg) {
+    openSheet(
+      `<h3>Kho phòng the</h3><p class="hint">Mỗi món dùng một lần, tối đa ${G.BED_ITEM_MAX} món mỗi đêm. Mỗi phi có một món nàng thích (♥ khi lật thẻ), dùng đúng món đó thì Tình cảm thêm +2.</p>
+       ${msg ? `<p class="hint fx-msg">${esc(msg)}</p>` : ""}
+       <div class="cards">${Object.entries(G.BED_ITEMS)
+         .map(([id, it]) => `<div class="row-card"><div><b>${esc(it.name)}</b> <span class="hint">· còn ${G.bedStock(id)}</span><br><span class="hint">${esc(it.desc)}</span></div><div class="row-btns"><button class="btn btn-sm" data-buy="${id}" data-n="1">${fmtMoney(it.cost)}</button><button class="btn btn-sm btn-ghost" data-buy="${id}" data-n="5">×5</button></div></div>`)
+         .join("")}</div>
+       <button class="btn btn-ghost" id="bs-close">Đóng</button>`,
+      (el) => {
+        on(el, "#bs-close", "click", () => closeSheet());
+        on(el, "[data-buy]", "click", (b) => {
+          const r = G.buyBedItem(b.dataset.buy, Number(b.dataset.n));
+          G.save();
+          openBedShop(r.text);
+          UI.render();
+        });
+      }
+    );
+  }
   function openActions() {
     const s = G.state;
     const selWhy = G.selectionStatus();
@@ -1303,6 +1322,7 @@
     openSheet(
       `<h3>Ý chỉ</h3>
        <div class="cards">
+         ${G.BED_ITEMS ? `<div class="row-card"><div><b>Kho phòng the</b><br><span class="hint">Dầu thơm, chuông bạc, dải lụa, hương trầm. Chọn dùng khi lật thẻ thị tẩm.</span></div><button class="btn btn-sm" id="a-bed">Mở kho</button></div>` : ""}
          <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.selectionCost()} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tuần du</b><br><span class="hint">${G.canTravel() ? "Mỗi năm một chuyến. Mỗi vùng có mỹ nhân và chuyện riêng." : "Năm nay đã tuần du rồi."}</span></div><button class="btn btn-sm" id="a-travel" ${G.canTravel() ? "" : "disabled"}>Chọn vùng</button></div>
          ${(() => {
@@ -1321,6 +1341,7 @@
         $(el, "#a-close").addEventListener("click", closeSheet);
         on(el, "#a-select", "click", openSelection);
         on(el, "#a-travel", "click", openTravel);
+        on(el, "#a-bed", "click", () => openBedShop());
         on(el, "#a-hanh", "click", openHanhCung);
         on(el, "#a-rules", "click", openRules);
         on(el, "#a-contest", "click", () => {
@@ -1377,11 +1398,20 @@
          <div class="field"><label for="m-import">Nhập mã lưu</label><textarea id="m-import" rows="3" placeholder="Dán mã vào đây"></textarea></div>
          <button class="btn btn-sm" id="m-doimport">Nhập</button>
        </details>
+       <details><summary>Che màn hình nhanh</summary>
+         <p class="hint">Chạm hai lần thật nhanh vào góc trên bên trái màn hình: game được che bằng một trang ghi chú bình thường, tên tab đổi thành "Ghi chú". Chạm hai lần vào trang ghi chú để quay lại.</p>
+         <label class="check"><input type="checkbox" id="m-autocover" ${autoCover() ? "checked" : ""}> Tự che khi chuyển sang ứng dụng khác</label>
+       </details>
        ${renderPacks()}
        <button class="btn btn-ghost" id="m-close">Đóng</button>`,
       (el) => {
         bindSlots(el);
         $(el, "#m-close").addEventListener("click", closeSheet);
+        on(el, "#m-autocover", "change", (inp) => {
+          try {
+            localStorage.setItem("dvs.autoCover", inp.checked ? "1" : "0");
+          } catch (e) {}
+        });
         $(el, "#m-export").addEventListener("click", () => ($(el, "#m-code").value = G.exportSave()));
         $(el, "#m-copy").addEventListener("click", () => {
           const t = $(el, "#m-code");
@@ -1477,6 +1507,7 @@
        <p class="whisper" id="c-whisper-text" hidden></p>
        ${meter("Sủng ái", c.favor)}
        ${meter("Tình cảm", c.affection, "gold")}
+       ${G.khatOf ? meter(G.khatOf(c) >= G.KHAT_ASK_AT ? "Khát khao · nàng sắp tự tìm đến" : "Khát khao", G.khatOf(c), "khat") : ""}
        <div class="choices">
          <button class="btn" id="c-visit">Ghé thăm</button>
          <button class="btn" id="c-night" ${G.cannotSummon(c) ? "disabled" : ""}>Triệu thị tẩm${G.cannotSummon(c) ? `<span class="cost">${esc(c.pregnantDue != null ? "Đang hoài thai" : G.isResting && G.isResting(c) ? "Tháng này nàng nghỉ" : "Chưa thể triệu")}</span>` : ""}</button>
@@ -1484,7 +1515,7 @@
          ${dacAn && !queued ? `<button class="btn" id="c-dacan">Đặc ân phong ${esc(G.RANKS[dacAn.next])}<span class="cost">${dacAn.ceremony ? `kèm lễ sắc phong · ${fmtMoney(dacAn.total)} lượng` : dacAn.fee ? `${fmtMoney(dacAn.fee)} lượng` : "miễn phí"}${dacAn.eligible ? "" : ` · ${[dacAn.favorGap ? `thiếu ${dacAn.favorGap} Sủng ái` : "", dacAn.kidGap ? `thiếu ${dacAn.kidGap} con` : ""].filter(Boolean).join(", ")}`}</span></button>` : ""}
          ${G.setTopFav ? `<button class="btn top-fav-btn" id="c-top" aria-pressed="${G.isTopFav(c)}">${G.isTopFav(c) ? "★ Đệ nhất sủng phi · bỏ ghim" : "☆ Chọn làm đệ nhất sủng phi"}<span class="cost">Mỗi tháng Sủng ái +${G.TOP_FAV_MONTHLY.favor}, luôn đứng đầu khay thẻ</span></button>` : ""}
        </div>
-       <div class="seg" role="tablist">${[["info", "Chung"], ["gift", "Quà"], fets.length ? ["fx", "Sở thích"] : null, ["school", "Học phường"], G.bookView ? ["book", "Sổ tay"] : null, s.godMode ? ["god", "Thiên Đạo"] : null]
+       <div class="seg" role="tablist">${[["info", "Chung"], ["gift", "Quà"], G.OUTFITS ? ["outfit", "Y phục"] : null, fets.length ? ["fx", "Sở thích"] : null, ["school", "Học phường"], G.bookView ? ["book", "Sổ tay"] : null, s.godMode ? ["god", "Thiên Đạo"] : null]
          .filter(Boolean)
          .map(([k, l]) => `<button class="seg-btn" role="tab" data-pane="${k}">${l}</button>`)
          .join("")}</div>
@@ -1501,6 +1532,13 @@
        <div class="pane" data-pane-body="gift" hidden><div class="cards">${gifts
          .map((g) => `<div class="row-card"><div><b>${esc(g.name)}</b>${(g.likes || []).some((l) => c.likes.includes(l) || c.traits.includes(l) || l === c.id) || (G.giftFitsBody && G.giftFitsBody(g, c)) ? " ♥" : ""}<br><span class="hint">${esc(g.desc || "")}${c.gifts[g.id] ? ` · đã tặng ${c.gifts[g.id]} lần` : ""}</span></div><button class="btn btn-sm" data-gift="${esc(g.id)}">${fmtMoney(g.cost)}</button></div>`)
          .join("")}</div></div>
+       ${G.OUTFITS ? `<div class="pane" data-pane-body="outfit" hidden><div class="cards">${Object.entries(G.OUTFITS)
+         .filter(([k]) => k !== "khong_mac")
+         .map(([k, o]) => {
+           const own = G.ownsOutfit(c, k);
+           return `<div class="row-card"><div><b>${esc(o.name)}</b>${G.likedOutfit(c) === k ? " ♥" : ""}<br><span class="hint">${own ? `Đã có · mặc ${G.wornCount(c, k)} lần` : "Lần đầu mặc: Sủng ái +" + G.OUTFIT_FIRST_FAVOR}</span></div>${own ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-outfit="${k}">${fmtMoney(o.cost)}</button>`}</div>`;
+         })
+         .join("")}</div><p class="hint">Chọn y phục khi lật thẻ thị tẩm nàng. "Không mặc gì" lúc nào cũng có. Bộ ♥ là bộ nàng thích nhất.</p></div>` : ""}
        <div class="pane" data-pane-body="school" hidden>
          <div class="field"><label for="c-school">Lớp</label><select id="c-school"><option value="">Không học</option>${Object.entries(G.SUBJECTS).map(([k, v]) => `<option value="${k}" ${c.school === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>
          <p class="hint">Các phi học chung lớp thân nhau hơn. Học đủ 12 tháng được trait tinh thông.${c.school ? ` Đã học ${c.schoolMonths} tháng.` : ""}</p>
@@ -1626,6 +1664,12 @@
           const r = G.releaseConsort(c.id);
           if (r) showMessage(r.ok ? "Xuất cung" : "Chưa thể", r.text, r.notes);
         });
+        on(el, "[data-outfit]", "click", (b) => {
+          const r = G.buyOutfit(c.id, b.dataset.outfit);
+          G.save();
+          if (r.ok) queue.unshift(() => openConsort(c.id));
+          showMessage(r.ok ? "Ban y phục" : "Chưa thể ban", r.text, r.notes);
+        });
         on(el, "[data-gift]", "click", (b) => {
           const r = G.buyGift(c.id, b.dataset.gift);
           if (r) showMessage(r.ok ? "Ban thưởng" : "Không thể ban thưởng", r.text, r.notes);
@@ -1726,7 +1770,7 @@
     openSheet(
       `${head}<p class="hint">Mỗi tháng chơi với mỗi phi một ván. Thắng: Tình cảm +5. Thua hay hòa nàng vẫn vui: Tình cảm +3. Trò nàng thích (♥) được thêm +2.</p>
        <div class="choices">${Object.entries(G.MINI_GAMES).map(([k, g]) => `<button class="btn" data-game="${k}">${esc(g.name)}${g.likes.some((x) => c.traits.includes(x)) ? " ♥" : ""}<span class="cost">${esc(g.desc)}</span></button>`).join("")}</div>`,
-      (el) => on(el, "[data-game]", "click", (b) => ({ dau_ho: gameDauHo, hoa_dang: gameHoaDang, doi_tho: gameDoiTho, danh_co: gameDanhCo, xuc_xac: gameXucXac, ban_cung: (x) => gameDauHo(x, "ban_cung") })[b.dataset.game](c))
+      (el) => on(el, "[data-game]", "click", (b) => ({ dau_ho: gameDauHo, hoa_dang: gameHoaDang, doi_tho: gameDoiTho, danh_co: gameDanhCo, xuc_xac: gameXucXac, ban_cung: (x) => gameDauHo(x, "ban_cung"), xoa_bop: gameXoaBop, co_coi_ao: gameCoCoiAo })[b.dataset.game](c))
     );
   }
   function endGame(c, id, outcome, line) {
@@ -1735,6 +1779,85 @@
     if (r) showMessage(`${G.MINI_GAMES[id].name} · ${outcome === "win" ? "Bệ hạ thắng" : outcome === "draw" ? "Hòa" : "Nàng thắng"}`, (line ? line + "\n\n" : "") + r.text, r.notes);
   }
   const gameHead = (c, id, sub) => `<div class="ev-head">${portrait(c, "sm")}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>${esc(G.MINI_GAMES[id].name)}</h3></div></div><p class="hint" id="g-sub">${sub}</p>`;
+
+  // Kết quả trò có mời thị tẩm
+  function gameNightOffer(c, title, text, notes) {
+    const can = !G.cannotSummon(c);
+    openSheet(
+      `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>${esc(title)}</h3></div></div>
+       <p class="ev-text">${formatText(text)}</p>${notesHtml(notes)}
+       <div class="choices">${can ? `<button class="btn btn-primary" id="go-night">Triệu nàng thị tẩm đêm nay</button>` : ""}<button class="btn btn-ghost" id="go-close">Để sau</button></div>`,
+      (el) => {
+        on(el, "#go-night", "click", () => openNight(c));
+        on(el, "#go-close", "click", () => closeSheet());
+      }
+    );
+  }
+
+  // Xoa bóp: năm lần chạm, tìm hai chỗ nàng thích nhất
+  function gameXoaBop(c) {
+    const favs = G.massageFavs(c);
+    let tries = G.MASSAGE_TRIES, found = 0;
+    const tried = new Set();
+    openSheet(
+      `${gameHead(c, "xoa_bop", `Bệ hạ xoa bóp cho ${esc(c.name)}. Chạm vào chỗ muốn xoa, còn ${tries} lần.`)}
+       <div class="zone-grid">${G.MASSAGE_ZONES.map((z, i) => `<button class="btn zone" data-zone="${i}">${esc(z)}</button>`).join("")}</div>`,
+      (el) => {
+        on(el, "[data-zone]", "click", (b) => {
+          const i = Number(b.dataset.zone);
+          if (tries <= 0 || tried.has(i)) return;
+          tried.add(i);
+          tries--;
+          const hit = favs.includes(i);
+          if (hit) found++;
+          b.classList.add(hit ? "hit" : "tried");
+          b.disabled = true;
+          $(el, "#g-sub").textContent = `${hit ? "Nàng rên khẽ, rất thích chỗ này!" : "Dễ chịu, nhưng chưa phải chỗ nàng thích nhất."} Tìm ra ${found}/2 · còn ${tries} lần.`;
+          if (found >= 2 || tries <= 0) {
+            setTimeout(() => {
+              const r = G.massageEnd(c, found);
+              G.save();
+              gameNightOffer(c, `Xoa bóp · ${r.outcome === "win" ? "Nàng mê mẩn" : r.outcome === "draw" ? "Dễ chịu" : "Nàng nhột"}`, r.line + "\n\n" + r.text, r.notes);
+            }, 450);
+          }
+        });
+      },
+      { locked: true }
+    );
+  }
+
+  // Cờ cởi áo: Xe ăn Pháo, Pháo ăn Mã, Mã ăn Xe. Thua ván cởi một lớp.
+  function gameCoCoiAo(c) {
+    let her = 0, me = 0; // số lớp đã cởi
+    const lines = [];
+    const draw = (msg) => {
+      const layers = (n) => Array.from({ length: G.CO_LAYERS }, (_, i) => `<i class="${i < G.CO_LAYERS - n ? "on" : ""}"></i>`).join("");
+      openSheet(
+        `${gameHead(c, "co_coi_ao", msg || "Chọn quân để đánh. Xe ăn Pháo, Pháo ăn Mã, Mã ăn Xe.")}
+         <div class="co-score"><span>Bệ hạ <span class="layers">${layers(me)}</span></span><span>${esc(c.name)} <span class="layers">${layers(her)}</span></span></div>
+         ${lines.length ? `<p class="ev-text co-log">${formatText(lines.slice(-2).join("\n"))}</p>` : ""}
+         <div class="choices co-moves">${G.CO_MOVES.map((m, i) => `<button class="btn" data-co="${i}">${esc(m)}</button>`).join("")}</div>`,
+        (el) =>
+          on(el, "[data-co]", "click", (b) => {
+            const mine = Number(b.dataset.co);
+            const r = G.coMove(c, mine);
+            const tag = `Bệ hạ đi ${G.CO_MOVES[mine]}, nàng đi ${G.CO_MOVES[r.hers]}.`;
+            if (r.res === "draw") return draw(`${tag} Hòa, đánh lại.`);
+            if (r.res === "win") lines.push(G.coLayerLine(c, "her", her++));
+            else lines.push(G.coLayerLine(c, "me", me++));
+            if (her >= G.CO_LAYERS || me >= G.CO_LAYERS) {
+              const won = her >= G.CO_LAYERS;
+              const end = G.coEnd(c, won);
+              G.save();
+              return gameNightOffer(c, `Cờ cởi áo · ${won ? "Bệ hạ thắng" : "Nàng thắng"}`, lines[lines.length - 1] + "\n\n" + end.line + "\n\n" + end.text, end.notes);
+            }
+            draw(`${tag} ${r.res === "win" ? "Bệ hạ thắng ván này." : "Nàng thắng ván này."}`);
+          }),
+        { locked: true }
+      );
+    };
+    draw();
+  }
 
   // Ném thẻ vào bình: kim chạy qua lại, bấm khi kim nằm trong vùng sáng
   function gameDauHo(c, gid) {
@@ -2286,6 +2409,19 @@
     return a;
   }
 
+  function nightExtrasHtml(c) {
+    if (!G.OUTFITS) return "";
+    const outfits = G.outfitsOf(c);
+    const items = Object.entries(G.BED_ITEMS).filter(([id]) => G.bedStock(id) > 0);
+    return `<details class="fx-group night-extra" open><summary>Y phục và đồ dùng đêm nay</summary>
+      <div class="field"><label for="n-outfit">Y phục</label><select id="n-outfit"><option value="">Thường phục</option>${outfits
+        .map((o) => `<option value="${o}">${esc(G.OUTFITS[o].name)}${G.likedOutfit(c) === o ? " ♥" : ""}${G.wornCount(c, o) ? "" : " · chưa mặc"}</option>`)
+        .join("")}</select></div>
+      ${items.length
+        ? `<p class="hint">Đồ dùng (tối đa ${G.BED_ITEM_MAX}):</p><div class="chips">${items.map(([id, it]) => `<button class="chip" data-item="${id}" aria-pressed="false">${esc(it.name)} ×${G.bedStock(id)}${G.likedItem(c) === id ? " ♥" : ""}</button>`).join("")}</div>`
+        : `<p class="hint">Kho đồ dùng trống. Mua ở Ý chỉ › Kho phòng the.</p>`}
+      <p class="hint">Mua thêm y phục cho nàng ở hồ sơ, tab Y phục.</p></details>`;
+  }
   function openNight(c, preset) {
     const fets = Object.values(R.fetishes)
       .filter((f) => G.fetishUnlocked(f.id))
@@ -2349,9 +2485,17 @@
               <div id="fx-list"></div>`
            : ""
        }
+       ${nightExtrasHtml(c)}
        <div class="choices"><button class="btn btn-primary" id="n-go">Truyền chỉ</button><button class="btn btn-ghost" id="n-back">Thôi</button></div>`,
       (el) => {
         $(el, "#n-back").addEventListener("click", closeSheet);
+        const items = new Set();
+        on(el, "[data-item]", "click", (b) => {
+          const id = b.dataset.item;
+          if (items.has(id)) items.delete(id);
+          else if (items.size < G.BED_ITEM_MAX) items.add(id);
+          for (const x of el.querySelectorAll("[data-item]")) x.setAttribute("aria-pressed", items.has(x.dataset.item));
+        });
         if (fets.length) {
           renderList(el);
           $(el, "#fx-q").addEventListener("input", (e) => {
@@ -2423,6 +2567,7 @@
             G.save();
             return showMood(c, mood);
           }
+          if (G.setNightExtras) G.setNightExtras(c.id, [...items], (el.querySelector("#n-outfit") || {}).value);
           const scene = G.summon(c.id, [...picked]);
           const later = scene && !scene.blocked ? G.rollNightEvent(c.id) : null;
           G.save();
@@ -2441,6 +2586,7 @@
       G.isSulking && G.isSulking(c) ? pill("Đang dỗi", "preg") : "",
       pr && pr.c.id === c.id && !pr.done ? pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : "",
       G.state.summonStreak.id === c.id && G.state.summonStreak.count >= 1 ? pill(`${G.state.summonStreak.count} đêm liền`, "rank") : "",
+      !faceDown && G.khatOf && G.khatOf(c) >= G.KHAT_ASK_AT ? pill("Khát khao", "khat") : "",
     ].filter(Boolean).join(" ");
     return `<button class="tablet${faceDown ? " down" : ""}${!faceDown && G.isTopFav && G.isTopFav(c) ? " top-fav" : ""}" data-tablet="${esc(c.id)}" aria-label="${faceDown ? "Thẻ úp" : esc(c.name)}">
       <span class="tablet-in">
@@ -2680,4 +2826,63 @@
       UI.renderGate();
     });
   }
+
+  /* ---------------- Che màn hình nhanh ---------------- */
+  function autoCover() {
+    try {
+      return localStorage.getItem("dvs.autoCover") === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+  const COVER_NOTES = ["Mua sữa, trứng, rau cải", "Gọi thợ sửa máy lạnh trước thứ Sáu", "Họp nhóm 9 giờ sáng thứ Hai", "Trả sách thư viện", "Đóng tiền điện tháng này", "Hẹn nha sĩ 3 giờ chiều thứ Tư", "Mua quà sinh nhật cho mẹ", "Gửi lại bảng báo giá cho anh Minh"];
+  let coverTitle = null;
+  function showCover() {
+    let el = document.getElementById("cover");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "cover";
+      const d = new Date();
+      el.innerHTML = `<div class="cv-head"><b>Ghi chú</b><span>${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}</span></div>
+        <h2>Việc cần làm</h2><ul>${COVER_NOTES.map((t, i) => `<li class="${i % 3 === 1 ? "done" : ""}"><span class="cv-box">${i % 3 === 1 ? "✓" : ""}</span>${t}</li>`).join("")}</ul>
+        <p class="cv-foot">8 mục · sửa lần cuối hôm nay</p>`;
+      document.body.appendChild(el);
+      doubleTap(el, hideCover);
+    }
+    if (!el.hidden && coverTitle !== null) return;
+    el.hidden = false;
+    if (coverTitle === null) coverTitle = document.title;
+    document.title = "Ghi chú";
+    document.body.classList.add("covered");
+  }
+  function hideCover() {
+    const el = document.getElementById("cover");
+    if (el) el.hidden = true;
+    if (coverTitle !== null) document.title = coverTitle;
+    coverTitle = null;
+    document.body.classList.remove("covered");
+  }
+  UI.showCover = showCover;
+  UI.hideCover = hideCover;
+  function doubleTap(target, fn) {
+    let last = 0;
+    target.addEventListener("pointerup", (e) => {
+      const t = Date.now();
+      if (t - last < 380) {
+        last = 0;
+        e.preventDefault();
+        fn();
+      } else last = t;
+    });
+  }
+  (function setupCover() {
+    const spot = document.createElement("div");
+    spot.id = "cover-spot";
+    spot.setAttribute("aria-hidden", "true");
+    document.body.appendChild(spot);
+    doubleTap(spot, showCover);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && autoCover()) showCover();
+    });
+  })();
 })();
