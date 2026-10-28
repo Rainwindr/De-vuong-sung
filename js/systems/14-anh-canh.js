@@ -1,6 +1,6 @@
 /*
- * Ảnh đầu cảnh theo sở thích: mỗi sở thích dùng một trong 31 tư thế (P01–P31).
- * Ảnh đặt trong packs/canh-viet/scene-art/ với tên P01.jpg … P31.jpg (hoặc .png, .webp). Chưa có thì cảnh hiện khung "· · ·" như cũ.
+ * Ảnh đầu cảnh: mỗi lần mở cảnh bốc ngẫu nhiên một ảnh trong packs/canh-viet/scene-art/ (xem "Kho ảnh ngẫu nhiên").
+ * Cách cũ (khi không lấy được danh sách ảnh): mỗi sở thích dùng một trong 31 tư thế, file P01.jpg … P31.jpg.
  * Một phần của các hệ thống game (xây trên js/engine.js). Các file trong js/systems/ nạp theo thứ tự số,
  * file sau có thể bọc (wrap) hàm của file trước, nên đừng đổi thứ tự.
  */
@@ -53,8 +53,73 @@
   G.SCENE_ART = {};
   for (const [pose, ids] of Object.entries(BY_POSE)) for (const id of ids) G.SCENE_ART[id] = pose;
 
-  /** Ảnh cho bộ sở thích đêm nay: { src, alt: [các đường dẫn thử tiếp] } hoặc null. */
+  /* ---------- Kho ảnh ngẫu nhiên ----------
+   * Mỗi lần mở cảnh, game bốc ngẫu nhiên một ảnh trong packs/canh-viet/scene-art/ (đặt tên gì cũng được,
+   * nhận .jpg .jpeg .png .webp), không lặp lại ảnh vừa hiện. Danh sách ảnh lấy theo thứ tự:
+   *   1. file list.json trong thư mục (nếu có): ["a.jpg", "b.jpg", ...]
+   *   2. trang GitHub Pages (<chủ>.github.io/<repo>/): hỏi GitHub danh sách file trong thư mục
+   *   3. máy chạy python -m http.server: đọc trang liệt kê thư mục
+   * Không lấy được danh sách thì dùng cách cũ: ảnh theo mã tư thế (P01…P31).
+   */
+  G.SCENE_ART_POOL = [];
+  const IMG = /\.(jpe?g|png|webp)$/i;
+  const CACHE = "dvs.sceneArtList";
+  const uniq = (a) => [...new Set(a)].filter((n) => IMG.test(n) && !n.startsWith("_"));
+  async function fromJson() {
+    const r = await fetch(G.SCENE_ART_BASE + "list.json", { cache: "no-cache" });
+    if (!r.ok) throw new Error("no list.json");
+    const a = await r.json();
+    if (!Array.isArray(a)) throw new Error("bad list.json");
+    return uniq(a.map(String));
+  }
+  async function fromGithub() {
+    const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
+    if (!m) throw new Error("not github pages");
+    const repo = location.pathname.split("/").filter(Boolean)[0];
+    const path = G.SCENE_ART_BASE.replace(/\/$/, "");
+    const url = repo && !/\.html?$/i.test(repo) ? `https://api.github.com/repos/${m[1]}/${repo}/contents/${path}` : `https://api.github.com/repos/${m[1]}/${m[1]}.github.io/contents/${path}`;
+    const r = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
+    if (!r.ok) throw new Error("github " + r.status);
+    const a = await r.json();
+    return uniq(a.filter((f) => f.type === "file").map((f) => f.name));
+  }
+  async function fromListing() {
+    const r = await fetch(G.SCENE_ART_BASE, { cache: "no-cache" });
+    if (!r.ok) throw new Error("no listing");
+    const html = await r.text();
+    return uniq([...html.matchAll(/href="([^"?#]+)"/g)].map((x) => decodeURIComponent(x[1].split("/").filter(Boolean).pop() || "")));
+  }
+  G.sceneArtReady = (async () => {
+    try {
+      const c = JSON.parse(sessionStorage.getItem(CACHE) || "null");
+      if (Array.isArray(c) && c.length) return (G.SCENE_ART_POOL = c);
+    } catch (e) {}
+    for (const f of [fromJson, fromGithub, fromListing]) {
+      try {
+        const list = await f();
+        if (list.length) {
+          G.SCENE_ART_POOL = list;
+          try {
+            sessionStorage.setItem(CACHE, JSON.stringify(list));
+          } catch (e) {}
+          return list;
+        }
+      } catch (e) {}
+    }
+    return [];
+  })();
+  let lastArt = null;
+
+  /** Ảnh cho đêm nay: { src, alt: [các đường dẫn thử tiếp] } hoặc null. */
   G.sceneArtFor = function (fetishIds) {
+    const pool = G.SCENE_ART_POOL;
+    if (pool.length) {
+      const choices = pool.length > 1 ? pool.filter((n) => n !== lastArt) : pool;
+      const name = choices[Math.floor(Math.random() * choices.length)];
+      lastArt = name;
+      return { src: G.SCENE_ART_BASE + encodeURIComponent(name), alt: [] };
+    }
+    // cách cũ: theo mã tư thế
     const list = (fetishIds || []).filter(Boolean);
     const pose = list.length ? list.map((f) => G.SCENE_ART[f]).find(Boolean) : G.SCENE_ART_PLAIN;
     if (!pose) return null;
