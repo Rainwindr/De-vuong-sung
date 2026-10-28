@@ -31,37 +31,69 @@
     });
   }
 
+  /**
+   * Nạp từ máy chủ, hai đợt để màn hình đầu hiện nhanh:
+   *  1. Dữ liệu lõi của mọi gói (tải song song), nạp theo đúng thứ tự trong packs/index.json.
+   *  2. Chữ của cảnh (phần nặng nhất) tải song song ở nền; xong mới cài vào game.
+   */
   async function loadFromServer() {
     const index = await fetchJSON("packs/index.json");
-    for (const folder of index.packs || []) {
-      const base = `packs/${folder}/`;
-      try {
-        const manifest = await fetchJSON(base + "manifest.json");
-        const files = manifest.files || {};
-        const data = { manifest };
-        for (const key of LIST_KINDS) {
-          if (!files[key]) continue;
-          data[key] = [];
-          for (const f of [].concat(files[key])) data[key].push(...(await fetchJSON(base + f)));
-        }
-        if (files.names) {
-          data.names = {};
-          for (const f of [].concat(files.names)) {
-            const n = await fetchJSON(base + f);
-            for (const k of Object.keys(n)) data.names[k] = (data.names[k] || []).concat(n[k]);
+    const folders = index.packs || [];
+    const fetched = await Promise.all(
+      folders.map(async (folder) => {
+        const base = `packs/${folder}/`;
+        try {
+          const manifest = await fetchJSON(base + "manifest.json");
+          const files = manifest.files || {};
+          const data = { manifest };
+          await Promise.all(
+            LIST_KINDS.filter((k) => files[k]).map(async (key) => {
+              const parts = await Promise.all([].concat(files[key]).map((f) => fetchJSON(base + f)));
+              data[key] = [].concat(...parts);
+            })
+          );
+          if (files.names) {
+            data.names = {};
+            for (const n of await Promise.all([].concat(files.names).map((f) => fetchJSON(base + f))))
+              for (const k of Object.keys(n)) data.names[k] = (data.names[k] || []).concat(n[k]);
           }
+          const portraits = await Promise.all([].concat(files.portraits || []).map((f) => fetchJSON(base + f)));
+          return { folder, base, manifest, files, data, portraits };
+        } catch (e) {
+          return { folder, error: e };
         }
-        fixAssetPaths(data, base);
-        G.packBases[manifest.id] = base;
-        if (G.loadPack(data)) {
-          for (const f of [].concat(files.scenes || [])) await loadScript(base + f);
-          for (const f of [].concat(files.sceneTexts || [])) G.addPackSceneTexts(await fetchJSON(base + f));
-          for (const f of [].concat(files.portraits || [])) G.addPortraits(await fetchJSON(base + f), base);
+      })
+    );
+    const loaded = [];
+    for (const p of fetched) {
+      if (p.error) {
+        G.registry.errors.push(`[${p.folder}] ${p.error.message}`);
+        continue;
+      }
+      try {
+        fixAssetPaths(p.data, p.base);
+        G.packBases[p.manifest.id] = p.base;
+        if (G.loadPack(p.data)) {
+          for (const f of [].concat(p.files.scenes || [])) await loadScript(p.base + f);
+          for (const m of p.portraits) G.addPortraits(m, p.base);
+          loaded.push(p);
         }
       } catch (e) {
-        G.registry.errors.push(`[${folder}] ${e.message}`);
+        G.registry.errors.push(`[${p.folder}] ${e.message}`);
       }
     }
+    // đợt 2: chữ của cảnh, tải song song, nạp theo thứ tự gói (trả về trong object để không bị await nuốt)
+    const texts = Promise.all(
+      loaded.map((p) =>
+        Promise.all([].concat(p.files.sceneTexts || []).map((f) => fetchJSON(p.base + f))).catch((e) => {
+          G.registry.errors.push(`[${p.folder}] ${e.message}`);
+          return [];
+        })
+      )
+    ).then((lists) => {
+      for (const list of lists) for (const st of list) G.addPackSceneTexts(st);
+    });
+    return { texts };
   }
 
   function fixAssetPaths(data, base) {
@@ -91,7 +123,16 @@
       } else if (location.protocol === "file:") {
         throw new Error("đang mở thẳng file và chưa có packs/bundle.js");
       }
-      else await loadFromServer();
+      else {
+        const { texts } = await loadFromServer();
+        // màn hình đầu hiện ngay; chữ cảnh nạp xong ở nền
+        G.textsPending = texts
+          .then(() => G.installSceneTexts())
+          .catch((e) => G.registry.errors.push("Không nạp được chữ cảnh: " + e.message))
+          .finally(() => (G.textsPending = null));
+        G.ui.renderGate();
+        return;
+      }
     } catch (e) {
       G.registry.errors.push(
         location.protocol === "file:"

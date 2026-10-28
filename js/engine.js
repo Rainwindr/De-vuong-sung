@@ -3,7 +3,7 @@
  *
  * Lõi lo: chỉ số, vòng lặp tháng, điều kiện, hệ quả, sự kiện, gói nội dung, HOOK.
  * Các hệ thống (con cái, đối thực, sở thích, cuộc thi, cửa hàng, tuần du, kế vị, thành tựu,
- * huyết mạch, God Mode) nằm ở js/systems.js.
+ * huyết mạch, God Mode) nằm ở các file trong js/systems/.
  * Lõi KHÔNG chứa cảnh chi tiết; cảnh do các gói đăng ký qua Game.hooks.register().
  *
  * Quy tắc lõi (gói và God Mode không ghi đè được):
@@ -19,7 +19,7 @@
   const G = (window.Game = window.Game || {});
   G.VERSION = "0.3.0";
   G.MIN_AGE = 18;
-  /** Hệ số của quẻ đầu năm (js/systems.js ghi đè); mặc định không đổi gì. */
+  /** Hệ số của quẻ đầu năm (js/systems/ ghi đè); mặc định không đổi gì. */
   G.queMult = () => 1;
 
   G.RANKS = ["Đáp ứng", "Thường tại", "Quý nhân", "Tần", "Phi", "Quý phi", "Hoàng quý phi", "Hoàng hậu"];

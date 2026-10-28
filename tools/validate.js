@@ -246,8 +246,10 @@ function crossCheck() {
   }
   const reg = [...all.hooksRegistered];
   // Cảnh JSON: khóa phải là nhân vật, sở thích hoặc _chung; HOOK phải có thật
-  // HOOK do code gọi trực tiếp (Lịch lễ, Hành cung, Sắc phong, Tâm nguyện… trong js/systems.js)
-  const codeHooks = [...fs.readFileSync(path.join(__dirname, "..", "js", "systems.js"), "utf8").matchAll(/"((?:canh-viet|core)\.[a-z0-9_]+)"/g)].map((m) => m[1]);
+  // HOOK do code gọi trực tiếp (Lịch lễ, Hành cung, Sắc phong, Tâm nguyện… trong js/systems/)
+  const sysDir = path.join(__dirname, "..", "js", "systems");
+  const sysSrc = fs.readdirSync(sysDir).filter((f) => f.endsWith(".js")).map((f) => fs.readFileSync(path.join(sysDir, f), "utf8")).join("\n");
+  const codeHooks = [...sysSrc.matchAll(/"((?:canh-viet|core)\.[a-z0-9_]+)"/g)].map((m) => m[1]);
   const knownHooks = new Set([...all.hooksUsed.map((u) => u.hook), ...reg, ...codeHooks]);
   const isKnownHook = (h) => knownHooks.has(h) || reg.some((r) => r.endsWith("*") && h.startsWith(r.slice(0, -1)));
   const seenHook = new Set();

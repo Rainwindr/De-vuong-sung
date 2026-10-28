@@ -136,6 +136,12 @@
   }
   UI.render = function () {
     const s = G.state;
+    // chữ cảnh còn đang tải ở nền: chờ một chút rồi mới vào game
+    if (G.textsPending && s) {
+      $app().innerHTML = `<section class="gate"><div class="seal">帝</div><p class="hint">Đang nạp cảnh…</p></section>`;
+      G.textsPending.then(() => UI.render());
+      return;
+    }
     if (!s) return UI.renderGate();
     if (s.ended) return renderEnding();
     const tabs = [

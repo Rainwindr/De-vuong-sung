@@ -64,7 +64,13 @@ def bundle_packs():
     return "window.__BUNDLED_PACKS__ = [\n" + ",\n".join(parts) + "\n];"
 
 
+def system_files():
+    """Các file hệ thống trong js/systems/, nạp theo thứ tự tên (01-, 02-...)."""
+    return sorted(str(p.relative_to(ROOT)).replace("\\", "/") for p in (ROOT / "js" / "systems").glob("*.js"))
+
+
 def main():
+    SYSTEM_FILES = system_files()
     css = read("css/style.css")
     fonts = (
         '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
@@ -73,7 +79,7 @@ def main():
     )
     scripts = "\n".join(
         f"<script>\n{safe_js(s)}\n</script>"
-        for s in [read("js/engine.js"), read("js/systems.js"), read("js/portrait.js"), read("js/scene-texts.js"), read("js/ui.js"), bundle_packs(), read("js/main.js")]
+        for s in [read("js/engine.js"), *[read(f) for f in SYSTEM_FILES], read("js/portrait.js"), read("js/scene-texts.js"), read("js/ui.js"), bundle_packs(), read("js/main.js")]
     )
     body = '<div id="app" class="app" aria-live="polite"></div>\n<div id="sheet" class="sheet" hidden></div>'
     head = (

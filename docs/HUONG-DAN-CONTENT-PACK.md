@@ -275,7 +275,7 @@ Khi một lựa chọn có `hook`, lõi tự tính đêm thị tẩm cho những
 
 ### 7.6 Mục tiêu năm
 
-Mỗi đầu năm lõi chọn 3 mục tiêu trong `G.GOALS` (js/systems.js) còn làm được. Mỗi mục tiêu có `text`, `ok(s)` (có nên đưa ra không), `test(s, base)` (đã xong chưa) và `reward` (cùng cú pháp `effects`). Đủ ba mục tiêu thưởng thêm 1000 lượng.
+Mỗi đầu năm lõi chọn 3 mục tiêu trong `G.GOALS` (js/systems/01-co-ban.js) còn làm được. Mỗi mục tiêu có `text`, `ok(s)` (có nên đưa ra không), `test(s, base)` (đã xong chưa) và `reward` (cùng cú pháp `effects`). Đủ ba mục tiêu thưởng thêm 1000 lượng.
 
 ## 8. Cuộc thi, quà, công trình, vùng
 
