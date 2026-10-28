@@ -1021,7 +1021,7 @@
     const i = Math.min(page || 0, pages.length - 1);
     const last = i === pages.length - 1;
     const img = scene.image
-      ? `<img class="scene-img" src="${esc(scene.image)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'scene-veil',textContent:'· · ·'}))">`
+      ? `<img class="scene-img" src="${esc(scene.image)}" alt="" data-alt="${esc((scene.imageAlt || []).join("|"))}" onerror="const a=(this.dataset.alt||'').split('|').filter(Boolean);if(a.length){this.dataset.alt=a.slice(1).join('|');this.src=a[0];}else this.replaceWith(Object.assign(document.createElement('div'),{className:'scene-veil',textContent:'· · ·'}))">`
       : `<div class="scene-veil">· · ·</div>`;
     const dots = pages.length > 1 ? `<div class="scene-dots" aria-label="Đoạn ${i + 1} trên ${pages.length}">${pages.map((_, k) => `<i class="${k === i ? "on" : k < i ? "done" : ""}"></i>`).join("")}</div>` : "";
     const btns = last

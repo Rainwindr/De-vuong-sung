@@ -1,6 +1,6 @@
 /*
  * Ảnh đầu cảnh theo sở thích: mỗi sở thích dùng một trong 31 tư thế (P01–P31).
- * Ảnh đặt trong packs/canh-viet/scene-art/. Có file nào thì ghi vào G.SCENE_ART_FILES; chưa có thì cảnh hiện khung "· · ·" như cũ.
+ * Ảnh đặt trong packs/canh-viet/scene-art/ với tên P01.jpg … P31.jpg (hoặc .png, .webp). Chưa có thì cảnh hiện khung "· · ·" như cũ.
  * Một phần của các hệ thống game (xây trên js/engine.js). Các file trong js/systems/ nạp theo thứ tự số,
  * file sau có thể bọc (wrap) hàm của file trước, nên đừng đổi thứ tự.
  */
@@ -44,23 +44,28 @@
     P31: ["core.duc_tri", "khung-nong-bong.nghi_thuc"]
   };
   G.SCENE_ART_PLAIN = "P06"; // đêm thường, không chọn sở thích
-  // Ảnh đã có: mã tư thế → tên file. Thêm dòng khi có ảnh mới, ví dụ P06: "P06.webp"
+  // Game tự tìm file theo mã tư thế, thử lần lượt các đuôi này (P06.jpg, P06.jpeg, P06.png, P06.webp).
+  // Không có file nào thì cảnh hiện khung "· · ·" như cũ.
+  G.SCENE_ART_EXT = [".jpg", ".jpeg", ".png", ".webp"];
+  // Ghi đè tên file riêng nếu cần, ví dụ P06: "dem-thuong.jpg"
   G.SCENE_ART_FILES = {};
 
   G.SCENE_ART = {};
   for (const [pose, ids] of Object.entries(BY_POSE)) for (const id of ids) G.SCENE_ART[id] = pose;
 
-  /** Đường dẫn ảnh cho bộ sở thích đêm nay, hoặc null. */
+  /** Ảnh cho bộ sở thích đêm nay: { src, alt: [các đường dẫn thử tiếp] } hoặc null. */
   G.sceneArtFor = function (fetishIds) {
     const list = (fetishIds || []).filter(Boolean);
-    const poses = list.length ? list.map((f) => G.SCENE_ART[f]).filter(Boolean) : [G.SCENE_ART_PLAIN];
-    const pose = poses.find((p) => G.SCENE_ART_FILES[p]);
-    return pose ? G.SCENE_ART_BASE + G.SCENE_ART_FILES[pose] : null;
+    const pose = list.length ? list.map((f) => G.SCENE_ART[f]).find(Boolean) : G.SCENE_ART_PLAIN;
+    if (!pose) return null;
+    const files = G.SCENE_ART_FILES[pose] ? [G.SCENE_ART_FILES[pose]] : G.SCENE_ART_EXT.map((e) => pose + e);
+    const paths = files.map((f) => G.SCENE_ART_BASE + f);
+    return { src: paths[0], alt: paths.slice(1) };
   };
   const withArt = (scene, fx) => {
     if (scene && !scene.blocked && !scene.image) {
-      const img = G.sceneArtFor(fx);
-      if (img) scene.image = img;
+      const art = G.sceneArtFor(fx);
+      if (art) Object.assign(scene, { image: art.src, imageAlt: art.alt });
     }
     return scene;
   };
