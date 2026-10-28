@@ -389,15 +389,16 @@
     if (!d.sacQueue.some((q) => q.id === c.id)) d.sacQueue.push({ id: c.id, rank: next });
     return Math.max(c.rank, Math.min(target, 3));
   };
-  function sacEvent(c, rank) {
-    const cost = G.SAC_PHONG_COST[rank];
+  function sacEvent(c, rank, extra) {
+    // extra: phí đặc ân khi bệ hạ phong cho người chưa đủ mốc (tính vào lễ)
+    const cost = G.SAC_PHONG_COST[rank] + (extra || 0);
     const ev = {
       id: "sys.sac_phong",
       title: "Lễ sắc phong · " + G.RANKS[rank],
       text: fillVars(G.D2_TEXT.sacPhong, { rank: G.RANKS[rank], cost }),
       choices: [
         { label: "Cử hành đại lễ", cost, hook: SAC_HOOK[rank], effects: { favor: 5, danTam: 1, hoaKhi: 1 }, _sac: rank },
-        { label: "Lễ giản dị", cost: Math.round(cost / 2), hook: SAC_HOOK[rank], effects: { favor: 2 }, _sac: rank },
+        { label: "Lễ giản dị", cost: Math.round(G.SAC_PHONG_COST[rank] / 2) + (extra || 0), hook: SAC_HOOK[rank], effects: { favor: 2 }, _sac: rank },
         { label: "Hoãn lại", effects: {} },
       ],
       onChoose: (ch) => {
@@ -418,6 +419,7 @@
     };
     return G.prepareEvent(ev, { speaker: c });
   }
+  G.sacEvent = sacEvent;
   monthly((s, report) => {
     if (s.ended) return;
     const d = d2(s);

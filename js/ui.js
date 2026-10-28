@@ -287,11 +287,11 @@
   }
   function consortCard(c, extra) {
     const p = G.partnerOf(c.id);
-    return `<button class="consort" data-consort="${esc(c.id)}">
+    return `<button class="consort${G.isTopFav && G.isTopFav(c) ? " top-fav" : ""}" data-consort="${esc(c.id)}">
       ${portrait(c)}
       <span class="body">
         <span class="name">${esc(c.name)}</span>
-        <span class="meta">${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}${G.isSulking && G.isSulking(c) ? " " + pill("Đang dỗi", "preg") : ""}${(() => { const pr = G.promiseNow && G.promiseNow(); return pr && pr.c.id === c.id && !pr.done ? " " + pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : ""; })()}</span>
+        <span class="meta">${G.isTopFav && G.isTopFav(c) ? pill("★ Sủng nhất", "top") + " " : ""}${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}${G.isSulking && G.isSulking(c) ? " " + pill("Đang dỗi", "preg") : ""}${(() => { const pr = G.promiseNow && G.promiseNow(); return pr && pr.c.id === c.id && !pr.done ? " " + pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : ""; })()}</span>
         <span class="favor">${bar(c.favor)}<span>Sủng ái ${c.favor}</span></span>
         ${G.levelName ? `<span class="meta card-extra"><span class="lv-pill lv-${G.levelOf(c)}">${esc(G.levelName(c))}</span> ${lastNightText(c)}</span>` : ""}
         ${extra || ""}
@@ -1025,13 +1025,19 @@
       : `<div class="scene-veil">· · ·</div>`;
     const dots = pages.length > 1 ? `<div class="scene-dots" aria-label="Đoạn ${i + 1} trên ${pages.length}">${pages.map((_, k) => `<i class="${k === i ? "on" : k < i ? "done" : ""}"></i>`).join("")}</div>` : "";
     const btns = last
-      ? `${notesHtml(notes || scene.notes)}${roundBtn(scene)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
+      ? `${notesHtml(notes || scene.notes)}${roundBtn(scene)}${banBtn(scene)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
       : `${sceneGameBtns(scene, i, pages)}<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
     openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${dots}<p class="ev-text">${formatText(pages[i])}</p>${btns}`, (el) => {
       $(el, ".sheet-card").classList.add("scene-card");
       if (last) {
         $(el, "#s-ok").addEventListener("click", closeSheet);
         on(el, "#s-more", "click", () => openRoundPicker(G.findConsort(scene.roundOf)));
+        on(el, "#s-ban", "click", () => {
+          const r = G.banPham(scene.roundOf);
+          G.save();
+          if (r.ok) queue.unshift(() => showScene(scene, notes, pages.length - 1));
+          showMessage(r.ok ? "Ban phẩm vị" : "Chưa thể ban", r.text, r.notes);
+        });
       }
       else {
         $(el, "#s-next").addEventListener("click", () => showScene(scene, notes, i + 1));
@@ -1041,6 +1047,16 @@
     }, last ? undefined : { locked: true });
   }
 
+  function banBtn(scene) {
+    if (!scene || scene.blocked || !scene.roundOf || !G.banPhamInfo) return "";
+    const c = G.findConsort(scene.roundOf);
+    const info = c && G.banPhamInfo(c);
+    if (!info) return "";
+    const st = G.state.stats.quocKho;
+    const rich = G.state.godFlags && G.state.godFlags.infiniteMoney;
+    const poor = info.fee > st && !rich;
+    return `<button class="btn" id="s-ban" ${poor ? "disabled" : ""}>Ban phẩm ${esc(G.RANKS[info.next])} cho nàng<span class="cost">${info.fee ? `${fmtMoney(info.fee)} lượng` : "miễn phí"}${info.ceremony ? " · tháng tới làm lễ sắc phong" : ""}${poor ? " · ngân khố không đủ" : ""}</span></button>`;
+  }
   function roundBtn(scene) {
     if (!scene || scene.blocked || !scene.roundOf || !G.roundState) return "";
     const c = G.findConsort(scene.roundOf);
@@ -1453,6 +1469,7 @@
     const canCrown = !s.consorts.some((x) => x.rank === 7) && c.favor >= 70;
     const wish = G.wishText ? G.wishText(c) : null;
     const queued = s.d2 && s.d2.sacQueue.find((q) => q.id === c.id);
+    const dacAn = G.dacAnInfo ? G.dacAnInfo(c) : null;
     const partner = G.partnerOf(c.id);
     const gifts = Object.values(R.gifts).sort((a, b) => a.cost - b.cost);
     openSheet(
@@ -1464,6 +1481,8 @@
          <button class="btn" id="c-visit">Ghé thăm</button>
          <button class="btn" id="c-night" ${G.cannotSummon(c) ? "disabled" : ""}>Triệu thị tẩm${G.cannotSummon(c) ? `<span class="cost">${esc(c.pregnantDue != null ? "Đang hoài thai" : G.isResting && G.isResting(c) ? "Tháng này nàng nghỉ" : "Chưa thể triệu")}</span>` : ""}</button>
          ${canCrown ? `<button class="btn" id="c-crown" ${crownWhy ? "disabled" : ""}>Lập làm Hoàng hậu${crownWhy ? `<span class="cost">${esc(crownWhy)}</span>` : ""}</button>` : ""}
+         ${dacAn && !queued ? `<button class="btn" id="c-dacan">Đặc ân phong ${esc(G.RANKS[dacAn.next])}<span class="cost">${dacAn.ceremony ? `kèm lễ sắc phong · ${fmtMoney(dacAn.total)} lượng` : dacAn.fee ? `${fmtMoney(dacAn.fee)} lượng` : "miễn phí"}${dacAn.eligible ? "" : ` · ${[dacAn.favorGap ? `thiếu ${dacAn.favorGap} Sủng ái` : "", dacAn.kidGap ? `thiếu ${dacAn.kidGap} con` : ""].filter(Boolean).join(", ")}`}</span></button>` : ""}
+         ${G.setTopFav ? `<button class="btn top-fav-btn" id="c-top" aria-pressed="${G.isTopFav(c)}">${G.isTopFav(c) ? "★ Đệ nhất sủng phi · bỏ ghim" : "☆ Chọn làm đệ nhất sủng phi"}<span class="cost">Mỗi tháng Sủng ái +${G.TOP_FAV_MONTHLY.favor}, luôn đứng đầu khay thẻ</span></button>` : ""}
        </div>
        <div class="seg" role="tablist">${[["info", "Chung"], ["gift", "Quà"], fets.length ? ["fx", "Sở thích"] : null, ["school", "Học phường"], G.bookView ? ["book", "Sổ tay"] : null, s.godMode ? ["god", "Thiên Đạo"] : null]
          .filter(Boolean)
@@ -1588,6 +1607,20 @@
           const ev = G.crownEvent ? G.crownEvent(c.id) : null;
           if (ev) showEvent(ev);
           else showMessage("Lập hậu", (G.crownBlock && G.crownBlock(c)) || "Chưa thể lập hậu.");
+        });
+        on(el, "#c-dacan", "click", () => {
+          const r = G.dacAn(c.id);
+          G.save();
+          if (r.event) showEvent(r.event);
+          else showMessage(r.ok ? "Đặc ân phong phẩm" : "Chưa thể phong", r.text, r.notes);
+        });
+        on(el, "#c-top", "click", () => {
+          const line = G.setTopFav(c.id);
+          G.save();
+          if (line) {
+            queue.unshift(() => openConsort(c.id));
+            showMessage("Đệ nhất sủng phi", line);
+          } else openConsort(c.id);
         });
         on(el, "#c-release", "click", () => {
           const r = G.releaseConsort(c.id);
@@ -2409,9 +2442,9 @@
       pr && pr.c.id === c.id && !pr.done ? pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : "",
       G.state.summonStreak.id === c.id && G.state.summonStreak.count >= 1 ? pill(`${G.state.summonStreak.count} đêm liền`, "rank") : "",
     ].filter(Boolean).join(" ");
-    return `<button class="tablet${faceDown ? " down" : ""}" data-tablet="${esc(c.id)}" aria-label="${faceDown ? "Thẻ úp" : esc(c.name)}">
+    return `<button class="tablet${faceDown ? " down" : ""}${!faceDown && G.isTopFav && G.isTopFav(c) ? " top-fav" : ""}" data-tablet="${esc(c.id)}" aria-label="${faceDown ? "Thẻ úp" : esc(c.name)}">
       <span class="tablet-in">
-        <span class="tablet-face front">${portrait(c)}<span class="t-name">${esc(c.name)}</span><span class="t-rank">${esc(G.displayTitle(c))}</span>${tags ? `<span class="t-tags">${tags}</span>` : ""}<span class="t-favor">${bar(c.favor)}<span>Sủng ái ${Math.round(c.favor)}</span></span></span>
+        <span class="tablet-face front">${portrait(c)}<span class="t-name">${G.isTopFav && G.isTopFav(c) ? '<b class="t-star">★</b> ' : ""}${esc(c.name)}</span><span class="t-rank">${esc(G.displayTitle(c))}</span>${tags ? `<span class="t-tags">${tags}</span>` : ""}<span class="t-favor">${bar(c.favor)}<span>Sủng ái ${Math.round(c.favor)}</span></span></span>
         <span class="tablet-face back"><span class="seal">御</span><span class="t-back">${faceDown ? "Thẻ úp" : "Đêm nay"}</span></span>
       </span>
     </button>`;
@@ -2421,7 +2454,8 @@
 
   function openSummon() {
     const s = G.state;
-    const list = s.consorts.filter((c) => !G.cannotSummon(c)).sort((a, b) => b.favor - a.favor);
+    const top = G.isTopFav || (() => false);
+    const list = s.consorts.filter((c) => !G.cannotSummon(c)).sort((a, b) => top(b) - top(a) || b.favor - a.favor);
     const fate = G.canDrawFate && G.canDrawFate();
     let busy = false;
     openSheet(
