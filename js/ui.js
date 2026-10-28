@@ -1020,7 +1020,9 @@
     const pages = scene.pages && scene.pages.length ? scene.pages : [scene.text || ""];
     const i = Math.min(page || 0, pages.length - 1);
     const last = i === pages.length - 1;
-    const img = scene.image
+    const img = !sceneArtOn()
+      ? ""
+      : scene.image
       ? `<img class="scene-img" src="${esc(scene.image)}" alt="" data-alt="${esc((scene.imageAlt || []).join("|"))}" onerror="const a=(this.dataset.alt||'').split('|').filter(Boolean);if(a.length){this.dataset.alt=a.slice(1).join('|');this.src=a[0];}else this.replaceWith(Object.assign(document.createElement('div'),{className:'scene-veil',textContent:'· · ·'}))">`
       : `<div class="scene-veil">· · ·</div>`;
     const dots = pages.length > 1 ? `<div class="scene-dots" aria-label="Đoạn ${i + 1} trên ${pages.length}">${pages.map((_, k) => `<i class="${k === i ? "on" : k < i ? "done" : ""}"></i>`).join("")}</div>` : "";
@@ -1398,6 +1400,7 @@
          <div class="field"><label for="m-import">Nhập mã lưu</label><textarea id="m-import" rows="3" placeholder="Dán mã vào đây"></textarea></div>
          <button class="btn btn-sm" id="m-doimport">Nhập</button>
        </details>
+       <label class="check menu-opt"><input type="checkbox" id="m-art" ${sceneArtOn() ? "checked" : ""}> Hiện ảnh đầu cảnh</label>
        <details><summary>Che màn hình nhanh</summary>
          <p class="hint">Chạm hai lần thật nhanh vào góc trên bên trái màn hình: game được che bằng một trang ghi chú bình thường, tên tab đổi thành "Ghi chú". Chạm hai lần vào trang ghi chú để quay lại.</p>
          <label class="check"><input type="checkbox" id="m-autocover" ${autoCover() ? "checked" : ""}> Tự che khi chuyển sang ứng dụng khác</label>
@@ -1407,6 +1410,11 @@
       (el) => {
         bindSlots(el);
         $(el, "#m-close").addEventListener("click", closeSheet);
+        on(el, "#m-art", "change", (inp) => {
+          try {
+            localStorage.setItem("dvs.sceneArt", inp.checked ? "1" : "0");
+          } catch (e) {}
+        });
         on(el, "#m-autocover", "change", (inp) => {
           try {
             localStorage.setItem("dvs.autoCover", inp.checked ? "1" : "0");
@@ -2825,6 +2833,15 @@
       G.state = null;
       UI.renderGate();
     });
+  }
+
+  /** Bật/tắt ảnh đầu cảnh (mặc định bật). Tắt thì cảnh không có khung ảnh. */
+  function sceneArtOn() {
+    try {
+      return localStorage.getItem("dvs.sceneArt") !== "0";
+    } catch (e) {
+      return true;
+    }
   }
 
   /* ---------------- Che màn hình nhanh ---------------- */

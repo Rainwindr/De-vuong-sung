@@ -619,3 +619,4 @@ details.fold > .section-head h3 { display: none; }
 #cover .cv-box { width: 20px; height: 20px; border: 1.5px solid #c9c4b8; border-radius: 50%; display: inline-grid; place-items: center; font-size: 12px; color: #b07a1f; flex: none; }
 #cover .cv-foot { color: #999; font-size: 13px; margin-top: 14px; }
 body.covered { overflow: hidden; }
+.menu-opt { margin: 10px 0; }
