@@ -219,7 +219,7 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 700; text-wrap: balance
 .choices .cost { float: right; color: var(--gold); font-size: 12.5px; font-variant-numeric: tabular-nums; }
 .notes { display: flex; flex-wrap: wrap; gap: 6px; }
 .notes span { font-size: 12px; padding: 3px 8px; border-radius: 999px; background: #ffffff10; color: var(--paper); font-variant-numeric: tabular-nums; }
-.scene-img { width: 100%; max-width: 100%; border-radius: var(--r); aspect-ratio: 4 / 3; object-fit: cover; background: var(--ink); }
+.scene-img { width: 100%; max-width: 100%; border-radius: var(--r); aspect-ratio: 16 / 9; object-fit: cover; background: var(--ink); }
 .scene-veil {
   aspect-ratio: 16 / 7; max-width: 100%; border-radius: var(--r);
   background:
