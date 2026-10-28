@@ -152,8 +152,8 @@
       ["palace", "Cung điện"],
     ];
     if (s.godMode) tabs.push(["god", "Thiên Đạo"]);
-    $app().innerHTML = `
-      <header class="topbar">
+    // Chỉ dựng lại phần nào đổi: đầu trang, nội dung tab, lớp mùa. Thanh nút dưới và toast giữ nguyên.
+    const headHtml = `<header class="topbar">
         <div class="who">
           <h2 title="${esc(s.emperorName)}">${esc(s.emperorName)}</h2>
           <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year} th.${s.month}${G.seasonOf ? ` <span class="season-pill s-${G.seasonOf(s.month)}">${G.SEASONS[G.seasonOf(s.month)]}</span>` : ""}${G.currentQue && G.currentQue() ? ` <span class="que-pill">${esc(G.currentQue().name)}</span>` : ""}</span>
@@ -167,8 +167,15 @@
           })
           .join("")}</div>
         <nav class="tabs" role="tablist">${tabs.map(([id, l]) => `<button class="tab" role="tab" data-tab="${id}" aria-selected="${tab === id}">${l}</button>`).join("")}</nav>
-      </header>
-      <main id="view">${renderTab()}</main>
+      </header>`;
+    const viewHtml = renderTab();
+    const seasonHtml = G.seasonOf ? seasonLayer(G.seasonOf(s.month)) : "";
+    const root = $app();
+    let head = $(root, ":scope > header.topbar");
+    let view = $(root, ":scope > #view");
+    if (!head || !view || !$(root, "#b-next")) {
+      root.innerHTML = `${headHtml}
+      <main id="view"></main>
       <div class="dock"><div class="dock-inner">
         <button class="btn" id="b-summon">Lật thẻ</button>
         <button class="btn" id="b-actions">Ý chỉ</button>
@@ -176,21 +183,49 @@
         <button class="btn btn-primary" id="b-skip">Đến chuyện mới</button>
       </div></div>
       <div class="toast" id="toast" hidden></div>
-      ${G.seasonOf ? seasonLayer(G.seasonOf(s.month)) : ""}`;
+      <div id="season-slot"></div>`;
+      $(root, "#b-next").addEventListener("click", nextMonth);
+      $(root, "#b-skip").addEventListener("click", skipToEvent);
+      $(root, "#b-summon").addEventListener("click", openSummon);
+      $(root, "#b-actions").addEventListener("click", openActions);
+      head = view = null;
+      shell = { head: null, view: null, season: null };
+    }
+    if (shell.head !== headHtml || !head) {
+      const old = $(root, ":scope > header.topbar");
+      const tpl = document.createElement("template");
+      tpl.innerHTML = headHtml;
+      const fresh = tpl.content.firstElementChild;
+      old.replaceWith(fresh);
+      shell.head = headHtml;
+      bindHead(fresh);
+    }
+    if (shell.view !== viewHtml || !view) {
+      view = $(root, ":scope > #view");
+      view.innerHTML = viewHtml;
+      shell.view = viewHtml;
+      bindTab(view);
+    }
+    if (shell.season !== seasonHtml) {
+      $(root, "#season-slot").innerHTML = seasonHtml;
+      shell.season = seasonHtml;
+    }
     if (G.seasonOf) document.body.dataset.season = G.seasonOf(s.month);
-    const root = $app();
-    on(root, ".tab", "click", (b) => {
+    if (!$sheet().hidden) return;
+    playFx();
+    if (s.pendingTitles.length) openTitlePrompt();
+  };
+
+  // Bản HTML đã dựng lần trước của từng vùng (để bỏ qua vùng không đổi)
+  let shell = { head: null, view: null, season: null };
+  function bindHead(headEl) {
+    on(headEl, ".tab", "click", (b) => {
       tab = b.dataset.tab;
       UI.render();
       window.scrollTo(0, 0);
     });
-    $(root, "#b-next").addEventListener("click", nextMonth);
-    $(root, "#b-skip").addEventListener("click", skipToEvent);
-    $(root, "#b-summon").addEventListener("click", openSummon);
-    $(root, "#b-actions").addEventListener("click", openActions);
-    $(root, "#b-menu").addEventListener("click", openMenu);
-    bindTab(root);
-    const tb = $(root, ".tabs");
+    $(headEl, "#b-menu").addEventListener("click", openMenu);
+    const tb = $(headEl, ".tabs");
     if (tb) {
       const edge = () => {
         tb.classList.toggle("more-r", tb.scrollLeft + tb.clientWidth < tb.scrollWidth - 4);
@@ -201,11 +236,7 @@
       edge();
       tb.addEventListener("scroll", edge, { passive: true });
     }
-    if (!$sheet().hidden) return;
-    playFx();
-    if (s.pendingTitles.length) openTitlePrompt();
-  };
-
+  }
   function renderTab() {
     return ({ harem: renderHarem, kids: renderKids, me: () => renderBedTitles() + renderGameRecords() + renderAlbum() + renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
   }

@@ -200,6 +200,29 @@ ${bun}${front}${sheen}${jewel}
 </g>
 </svg>`;
   };
+
+  // Nhớ sẵn chân dung: cùng người, cùng tâm trạng, phẩm vị, vòng một thì SVG giống hệt, khỏi tính lại.
+  const draw = G.portraitSVG;
+  const cache = new Map();
+  G.portraitSVG = function (c) {
+    const p = c.portrait || {};
+    const kid = !!c.isChild;
+    const favor = c.favor != null ? c.favor : 50;
+    const mood = kid ? 0 : favor >= 70 ? 2 : favor >= 35 ? 1 : 0;
+    let nguc = "";
+    if (!kid && G.state && G.bodyOf && G.findConsort) {
+      const f = G.findConsort(c.id);
+      if (f) nguc = G.bodyOf(f).nguc;
+    }
+    const key = [c.id || "", c.name || "", p.hue != null ? p.hue : "", kid ? 1 : 0, mood, kid ? 0 : c.rank || 0, nguc].join("|");
+    let svg = cache.get(key);
+    if (svg === undefined) {
+      svg = draw(c);
+      if (cache.size > 600) cache.clear();
+      cache.set(key, svg);
+    }
+    return svg;
+  };
 })();
 
 /*
