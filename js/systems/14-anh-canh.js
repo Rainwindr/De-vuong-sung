@@ -61,9 +61,11 @@
    *   3. máy chạy python -m http.server: đọc trang liệt kê thư mục
    * Không lấy được danh sách thì dùng cách cũ: ảnh theo mã tư thế (P01…P31).
    */
+  // Kho ảnh ngoài (Cloudflare R2). Ảnh ở đó tên anh-001.webp, anh-002.webp… liên tiếp; game tự dò đến hết.
+  G.SCENE_ART_REMOTE = "https://pub-eda5bdbc8a86487b966957882f6f27a7.r2.dev/";
   G.SCENE_ART_POOL = [];
   const IMG = /\.(jpe?g|png|webp)$/i;
-  const CACHE = "dvs.sceneArtList";
+  const CACHE = "dvs.sceneArtList2";
   const uniq = (a) => [...new Set(a)].filter((n) => IMG.test(n) && !n.startsWith("_"));
   async function fromJson() {
     const r = await fetch(G.SCENE_ART_BASE + "list.json", { cache: "no-cache" });
@@ -89,12 +91,39 @@
     const html = await r.text();
     return uniq([...html.matchAll(/href="([^"?#]+)"/g)].map((x) => decodeURIComponent(x[1].split("/").filter(Boolean).pop() || "")));
   }
+  const exists = (url) =>
+    new Promise((res) => {
+      const im = new Image();
+      const t = setTimeout(() => res(false), 8000);
+      im.onload = () => (clearTimeout(t), res(true));
+      im.onerror = () => (clearTimeout(t), res(false));
+      im.src = url;
+    });
+  async function fromRemote() {
+    const base = G.SCENE_ART_REMOTE;
+    if (!base) throw new Error("no remote");
+    const name = (i) => `${base}anh-${String(i).padStart(3, "0")}.webp`;
+    const found = [];
+    let i = 1, miss = 0;
+    while (miss < 3 && i < 1000) {
+      const batch = Array.from({ length: 10 }, (_, k) => i + k);
+      const ok = await Promise.all(batch.map((n) => exists(name(n))));
+      for (let k = 0; k < ok.length; k++) {
+        if (ok[k]) {
+          found.push(name(batch[k]));
+          miss = 0;
+        } else miss++;
+      }
+      i += 10;
+    }
+    return found;
+  }
   G.sceneArtReady = (async () => {
     try {
       const c = JSON.parse(sessionStorage.getItem(CACHE) || "null");
       if (Array.isArray(c) && c.length) return (G.SCENE_ART_POOL = c);
     } catch (e) {}
-    for (const f of [fromJson, fromGithub, fromListing]) {
+    for (const f of [fromRemote, fromJson, fromGithub, fromListing]) {
       try {
         const list = await f();
         if (list.length) {
@@ -117,7 +146,7 @@
       const choices = pool.length > 1 ? pool.filter((n) => n !== lastArt) : pool;
       const name = choices[Math.floor(Math.random() * choices.length)];
       lastArt = name;
-      return { src: G.SCENE_ART_BASE + encodeURIComponent(name), alt: [] };
+      return { src: /^https?:/.test(name) ? name : G.SCENE_ART_BASE + encodeURIComponent(name), alt: [] };
     }
     // cách cũ: theo mã tư thế
     const list = (fetishIds || []).filter(Boolean);
