@@ -53,7 +53,7 @@
   G.D11_TEXT.edgeFail = ["{name} không kìm được, lên đỉnh sớm hơn trẫm muốn.", "{name} đạt đỉnh trước, rên lớn nước ướt hết đùi.", "{name} lên đỉnh sớm, co giật không kịp kìm."];
   G.D11_TEXT.spotHot = ["Bệ hạ vừa chạm đúng chỗ nhạy nhất của {name}.\n> A… thần thiếp lên đỉnh rồi!", "Ngón tay trẫm chạm đúng hạt của {name}.\n> Ôi… thiếp chịu không nổi nữa!", "Bệ hạ vuốt đúng điểm nhạy của {name}.\n> Bệ hạ ơi… thiếp muốn bị đụ ngay!"];
   G.D11_TEXT.giftBack = {"canh": ["{name} vui tặng bát canh bổ tự nấu để đêm nay trẫm sung sức.", "{name} dâng canh bổ, mong bệ hạ đụ thiếp mạnh hơn đêm nay."], "tui": ["{name} tặng túi thơm tự thêu cho bệ hạ.", "{name} trao túi thơm, hương của thiếp dành cho trẫm."]};
-  G.D11_TEXT.contestWin = ["{name} thắng cuộc thi, được hầu trẫm đêm nay, các phi ghen tị.", "{name} thắng, được hầu bệ hạ, phi khác đỏ mắt nhìn.", "{name} thắng thi giữa các phi, đêm nay thiếp hầu trẫm."];
+  G.D11_TEXT.contestWin = ["{name} thắng cuộc thi, được hầu trẫm đêm nay, các phi ghen tị.", "{name} thắng, được hầu bệ hạ, phi khác đỏ mắt nhìn.", "{name} thắng thi giữa các phi, đêm nay thiếp hầu bệ hạ."];
   const d11 = (s) => {
     s = s || G.state;
     if (!s.d11) s.d11 = {};
