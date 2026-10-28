@@ -10,25 +10,29 @@
   const log = (t, k) => G.log(t, k);
   const monthly = (fn) => G.monthlyHooks.push(fn);
 
-  // Câu nháp, chờ Grok viết lại. Biến: {name}, {rank} (phẩm mới).
+  // Câu do Claude viết (mức gợi tình). Grok có thể viết lại theo PROMPT-GROK-PHONG-PHAM. Biến: {name}, {rank} (phẩm mới).
   G.D12_TEXT = {
     // ghi nhật ký khi bệ hạ đặc ân phong phẩm (phẩm dưới Phi, không cần lễ)
     dacAn: [
-      "Một đạo khẩu dụ, {name} được bệ hạ đặc ân phong lên {rank}, cả hậu cung xôn xao.",
-      "{name} chưa đủ lệ mà vẫn lên {rank}, ai cũng biết đó là ân sủng riêng của bệ hạ.",
-      "Bệ hạ phá lệ phong {name} lên {rank}, nàng đỏ mặt tạ ơn mãi không thôi.",
+      "Một đạo khẩu dụ truyền xuống, {name} được bệ hạ phá lệ phong lên {rank}, cả hậu cung xôn xao bàn tán.",
+      "{name} chưa đủ lệ mà vẫn lên {rank}, các phi đều hiểu đó là ân sủng riêng bệ hạ dành cho nàng.",
+      "Bệ hạ đặc ân phong {name} lên {rank}, nàng quỳ tạ ơn mà má đỏ bừng, mắt không rời long nhan.",
+      "Kim sách phong {name} làm {rank} đến sớm hơn lệ cả năm, chỉ vì bệ hạ muốn thấy nàng cười.",
     ],
     // ban phẩm ngay trên giường, sau đêm thị tẩm: câu dẫn + thoại
     banPham: [
-      "Còn nằm trong vòng tay bệ hạ, {name} nghe trẫm phán sẽ phong nàng lên {rank}.\n> Thần thiếp tạ ơn bệ hạ, đêm nào thiếp cũng xin hầu bệ hạ thật vừa ý.",
-      "Bệ hạ vuốt tóc {name}, khẽ nói từ mai nàng là {rank}.\n> Bệ hạ thương thiếp quá… thiếp không biết lấy gì báo đáp, chỉ có thân này thôi.",
-      "{name} vừa thở dốc vừa nghe tin được ban phẩm {rank}, ôm chặt lấy bệ hạ.\n> Thiếp sẽ làm bệ hạ vui lòng mỗi đêm, để bệ hạ không hối hận.",
+      "Còn nằm trong vòng tay bệ hạ, mồ hôi chưa ráo, {name} nghe bệ hạ phán từ mai nàng là {rank}.\n> Thần thiếp tạ ơn bệ hạ… thân này của thiếp, đêm nào bệ hạ muốn cũng xin dâng trọn.",
+      "Bệ hạ vuốt dọc tấm lưng trần của {name}, khẽ nói sẽ phong nàng lên {rank}.\n> Bệ hạ thương thiếp quá… thiếp không có gì báo đáp, chỉ biết hầu bệ hạ thật ngoan thôi.",
+      "{name} vừa thở dốc vừa nghe tin được ban phẩm {rank}, nàng ôm siết lấy bệ hạ không chịu buông.\n> Vậy đêm mai thiếp càng phải làm bệ hạ vừa ý hơn đêm nay mới được.",
+      "Bệ hạ hôn lên vai {name} còn ửng hồng, ban cho nàng phẩm {rank} ngay trên gối.\n> {rank} của bệ hạ xin tạ ơn bằng cả đêm nay… bệ hạ còn sức không?",
+      "{name} quấn mình trong chăn gấm, nghe bệ hạ phong mình làm {rank} thì cười khúc khích, áp sát vào lòng bệ hạ.\n> Thiếp lên phẩm rồi, mà vẫn chỉ muốn nằm dưới bệ hạ thôi.",
     ],
     // khi được ghim làm Đệ nhất sủng phi: câu dẫn + thoại
     topPin: [
-      "Bệ hạ đặt thẻ tên {name} lên đầu khay, từ nay nàng là đệ nhất sủng phi.\n> Thần thiếp xin chỉ thuộc về một mình bệ hạ.",
-      "Lý công công truyền chỉ: {name} là người bệ hạ sủng nhất hậu cung.\n> Bệ hạ đã chọn thiếp, thiếp sẽ không để bệ hạ thất vọng đêm nào.",
-      "{name} nhận ấn ngọc khắc chữ Sủng, cúi đầu mà mắt long lanh.\n> Thiếp mong bệ hạ triệu thiếp thật nhiều.",
+      "Bệ hạ đặt thẻ tên {name} lên đầu khay, từ nay {rank} {name} là đệ nhất sủng phi.\n> Thần thiếp xin chỉ thuộc về một mình bệ hạ, đêm nào cũng chờ.",
+      "Lý công công truyền chỉ khắp lục cung: {rank} {name} là người bệ hạ sủng nhất.\n> Bệ hạ đã chọn thiếp… vậy đêm nay bệ hạ có đến không?",
+      "{name} nhận ấn ngọc khắc chữ Sủng, dù mới là {rank} mà các phi đã phải nhường lối.\n> Thiếp sẽ giữ bệ hạ thật chặt, để bệ hạ không nỡ rời giường thiếp.",
+      "Bệ hạ cài trâm phượng lên tóc {name}, phán rằng {rank} này đứng trên cả hậu cung trong lòng trẫm.\n> Thiếp mong bệ hạ triệu thiếp thật nhiều, nhiều đến mức các phi phải ghen.",
     ],
   };
 
