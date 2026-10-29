@@ -647,3 +647,8 @@ body.covered { overflow: hidden; }
 .night-extra .chip { white-space: normal; text-align: left; }
 .night-extra select { max-width: 100%; }
 .tablet.preg .tablet-face.front { border-color: #6fae8e; box-shadow: 0 0 0 1px #6fae8e88; }
+
+/* Sửa tràn ngang: cột lưới đầu trang không được rộng hơn màn hình */
+.topbar { grid-template-columns: minmax(0, 1fr); }
+.topbar > * { min-width: 0; }
+.who .date { display: flex; align-items: center; justify-content: flex-end; gap: 4px; flex-wrap: nowrap; }
