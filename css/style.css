@@ -646,3 +646,4 @@ body.covered { overflow: hidden; }
 .night-extra .chips { flex-wrap: wrap; overflow: visible; white-space: normal; }
 .night-extra .chip { white-space: normal; text-align: left; }
 .night-extra select { max-width: 100%; }
+.tablet.preg .tablet-face.front { border-color: #6fae8e; box-shadow: 0 0 0 1px #6fae8e88; }

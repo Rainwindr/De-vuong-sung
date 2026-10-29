@@ -1679,7 +1679,7 @@
           $(el, "#c-release-ask").hidden = false;
         });
         $(el, "#c-visit").addEventListener("click", () => openTalk(c));
-        $(el, "#c-night").addEventListener("click", () => openNight(c));
+        $(el, "#c-night").addEventListener("click", () => openNight(c, [], { pregOk: true }));
         on(el, "#c-crown", "click", () => {
           const ev = G.crownEvent ? G.crownEvent(c.id) : null;
           if (ev) showEvent(ev);
@@ -2784,8 +2784,34 @@
       ${furn.length ? `<div class="field"><label for="n-furn">Bày biện</label><select id="n-furn"><option value="">Không dùng</option>${furn.map((f) => `<option value="${f}">${esc(G.FURNISH[f].name)}</option>`).join("")}</select></div>` : ""}
       <p class="hint">Mua y phục và đồ riêng cho nàng ở hồ sơ (tab Y phục, Đồ riêng). Bày biện tẩm cung mua ở Ý chỉ › Kho phòng the.</p></details>`;
   }
+  /** Lỡ chọn phi đang hoài thai: nàng làm nũng, gợi ý 2 phi khác, không mất lượt. */
+  const PREG_LINES = [
+    "{name} xoa nhẹ bụng, cười ngượng.\n> Bệ hạ, long thai đang quấy, đêm nay thiếp xin hầu bệ hạ chén trà thôi nhé. Hay bệ hạ ghé chỗ tỷ muội khác?",
+    "{name} kéo tay bệ hạ đặt lên bụng mình.\n> Con của bệ hạ vừa đạp đấy. Đêm nay để thiếp nghỉ, bệ hạ đừng giận thiếp.",
+    "{name} tựa đầu vào vai bệ hạ, giọng nũng nịu.\n> Thái y dặn thiếp tĩnh dưỡng rồi. Bệ hạ thương thiếp thì đêm nay sang cung khác đi mà.",
+  ];
+  function pregGate(c, go) {
+    const alt = G.state.consorts
+      .filter((x) => x.id !== c.id && x.pregnantDue == null && !G.cannotSummon(x))
+      .sort((a, b) => (G.isTopFav && G.isTopFav(b) ? 1 : 0) - (G.isTopFav && G.isTopFav(a) ? 1 : 0) || b.favor - a.favor)
+      .slice(0, 2);
+    const line = G.fill(PREG_LINES[Math.floor(Math.random() * PREG_LINES.length)], { speaker: c });
+    openSheet(
+      `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Đang hoài thai · ${esc(G.displayTitle(c))}</span><h3>${esc(c.name)}</h3></div></div>
+       <p class="ev-text">${formatText(line)}</p>
+       <div class="choices">${alt.map((x) => `<button class="btn btn-primary" data-alt="${esc(x.id)}">Đổi sang ${esc(x.name)}<span class="cost">${esc(G.displayTitle(x))} · Sủng ái ${Math.round(x.favor)}</span></button>`).join("")}
+         <button class="btn" id="pg-tray">Về khay lật thẻ</button>
+         <button class="btn btn-ghost" id="pg-go">Vẫn triệu nàng (nhẹ nhàng, sở thích Mang thai)</button></div>`,
+      (el) => {
+        on(el, "[data-alt]", "click", (b) => openNight(G.findConsort(b.dataset.alt)));
+        on(el, "#pg-tray", "click", () => openSummon());
+        on(el, "#pg-go", "click", () => go());
+      }
+    );
+  }
   function openNight(c, preset, opts) {
     opts = opts || {};
+    if (c && c.pregnantDue != null && !opts.pregOk) return pregGate(c, () => openNight(c, ["canh-viet.mang_thai"].filter((f) => R.fetishes[f]), Object.assign({}, opts, { pregOk: true })));
     const fets = Object.values(R.fetishes)
       .filter((f) => G.fetishUnlocked(f.id))
       .sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name, "vi"));
@@ -2957,8 +2983,9 @@
       pr && pr.c.id === c.id && !pr.done ? pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : "",
       G.state.summonStreak.id === c.id && G.state.summonStreak.count >= 1 ? pill(`${G.state.summonStreak.count} đêm liền`, "rank") : "",
       !faceDown && G.khatOf && G.khatOf(c) >= G.KHAT_ASK_AT ? pill("Khát khao", "khat") : "",
+      !faceDown && c.pregnantDue != null ? pill(`Hoài thai · tháng ${Math.min(9, Math.max(1, 9 - (c.pregnantDue - G.state.turn) + 1))}`, "preg") : "",
     ].filter(Boolean).join(" ");
-    return `<button class="tablet${faceDown ? " down" : ""}${!faceDown && G.isTopFav && G.isTopFav(c) ? " top-fav" : ""}" data-tablet="${esc(c.id)}" aria-label="${faceDown ? "Thẻ úp" : esc(c.name)}">
+    return `<button class="tablet${faceDown ? " down" : ""}${!faceDown && c.pregnantDue != null ? " preg" : ""}${!faceDown && G.isTopFav && G.isTopFav(c) ? " top-fav" : ""}" data-tablet="${esc(c.id)}" aria-label="${faceDown ? "Thẻ úp" : esc(c.name)}">
       <span class="tablet-in">
         <span class="tablet-face front">${portrait(c)}<span class="t-name">${G.isTopFav && G.isTopFav(c) ? '<b class="t-star">★</b> ' : ""}${esc(c.name)}</span><span class="t-rank">${esc(G.displayTitle(c))}</span>${tags ? `<span class="t-tags">${tags}</span>` : ""}<span class="t-favor">${bar(c.favor)}<span>Sủng ái ${Math.round(c.favor)}</span></span></span>
         <span class="tablet-face back"><span class="seal">御</span><span class="t-back">${faceDown ? "Thẻ úp" : "Đêm nay"}</span></span>
