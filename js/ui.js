@@ -237,8 +237,70 @@
       tb.addEventListener("scroll", edge, { passive: true });
     }
   }
+  /* ---------------- Cấp phòng the của bệ hạ ---------------- */
+  function renderLevel() {
+    if (!G.levelInfo) return "";
+    const L = G.levelInfo();
+    return `<section class="section lv-card"><div class="section-head"><h3>Cấp phòng the ${L.level} · ${esc(L.title)}</h3><span class="hint">${L.next ? `${L.xp}/${L.next} kinh nghiệm` : "Cấp cao nhất"}</span></div>
+      ${bar(L.pct, "gold")}
+      <p class="hint">Mỗi đêm thị tẩm +${G.XP.night} (mỗi người thêm +${G.XP.extra}), mỗi hiệp thêm +${G.XP.round}, mỗi trò trong đêm +${G.XP.game}.</p>
+      ${L.pending && L.offer ? `<div class="perk-pick"><p><b>Lên cấp! Chọn một đặc quyền:</b></p><div class="choices">${L.offer.map((k) => `<button class="btn perk-btn" data-perk="${k}">${esc(G.PERKS[k].name)}<span class="cost">${esc(G.PERKS[k].desc)}</span></button>`).join("")}</div></div>` : ""}
+      ${L.perks.length ? `<div class="row-wrap">${L.perks.map((k) => `<span class="pill rank" title="${esc(G.PERKS[k].desc)}">${esc(G.PERKS[k].name)}</span>`).join("")}</div><p class="hint">${L.perks.map((k) => esc(G.PERKS[k].desc)).join(" ")}</p>` : `<p class="hint">Chưa có đặc quyền nào. Lên cấp 2 để chọn đặc quyền đầu tiên.</p>`}
+    </section>`;
+  }
+  /* ---------------- Phòng tranh ---------------- */
+  let galleryAll = false;
+  function renderGallery() {
+    if (!G.artSeen) return "";
+    const seen = G.artSeen();
+    const total = (G.SCENE_ART_POOL || []).length;
+    const shown = galleryAll ? seen : seen.slice(-12);
+    return `<section class="section"><div class="section-head"><h3>Phòng tranh</h3><span class="hint">${seen.length}${total ? "/" + total : ""} bức đã mở</span></div>
+      ${seen.length
+        ? `<div class="gal-grid">${shown
+            .slice()
+            .reverse()
+            .map((src, k) => `<button class="gal-item" data-art="${shown.length - 1 - k}"><img src="${esc(src)}" alt="" loading="lazy" onerror="this.parentNode.remove()"></button>`)
+            .join("")}</div>${seen.length > 12 ? `<button class="btn btn-sm btn-ghost" data-galall="${galleryAll ? 0 : 1}">${galleryAll ? "Thu gọn" : `Xem cả ${seen.length} bức`}</button>` : ""}`
+        : `<p class="empty">Chưa mở bức nào. Mỗi ảnh hiện ở đầu cảnh sẽ được treo vào đây.</p>`}
+    </section>`;
+  }
+  /** Xem ảnh toàn màn hình: chạm để đóng, vuốt hoặc bấm mũi tên để sang ảnh khác. */
+  function openArtViewer(list, i) {
+    if (!list || !list.length) return;
+    let k = Math.max(0, Math.min(i, list.length - 1));
+    let el = document.getElementById("art-view");
+    if (el) el.remove();
+    el = document.createElement("div");
+    el.id = "art-view";
+    const draw = () => {
+      el.innerHTML = `<img src="${esc(list[k])}" alt="">${list.length > 1 ? `<button class="av-nav prev" aria-label="Ảnh trước">‹</button><button class="av-nav next" aria-label="Ảnh sau">›</button><span class="av-n">${k + 1}/${list.length}</span>` : ""}<button class="av-x" aria-label="Đóng">✕</button>`;
+    };
+    draw();
+    document.body.appendChild(el);
+    let x0 = null;
+    el.addEventListener("pointerdown", (e) => (x0 = e.clientX));
+    el.addEventListener("click", (e) => {
+      if (e.target.closest(".prev")) k = (k - 1 + list.length) % list.length;
+      else if (e.target.closest(".next")) k = (k + 1) % list.length;
+      else return el.remove();
+      draw();
+    });
+    el.addEventListener("pointerup", (e) => {
+      if (x0 == null || list.length < 2) return;
+      const dx = e.clientX - x0;
+      x0 = null;
+      if (Math.abs(dx) > 50) {
+        k = (k + (dx < 0 ? 1 : -1) + list.length) % list.length;
+        draw();
+        e.stopPropagation();
+      }
+    });
+  }
+  UI.openArtViewer = openArtViewer;
+
   function renderTab() {
-    return ({ harem: renderHarem, kids: renderKids, me: () => renderBedTitles() + renderGameRecords() + renderAlbum() + renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
+    return ({ harem: renderHarem, kids: renderKids, me: () => renderLevel() + renderBedTitles() + renderGameRecords() + renderGallery() + renderAlbum() + renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
   }
 
   /* ---------------- Nhật ký ---------------- */
@@ -291,7 +353,7 @@
       ${portrait(c)}
       <span class="body">
         <span class="name">${esc(c.name)}</span>
-        <span class="meta">${G.isTopFav && G.isTopFav(c) ? pill("★ Sủng nhất", "top") + " " : ""}${G.khatOf && G.khatOf(c) >= G.KHAT_ASK_AT ? pill("Khát khao", "khat") + " " : ""}${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}${G.isSulking && G.isSulking(c) ? " " + pill("Đang dỗi", "preg") : ""}${(() => { const pr = G.promiseNow && G.promiseNow(); return pr && pr.c.id === c.id && !pr.done ? " " + pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : ""; })()}</span>
+        <span class="meta">${G.isTopFav && G.isTopFav(c) ? pill("★ Sủng nhất", "top") + " " : ""}${G.khatBadge && G.khatBadge(c) ? pill("Khát khao", "khat") + " " : ""}${pill(G.displayTitle(c), "rank")} ${c.age} tuổi${c.kids ? ` · ${c.kids} con` : ""} ${c.pregnantDue != null ? pill("Hoài thai", "preg") : ""}${p && p.tinhY >= 61 ? " " + pill(p.status + " · " + p.other.name, "pair") : ""}${G.state.d1 && G.state.d1.badge && G.state.d1.badge.id === c.id ? " " + pill(G.state.d1.badge.label, "rank") : ""}${G.isSulking && G.isSulking(c) ? " " + pill("Đang dỗi", "preg") : ""}${(() => { const pr = G.promiseNow && G.promiseNow(); return pr && pr.c.id === c.id && !pr.done ? " " + pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : ""; })()}</span>
         <span class="favor">${bar(c.favor)}<span>Sủng ái ${c.favor}</span></span>
         ${G.levelName ? `<span class="meta card-extra"><span class="lv-pill lv-${G.levelOf(c)}">${esc(G.levelName(c))}</span> ${lastNightText(c)}</span>` : ""}
         ${extra || ""}
@@ -354,10 +416,17 @@
     openSheet(
       `<h3>${esc(p ? p.name : "")}${lv ? ` <span class="p-up">${"★".repeat(lv)}</span>` : ""}</h3>
        <p class="hint">${res.length} người ở. Chủ vị là người phẩm cao nhất.${lv ? ` Cung bậc ${lv}/3: người ở được Tình cảm +${lv} mỗi tháng.` : ""}</p>
+       ${G.walkPalace && res.length ? `<button class="btn btn-primary" id="p-walk" ${G.canWalk() ? "" : "disabled"}>Dạo cung, ghé bất chợt<span class="cost">${G.canWalk() ? `mỗi tháng ${G.WALK_PER_MONTH} lần` : "tháng này đã dạo đủ"}</span></button>` : ""}
        <div class="cards">${res.map((c) => consortCard(c)).join("")}</div>
        ${cost != null ? `<button class="btn" id="p-up">Trùng tu lên bậc ${lv + 1}/3<span class="cost"> · ${fmtMoney(cost)} lượng · người ở Tình cảm +5 ngay, +${lv + 1} mỗi tháng</span></button>` : `<p class="hint">Cung đã trùng tu bậc cao nhất.</p>`}`,
       (el) => {
         on(el, "[data-consort]", "click", (b) => openConsort(b.dataset.consort));
+        on(el, "#p-walk", "click", () => {
+          const ev = G.walkPalace(pid);
+          G.save();
+          if (ev.why) showMessage("Dạo cung", ev.why);
+          else showEvent(ev);
+        });
         on(el, "#p-up", "click", () => {
           const r = G.upgradePalace(pid);
           G.save();
@@ -719,6 +788,21 @@
       UI.render();
     });
     on(root, "[data-algroup]", "click", (b) => openAlbumGroup(b.dataset.algroup));
+    on(root, "[data-perk]", "click", (b) => {
+      if (G.choosePerk(b.dataset.perk)) {
+        G.save();
+        showMessage("Đặc quyền mới", `Bệ hạ lĩnh hội: ${G.PERKS[b.dataset.perk].name}. ${G.PERKS[b.dataset.perk].desc}`);
+      }
+    });
+    on(root, "[data-galall]", "click", (b) => {
+      galleryAll = b.dataset.galall === "1";
+      UI.render();
+    });
+    on(root, "[data-art]", "click", (b) => {
+      const seen = G.artSeen();
+      const shown = galleryAll ? seen : seen.slice(-12);
+      openArtViewer(shown, Number(b.dataset.art));
+    });
     on(root, "#me-tinh", "change", (sel) => {
       G.setEmperorTinh(sel.value);
       G.save();
@@ -1034,8 +1118,13 @@
     const btns = last
       ? `${notesHtml(notes || scene.notes)}${roundBtn(scene)}${banBtn(scene)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
       : `${sceneGameBtns(scene, i, pages)}<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
-    openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${dots}<p class="ev-text">${formatText(pages[i])}</p>${btns}`, (el) => {
+    openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${scene.mixNames ? `<p class="hint mix-tag">Ghép từ: ${esc(scene.mixNames)}</p>` : ""}${dots}<p class="ev-text">${formatText(pages[i])}</p>${btns}`, (el) => {
       $(el, ".sheet-card").classList.add("scene-card");
+      const im = el.querySelector(".scene-img");
+      if (im) {
+        im.addEventListener("load", () => G.markArtSeen && G.markArtSeen(im.currentSrc || im.src), { once: true });
+        im.addEventListener("click", () => openArtViewer([im.currentSrc || im.src], 0));
+      }
       if (last) {
         $(el, "#s-ok").addEventListener("click", closeSheet);
         on(el, "#s-more", "click", () => openRoundPicker(G.findConsort(scene.roundOf)));
@@ -1303,6 +1392,26 @@
   }
 
   /* ---------------- Ý chỉ (hành động) ---------------- */
+  function openViHanh() {
+    openSheet(
+      `<h3>Vi hành</h3><p class="hint">Bệ hạ cải trang thường dân, ${G.VI_HANH_COST} lượng một chuyến.</p>
+       <div class="cards">${Object.entries(G.VI_HANH_PLACES).map(([k, p]) => `<button class="row-card vh-row" data-vh="${k}"><div><b>${esc(p.name)}</b><br><span class="hint">${esc(p.intro)}</span></div></button>`).join("")}</div>
+       <button class="btn btn-ghost" id="vh-close">Thôi</button>`,
+      (el) => {
+        on(el, "#vh-close", "click", () => closeSheet());
+        on(el, "[data-vh]", "click", (b) => {
+          const r = G.viHanh(b.dataset.vh);
+          G.save();
+          if (!r.ok) return showMessage("Vi hành", r.text);
+          if (r.kind === "beauty") {
+            queue.unshift(() => recruitPicker("Giai nhân gặp khi vi hành", "Bệ hạ có muốn đón nàng vào cung?", [r.recruit], 0));
+            return showMessage("Vi hành", r.text, r.notes);
+          }
+          showMessage("Vi hành", r.text, r.notes);
+        });
+      }
+    );
+  }
   function openBedShop(msg) {
     openSheet(
       `<h3>Kho phòng the</h3><p class="hint">Mỗi món dùng một lần, tối đa ${G.BED_ITEM_MAX} món mỗi đêm. Mỗi phi có một món nàng thích (♥ khi lật thẻ), dùng đúng món đó thì Tình cảm thêm +2.</p>
@@ -1345,6 +1454,7 @@
     openSheet(
       `<h3>Ý chỉ</h3>
        <div class="cards">
+         ${G.viHanh ? `<div class="row-card"><div><b>Vi hành</b><br><span class="hint">${G.canViHanh() ? `Cải trang ra ngoài cung, ${G.VI_HANH_COST} lượng. Có khi gặp giai nhân, có khi mua được đồ lạ.` : `Mỗi ${G.VI_HANH_GAP} tháng một lần.`}</span></div><button class="btn btn-sm" id="a-vihanh" ${G.canViHanh() ? "" : "disabled"}>Chọn nơi</button></div>` : ""}
          ${G.BED_ITEMS ? `<div class="row-card"><div><b>Kho phòng the</b><br><span class="hint">Đồ dùng một lần, bày biện tẩm cung, Tố Nữ Kinh. Chọn dùng khi lật thẻ thị tẩm.</span></div><button class="btn btn-sm" id="a-bed">Mở kho</button></div>` : ""}
          <div class="row-card"><div><b>Tuyển tú</b><br><span class="hint">${esc(selWhy || `Mỗi năm một lần, ${G.selectionCost()} lượng. Chọn trong bốn tú nữ.`)}</span></div><button class="btn btn-sm" id="a-select" ${selWhy ? "disabled" : ""}>Mở</button></div>
          <div class="row-card"><div><b>Tuần du</b><br><span class="hint">${G.canTravel() ? "Mỗi năm một chuyến. Mỗi vùng có mỹ nhân và chuyện riêng." : "Năm nay đã tuần du rồi."}</span></div><button class="btn btn-sm" id="a-travel" ${G.canTravel() ? "" : "disabled"}>Chọn vùng</button></div>
@@ -1365,6 +1475,7 @@
         on(el, "#a-select", "click", openSelection);
         on(el, "#a-travel", "click", openTravel);
         on(el, "#a-bed", "click", () => openBedShop());
+        on(el, "#a-vihanh", "click", () => openViHanh());
         on(el, "#a-hanh", "click", openHanhCung);
         on(el, "#a-rules", "click", openRules);
         on(el, "#a-contest", "click", () => {
@@ -1537,7 +1648,7 @@
        ${meter("Sủng ái", c.favor)}
        ${meter("Tình cảm", c.affection, "gold")}
        ${G.khatOf ? meter(G.khatOf(c) >= G.KHAT_ASK_AT ? "Khát khao · nàng sắp tự tìm đến" : "Khát khao", G.khatOf(c), "khat") : ""}
-       <div class="choices">
+       <div class="choices prof-actions">
          <button class="btn" id="c-visit">Ghé thăm</button>
          <button class="btn" id="c-night" ${G.cannotSummon(c) ? "disabled" : ""}>Triệu thị tẩm${G.cannotSummon(c) ? `<span class="cost">${esc(c.pregnantDue != null ? "Đang hoài thai" : G.isResting && G.isResting(c) ? "Tháng này nàng nghỉ" : "Chưa thể triệu")}</span>` : ""}</button>
          ${canCrown ? `<button class="btn" id="c-crown" ${crownWhy ? "disabled" : ""}>Lập làm Hoàng hậu${crownWhy ? `<span class="cost">${esc(crownWhy)}</span>` : ""}</button>` : ""}
@@ -1659,6 +1770,17 @@
           for (const p of el.querySelectorAll("[data-pane-body]")) p.hidden = p.dataset.paneBody !== k;
         };
         showPane(consortPane);
+        const seg = el.querySelector(".seg");
+        if (seg) {
+          const edge = () => {
+            seg.classList.toggle("more-r", seg.scrollLeft + seg.clientWidth < seg.scrollWidth - 4);
+            seg.classList.toggle("more-l", seg.scrollLeft > 4);
+          };
+          const cur = seg.querySelector('[aria-selected="true"]');
+          if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: "nearest", inline: "nearest" });
+          edge();
+          seg.addEventListener("scroll", edge, { passive: true });
+        }
         on(el, "#c-spot", "click", () => openSpotSearch(c));
         on(el, "#c-whisper", "click", () => {
           const box = $(el, "#c-whisper-text");
@@ -2849,19 +2971,21 @@
       renderStatus(el);
     };
 
+    let mixOn = true;
     const renderStatus = (el) => {
       const ids = [...picked];
       const combo = G.findCombo(ids);
       const names = ids.map((id) => (R.fetishes[id] || {}).name || id);
       $(el, "#fx-status").innerHTML = (ids.length
         ? `Đã chọn: ${names.map(esc).join(", ")}${combo ? ` · <strong>Combo: ${esc(combo.name)}</strong>` : ""} <button class="btn btn-sm btn-ghost" id="fx-clear">Bỏ chọn</button>`
-        : `<span class="hint">Chưa chọn sở thích nào (đêm thường).</span>`) + ` <button class="btn btn-sm" id="fx-suggest">✦ Gợi ý đêm nay</button>`;
+        : `<span class="hint">Chưa chọn sở thích nào (đêm thường).</span>`) + ` <button class="btn btn-sm" id="fx-suggest">✦ Gợi ý đêm nay</button>` + (ids.length >= 2 && !combo && G.setMixNext ? `<label class="check mix-opt"><input type="checkbox" id="fx-mix" ${mixOn ? "checked" : ""}> Đêm kết hợp: ghép đoạn từ ${Math.min(3, ids.length)} sở thích</label>` : "");
     };
 
     openSheet(
       `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Lật thẻ bài · ${esc(G.displayTitle(c))}</span><h3>${esc(c.name)}</h3></div></div>
        ${G.fateNow && G.fateNow(c) ? `<p class="hint fate-hint">Duyên trời: triệu nàng đêm nay được Tình cảm +${G.FATE_BONUS}.</p>` : ""}
        ${G.state.summonStreak.id === c.id && G.state.summonStreak.count >= G.JEALOUS_AT - 1 ? `<p class="hint warn-hint">Đã triệu nàng ${G.state.summonStreak.count} đêm liền. Đêm nay sẽ có phi khác ghen.</p>` : ""}
+       ${nightExtrasHtml(c, opts.outfit)}
        ${
          fets.length
            ? `<p class="hint">Chọn sở thích cho đêm nay (tùy chọn). Chọn hai sở thích hợp nhau để mở combo. Bấm ☆ để ghim lên đầu. Bỏ chọn "Chỉ điều nàng sẵn lòng" để thấy và thuyết phục những sở thích nàng còn ngại.</p>
@@ -2874,7 +2998,6 @@
               <div id="fx-list"></div>`
            : ""
        }
-       ${nightExtrasHtml(c, opts.outfit)}
        <div class="choices"><button class="btn btn-primary" id="n-go">Truyền chỉ</button><button class="btn btn-ghost" id="n-back">Thôi</button></div>`,
       (el) => {
         $(el, "#n-back").addEventListener("click", closeSheet);
@@ -2904,6 +3027,10 @@
           });
           const card = $(el, ".sheet-card");
           card.addEventListener("change", (e) => {
+            if (e.target.id === "fx-mix") {
+              mixOn = e.target.checked;
+              return;
+            }
             const id = e.target.dataset && e.target.dataset.fx;
             if (!id) return;
             if (e.target.checked) picked.add(id);
@@ -2963,6 +3090,7 @@
             G.save();
             return showMood(c, mood);
           }
+          if (G.setMixNext) G.setMixNext(mixOn && picked.size >= 2 && !G.findCombo([...picked]) && !!el.querySelector("#fx-mix"));
           if (G.setNightExtras) G.setNightExtras(c.id, [...items], (el.querySelector("#n-outfit") || {}).value, [...keeps], (el.querySelector("#n-furn") || {}).value);
           const scene = G.summon(c.id, [...picked]);
           const later = scene && !scene.blocked ? G.rollNightEvent(c.id) : null;
@@ -2982,7 +3110,7 @@
       G.isSulking && G.isSulking(c) ? pill("Đang dỗi", "preg") : "",
       pr && pr.c.id === c.id && !pr.done ? pill(pr.thisMonth ? "Hẹn tháng này" : "Hẹn tháng sau", "pair") : "",
       G.state.summonStreak.id === c.id && G.state.summonStreak.count >= 1 ? pill(`${G.state.summonStreak.count} đêm liền`, "rank") : "",
-      !faceDown && G.khatOf && G.khatOf(c) >= G.KHAT_ASK_AT ? pill("Khát khao", "khat") : "",
+      !faceDown && G.khatBadge && G.khatBadge(c) ? pill("Khát khao", "khat") : "",
       !faceDown && c.pregnantDue != null ? pill(`Hoài thai · tháng ${Math.min(9, Math.max(1, 9 - (c.pregnantDue - G.state.turn) + 1))}`, "preg") : "",
     ].filter(Boolean).join(" ");
     return `<button class="tablet${faceDown ? " down" : ""}${!faceDown && c.pregnantDue != null ? " preg" : ""}${!faceDown && G.isTopFav && G.isTopFav(c) ? " top-fav" : ""}" data-tablet="${esc(c.id)}" aria-label="${faceDown ? "Thẻ úp" : esc(c.name)}">
@@ -3004,7 +3132,7 @@
     openSheet(
       `<h3>Lật thẻ bài</h3><p class="hint">Lý công công dâng khay thẻ tên. Bệ hạ chạm vào thẻ để lật, đêm nay chọn ai?</p>
        ${list.length >= 2 ? `<button class="btn fate-btn" id="sm-fate" ${fate ? "" : "disabled"}>Bốc thẻ úp · duyên trời <span class="hint">${fate ? `Tình cảm +${G.FATE_BONUS} nếu triệu người bốc được` : "tháng này đã bốc"}</span></button>` : ""}
-       ${list.length >= 2 ? `<div class="row-btns tray-extra"><button class="btn btn-sm" id="sm-wheel">Vòng quay hậu cung</button><button class="btn btn-sm" id="sm-thi" ${G.canThiTai && G.canThiTai() ? "" : "disabled"}>Các phi thi tài${G.canThiTai && G.canThiTai() ? "" : " (tháng này rồi)"}</button></div>` : ""}
+       ${list.length >= 2 ? `<div class="row-btns tray-extra"><button class="btn btn-sm" id="sm-wheel">Vòng quay hậu cung</button>${G.pairsForNight && G.pairsForNight().length ? `<button class="btn btn-sm" id="sm-pair">Triệu đôi (${G.pairsForNight().length})</button>` : ""}<button class="btn btn-sm" id="sm-thi" ${G.canThiTai && G.canThiTai() ? "" : "disabled"}>Các phi thi tài${G.canThiTai && G.canThiTai() ? "" : " (tháng này rồi)"}</button></div>` : ""}
        ${list.length ? `<div class="tray">${list.map((c) => tablet(c)).join("")}</div>` : `<p class="empty">Không có phi tần nào có thể thị tẩm.</p>`}
        <button class="btn btn-ghost" id="sm-close">Đóng</button>`,
       (el) => {
@@ -3012,6 +3140,7 @@
         const f = el.querySelector("#sm-fate");
         if (f) f.addEventListener("click", openFate);
         on(el, "#sm-wheel", "click", () => openWheel());
+        on(el, "#sm-pair", "click", () => openPairs());
         on(el, "#sm-thi", "click", () => openThiTai());
         on(el, "[data-tablet]", "click", (b) => {
           if (busy) return;
@@ -3020,6 +3149,26 @@
           if (reduceMotion()) return openNight(c);
           b.classList.add("down", "picked");
           setTimeout(() => openNight(c), FLIP_MS);
+        });
+      }
+    );
+  }
+
+  function openPairs() {
+    const list = G.pairsForNight();
+    openSheet(
+      `<h3>Triệu đôi</h3><p class="hint">Hai phi thân thiết (Tình ý từ ${G.PAIR_MIN}), cả hai sẵn lòng với "Hai người cùng hầu", cùng hầu bệ hạ một đêm. Mỗi người Sủng ái +6, Tình cảm +3.</p>
+       <div class="cards">${list
+         .map((p) => `<button class="row-card pair-row" data-pair="${esc(p.a.id)}|${esc(p.b.id)}"><span class="duo">${portrait(p.a, "sm")}${portrait(p.b, "sm")}</span><span><b>${esc(p.a.name)} & ${esc(p.b.name)}</b><br><span class="hint">${esc(p.status)} · Tình ý ${Math.round(p.tinhY)}</span></span></button>`)
+         .join("")}</div>
+       <button class="btn btn-ghost" id="pr-back">Về khay lật thẻ</button>`,
+      (el) => {
+        on(el, "#pr-back", "click", () => openSummon());
+        on(el, "[data-pair]", "click", (b) => {
+          const [a, c] = b.dataset.pair.split("|");
+          const scene = G.summonPair(a, c);
+          G.save();
+          if (scene) showScene(scene);
         });
       }
     );

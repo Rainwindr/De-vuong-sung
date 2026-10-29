@@ -157,6 +157,21 @@
     return pickUnseen(list[0].slot, list[0].arr);
   }
 
+  /** Chữ một bản của đúng một khóa (sở thích / nhân vật) trong HOOK, đã điền tên; null nếu không có. Dùng cho Đêm kết hợp. */
+  G.textPagesFor = function (hook, key, ctx) {
+    const byKey = texts[hook];
+    const byLv = byKey && byKey[key];
+    if (!byLv) return null;
+    for (const lv of [levelOf(ctx.participants[0]), "quen", "_"]) {
+      const arr = byLv[lv];
+      if (arr && arr.length) {
+        lastCtx = ctx;
+        return pickUnseen(`v2|${hook}|${key}|${lv}`, arr).map((x) => fillText(x, ctx));
+      }
+    }
+    return null;
+  };
+
   /** Danh sách mọi ô cảnh cho album: [{ slot, hook, key, lv, n, title }] */
   G.sceneSlots = function () {
     const out = [];

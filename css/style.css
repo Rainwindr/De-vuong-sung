@@ -652,3 +652,32 @@ body.covered { overflow: hidden; }
 .topbar { grid-template-columns: minmax(0, 1fr); }
 .topbar > * { min-width: 0; }
 .who .date { display: flex; align-items: center; justify-content: flex-end; gap: 4px; flex-wrap: nowrap; }
+
+/* Lượt update all 2026-10-29 */
+.prof-actions { grid-template-columns: 1fr 1fr; }
+.prof-actions .btn { font-size: 14px; padding: 11px 10px; text-align: left; }
+.prof-actions .btn .cost { font-size: 11.5px; }
+.top-fav-btn .cost, .prof-actions .btn .cost { display: block; text-align: left; }
+.seg.more-r { -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent); mask-image: linear-gradient(90deg, #000 82%, transparent); }
+.seg.more-l { -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%); mask-image: linear-gradient(90deg, transparent, #000 18%); }
+.seg.more-l.more-r { -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
+main#view { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+.scene-img { cursor: zoom-in; }
+.mix-tag { margin-top: -6px; }
+.mix-opt { display: flex; margin-top: 6px; }
+.lv-card .bar { margin: 6px 0; }
+.perk-pick { border: 1px solid var(--gold); border-radius: var(--r); padding: 10px; margin: 8px 0; }
+.gal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 8px 0; }
+.gal-item { padding: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--ink); cursor: zoom-in; }
+.gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#art-view { position: fixed; inset: 0; z-index: 9990; background: #000e; display: grid; place-items: center; touch-action: pan-y; }
+#art-view img { max-width: 100vw; max-height: 100vh; object-fit: contain; }
+#art-view .av-x { position: absolute; top: calc(10px + env(safe-area-inset-top, 0px)); right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #fff5; background: #0008; color: #fff; font-size: 18px; }
+#art-view .av-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 64px; border: 0; background: #0006; color: #fff; font-size: 30px; }
+#art-view .av-nav.prev { left: 0; border-radius: 0 10px 10px 0; } #art-view .av-nav.next { right: 0; border-radius: 10px 0 0 10px; }
+#art-view .av-n { position: absolute; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); color: #fffc; font-size: 13px; }
+.pair-row, .vh-row { display: flex; gap: 10px; align-items: center; text-align: left; width: 100%; cursor: pointer; }
+.pair-row .duo { display: flex; }
+.pair-row .duo .portrait + .portrait { margin-left: -10px; }
+.perk-btn { text-align: left; border-color: var(--gold); }
+.perk-btn .cost { display: block; text-align: left; }
