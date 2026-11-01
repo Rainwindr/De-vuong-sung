@@ -30,6 +30,17 @@
     const img = src ? `<img src="${esc(src)}" alt="" loading="lazy" onerror="this.remove()">` : "";
     return `<span class="portrait${size ? " " + size : ""}${mood}${c.isChild ? " child" : ""}" style="--h:${hue}" aria-hidden="true">${G.portraitSVG(c)}${img}</span>`;
   }
+  /** Biểu tượng ảnh của một món đồ (chưa có file thì không hiện gì). */
+  const itemIcon = (kind, id, cls) => {
+    const u = G.iconFor && G.iconFor(kind, id);
+    return u ? `<img class="item-ic${cls ? " " + cls : ""}" src="${esc(u)}" alt="" onload="this.classList.add('ok')" onerror="window.Game.markImgMissing(this.src);this.remove()">` : "";
+  };
+  /** Ảnh toàn thân đầu hồ sơ: thử lần lượt ảnh theo phẩm vị, ảnh riêng, ảnh chung; không có thì gỡ khung. */
+  const fullBody = (c) => {
+    const list = G.fullBodyFor ? G.fullBodyFor(c) : [];
+    if (!list.length) return "";
+    return `<figure class="prof-full"><img src="${esc(list[0])}" alt="" data-alt="${esc(list.slice(1).join("|"))}" onerror="window.Game.markImgMissing(this.src);const a=(this.dataset.alt||'').split('|').filter(Boolean);if(a.length){this.dataset.alt=a.slice(1).join('|');this.src=a[0];}else this.closest('figure').remove()"></figure>`;
+  };
   const bar = (v, cls) => `<span class="bar${cls ? " " + cls : ""}"><i style="width:${Math.max(0, Math.min(100, v))}%"></i></span>`;
   const meter = (label, v, cls) => `<div class="favor">${bar(v, cls)}<span>${esc(label)} ${Math.round(v)}</span></div>`;
   const notesHtml = (notes) => (notes && notes.length ? `<div class="notes">${notes.map((n) => `<span>${esc(n)}</span>`).join("")}</div>` : "");
@@ -1240,6 +1251,8 @@
     );
   }
   UI.showEvent = showEvent;
+  UI.showScene = (scene, notes) => showScene(scene, notes);
+  UI.openGames = (c) => openGames(c);
   /** Chọn người cho cảnh nhiều người: 2–4 phi cùng sẵn lòng, chọn người chính. */
   function openGroupPicker(prepared, idx) {
     const ch = prepared.ev.choices[idx];
@@ -1417,12 +1430,12 @@
       `<h3>Kho phòng the</h3><p class="hint">Mỗi món dùng một lần, tối đa ${G.BED_ITEM_MAX} món mỗi đêm. Mỗi phi có một món nàng thích (♥ khi lật thẻ), dùng đúng món đó thì Tình cảm thêm +2.</p>
        ${msg ? `<p class="hint fx-msg">${esc(msg)}</p>` : ""}
        <div class="cards">${Object.entries(G.BED_ITEMS)
-         .map(([id, it]) => `<div class="row-card"><div><b>${esc(it.name)}</b> <span class="hint">· còn ${G.bedStock(id)}</span><br><span class="hint">${esc(it.desc)}</span></div><div class="row-btns"><button class="btn btn-sm" data-buy="${id}" data-n="1">${fmtMoney(it.cost)}</button><button class="btn btn-sm btn-ghost" data-buy="${id}" data-n="5">×5</button></div></div>`)
+         .map(([id, it]) => `<div class="row-card">${itemIcon("bed", id)}<div class="rc-body"><b>${esc(it.name)}</b> <span class="hint">· còn ${G.bedStock(id)}</span><br><span class="hint">${esc(it.desc)}</span></div><div class="row-btns"><button class="btn btn-sm" data-buy="${id}" data-n="1">${fmtMoney(it.cost)}</button><button class="btn btn-sm btn-ghost" data-buy="${id}" data-n="5">×5</button></div></div>`)
          .join("")}</div>
        ${G.FURNISH ? `<h3>Bày biện tẩm cung</h3><p class="hint">Mua một lần. Khi lật thẻ, chọn một món ở mục Bày biện để đổi không khí đêm đó.</p><div class="cards">${Object.entries(G.FURNISH)
-         .map(([id, f]) => `<div class="row-card"><div><b>${esc(f.name)}</b><br><span class="hint">${[f.fx.favor ? `Sủng ái +${f.fx.favor}` : "", f.fx.affection ? `Tình cảm +${f.fx.affection}` : "", f.fx.longThe ? `Long thể +${f.fx.longThe}` : ""].filter(Boolean).join(", ")} mỗi đêm dùng</span></div>${G.ownsFurn(id) ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-furn="${id}">${fmtMoney(f.cost)}</button>`}</div>`)
+         .map(([id, f]) => `<div class="row-card">${itemIcon("furn", id)}<div class="rc-body"><b>${esc(f.name)}</b><br><span class="hint">${[f.fx.favor ? `Sủng ái +${f.fx.favor}` : "", f.fx.affection ? `Tình cảm +${f.fx.affection}` : "", f.fx.longThe ? `Long thể +${f.fx.longThe}` : ""].filter(Boolean).join(", ")} mỗi đêm dùng</span></div>${G.ownsFurn(id) ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-furn="${id}">${fmtMoney(f.cost)}</button>`}</div>`)
          .join("")}
-         <div class="row-card"><div><b>Tố Nữ Kinh chép tay</b><br><span class="hint">Mở lớp Phòng the ở Học phường. Học đủ 12 tháng thì nàng tinh thông phòng the.</span></div>${G.hasKinh() ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" id="bs-kinh">${fmtMoney(G.KINH_COST)}</button>`}</div></div>` : ""}
+         <div class="row-card">${itemIcon("kinh")}<div class="rc-body"><b>Tố Nữ Kinh chép tay</b><br><span class="hint">Mở lớp Phòng the ở Học phường. Học đủ 12 tháng thì nàng tinh thông phòng the.</span></div>${G.hasKinh() ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" id="bs-kinh">${fmtMoney(G.KINH_COST)}</button>`}</div></div>` : ""}
        <button class="btn btn-ghost" id="bs-close">Đóng</button>`,
       (el) => {
         on(el, "#bs-close", "click", () => closeSheet());
@@ -1660,11 +1673,13 @@
          .map(([k, l]) => `<button class="seg-btn" role="tab" data-pane="${k}">${l}</button>`)
          .join("")}</div>
        <div class="pane" data-pane-body="info">
+       ${fullBody(c)}
        <div class="row-wrap">${c.traits.map((t) => pill(t)).join("")}</div>
        ${G.bodyOf ? `<div class="body-row"><div class="field"><label for="c-nguc">Vòng một</label><select id="c-nguc">${G.BODY.nguc.map((n, i) => `<option value="${i}" ${i === G.bodyOf(c).nguc ? "selected" : ""}>${n}</option>`).join("")}</select></div><div class="field"><label for="c-kin">Nơi kín</label><select id="c-kin">${G.BODY.kin.map((n, i) => `<option value="${i}" ${i === G.bodyOf(c).kin ? "selected" : ""}>${n}</option>`).join("")}</select></div>
          <div class="field"><label for="c-long">Lông nơi kín${G.longNow(c) !== G.bodyOf(c).long ? " · đang cạo sạch" : ""}</label><select id="c-long">${G.BODY.long.map((n, i) => `<option value="${i}" ${i === G.bodyOf(c).long ? "selected" : ""}>${n}</option>`).join("")}</select></div>
          <div class="field"><label for="c-nhay">Độ nhạy</label><select id="c-nhay">${G.BODY.nhay.map((n, i) => `<option value="${i}" ${i === G.bodyOf(c).nhay ? "selected" : ""}>${n}</option>`).join("")}</select></div></div>` : ""}
        <p class="hint">${c.nights} đêm thị tẩm · ${c.kids} con${c.contestWins ? ` · ${c.contestWins} lần thắng thi` : ""}${partner && partner.tinhY >= 31 ? ` · ${partner.status} với ${esc(partner.other.name)} (${Math.round(partner.tinhY)})` : ""}</p>
+       ${G.friendsOf && s.consorts.length > 1 ? `<p class="hint"><b>Tỷ muội thân:</b> ${G.friendsOf(c).map((o) => esc(o.name)).join(", ") || "—"}${G.foesOf(c).length ? ` · <b>Không ưa:</b> ${G.foesOf(c).map((o) => esc(o.name)).join(", ")}` : ""}. Triệu chung tỷ muội thân được thưởng thêm; đôi không ưa nhau sẽ đấu khẩu cả đêm.</p>` : ""}
        ${wish ? `<p class="hint"><b>Tâm nguyện:</b> ${esc(wish.text)} · còn ${wish.left} tháng. Toại nguyện: Tình cảm +${G.WISH_AFFECTION}.</p>` : ""}
        ${queued ? `<p class="hint"><b>Chờ lễ sắc phong</b> lên ${esc(G.RANKS[queued.rank])} (${G.SAC_PHONG_COST[queued.rank]} lượng). Lễ bộ sẽ dâng tấu.</p>` : ""}
        </div>
@@ -1673,10 +1688,10 @@
          .map((g) => `<div class="row-card"><div><b>${esc(g.name)}</b>${(g.likes || []).some((l) => c.likes.includes(l) || c.traits.includes(l) || l === c.id) || (G.giftFitsBody && G.giftFitsBody(g, c)) ? " ♥" : ""}<br><span class="hint">${esc(g.desc || "")}${c.gifts[g.id] ? ` · đã tặng ${c.gifts[g.id]} lần` : ""}</span></div><button class="btn btn-sm" data-gift="${esc(g.id)}">${fmtMoney(g.cost)}</button></div>`)
          .join("")}</div></div>
        ${G.OUTFITS ? `<div class="pane" data-pane-body="outfit" hidden><div class="cards">${Object.entries(G.OUTFITS)
-         .filter(([k]) => k !== "khong_mac")
+         .filter(([k, o]) => k !== "khong_mac" && (!o.foreign || G.ownsOutfit(c, k)))
          .map(([k, o]) => {
            const own = G.ownsOutfit(c, k);
-           return `<div class="row-card"><div><b>${esc(o.name)}</b>${G.likedOutfit(c) === k ? " ♥" : ""}<br><span class="hint">${own ? `Đã có · mặc ${G.wornCount(c, k)} lần` : "Lần đầu mặc: Sủng ái +" + G.OUTFIT_FIRST_FAVOR}</span></div>${own ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-outfit="${k}">${fmtMoney(o.cost)}</button>`}</div>`;
+           return `<div class="row-card">${itemIcon("outfit", k)}<div class="rc-body"><b>${esc(o.name)}</b>${G.likedOutfit(c) === k ? " ♥" : ""}<br><span class="hint">${own ? `Đã có · mặc ${G.wornCount(c, k)} lần` : "Lần đầu mặc: Sủng ái +" + G.OUTFIT_FIRST_FAVOR}</span></div>${own ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-outfit="${k}">${fmtMoney(o.cost)}</button>`}</div>`;
          })
          .join("")}</div><p class="hint">Chọn y phục khi lật thẻ thị tẩm nàng. "Không mặc gì" lúc nào cũng có. Bộ ♥ là bộ nàng thích nhất.</p></div>` : ""}
        ${G.KEEPSAKES ? `<div class="pane" data-pane-body="keep" hidden><p class="hint">Đồ riêng nàng giữ lại, chọn dùng mỗi khi lật thẻ thị tẩm (tối đa ${G.KEEP_MAX} món một đêm). ♥ là món nàng thích.</p><div class="cards">${["keep", "jewel"]
@@ -1685,7 +1700,7 @@
            .map(([id, k]) => {
              const own = G.ownsKeep(c, id);
              const fx = [k.fx.favor ? `Sủng ái +${k.fx.favor}` : "", k.fx.affection ? `Tình cảm +${k.fx.affection}` : "", k.fx.longThe ? `Long thể +${k.fx.longThe}` : "", k.fx.truyLac ? `Trụy lạc +${k.fx.truyLac}` : ""].filter(Boolean).join(", ");
-             return `<div class="row-card"><div><b>${esc(k.name)}</b>${G.likesThing(c, id, k.like) ? " ♥" : ""}<br><span class="hint">${k.desc ? esc(k.desc) + " · " : ""}mỗi đêm dùng: ${fx}${own ? " · đã có" : ""}</span></div>${own ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-keepbuy="${id}">${fmtMoney(k.cost)}</button>`}</div>`;
+             return `<div class="row-card">${itemIcon("keep", id)}<div class="rc-body"><b>${esc(k.name)}</b>${G.likesThing(c, id, k.like) ? " ♥" : ""}<br><span class="hint">${k.desc ? esc(k.desc) + " · " : ""}mỗi đêm dùng: ${fx}${own ? " · đã có" : ""}</span></div>${own ? `<span class="hint">✓</span>` : `<button class="btn btn-sm" data-keepbuy="${id}">${fmtMoney(k.cost)}</button>`}</div>`;
            })
            .join(""))
          .join("")}</div></div>` : ""}
@@ -1782,6 +1797,7 @@
           seg.addEventListener("scroll", edge, { passive: true });
         }
         on(el, "#c-spot", "click", () => openSpotSearch(c));
+        on(el, ".prof-full img", "click", (im) => openArtViewer([im.currentSrc || im.src], 0));
         on(el, "#c-whisper", "click", () => {
           const box = $(el, "#c-whisper-text");
           const lv = G.levelOf(c);
@@ -2306,9 +2322,30 @@
       let order = shuffleArr([0, 1, 2, 3, 4, 5, 6, 7, 8]);
       while (order.every((v, k) => v === k)) order = shuffleArr(order);
       let pick = -1;
-      const tiles = () => order.map((v, k) => `<button class="tg-tile${pick === k ? " on" : ""}" data-t="${k}" style="background-image:url('${PUZZLE_ART}');background-position:${(v % 3) * 50}% ${Math.floor(v / 3) * 50}%"></button>`).join("");
-      sheet(`<div class="tg-puzzle" id="tg-pz">${tiles()}</div>`, (el) => {
+      // ảnh thật trong kho (cắt vuông ở giữa); chưa có thì dùng tranh vẽ
+      let art = { src: PUZZLE_ART, a: 1 };
+      const tileStyle = (v) => {
+        const col = v % 3, row = Math.floor(v / 3);
+        if (art.a === 1) return `background-image:url('${art.src}');background-size:300% 300%;background-position:${col * 50}% ${row * 50}%`;
+        const T = art.t || 100;
+        const w = art.a > 1 ? 3 * T * art.a : 3 * T, h = art.a > 1 ? 3 * T : (3 * T) / art.a;
+        const x0 = (w - 3 * T) / 2, y0 = (h - 3 * T) / 2;
+        return `background-image:url('${esc(art.src)}');background-size:${w}px ${h}px;background-position:${-(x0 + col * T)}px ${-(y0 + row * T)}px`;
+      };
+      const tiles = () => order.map((v, k) => `<button class="tg-tile${pick === k ? " on" : ""}" data-t="${k}" style="${tileStyle(v)}"></button>`).join("");
+      sheet(`<div class="tg-puzzle" id="tg-pz">${tiles()}</div><p class="hint" id="tg-pz-ref"></p>`, (el) => {
         const box = $(el, "#tg-pz");
+        const real = G.puzzleArt && G.puzzleArt();
+        if (real) {
+          const im = new Image();
+          im.onload = () => {
+            if (!alive(box) || !im.naturalWidth) return;
+            const first = box.querySelector(".tg-tile");
+            art = { src: real, a: im.naturalWidth / im.naturalHeight, t: first ? first.getBoundingClientRect().width : box.clientWidth / 3 };
+            box.innerHTML = tiles();
+          };
+          im.src = real;
+        }
         const t0 = Date.now();
         const correct = () => order.filter((v, k) => v === k).length;
         const show = () => st(el, `Đúng chỗ ${correct()}/9 · còn ${Math.max(0, g.sec - Math.floor((Date.now() - t0) / 1000))} giây`);
@@ -2704,8 +2741,12 @@
     const layers = ["Áo khoác ngoài", "Áo trong", "Yếm"];
     let k = 0, prog = 0, hold = false, live = true, last = performance.now();
     const lines = [];
+    // bộ ảnh theo nấc (coi-NN-0 … coi-NN-3); ảnh nấc nào thiếu thì giữ ảnh nấc trước
+    const art = sceneArtOn() && G.undressArt ? G.undressArt() : null;
+    if (art) art.slice(1).forEach((u) => (new Image().src = u));
     openSheet(
-      `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>Cởi từng lớp</h3></div></div>
+      `${art ? `<div class="ud-art"><img id="ud-img" src="${esc(art[0])}" alt="" onerror="window.Game.markImgMissing(this.src);this.dataset.bad=1;if(this.dataset.prev)this.src=this.dataset.prev;else this.closest('.ud-art').remove()"></div>` : ""}
+       <div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>Cởi từng lớp</h3></div></div>
        <p class="hint">Giữ ngón tay trên nút cho đến khi thanh đầy để cởi một lớp. Buông sớm thì nàng thẹn kéo áo lại.</p>
        <div class="ud-log" id="ud-log"></div>
        <div class="rh-meter">${bar(0)}</div>
@@ -2733,6 +2774,12 @@
             lines.push(G.fill(G.d3one(T.undress[k]), { speaker: c }));
             log.innerHTML = lines.map((x) => `<p class="ev-text">${formatText(x)}</p>`).join("");
             k++;
+            const im = el.querySelector("#ud-img");
+            if (im && art[k] && !G.imgMissing(art[k])) {
+              if (!im.dataset.bad) im.dataset.prev = im.src;
+              delete im.dataset.bad;
+              im.src = art[k];
+            }
             prog = 0;
             hold = false;
             if (k >= layers.length) {
@@ -2900,9 +2947,9 @@
         .map((o) => `<option value="${o}" ${presetOutfit === o ? "selected" : ""}>${esc(G.OUTFITS[o].name)}${G.likedOutfit(c) === o ? " ♥" : ""}${G.wornCount(c, o) ? "" : " · chưa mặc"}</option>`)
         .join("")}</select></div>
       ${items.length
-        ? `<p class="hint">Đồ dùng (tối đa ${G.BED_ITEM_MAX}):</p><div class="chips">${items.map(([id, it]) => `<button class="chip" data-item="${id}" aria-pressed="false">${esc(it.name)} ×${G.bedStock(id)}${G.likedItem(c) === id ? " ♥" : ""}</button>`).join("")}</div>`
+        ? `<p class="hint">Đồ dùng (tối đa ${G.BED_ITEM_MAX}):</p><div class="chips">${items.map(([id, it]) => `<button class="chip" data-item="${id}" aria-pressed="false">${itemIcon("bed", id, "sm")}${esc(it.name)} ×${G.bedStock(id)}${G.likedItem(c) === id ? " ♥" : ""}</button>`).join("")}</div>`
         : `<p class="hint">Kho đồ dùng trống. Mua ở Ý chỉ › Kho phòng the.</p>`}
-      ${keeps.length ? `<p class="hint">Đồ riêng của nàng (tối đa ${G.KEEP_MAX}):</p><div class="chips">${keeps.map((k) => `<button class="chip" data-keep="${k}" aria-pressed="false">${esc(G.KEEPSAKES[k].name)}${G.likesThing(c, k, G.KEEPSAKES[k].like) ? " ♥" : ""}</button>`).join("")}</div>` : ""}
+      ${keeps.length ? `<p class="hint">Đồ riêng của nàng (tối đa ${G.KEEP_MAX}):</p><div class="chips">${keeps.map((k) => `<button class="chip" data-keep="${k}" aria-pressed="false">${itemIcon("keep", k, "sm")}${esc(G.KEEPSAKES[k].name)}${G.likesThing(c, k, G.KEEPSAKES[k].like) ? " ♥" : ""}</button>`).join("")}</div>` : ""}
       ${furn.length ? `<div class="field"><label for="n-furn">Bày biện</label><select id="n-furn"><option value="">Không dùng</option>${furn.map((f) => `<option value="${f}">${esc(G.FURNISH[f].name)}</option>`).join("")}</select></div>` : ""}
       <p class="hint">Mua y phục và đồ riêng cho nàng ở hồ sơ (tab Y phục, Đồ riêng). Bày biện tẩm cung mua ở Ý chỉ › Kho phòng the.</p></details>`;
   }
@@ -2984,6 +3031,10 @@
     openSheet(
       `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Lật thẻ bài · ${esc(G.displayTitle(c))}</span><h3>${esc(c.name)}</h3></div></div>
        ${G.fateNow && G.fateNow(c) ? `<p class="hint fate-hint">Duyên trời: triệu nàng đêm nay được Tình cảm +${G.FATE_BONUS}.</p>` : ""}
+       ${(() => {
+         const ch = G.nightChallenge ? G.nightChallenge(c) : null;
+         return ch ? `<div class="chal-box"><span class="eyebrow">Nàng ra điều kiện</span><p class="ev-text">${formatText("> " + ch.ask)}</p><p class="hint">Điều kiện: <b>${esc(ch.rule)}</b>. Giữ đúng thì mở đoạn kết riêng, Sủng ái +${G.CHAL_REWARD.favor}, Tình cảm +${G.CHAL_REWARD.affection}. Không giữ thì nàng hơi dỗi.</p></div>` : "";
+       })()}
        ${G.state.summonStreak.id === c.id && G.state.summonStreak.count >= G.JEALOUS_AT - 1 ? `<p class="hint warn-hint">Đã triệu nàng ${G.state.summonStreak.count} đêm liền. Đêm nay sẽ có phi khác ghen.</p>` : ""}
        ${nightExtrasHtml(c, opts.outfit)}
        ${
@@ -3090,16 +3141,51 @@
             G.save();
             return showMood(c, mood);
           }
-          if (G.setMixNext) G.setMixNext(mixOn && picked.size >= 2 && !G.findCombo([...picked]) && !!el.querySelector("#fx-mix"));
-          if (G.setNightExtras) G.setNightExtras(c.id, [...items], (el.querySelector("#n-outfit") || {}).value, [...keeps], (el.querySelector("#n-furn") || {}).value);
-          const scene = G.summon(c.id, [...picked]);
-          const later = scene && !scene.blocked ? G.rollNightEvent(c.id) : null;
-          G.save();
-          if (scene && scene.jealous) queue.push(() => showJealous(scene.jealous));
-          if (later) queue.push(() => showLaterEvent(later));
-          showScene(scene);
+          const mix = mixOn && picked.size >= 2 && !G.findCombo([...picked]) && !!el.querySelector("#fx-mix");
+          const outfit = (el.querySelector("#n-outfit") || {}).value;
+          const furn = (el.querySelector("#n-furn") || {}).value;
+          const pick = { items: [...items], keeps: [...keeps], outfit, fx: [...picked] };
+          const go = (memo) => {
+            if (G.setMixNext) G.setMixNext(mix);
+            if (G.setNightExtras) G.setNightExtras(c.id, pick.items, outfit, pick.keeps, furn);
+            const scene = G.summon(c.id, pick.fx);
+            if (scene && !scene.blocked && memo) {
+              scene.pages = [memo.text].concat(scene.pages && scene.pages.length ? scene.pages : [scene.text || ""]);
+              scene.notes = memo.notes.concat(scene.notes || []);
+            }
+            if (G.challengeResolve) G.challengeResolve(c, scene, pick);
+            const later = scene && !scene.blocked ? G.rollNightEvent(c.id) : null;
+            G.save();
+            if (scene && scene.jealous) queue.push(() => showJealous(scene.jealous));
+            if (later) queue.push(() => showLaterEvent(later));
+            showScene(scene);
+          };
+          const memo = G.rollMemorial ? G.rollMemorial(c) : null;
+          if (memo) {
+            G.save();
+            return showMemorial(c, memo, go);
+          }
+          go();
         });
       }
+    );
+  }
+
+  /** Tấu chương đêm khuya: phê ngay (mất đêm) hoặc gác lại (đêm tiếp tục). */
+  function showMemorial(c, memo, go) {
+    openSheet(
+      `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Tấu khẩn · ${esc(c.name)}</span><h3>${esc(memo.title)}</h3></div></div>
+       <p class="ev-text">${formatText(memo.text)}</p>
+       <div class="choices"><button class="btn" id="mm-go">Phê tấu ngay<span class="cost">Dân tâm +4 · đêm không thành, nàng dỗi</span></button><button class="btn btn-primary" id="mm-stay">Để đến sáng<span class="cost">Dân tâm −3 · nàng Tình cảm +3</span></button></div>`,
+      (el) => {
+        on(el, "#mm-go", "click", () => {
+          const r = G.memorialDecide(c, true);
+          G.save();
+          showMessage("Đêm dang dở", r.text, r.notes);
+        });
+        on(el, "#mm-stay", "click", () => go(G.memorialDecide(c, false)));
+      },
+      { locked: true }
     );
   }
 
@@ -3159,7 +3245,7 @@
     openSheet(
       `<h3>Triệu đôi</h3><p class="hint">Hai phi thân thiết (Tình ý từ ${G.PAIR_MIN}), cả hai sẵn lòng với "Hai người cùng hầu", cùng hầu bệ hạ một đêm. Mỗi người Sủng ái +6, Tình cảm +3.</p>
        <div class="cards">${list
-         .map((p) => `<button class="row-card pair-row" data-pair="${esc(p.a.id)}|${esc(p.b.id)}"><span class="duo">${portrait(p.a, "sm")}${portrait(p.b, "sm")}</span><span><b>${esc(p.a.name)} & ${esc(p.b.name)}</b><br><span class="hint">${esc(p.status)} · Tình ý ${Math.round(p.tinhY)}</span></span></button>`)
+         .map((p) => `<button class="row-card pair-row" data-pair="${esc(p.a.id)}|${esc(p.b.id)}"><span class="duo">${portrait(p.a, "sm")}${portrait(p.b, "sm")}</span><span><b>${esc(p.a.name)} & ${esc(p.b.name)}</b><br><span class="hint">${esc(p.status)} · Tình ý ${Math.round(p.tinhY)}${G.bondLabel && G.bondLabel(p.a, p.b) ? " · " + esc(G.bondLabel(p.a, p.b)) : ""}</span></span></button>`)
          .join("")}</div>
        <button class="btn btn-ghost" id="pr-back">Về khay lật thẻ</button>`,
       (el) => {
