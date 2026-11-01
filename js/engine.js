@@ -773,12 +773,14 @@
   function tryConceive(c) {
     const s = G.state;
     if (c.pregnantDue != null) return;
+    if (G.canConceive && !G.canConceive(c)) return;
     let p = 0.08;
     if (c.favor >= 70) p += 0.02;
     if (c.traits.includes("Phúc tướng")) p += 0.03;
     if (s.legacies.includes("phuc_tuong")) p += 0.03;
     if (s.stats.longThe < 40) p *= 0.5;
     p *= G.queMult("conceive");
+    if (G.conceiveRate) p *= G.conceiveRate();
     if (s.godFlags.alwaysConceive) p = 1;
     if (rand() < p) {
       c.pregnantDue = s.turn + 9;

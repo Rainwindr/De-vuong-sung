@@ -698,3 +698,8 @@ main#view { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 .body-ic[hidden] { display: none; }
 #me-size + .body-ic, .field .body-ic + select { margin-top: 0; }
 .body-ic[data-bk="size"] { max-width: 200px; }
+.menu-group { display: grid; gap: 6px; padding: 10px 12px; margin: 6px 0 12px; border: 1px solid var(--line); border-radius: var(--r); background: var(--lacquer); }
+.menu-group .eyebrow { margin-bottom: 2px; }
+.menu-group .hint { margin: 0; }
+.want-kid { margin-top: 8px; }
+.kid-fold > summary { cursor: pointer; padding: 8px 0; color: var(--gold); }

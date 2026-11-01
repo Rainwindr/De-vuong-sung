@@ -42,7 +42,14 @@
     return `<figure class="prof-full"><img src="${esc(list[0])}" alt="" data-alt="${esc(list.slice(1).join("|"))}" onerror="window.Game.markImgMissing(this.src);const a=(this.dataset.alt||'').split('|').filter(Boolean);if(a.length){this.dataset.alt=a.slice(1).join('|');this.src=a[0];}else this.closest('figure').remove()"></figure>`;
   };
   /** Ô ảnh thân thể (ẩn đến khi có ảnh). */
-  const bodyImg = (k) => (G.bodyArt ? `<img class="body-ic" data-bk="${k}" alt="" hidden>` : "");
+  const bodyArtOn = () => {
+    try {
+      return localStorage.getItem("dvs.bodyArt") !== "0";
+    } catch (e) {
+      return true;
+    }
+  };
+  const bodyImg = (k) => (G.bodyArt && bodyArtOn() ? `<img class="body-ic" data-bk="${k}" alt="" hidden>` : "");
   /** Gắn ảnh cho các ô thân thể theo mức đang chọn; c = null cho long căn bệ hạ. */
   function paintBody(root, c) {
     if (!G.bodyArt) return;
@@ -532,6 +539,8 @@
     const sons = s.children.filter((c) => c.sex === "m").length;
     return `<section class="section">
       <div class="section-head"><h3>Gia phả</h3><span class="hint">${sons} hoàng tử · ${s.children.length - sons} công chúa · ${s.grandchildren.length} cháu</span></div>
+      ${s.successor && s.children.find((x) => x.id === s.successor) ? `<p class="hint"><b>Người kế vị:</b> ${esc(s.children.find((x) => x.id === s.successor).name)}</p>` : ""}
+      <details class="kid-fold" ${UI._kidsOpen ? "open" : ""} ontoggle="window.Game.ui._kidsOpen=this.open"><summary>Xem danh sách ${s.children.length} con</summary>
       <div class="cards">${s.children
         .map((ch) => {
           const age = G.childAge(ch);
@@ -544,7 +553,7 @@
             ${s.godMode ? `<div class="slider"><label for="ca-${esc(ch.id)}">Tuổi</label><input type="range" id="ca-${esc(ch.id)}" data-childage="${esc(ch.id)}" min="0" max="40" value="${age}"><output>${age}</output></div>` : ""}
           </div></div>`;
         })
-        .join("")}</div>
+        .join("")}</div></details>
       ${s.grandchildren.length ? `<div class="section-head"><h3>Cháu</h3></div><p>${s.grandchildren.map((g) => `${esc(g.name)} <span class="hint">(con của ${esc(g.parentName)})</span>`).join(", ")}</p>` : ""}
     </section>`;
   }
@@ -1563,7 +1572,20 @@
   }
   function openMenu() {
     openSheet(
-      `<h3>Lưu game</h3><p class="hint">Game tự lưu sau mỗi lượt. Lưu thêm vào ô để giữ một mốc quay lại.</p>
+      `<h3>Cài đặt</h3>
+       <div class="menu-group"><span class="eyebrow">Hiển thị</span>
+         <label class="check menu-opt"><input type="checkbox" id="m-art" ${sceneArtOn() ? "checked" : ""}> Hiện ảnh đầu cảnh và ảnh trong trò chơi</label>
+         <label class="check menu-opt"><input type="checkbox" id="m-body" ${bodyArtOn() ? "checked" : ""}> Hiện ảnh thân thể trong hồ sơ (vòng một, vòng ba…)</label>
+       </div>
+       ${G.state && G.CONCEIVE_LEVELS ? `<div class="menu-group"><span class="eyebrow">Lối chơi</span>
+         <div class="field"><label for="m-kid">Tỉ lệ hoài thai</label><select id="m-kid">${G.CONCEIVE_LEVELS.map((x, i) => `<option value="${i}" ${i === G.conceiveLevel() ? "selected" : ""}>${x.name}</option>`).join("")}</select></div>
+         <p class="hint">Từng phi bật tắt "Muốn có con" trong hồ sơ. Kho phòng the có Tị tử thang cho từng đêm.</p>
+       </div>` : ""}
+       <div class="menu-group"><span class="eyebrow">Riêng tư</span>
+         <p class="hint">Chạm hai lần thật nhanh vào góc trên bên trái: game được che bằng một trang ghi chú, tên tab đổi thành "Ghi chú". Chạm hai lần vào trang ghi chú để quay lại.</p>
+         <label class="check"><input type="checkbox" id="m-autocover" ${autoCover() ? "checked" : ""}> Tự che khi chuyển sang ứng dụng khác</label>
+       </div>
+       <h3>Lưu game</h3><p class="hint">Game tự lưu sau mỗi lượt. Lưu thêm vào ô để giữ một mốc quay lại.</p>
        <div class="cards">${slotsHtml(true)}</div>
        <details><summary>Chuyển sang máy khác</summary>
          <p class="hint">Chép mã lưu này, dán vào ô Nhập ở máy kia.</p>
@@ -1571,11 +1593,6 @@
          <div class="row-wrap"><button class="btn btn-sm" id="m-export">Tạo mã</button><button class="btn btn-sm" id="m-copy">Chép</button></div>
          <div class="field"><label for="m-import">Nhập mã lưu</label><textarea id="m-import" rows="3" placeholder="Dán mã vào đây"></textarea></div>
          <button class="btn btn-sm" id="m-doimport">Nhập</button>
-       </details>
-       <label class="check menu-opt"><input type="checkbox" id="m-art" ${sceneArtOn() ? "checked" : ""}> Hiện ảnh đầu cảnh</label>
-       <details><summary>Che màn hình nhanh</summary>
-         <p class="hint">Chạm hai lần thật nhanh vào góc trên bên trái màn hình: game được che bằng một trang ghi chú bình thường, tên tab đổi thành "Ghi chú". Chạm hai lần vào trang ghi chú để quay lại.</p>
-         <label class="check"><input type="checkbox" id="m-autocover" ${autoCover() ? "checked" : ""}> Tự che khi chuyển sang ứng dụng khác</label>
        </details>
        ${renderPacks()}
        <button class="btn btn-ghost" id="m-close">Đóng</button>`,
@@ -1586,6 +1603,16 @@
           try {
             localStorage.setItem("dvs.sceneArt", inp.checked ? "1" : "0");
           } catch (e) {}
+        });
+        on(el, "#m-body", "change", (inp) => {
+          try {
+            localStorage.setItem("dvs.bodyArt", inp.checked ? "1" : "0");
+          } catch (e) {}
+          UI.render();
+        });
+        on(el, "#m-kid", "change", (sel) => {
+          G.setConceiveLevel(sel.value);
+          G.save();
         });
         on(el, "#m-autocover", "change", (inp) => {
           try {
@@ -1707,6 +1734,7 @@
          .map(([k, l]) => `<div class="field"><label for="c-${k}">${l}</label>${bodyImg(k)}<select id="c-${k}">${G.BODY[k].map((n, i) => `<option value="${i}" ${i === G.bodyOf(c)[k] ? "selected" : ""}>${n}</option>`).join("")}</select></div>`)
          .join("")}</div>` : ""}
        <p class="hint">${c.nights} đêm thị tẩm · ${c.kids} con${c.contestWins ? ` · ${c.contestWins} lần thắng thi` : ""}${partner && partner.tinhY >= 31 ? ` · ${partner.status} với ${esc(partner.other.name)} (${Math.round(partner.tinhY)})` : ""}</p>
+       ${G.wantsKid ? `<label class="check want-kid"><input type="checkbox" id="c-want" ${G.wantsKid(c) ? "checked" : ""}> Muốn có con với nàng</label><p class="hint">${c.kids ? `Nàng đã có ${c.kids} con. ` : ""}Tắt thì nàng uống canh tránh thai, không hoài thai. Phi đủ ${G.KID_SELF_LIMIT} con tự kiêng, trừ khi bệ hạ bật lại.${G.conceiveLevel() === 0 ? " Hiện đang tắt hoài thai cho cả hậu cung (☰ › Cài đặt)." : ""}</p>` : ""}
        ${G.friendsOf && s.consorts.length > 1 ? `<p class="hint"><b>Tỷ muội thân:</b> ${G.friendsOf(c).map((o) => esc(o.name)).join(", ") || "—"}${G.foesOf(c).length ? ` · <b>Không ưa:</b> ${G.foesOf(c).map((o) => esc(o.name)).join(", ")}` : ""}. Triệu chung tỷ muội thân được thưởng thêm; đôi không ưa nhau sẽ đấu khẩu cả đêm.</p>` : ""}
        ${wish ? `<p class="hint"><b>Tâm nguyện:</b> ${esc(wish.text)} · còn ${wish.left} tháng. Toại nguyện: Tình cảm +${G.WISH_AFFECTION}.</p>` : ""}
        ${queued ? `<p class="hint"><b>Chờ lễ sắc phong</b> lên ${esc(G.RANKS[queued.rank])} (${G.SAC_PHONG_COST[queued.rank]} lượng). Lễ bộ sẽ dâng tấu.</p>` : ""}
@@ -1888,6 +1916,7 @@
         on(el, "#c-school", "change", (sel) => G.setSchool(c.id, sel.value));
         for (const k of ["nguc", "mong", "kin", "long", "nhay"]) on(el, "#c-" + k, "change", (sel) => (G.setBody(c.id, k, sel.value), G.save(), paintBody(el, c)));
         paintBody(el, c);
+        on(el, "#c-want", "change", (inp) => (G.setWantsKid(c.id, inp.checked), G.save()));
         on(el, ".body-ic", "click", (im) => im.src && openArtViewer([im.currentSrc || im.src], 0));
         // bảng sở thích được vẽ lại, nên bắt sự kiện bấm trên cả hộp
         const fxBox = el.querySelector("#c-fxt");
