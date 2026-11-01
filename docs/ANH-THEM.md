@@ -139,3 +139,18 @@ Mỗi bộ cùng một người, cùng góc máy: `coi-01-0.webp` (còn đủ á
 ## 4. Trò ghép tranh
 
 Không cần ảnh mới: game lấy ngẫu nhiên một ảnh trong kho `anh-NNN.webp`, cắt vuông ở giữa.
+
+## 5. Ảnh thân thể (hồ sơ phi và Long thể bệ hạ, khung vuông)
+
+Tên: `body-<mục>-<mức>.webp`. Muốn nhiều ảnh cho một mức thì thêm `-2`, `-3`… (`body-nguc-2.webp`, `body-nguc-2-2.webp`…); mỗi phi nhận cố định một ảnh trong số đó. Ảnh riêng cho một phi: `body-<mục>-<mức>-<tên phi>.webp` (tên phi như mục 1, ví dụ `body-nguc-2-tuyet.webp`). Mức chưa có ảnh thì chỉ hiện chữ.
+
+| Mục | Mức 0 | Mức 1 | Mức 2 | Mức 3 |
+|---|---|---|---|---|
+| `nguc` (Vòng một) | Nhỏ nhắn | Vừa | Đầy đặn | Rất đầy |
+| `mong` (Vòng ba) | Nhỏ gọn | Tròn căng | Đầy đặn | Rất đầy |
+| `kin` (Nơi kín) | Rất khít | Khít | Vừa | — |
+| `long` (Lông nơi kín) | Cạo sạch | Tỉa gọn | Tự nhiên | — |
+| `nhay` (Độ nhạy) | Dễ lên đỉnh | Bình thường | Khó lên đỉnh | — |
+| `size` (Long căn bệ hạ) | Vừa vặn | To | Rất to | Quá khổ |
+
+Ví dụ: `body-kin-0.webp`, `body-kin-1.webp`, `body-kin-2.webp`, `body-long-0.webp`… `body-size-0.webp` … `body-size-3.webp`.

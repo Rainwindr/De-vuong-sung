@@ -128,3 +128,86 @@
     return pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
   };
 })();
+
+/*
+ * Ảnh thân thể (vòng một, vòng ba, nơi kín, lông nơi kín, độ nhạy, long căn bệ hạ):
+ *   body-<mục>-<mức>.webp, thêm ảnh cùng mức: body-<mục>-<mức>-2.webp, -3…; ảnh riêng phi: body-<mục>-<mức>-<tên>.webp
+ *   mục: nguc, mong, kin, long, nhay, size (long căn của bệ hạ). Mức đếm từ 0 theo thứ tự trong ô chọn.
+ */
+(function () {
+  "use strict";
+  const G = window.Game;
+  if (!G.BODY) return;
+  // Vòng ba (mới)
+  G.BODY.mong = ["Nhỏ gọn", "Tròn căng", "Đầy đặn", "Rất đầy"];
+  const bodyD19 = G.bodyOf;
+  G.bodyOf = function (c) {
+    const b = bodyD19(c);
+    if (b.mong == null) {
+      let h = 7;
+      for (const ch of String(c.id)) h = (h * 41 + ch.charCodeAt(0)) >>> 0;
+      b.mong = h % 4;
+    }
+    return b;
+  };
+  G.BODY_ART_KEYS = ["nguc", "mong", "kin", "long", "nhay", "size"];
+  const base = () => G.SCENE_ART_REMOTE || "";
+  const pools = {};
+  const pending = {};
+  const exists = (url) =>
+    new Promise((res) => {
+      if (G.imgMissing(url)) return res(false);
+      const im = new Image();
+      const t = setTimeout(() => res(false), 8000);
+      im.onload = () => (clearTimeout(t), res(true));
+      im.onerror = () => (clearTimeout(t), G.markImgMissing(url), res(false));
+      im.src = url;
+    });
+  const nameOf = (key, lvl, v) => `${base()}body-${key}-${lvl}${v > 1 ? "-" + v : ""}.webp`;
+  /** Dò các ảnh chung của một mục (mọi mức), lưu trong phiên. */
+  G.bodyReady = function (key) {
+    if (!base() || !G.BODY[key]) return Promise.resolve();
+    if (pending[key]) return pending[key];
+    const ck = "dvs.probe.body-" + key;
+    try {
+      const c = JSON.parse(sessionStorage.getItem(ck) || "null");
+      if (c) return (pending[key] = Promise.resolve((pools[key] = c)));
+    } catch (e) {}
+    pending[key] = (async () => {
+      const out = {};
+      try {
+        await Promise.all(
+          G.BODY[key].map(async (_, lvl) => {
+            const list = [];
+            for (let v = 1; v < 40; v += 3) {
+              const ok = await Promise.all([v, v + 1, v + 2].map((n) => exists(nameOf(key, lvl, n))));
+              ok.forEach((x, k) => x && list.push(nameOf(key, lvl, v + k)));
+              if (ok.some((x) => !x)) break;
+            }
+            out[lvl] = list;
+          })
+        );
+      } catch (e) {}
+      pools[key] = out;
+      try {
+        sessionStorage.setItem(ck, JSON.stringify(out));
+      } catch (e) {}
+      return out;
+    })();
+    return pending[key];
+  };
+  const hash = (str) => {
+    let h = 0;
+    for (const ch of String(str)) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    return h;
+  };
+  /** Đường dẫn ảnh để thử lần lượt cho mục/mức của phi c (c = null với long căn bệ hạ). */
+  G.bodyArt = function (key, lvl, c) {
+    if (!base()) return [];
+    const out = [];
+    if (c) out.push(`${base()}body-${key}-${lvl}-${G.imgSlug(c)}.webp`);
+    const pool = (pools[key] && pools[key][lvl]) || [];
+    if (pool.length) out.push(pool[hash((c ? c.id : "emperor") + key) % pool.length]);
+    return out.filter((u) => !G.imgMissing(u));
+  };
+})();

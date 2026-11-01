@@ -694,3 +694,7 @@ main#view { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 .chal-box { margin: 8px 0; padding: 10px 12px; border-radius: var(--r); border: 1px dashed var(--gold); background: #e3bb6214; }
 .chal-box .ev-text { margin: 4px 0; }
 .chal-box .hint { margin: 0; }
+.body-ic { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; margin: 2px 0 6px; border: 1px solid var(--line); cursor: zoom-in; }
+.body-ic[hidden] { display: none; }
+#me-size + .body-ic, .field .body-ic + select { margin-top: 0; }
+.body-ic[data-bk="size"] { max-width: 200px; }
