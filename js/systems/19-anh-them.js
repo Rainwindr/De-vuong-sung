@@ -5,7 +5,8 @@
  *     tt-chung-001.webp, tt-chung-002.webp… (mỗi phi nhận cố định một ảnh).
  *   - Biểu tượng đồ vật: do-<mã>.webp (kho phòng the), ao-<mã>.webp (y phục), rieng-<mã>.webp (đồ riêng),
  *     bay-<mã>.webp (bày biện), kinh.webp (Tố Nữ Kinh). Danh sách mã xem docs/ANH-THEM.md.
- *   - Trò "Cởi từng lớp": mỗi bộ 4 ảnh coi-01-0.webp (còn đủ áo) … coi-01-3.webp (cởi hết 3 lớp), bộ sau coi-02-…
+ *   - Trò "Cởi từng lớp": mỗi bộ coi-01-0.webp (còn đủ áo), coi-01-1, coi-01-2; ảnh cuối coi-01-3.webp có thì dùng,
+ *     không có thì lấy ngẫu nhiên một ảnh anh-NNN.webp. Bộ sau coi-02-…
  *   - Trò ghép tranh: dùng ngẫu nhiên một ảnh trong kho ảnh đầu cảnh.
  * File nào chưa có thì game giữ cách hiển thị cũ.
  */
@@ -114,7 +115,11 @@
     const sets = G.UNDRESS_SETS;
     if (!sets.length) return null;
     const n = sets[Math.floor(Math.random() * sets.length)];
-    return Array.from({ length: G.UNDRESS_LAYERS }, (_, k) => `${base()}coi-${pad(n, 2)}-${k}.webp`);
+    const list = Array.from({ length: G.UNDRESS_LAYERS }, (_, k) => `${base()}coi-${pad(n, 2)}-${k}.webp`);
+    // nấc cuối: bộ nào không có coi-NN-3 thì lấy ngẫu nhiên một ảnh anh-NNN trong kho ảnh đầu cảnh
+    list.fallback = G.puzzleArt ? G.puzzleArt() : null;
+    if (list.fallback && miss.has(list[list.length - 1])) list[list.length - 1] = list.fallback;
+    return list;
   };
 
   /** Ảnh cho trò ghép tranh: một ảnh ngẫu nhiên trong kho ảnh đầu cảnh, hoặc null. */

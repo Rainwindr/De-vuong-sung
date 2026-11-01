@@ -2745,7 +2745,7 @@
     const art = sceneArtOn() && G.undressArt ? G.undressArt() : null;
     if (art) art.slice(1).forEach((u) => (new Image().src = u));
     openSheet(
-      `${art ? `<div class="ud-art"><img id="ud-img" src="${esc(art[0])}" alt="" onerror="window.Game.markImgMissing(this.src);this.dataset.bad=1;if(this.dataset.prev)this.src=this.dataset.prev;else this.closest('.ud-art').remove()"></div>` : ""}
+      `${art ? `<div class="ud-art"><img id="ud-img" src="${esc(art[0])}" alt="" ${art.fallback ? `data-fb="${esc(art.fallback)}"` : ""} onerror="window.Game.markImgMissing(this.src);if(this.dataset.last&&this.dataset.fb){const f=this.dataset.fb;delete this.dataset.fb;this.src=f;return;}this.dataset.bad=1;if(this.dataset.prev)this.src=this.dataset.prev;else this.closest('.ud-art').remove()"></div>` : ""}
        <div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>Cởi từng lớp</h3></div></div>
        <p class="hint">Giữ ngón tay trên nút cho đến khi thanh đầy để cởi một lớp. Buông sớm thì nàng thẹn kéo áo lại.</p>
        <div class="ud-log" id="ud-log"></div>
@@ -2778,6 +2778,7 @@
             if (im && art[k] && !G.imgMissing(art[k])) {
               if (!im.dataset.bad) im.dataset.prev = im.src;
               delete im.dataset.bad;
+              if (k === art.length - 1) im.dataset.last = 1;
               im.src = art[k];
             }
             prog = 0;

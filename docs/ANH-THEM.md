@@ -134,7 +134,7 @@ Up lên kho R2 (cùng chỗ với `anh-NNN.webp`). Đặt **đúng tên** dướ
 
 ## 3. Trò "Cởi từng lớp" (ngang 16:9)
 
-Mỗi bộ 4 ảnh cùng một người, cùng góc máy: `coi-01-0.webp` (còn đủ áo ngoài), `coi-01-1.webp` (đã cởi áo ngoài), `coi-01-2.webp` (đã cởi áo trong, còn yếm), `coi-01-3.webp` (cởi hết). Bộ thứ hai `coi-02-0…3`, cứ thế tiếp. Game bốc ngẫu nhiên một bộ mỗi lần chơi; đánh số bộ liên tiếp, đừng bỏ trống.
+Mỗi bộ cùng một người, cùng góc máy: `coi-01-0.webp` (còn đủ áo ngoài), `coi-01-1.webp` (đã cởi áo ngoài), `coi-01-2.webp` (đã cởi áo trong, còn yếm). Ảnh cuối `coi-01-3.webp` (cởi hết) **không bắt buộc**: bộ nào không có thì game lấy ngẫu nhiên một ảnh `anh-NNN.webp` trong kho ảnh đầu cảnh. Bộ thứ hai `coi-02-…`, cứ thế tiếp. Game bốc ngẫu nhiên một bộ mỗi lần chơi; đánh số bộ liên tiếp, đừng bỏ trống.
 
 ## 4. Trò ghép tranh
 
