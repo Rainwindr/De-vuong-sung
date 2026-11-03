@@ -200,14 +200,10 @@
         <div class="who">
           <h2 title="${esc(s.emperorName)}">${esc(s.emperorName)}</h2>
           <span class="date">${s.godMode ? '<span class="god-badge">Thiên Đạo · </span>' : ""}${s.age} tuổi · năm ${s.year} th.${s.month}${G.seasonOf ? ` <span class="season-pill s-${G.seasonOf(s.month)}">${G.SEASONS[G.seasonOf(s.month)]}</span>` : ""}${G.currentQue && G.currentQue() ? ` <span class="que-pill">${esc(G.currentQue().name)}</span>` : ""}</span>
-          <button class="icon-btn" id="b-menu" aria-label="Lưu game, gói nội dung và cài đặt">☰</button>
+          <span class="who-btns"><button class="icon-btn" id="b-over" aria-label="Tổng quan hậu cung">◈</button><button class="icon-btn" id="b-menu" aria-label="Lưu game, gói nội dung và cài đặt">☰</button></span>
         </div>
         <div class="stats">${Object.entries(G.STATS)
-          .map(([k, d]) => {
-            const v = s.stats[k];
-            const pct = k === "quocKho" ? Math.min(100, v / 200) : v;
-            return `<div class="stat ${k}"><span class="k">${d.label}</span><span class="v">${k === "quocKho" ? fmtMoney(v) : Math.round(v)}</span>${bar(pct)}</div>`;
-          })
+          .map(([k, d]) => statSeg(k, d, s.stats[k]))
           .join("")}</div>
         <nav class="tabs" role="tablist">${tabs.map(([id, l]) => `<button class="tab" role="tab" data-tab="${id}" aria-selected="${tab === id}">${l}</button>`).join("")}</nav>
       </header>`;
@@ -268,6 +264,7 @@
       window.scrollTo(0, 0);
     });
     $(headEl, "#b-menu").addEventListener("click", openMenu);
+    on(headEl, "#b-over", "click", () => openOverview());
     const tb = $(headEl, ".tabs");
     if (tb) {
       const edge = () => {
@@ -280,7 +277,284 @@
       tb.addEventListener("scroll", edge, { passive: true });
     }
   }
+  /* ---------------- Thanh chỉ số dạng vạch ---------------- */
+  const STAT_WORDS = {
+    truyLac: ["Đoan chính", "Phong lưu", "Đắm say", "Trụy lạc"],
+    longThe: ["Suy kiệt", "Mỏi mệt", "Khỏe", "Sung mãn"],
+    quocKho: ["Cạn kiệt", "Eo hẹp", "Dư dả", "Đầy kho"],
+    danTam: ["Oán thán", "Bất an", "Yên ổn", "Hưng thịnh"],
+    hoaKhi: ["Rối ren", "Lục đục", "Êm ấm", "Hòa thuận"],
+  };
+  function statSeg(k, d, v) {
+    const lv = k === "quocKho" ? (v < 500 ? 0 : v < 2000 ? 1 : v < 8000 ? 2 : 3) : v < 25 ? 0 : v < 50 ? 1 : v < 75 ? 2 : 3;
+    const word = (STAT_WORDS[k] || [])[lv] || "";
+    const val = k === "quocKho" ? fmtMoney(v) : Math.round(v);
+    return `<div class="stat ${k} lv${lv}" title="${esc(d.label)} ${val}"><span class="k">${esc(d.label)} <b>${val}</b></span><span class="w">${esc(word)}</span><span class="segs">${[0, 1, 2, 3].map((i) => `<i class="${i <= lv ? "on" : ""}"></i>`).join("")}</span></div>`;
+  }
+
+  /* ---------------- Bảng tổng quan hậu cung ---------------- */
+  function openOverview() {
+    const s = G.state;
+    if (!s) return;
+    const chips = (list, why) => (list.length ? list.map((c) => `<button class="ov-chip" data-oc="${esc(c.id)}">${portrait(c, "xs")}<span>${esc(c.name)}${why ? `<em>${esc(why(c))}</em>` : ""}</span></button>`).join("") : `<span class="hint">Không có</span>`);
+    const top = [...s.consorts].sort((a, b) => b.favor - a.favor).slice(0, 3);
+    const khat = s.consorts.filter((c) => G.khatBadge && G.khatBadge(c));
+    const sulk = s.consorts.filter((c) => G.isSulking && G.isSulking(c));
+    const preg = s.consorts.filter((c) => c.pregnantDue != null);
+    const rem = G.reminders ? G.reminders().length : 0;
+    const go = [["harem", "Hậu cung"], ["rel", "Quan hệ"], ["kids", "Con cháu"], ["me", "Bệ hạ"], ["palace", "Cung điện"], ["bed", "Kho phòng the"], ["create", "Thiên Đạo"], ["menu", "Cài đặt · Lưu"]];
+    openSheet(
+      `<h3>Tổng quan hậu cung</h3>
+       <div class="ov-sec"><span class="eyebrow">Tiến trình năm ${s.year}</span><div class="ov-row"><span>Tháng ${s.month}/12</span>${bar((s.month / 12) * 100, "gold")}</div>
+         <p class="hint">${s.consorts.length} phi tần · ${s.children.length} con${rem ? ` · ${rem} việc chờ ở Triều` : ""}</p></div>
+       <div class="ov-sec"><span class="eyebrow">Sủng nhất</span><div class="ov-chips">${chips(top, (c) => `Sủng ái ${Math.round(c.favor)}`)}</div></div>
+       <div class="ov-sec"><span class="eyebrow">Đang khát</span><div class="ov-chips">${chips(khat, (c) => (G.khatOf ? `Khát khao ${Math.round(G.khatOf(c))}` : ""))}</div></div>
+       <div class="ov-sec"><span class="eyebrow">Đang dỗi</span><div class="ov-chips">${chips(sulk)}</div></div>
+       ${preg.length ? `<div class="ov-sec"><span class="eyebrow">Hoài thai</span><div class="ov-chips">${chips(preg, (c) => `còn ${Math.max(0, c.pregnantDue - s.turn)} tháng`)}</div></div>` : ""}
+       <div class="ov-sec"><span class="eyebrow">Điều hướng</span><div class="ov-grid">${go.map(([k, l]) => `<button class="btn btn-sm" data-ogo="${k}">${l}</button>`).join("")}</div></div>
+       <button class="btn btn-ghost" id="ov-close">Đóng</button>`,
+      (el) => {
+        on(el, "#ov-close", "click", () => closeSheet());
+        on(el, "[data-oc]", "click", (b) => openConsort(b.dataset.oc));
+        on(el, "[data-ogo]", "click", (b) => {
+          const k = b.dataset.ogo;
+          if (k === "bed") return openBedShop();
+          if (k === "menu") return openMenu();
+          if (k === "create") return openGodHub();
+          closeSheet();
+          if (k === "rel") {
+            tab = "harem";
+            haremView = "rel";
+          } else tab = k;
+          UI.render();
+          window.scrollTo(0, 0);
+        });
+      }
+    );
+  }
+
+  /* ---------------- Bản đồ quan hệ ---------------- */
+  function relColOf(c) {
+    if ((G.isSulking && G.isSulking(c)) || c.affection < 30) return "doi";
+    if (c.favor >= 60 && c.affection >= 60) return "than";
+    return "binh";
+  }
+  function renderRelMap() {
+    const s = G.state;
+    const cols = [["than", "Thân bệ hạ", "Sủng ái và Tình cảm từ 60"], ["binh", "Bình thường", ""], ["doi", "Đang dỗi / ghen", "Đang dỗi hoặc Tình cảm dưới 30"]];
+    const by = { than: [], binh: [], doi: [] };
+    for (const c of [...s.consorts].sort((a, b) => b.favor - a.favor)) by[relColOf(c)].push(c);
+    return `<div class="rel-map">${cols
+      .map(([k, l, h]) => `<div class="rel-col rel-${k}"><div class="rel-h"><b>${l}</b><span class="rel-n">${by[k].length}</span></div>${h ? `<p class="hint">${h}</p>` : ""}${
+        by[k].length
+          ? by[k]
+              .map((c) => {
+                const bio = G.bioOf ? G.bioOf(c) : null;
+                return `<button class="rel-card" data-consort="${esc(c.id)}"><span class="rel-top">${portrait(c, "sm")}<span><b>${esc(c.name)}</b><br><span class="hint">${esc(G.displayTitle(c))}</span></span></span>${bio ? `<span class="rel-bio">${esc(bio[0])}</span>` : ""}<span class="rel-bar"><span>Sủng ái</span>${bar(c.favor)}<em>${Math.round(c.favor)}</em></span><span class="rel-bar"><span>Tình cảm</span>${bar(c.affection, "gold")}<em>${Math.round(c.affection)}</em></span></button>`;
+              })
+              .join("")
+          : `<p class="empty">Không có</p>`
+      }</div>`)
+      .join("")}</div>`;
+  }
+
+  /* ---------------- Trong cảnh: đổi tư thế, ra lệnh, chỗ bắn ---------------- */
+  function sceneActBtns(scene, i) {
+    if (!scene.roundOf || scene.blocked || !G.POSES) return "";
+    const out = [];
+    if ((scene._poses || 0) < G.POSE_MAX) out.push(`<button class="btn btn-sm" data-sa="pose">Đổi tư thế ▸</button>`);
+    if ((scene._cmds || 0) < G.COMMAND_MAX) out.push(`<button class="btn btn-sm" data-sa="cmd">Ra lệnh ▸</button>`);
+    return out.length ? `<div class="sg-row">${out.join("")}</div>` : "";
+  }
+  function sceneFinishBox(scene) {
+    if (!scene.roundOf || scene.blocked || !G.FINISHES) return "";
+    const c = G.findConsort(scene.roundOf);
+    if (!c) return "";
+    if (!scene._finish) {
+      const list = Object.entries(G.FINISHES);
+      return `<div class="fin-box"><span class="eyebrow">Đến lúc rồi · bắn vào đâu?</span><div class="chips">${list.map(([k, f]) => (G.levelOf(c) >= (f.need || 0) ? `<button class="chip" data-fin="${k}">${esc(f.name)}</button>` : `<button class="chip" disabled title="${esc(G.needLabel(f.need))}">${esc(f.name)} · ${esc(G.needLabel(f.need))}</button>`)).join("")}</div></div>`;
+    }
+    if (!scene._after) {
+      const list = G.aftersFor(c, scene._finish);
+      if (!list.length) return "";
+      return `<div class="fin-box"><span class="eyebrow">Sau đó</span><div class="chips">${list.map(([k, a]) => `<button class="chip" data-aft="${k}">${esc(a.name)}</button>`).join("")}</div></div>`;
+    }
+    return "";
+  }
+  function bindSceneActs(el, scene, notes, i, pages) {
+    const pushNote = (n) => n && (notes ? notes.push(n) : (scene.notes = (scene.notes || []).concat([n])));
+    const insertNext = (line) => {
+      const ps = scene.pages.slice();
+      ps[i + 1] = line + "\n\n" + ps[i + 1];
+      scene.pages = ps;
+      scene.text = ps.join("\n\n");
+    };
+    on(el, "[data-sa]", "click", (b) => {
+      const c = G.findConsort(scene.roundOf);
+      if (!c) return;
+      const pose = b.dataset.sa === "pose";
+      const list = pose ? Object.entries(G.POSES) : Object.entries(G.COMMANDS);
+      openSheet(
+        `<h3>${pose ? "Đổi tư thế" : "Ra lệnh"}</h3><p class="hint">${pose ? `Còn ${G.POSE_MAX - (scene._poses || 0)} lần đổi trong cảnh này. Ảnh đổi theo tư thế.` : `Còn ${G.COMMAND_MAX - (scene._cmds || 0)} lệnh trong cảnh này. ${esc(G.levelName ? G.levelName(c) : "")}: lệnh khó hơn mở theo mức thân mật.`}</p>
+         <div class="choices">${list.map(([k, it]) => `<button class="btn" data-pick="${k}" ${G.levelOf(c) >= (it.need || 0) ? "" : "disabled"}>${esc(pose ? it.name : "“" + it.label + "”")}${it.need && G.levelOf(c) < it.need ? `<span class="cost">${esc(G.needLabel(it.need))}</span>` : ""}</button>`).join("")}</div>
+         <button class="btn btn-ghost" id="sa-back">Thôi, đọc tiếp</button>`,
+        (el2) => {
+          on(el2, "#sa-back", "click", () => showScene(scene, notes, i));
+          on(el2, "[data-pick]", "click", (bb) => {
+            const k = bb.dataset.pick;
+            if (pose) {
+              const r = G.scenePose(scene, k);
+              if (r) {
+                insertNext(r.line);
+                const src = r.image.list[0] || r.image.fallback;
+                if (src) {
+                  scene.image = src;
+                  scene.imageAlt = r.image.list[0] && r.image.fallback ? [r.image.fallback] : [];
+                  scene._imgPage = i + 1;
+                }
+              }
+            } else {
+              const r = G.sceneCommand(scene, k);
+              if (r) {
+                insertNext(r.line);
+                pushNote(r.note);
+              }
+            }
+            G.save();
+            showScene(scene, notes, i + 1);
+          });
+        },
+        { locked: true }
+      );
+    });
+    on(el, "[data-fin]", "click", (b) => {
+      const r = G.sceneFinish(scene, b.dataset.fin);
+      if (!r) return;
+      scene.pages = scene.pages.concat([r.line]);
+      scene.text = scene.pages.join("\n\n");
+      (r.notes || []).forEach(pushNote);
+      G.save();
+      showScene(scene, notes, scene.pages.length - 1);
+    });
+    on(el, "[data-aft]", "click", (b) => {
+      const r = G.sceneAfter(scene, b.dataset.aft);
+      if (!r) return;
+      scene.pages = scene.pages.concat([r.line]);
+      scene.text = scene.pages.join("\n\n");
+      pushNote(r.note);
+      G.save();
+      showScene(scene, notes, scene.pages.length - 1);
+    });
+  }
+
+  /* ---------------- Thiên Đạo sáng tạo ---------------- */
+  function openGodHub() {
+    openSheet(
+      `<h3>Thiên Đạo · sáng tạo</h3><p class="hint">Tự tạo phi theo ý, hoặc tự dựng một đêm không cần điều kiện, không tốn Long thể.</p>
+       <div class="choices"><button class="btn" id="gh-create">Tạo phi mới</button><button class="btn" id="gh-night">Dựng đêm theo ý</button><button class="btn btn-ghost" id="gh-close">Đóng</button></div>`,
+      (el) => {
+        on(el, "#gh-create", "click", () => openGodCreate());
+        on(el, "#gh-night", "click", () => openGodNight());
+        on(el, "#gh-close", "click", () => closeSheet());
+      }
+    );
+  }
+  const fxPickHtml = (id, checked) => {
+    const list = Object.values(R.fetishes)
+      .filter((f) => G.fetishUnlocked(f.id))
+      .sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name, "vi"));
+    return `<input type="search" id="${id}-q" placeholder="Tìm sở thích…" autocomplete="off"><div class="god-fx" id="${id}">${list.map((f) => `<label class="check" data-fname="${esc(fold(f.name))}"><input type="checkbox" value="${esc(f.id)}" ${checked && checked.includes(f.id) ? "checked" : ""}> ${esc(f.name)}</label>`).join("")}</div>`;
+  };
+  const bindFxPick = (el, id) => {
+    on(el, `#${id}-q`, "input", (inp) => {
+      const q = fold(inp.value.trim());
+      for (const l of el.querySelectorAll(`#${id} label`)) l.hidden = !!q && !l.dataset.fname.includes(q);
+    });
+  };
+  const fxPicked = (el, id) => [...el.querySelectorAll(`#${id} input:checked`)].map((x) => x.value);
+  function openGodCreate() {
+    const traits = new Set();
+    const body = G.BODY ? ["nguc", "mong", "kin", "long", "nhay"].filter((k) => G.BODY[k]) : [];
+    const names = { nguc: "Vòng một", mong: "Vòng ba", kin: "Nơi kín", long: "Lông nơi kín", nhay: "Độ nhạy" };
+    openSheet(
+      `<h3>Tạo phi mới</h3>
+       <div class="field"><label for="gc-name">Tên</label><input id="gc-name" maxlength="30" placeholder="Ví dụ: Lâm Thanh Nhã"></div>
+       <div class="body-row"><div class="field"><label for="gc-age">Tuổi (từ 18)</label><input id="gc-age" type="number" min="18" max="45" value="20"></div><div class="field"><label for="gc-origin">Xuất thân</label><input id="gc-origin" maxlength="60" placeholder="Tiểu thư Giang Nam"></div></div>
+       <p class="hint">Tính nết (chọn tối đa 3):</p><div class="chips">${G.TRAIT_POOL.map((t) => `<button class="chip" data-gt="${esc(t)}" aria-pressed="false">${esc(t)}</button>`).join("")}</div>
+       ${body.length ? `<div class="body-row">${body.map((k) => `<div class="field"><label for="gc-${k}">${names[k]}</label><select id="gc-${k}"><option value="">Ngẫu nhiên</option>${G.BODY[k].map((n, i) => `<option value="${i}">${n}</option>`).join("")}</select></div>`).join("")}</div>` : ""}
+       <details><summary>Tiểu sử (tùy chọn)</summary><div class="field"><input id="gc-b1" placeholder="Xuất thân, ví dụ: con gái thợ nhuộm ven sông"></div><div class="field"><input id="gc-b2" placeholder="Tính nết"></div><div class="field"><input id="gc-b3" placeholder="Chuyện riêng"></div></details>
+       <p class="hint">Sở thích nàng sẵn lòng ngay từ đầu (ba mục chọn đầu tiên thành sở thích nàng thích ♥):</p>
+       ${fxPickHtml("gc-fx")}
+       <p class="hint fx-msg" id="gc-msg" hidden></p>
+       <div class="choices"><button class="btn btn-primary" id="gc-go">Cho nhập cung</button><button class="btn btn-ghost" id="gc-back">Thôi</button></div>`,
+      (el) => {
+        bindFxPick(el, "gc-fx");
+        on(el, "[data-gt]", "click", (b) => {
+          const t = b.dataset.gt;
+          if (traits.has(t)) traits.delete(t);
+          else if (traits.size < 3) traits.add(t);
+          for (const x of el.querySelectorAll("[data-gt]")) x.setAttribute("aria-pressed", traits.has(x.dataset.gt));
+        });
+        on(el, "#gc-back", "click", () => openGodHub());
+        on(el, "#gc-go", "click", () => {
+          const v = (id) => (el.querySelector("#" + id) || {}).value || "";
+          const fx = fxPicked(el, "gc-fx");
+          const r = G.godCreate({ name: v("gc-name"), age: v("gc-age"), origin: v("gc-origin"), traits: [...traits], willing: fx, likes: fx.slice(0, 3), body: Object.fromEntries(body.map((k) => [k, v("gc-" + k)])), bio: [v("gc-b1"), v("gc-b2"), v("gc-b3")].some(Boolean) ? [v("gc-b1"), v("gc-b2"), v("gc-b3")] : null });
+          if (!r.ok) {
+            const m = $(el, "#gc-msg");
+            m.textContent = r.text;
+            m.hidden = false;
+            return;
+          }
+          G.save();
+          UI.render();
+          showMessage("Thiên Đạo ban mỹ nhân", r.text, ["Sủng ái 40", "Tình cảm 40"]);
+        });
+      }
+    );
+  }
+  function openGodNight(cid) {
+    const s = G.state;
+    const list = s.consorts.filter((c) => c.pregnantDue == null);
+    if (!list.length) return showMessage("Dựng đêm", "Không có phi nào để triệu (các phi đều đang hoài thai hoặc hậu cung trống).");
+    const cur = G.findConsort(cid) || list[0];
+    const items = new Set();
+    openSheet(
+      `<h3>Dựng đêm theo ý</h3>
+       <div class="field"><label for="gn-c">Phi</label><select id="gn-c">${list.map((c) => `<option value="${esc(c.id)}" ${c.id === cur.id ? "selected" : ""}>${esc(c.name)} · ${esc(G.displayTitle(c))}</option>`).join("")}</select></div>
+       ${G.NIGHT_PLACES ? `<div class="field"><label for="gn-place">Nơi</label><select id="gn-place"><option value="">Tẩm cung</option>${Object.entries(G.NIGHT_PLACES).map(([k, p]) => `<option value="${k}">${esc(p.name)}</option>`).join("")}</select></div>` : ""}
+       ${G.OUTFITS ? `<div class="field"><label for="gn-outfit">Y phục</label><select id="gn-outfit"><option value="">Thường phục</option>${Object.entries(G.OUTFITS).map(([k, o]) => `<option value="${k}">${esc(o.name)}</option>`).join("")}</select></div>` : ""}
+       ${G.FURNISH ? `<div class="field"><label for="gn-furn">Bày biện</label><select id="gn-furn"><option value="">Không dùng</option>${Object.entries(G.FURNISH).map(([k, f]) => `<option value="${k}">${esc(f.name)}</option>`).join("")}</select></div>` : ""}
+       ${G.BED_ITEMS ? `<p class="hint">Đồ dùng (tối đa ${G.BED_ITEM_MAX}, không trừ kho):</p><div class="chips">${Object.entries(G.BED_ITEMS).map(([k, it]) => `<button class="chip" data-gi="${k}" aria-pressed="false">${esc(it.name)}</button>`).join("")}</div>` : ""}
+       <p class="hint">Sở thích đêm nay:</p>
+       ${fxPickHtml("gn-fx")}
+       <label class="check"><input type="checkbox" id="gn-will" checked> Cho nàng sẵn lòng với các sở thích đã chọn</label>
+       <div class="choices"><button class="btn btn-primary" id="gn-go">Diễn</button><button class="btn btn-ghost" id="gn-back">Thôi</button></div>`,
+      (el) => {
+        bindFxPick(el, "gn-fx");
+        on(el, "[data-gi]", "click", (b) => {
+          const k = b.dataset.gi;
+          if (items.has(k)) items.delete(k);
+          else if (items.size < G.BED_ITEM_MAX) items.add(k);
+          for (const x of el.querySelectorAll("[data-gi]")) x.setAttribute("aria-pressed", items.has(x.dataset.gi));
+        });
+        on(el, "#gn-back", "click", () => openGodHub());
+        on(el, "#gn-go", "click", () => {
+          const v = (id) => (el.querySelector("#" + id) || {}).value || "";
+          const scene = G.godNight({ cid: v("gn-c"), place: v("gn-place"), outfit: v("gn-outfit"), furn: v("gn-furn"), items: [...items], fx: fxPicked(el, "gn-fx"), makeWilling: (el.querySelector("#gn-will") || {}).checked });
+          G.save();
+          if (scene) showScene(scene);
+        });
+      }
+    );
+  }
+  UI.openGodHub = openGodHub;
+
   /* ---------------- Cấp phòng the của bệ hạ ---------------- */
+  function renderGodSection() {
+    if (!G.godCreate) return "";
+    return `<section class="section"><div class="section-head"><h3>Thiên Đạo · sáng tạo</h3><span class="hint">Tự tạo phi, tự dựng đêm</span></div><div class="choices row-2"><button class="btn" id="tg-create">Tạo phi mới</button><button class="btn" id="tg-night">Dựng đêm theo ý</button></div></section>`;
+  }
   function renderLevel() {
     if (!G.levelInfo) return "";
     const L = G.levelInfo();
@@ -343,7 +617,7 @@
   UI.openArtViewer = openArtViewer;
 
   function renderTab() {
-    return ({ harem: renderHarem, kids: renderKids, me: () => renderLevel() + renderBedTitles() + renderGameRecords() + renderGallery() + renderAlbum() + renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
+    return ({ harem: renderHarem, kids: renderKids, me: () => renderGodSection() + renderLevel() + renderBedTitles() + renderGameRecords() + renderGallery() + renderAlbum() + renderBody() + renderFetish() + renderAch(), palace: renderPalace, god: renderGod }[tab] || renderLog)();
   }
 
   /* ---------------- Nhật ký ---------------- */
@@ -488,8 +762,8 @@
     const pairs = G.listPairs().filter((p) => p.tinhY >= 31);
     return `<section class="section">
       <div class="section-head"><h3>Hậu cung</h3><span class="hint">Chạm để ghé thăm, tặng quà, xem chi tiết</span></div>
-      <div class="seg" role="tablist"><button class="seg-btn" data-hview="list" aria-selected="${haremView !== "map"}">Danh sách</button><button class="seg-btn" data-hview="map" aria-selected="${haremView === "map"}">Bản đồ cung</button></div>
-      ${!list.length ? `<p class="empty">Hậu cung trống. Mở tuyển tú để nạp phi.</p>` : haremView === "map" ? renderPalaceMap() : `<div class="cards">${list.map((c) => consortCard(c)).join("")}</div>`}
+      <div class="seg" role="tablist"><button class="seg-btn" data-hview="list" aria-selected="${haremView !== "map" && haremView !== "rel"}">Danh sách</button><button class="seg-btn" data-hview="rel" aria-selected="${haremView === "rel"}">Quan hệ</button><button class="seg-btn" data-hview="map" aria-selected="${haremView === "map"}">Bản đồ cung</button></div>
+      ${!list.length ? `<p class="empty">Hậu cung trống. Mở tuyển tú để nạp phi.</p>` : haremView === "rel" ? renderRelMap() : haremView === "map" ? renderPalaceMap() : `<div class="cards">${list.map((c) => consortCard(c)).join("")}</div>`}
       <details class="fold"><summary>Đối thực <span class="hint">${pairs.length} cặp</span></summary>
       <div class="section-head"><h3>Đối thực</h3><span class="hint">Thái độ của bệ hạ: ${G.ATTITUDE_LABEL[s.attitude]}</span></div>
       ${
@@ -848,6 +1122,8 @@
       const shown = galleryAll ? seen : seen.slice(-12);
       openArtViewer(shown, Number(b.dataset.art));
     });
+    on(root, "#tg-create", "click", () => openGodCreate());
+    on(root, "#tg-night", "click", () => openGodNight());
     on(root, "#me-tinh", "change", (sel) => {
       G.setEmperorTinh(sel.value);
       G.save();
@@ -1163,10 +1439,11 @@
       : `<div class="scene-veil">· · ·</div>`;
     const dots = pages.length > 1 ? `<div class="scene-dots" aria-label="Đoạn ${i + 1} trên ${pages.length}">${pages.map((_, k) => `<i class="${k === i ? "on" : k < i ? "done" : ""}"></i>`).join("")}</div>` : "";
     const btns = last
-      ? `${notesHtml(notes || scene.notes)}${roundBtn(scene)}${banBtn(scene)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
-      : `${sceneGameBtns(scene, i, pages)}<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
-    openSheet(`${i === 0 ? img : ""}<h3>${esc(scene.title || "")}</h3>${scene.mixNames ? `<p class="hint mix-tag">Ghép từ: ${esc(scene.mixNames)}</p>` : ""}${dots}<p class="ev-text">${formatText(pages[i])}</p>${btns}`, (el) => {
+      ? `${sceneFinishBox(scene)}${notesHtml(notes || scene.notes)}${roundBtn(scene)}${banBtn(scene)}<button class="btn btn-primary" id="s-ok">${scene.blocked ? "Đóng" : "Sáng hôm sau"}</button>`
+      : `${sceneGameBtns(scene, i, pages)}${sceneActBtns(scene, i)}<div class="choices scene-nav"><button class="btn btn-primary" id="s-next">Tiếp · ${i + 1}/${pages.length}</button><button class="btn btn-ghost btn-sm" id="s-all">Đọc liền một mạch</button></div>`;
+    openSheet(`${i === 0 || scene._imgPage === i ? img : ""}<h3>${esc(scene.title || "")}</h3>${scene.mixNames ? `<p class="hint mix-tag">Ghép từ: ${esc(scene.mixNames)}</p>` : ""}${dots}<p class="ev-text">${formatText(pages[i])}</p>${btns}`, (el) => {
       $(el, ".sheet-card").classList.add("scene-card");
+      bindSceneActs(el, scene, notes, i, pages);
       const im = el.querySelector(".scene-img");
       if (im) {
         im.addEventListener("load", () => G.markArtSeen && G.markArtSeen(im.currentSrc || im.src), { once: true });
@@ -1268,7 +1545,7 @@
 
   function showEvent(prepared) {
     openSheet(
-      `${eventHead(prepared)}<p class="ev-text">${formatText(prepared.text)}</p>
+      `${prepared.image && sceneArtOn() ? `<img class="scene-img" src="${esc(prepared.image)}" alt="" onerror="this.remove()">` : ""}${eventHead(prepared)}<p class="ev-text">${formatText(prepared.text)}</p>
        <div class="choices">${prepared.choices.map((c) => `<button class="btn" data-choice="${c.index}">${esc(c.label)}${c.cost ? `<span class="cost">−${fmtMoney(c.cost)} lượng</span>` : ""}</button>`).join("")}</div>`,
       (el) =>
         on(el, "[data-choice]", "click", (b) => {
@@ -1728,6 +2005,8 @@
          .join("")}</div>
        <div class="pane" data-pane-body="info">
        ${fullBody(c)}
+       ${G.bioOf ? `<div class="bio">${G.bioOf(c).map((l, i) => `<p><span class="eyebrow">${["Xuất thân", "Tính nết", "Chuyện riêng"][i] || ""}</span>${esc(l)}</p>`).join("")}</div>` : ""}
+       ${G.stakeOf && G.stakeOf(c) ? `<p class="hint stake-line"><b>Đang thi hành cược:</b> ${esc(G.stakeOf(c).def.name)}</p>` : ""}
        <div class="row-wrap">${c.traits.map((t) => pill(t)).join("")}</div>
        ${G.bodyOf ? `<div class="body-row">${[["nguc", "Vòng một"], ["mong", "Vòng ba"], ["kin", "Nơi kín"], ["long", "Lông nơi kín" + (G.longNow(c) !== G.bodyOf(c).long ? " · đang cạo sạch" : "")], ["nhay", "Độ nhạy"]]
          .filter(([k]) => G.BODY[k])
@@ -2008,6 +2287,7 @@
     const head = `<div class="ev-head">${portrait(c)}<div class="t"><span class="eyebrow">Chơi cùng ${esc(c.name)}</span><h3>Chọn trò</h3></div></div>`;
     openSheet(
       `${head}<p class="hint">Mỗi tháng chơi với mỗi phi một ván. Thắng: Tình cảm +5. Thua hay hòa nàng vẫn vui: Tình cảm +3. Trò nàng thích (♥) được thêm +2.</p>
+       ${G.STAKES ? `<div class="field"><label for="g-bet">Cược thân (tùy chọn)</label><select id="g-bet"><option value="">Không cược</option>${Object.entries(G.STAKES).map(([k, st]) => `<option value="${k}">${esc(st.name)}</option>`).join("")}</select></div><p class="hint">Bệ hạ thắng: nàng phải thi hành món cược. Bệ hạ thua: chiều nàng một yêu cầu.</p>` : ""}
        <div class="choices">${Object.entries(G.MINI_GAMES)
          .filter(([, g]) => !g.slot || g.slot === "day")
          .map(([k, g]) => {
@@ -2018,6 +2298,7 @@
       (el) =>
         on(el, "[data-game]", "click", (b) => {
           const k = b.dataset.game;
+          if (G.setBet) G.setBet(c.id, (el.querySelector("#g-bet") || {}).value);
           if (G.NEW_GAMES && G.NEW_GAMES[k]) return playNewDay(c, k);
           ({ dau_ho: gameDauHo, hoa_dang: gameHoaDang, doi_tho: gameDoiTho, danh_co: gameDanhCo, xuc_xac: gameXucXac, ban_cung: (x) => gameDauHo(x, "ban_cung"), xoa_bop: gameXoaBop, co_coi_ao: gameCoCoiAo })[k](c);
         })
@@ -3007,6 +3288,7 @@
         ? `<p class="hint">Đồ dùng (tối đa ${G.BED_ITEM_MAX}):</p><div class="chips">${items.map(([id, it]) => `<button class="chip" data-item="${id}" aria-pressed="false">${itemIcon("bed", id, "sm")}${esc(it.name)} ×${G.bedStock(id)}${G.likedItem(c) === id ? " ♥" : ""}</button>`).join("")}</div>`
         : `<p class="hint">Kho đồ dùng trống. Mua ở Ý chỉ › Kho phòng the.</p>`}
       ${keeps.length ? `<p class="hint">Đồ riêng của nàng (tối đa ${G.KEEP_MAX}):</p><div class="chips">${keeps.map((k) => `<button class="chip" data-keep="${k}" aria-pressed="false">${itemIcon("keep", k, "sm")}${esc(G.KEEPSAKES[k].name)}${G.likesThing(c, k, G.KEEPSAKES[k].like) ? " ♥" : ""}</button>`).join("")}</div>` : ""}
+      ${G.placesFor && G.placesFor().length ? `<div class="field"><label for="n-place">Nơi thị tẩm</label><select id="n-place"><option value="">Tẩm cung</option>${G.placesFor().map((p) => `<option value="${p}">${esc(G.NIGHT_PLACES[p].name)}</option>`).join("")}</select></div>` : ""}
       ${furn.length ? `<div class="field"><label for="n-furn">Bày biện</label><select id="n-furn"><option value="">Không dùng</option>${furn.map((f) => `<option value="${f}">${esc(G.FURNISH[f].name)}</option>`).join("")}</select></div>` : ""}
       <p class="hint">Mua y phục và đồ riêng cho nàng ở hồ sơ (tab Y phục, Đồ riêng). Bày biện tẩm cung mua ở Ý chỉ › Kho phòng the.</p></details>`;
   }
@@ -3201,10 +3483,12 @@
           const mix = mixOn && picked.size >= 2 && !G.findCombo([...picked]) && !!el.querySelector("#fx-mix");
           const outfit = (el.querySelector("#n-outfit") || {}).value;
           const furn = (el.querySelector("#n-furn") || {}).value;
+          const place = (el.querySelector("#n-place") || {}).value;
           const pick = { items: [...items], keeps: [...keeps], outfit, fx: [...picked] };
           const go = (memo) => {
             if (G.setMixNext) G.setMixNext(mix);
             if (G.setNightExtras) G.setNightExtras(c.id, pick.items, outfit, pick.keeps, furn);
+            if (G.setNightPlace) G.setNightPlace(c.id, place);
             const scene = G.summon(c.id, pick.fx);
             if (scene && !scene.blocked && memo) {
               scene.pages = [memo.text].concat(scene.pages && scene.pages.length ? scene.pages : [scene.text || ""]);

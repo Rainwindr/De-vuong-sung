@@ -703,3 +703,60 @@ main#view { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 .menu-group .hint { margin: 0; }
 .want-kid { margin-top: 8px; }
 .kid-fold > summary { cursor: pointer; padding: 8px 0; color: var(--gold); }
+
+/* Thanh chỉ số dạng vạch */
+.stat .k b { font-weight: 600; color: var(--paper); opacity: .75; font-variant-numeric: tabular-nums; }
+.stat .w { font: 600 12.5px/1.1 var(--f-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stat .segs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.stat .segs i { height: 4px; border-radius: 1px; background: #ffffff17; }
+.stat .segs i.on { background: var(--gold); }
+.stat.truyLac .segs i.on { background: var(--vermilion); }
+.stat.longThe .segs i.on { background: #e0a050; }
+.stat.danTam .segs i.on, .stat.hoaKhi .segs i.on { background: var(--jade, #6fae8e); }
+.stat.lv0 .w { color: var(--vermilion); }
+.who-btns { display: flex; gap: 6px; flex: none; }
+
+/* Tổng quan */
+.ov-sec { display: grid; gap: 6px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.ov-row { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; font-size: 13px; }
+.ov-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ov-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 4px; border-radius: 999px; border: 1px solid var(--line); background: var(--lacquer); color: var(--paper); font-size: 13px; }
+.ov-chip em { display: block; font-style: normal; font-size: 11px; color: var(--muted); }
+.ov-chip span { text-align: left; line-height: 1.15; }
+.ov-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+
+/* Bản đồ quan hệ */
+.rel-map { display: grid; gap: 12px; margin-top: 10px; }
+@media (min-width: 720px) { .rel-map { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.rel-col { border: 1px solid var(--line); border-radius: var(--r); padding: 10px; background: #0002; display: grid; gap: 8px; align-content: start; }
+.rel-h { display: flex; justify-content: space-between; align-items: center; letter-spacing: .06em; text-transform: uppercase; font-size: 12.5px; }
+.rel-than .rel-h { color: var(--jade, #6fae8e); }
+.rel-binh .rel-h { color: var(--gold); }
+.rel-doi .rel-h { color: var(--vermilion); }
+.rel-n { min-width: 22px; padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; text-align: center; }
+.rel-col .hint { margin: 0; }
+.rel-card { display: grid; gap: 6px; text-align: left; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--lacquer); color: var(--paper); }
+.rel-top { display: flex; gap: 10px; align-items: center; }
+.rel-bio { font-size: 12.5px; color: var(--muted); }
+.rel-bar { display: grid; grid-template-columns: 62px 1fr 26px; gap: 6px; align-items: center; font-size: 11.5px; color: var(--muted); }
+.rel-bar em { font-style: normal; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Tiểu sử */
+.bio { display: grid; gap: 4px; margin: 4px 0 10px; padding: 10px 12px; border-left: 2px solid var(--gold); background: #e3bb620d; border-radius: 0 8px 8px 0; }
+.bio p { margin: 0; font-size: 13.5px; }
+.bio .eyebrow { display: block; font-size: 10.5px; margin-bottom: 1px; }
+
+/* Trong cảnh */
+.fin-box { display: grid; gap: 6px; margin: 8px 0; padding: 10px; border: 1px dashed var(--vermilion); border-radius: var(--r); }
+.fin-box .chip { padding: 7px 12px; font-size: 13px; color: var(--paper); }
+.fin-box .chip[disabled] { opacity: .45; }
+.god-fx { display: grid; gap: 2px; max-height: 240px; overflow-y: auto; padding: 6px; border: 1px solid var(--line); border-radius: 8px; margin: 6px 0; }
+.god-fx .check { font-size: 13.5px; }
+.choices.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stat .k { font-size: 10px; letter-spacing: .02em; }
+.stat .k b { display: none; }
+.stat .w { font-size: 11.5px; }
+.fin-box .chips { flex-wrap: wrap; overflow: visible; }
+.who-btns .icon-btn { width: 34px; height: 34px; }
+@media (max-width: 430px) { .who .date .season-pill { display: none; } }
+.stat.truyLac.lv0 .w { color: inherit; } .stat.truyLac.lv3 .w { color: var(--vermilion); }

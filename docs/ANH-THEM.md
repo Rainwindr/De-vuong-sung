@@ -154,3 +154,18 @@ Tên: `body-<mục>-<mức>.webp`. Muốn nhiều ảnh cho một mức thì th�
 | `size` (Long căn bệ hạ) | Vừa vặn | To | Rất to | Quá khổ |
 
 Ví dụ: `body-kin-0.webp`, `body-kin-1.webp`, `body-kin-2.webp`, `body-long-0.webp`… `body-size-0.webp` … `body-size-3.webp`.
+
+## 6. Ảnh theo tư thế (khi bấm "Đổi tư thế" giữa cảnh, khung ngang 16:9)
+
+Tên: `tu-the-<mã>.webp`, thêm ảnh cùng tư thế: `tu-the-<mã>-2.webp`, `-3`… (liên tiếp). Tư thế chưa có ảnh thì game lấy ngẫu nhiên một ảnh `anh-NNN`.
+
+| Mã | Tư thế |
+|---|---|
+| `cuoi-ngua` | Cưỡi ngựa |
+| `truyen-giao` | Nằm ngửa ôm chặt |
+| `cho-cai` | Quỳ chổng mông |
+| `gac-vai` | Gác chân lên vai |
+| `be-dung` | Bế đứng |
+| `up-thia` | Nằm nghiêng úp thìa |
+| `ep-tuong` | Ép vào tường |
+| `cui-ban` | Cúi người trên án |
