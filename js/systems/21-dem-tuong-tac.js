@@ -524,3 +524,5 @@
   G.D21_TEXT.bold = T.react_bold;
   G.LOSE_WISH = T.lose_wish;
 })();
+// Câu thay cho câu Grok bị giữ lại (gần quy tắc không làm nàng nghẹn), người chơi đã duyệt 11-03
+if (window.Game.COMMANDS && window.Game.COMMANDS.ngam) window.Game.COMMANDS.ngam.line += "\nNàng ngậm sâu hết mức, mắt ngước nhìn trẫm.";

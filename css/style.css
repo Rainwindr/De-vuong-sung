@@ -760,3 +760,29 @@ main#view { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 .who-btns .icon-btn { width: 34px; height: 34px; }
 @media (max-width: 430px) { .who .date .season-pill { display: none; } }
 .stat.truyLac.lv0 .w { color: inherit; } .stat.truyLac.lv3 .w { color: var(--vermilion); }
+
+/* Thao tác chạm */
+.tc-hr { margin-left: auto; font: 700 15px/1 var(--f-body); color: #f07aa0; font-variant-numeric: tabular-nums; }
+.tc-hr.hot { color: var(--vermilion); animation: tcbeat .45s ease-in-out infinite; }
+@keyframes tcbeat { 50% { transform: scale(1.18); } }
+.tc-meter { display: grid; grid-template-columns: 74px 1fr 34px; gap: 8px; align-items: center; font-size: 12.5px; color: var(--muted); margin: 6px 0; }
+.tc-meter em { font-style: normal; text-align: right; font-variant-numeric: tabular-nums; }
+.tc-area { display: grid; gap: 10px; justify-items: center; margin: 12px 0; padding: 12px; border-radius: var(--r); background: #0003; border: 1px solid var(--line); }
+.tc-area.flash { animation: tcflash .6s ease-out; }
+@keyframes tcflash { 0% { background: #f07aa055; } 100% { background: #0003; } }
+.tc-pad { width: min(100%, 260px); height: 150px; border-radius: 18px; border: 2px solid var(--gold); background: radial-gradient(circle, #d2442f55, #2a0b08); color: var(--paper); font: 700 22px var(--f-display); touch-action: none; user-select: none; -webkit-user-select: none; }
+.tc-pad:active { transform: scale(.97); }
+.tc-pad.small { height: 90px; font-size: 18px; }
+.tc-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+.tc-zone { width: 100%; height: 120px; border-radius: 14px; border: 1px dashed #f07aa0; display: grid; place-items: center; color: #f07aa0; touch-action: none; user-select: none; }
+.tc-depth { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; width: 100%; font-size: 13px; color: var(--muted); }
+.tc-depth input { width: 100%; height: 36px; }
+.tc-ring { position: relative; width: 200px; height: 200px; border-radius: 50%; border: 0; background: #2a0b08; touch-action: none; }
+.tc-ring i { position: absolute; inset: 0; border-radius: 50%; }
+.tc-ring .tgt { inset: 24%; border: 3px solid var(--gold); box-shadow: 0 0 18px #e3bb6266; }
+.tc-ring .rng { border: 4px solid #f07aa0; }
+.tc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.tc-cell { padding: 16px 4px; border-radius: 12px; border: 1px solid var(--line); background: var(--lacquer); color: var(--paper); font-size: 14px; }
+.tc-cell:active { background: #d2442f55; }
+.tc-svg { width: min(100%, 220px); height: auto; touch-action: none; }
+.tc-word { min-height: 1.2em; text-align: center; margin: 0; }

@@ -364,6 +364,8 @@
     const out = [];
     if ((scene._poses || 0) < G.POSE_MAX) out.push(`<button class="btn btn-sm" data-sa="pose">Đổi tư thế ▸</button>`);
     if ((scene._cmds || 0) < G.COMMAND_MAX) out.push(`<button class="btn btn-sm" data-sa="cmd">Ra lệnh ▸</button>`);
+    if (G.TOUCH && (scene._touch || 0) < G.TOUCH_MAX) out.push(`<button class="btn btn-sm" data-st="pick">Thao tác ▸</button>`);
+    if (G.parseTyped) out.push(`<button class="btn btn-sm" data-st="type">Gõ lệnh ▸</button>`);
     return out.length ? `<div class="sg-row">${out.join("")}</div>` : "";
   }
   function sceneFinishBox(scene) {
@@ -427,6 +429,25 @@
         { locked: true }
       );
     });
+    on(el, "[data-st]", "click", (b) => {
+      const c = G.findConsort(scene.roundOf);
+      if (!c) return;
+      if (b.dataset.st === "type") return openTypeCmd(scene, notes, i, c, insertNext, pushNote);
+      openSheet(
+        `<h3>Thao tác</h3><p class="hint">Bệ hạ tự tay làm. Còn ${G.TOUCH_MAX - (scene._touch || 0)} lần trong cảnh này. Nhịp tim nàng hiện ở góc trên.</p>
+         <div class="choices">${Object.entries(G.TOUCH)
+           .map(([k, t]) => {
+             const why = G.touchOk(c, k);
+             return `<button class="btn" data-tk="${k}" ${why ? "disabled" : ""}>${esc(t.name)}<span class="cost">${esc(why || t.rule)}</span></button>`;
+           })
+           .join("")}</div><button class="btn btn-ghost" id="tk-back">Thôi, đọc tiếp</button>`,
+        (el2) => {
+          on(el2, "#tk-back", "click", () => showScene(scene, notes, i));
+          on(el2, "[data-tk]", "click", (bb) => openTouch(scene, notes, i, c, bb.dataset.tk, insertNext, pushNote));
+        },
+        { locked: true }
+      );
+    });
     on(el, "[data-fin]", "click", (b) => {
       const r = G.sceneFinish(scene, b.dataset.fin);
       if (!r) return;
@@ -445,6 +466,299 @@
       G.save();
       showScene(scene, notes, scene.pages.length - 1);
     });
+  }
+
+  /* ---------------- Gõ lệnh bằng chữ ---------------- */
+  function openTypeCmd(scene, notes, i, c, insertNext, pushNote) {
+    openSheet(
+      `<h3>Gõ lệnh</h3><p class="hint">Gõ lệnh cho ${esc(c.name)} như "banh ra", "quay đít lại", "cưỡi lên trẫm", "rên to lên". Game nhận từ khóa trong câu.</p>
+       <div class="field"><input id="ty-in" maxlength="80" placeholder="Trẫm ra lệnh…" autocomplete="off"></div>
+       <p class="hint fx-msg" id="ty-msg" hidden></p>
+       <div class="choices"><button class="btn btn-primary" id="ty-go">Ra lệnh</button><button class="btn btn-ghost" id="ty-back">Thôi</button></div>`,
+      (el) => {
+        const msg = (t) => {
+          const m = $(el, "#ty-msg");
+          m.textContent = t;
+          m.hidden = false;
+        };
+        on(el, "#ty-back", "click", () => showScene(scene, notes, i));
+        const go = () => {
+          const raw = $(el, "#ty-in").value.trim();
+          const hit = G.parseTyped(raw);
+          if (!hit) return msg("Nàng chưa hiểu bệ hạ muốn gì. Thử: banh ra, bóp vú, quay đít, liếm, ngậm, tự sướng, xin, rên to, cưỡi lên, quỳ xuống, gác chân, bế lên, nằm nghiêng, ép vào tường, cúi xuống án thư.");
+          const it = hit.type === "pose" ? G.POSES[hit.id] : G.COMMANDS[hit.id];
+          if (G.levelOf(c) < (it.need || 0)) return msg(`${c.name} chưa đủ thân để làm vậy (${G.needLabel(it.need)}).`);
+          if (hit.type === "pose") {
+            const r = G.scenePose(scene, hit.id);
+            insertNext(`> ${raw}!\n` + r.line);
+            const src = r.image.list[0] || r.image.fallback;
+            if (src) {
+              scene.image = src;
+              scene.imageAlt = r.image.list[0] && r.image.fallback ? [r.image.fallback] : [];
+              scene._imgPage = i + 1;
+            }
+          } else {
+            const r = G.sceneCommand(scene, hit.id);
+            insertNext(r.line.replace(/^> .*?!\n/, `> ${raw}!\n`));
+            pushNote(r.note);
+          }
+          G.save();
+          showScene(scene, notes, i + 1);
+        };
+        on(el, "#ty-go", "click", go);
+        on(el, "#ty-in", "keydown", (inp, e) => e.key === "Enter" && go());
+        setTimeout(() => el.querySelector("#ty-in") && el.querySelector("#ty-in").focus(), 50);
+      },
+      { locked: true }
+    );
+  }
+
+  /* ---------------- Thao tác chạm ---------------- */
+  function openTouch(scene, notes, i, c, kind, insertNext, pushNote) {
+    const T = G.TOUCH[kind];
+    const pref = G.touchPrefs(c);
+    const DUR = { cam_ren: 15, num: 15 }[kind] || 20;
+    let ar = 0, ended = false, orgasms = 0;
+    const timers = [];
+    const t0 = Date.now();
+    const elapsed = () => (Date.now() - t0) / 1000;
+    let area = "";
+    if (kind === "nhap") area = `<button class="tc-pad" id="tc-pad">Chạm</button><p class="hint tc-word" id="tc-word">&nbsp;</p>`;
+    if (kind === "sau") area = `<div class="tc-depth"><span>Nông</span><input type="range" id="tc-rng" min="0" max="100" value="10"><span>Sâu</span></div><p class="hint tc-word" id="tc-word">Kéo qua lại để dò chỗ nàng thích</p>`;
+    if (kind === "hai_ngon") area = `<div class="tc-zone" id="tc-top">Vuốt vú nàng ở đây</div><button class="tc-pad small" id="tc-pad">Nhịp</button><p class="hint tc-word" id="tc-word">&nbsp;</p>`;
+    if (kind === "canh") area = `<button class="tc-ring" id="tc-ring"><i class="tgt"></i><i class="rng" id="tc-rg"></i></button><p class="hint tc-word" id="tc-word">Trúng 0/4</p>`;
+    if (kind === "bu_vu") area = `<div class="tc-two"><button class="tc-pad small" data-side="T">Trái</button><button class="tc-pad small" data-side="P">Phải</button></div><p class="hint tc-word">Nàng thích: ${pref.pattern.map((x) => (x === "T" ? "Trái" : "Phải")).join(" → ")} (lặp lại)</p><p class="hint tc-word" id="tc-word">0/12</p>`;
+    if (kind === "liem") area = `<svg class="tc-svg" id="tc-svg" viewBox="0 0 100 160"><path d="M50 6 C60 6 64 14 63 22 C62 30 57 33 50 33 C43 33 38 30 37 22 C36 14 40 6 50 6Z M38 34 C30 36 26 44 27 58 L31 70 C29 92 30 128 34 156 L66 156 C70 128 71 92 69 70 L73 58 C74 44 70 36 62 34 Z" fill="#3b181b" stroke="#d9ad55" stroke-width=".6"/><path id="tc-path" d="M50 30 C50 42 42 48 44 58 C46 68 56 72 52 84 C48 96 44 104 47 116 C49 126 46 134 45 146" fill="none" stroke="#e3bb62" stroke-width="2.4" stroke-dasharray="3 3"/><circle id="tc-dot" r="3" fill="#d2442f" cx="50" cy="30"/></svg><p class="hint tc-word" id="tc-word">Đặt ngón tay ở chấm đỏ rồi kéo theo đường</p>`;
+    if (kind === "ngam_kim") area = `<div class="tc-meter"><span>Sắp bắn</span><span class="bar red"><i id="tc-sb" style="width:0%"></i></span></div><div class="tc-meter"><span>Sức kìm</span><span class="bar gold"><i id="tc-st" style="width:100%"></i></span></div><button class="tc-pad" id="tc-pad">Giữ để kìm</button>`;
+    if (kind === "cam_ren") area = `<div class="tc-grid">${["Môi", "Tai", "Cổ", "Vú trái", "Vú phải", "Eo", "Đùi trong", "Mông", "Lồn"].map((n, k) => `<button class="tc-cell" data-spot="${k}">${n}</button>`).join("")}</div><p class="hint tc-word" id="tc-word">&nbsp;</p>`;
+    if (kind === "num") area = `<div class="tc-depth"><span>Nhẹ</span><input type="range" id="tc-rng" min="0" max="100" value="20"><span>Mạnh</span></div><p class="hint tc-word" id="tc-word">Nàng ra 0 lần</p>`;
+    openSheet(
+      `<div class="ev-head">${portrait(c, "sm")}<div class="t"><span class="eyebrow">${esc(c.name)}</span><h3>${esc(T.name)}</h3></div><span class="tc-hr" id="tc-hr">♥ 70</span></div>
+       <p class="hint">${esc(T.rule)}</p>
+       <div class="tc-meter"><span>Hưng phấn</span>${bar(0, "red")}<em id="tc-t">${DUR}s</em></div>
+       <div class="tc-area">${area}</div>
+       <button class="btn btn-ghost btn-sm" id="tc-skip">Thôi</button>`,
+      (el) => {
+        const arEl = el.querySelector(".tc-meter .bar i");
+        const hrEl = $(el, "#tc-hr");
+        const tEl = $(el, "#tc-t");
+        const word = (t) => {
+          const w = el.querySelector("#tc-word");
+          if (w) w.textContent = t;
+        };
+        const draw = () => {
+          ar = Math.max(0, Math.min(100, ar));
+          arEl.style.width = ar + "%";
+          const hr = Math.round(68 + ar * 0.95);
+          hrEl.textContent = "♥ " + hr;
+          hrEl.classList.toggle("hot", hr > 140);
+          tEl.textContent = Math.max(0, Math.ceil(DUR - elapsed())) + "s";
+        };
+        const finish = (outcome) => {
+          if (ended) return;
+          ended = true;
+          timers.forEach((t) => (clearInterval(t), clearTimeout(t)));
+          const r = G.touchResult(scene, kind, outcome, { orgasms });
+          if (r) {
+            insertNext(r.line);
+            r.notes.forEach(pushNote);
+          }
+          G.save();
+          showScene(scene, notes, i + 1);
+        };
+        on(el, "#tc-skip", "click", () => {
+          ended = true;
+          timers.forEach((t) => (clearInterval(t), clearTimeout(t)));
+          showScene(scene, notes, i);
+        });
+        let decay = 5;
+        let onTick = null;
+        let onTimeout = () => finish(ar >= 70 ? "draw" : "lose");
+        if (kind === "nhap") {
+          let last = 0;
+          $(el, "#tc-pad").addEventListener("pointerdown", (e) => {
+            e.preventDefault();
+            const now = Date.now();
+            const dt = now - last;
+            last = now;
+            const g = dt < 250 ? 4.5 : dt < 600 ? 3.2 : 1.5;
+            ar += g;
+            word(dt < 250 ? "Đụ dồn dập!" : dt < 600 ? "Nhịp đều, sâu" : "Chậm mà sâu");
+            if (ar >= 100) finish("win");
+          });
+        }
+        if (kind === "sau") {
+          decay = 4;
+          let lastV = 10;
+          $(el, "#tc-rng").addEventListener("input", (e) => {
+            const v = Number(e.target.value);
+            const d = Math.abs(v - lastV);
+            lastV = v;
+            const near = Math.abs(v - pref.depth) < 15;
+            ar += d * (near ? 0.3 : 0.05);
+            word(near ? "Đúng chỗ rồi! Nàng run lên" : v < pref.depth ? "Nàng muốn sâu hơn…" : "Sâu quá, nàng nhăn mặt");
+            if (ar >= 100) finish("win");
+          });
+        }
+        if (kind === "hai_ngon") {
+          let lastStroke = 0;
+          const top = $(el, "#tc-top");
+          top.addEventListener("pointermove", (e) => {
+            if (e.pressure === 0 && e.pointerType !== "mouse") return;
+            lastStroke = Date.now();
+            ar += 0.25;
+          });
+          $(el, "#tc-pad").addEventListener("pointerdown", (e) => {
+            e.preventDefault();
+            const both = Date.now() - lastStroke < 400;
+            ar += both ? 4.5 : 2;
+            word(both ? "Cả hai cùng lúc! Nàng giật nảy" : "Chỉ có nhịp, thêm tay vuốt vú nữa");
+            if (ar >= 100) finish("win");
+          });
+        }
+        if (kind === "canh") {
+          decay = 0;
+          let cyc = Date.now(), tries = 0, hits = 0;
+          const rg = $(el, "#tc-rg");
+          const scale = () => Math.max(0, 1 - (Date.now() - cyc) / 1500);
+          const anim = () => {
+            if (ended) return;
+            const sc = scale();
+            if (sc <= 0) cyc = Date.now();
+            rg.style.transform = `scale(${scale()})`;
+            requestAnimationFrame(anim);
+          };
+          requestAnimationFrame(anim);
+          $(el, "#tc-ring").addEventListener("pointerdown", (e) => {
+            e.preventDefault();
+            const sc = scale();
+            tries++;
+            const hit = sc > 0.42 && sc < 0.62;
+            if (hit) hits++;
+            ar = hits * 25;
+            word(`${hit ? "Trúng!" : sc >= 0.62 ? "Sớm quá" : "Muộn quá"} · Trúng ${hits}/${tries} (4 lần)`);
+            cyc = Date.now();
+            if (tries >= 4) setTimeout(() => finish(hits >= 3 ? "win" : hits === 2 ? "draw" : "lose"), 350);
+          });
+          onTimeout = () => finish(hits >= 3 ? "win" : hits === 2 ? "draw" : "lose");
+        }
+        if (kind === "bu_vu") {
+          decay = 0;
+          let k = 0;
+          on(el, "[data-side]", "click", (b) => {
+            const want = pref.pattern[k % pref.pattern.length];
+            const okk = b.dataset.side === want;
+            ar += okk ? 9 : -6;
+            k++;
+            word(`${okk ? "Đúng ý nàng" : "Nàng nhăn mặt"} · ${k}/12`);
+            if (k >= 12) finish(ar >= 90 ? "win" : ar >= 55 ? "draw" : "lose");
+          });
+          onTimeout = () => finish(ar >= 90 ? "win" : ar >= 55 ? "draw" : "lose");
+        }
+        if (kind === "liem") {
+          decay = 0;
+          const svg = $(el, "#tc-svg");
+          const path = $(el, "#tc-path");
+          const dot = $(el, "#tc-dot");
+          const L = path.getTotalLength();
+          const pts = Array.from({ length: 60 }, (_, k) => path.getPointAtLength((L * k) / 59));
+          let prog = 0, miss = 0, down = false;
+          const toSvg = (e) => {
+            const r = svg.getBoundingClientRect();
+            return { x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 160 };
+          };
+          svg.addEventListener("pointerdown", (e) => {
+            down = true;
+            svg.setPointerCapture && svg.setPointerCapture(e.pointerId);
+          });
+          svg.addEventListener("pointerup", () => (down = false));
+          svg.addEventListener("pointermove", (e) => {
+            if (!down || ended) return;
+            const p = toSvg(e);
+            let best = -1, bd = 1e9;
+            for (let k = prog; k < Math.min(pts.length, prog + 6); k++) {
+              const d = Math.hypot(pts[k].x - p.x, pts[k].y - p.y);
+              if (d < bd) (bd = d), (best = k);
+            }
+            if (bd < 7 && best >= prog) {
+              prog = best;
+              dot.setAttribute("cx", pts[prog].x);
+              dot.setAttribute("cy", pts[prog].y);
+              ar = (prog / (pts.length - 1)) * 100 - miss * 0.6;
+              word(["Cổ…", "Ngực…", "Bụng…", "Giữa hai đùi…"][Math.min(3, Math.floor((prog / pts.length) * 4))]);
+            } else miss++;
+            if (prog >= pts.length - 2) finish(miss <= 25 ? "win" : miss <= 60 ? "draw" : "lose");
+          });
+          onTimeout = () => finish(prog > pts.length * 0.7 ? "draw" : "lose");
+        }
+        if (kind === "ngam_kim") {
+          decay = 0;
+          let sb = 0, stam = 100, hold = false;
+          const pad = $(el, "#tc-pad");
+          pad.addEventListener("pointerdown", (e) => (e.preventDefault(), (hold = true)));
+          for (const ev of ["pointerup", "pointerleave", "pointercancel"]) pad.addEventListener(ev, () => (hold = false));
+          onTick = (dt) => {
+            const rise = (9 + elapsed() * 0.6) * dt;
+            if (hold && stam > 0) {
+              sb -= 16 * dt;
+              stam -= 22 * dt;
+            } else {
+              sb += rise;
+              stam = Math.min(100, stam + 8 * dt);
+            }
+            sb = Math.max(0, sb);
+            ar = Math.min(100, elapsed() * 5);
+            $(el, "#tc-sb").style.width = Math.min(100, sb) + "%";
+            $(el, "#tc-st").style.width = Math.max(0, stam) + "%";
+            if (sb >= 100) finish(elapsed() >= 12 ? "draw" : "lose");
+          };
+          onTimeout = () => finish("win");
+        }
+        if (kind === "cam_ren") {
+          decay = 3;
+          let lastSpot = -1;
+          on(el, "[data-spot]", "click", (b) => {
+            const k = Number(b.dataset.spot);
+            const hot = pref.spots.includes(k);
+            ar += k === lastSpot ? 2 : hot ? 18 : 6;
+            lastSpot = k;
+            word(hot ? "Nàng cắn môi, suýt bật tiếng!" : k === lastSpot ? "Chạm mãi một chỗ, nàng quen rồi" : "Nàng nín được");
+            if (ar >= 100) finish("win");
+          });
+        }
+        if (kind === "num") {
+          decay = 3;
+          const rng = $(el, "#tc-rng");
+          onTick = (dt) => {
+            ar += (Number(rng.value) / 100) * 24 * dt;
+            if (ar >= 100) {
+              orgasms++;
+              ar = 35;
+              word(`Nàng ra ${orgasms} lần!`);
+              el.querySelector(".tc-area").classList.remove("flash");
+              void el.offsetWidth;
+              el.querySelector(".tc-area").classList.add("flash");
+            }
+          };
+          onTimeout = () => finish(orgasms >= 2 ? "win" : orgasms === 1 ? "draw" : "lose");
+        }
+        let lastT = Date.now();
+        timers.push(
+          setInterval(() => {
+            if (ended || !document.body.contains(arEl)) return;
+            const now = Date.now();
+            const dt = (now - lastT) / 1000;
+            lastT = now;
+            ar -= decay * dt;
+            if (onTick) onTick(dt);
+            draw();
+            if (elapsed() >= DUR) onTimeout();
+          }, 100)
+        );
+        draw();
+      },
+      { locked: true }
+    );
   }
 
   /* ---------------- Thiên Đạo sáng tạo ---------------- */
