@@ -436,3 +436,91 @@
     return scene;
   };
 })();
+
+/* Câu Grok viết (2026-11-03), thay câu tạm của Claude. Mỗi mục 4 câu nối thành một đoạn. */
+(function () {
+  "use strict";
+  const G = window.Game;
+  const T = {
+    "poses": {
+      "cuoi_ngua": "Trẫm nằm ngửa, {name} trườn lên cưỡi, lồn ướt nhẹp nuốt trọn cặc. Nàng tự nhún, vú nảy theo từng nhịp.\n> Thần thiếp… tự đụ lấy cặc bệ hạ…\n{name} chống tay lên ngực trẫm, đít mông vỗ mạnh, nước lồn chảy xuống đùi trẫm. Nàng xoay hông chậm, lồn siết chặt, mặt đỏ bừng vì sướng.",
+      "truyen_giao": "{name} nằm ngửa ôm chặt cổ trẫm, hai chân quặp lưng. Trẫm đụ sâu, lồn nàng co giật.\n> Bệ hạ đụ mạnh hơn… thần thiếp chịu hết…\nVú nàng ép lên ngực trẫm, mỗi cú đụ đều nghe tiếng nước lồn bắn. Nàng rên nhỏ, móng tay cào lưng trẫm khi cặc chạm sâu tận tử cung.",
+      "cho_cai": "{name} quỳ chổng đít, lồn và lỗ đít hiện rõ. Trẫm nắm eo đụ từ sau, đít nàng nảy theo nhịp.\n> Đụ lồn thần thiếp đi bệ hạ… đừng rút…\nMỗi cú đụ sâu, nước lồn bắn ra, chảy dọc đùi nàng. Nàng cúi thấp, vú đung đưa, miệng há rên to.",
+      "gac_vai": "Hai chân {name} gác lên vai trẫm, lồn mở rộng. Trẫm đụ thẳng, nhìn rõ cặc ra vào.\n> Sâu quá… thần thiếp sắp ra…\nTrẫm bóp vú nàng, mỗi cú đụ làm nàng giật mạnh. Nàng ôm chân mình, mặt đỏ, nước lồn chảy đầy.",
+      "be_dung": "Trẫm bế bổng {name}, nàng quấn chân quanh eo. Cặc đụ thẳng vào lồn giữa không trung.\n> Bệ hạ mạnh quá… thần thiếp không chịu nổi…\nNàng ôm cổ trẫm, đít bị đụ nảy lên xuống. Mỗi cú đụ nghe tiếng da thịt va nhau rõ.",
+      "up_thia": "{name} nằm nghiêng, trẫm ôm từ sau. Cặc đụ chậm, tay bóp vú nàng.\n> Nhẹ thôi… thần thiếp thích tư thế này…\nLồn nàng ướt, mỗi nhịp đụ đều siết chặt. Nàng ngoái lại hôn trẫm, rên khẽ trong cổ.",
+      "ep_tuong": "Trẫm ép {name} vào cột giường, nâng một chân nàng lên đụ. Lồn ướt nhẹp nhận cặc.\n> Đụ thần thiếp ngay đây… không ai thấy…\nNàng chống tay vào tường, đít bị đụ mạnh. Vú nàng ép vào cột, mặt đỏ vì sướng.",
+      "cui_ban": "{name} cúi úp trên án thư, đít chổng cao. Trẫm đụ từ sau, án thư rung theo nhịp.\n> Bệ hạ đụ mạnh… thần thiếp chịu…\nNàng bám mép án, nước lồn chảy xuống chân. Mỗi cú đụ sâu, nàng rên to hơn."
+    },
+    "commands": {
+      "banh": "{name} đỏ mặt banh lồn ra, hai ngón tay kéo mép. Lồn hồng ướt nhẹp hiện rõ.\n> Thần thiếp… banh cho bệ hạ xem…\nNàng run nhẹ nhưng vẫn mở rộng, nước lồn chảy. Mắt nàng nhìn trẫm, miệng há nhỏ.",
+      "bop_vu": "{name} tự bóp vú, ngón tay vê đầu ti. Vú mềm nảy theo tay nàng.\n> Thần thiếp tự bóp… bệ hạ nhìn đi…\nNàng bóp mạnh hơn, mặt đỏ vì kích thích. Đầu ti cứng lên, nàng rên khẽ.",
+      "quay_dit": "{name} quay đít lại, cúi thấp chổng mông. Lồn và lỗ đít hiện rõ trước mắt trẫm.\n> Đít thần thiếp… bệ hạ nhìn…\nNàng lắc nhẹ, nước lồn chảy xuống đùi. Mặt nàng đỏ, nhưng vẫn giữ nguyên tư thế.",
+      "liem": "{name} cúi xuống liếm sạch cặc trẫm, lưỡi quấn quanh đầu cặc. Nước lồn và tinh trộn lẫn.\n> Thần thiếp liếm sạch…\nNàng nuốt nước, mắt nhìn trẫm. Lưỡi nàng liếm từ gốc lên đầu, sạch sẽ.",
+      "ngam": "{name} há miệng ngậm cặc trẫm, lưỡi quấn lấy. Nàng ngậm sâu, mắt đỏ.\n> Thần thiếp ngậm…\nNàng hút nhẹ, nước bọt chảy.",
+      "tu_suong": "{name} ngồi dang chân, ngón tay tự móc lồn. Nước lồn chảy ra từng giọt.\n> Thần thiếp tự sướng… bệ hạ nhìn…\nNàng rên nhỏ, hai ngón đút sâu. Mặt đỏ, lồn co giật theo ngón tay.",
+      "xin": "> Bệ hạ… đụ thần thiếp đi… thần thiếp xin…\n{name} quỳ xuống, tay sờ lồn mình, mắt đỏ.\n> Xin bệ hạ đụ lồn thần thiếp…\nNàng run, nhưng vẫn nói tiếp.",
+      "keu_to": "{name} há miệng rên to, tiếng rên vang khắp phòng. Lồn nàng ướt hơn.\n> Aa… bệ hạ đụ thần thiếp…\nNàng rên lớn từng nhịp đụ. Mặt đỏ, nhưng không giữ lại."
+    },
+    "react_shy": [
+      "{name} đỏ mặt, run nhẹ nhưng vẫn làm theo.",
+      "Nàng ngập ngừng, mắt nhìn xuống, tay vẫn động.",
+      "Mặt nàng nóng bừng, miệng há nhỏ rên khẽ.",
+      "Nàng cắn môi, nhưng không dừng."
+    ],
+    "react_bold": [
+      "{name} cười, làm ngay không chút ngại.",
+      "Nàng nhìn thẳng trẫm, động tác mạnh hơn.",
+      "Nàng khiêu khích, rên to hơn yêu cầu.",
+      "Nàng chủ động làm mạnh, mặt đầy khoái lạc."
+    ],
+    "finishes": {
+      "trong": "Trẫm bắn mạnh vào trong lồn {name}, tinh nóng đầy. Nàng co giật, ôm chặt.\n> Bệ hạ… bắn vào trong… thần thiếp nhận hết…\nTinh trào ra mép lồn, nàng vẫn siết. Nàng rên to, bụng nàng ấm tinh.",
+      "bung": "Trẫm rút ra bắn lên bụng {name}, tinh trắng đầy. Nàng nhìn xuống, mặt đỏ.\n> Nhiều quá… dính hết bụng thần thiếp…\nNàng xoa nhẹ, tinh dính ngón tay. Bụng nàng ấm, nàng thở dốc.",
+      "nguc": "Trẫm bắn lên vú {name}, tinh dính đầy hai bầu. Nàng bóp vú, tinh chảy xuống.\n> Bệ hạ bắn lên vú thần thiếp…\nĐầu ti dính tinh, nàng liếm ngón. Vú nàng bóng tinh, nàng cười nhỏ.",
+      "lung": "Trẫm bắn lên lưng {name}, tinh chảy dọc sống lưng. Nàng run nhẹ.\n> Nóng quá… dính lưng thần thiếp…\nNàng cúi, tinh chảy xuống đít. Lưng nàng ấm, nàng thở đều.",
+      "mieng": "Trẫm bắn vào miệng {name}, nàng nuốt hết. Tinh chảy nhẹ khóe miệng.\n> Thần thiếp nuốt… sạch…\nNàng há miệng cho trẫm xem, tinh còn sót. Nàng liếm môi, mắt đỏ.",
+      "mat": "Trẫm bắn lên mặt {name}, tinh dính má và miệng. Nàng liếm, mặt đỏ.\n> Bệ hạ… dính mặt thần thiếp…\nNàng không lau, để tinh chảy. Mắt nàng nhìn trẫm, miệng hé."
+    },
+    "afters": {
+      "giu": "Trẫm giữ {name} nằm, lồn nàng còn đầy tinh. Nàng không được động.\n> Thần thiếp giữ… không cho chảy…\nNàng siết chặt, tinh không trào. Mặt nàng đỏ, bụng ấm.",
+      "liem_sach": "{name} cúi liếm sạch cặc trẫm, lưỡi quấn lấy tinh còn sót.\n> Thần thiếp liếm sạch cho bệ hạ…\nNàng nuốt, miệng bóng. Cặc sạch, nàng hôn đầu cặc.",
+      "ngam": "Trẫm để {name} nằm dang chân, tinh còn dính. Nàng không che.\n> Bệ hạ… nhìn thần thiếp…\nLồn nàng mở, tinh chảy nhẹ. Nàng thở đều, mắt nhìn trẫm."
+    },
+    "places": {
+      "hoa_vien": "Đêm hoa viên riêng, chỉ có trẫm và {name}. Nàng mặc yếm mỏng, gió đêm thổi.\n> Bệ hạ… thần thiếp chờ ở đây…\nHoa nở, chỉ hai người, nàng quỳ bên ghế đá. Trẫm kéo nàng vào lòng, yếm tuột.",
+      "ho_sen": "Thuyền hoa rèm kín giữa hồ sen, chỉ trẫm và {name}. Nàng ngồi trong lòng.\n> Rèm kín… không ai thấy…\nSen nở, thuyền lắc nhẹ, nàng cởi yếm. Chỉ hai người, nàng hôn trẫm.",
+      "phong_huong": "Phòng hương ngào ngạt, chỉ trẫm và {name}. Nàng mặc mỏng, hương thơm.\n> Hương này… thần thiếp thích…\nNàng quỳ bên giường, mắt nhìn trẫm. Trẫm kéo nàng lại, yếm tuột.",
+      "san_khau": "Sân khấu nhỏ vắng tanh, {name} múa riêng cho trẫm. Chỉ hai người.\n> Thần thiếp múa… chỉ cho bệ hạ xem…\nNàng xoay, yếm mỏng bay, mắt nhìn trẫm. Múa xong, nàng quỳ, chờ lệnh.",
+      "me_lau": "Mê Lâu nghìn phòng rèm lụa, chỉ trẫm và {name} trong một phòng. Rèm kín.\n> Phòng này… chỉ có hai ta…\nNàng ngồi trên giường lụa, mắt đỏ. Trẫm kéo rèm, nàng mỉm cười.",
+      "ho_duc_tri": "Bể tắm suối nóng lát ngọc, chỉ trẫm và {name}. Nàng trần, nước nóng.\n> Nước nóng… thần thiếp hầu bệ hạ…\nNàng ngồi trong nước, vú nổi. Chỉ hai người, nàng ôm trẫm.",
+      "lac_thu_dien": "Phòng bốn bức tường gương, chỉ trẫm và {name}. Nàng thấy mình từ mọi phía.\n> Gương… thần thiếp thấy hết…\nNàng đỏ mặt, nhưng không che. Trẫm kéo nàng lại, gương phản chiếu.",
+      "phong_tranh_xuan": "Phòng treo tranh xuân cung, {name} muốn thử giống trong tranh. Chỉ hai người.\n> Thần thiếp muốn… làm như tranh…\nNàng nhìn tranh, mặt đỏ, rồi quay lại trẫm. Nàng cởi yếm, quỳ theo tư thế tranh."
+    },
+    "stakes": {
+      "khong_yem": "{name} không mặc yếm cả tháng, vú lộ mỗi lần vào hầu. Nàng đỏ mặt quỳ.\n> Thần thiếp… không yếm… như cược…\nVú nàng nảy theo từng bước, chỉ có trẫm thấy. Nàng ngồi, hai vú trần trước mặt trẫm.",
+      "coi_ao": "{name} tự cởi áo ngoài cửa trước khi vào tẩm cung. Nàng trần bước vào.\n> Thần thiếp cởi hết… như cược…\nNàng đỏ mặt, nhưng vẫn bước vào. Áo rơi ngoài, nàng quỳ trần.",
+      "chu_nhan": "{name} gọi trẫm là chủ nhân mỗi câu. Nàng quỳ, miệng nói.\n> Chủ nhân… thần thiếp hầu…\nNàng đỏ mặt, nhưng vẫn gọi đúng. Mỗi lần nói, nàng run nhẹ.",
+      "hau_tam": "{name} hầu trẫm tắm, kỳ lưng bằng chính thân mình. Nàng trần áp vào.\n> Thần thiếp… kỳ cho chủ nhân…\nVú nàng cọ lưng trẫm, nước chảy. Nàng đỏ mặt, nhưng vẫn áp sát.",
+      "chuong": "{name} đeo chuông bạc cổ chân, đi đâu cũng kêu. Nàng bước vào, chuông vang.\n> Chuông kêu… thần thiếp đến…\nMỗi bước, chuông ngân, nàng đỏ mặt. Nàng quỳ, chuông vẫn kêu nhẹ."
+    },
+    "lose_wish": [
+      "{name} thắng, đòi bệ hạ ôm nàng ngủ cả đêm, không đụ.",
+      "{name} thắng, đòi bệ hạ hôn nàng từ cổ xuống bụng, chậm rãi.",
+      "{name} thắng, đòi bệ hạ để nàng cưỡi, nàng tự điều khiển nhịp.",
+      "{name} thắng, đòi bệ hạ thì thầm tên nàng vào tai khi đụ."
+    ]
+  };
+  const put = (dst, src, field) => {
+    for (const [k, v] of Object.entries(src)) if (dst[k]) dst[k][field] = v;
+  };
+  put(G.POSES, T.poses, "line");
+  put(G.COMMANDS, T.commands, "line");
+  put(G.FINISHES, T.finishes, "line");
+  put(G.AFTERS, T.afters, "line");
+  put(G.STAKES, T.stakes, "line");
+  for (const [k, v] of Object.entries(T.places)) if (G.NIGHT_PLACES["core." + k]) G.NIGHT_PLACES["core." + k].intro = v;
+  G.D21_TEXT.shy = T.react_shy;
+  G.D21_TEXT.bold = T.react_bold;
+  G.LOSE_WISH = T.lose_wish;
+})();
